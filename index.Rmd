@@ -1,6 +1,7 @@
 ---
 title: "Material introdutório de Processamento Digital de Imagens(PDI)"
 author: ""
+lang: pt-BR
 site: bookdown::bookdown_site
 documentclass: book
 output:
