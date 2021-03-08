@@ -3,10 +3,15 @@ title: "Material introdutório de Processamento Digital de Imagens(PDI)"
 author: ""
 lang: pt-BR
 site: bookdown::bookdown_site
+knit: "bookdown::render_book"
+bibliography: book.bib
+csl: ieee.csl
+link-citations: yes
 documentclass: book
 output:
   bookdown::gitbook: default
-  #bookdown::pdf_book: default
+  bookdown::pdf_book:
+    citation_package: biblatex 
 ---
 
 # Inicio {-}
