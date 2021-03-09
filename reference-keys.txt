@@ -1,0 +1,13 @@
+fig:areasPDI
+tab:processos
+fig:espectro
+fig:aplicacoes
+fig:etapasPDI
+fig:aquisicao
+fig:preProcessamento
+fig:segmentacao
+fig:analise
+intro
+relação-de-processamento-digital-de-imagem-visão-computacional-e-computação-gráfica
+aplicações-processamento-digital-de-imagens
+etapas-do-processamento-e-análise-de-imagens
