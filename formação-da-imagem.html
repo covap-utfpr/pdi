@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xml:lang="pt-BR">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 Formação da imagem | Material introdutório de Processamento Digital de Imagens(PDI)</title>
+  <meta name="description" content="Capítulo 2 Formação da imagem | Material introdutório de Processamento Digital de Imagens(PDI)" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 Formação da imagem | Material introdutório de Processamento Digital de Imagens(PDI)" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 Formação da imagem | Material introdutório de Processamento Digital de Imagens(PDI)" />
+  
+  
+  
+
+<meta name="author" content="" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="logo"><a href="./"><img src="imagens/logo.jpeg"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Inicio</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introdução</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#relação-de-processamento-digital-de-imagem-visão-computacional-e-computação-gráfica"><i class="fa fa-check"></i><b>1.1</b> Relação de Processamento Digital de Imagem, Visão Computacional e Computação Gráfica</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#aplicações-processamento-digital-de-imagens"><i class="fa fa-check"></i><b>1.2</b> Aplicações Processamento Digital de Imagens</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#etapas-do-processamento-e-análise-de-imagens"><i class="fa fa-check"></i><b>1.3</b> Etapas do Processamento e Análise de Imagens</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html"><i class="fa fa-check"></i><b>2</b> Formação da imagem</a><ul>
+<li class="chapter" data-level="2.1" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#câmera-pinhole-e-geometria"><i class="fa fa-check"></i><b>2.1</b> Câmera pinhole e geometria</a></li>
+<li class="chapter" data-level="2.2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#lentes"><i class="fa fa-check"></i><b>2.2</b> Lentes</a></li>
+<li class="chapter" data-level="2.3" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#sensor"><i class="fa fa-check"></i><b>2.3</b> Sensor</a></li>
+<li class="chapter" data-level="2.4" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#amostragem-e-quantização"><i class="fa fa-check"></i><b>2.4</b> Amostragem e Quantização</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#amostragem"><i class="fa fa-check"></i><b>2.4.1</b> Amostragem</a></li>
+<li class="chapter" data-level="2.4.2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#quantização"><i class="fa fa-check"></i><b>2.4.2</b> Quantização</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#definição-de-imagem-digital"><i class="fa fa-check"></i><b>2.5</b> Definição de imagem digital</a></li>
+<li class="chapter" data-level="2.6" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#resolução-espacial-e-de-intensidade"><i class="fa fa-check"></i><b>2.6</b> Resolução espacial e de intensidade</a></li>
+<li class="chapter" data-level="2.7" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#pixels"><i class="fa fa-check"></i><b>2.7</b> Pixels</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#vizinhança"><i class="fa fa-check"></i><b>2.7.1</b> Vizinhança</a></li>
+<li class="chapter" data-level="2.7.2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#conectividade"><i class="fa fa-check"></i><b>2.7.2</b> Conectividade</a></li>
+<li class="chapter" data-level="2.7.3" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#adjacência"><i class="fa fa-check"></i><b>2.7.3</b> Adjacência</a></li>
+<li class="chapter" data-level="2.7.4" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#componente-conexa"><i class="fa fa-check"></i><b>2.7.4</b> Componente Conexa</a></li>
+<li class="chapter" data-level="2.7.5" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#medidas-de-distância"><i class="fa fa-check"></i><b>2.7.5</b> Medidas de Distância</a></li>
+<li class="chapter" data-level="2.7.6" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#operações-lógico-aritméticas"><i class="fa fa-check"></i><b>2.7.6</b> Operações Lógico-aritméticas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="3" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html"><i class="fa fa-check"></i><b>3</b> Transformacões Geométricas</a><ul>
+<li class="chapter" data-level="3.1" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#representação-vetorial-e-matricial-da-imagem"><i class="fa fa-check"></i><b>3.1</b> Representação Vetorial e Matricial da Imagem</a></li>
+<li class="chapter" data-level="3.2" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#sistema-de-coordenadas-objetos-2d-e-3d"><i class="fa fa-check"></i><b>3.2</b> Sistema de coordenadas objetos (2D e 3D)</a></li>
+<li class="chapter" data-level="3.3" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformações-em-pontos-e-objetos"><i class="fa fa-check"></i><b>3.3</b> Transformações em pontos e objetos</a></li>
+<li class="chapter" data-level="3.4" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformações-lineares"><i class="fa fa-check"></i><b>3.4</b> Transformações Lineares</a></li>
+<li class="chapter" data-level="3.5" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-translação"><i class="fa fa-check"></i><b>3.5</b> Transformação de Translação</a></li>
+<li class="chapter" data-level="3.6" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-escala"><i class="fa fa-check"></i><b>3.6</b> Transformação de Escala</a></li>
+<li class="chapter" data-level="3.7" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-rotação"><i class="fa fa-check"></i><b>3.7</b> Transformação de Rotação</a></li>
+<li class="chapter" data-level="3.8" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-cisalhamento-shearing-ou-skew"><i class="fa fa-check"></i><b>3.8</b> Transformação Cisalhamento (Shearing ou Skew)</a></li>
+<li class="chapter" data-level="3.9" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-reflexão"><i class="fa fa-check"></i><b>3.9</b> Transformação de Reflexão</a></li>
+<li class="chapter" data-level="3.10" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#características-especias"><i class="fa fa-check"></i><b>3.10</b> Características especias</a></li>
+<li class="chapter" data-level="3.11" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-isométrica"><i class="fa fa-check"></i><b>3.11</b> Transformação Isométrica</a></li>
+<li class="chapter" data-level="3.12" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-semelhança"><i class="fa fa-check"></i><b>3.12</b> Transformação Semelhança</a></li>
+<li class="chapter" data-level="3.13" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-afim"><i class="fa fa-check"></i><b>3.13</b> Transformação Afim</a></li>
+<li class="chapter" data-level="3.14" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-projetiva"><i class="fa fa-check"></i><b>3.14</b> Transformação Projetiva</a></li>
+<li class="chapter" data-level="3.15" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-inversão"><i class="fa fa-check"></i><b>3.15</b> Transformação Inversão</a></li>
+<li class="chapter" data-level="3.16" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#classificação-das-projeções-geométricas"><i class="fa fa-check"></i><b>3.16</b> Classificação das Projeções Geométricas</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html"><i class="fa fa-check"></i><b>4</b> Transformações radiométricas</a><ul>
+<li class="chapter" data-level="4.1" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-linear"><i class="fa fa-check"></i><b>4.1</b> Transformação Linear</a></li>
+<li class="chapter" data-level="4.2" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-logarítmica"><i class="fa fa-check"></i><b>4.2</b> Transformação Logarítmica</a></li>
+<li class="chapter" data-level="4.3" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-de-potência"><i class="fa fa-check"></i><b>4.3</b> Transformação de Potência</a></li>
+<li class="chapter" data-level="4.4" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#processamento-de-histograma"><i class="fa fa-check"></i><b>4.4</b> Processamento de histograma</a></li>
+<li class="chapter" data-level="4.5" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#equalização-do-histograma"><i class="fa fa-check"></i><b>4.5</b> Equalização do histograma</a></li>
+<li class="chapter" data-level="4.6" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#especificação-de-histograma"><i class="fa fa-check"></i><b>4.6</b> Especificação de histograma</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="filtros.html"><a href="filtros.html"><i class="fa fa-check"></i><b>5</b> Filtros</a><ul>
+<li class="chapter" data-level="5.1" data-path="filtros.html"><a href="filtros.html#convolução"><i class="fa fa-check"></i><b>5.1</b> Convolução</a></li>
+<li class="chapter" data-level="5.2" data-path="filtros.html"><a href="filtros.html#média"><i class="fa fa-check"></i><b>5.2</b> Média</a></li>
+<li class="chapter" data-level="5.3" data-path="filtros.html"><a href="filtros.html#mediana"><i class="fa fa-check"></i><b>5.3</b> Mediana</a></li>
+<li class="chapter" data-level="5.4" data-path="filtros.html"><a href="filtros.html#gaussiano"><i class="fa fa-check"></i><b>5.4</b> Gaussiano</a></li>
+<li class="chapter" data-level="5.5" data-path="filtros.html"><a href="filtros.html#canny"><i class="fa fa-check"></i><b>5.5</b> Canny</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="segmentação.html"><a href="segmentação.html"><i class="fa fa-check"></i><b>6</b> Segmentação</a><ul>
+<li class="chapter" data-level="6.1" data-path="segmentação.html"><a href="segmentação.html#detecção-por-descontinuidade"><i class="fa fa-check"></i><b>6.1</b> Detecção por descontinuidade</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="segmentação.html"><a href="segmentação.html#detecção-de-ponto"><i class="fa fa-check"></i><b>6.1.1</b> Detecção de ponto</a></li>
+<li class="chapter" data-level="6.1.2" data-path="segmentação.html"><a href="segmentação.html#detecção-de-linha"><i class="fa fa-check"></i><b>6.1.2</b> Detecção de linha</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="segmentação.html"><a href="segmentação.html#detecção-de-bordas"><i class="fa fa-check"></i><b>6.2</b> Detecção de bordas</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="segmentação.html"><a href="segmentação.html#modelos-de-bordas"><i class="fa fa-check"></i><b>6.2.1</b> Modelos de Bordas</a></li>
+<li class="chapter" data-level="6.2.2" data-path="segmentação.html"><a href="segmentação.html#método-do-gradiente-roberts-prewitt-sobel."><i class="fa fa-check"></i><b>6.2.2</b> Método do gradiente ( Roberts, Prewitt, Sobel).</a></li>
+<li class="chapter" data-level="6.2.3" data-path="segmentação.html"><a href="segmentação.html#método-marr-hildreth"><i class="fa fa-check"></i><b>6.2.3</b> Método Marr-Hildreth</a></li>
+<li class="chapter" data-level="6.2.4" data-path="segmentação.html"><a href="segmentação.html#método-canny"><i class="fa fa-check"></i><b>6.2.4</b> Método Canny</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="segmentação.html"><a href="segmentação.html#transformada-de-hough"><i class="fa fa-check"></i><b>6.3</b> Transformada de Hough</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="segmentação.html"><a href="segmentação.html#transformada-de-hough-para-detecção-de-linhas"><i class="fa fa-check"></i><b>6.3.1</b> Transformada de Hough para detecção de linhas</a></li>
+<li class="chapter" data-level="6.3.2" data-path="segmentação.html"><a href="segmentação.html#transformada-de-hough-para-detecção-de-círculos"><i class="fa fa-check"></i><b>6.3.2</b> Transformada de Hough para detecção de círculos</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="segmentação.html"><a href="segmentação.html#detecção-de-blobs"><i class="fa fa-check"></i><b>6.4</b> Detecção de blobs</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="segmentação.html"><a href="segmentação.html#log"><i class="fa fa-check"></i><b>6.4.1</b> LoG</a></li>
+<li class="chapter" data-level="6.4.2" data-path="segmentação.html"><a href="segmentação.html#dog"><i class="fa fa-check"></i><b>6.4.2</b> DoG</a></li>
+<li class="chapter" data-level="6.4.3" data-path="segmentação.html"><a href="segmentação.html#doh"><i class="fa fa-check"></i><b>6.4.3</b> DoH</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="segmentação.html"><a href="segmentação.html#detecção-de-junções-ou-cantos"><i class="fa fa-check"></i><b>6.5</b> Detecção de junções ou cantos</a></li>
+<li class="chapter" data-level="6.6" data-path="segmentação.html"><a href="segmentação.html#segmentação-por-limiarização"><i class="fa fa-check"></i><b>6.6</b> Segmentação por limiarização</a></li>
+<li class="chapter" data-level="6.7" data-path="segmentação.html"><a href="segmentação.html#método-de-otsu"><i class="fa fa-check"></i><b>6.7</b> método de Otsu</a></li>
+<li class="chapter" data-level="6.8" data-path="segmentação.html"><a href="segmentação.html#segmentação-usando-watersheds-morfológicas"><i class="fa fa-check"></i><b>6.8</b> Segmentação usando watersheds morfológicas</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="refêrencias.html"><a href="refêrencias.html"><i class="fa fa-check"></i>Refêrencias</a></li>
+<li class="divider"></li>
+<li><center>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+</a></li></center>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Material introdutório de Processamento Digital de Imagens(PDI)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="formação-da-imagem" class="section level1">
+<h1><span class="header-section-number">Capítulo 2</span> Formação da imagem</h1>
+<p>Existem diferentes tipos de fontes utilizadas para geração de imagens, sendo que a mais comum é do espectro eletromagnético, mas podendo ser também, a partir da energia mecânica (ultrassom), feixe de elétrons, etc.. Cada fonte necessita de um método específico de captura, para algumas pode ser uma câmera fotográfica, porém a outras é necessário que o computador sintetize a imagem, como o microscópio eletrônico. Como já mencionado no tópico de introdução, o espectro eletromagnético contém diferentes frequências de energia, mas os humanos conseguem enxergar somente uma pequena parte desse espectro, conhecido como luz visível. Isso se deve ao fato de que nossos olhos evoluíram para serem sensitivos a essa faixa de luzes, que vêm da luz solar e nos ajuda a realizar nossas atividades. Existem outros animais, como pássaros e insetos, que conseguem ver luz em outras faixas, como a ultravioleta<span class="citation">[<a href="#ref-cuthill2017" role="doc-biblioref">6</a>, p. 2]</span>. Caso nossos olhos fossem também sensíveis a outras frequências, como por exemplo a de rádio, nossos celulares e torres telefônicas pareceriam lanternas<span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 8]</span>.</p>
+<p>A luz sem cor, isto é, a luz com maior energia dentro do espectro visível humano, é chamada de luz monocromática (ou acromática). Pelo fato de a intensidade da luz monocromática ser percebida como variações de preto a tons de cinza até chegar ao branco, utiliza-se o termo nível de cinza. Já a luz cromática (colorida) cobre o espectro de energia eletromagnética na faixa de 0,43 a 0,79 <span class="math inline">\(\mu m\)</span>. Além da frequência, três medidas básicas são utilizadas para descrever a qualidade de uma fonte de luz cromática: radiância, luminância e brilho. A radiância é a quantidade total de energia que é emitida pela fonte de luz e é normalmente medida em watts (W). A luminância, medida em lumens (lm), mede a quantidade de energia que um observador percebe de uma fonte de luz. O brilho, que incorpora a noção acromática de intensidade, é um descritor subjetivo da percepção da luz, então é praticamente impossível mensurar<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 28]</span>.</p>
+<p>Nos próximos tópicos iremos explorar alguns conceitos e o funcionamento da aquisição de imagem. Esse processo é um pouco complexo e envolve conceitos de ótica, que serão apresentados, de maneira introdutória, a seguir.</p>
+<div id="câmera-pinhole-e-geometria" class="section level2">
+<h2><span class="header-section-number">2.1</span> Câmera pinhole e geometria</h2>
+<p>Na figura <a href="formação-da-imagem.html#fig:aquisicaoimagem">2.1</a> temos um esquema básico de como geralmente ocorre a aquisição de imagens, primeiramente a energia em forma de luz, vinda de uma fonte, atinge um objeto e é refletida, sendo após isso capturada por um dispositivo, como uma câmera.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:aquisicaoimagem"></span>
+<img src="imagens/02-formacao/aquisicao_imagem.png" alt="Representação de uma típica captura de imagem [7, p. 8]." width="55%" />
+<p class="caption">
+Figura 2.1: Representação de uma típica captura de imagem <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 8]</span>.
+</p>
+</div>
+<p>Baseado nesse princípio pode-se criar um dispositivo muito simples para captura de imagens, este é conhecido como câmara pinhole(do inglês buraco de alfinete) ou câmara escura. Este dispositivo consiste basicamente de uma caixa fechada com somente um pequeno orifício por onde os raios de luz possam entrar. Mas por que utilizar somente uma pequena entrada? Como podemos ver na figura <a href="formação-da-imagem.html#fig:barreiraluz">2.2</a>, se tentarmos realizar a captura da imagem, usando filme fotográfico ou um sensor, sem essa limitação, a área sensível acaba recebendo raios de inúmeras direções, que acabam se misturando tendo como resultado uma imagem ruim. Com a barreira de entrada, limitamos a quantidade de luz e conseguimos resultados melhores.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:barreiraluz"></span>
+<img src="imagens/02-formacao/barreiraluz.png" alt="Introdução de barreira para captura de imagem [7, p. 11]." width="55%" />
+<p class="caption">
+Figura 2.2: Introdução de barreira para captura de imagem <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 11]</span>.
+</p>
+</div>
+<p>Na figura <a href="formação-da-imagem.html#fig:barreiraluz">2.2</a> percebemos que a imagem resultante acaba invertida, isso pode ser explicado através de algumas relações geométricas que serão apresentadas a seguir.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:geometriapinhole"></span>
+<img src="imagens/02-formacao/geometriapinhole.png" alt="Geometria de uma câmera pinhole [8, p. 5]." width="55%" />
+<p class="caption">
+Figura 2.3: Geometria de uma câmera pinhole <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 5]</span>.
+</p>
+</div>
+<p>Na figura <a href="formação-da-imagem.html#fig:geometriapinhole">2.3</a>, considerando que o eixo óptico corresponde a uma reta perpendicular ao orifício de entrada de luz, que o objeto está localizado a uma distância <span class="math inline">\(Z\)</span> da abertura e a uma distância <span class="math inline">\(Y\)</span> o eixo óptico, podemos definir a altura <span class="math inline">\(y\)</span> e a largura <span class="math inline">\(x\)</span> da projeção do objeto utilizando a simetria de triângulos:</p>
+<p><span class="math display">\[-\frac{y}{f}=\frac{Y}{Z}\Leftrightarrow y=-f\frac{Y}{Z} \text{ e } -\frac{x}{f}=\frac{x}{f} \Leftrightarrow x=-f\frac{X}{Z}\]</span></p>
+<p>A variável <span class="math inline">\(f\)</span> nessa equação se refere a distância focal, que é, nesse caso, o tamanho da caixa da câmera. Os sinais negativos das equações significam que a imagem projetada está rotacionada a 180º verticalmente e horizontalmente, como podemos confirmar na imagem acima. Câmeras que usavam esse princípio de funcionamento foram utilizadas a partir do século XIII mas hoje em dia não são utilizadas, somente por hobbistas ou curiosos, já que tem muitas desvantagens, como precisar de um longo tempo de exposição para captura da imagem.</p>
+</div>
+<div id="lentes" class="section level2">
+<h2><span class="header-section-number">2.2</span> Lentes</h2>
+<p>As câmeras mais modernas não possuem somente uma pequena entrada para luz, mas um sistema de lentes que focam a luz recebida no sensor. Discutiremos a seguir alguns dos conceitos por trás disso.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:lente"></span>
+<img src="imagens/02-formacao/lente.png" alt="Ação de uma lente sobre os raios de luz [7, p. 12]." width="55%" />
+<p class="caption">
+Figura 2.4: Ação de uma lente sobre os raios de luz <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 12]</span>.
+</p>
+</div>
+<p>Como podemos ver na figura <a href="formação-da-imagem.html#fig:lente">2.4</a>, em cada ponto de um objeto há inúmeros raios de luz refletidos - neste caso são ilustrados três - e os que chegam à lente são focalizados no seu lado direito. As imagens são capturadas colocando-se o sensor exatamente onde esses raios são focalizados, ou seja, onde a imagem é formada.
+O ponto <span class="math inline">\(F\)</span> onde os raios paralelos se cruzam é conhecido como Ponto Focal. A distância <span class="math inline">\(f\)</span>, que vai do centro óptico <span class="math inline">\(O\)</span> até <span class="math inline">\(F\)</span> é conhecida como Distância Focal.
+Definindo a distância do objeto real até a lente como g e a distância até a formação da imagem após passa pela lente como b temos que:</p>
+<p><span class="math display">\[\frac{1}{g}+\frac{1}{b}=\frac{1}{f}\]</span></p>
+<p>Como <span class="math inline">\(f\)</span> e <span class="math inline">\(b\)</span> estão normalmente entre 1 mm e 100mm isso mostra que <span class="math inline">\(\frac{1}{g}\)</span> não tem quase nenhum impacto na equação e significa que <span class="math inline">\(b = f\)</span>. Isso significa que a imagem dentro da câmera é formada muito próxima ao ponto focal.
+Outro ponto importante das lentes é conhecido como zoom óptico. Isto deriva de um aspecto das lentes de que o tamanho do objeto na imagem formada, <span class="math inline">\(B\)</span>, aumenta quando <span class="math inline">\(f\)</span> aumenta. Podemos representar isso na seguinte equação, onde <span class="math inline">\(g\)</span> é o tamanho real do objeto:</p>
+<p><span class="math display">\[\frac{b}{B}=\frac{g}{G}\]</span></p>
+<p>Na prática <span class="math inline">\(f\)</span> é alterado através de mudanças na distância entre diferentes lentes dentro do sistema óptico da câmera, aqui estamos usando somente uma lente para exemplificar de maneira fácil alguns de seus conceitos básicos.
+Se o <span class="math inline">\(f\)</span> for constante, quando alteramos a distância do objeto, no caso <span class="math inline">\(g\)</span>, sabemos que <span class="math inline">\(b\)</span> também aumenta, isso significa que o sensor tem que ser movido mais para trás, pois a imagem estará sendo formada mais longe da lente. Se não movermos <span class="math inline">\(b\)</span> temos uma imagem fora de foco, como mostrado a seguir. Quando usamos uma câmera, o ato de colocar a imagem em foco significa que estamos alterando <span class="math inline">\(b\)</span> para que a imagem seja formada onde o sensor está localizado, para que a imagem esteja em foco.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:foco"></span>
+<img src="imagens/02-formacao/foco.png" alt="Uma imagem focada e desfocada [7, p. 11]." width="55%" />
+<p class="caption">
+Figura 2.5: Uma imagem focada e desfocada <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 11]</span>.
+</p>
+</div>
+<p>A figura <a href="formação-da-imagem.html#fig:foco">2.5</a> ilustra exatamente o que significa uma imagem estar fora de foco, no sensor cada pixel tem um tamanho específico, quando a imagem está em foco os raios de um ponto específico estão dentro da área do pixel. Uma imagem fica fora de foco quando os raios de outros pontos também interceptam o pixel, gerando uma mistura de diferentes pontos.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:profundidade"></span>
+<img src="imagens/02-formacao/profundidade.png" alt="Profundidade de campo [7, p. 13]." width="55%" />
+<p class="caption">
+Figura 2.6: Profundidade de campo <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 13]</span>.
+</p>
+</div>
+<p>A figura <a href="formação-da-imagem.html#fig:profundidade">2.6</a> apresenta outro ponto muito importante, chamado Profundidade de Campo(Depth of field), que representa a soma das distâncias <span class="math inline">\(g_l\)</span> e <span class="math inline">\(g_r\)</span>, que representam o quando os objetos podem ser movidos e permanecerem em foco.</p>
+<p>Um tópico que também tem muita importância na aquisição de imagens é o Campo de Visão(Field of View ou FOV) que representa a área observável de uma câmera. Na figura <a href="formação-da-imagem.html#fig:campovisao">2.7</a> essa área observável é denotada pelo ângulo <span class="math inline">\(V\)</span>. O FOV de uma câmera depende de alguns aspectos, como sua distância focal e tamanho do sensor. Em muitos casos os sensores não são quadrados, mas retangulares, então para representarmos matematicamente o campo de visão, utilizamos as equações seguintes para o FOV vertical e horizontal:
+<span class="math display">\[FOV_x = 2*\tan^{-1}\left(\frac{\frac{comprimento\ do\ sensor}{2}}{f}\right) \text{ e }  FOV_y = 2*\tan^{-1}\left(\frac{\frac{altura\ do\ sensor}{2}}{f}\right)\]</span></p>
+
+<div class="figure" style="text-align: center"><span id="fig:campovisao"></span>
+<img src="imagens/02-formacao/campovisao.png" alt="Campo de visão [7, p. 14]." width="55%" />
+<p class="caption">
+Figura 2.7: Campo de visão <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 14]</span>.
+</p>
+</div>
+<p>Por exemplo, se tivermos uma câmera com um sensor que tenha o comprimento de 14mm, altura de 10mm e uma distância focal de 5mm temos:
+<span class="math display">\[FOV_x=2*tan^{-1}\left(\frac{7}{5}\right)=108.0^{\circ} \text{ e } FOV_y=2*tan^{-1}(1)=90^{\circ}\]</span></p>
+<p>Isso significa que essa câmera tem uma área observal de 108.9º horizontalmente e 90º verticalmente. Na figura <a href="formação-da-imagem.html#fig:diferentesprofundidades">2.8</a> temos o mesmo objeto fotografado com diferentes profundidades de campo:</p>
+
+<div class="figure" style="text-align: center"><span id="fig:diferentesprofundidades"></span>
+<img src="imagens/02-formacao/diferentesprofundidades.png" alt="Diferentes profundidades de campo [7, p. 15]." width="90%" />
+<p class="caption">
+Figura 2.8: Diferentes profundidades de campo <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 15]</span>.
+</p>
+</div>
+<p>Outros dois fatores importantes na aquisição de imagem são a abertura e o obturador. A abertura é, em uma câmera, o mesmo que a íris no olho humano, ela controla a quantidade de luz que chega ao sensor. E o obturador é um dispositivo que controla o tempo ao qual o sensor será exposto à luz para capturar a imagem.</p>
+</div>
+<div id="sensor" class="section level2">
+<h2><span class="header-section-number">2.3</span> Sensor</h2>
+<p>Existem dois tipos principais de sensores que são empregados em dispositivos fotográficos. Um deles é o CCD, que é usado principalmente em aplicações mais específicas ou que precisam de uma qualidade muito alta, e o CMOS, usado em casos mais gerais, como câmeras de celulares.
+Após a luz passar por todo o sistema de lentes ela chega a esses sensores, que tem sua estrutura exemplificada na figura <a href="formação-da-imagem.html#fig:sensor">2.9</a>, conhecido como PDA(Photodiode Array):</p>
+
+<div class="figure" style="text-align: center"><span id="fig:sensor"></span>
+<img src="imagens/02-formacao/sensor.png" alt="Sensor(area matricial de celulas), Single Cell(uma única celula sensora) [7, p. 17]." width="55%" />
+<p class="caption">
+Figura 2.9: Sensor(area matricial de celulas), Single Cell(uma única celula sensora) <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 17]</span>.
+</p>
+</div>
+<p>Como podemos ver, o sensor consiste em várias pequenas células, cada uma um pixel, que recebe a energia luminosa e a converte para um número digital. Quanto maior a incidência de luz em um pixel, maior a quantidade de energia e por isso maior será o valor do número gerado. O trabalho de controlar esse tempo de exposição é do obturador da câmera, sendo que um tempo muito longo ou muito curto podem produzir efeitos indesejados nas imagens obtidas, por isso a maioria das câmeras contam com um sistema que controla automaticamente esse tempo para o melhor resultado. Na figura <a href="formação-da-imagem.html#fig:exposicao">2.10</a> podemos ver isso em uma imagem real, na primeira temos uma imagem que foi capturada com a exposição correta(correctly exposed), logo em seguida temos uma que sofreu de superexposição(overexposed) e na terceira temos uma com subexposição(under exposed). Por último temos uma imagem que sobre com o movimento do objeto que estava sendo capturado, oque ocasionou o borramento(motion blur).</p>
+
+<div class="figure" style="text-align: center"><span id="fig:exposicao"></span>
+<img src="imagens/02-formacao/exposicao.png" alt="Diferentes níveis de exposição [7, p. 17]." width="60%" />
+<p class="caption">
+Figura 2.10: Diferentes níveis de exposição <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 17]</span>.
+</p>
+</div>
+<p>Vimos até agora, principalmente, como se capturam imagens em tons de cinza, mas em imagens coloridas, como são capturadas?
+Imagens coloridas utilizam, especialmente, o formato RGB, que significa Red-Green-Blue, ou seja, é formado pelas cores primárias vermelho, verde e azul. Podemos a partir disso gerar imagens coloridas tendo as informações sobre sua intensidade de cada uma dessas cores. Na figura <a href="formação-da-imagem.html#fig:componentes">2.11</a> podemos ver uma imagem com seus componentes separados:</p>
+
+<div class="figure" style="text-align: center"><span id="fig:componentes"></span>
+<img src="imagens/02-formacao/componentes.png" alt="Imagem colorida separada em seus três componentes [7, p. 28]." width="65%" />
+<p class="caption">
+Figura 2.11: Imagem colorida separada em seus três componentes <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 28]</span>.
+</p>
+</div>
+<p>Precisamos assim dessas três informações para formar uma imagem colorida, uma das implementações pensadas para resolver esse problema foi a de dividir a luz de entrada e enviar cada um dos raios filtrados para um sensor diferente, como representado na figura <a href="formação-da-imagem.html#fig:tressensores">2.12</a>. Apesar de essa implementação funcionar, ela não se tornou o padrão pelo fato de que utilizar três sensores faz com que seu preço de construção fique elevado e o projeto em si muito mais complexo.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:tressensores"></span>
+<img src="imagens/02-formacao/tres_sensores.png" alt="Captura de imagem com três sensores [9, p. 242]." width="60%" />
+<p class="caption">
+Figura 2.12: Captura de imagem com três sensores <span class="citation">[<a href="#ref-teubner2019" role="doc-biblioref">9</a>, p. 242]</span>.
+</p>
+</div>
+<p>Ao invés disso, as câmeras modernas utilizam somente um sensor e fazem uso de um filtro que separa uma das três cores para cada pixel, isso porque os fotodiodos não reconhecem por si só as cores, mas a intensidade, o que nos levaria a ter somente fotos com tons de cinza. Esse filtro pode conter diferentes configurações, sendo que uma das mais utilizadas é o filtro Bayer, que pode ser visto na figura <a href="formação-da-imagem.html#fig:bayer">2.13</a>:</p>
+
+<div class="figure" style="text-align: center"><span id="fig:bayer"></span>
+<img src="imagens/02-formacao/bayer.png" alt="Filtro Bayer [7, p. 29]." width="80%" />
+<p class="caption">
+Figura 2.13: Filtro Bayer <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 29]</span>.
+</p>
+</div>
+<p>Podemos perceber que ocorre uma maior ocorrência das cores verdes, isso se deve ao fato de que o olho humano é mais sensível a essa cor, logo se dá uma maior ênfase a sua captura. Na figura 14 temos uma esquematização de como cada pixel recebe informação de somente uma cor, por meio da filtragem, onde a luz que entra(Incoming light) é filtrada e somente a cor de interesse consegue passar, após isso ela chega a malha de sensores(sensor array):</p>
+
+<div class="figure" style="text-align: center"><span id="fig:sensorarray"></span>
+<img src="imagens/02-formacao/sensorarray.png" alt="Sensores com padrão Bayer [10]." width="60%" />
+<p class="caption">
+Figura 2.14: Sensores com padrão Bayer <span class="citation">[<a href="#ref-img:sensorarray" role="doc-biblioref">10</a>]</span>.
+</p>
+</div>
+<p>Vemos na figura <a href="formação-da-imagem.html#fig:sensorarray">2.14</a> que temos ao final três grupos de informações diferentes mas que têm dados faltantes nos pixels referentes às outras cores. As informações desses pixels são preenchidas em um processo chamado interpolação que completa as informações baseada nos valores dos pixels vizinhos.</p>
+</div>
+<div id="amostragem-e-quantização" class="section level2">
+<h2><span class="header-section-number">2.4</span> Amostragem e Quantização</h2>
+<p>Nas seções anteriores foram apresentados processos para a captura de imagens a partir de sensores (principalmente de câmeras comuns). Ainda como etapas da aquisição de imagens serão abordados nesta seção a amostragem e a quantização, procedimentos em que os dados contínuos dos sensores são convertidos para o formato digital, que é discreto.</p>
+<div id="amostragem" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Amostragem</h3>
+<p>Na amostragem ocorre a discretização espacial, ou seja, a conversão de um espaço contínuo em um espaço discreto, que pode ser representado digitalmente. Este procedimento é exemplificado na Figura <a href="formação-da-imagem.html#fig:amostragemquant">2.15</a>, na qual a figura <a href="formação-da-imagem.html#fig:amostragemquant">2.15</a> (a) representa um objeto de atributos contínuos, e a linha AB é um segmento horizontal do objeto.</p>
+<p>A figura <a href="formação-da-imagem.html#fig:amostragemquant">2.15</a> (b) contém a representação da amplitude (nível de intensidade) da imagem contínua ao longo da linha AB. Nas extremidades do gráfico na figura <a href="formação-da-imagem.html#fig:amostragemquant">2.15</a> (b), a intensidade é mais alta devido a parte branca da imagem, já os vales representam as partes com menos intensidade, ou seja, as partes mais escuras. Como o computador ainda não tem a capacidade de armazenar uma sequência infinita de números reais, então na quantização são selecionados pontos espaçados igualmente, como na figura <a href="formação-da-imagem.html#fig:amostragemquant">2.15</a> (c).</p>
+<p>Esse procedimento de amostragem, na prática, é realizado pelos sensores, nos casos mais comuns por um sensor de uma câmera, que geralmente é retangular. Desta forma, a quantidade de células sensíveis na matriz do sensor determina os limites da amostragem. Dito isso, percebe-se que para representar de maneira real o mundo teríamos que ter um número infinito de pixels, como isso não é possível recorremos a opção de utilizar o maior número de pixels possíveis. Quanto mais pixels houver no sensor, maior será a quantidade de detalhes por ele capturado, melhorando a qualidade da imagem <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>]</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:amostragemquant"></span>
+<img src="imagens/02-formacao/amostragemquant.png" alt="Filtro Bayer [2, p. 34]." width="70%" />
+<p class="caption">
+Figura 2.15: Filtro Bayer <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 34]</span>.
+</p>
+</div>
+</div>
+<div id="quantização" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Quantização</h3>
+<p>Na figura <a href="formação-da-imagem.html#fig:amostragemquant">2.15</a> (c), os níveis de intensidade ainda variam dentro de uma faixa contínua. A função digital da intensidade é obtida pela quantização, em que as intensidades das amostras são mapeadas em um conjunto de quantidades discretas. Na figura <a href="formação-da-imagem.html#fig:amostragemquant">2.15</a> (d), os valores contínuos de intensidade são quantizados estabelecendo um dos oito valores para cada amostra de acordo com a escala de intensidade na figura <a href="formação-da-imagem.html#fig:amostragemquant">2.15</a> (c).
+Na prática, geralmente a etapa de quantização é realizada diretamente no hardware utilizando um conversor analógico-digital<span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 8]</span>. A conversão dos valores contínuos para valores discretos pode ser realizada por meio de arredondamento, truncamento ou algum outro processo<span class="citation">[<a href="#ref-bovik2009essential" role="doc-biblioref">11</a>, p. 9]</span>.
+No processo de quantização, geralmente os níveis de intensidade são mapeados por uma transformação linear para um conjunto finitos de inteiros não negativos <span class="math inline">\(\{0,\dots, L-1\}\)</span>, onde <span class="math inline">\(L\)</span> é uma potência de dois, ou seja, <span class="math inline">\(L = 2_k\)</span> <span class="citation">[<a href="#ref-bovik2009essential" role="doc-biblioref">11</a>, p. 10]</span>. Isso significa que L é o número de tons de cinza que podem ser representados com uma quantidade k de bits. Em muitas situações é utilizado <span class="math inline">\(k = 8\)</span>, ou seja, temos 256 níveis de cinza.
+Ao realizar a quantização e a amostragem linha por linha no objeto da figura <a href="formação-da-imagem.html#fig:quantizacao">2.16</a> (a) é produzida uma imagem digital bidimensional como na figura <a href="formação-da-imagem.html#fig:quantizacao">2.16</a>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:quantizacao"></span>
+<img src="imagens/02-formacao/quantizacao.png" alt="Filtro Bayer [2, p. 35]." width="60%" />
+<p class="caption">
+Figura 2.16: Filtro Bayer <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 35]</span>.
+</p>
+</div>
+</div>
+</div>
+<div id="definição-de-imagem-digital" class="section level2">
+<h2><span class="header-section-number">2.5</span> Definição de imagem digital</h2>
+<p>Uma imagem pode ser definida como uma função bidimensional, <span class="math inline">\(f(x, y)\)</span>, em que <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> são coordenadas espaciais (plano), e a amplitude de <span class="math inline">\(f\)</span> em qualquer par de coordenadas <span class="math inline">\((x, y)\)</span> é chamada de intensidade ou nível de cinza da imagem nesse ponto <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>]</span>. Quando <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> e os valores de intensidade de f são quantidades finitas e discretas, chamamos de imagem digital.</p>
+<p>A função <span class="math inline">\(f(x, y)\)</span> pode ser representada na forma de uma matriz (M x N) como na Figura, em que as M linhas são identificadas pelas coordenadas em <span class="math inline">\(x\)</span>, e as N colunas em <span class="math inline">\(y\)</span>. Cada elemento dessa matriz é chamado de elemento de imagem, elemento pictórico, pixel ou pel. O formato numérico da matriz, imagem <a href="formação-da-imagem.html#fig:imagemdigital">2.17</a>, é apropriado para o desenvolvimento de algoritmos, particularmente quando se escreve a equação da matriz (M x N):
+<span class="math display">\[f(x,y) = \begin{bmatrix}
+ f(0,0)   &amp; f(0,1)     &amp; \cdots &amp; f(0,N-1)    \\ 
+ f(1,0)   &amp; f(1,1)     &amp; \cdots &amp; f(1, N-1)   \\ 
+ \vdots   &amp; \vdots    &amp; &amp;         \vdots      \\ 
+ f(M-1,0) &amp; f(M-1, 1)  &amp; \cdots &amp; f(M-1, N-1)
+\end{bmatrix}\]</span></p>
+
+<div class="figure" style="text-align: center"><span id="fig:imagemdigital"></span>
+<img src="imagens/02-formacao/imagemdigital.png" alt="Representações da imagem digital [2, p. 36]." width="70%" />
+<p class="caption">
+Figura 2.17: Representações da imagem digital <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 36]</span>.
+</p>
+</div>
+<p>Na figura <a href="formação-da-imagem.html#fig:imagemdigital">2.17</a> (a) temos a representação da imagem em 3D, onde a intensidade de cada pixel é representada no eixo z, ou seja, sua altura. Como a matriz numérica transmite pouca informação visual é comum uma representação como na figura <a href="formação-da-imagem.html#fig:imagemdigital">2.17</a> (b), formato que seria visualizado em um monitor ou uma fotografia <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>]</span>. Em cada ponto da figura <a href="formação-da-imagem.html#fig:imagemdigital">2.17</a> (a), o nível de cinza é proporcional ao valor da intensidade <span class="math inline">\(f\)</span>, assumindo valores 0, 0,5 ou 1. Um monitor ou impressora simplesmente converte esses três valores em preto, cinza ou branco.</p>
+<p>Note que na Figura, a origem de uma imagem digital se localiza na parte superior esquerda, com o eixo x positivo direcionado para baixo e o eixo y positivo para a direita. Esse padrão segue o comportamento de varredura de dispositivos de visualização de imagem, como os monitores de TV, que começam do canto superior esquerdo da imagem e se movem para a direita, fazendo uma linha por vez <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>]</span>.
+De acordo com o tamanho da matriz (M x N) e dos níveis discretos de tons de cinza (<span class="math inline">\(L = 2^k\)</span>) que os pixels podem assumir é possível determinar o número, <span class="math inline">\(b\)</span>, de bits necessários para armazenar uma imagem digitalizada:</p>
+<p><span class="math display">\[b = M × N × k\]</span></p>
+<p>Quando uma imagem pode ter <span class="math inline">\(2^k\)</span> níveis de intensidade, geralmente ela é denominada como uma “imagem de k bits”. Por exemplo, uma imagem com 256 níveis discretos de intensidade é chamada de uma imagem de 8 bits. A figura <a href="formação-da-imagem.html#fig:tabelabits">2.18</a> mostra o número de bits utilizados para armazenar imagens quadradas de dimensão (N x N) para diferentes valores de N e k. O número de níveis de intensidade (L) correspondente a cada valor de k é mostrado entre parênteses. Observa-se na figura <a href="formação-da-imagem.html#fig:tabelabits">2.18</a> que uma imagem de 8 bits com dimensões 1.024 × 1.024 exigiria aproximadamente 1MB para armazenamento.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:tabelabits"></span>
+<img src="imagens/02-formacao/tabelabits.png" alt="Número de bits de armazenamento para vários valores de N e k [2, p. 38]." width="100%" />
+<p class="caption">
+Figura 2.18: Número de bits de armazenamento para vários valores de N e k <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 38]</span>.
+</p>
+</div>
+</div>
+<div id="resolução-espacial-e-de-intensidade" class="section level2">
+<h2><span class="header-section-number">2.6</span> Resolução espacial e de intensidade</h2>
+<p>Sem as especificações espaciais da imagem, não se pode inferir sobre a qualidade apenas pelo tamanho (M x N) em quantidades de pixels. Outra medida para especificar a resolução espacial é a densidade de pixels, podendo ser expressa como pontos (pixels) por unidade de distância, comumente dots per inch (pontos por polegada ou dpi). Referências de qualidade em relação à resolução espacial são, por exemplo, jornais impressos com uma resolução de 75 dpi e páginas de livros geralmente impressas com 2.400 dpi <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>]</span>.</p>
+<p>A figura <a href="formação-da-imagem.html#fig:resolucaoespacial">2.19</a> mostra os efeitos da redução da resolução espacial em uma imagem em seis resoluções diferentes. A figura <a href="formação-da-imagem.html#fig:resolucaoespacial">2.19</a> (a) tem resolução 512 x 512, e a resolução das demais <a href="formação-da-imagem.html#fig:resolucaoespacial">2.19</a> (b-f) diminui pela metade de forma sequencial. Todas as imagens têm as mesmas dimensões, ampliando-se o tamanho do pixel para deixar mais evidente a perda de detalhes nas imagens de baixa resolução.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:resolucaoespacial"></span>
+<img src="imagens/02-formacao/resolucaoespacial.png" alt="Efeitos da redução da resolução espacial [3, p. 20]." width="50%" />
+<p class="caption">
+Figura 2.19: Efeitos da redução da resolução espacial <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 20]</span>.
+</p>
+</div>
+<p>A resolução de intensidade ou profundidade corresponde ao número de bits (k) utilizados para estabelecer os níveis de cinza da imagem (<span class="math inline">\(L=2^k\)</span>). Por exemplo, em uma imagem cuja intensidade é quantizada em L= 256 níveis, a profundidade é de k = 8 bits por pixel.</p>
+<p>Os efeitos da redução dos níveis de cinza (profundidade) podem ser vistos na Figura. A imagem (a) apresenta 256 níveis de cinza (k = 8). As imagens (b) e (c) foram geradas pela redução do número de bits k = 4 e k = 2, respectivamente, mas mantendo a mesma dimensão.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:reducaoprofundidade"></span>
+<img src="imagens/02-formacao/reducaoprofundidade.png" alt="Efeitos da redução de profundidade [7, p. 19]." width="90%" />
+<p class="caption">
+Figura 2.20: Efeitos da redução de profundidade <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 19]</span>.
+</p>
+</div>
+</div>
+<div id="pixels" class="section level2">
+<h2><span class="header-section-number">2.7</span> Pixels</h2>
+<p>A topologia digital da imagem desempenha muita importância na especificação, localização e relação entre as coordenadas da imagem, facilitando sua manipulação. A tipologia de uma imagem digital contém as seguintes propriedades dos pixels: Vizinhança ( 4, D e 8 ), Conectividade, Adjacência, Caminho, Componente Conexa, Medidas de Distância, Operações Lógico-aritméticas.</p>
+<p>Para especificar, localizar, e relacionar topologicamente uma imagem digitalizada, consideramos: p,q denotando os pontos e, <span class="math inline">\(p(x,y)\)</span>, <span class="math inline">\(q(x,y)\)</span>, <span class="math inline">\(u(x,y)\)</span> coordenadas dos pontos denotados, expressaremos <span class="math inline">\(V\)</span> Conjunto de valores em uma imagem binária <span class="math inline">\(V=\{0,1\}\)</span>.</p>
+<div id="vizinhança" class="section level3">
+<h3><span class="header-section-number">2.7.1</span> Vizinhança</h3>
+<ul>
+<li><strong>Vizinhança 4 - <span class="math inline">\(\left[N_4(p)\right]\)</span></strong></li>
+</ul>
+<p><span class="math inline">\(N_4(p)\)</span> em <span class="math inline">\(p(x,y)\)</span> possui quatro vizinhos, dois na horizontal outros dois na vertical suas coordenadas, ou seja, é o conjunto de pixels ao redor de p, sem considerar as diagonais <span class="citation">[<a href="#ref-thome2017" role="doc-biblioref">12</a>, p. 15]</span>. Exemplo na figura <a href="formação-da-imagem.html#fig:vizinhanca">2.21</a> (a).</p>
+<p><span class="math display">\[p(x,y): p(x+1, y), p(x-1, y), p(x, y+1), p(x, y-1)\]</span></p>
+<ul>
+<li><strong>Vizinhança D - <span class="math inline">\(\left[N_D(p)\right]\)</span></strong></li>
+</ul>
+<p><span class="math inline">\(N_D(p)\)</span> em <span class="math inline">\(p(x,y)\)</span> possui quatro vizinhos, dois na diagonais superiores (direita, esquerda ) outras duas na diagonais inferiores (direita, esquerda) suas coordenadas, ou seja o conjunto de pixels ao redor de <span class="math inline">\(p\)</span>, considerando apenas as diagonais <span class="citation">[<a href="#ref-thome2017" role="doc-biblioref">12</a>, p. 15]</span>.Exemplo na figura <a href="formação-da-imagem.html#fig:vizinhanca">2.21</a> (b).</p>
+<p><span class="math display">\[p(x,y): p(x+1,y+1), p(x+1, y-1), p(x-1, y+1), p(x-1, y-1)\]</span></p>
+<ul>
+<li><strong>Vizinhança 8 - <span class="math inline">\(\left[N_8(p)\right]\)</span></strong></li>
+</ul>
+<p><span class="math inline">\(N_8(p)\)</span> em <span class="math inline">\(p(x,y)\)</span> possui 8 vizinhos, quatro <span class="math inline">\(N_4(p)\)</span> e outros 4 <span class="math inline">\(N_D(p)\)</span>suas coordenadas ou seja o conjunto de pixels ao redor de <span class="math inline">\(p\)</span>, considerando união das vizinhanças-4 e vizinhança-8 <span class="citation">[<a href="#ref-thome2017" role="doc-biblioref">12</a>, p. 15]</span>. Exemplo na figura <a href="formação-da-imagem.html#fig:vizinhanca">2.21</a> (c).</p>
+<p><span class="math display">\[p(x,y): N_8(p) = N_4(p) \cup N_D(p)\]</span></p>
+
+<div class="figure" style="text-align: center"><span id="fig:vizinhanca"></span>
+<img src="imagens/02-formacao/vizinhanca.png" alt="Vizinhanças [12]." width="55%" />
+<p class="caption">
+Figura 2.21: Vizinhanças <span class="citation">[<a href="#ref-thome2017" role="doc-biblioref">12</a>]</span>.
+</p>
+</div>
+</div>
+<div id="conectividade" class="section level3">
+<h3><span class="header-section-number">2.7.2</span> Conectividade</h3>
+<p>Conceito importante, usado no estabelecimento limite das bordas de objetos e, identifica componentes das regiões da imagem (obtenção de propriedades específicas do objeto para o processamento de mais alto nível ).</p>
+<p>Dois pixels <span class="math inline">\(p(x,y)\)</span>, <span class="math inline">\(q(x,y)\)</span> estão conectados se:</p>
+<ol style="list-style-type: decimal">
+<li>São de alguma forma vizinhos (<span class="math inline">\(N_4\)</span>,<span class="math inline">\(N_D\)</span> ou <span class="math inline">\(N_8\)</span>).</li>
+<li>Seus níveis de cinza satisfazem algum critério de similaridade (<span class="math inline">\(V = \{ \dots \}\)</span>).</li>
+</ol>
+<ul>
+<li><strong>Conectividade de 4</strong>:</li>
+</ul>
+<p>Os pixels p e q, assumindo valores em &amp;V&amp; , são conectados de 4 somente se q pertence ao conjunto <span class="math inline">\(N_4(p)\)</span>. Exemplo em figura <a href="formação-da-imagem.html#fig:conectividade">2.22</a> (a).</p>
+<p><span class="math display">\[C4_{p,q} \text{ em } V \Leftrightarrow q \in N_4(p) \wedge f(p) \wedge f(q) \in V \]</span>
+<span class="math display">\[V = \{0\} \to C4_{p.q} \text{ verdadeiro}\]</span></p>
+<ul>
+<li><strong>Conectividade de m(conectividade mista)</strong>:</li>
+</ul>
+<p>Dois pixels <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span>, assumindo valores em <span class="math inline">\(V\)</span>, são conectados de m somente se:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(q\)</span> pertence ao conjunto <span class="math inline">\(N_4(p)\)</span></li>
+<li><span class="math inline">\(q\)</span> pertence ao conjunto <span class="math inline">\(N_D(p)\)</span> e a interseção entre <span class="math inline">\(N_4(p)\)</span> e <span class="math inline">\(N_4(q)\)</span> for vazia.</li>
+</ol>
+<p><span class="math display">\[Cm_{p,q} \text{ em } V\Leftrightarrow (q \in N_4(p) \vee (q \in N_D(p) \wedge N_4(p) \cap N_4(q) = \{\})) \vee f(p) e f(q) \in V  \]</span>
+<span class="math display">\[V = \{0\} \to Cm_{p.q}\text{ falso}\]</span>
+Exemplo em figura <a href="formação-da-imagem.html#fig:conectividade">2.22</a> (b).</p>
+<ul>
+<li><strong>Conectividade de 8</strong>:</li>
+</ul>
+<p>Os pixels <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span>, assumindo valores em V, são conectados de 8 somente se <span class="math inline">\(q\)</span> pertence ao conjunto <span class="math inline">\(N_8(p)\)</span>. Exemplo em figura <a href="formação-da-imagem.html#fig:conectividade">2.22</a> (c).</p>
+<p><span class="math display">\[C8_{p,q} \text{ em } V\Leftrightarrow q \in N_8(p) \wedge f(p) \wedge f(q) \in V \]</span>
+<span class="math display">\[V = \{0\} \to C8_{p.q}\text{ verdadeiro}\]</span></p>
+
+<div class="figure" style="text-align: center"><span id="fig:conectividade"></span>
+<img src="imagens/02-formacao/conectividade.png" alt="Conectividades [12]." width="55%" />
+<p class="caption">
+Figura 2.22: Conectividades <span class="citation">[<a href="#ref-thome2017" role="doc-biblioref">12</a>]</span>.
+</p>
+</div>
+</div>
+<div id="adjacência" class="section level3">
+<h3><span class="header-section-number">2.7.3</span> Adjacência</h3>
+<p>Dois pixels <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span>, com valores pertencendo a <span class="math inline">\(V\)</span> são:</p>
+<ol style="list-style-type: decimal">
+<li>Adjacentes-4 se <span class="math inline">\(q\)</span> estiver no conjunto <span class="math inline">\(N_4(p)\)</span>.</li>
+<li>Adjacentes-8 se <span class="math inline">\(q\)</span> estiver no conjunto <span class="math inline">\(N_8(p)\)</span>.</li>
+<li>Adjacentes-m, <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span> subconjuntos de pixels onde <span class="math inline">\(\{(pq) \vee (pp) \vee (q q) \}\)</span>, são ditos adjacentes se pegamos um pixel do primeiro conjunto for adjacente a um pixel do segundo.</li>
+</ol>
+<p>Na figura <a href="formação-da-imagem.html#fig:adjacencia">2.23</a> temos exemplos de 1. e 2. (em <a href="formação-da-imagem.html#fig:adjacencia">2.23</a> (a)) e de 3. em <a href="formação-da-imagem.html#fig:adjacencia">2.23</a> (b).</p>
+
+<div class="figure" style="text-align: center"><span id="fig:adjacencia"></span>
+<img src="imagens/02-formacao/adjacencia.png" alt="Adjacências [12]." width="55%" />
+<p class="caption">
+Figura 2.23: Adjacências <span class="citation">[<a href="#ref-thome2017" role="doc-biblioref">12</a>]</span>.
+</p>
+</div>
+</div>
+<div id="componente-conexa" class="section level3">
+<h3><span class="header-section-number">2.7.4</span> Componente Conexa</h3>
+<p>Dois pixels <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span> de um subconjunto de pixels <span class="math inline">\(V\)</span> da imagem são ditos conexos em <span class="math inline">\(V\)</span> se existir um caminho de pa qinteiramente contido em <span class="math inline">\(V\)</span>.</p>
+<p>Para qualquer pixel <span class="math inline">\(p\)</span> em <span class="math inline">\(V\)</span>, o conjunto de pixels em <span class="math inline">\(V\)</span> que são conexos a pé chamado um componente conexo de <span class="math inline">\(V\)</span>.</p>
+<p>Note que em uma componente conexo qualquer dois pixels deste componentes são conexos entre si.</p>
+<p>Em componentes conexos distintos os pixels são disjuntos (não conectados).</p>
+</div>
+<div id="medidas-de-distância" class="section level3">
+<h3><span class="header-section-number">2.7.5</span> Medidas de Distância</h3>
+<p>Para pixels <span class="math inline">\(p\)</span>, <span class="math inline">\(q\)</span> e <span class="math inline">\(z\)</span> com coordenadas <span class="math inline">\(p(x,y)\)</span>, <span class="math inline">\(q(s,t)\)</span> e <span class="math inline">\((u,v)\)</span>, respectivamente, <span class="math inline">\(D\)</span> é uma função distância ou métrica se:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(D(p,q) &gt;= 0 (D(p,q) = 0 ) \Leftrightarrow p = q\)</span></li>
+<li><span class="math inline">\(D(p,q) = D(q,p)\)</span></li>
+<li><span class="math inline">\(D(p,z) &lt;= D(p,q) + D(q,u)\)</span></li>
+</ol>
+<ul>
+<li>A distância entre dois pontos quaisquer pode ser definida por:</li>
+</ul>
+<p><span class="math display">\[D_e(p,q) = \sqrt{(x-s)^2 + (y-t)^2}\]</span></p>
+<p>conhecida como Distância Euclidiana.</p>
+<ul>
+<li>Distância <span class="math inline">\(D_4\)</span>(City Block ou Quarteirão) entre <span class="math inline">\(p(x,y)\)</span> e <span class="math inline">\(q(s,t)\)</span>é definida por:</li>
+</ul>
+<p><span class="math display">\[D4(p,q)=|x-s|+|y-t|\]</span></p>
+<p>Distância D8(Distância Xadrez) entre <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span> é definida como:</p>
+<p><span class="math display">\[D_8 = max(|x-s|,|y-t|)\]</span></p>
+</div>
+<div id="operações-lógico-aritméticas" class="section level3">
+<h3><span class="header-section-number">2.7.6</span> Operações Lógico-aritméticas</h3>
+<p>As operações entre pixels são computadas pixel a pixel, considerando p e qpodemos efetuar as seguintes operações aritméticas e lógicas.</p>
+<ul>
+<li>Operações Aritméticas:
+<ol style="list-style-type: decimal">
+<li><strong>Adição</strong>: <span class="math inline">\(p+q\)</span>. O uso ocorre ao se fazer a média para redução de ruído.</li>
+<li><strong>Subtração</strong>: <span class="math inline">\(p-q\)</span>. É usada para remover informação estática de fundo, Detecção de diferenças entre imagens.</li>
+<li><strong>Multiplicação</strong>: <span class="math inline">\(p\cdot q\)</span>. Calibração de brilho.</li>
+<li><strong>Divisão</strong>: <span class="math inline">\(p\div q\)</span></li>
+</ol></li>
+</ul>
+<p>As operações Aritmética de Multiplicação e Divisão são usadas para corrigir sombras em níveis de cinza, produzidas em não uniformidades da iluminação ou no sensor utilizado para a aquisição da imagem.</p>
+<ul>
+<li>Operações Lógicas:
+<ol style="list-style-type: decimal">
+<li><strong>Conjunção</strong>: <span class="math inline">\(p\wedge q\)</span></li>
+<li><strong>Disjunção</strong>: <span class="math inline">\(p\vee q\)</span></li>
+<li><strong>Complementar</strong>: <span class="math inline">\(\neg q(\bar{q})\)</span></li>
+</ol></li>
+</ul>
+<p>As operações lógicas podem ser combinadas para formar qualquer outra operação lógica, são aplicadas apenas em imagens binárias, tem seu uso no mascaramento, detecção de características e análise de forma.</p>
+
+
+</div>
+</div>
+</div>
+<h3>Refêrencias</h3>
+<div id="refs" class="references">
+<div id="ref-gonzalez2010">
+<p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+</div>
+<div id="ref-pedrini2008">
+<p>[3] H. Pedrini e W. Robson Schwartz, <em>Análise de imagens digitais: princípios, algoritmos e aplicações</em>, 3º ed. São Paulo: Thomson Learning Edicoes Ltda, 2007.</p>
+</div>
+<div id="ref-cuthill2017">
+<p>[6] I. C. Cuthill <em>et al.</em>, “The biology of color”, <em>Science</em>, vol. 357, nº 6350, 2017.</p>
+</div>
+<div id="ref-moeslund2012">
+<p>[7] T. B. Moeslund, <em>Introduction to video and image processing: Building real systems and applications</em>. Springer Science &amp; Business Media, 2012.</p>
+</div>
+<div id="ref-burger2009">
+<p>[8] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
+</div>
+<div id="ref-teubner2019">
+<p>[9] U. Teubner e H. J. Brückner, <em>Optical Imaging and Photography: Introduction to Science and Technology of Optics, Sensors and Systems</em>. Walter de Gruyter GmbH &amp; Co KG, 2019.</p>
+</div>
+<div id="ref-img:sensorarray">
+<p>[10] W. Commons, “Bayer pattern on sensor profile”. 2006, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Bayer_pattern_on_sensor_profile.svg">https://commons.wikimedia.org/wiki/File:Bayer_pattern_on_sensor_profile.svg</a>.</p>
+</div>
+<div id="ref-bovik2009essential">
+<p>[11] A. C. Bovik, <em>The essential guide to image processing</em>. Academic Press, 2009.</p>
+</div>
+<div id="ref-thome2017">
+<p>[12] A. G. Thomé, “Fundamentos sobre Processamento de Imagens”. Universidade Federal do Rio de Janeiro; <a href="http://hpc.ct.utfpr.edu.br/~charlie/docs/PID/PID_AULA_01.pdf">http://hpc.ct.utfpr.edu.br/~charlie/docs/PID/PID_AULA_01.pdf</a>, 2017.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": null
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

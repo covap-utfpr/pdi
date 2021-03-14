@@ -1,0 +1,15 @@
+p {
+  text-align: justify;
+}
+.logo{
+  width: 200px !important;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
+.logo img{
+  max-width: 100%;
+  margin-bottom: 10px;
+  border-radius: 50%;
+
+}
