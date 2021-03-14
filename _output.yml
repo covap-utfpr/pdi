@@ -1,6 +1,7 @@
 bookdown::gitbook:
   css: [css/style.css]
   config:
+    edit: https://github.com/covap-utfpr/pdi/edit/master/%s
     sharing:
       facebook: no
       github: yes
@@ -19,7 +20,7 @@ bookdown::gitbook:
         <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
         <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
         </a></li></center>
-    download: ["pdf"]
+    download: null
     citation_package: biblatex
 bookdown::pdf_book:
   citation_package: biblatex

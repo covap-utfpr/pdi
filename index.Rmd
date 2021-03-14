@@ -8,9 +8,6 @@ bibliography: book.bib
 csl: ieee.csl
 link-citations: yes
 documentclass: book
-output:
-  bookdown::pdf_book:
-    citation_package: biblatex 
 ---
 
 # Inicio {-}
