@@ -1,0 +1,7 @@
+# Transformações radiométricas
+## Transformação Linear
+## Transformação Logarítmica 
+## Transformação de Potência
+## Processamento de histograma
+## Equalização do histograma
+## Especificação de histograma

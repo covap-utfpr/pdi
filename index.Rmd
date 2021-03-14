@@ -9,7 +9,6 @@ csl: ieee.csl
 link-citations: yes
 documentclass: book
 output:
-  bookdown::gitbook: default
   bookdown::pdf_book:
     citation_package: biblatex 
 ---

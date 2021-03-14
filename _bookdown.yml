@@ -1,1 +1,15 @@
+repo: https://github.com/covap-utfpr/pdi
+delete_merged_file: true
 output_dir: "docs"
+clean: [packages.bib, bookdown.bib]
+language:
+  label:
+    fig: 'Figura '
+    tab: 'Tabela '
+    eq: 'Equação '
+    exm: 'Exemplo '
+    ref: 'Refêrencias'
+  ui:
+    edit: "Editar "
+    chapter_name: "Capítulo "
+

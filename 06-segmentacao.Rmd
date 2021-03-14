@@ -1,0 +1,20 @@
+# Segmentação
+## Detecção por descontinuidade
+### Detecção de ponto
+### Detecção de linha
+## Detecção de bordas
+### Modelos de Bordas
+### Método do gradiente ( Roberts, Prewitt, Sobel).
+### Método Marr-Hildreth
+### Método Canny
+## Transformada de Hough
+### Transformada de Hough para detecção de linhas
+### Transformada de Hough para detecção de círculos
+## Detecção de blobs
+### LoG
+### DoG
+### DoH
+## Detecção de junções ou cantos
+## Segmentação por limiarização
+## método de Otsu
+## Segmentação usando watersheds morfológicas

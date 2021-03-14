@@ -1,0 +1,17 @@
+# Transformacões Geométricas
+## Representação Vetorial e Matricial da Imagem
+## Sistema de coordenadas objetos (2D e 3D)
+## Transformações em pontos e objetos
+## Transformações Lineares
+## Transformação de Translação
+## Transformação de Escala
+## Transformação de Rotação
+## Transformação Cisalhamento (Shearing ou Skew)
+## Transformação de Reflexão
+## Características especias
+## Transformação Isométrica
+## Transformação Semelhança
+## Transformação Afim
+## Transformação Projetiva
+## Transformação Inversão
+## Classificação das Projeções Geométricas

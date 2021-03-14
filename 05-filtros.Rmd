@@ -1,0 +1,6 @@
+# Filtros
+## Convolução
+## Média 
+## Mediana
+## Gaussiano
+## Canny

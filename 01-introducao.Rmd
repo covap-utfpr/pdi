@@ -13,7 +13,7 @@ A visão desempenha um papel importante na vida das pessoas, pois com ela é pos
 (ref:areasPDI) Processos Computacionais com Imagens [@velho2009, p. 2].
 
 ```{r areasPDI, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:areasPDI)', fig.align='center', out.width='40%'}
-knitr::include_graphics(rep('imagem/areasPDI.png'))
+knitr::include_graphics(rep('imagens/01-introducao/areasPDI.png'))
 
 ```
 
@@ -62,7 +62,7 @@ Uma das formas mais fáceis de desenvolver uma compreensão básica da extensão
 (ref:espectro) Espectro eletromagnético [@img:espectro].
 
 ```{r espectro, echo=FALSE, fig.cap='(ref:espectro)', fig.asp=.8, fig.width= 4, fig.align='center', out.width='90%'}
-knitr::include_graphics(rep('imagem/espectro.png'))
+knitr::include_graphics(rep('imagens/01-introducao/espectro.png'))
 ```
 
 
@@ -91,7 +91,7 @@ Como podemos observar, existem inúmeras maneiras de se conseguir imagens além 
 (ref:aplicacoes) Nebulosa CRAB em diferentes frequências [@img:nebulosa].
 
 ```{r aplicacoes, echo=FALSE,fig.asp=.8, fig.width= 4, fig.cap='(ref:aplicacoes)', fig.align='center', out.width='90%'}
-knitr::include_graphics(rep('imagem/aplicacoes.png'))
+knitr::include_graphics(rep('imagens/01-introducao/aplicacoes.png'))
 ```
 
 
@@ -102,7 +102,7 @@ Um dos objetivos deste material é servir de referência para o estudo inicial d
 (ref:etapasPDI) Etapas de aplicação de PDI [@pedrini2008, p. 4].
 
 ```{r etapasPDI, echo= FALSE, fig.asp=.6, fig.width= 4, fig.cap='(ref:etapasPDI)', fig.align='center', out.width='40%'}
-knitr::include_graphics(rep('imagem/etapasPDI.png'))
+knitr::include_graphics(rep('imagens/01-introducao/etapasPDI.png'))
 ```
 
 Vale ressaltar que essas etapas não são fixas e podem ser modificadas, sendo que uma base de conhecimentos é importante para orientar em uma aplicação específica [@pedrini2008, p. 4].
@@ -114,7 +114,7 @@ Vale ressaltar que essas etapas não são fixas e podem ser modificadas, sendo q
 (ref:aquisicao) Aquisição de imagens de satélite.(a) a (d) mostram quatro imagens espectrais de satélite da cidade de Washington, D.C., banda vermelha, verde e azul visíveis e o infravermelho próximo, respectivamente. (e) Imagem colorida como combinação RGB de (a), (b) e (c). (f) Imagem colorida obtida pela combinação de (b), (c) e (d)[@gonzalez2010, p. 279].
 
 ```{r aquisicao, echo= FALSE, fig.asp=.6, fig.width= 4, fig.cap='(ref:aquisicao)', fig.align='center', out.width='40%'}
-knitr::include_graphics(rep('imagem/aquisicao.png'))
+knitr::include_graphics(rep('imagens/01-introducao/aquisicao.png'))
 ```
 
 - **Pré processamento**
@@ -124,7 +124,7 @@ knitr::include_graphics(rep('imagem/aquisicao.png'))
 (ref:preProcessamento) Subtração de imagens para realce de diferenças.(a) Imagem da área de Washington D.C em infravermelho. (b) Resultado ao zerar o bit menos significativo de todos os pixels de (a). (c) Diferença entre as duas imagens ajustada para a faixa [0, 255], sendo que valores em preto (0) indicam pontos nos quais não há nenhuma diferença [@gonzalez2010, p. 49]. 
 
 ```{r preProcessamento, echo= FALSE, fig.asp=.6, fig.width= 4, fig.cap='(ref:preProcessamento)', fig.align='center', out.width='60%'}
-knitr::include_graphics(rep('imagem/preProcessamento.png'))
+knitr::include_graphics(rep('imagens/01-introducao/preProcessamento.png'))
 ```
 
 - **Segmentação**
@@ -134,7 +134,7 @@ knitr::include_graphics(rep('imagem/preProcessamento.png'))
 (ref:segmentacao) Extração de características de uma imagem segmentada.(a) Imagem na banda infravermelha da área de Washington, D.C. (b) Segmentação da imagem por limiarização. (c) O maior componente conexo de (b). Técnica de representação por esqueleto de (c) [@gonzalez2010, p. 544].
 
 ```{r segmentacao, echo= FALSE, fig.asp=.6, fig.width= 4, fig.cap='(ref:segmentacao)', fig.align='center', out.width='50%'}
-knitr::include_graphics(rep('imagem/segmentacao.png'))
+knitr::include_graphics(rep('imagens/01-introducao/segmentacao.png'))
 ```
 
 - **Representação e Descrição**
@@ -149,5 +149,5 @@ knitr::include_graphics(rep('imagem/segmentacao.png'))
 (ref:analise) Classificação bayesiana em uma imagem multiespectral. Resultado (em branco) da classificação na classe água, desenvolvimento urbano e vegetação, da esquerda para a direita [@gonzalez2010, p. 579].
 
 ```{r analise, echo= FALSE,fig.asp=.6, fig.width= 4, fig.cap='(ref:analise)', fig.align='center', out.width='60%'}
-knitr::include_graphics(rep('imagem/analise.png'))
+knitr::include_graphics(rep('imagens/01-introducao/analise.png'))
 ```
