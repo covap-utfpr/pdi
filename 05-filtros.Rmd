@@ -1,6 +1,377 @@
 # Filtros
+
+Filtros são uma poderosa ferramenta para se realizar operações em imagens. Diferente das operações de ponto, que operam sobre um único pixel, as operações utilizando filtros levam em consideração os pixels próximos ao pixel atualmente em modificação. Isso nos permite realizar alterações muito mais complexas do que as realizadas anteriormente, como a operação *sharpen* (aguçamento) e *blur* (suavizar), que podem ser observados na figura \@ref(fig:onibusSharpenNBlur) (a) e figura \@ref(fig:onibusSharpenNBlur) (b), respectivamente.
+
+
+(ref:onibusSharpenNBlur) Imagem de ônibus com filtro de aguçamento e de suavização [@burger2009, p. 98]
+
+```{r onibusSharpenNBlur, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:onibusSharpenNBlur)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/onibusShapenNBlur.png'))
+```
+
 ## Convolução
-## Média 
+
+Convolução é uma operação muito utilizada no PDI, a qual tem suas origens na matemática, onde ela é definida como uma operação realizada entre duas funções e que resulta numa terceira, ou, em outras palavras, ela recebe dois sinais de entrada e gera um sinal de saída. No caso do PDI, podemos imaginar os sinais de entrada como sendo a nossa imagem e o filtro (*kernel*), e a nossa saída como sendo a imagem filtrada. 
+
+Quando dizemos *kernel*, estamos nos referindo a uma função ou, no caso do processamento de imagens, a uma matriz, que é aplicada em nossa imagem e produz como saída o objeto de entrada com modificações. Na tabela \@ref(tab:kernelExample), temos exemplos de alguns tipos de *kernels* que podem ser utilizados na convolução e seus respectivos resultados. Além dos efeitos mais comuns, como o de desfoque (*blur*), podemos utilizar *kernels* que extraem informações mais complexas das imagens, como os detectores de borda, que serão discutidos mais a fundo nos próximos tópicos.
+
+
+Table: (#tab:kernelExample) Exemplo de *kernels* (adaptada de [@tab:kernelExample]).
+
+|Operação|*Kernel*|Resultado|
+|:------------:|:-----------:|:------------:|
+|Identidade (Imagem Original)|$$\begin{bmatrix}
+0 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 0
+\end{bmatrix}$$|![](imagens/05-filtros/esquilo1.png)|
+|Detecção de borda|$$\begin{bmatrix}
+-1 & -1 & -1\\
+-1 & 8 & -1\\
+-1 & -1 & -1
+\end{bmatrix}$$|![](imagens/05-filtros/esquilo2.png)|
+|Média (box blur)|$$\frac{1}{9}\begin{bmatrix}
+1 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1
+\end{bmatrix}$$|![](imagens/05-filtros/esquilo3.png)|
+|Gaussian blur|$$\frac{1}{16}\begin{bmatrix}
+1 & 2 & 1\\
+2 & 4 & 2\\
+1 & 2 & 1
+\end{bmatrix}$$|![](imagens/05-filtros/esquilo1.png)|
+
+
+Agora, veremos operação de convolução mais detalhadamente. Essa operação geralmente é representada por $*$ e pode ser descrita, em poucas palavras, como uma soma de produtos que é realizada com um deslizamento sobre a função de entrada. A figura \@ref(fig:convolutionGif) representa de maneira visual a convolução em um cenário de uma dimensão, através do sinal de entrada (*signal*) e o *kernel*. Podemos ainda perceber que o *kernel* está rotacionado em 180º, isso se deve a definição de convolução.
+
+(ref:convolutionGif) Convolução em uma dimensão [@img:convolutionGif]
+
+```{r convolutionGif, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:convolutionGif)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/convolutionGif.png'))
+```
+
+Algo interessante que podemos observar na imagem \@ref(fig:convolutionGif) é que nosso sinal de entrada é quase totalmente 0 e contém um único ponto 1, isso faz com que nosso resultado seja uma cópia do *kernel*. A partir disso, conseguimos imaginar o por que temos como resultado a própria imagem quando aplicado um *kernel* identidade, como mostrado na tabela \@ref(tab:kernelExample). 
+
+Antes de irmos mais adiante no assunto, é importante esclarecermos alguns conceitos para que não se tornem confusos. Existe outra operação matemática extremamente parecida com a convolução chamada correlação, sendo que ela também realiza a soma de multiplicações com a diferença de que ela não rotaciona o *kernel*.
+
+Para entendermos bem essa diferença, podemos observar a figura \@ref(fig:correlationNConvolution1D), onde temos um exemplo de correlação e convolução sendo executados em um espaço unidimensional. Temos uma função $f$ e um filtro $w$ na figura \@ref(fig:correlationNConvolution1D) (a) e (b), na sequência, de (b) e (j), temos as funções e os filtros prontos para se realizar a correlação e a convolução. Nas etapas (c) e (k), podemos ver o preenchimento com zeros, isso ocorre porque há partes das funções que não se sobrepõem, dessa forma, permite que $w$ percorra todos os pixels de $f$. Após isso, é realizado o primeiro passo da correlação e convolução, onde podemos observar que o resultado é 0 já que $w$ está sobreposto por somente zeros, logo a soma da multiplicação de cada item de $w$ por $f$ será nulo. Deslocamos então o filtro $w$ em uma unidade a direita, onde o resultado novamente será 0, sendo que o primeiro resultado não nulo se dará no terceiro deslocamento, sendo 8 para a correlação e $1$ para a convolução. Temos o resultado de ambas operações em (g) e (o) e o resultado recortado em (h) e (p), recorte este que remove os zeros até o tamanho ficar igual ao da $f$ inicial.
+
+(ref:correlationNConvolution1D) Ilustração de correlação e convolução unidimensional [@gonzalez2010, p. 96]
+
+```{r correlationNConvolution1D, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:correlationNConvolution1D)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/correlationNConvolution1D.png'))
+```
+
+
+Vamos extender agora essas duas operações à aplicação em duas dimensões. Uma representação disso pode ser vista na figura \@ref(fig:correlationNConvolution2D), onde temos novamente o kernel $w$ e a função $f$. Percebe-se outra vez o efeito de se aplicar o *kernel* em uma imagem com apenas o número 1 no meio, nos dois casos temos como saída a cópia do *kernel*, com a diferença que na correlação ele sai rotacionado. Assim, nota-se que se pré-rotacionarmos o filtro e realizarmos a correlação teremos no final uma convolução.
+
+Já que a correlação e convolução são iguais, quais delas devo utilizar? Segundo Gonzalez, [@gonzalez2010, p. 98], isso é uma questão de preferência e qualquer uma das duas operações conseguem realizar a outra com uma simples rotação do *kernel*. Essa questão se torna ainda menos relevante quando utilizamos filtros que são simétricos, pois, como antes e após a rotação temos o mesmo *kernel*, tanto correlação ou convolução nos darão o mesmo resultado; já em *kernels* assimétricos, temos resultados diferentes. Ainda, segundo Moeslund, [@moeslund2012, p. 87], quando trabalhamos com filtros de desfoque, detectores de borda, entre outros, o processo de se aplicar o *kernel* é comumente chamado de convolução mesmo quando na prática se é implementada a correlação.
+
+(ref:correlationNConvolution2D) Ilustração de correlação e convolução bidimensional [@gonzalez2010, p. 98]
+
+```{r correlationNConvolution2D, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:correlationNConvolution2D)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/correlationNConvolution2D.png'))
+```
+
+
+### Definção matemática de convolução
+
+Vamos explorar um pouco das notações matemáticas utilizadas para representar a convolução e a correlação, assim também poderemos consolidar a idéia de que ambas são muito correlacionadas.
+Como dito no início desta seção, geralmente a convolução é identificada por $*$, já a correlação costuma ser identificada por ☆. A correlação em duas dimensões segue a seguinte equação (Equação X):
+
+$g(x,y) = w(x,y)☆f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x+s,y+t)$
+
+Onde $w$ é nosso $kernel$ e $f$ nossa imagem, podemos perceber que ambas são funções de duas variáveis, $x$ e $y$, pois estamos trabalhando em duas dimensões. Os limites dos somatórios são dados por $a=(m-1)/2$ e $b=(n-1)/2$. E o que essa função faz é andar em cada posição da imagem, ou seja, $(x,y)$, e substituir o *píxel* atual pela soma de produtos da multiplicação dos valores do $kernel$ pelos valores dos *píxels* da imagem. Já a convolução tem uma equação bem similar, sendo diferente apenas pelos sinais negativos em $f$, o que evidência a rotação do $kernel$. Podemos notar que os sinais inversos estão em $f$ e não em $w$; segundo [@gonzalez2010, p. 98], isso é usado para fins de simplicidade de notação e não alteram o resultado.
+
+
+$g(x,y) = w(x,y)*f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x-s,y-t)$
+
+
+Uma das melhores maneiras de entender bem as equações é ver um exemplo prático. Veremos isso a seguir, onde temos um exemplo passo-a-passo de correlação:
+
+```{r conv_1, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/conv_1.png'))
+```
+$$
+\text{w}\text{*f}\left(0,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,0+t\right)\,\text{=}\,\\
+\text{+w}\left(-1,-1\right)\text{f}\left(-1,-1\right)\text{+w}\left(-1,0\right)\text{f}\left(-1,0\right)\text{+w}\left(-1,1\right)\text{f}\left(-1,1\right)\\
+\text{+w}\left(0,-1\right)\text{f}\left(0,-1\right)\text{+w}\left(0,0\right)\text{f}\left(0,0\right)\text{+w}\left(0,1\right)\text{f}\left(0,1\right)\\
+\text{+w}\left(1,-1\right)\text{f}\left(1,-1\right)\text{+w}\left(0,1\right)\text{f}\left(0,-1\right)\text{+w}\left(1,1\right)\text{f}\left(-1,-1\right)\\
+=\,1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
++2\cdot0+0\cdot2+\left(-2\right)\cdot1\\
++1\cdot0+0\cdot9+\left(-1\right)\cdot3\\
+=0\,-2-3\,=\,-5
+$$
+
+
+
+
+```{r conv_2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/conv_2.png'))
+```
+$$
+\text{w}\text{*f}\left(0,1\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,1+t\right)\,\text{=}\,\\
+\text{+w}\left(-1,-1\right)\text{f}\left(-1,0\right)\text{+w}\left(-1,0\right)\text{f}\left(-1,1\right)\text{+w}\left(-1,1\right)\text{f}\left(-1,2\right)\\
+\text{+w}\left(0,-1\right)\text{f}\left(0,0\right)\text{+w}\left(0,0\right)\text{f}\left(0,1\right)\text{+w}\left(0,1\right)\text{f}\left(0,2\right)\\
+\text{+w}\left(1,-1\right)\text{f}\left(1,0\right)\text{+w}\left(1,0\right)\text{f}\left(1,1\right)\text{+w}\left(1,1\right)\text{f}\left(1,2\right)\\
+=\,1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
++2\cdot2+0\cdot1+\left(-2\right)\cdot0\\
++1\cdot9+0\cdot3+\left(-1\right)\cdot1\\
+=0\,+4+8=\,12
+$$
+
+
+
+
+```{r conv_3, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/conv_3.png'))
+```
+$$
+\text{w}\text{*f}\left(0,2\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,2+t\right)\,\text{=}\,\\
+\text{+w}\left(-1,-1\right)\text{f}\left(-1,1\right)\text{+w}\left(-1,0\right)\text{f}\left(-1,2\right)\text{+w}\left(-1,1\right)\text{f}\left(-1,3\right)\\
+\text{+w}\left(0,-1\right)\text{f}\left(0,1\right)\text{+w}\left(0,0\right)\text{f}\left(0,2\right)\text{+w}\left(0,1\right)\text{f}\left(0,3\right)\\
+\text{+w}\left(1,-1\right)\text{f}\left(1,1\right)\text{+w}\left(1,0\right)\text{f}\left(1,2\right)\text{+w}\left(1,1\right)\text{f}\left(1,3\right)\\
+=\,1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
++2\cdot1+0\cdot0+\left(-2\right)\cdot0\\
++1\cdot3+0\cdot1+\left(-1\right)\cdot0\\
+=0\,+2+3=\,5
+$$
+
+
+
+
+```{r conv_4, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/conv_4.png'))
+```
+$$
+\text{w}\text{*f}\left(1,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(1+s,0+t\right)\,\text{=}\,\\
+\text{+w}\left(-1,-1\right)\text{f}\left(0,-1\right)\text{+w}\left(-1,0\right)\text{f}\left(0,0\right)\text{+w}\left(-1,1\right)\text{f}\left(0,1\right)\\
+\text{+w}\left(0,-1\right)\text{f}\left(1,-1\right)\text{+w}\left(0,0\right)\text{f}\left(1,0\right)\text{+w}\left(0,1\right)\text{f}\left(1,1\right)\\
+\text{+w}\left(1,-1\right)\text{f}\left(2,-1\right)\text{+w}\left(1,0\right)\text{f}\left(2,0\right)\text{+w}\left(1,1\right)\text{f}\left(2,1\right)\\
+=\,1\cdot0+0\cdot2+\left(-1\right)\cdot1\\
++2\cdot0+0\cdot9+\left(-2\right)\cdot3\\
++1\cdot0+0\cdot5+\left(-1\right)\cdot4\\
+=\left(-1\right)\,+\left(-6\right)+\left(-4\right)=\,-11    
+$$
+
+
+
+
+```{r conv_5, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/conv_5.png'))
+```
+$$
+\text{w}\text{*f}\left(1,1\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(1+s,1+t\right)\,\text{=}\,\\
+\text{+w}\left(-1,-1\right)\text{f}\left(0,0\right)\text{+w}\left(-1,0\right)\text{f}\left(0,1\right)\text{+w}\left(-1,1\right)\text{f}\left(0,2\right)\\
+\text{+w}\left(0,-1\right)\text{f}\left(1,0\right)\text{+w}\left(0,0\right)\text{f}\left(1,1\right)\text{+w}\left(0,1\right)\text{f}\left(1,2\right)\\
+\text{+w}\left(1,-1\right)\text{f}\left(2,0\right)\text{+w}\left(1,0\right)\text{f}\left(2,1\right)\text{+w}\left(1,1\right)\text{f}\left(2,2\right)\\
+=\,1\cdot2+0\cdot1+\left(-1\right)\cdot0\\
++2\cdot9+0\cdot3+\left(-2\right)\cdot1\\
++1\cdot5+0\cdot4+\left(-1\right)\cdot2\\
+=2\,+16+3=\,21    
+$$
+
+
+
+
+```{r conv_6, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/conv_6.png'))
+```
+$$
+\text{w}\text{*f}\left(1,2\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(1+s,2+t\right)\,\text{=}\,\\
+\text{+w}\left(-1,-1\right)\text{f}\left(0,1\right)\text{+w}\left(-1,0\right)\text{f}\left(0,2\right)\text{+w}\left(-1,1\right)\text{f}\left(0,3\right)\\
+\text{+w}\left(0,-1\right)\text{f}\left(1,1\right)\text{+w}\left(0,0\right)\text{f}\left(1,2\right)\text{+w}\left(0,1\right)\text{f}\left(1,3\right)\\
+\text{+w}\left(1,-1\right)\text{f}\left(2,1\right)\text{+w}\left(1,0\right)\text{f}\left(2,2\right)\text{+w}\left(1,1\right)\text{f}\left(2,3\right)\\
+=\,1\cdot1+0\cdot1+\left(-1\right)\cdot0\\
++2\cdot3+0\cdot1+\left(-2\right)\cdot0\\
++1\cdot4+0\cdot2+\left(-1\right)\cdot0\\
+=1\,+6+4=\,11    
+$$
+
+
+
+
+```{r conv_7, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/conv_7.png'))
+```
+$$
+\text{w}\text{*f}\left(2,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(2+s,0+t\right)\text{=}\\
+\text{+w}\left(-1,-1\right)\text{f}\left(1,-1\right)\text{+w}\left(-1,0\right)\text{f}\left(1,0\right)\text{+w}\left(-1,1\right)\text{f}\left(1,1\right)\\
+\text{+w}\left(0,-1\right)\text{f}\left(2,-1\right)\text{+w}\left(0,0\right)\text{f}\left(2,0\right)\text{+w}\left(0,1\right)\text{f}\left(2,1\right)\\
+\text{+w}\left(1,-1\right)\text{f}\left(3,-1\right)\text{+w}\left(1,0\right)\text{f}\left(3,0\right)\text{+w}\left(1,1\right)\text{f}\left(3,1\right)\\
+=\,1\cdot0+0\cdot9+\left(-1\right)\cdot3\\
++2\cdot0+0\cdot5+\left(-2\right)\cdot4\\
++1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
+=\left(-3\right)+\left(-8\right)+0=\,-11
+$$
+
+
+```{r conv_8, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/conv_8.png'))
+```
+$$
+\text{w}\text{*f}\left(2,1\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(2+s,1+t\right)\,\text{=}\,\\
+\text{+w}\left(-1,-1\right)\text{f}\left(1,0\right)\text{+w}\left(-1,0\right)\text{f}\left(1,1\right)\text{+w}\left(-1,1\right)\text{f}\left(1,2\right)\\
+\text{+w}\left(0,-1\right)\text{f}\left(2,0\right)\text{+w}\left(0,0\right)\text{f}\left(2,1\right)\text{+w}\left(0,1\right)\text{f}\left(2,2\right)\\
+\text{+w}\left(1,-1\right)\text{f}\left(3,0\right)\text{+w}\left(1,0\right)\text{f}\left(3,1\right)\text{+w}\left(1,1\right)\text{f}\left(3,2\right)\\
+=\,1\cdot9+0\cdot3+\left(-1\right)\cdot1\\
++2\cdot5+0\cdot4+\left(-2\right)\cdot2\\
++1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
+=8+6+0=\,14\\
+$$
+
+
+```{r conv_9, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/conv_9.png'))
+```
+$$
+\text{w}\text{f}\left(2,2\right)\text{=}\sum{s}^{}\sum{t}^{}\text{w}\left(s,t\right)\text{f}\left(2+s,2+t\right)\text{=}\\
+\text{+w}\left(-1,-1\right)\text{f}\left(1,1\right)\text{+w}\left(-1,0\right)\text{f}\left(1,2\right)\text{+w}\left(-1,1\right)\text{f}\left(1,3\right)\\
+\text{+w}\left(0,-1\right)\text{f}\left(2,1\right)\text{+w}\left(0,0\right)\text{f}\left(2,2\right)\text{+w}\left(0,1\right)\text{f}\left(2,3\right)\\
+\text{+w}\left(1,-1\right)\text{f}\left(3,1\right)\text{+w}\left(1,0\right)\text{f}\left(3,2\right)\text{+w}\left(1,1\right)\text{f}\left(3,3\right)\\
+=,1\cdot3+0\cdot1+\left(-1\right)\cdot0\\
++2\cdot4+0\cdot2+\left(-2\right)\cdot0\\
++1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
+=3+8+0=11
+$$
+
+
+```{r conv_final, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/conv_final.png'))
+```
+Fonte: Autoria própria inspirado em http://www.songho.ca/dsp/convolution/convolution2d_example.html e https://arxiv.org/abs/1603.07285
+
+
+O exemplo utiliza um $kernel$ assimétrico, então, como dito anteriormente, os resultados da correlação e convolução são diferentes. Deixaremos isso como um exercício ao leitor, realizar a convolução para provar a diferença. O caso anterior tem também uma característica que é o complemento das bordas com 0's para que o $kernel$ pudesse ser aplicado sobre toda a imagem. Essa é uma das maneiras de lidar com o problema das bordas, sendo que temos essa e mais algumas possibilidades [@burger2009, p. 125] [@chityala2020, p. 60]:
+
+- Preenchimento com constante (*constant padding*):
+Método onde as laterais são preenchidas com um valor constante, comumente 0.
+
+- Preenchimento com vizinho (*nearest neighbor*):
+Se realiza o preenchimento das bordas adicionais com os valores dos vizinhos mais próximos.
+
+- Reflexão (*reflect*):
+Os pixels das bordas da imagem são repetidos nas bordas adicionais.
+
+- Repetição (ou *wrap*):
+A imagem é repetida nas bordas.
+
+
+
+Além dos métodos apresentados existem outras técnicas que podem ser utilizadas, sendo que em cada caso se escolhe a que melhor se ajusta à tarefa realizada. 
+O último ponto a ser explorado é a escolha do tamanho ideal do preenchimento que deve ser aplicado à imagem. De forma geral, se temos uma imagem ($f$), um *kernel* ($w$) e um preenchimento ($p$), podemos escrever a seguinte relação^[Adaptado de https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html]:
+
+$$saída = (f_{vertical} - w_{vertical} + p_{vertical} + 1) \times  (f_{horizontal} - w_{horizontal} + p_{horizontal} + 1)$$
+Isso nos leva a perceber que o tamanho da imagem de saída aumenta conforme o preenchimento. Na maioria dos casos, queremos que a imagem de entrada e saída tenha o mesmo tamanho, então usamos $p_{vertical} = k_{vertical} - 1$ e $p_{horizontal} = k_{horizontal} - 1$. E como, geralmente, o *kernel* tem tamanho ímpar, utilizamos $\frac{p_{vertical}}{2}$ e $\frac{p_{horizontal}}{2}$.
+
+
+
+## Média
+
+Um filtro de média é um tipo de filtro que utiliza a média dos valores dos *píxels* próximos ao *píxel* central. Como esse tipo de filtro realiza uma operação linear, ele é classificado como um filtro linear de suavização. Essa suavização se dá exatamente pelo tipo da operação utilizada, a média dos *píxels* vizinhos, que diminui a nitidez pela redução das transições abruptas nos níveis de intensidade. Um dos problemas que podem ocorrer é que as bordas também são mudanças abruptas, então podem ser comprometidas pelo filtro. Na figura \@ref(fig:onibusBoxFilter), temos um exemplo do efeito desse filtro:
+
+(ref:onibusBoxFilter) Imagem de ônibus com filtro de aguçamento e de suavização [@burger2009, p. 98]
+
+```{r onibusBoxFilter, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:onibusBoxFilter)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/onibusShapenNBlur.png'))
+```
+
+A máscara (*kernel*) de um filtro de média pode ser representada por:
+
+$$\begin{bmatrix}
+\frac{1}{9} & \frac{1}{9} & \frac{1}{9}\\
+\frac{1}{9} & \frac{1}{9} & \frac{1}{9}\\
+\frac{1}{9} & \frac{1}{9} & \frac{1}{9}
+\end{bmatrix} =
+\frac{1}{9}
+\begin{bmatrix}
+1 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1
+\end{bmatrix}
+$$
+A primeira forma é a soma de todos os valores divididos por 9, o qual é o tamanho do filtro. A segunda forma, onde todos os coeficientes do *kernel* são 1's, é mais eficiente computacionalmente, pois realizamos todas as somas e multiplicações antes de dividirmos. Esse tipo de filtro é muitas vezes chamado de *box filter*.
+
+(ref:filtrosLetras) Imagem com diferentes tamanhos de filtro de média [@gonzalez2010, p. 102]
+
+```{r filtrosLetras, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:filtrosLetras)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/filtrosLetras.png'))
+```
+
+Na figura \@ref(fig:filtrosLetras), temos um exemplo onde foram aplicados filtros de média com diferentes tamanhos, 3x3(b) ; 5x5(c) ; 9x9(d) ; 15x15(e) e 35x35(f). Podemos notar que com o menor filtro, o de tamanho 3, temos um leve borramento na imagem toda, mas que as partes que tem o mesmo tamanho ou são menores que o filtro tem um borramento maior. Isso exemplifica umas das importantes aplicações dos filtros de suavização, que é a de desfocar os objetos menores e deixar os maiores em maior evidência.
+
+
+(ref:filtrosMediaHubble) Exemplo de uso do desfoque [@gonzalez2010, p. 103]
+
+```{r filtrosMediaHubble, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:filtrosMediaHubble)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/filtrosMediaHubble.png'))
+```
+
+Na figura \@ref(fig:filtrosMediaHubble), podemos ver como o desfoque pode ser utilizado para encontrar os detalhes principais da imagem. Nesta imagem obtida a partir do telescópio Hubble foi aplicado o desfoque para diminuir a visibilidade dos objetos menores e dar maior ênfase aos da frente. E, então, foi limiarizado o resultado a fim de destacar esses objetos.
+
+
 ## Mediana
+
+A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em ordenar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta, que tem uma característica aparência de pixels pretos e brancos.
+Como dito anteriormente que a mediana consiste em ordenar o conjunto de dados, nesse caso os valores da vizinhança do *píxel*. Se usarmos uma vizinhança de tamanho 3x3, a mediana será o quinto maior valor, pois consideramos também o valor do *píxel* central.
+
+Na figura \@ref(fig:placaEletronicaMediana), tem-se um exemplo mostrando uma imagem de raios X de uma placa de circuitos com ruído sal e pimenta (a). As respectivas aplicações de um filtro de média (b) e do filtro da mediana (c), ambos com dimensões 3x3. A partir dela, é visto o quanto o filtro da mediana se sai melhor na remoção do ruído.
+
+(ref:placaEletronicaMediana) Remoção de ruído [@gonzalez2010, p. 103]
+
+```{r placaEletronicaMediana, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:placaEletronicaMediana)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/placaEletronicaMediana.png'))
+```
+
+
+
 ## Gaussiano
-## Canny
+Filtro de Gauss é um filtro simétrico (isotrópico) usado para suavizar imagens. Ele funciona análogo a um filtro de média ponderada, mas com um padrão, isto é, dá ênfase ao pixel central da máscara (*kernel*) e menor ênfase a medida que os demais se distanciam dele, seguindo um gradiente muito similar à distribuição gaussiana. O “similar” se deve somente ao fato que será necessário truncamentos, assim, havendo erros e por ser desconsiderado a constante multiplicadora, o que melhora o perfil da função para aplicação no PDI.
+
+- *Função gaussiana:* $$g(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
+
+- *Função gaussiana modificada:* $$g(x) = e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
+
+Note que a função tem formato de sino, que varia de acordo com os valores atribuídos ao, $\sigma$, o qual dependerá da ênfase desejada no cálculo. A medida que $\sigma$ aumenta, maior é o peso dado às “caldas”, no caso, aos *pixels* mais distantes do *pixel* central. Característica representada no gráfico \@ref(fig:funcaoGaussiana). 
+
+A fim de que o *pixel* central da máscara esteja em $(0,0)$, considera-se $\mu=0$.
+
+(ref:funcaoGaussiana) Função gaussiana com $\mu=0$ e diferentes $\sigma$
+
+```{r funcaoGaussiana, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:funcaoGaussiana)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/funcaoGaussiana.png'))
+```
+
+
+O filtro gaussiano 2D é gerado através da convolução de dois vetores da mesma função - a imagem se refere ao subconjunto do contradomínio -, sendo estas, normalmente, oriundas da mesma função gaussiana modificada. De forma alternativa, ele também pode ser construído a partir da i-ésima linha do Triângulo de Pascal que corresponde ao tamanho do *kernel* desejado. Como o método é o mesmo para as duas fontes, explicaremos ele utilizando como fonte a função gaussiana modificada. 
+
+O procedimento primário é obter a imagem da função, mas para obter um filtro com intuito gaussiano se deve selecionar a amostragem  dos pontos no intervalo de $\pm 2.5\sigma$ ou $\pm 3.5\sigma$ [@burger2009, p. 114]. Assim, optando-se pela primeira opção, procura-se $f(-3)$, $f(-2)$, $f(-1)$, $f(0)$, $f(1)$ e $f(2)$ e $f(3)$. Entretanto, como alguns valores têm infinitas casas decimais, devemos truncá-los, no qual foi preferido com cinco casas decimais.
+
+- $f(-3) = f(3) = 0,01110$
+- $f(-2) = f(2) = 0,13533$
+- $f(-1) = f(1) = 0,60653$
+- $f(0) = 1$
+
+Então, considera-se o menor valor como 1, no caso $f(3)$ e $f(-3)$, e interpolamos os demais, truncando-os com propósito de obter a parte inteira. A divisão por 224 é oriunda da soma dos pesos da média. Pronto, temos a máscara gaussiana 1D necessária:
+
+$\frac{1}{224}\begin{bmatrix}1 &  12 &  54 &  90 &  54 &  12 &  1\end{bmatrix}$
+
+Com a máscara em mãos, convoluciona-se os seguintes fatores:
+
+- $\frac{1}{224}\begin{bmatrix}1 &  12 &  54 &  90 &  54 &  12 &  1\end{bmatrix}$
+
+- $\frac{1}{224}\begin{bmatrix}1 \\ 12 \\ 54 \\ 90 \\ 54 \\ 12 \\ 1\end{bmatrix}$ é a transposta da máscara 1D
+
+- $f(x,y)$ é a imagem de entrada
+
+Nessa propriedade há uma determinada ordem que é mais eficiente para o sistema digital, que é a convolução entre $f(x,y)$ e uma das máscaras 1D e, depois, a convolução desse resultado com a transposta desta máscara. Pronto, como saída teremos o filtro gaussiano aplicado a imagem.
+
+(ref:lettersGaussianFilter) Imagem com diferentes tamanhos de filtro gaussiano. (Adaptado:[@gonzalez2010, p. 102]) 
+
+
+```{r lettersGaussianFilter, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:lettersGaussianFilter)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/05-filtros/LettersGaussianFilter.png'))
+```
+
+
+Nesse exemplo, temos um exemplo similar ao usado no filtro de média, porém, usando-se o filtro gaussiano. A imagem de entrada (a) tem tamanho 500x500 onde foram aplicados filtros de diferentes tamanhos, 3x3(b) ; 5x5(c) ; 9x9(d) ; 15x15(e) e 35x35(f). Note que, ao contrário do exemplo anterior, há uma maior preservação da nítidez, todavia não seria um filtro eficiente para redução de ruído. Essa característica é devido ao maior peso dado ao *pixel* central do *kernel*.
