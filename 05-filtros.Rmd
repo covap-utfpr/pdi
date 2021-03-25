@@ -345,12 +345,12 @@ knitr::include_graphics(rep('imagens/05-filtros/funcaoGaussiana.png'))
 
 O filtro gaussiano 2D é gerado através da convolução de dois vetores da mesma função - a imagem se refere ao subconjunto do contradomínio -, sendo estas, normalmente, oriundas da mesma função gaussiana modificada. De forma alternativa, ele também pode ser construído a partir da i-ésima linha do Triângulo de Pascal que corresponde ao tamanho do *kernel* desejado. Como o método é o mesmo para as duas fontes, explicaremos ele utilizando como fonte a função gaussiana modificada. 
 
-O procedimento primário é obter a imagem da função, mas para obter um filtro com intuito gaussiano se deve selecionar a amostragem  dos pontos no intervalo de $\pm 2.5\sigma$ ou $\pm 3.5\sigma$ [@burger2009, p. 114]. Assim, optando-se pela primeira opção, procura-se $f(-3)$, $f(-2)$, $f(-1)$, $f(0)$, $f(1)$ e $f(2)$ e $f(3)$. Entretanto, como alguns valores têm infinitas casas decimais, devemos truncá-los, no qual foi preferido com cinco casas decimais.
+O procedimento primário é obter a imagem da função, mas para obter um filtro com intuito gaussiano se deve selecionar a amostragem  dos pontos no intervalo de $\pm 2.5\sigma$ ou $\pm 3.5\sigma$ [@burger2009, p. 114]. Assim, optando-se pela primeira opção, procura-se $g(-3)$, $g(-2)$, $g(-1)$, $g(0)$, $g(1)$, $g(2)$ e $g(3)$. Entretanto, como alguns valores têm infinitas casas decimais, devemos truncá-los, no qual foi preferido com cinco casas decimais.
 
-- $f(-3) = f(3) = 0,01110$
-- $f(-2) = f(2) = 0,13533$
-- $f(-1) = f(1) = 0,60653$
-- $f(0) = 1$
+- $g(-3) = g(3) = 0,01110$
+- $g(-2) = g(2) = 0,13533$
+- $g(-1) = g(1) = 0,60653$
+- $g(0) = 1$
 
 Então, considera-se o menor valor como 1, no caso $f(3)$ e $f(-3)$, e interpolamos os demais, truncando-os com propósito de obter a parte inteira. A divisão por 224 é oriunda da soma dos pesos da média. Pronto, temos a máscara gaussiana 1D necessária:
 
