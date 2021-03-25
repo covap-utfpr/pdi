@@ -468,12 +468,12 @@ Figura 5.9: Função gaussiana com <span class="math inline">\(\mu=0\)</span> e 
 </p>
 </div>
 <p>O filtro gaussiano 2D é gerado através da convolução de dois vetores da mesma função - a imagem se refere ao subconjunto do contradomínio -, sendo estas, normalmente, oriundas da mesma função gaussiana modificada. De forma alternativa, ele também pode ser construído a partir da i-ésima linha do Triângulo de Pascal que corresponde ao tamanho do <em>kernel</em> desejado. Como o método é o mesmo para as duas fontes, explicaremos ele utilizando como fonte a função gaussiana modificada.</p>
-<p>O procedimento primário é obter a imagem da função, mas para obter um filtro com intuito gaussiano se deve selecionar a amostragem dos pontos no intervalo de <span class="math inline">\(\pm 2.5\sigma\)</span> ou <span class="math inline">\(\pm 3.5\sigma\)</span> <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 114]</span>. Assim, optando-se pela primeira opção, procura-se <span class="math inline">\(f(-3)\)</span>, <span class="math inline">\(f(-2)\)</span>, <span class="math inline">\(f(-1)\)</span>, <span class="math inline">\(f(0)\)</span>, <span class="math inline">\(f(1)\)</span> e <span class="math inline">\(f(2)\)</span> e <span class="math inline">\(f(3)\)</span>. Entretanto, como alguns valores têm infinitas casas decimais, devemos truncá-los, no qual foi preferido com cinco casas decimais.</p>
+<p>O procedimento primário é obter a imagem da função, mas para obter um filtro com intuito gaussiano se deve selecionar a amostragem dos pontos no intervalo de <span class="math inline">\(\pm 2.5\sigma\)</span> ou <span class="math inline">\(\pm 3.5\sigma\)</span> <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 114]</span>. Assim, optando-se pela primeira opção, procura-se <span class="math inline">\(g(-3)\)</span>, <span class="math inline">\(g(-2)\)</span>, <span class="math inline">\(g(-1)\)</span>, <span class="math inline">\(g(0)\)</span>, <span class="math inline">\(g(1)\)</span>, <span class="math inline">\(g(2)\)</span> e <span class="math inline">\(g(3)\)</span>. Entretanto, como alguns valores têm infinitas casas decimais, devemos truncá-los, no qual foi preferido com cinco casas decimais.</p>
 <ul>
-<li><span class="math inline">\(f(-3) = f(3) = 0,01110\)</span></li>
-<li><span class="math inline">\(f(-2) = f(2) = 0,13533\)</span></li>
-<li><span class="math inline">\(f(-1) = f(1) = 0,60653\)</span></li>
-<li><span class="math inline">\(f(0) = 1\)</span></li>
+<li><span class="math inline">\(g(-3) = g(3) = 0,01110\)</span></li>
+<li><span class="math inline">\(g(-2) = g(2) = 0,13533\)</span></li>
+<li><span class="math inline">\(g(-1) = g(1) = 0,60653\)</span></li>
+<li><span class="math inline">\(g(0) = 1\)</span></li>
 </ul>
 <p>Então, considera-se o menor valor como 1, no caso <span class="math inline">\(f(3)\)</span> e <span class="math inline">\(f(-3)\)</span>, e interpolamos os demais, truncando-os com propósito de obter a parte inteira. A divisão por 224 é oriunda da soma dos pesos da média. Pronto, temos a máscara gaussiana 1D necessária:</p>
 <p><span class="math inline">\(\frac{1}{224}\begin{bmatrix}1 &amp; 12 &amp; 54 &amp; 90 &amp; 54 &amp; 12 &amp; 1\end{bmatrix}\)</span></p>
