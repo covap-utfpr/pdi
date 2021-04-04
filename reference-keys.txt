@@ -62,6 +62,7 @@ componente-conexa
 medidas-de-distância
 operações-lógico-aritméticas
 transformacões-geométricas
+definição
 representação-vetorial-e-matricial-da-imagem
 sistema-de-coordenadas-objetos-2d-e-3d
 transformações-em-pontos-e-objetos
