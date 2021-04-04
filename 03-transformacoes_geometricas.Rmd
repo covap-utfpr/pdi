@@ -1,17 +1,40 @@
 # Transformacões Geométricas
+Nessa seção abordaremos conceitos importantes que detalham  processos de transformações geométricas na imagem digitalizada, definiremos a seção proposta; representação vetorial e matricial da Imagem;  sistema de coordenadas objetos (2D e 3D); transformações em pontos e objetos; transformações (lineares, translação, escala,  rotação, cisalhamento (Shearing ou Skew), reflexão )); características especiais transformação (isométrica, semelhança, afim, projetiva, inversão); classificação das projeções geométricas.
+
+## Definição
+As transformações geométricas são operações que podem ser utilizadas sobre uma imagem, visando alteração de características como: posição , orientação, forma ou tamanho da imagem apresentada.
+
+As operações  (transformações geométricas) não alteram a topologia (pixels) da imagem operada, apenas possibilitam a projeção da imagem no espaço determinado.
+
+
 ## Representação Vetorial e Matricial da Imagem
+
 ## Sistema de coordenadas objetos (2D e 3D)
+
 ## Transformações em pontos e objetos
+
 ## Transformações Lineares
+
 ## Transformação de Translação
+
 ## Transformação de Escala
+
 ## Transformação de Rotação
+
 ## Transformação Cisalhamento (Shearing ou Skew)
+
 ## Transformação de Reflexão
+
 ## Características especias
+
 ## Transformação Isométrica
+
 ## Transformação Semelhança
+
 ## Transformação Afim
+
 ## Transformação Projetiva
+
 ## Transformação Inversão
+
 ## Classificação das Projeções Geométricas
