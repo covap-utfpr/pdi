@@ -9,6 +9,10 @@ As operações  (transformações geométricas) não alteram a topologia (pixels
 
 ## Representação Vetorial e Matricial da Imagem
 
+Podemos definir um vetor como segmento de reta orientada (sentido  e direção). Pensado  em um vetor 2D, representada por V, coordenadas, para o ponto P(x,y), tendo assim um sentido e uma direção, um sentido e um comprimento especificado.
+Podemos então calcular o comprimento do vetor 2D, pela fórmula:
+|V| = {sqr{x^2 + y^2}}
+
 ## Sistema de coordenadas objetos (2D e 3D)
 
 ## Transformações em pontos e objetos
