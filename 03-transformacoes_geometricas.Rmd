@@ -11,7 +11,7 @@ As operações  (transformações geométricas) não alteram a topologia (pixels
 
 Podemos definir um vetor como segmento de reta orientada (sentido  e direção). Pensado  em um vetor 2D, representada por V, coordenadas, para o ponto P(x,y), tendo assim um sentido e uma direção, um sentido e um comprimento especificado.
 Podemos então calcular o comprimento do vetor 2D, pela fórmula:
-|V| = {\sigma\sqrt{x^2 + y^2}}
+$$|V| = {\sigma\sqrt{x^2 + y^2}}$$
 
 Exemplo 1: Calcule o comprimento de V com X=2 e Y=3.
 Resolução:
