@@ -30,6 +30,7 @@ fig:reducaoprofundidade
 fig:vizinhanca
 fig:conectividade
 fig:adjacencia
+fig:tableMatriz
 fig:onibusSharpenNBlur
 tab:kernelExample
 fig:convolutionGif
