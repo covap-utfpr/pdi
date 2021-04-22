@@ -11,25 +11,25 @@ As operações  (transformações geométricas) não alteram a topologia (pixels
 
 Podemos definir um vetor como segmento de reta orientada (sentido  e direção). Pensado  em um vetor 2D, representada por V, coordenadas, para o ponto P(x,y), tendo assim um sentido e uma direção, um sentido e um comprimento especificado.
 Podemos então calcular o comprimento do vetor 2D, pela fórmula:
-$|V| = {\sigma\sqrt{x^2 + y^2}}$
+$|V| = {\sqrt{x^2 + y^2}}$
 
 Exemplo 1: Calcule o comprimento de V com $X=2$ e $Y=3$.
 Resolução:
 $ V = 22+ 32 = 3.605 $
 
 Se pensamos em Vem 3D, definindo a origem ao ponto $P(x,y, z)$ seu comprimento seria:
-$|V| = {\sigma\sqrt{x^2+y^2+z^2}}$
+$|V| = {\sqrt{x^2+y^2+z^2}}$
 
 Exemplo 2: Calcule o comprimento de V com $X=2$ , $Y=3$ e $Z=1$.
 
-Resolução: $|V| = {\sigma\sqrt{x^2+3^2+1^2} = 3.741}$
+Resolução: $|V| = {\sqrt{2^2+3^2+1^2} = 3.741}$
 
 Uma matriz é um arranjo (array) de elementos em duas direções (linha e coluna). Para manipulá-la é necessário que definimos a quantidade de elementos existentes em cada direção.
 Representaremos matriz com a letra M, as direções (linha e coluna) pelas letras L e C. 
-Suponhamos que L  = 4 e C = 4 então $M[4][4]$ possui 4 linhas e 4 colunas, como representada na figura 3.0.
+Suponhamos que L  = 4 e C = 4 então $M[4][4]$ possui 4 linhas e 4 colunas, como representada na figura 3.1.
 
 
-```{r tableMatriz, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:tableMatriz)', fig.align='center', out.width='40%'}
+```{r Matriz da imagem, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:Matriz da imagem)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/03-transformacoes/tableMatriz.png'))
 
 ```
