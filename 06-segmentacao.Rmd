@@ -5,15 +5,331 @@
 ## Detecção de bordas
 ### Modelos de Bordas
 ### Método do gradiente ( Roberts, Prewitt, Sobel).
-### Método Marr-Hildreth
-### Método Canny
+### Método de Marr-Hildreth
+### Método de Canny
+O algoritmo de Canny recebeu esse nome em alusão a John Canny, que o propôs em seu artigo, “A computational Approach to Edge Detection"[@canny1986computational], publicado em 1986. Sua formulação se baseava em três pontos principais:
+
+- Uma baixa taxa de erro, ou seja, todas as bordas presentes na imagem devem ser encontradas e não deve haver respostas espúrias.
+- O segundo critério diz que as bordas detectadas devem estar bem localizadas, em outras palavras, elas devem estar o mais próximo possível das bordas verdadeiras.
+- O terceiro e último critério diz que se deve minimizar o número de máximos locais em torno da borda verdadeira, para que não sejam encontrados múltiplos pixels de borda onde deve haver somente um.
+
+Em seu trabalho, Canny buscou encontrar soluções ótimas, matematicamente, que obedecessem os três critérios. Apesar disso, é muito difícil, ou impossível, encontrar uma solução que satisfaça completamente os objetivos descritos[@gonzalez2010, p.474]. Todavia é possível utilizar uma aproximação por meio de otimização numérica com as bordas em degrau em um exemplo 1-D que contenham ruído branco gaussiano e mostrar que uma boa aproximação para um ótimo detector de bordas é a primeira derivada de uma gaussiana[@gonzalez2010, p.474]:
+
+$$\frac{\mathrm{d} }{\mathrm{d} x}e^{\frac{-x^2}{2\sigma^2}} = \frac{-x}{\sigma^2}e^{\frac{-x^2}{2\sigma^2}}$$
+
+Canny demonstrou que a utilização dessa aproximação pode ser feita com uma taxa 20% inferior à solução numérica, o que a torna praticamente imperceptível para muitas das aplicações[@gonzalez2010, p.474].
+A ideia anterior foi imaginada em um aspecto 1D, precisamos agora, expandir esse conceito para uma generalização 2D. Uma borda de degrau pode ser caracterizada pela sua posição, orientação e possível magnitude. Aplicar um filtro Gaussiano em uma imagem e depois diferenciá-la forma um simples e efetivo operador direcional[@sonka2014, p.145]. Digamos então que $f(x,y)$ seja uma imagem e $G(x,y)$ a função gaussiana:
+
+$$G(x,y) = e^{-\frac{x^2+y^2}{2\sigma^2}}$$
+
+Temos como saída a imagem suavizada:
+
+$$f_s(x,y)=G(x,y)*f(x,y)$$
+
+E após isso realizamos o cálculo da magnitude e direção do gradiente:
+
+$$M(x,y) = \sqrt{g_x^2+g_y^2}$$
+$$\alpha(x,y)= \tan^{-1}\left ( \frac{g_y}{g_x} \right )$$
+
+onde $g_x=\partial f_s/\partial x$ e $g_y=\partial f_s/\partial y$. Para o cálculo das derivadas parciais podemos utilizar tanto Prewitt quanto Sobel. Como essa primeira etapa utiliza operadores que calculam as primeiras derivadas, acabamos com bordas grossas, e o terceiro objetivo da proposta de Canny é ter bordas com único ponto, por isso o próximo passo é a de afinar as bordas encontradas. O método que usaremos para isso é chamado supressão dos não máximos. Esse processo tem como base a discretização das direções da normal da borda(vetor gradiente), ou seja, em uma região 3x3 temos 4 direções possíveis, como pode ser visto na figura \@ref(fig:edgeorientation)(c), sendo que consideramos 4 pois é contando as duas direções, como exemplo, consideramos um borda de 45º se ela se encontra entre +157,5º e +112,5º ou -67,5º e -22,5º.
+Na figura \@ref(fig:edgeorientation)(a) temos um exemplo de duas orientações que podem existir em uma borda horizontal, e na figura \@ref(fig:edgeorientation)(b) podemos ver a normal de uma borda horizontal e o intervalo de valores onde a direção do vetor gradiente pode existir.
+
+(ref:edgeorientation) Discretização das direções. (a)Borda horizontal. (b) Intervalo dos possíveis valores do ângulo, normal da borda, para uma borda horizontal. (c) Intervalo de valores do ângulo da normal para os diferentes tipos de borda. [@gonzalez2010, p. 475]
+
+```{r edgeorientation, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:edgeorientation)', fig.align='center', out.width='70%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/edge_orientation.png'))
+```
+
+Se consideramos $d1$, $d2$, $d3$ e $d4$ como as direções possíveis em uma área 3x3, podemos formular o seguinte esquema de supressão de não máximos de uma região 3x3 centrada em todos os pontos $(x,y)$ de [@gonzalez2010, p.475]:
+- Encontrar a direção $d_k$ que está mais perto de $\alpha (x,y)$.
+- Se o valor de $M(x,y)$ for inferior a pelo menos um dos seus dois vizinhos ao logo de $d_k$, deixe $g_N(x,y)=0$(supressão); caso contrário, deixe $g_N(x,y)=M(x,y)$.
+Onde $g_N(x,y)$ é a imagem suprimida.
+A última operação a ser realizada é a limiarização, para se remover os pontos de falsas bordas. Aqui usaremos a limiarização por histerese que utiliza dois limiares, um baixo($T_L$) e um alto ($T_H$), sendo que Canny sugeriu, em seu trabalho, que a razão entre o limiar alto para o baixo deva ser de dois ou três para um.
+Podemos imaginar essa limiarização da seguinte forma, criamos duas imagens adicionais:
+
+$$g_{NH}(x,y) = g_N(x,y)\geq T_H$$ e $$g_{NL}(x,y) = g_N(x,y)\geq T_L$$
+
+Onde $g_{NH}(x,y)$ e $g_{NL}(x,y)$ são definidas inicialmente como $0$. Temos então que $g_{NH}(x,y)$conterá os pixels que são maiores que o nosso limiar e $g_{NL}(x,y)$ terá os pixels que estão acima do nosso limiar baixo, o que significa que ele contém os pixels que se encontram no meio dos dois limiares mais o que está acima do limiar alto, temos então que remover esses pixels, o que significa:
+$$g_{NL}(x,y)=g_{NL}(x,y)-g_{NH}(x,y)$$
+
+Podemos chamar os pixels de $g_{NH}(x,y)$ de pixels fortes e os de $g_{NL}(x,y)$ de fracos. Ao final dessa limiarização todos os pixels fortes são classificados como borda válida, mas com falhas, que nos leva a outro processo:
+
+- Localizar o próximo pixel borda a ser revisado em $g_{NH}(x,y)$, chamaremos esse pixel de p.
+- Classificar todos os pixels fracos de $g_{NL}(x,y)$ que tenham conexão, como a conectividade-8, como bordas válidas.
+- Quando todos os pixels de $g_{NL}(x,y)$ Se forem analisados, pulamos para 4, senão voltamos para 1.
+- Zerar todos os pixels de $g_{NL}(x,y)$ que não são bordas válidas.
+
+Ao final desses processos teremos a imagem de saída do algoritmo de Canny. Como dito por [@gonzalez2010, p.476], o uso de duas imagens $g_{NH}(x,y)$ e $g_{NL}(x,y)$ é uma boa maneira para se explicar o algoritmo de uma maneira simples, mas na prática isso pode ser feito diretamente na imagem $g_N(x,y)$.
+Por fim, sumarizando os passos do algoritmo, com um exemplo:
+
+1. Imagem original
+
+(ref:original) Imagem original.
+
+```{r original, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:original)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/original.jpg'))
+```
+
+2. Aplicação do filtro gaussiano para suavizar a imagem.
+
+(ref:gaussian) Imagem filtrada com filtro gaussiano.
+
+```{r gaussian, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:gaussian)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/gaussian.jpg'))
+```
+
+3. Cálculo da magnitude do gradiente e dos ângulos.
+
+(ref:derivadas) (a) Sobel na direção vertical. (b) Sobel na direção horizontal. (c) Gradiente. (d) Angulos. [@burger2009, p. 98]
+
+```{r derivadas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:derivadas)', fig.align='center', out.width='75%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/derivadas.jpg'))
+```
+
+4. Aplicação da supressão não máxima para afinar as bordas.
+
+(ref:supressao) Resultado da supressão não máxima.
+
+```{r supressao, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:supressao)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/supressao.jpg'))
+```
+
+6. Usar limiarização por histerese e análise de conectividade para detectar e conectar as bordas.
+
+(ref:threshold) Resultado da histerese e conecção de bordas.
+
+```{r threshold, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:threshold)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/threshold.jpg'))
+```
+
+7. Resultado final.
+
+(ref:canny) Resultado final da detecção de bordas de Canny.
+
+```{r canny, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:canny)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/canny.jpg'))
+```
+
 ## Transformada de Hough
+A Transformada de Hough é uma técnica utilizada para detectar formas em imagens, sejam elas linhas, círculos ou elipses. Apesar de ela ser muito utilizada e ter sido criada para detecção principalmente de linhas, ela pode ser usada para a detecção de outras formas, como dito anteriormente.
+
 ### Transformada de Hough para detecção de linhas
+Para começar a entender essa transformada, imaginemos que temos um ponto $(x_i, y_i)$ no plano $xy$ e a equação da reta $y_i=ax_i+b$. Pelo ponto $(x_i, y_i)$ passam infinitas retas e todas satisfazem a equação. Podemos escrever a equação anterior em relação a $b$, ou seja, $b=-x_ia+y_i$, o que nos leva ao plano $ab$(espaço de parâmetros) onde essa nova equação gerará uma única reta.
+
+Agora imaginemos um outro ponto $(x_j, y_j)$ no plano $xy$, podemos também levá-lo ao plano ab com a equação $b=-x_ja+y_j$. Como podemos ver na figura \@ref(fig:planoxy)(b) as duas retas geradas no plano $ab$ se cruzam nas coordenadas $(a', b')$, e esse ponto de cruzamento representa a reta que cruza os dois pontos no plano $xy$, como podemos ver na mesma representação \@ref(fig:planoxy)(b). Na realidade, todos os pontos pertencentes a reta definida por esses dois pontos em $xy$ tem sua reta respectiva em $ab$ e todas elas se cruzam no ponto $(a', b')$, isso nos dá uma maneira de realizar a detecção de bordas, pois podemos imaginar essa reta como nossa borda, assim, para achá-la basta localizar o ponto no espaço de parâmetros onde um grande número de retas se cruzam.
+
+(ref:planoxy) Plano xy e ab. [@gonzalez2010, p.483]
+
+```{r planoxy, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:planoxy)', fig.align='center', out.width='65%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/planoxy.png'))
+```
+
+Ocorre um pequeno problema nessa forma, pois quando a reta se aproxima da direção vertical, $ab$ se aproxima do infinito. Para resolver essa dificuldade, em vez de levarmos os pontos a retas no espaço $ab$ cartesiano utilizamos um espaço em coordenadas polares. Para isso utilizamos a seguinte equação:
+$$\rho=x\cos{\theta}+y\ sen{\ \theta}$$
+Na figura \@ref(fig:planoxyrhotheta)(a) podemos ver isso de maneira gráfica, temos que p corresponde à distância da origem até a reta. Cada uma das curvas senoidais da figura \@ref(fig:planoxyrhotheta)(b) representa um conjunto de linhas que cruzam os dois pontos da figura \@ref(fig:planoxyrhotheta)(a), sendo que na interseção das curvas temos a reta que cruza esses pontos.
+
+(ref:planoxyrhotheta) Imagem de ônibus com filtro de aguçamento e de suavização [@burger2009, p. 98]
+
+```{r planoxyrhotheta, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:planoxyrhotheta)', fig.align='center', out.width='90%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/planoxyrhotheta.png'))
+```
+
+A figura \@ref(fig:planoxyrhotheta)(c) mostra como fazemos a representação do espaço , usamos uma matriz onde esse espaço é subdividido em várias células, chamadas células acumuladoras. Os valores de $\theta_{\text{min}}$ e $\theta_{\text{max}}$ são geralmente $-90^{\circ}\leq \theta\leq90^{\circ}$ e os valores de $\rho_min$ e $\rho_max$ são $-D\leq\rho\leq D$, onde $D$ é o comprimento da diagonal da imagem, ou seja, $D=\sqrt{vertical^2+horizontal^2}$. O que fazemos então é andar por todos os pontos de borda da imagem de entrada e calcular o valor de  a partir da equação apresentada anteriormente usando o valor de $(x,y)$ e variando o ângulo , com isso a cada valor do ângulo teremos um  diferente e somamos mais um na célula correspondente da matriz acumuladora, que inicialmente é toda preenchida com zeros. Ao final de todo o processo termos determinadas células com valores mais altos, essas são conhecidas como picos e correspondem ao cruzamento de duas ou mais curvas senoidais do plano  o que corresponde a uma linha ligando pontos no plano $xy$. 
+
+A seguir temos um exemplo, que nos ajuda a entender e ver na prática o funcionamento da transformada de Hough. A figura \@ref(fig:houghumponto)(a) contém uma imagem de tamanho 101x101 com um ponto no centro, ou seja $(x,y)=(50,50)$ e a figura \@ref(fig:houghumponto)(b) contém a matriz acumuladora da transformada, onde podemos ver a curva senóide formada pelo ponto. Verificando os valores nela vemos que para $\rho=-90^{\circ}$ temos: 
+
+$$\rho=50 \cdot \cos(-90^{\circ})+50\cdot\text{sen}(-90^{\circ}) = -50$$
+para $\theta=90^{\circ}$ temos:
+
+$$\rho=50\cdot \cos(90^{\circ})+50\cdot\text{sen}(90^{\circ})=50$$
+para $\theta=45^{\circ}$ temos:
+
+$$\rho=50\cdot \cos(45^{\circ})+50\cdot \text{sen}(45^{\circ})\approx70,71$$
+e para $\theta=-45^{\circ}$ temos:
+
+$$\rho=50\cdot\cos(-45º)+50\cdot \text{sen}(-45º)=0$$ 
+
+(ref:houghumponto) Transformada de Hough para um ponto.
+
+```{r houghumponto, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:houghumponto)', fig.align='center', out.width='75%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/hough_um_ponto.jpg'))
+```
+
+Na figura \@ref(fig:houghdoispontosesquerda)(a) temos dois pontos, a e b, onde foi realizada a transformada de Hough que tem como espaço de saída a figura \@ref(fig:houghdoispontosesquerda)(b). A reta que passa por esses dois pontos, chamada de reta c é representada por uma reta pontilhada na figura \@ref(fig:houghdoispontosesquerda)(a) e na figura \@ref(fig:houghdoispontosesquerda)(b) temos o ponto no plano  que representa essa reta, ou seja, uma reta a uma distância $\rho\approx70,71$ da origem com ângulo de $45^{\circ}$.
+
+(ref:houghdoispontosesquerda) Transformada de Hough para um ponto em 45º.
+
+```{r houghdoispontosesquerda, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:houghdoispontosesquerda)', fig.align='center', out.width='75%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/hough_dois_ponto_esquerda.png'))
+```
+
+Na figura \@ref(fig:houghdoispontosdireita)(a) temos mais um exemplo, desta vez com um ponto localizado a sua direita, diferentemente da anterior, esses dois pontos formam uma reta de $-45^{\circ}$, fato que pode ser visto na figura \@ref(fig:houghdoispontosdireita)(b) onde o ponto de encontro das duas curvas acontece em $\theta=-45^{\circ}$ com um valor de $\rho=0$ já que a reta cruza a origem, ou seja, não possui distância em relação a ela.
+
+(ref:houghdoispontosdireita) Transformada de Hough para um ponto em -45º.
+
+```{r houghdoispontosdireita, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:houghdoispontosdireita)', fig.align='center', out.width='75%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/hough_dois_ponto_direita.png'))
+```
+
+Nosso último exemplo contém uma imagem com três pontos, onde temos três tipos de retas possíveis. Observando a figura \@ref(fig:houghtrespontos)(a) podemos ver os pontos a, b e c e as retas que passam por eles d, e e f, e na figura \@ref(fig:houghtrespontos)(b) temos a transformada de Hough para esse imagem, algo interessante de se notar é o fato de a reta que passa pelos pontos b e c ser detectada duas vezes, isso se deve a uma característica da transformada de Hough chamada relação de adjacência reflexiva, ou seja, isso acontece como resultado pela maneira como $\rho$ e  $\theta$ mudam de sinal quando chegamos as extremidades de $\pm90^{\circ}$.
+
+(ref:houghtrespontos) Transformada de Hough para três pontos.
+
+```{r houghtrespontos, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:houghtrespontos)', fig.align='center', out.width='75%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/hough_tres_ponto.png'))
+```
+
+Na figura \@ref(fig:houghlineexemplo) temos nosso último exemplo na detecção de linhas, dessa vez realizado em uma imagem real, neste caso primeiramente foi realizado a detecção de bordas pelo método de Canny, como pode ser visto na figura \@ref(fig:houghlineexemplo)(a). Logo após foi realizada a transformação de Hough, com resultado em figura \@ref(fig:houghlineexemplo)(b) e por fim temos a imagem original com as linhas detectadas em figura \@ref(fig:houghlineexemplo)(c). Atenção ao fato de que nem todos os picos da transformada podem ser utilizados como linhas, pois teríamos um número enorme delas, para isso utilizamos um threshold, utilizando somente as linhas que tiverem o número de votos(acumulação na matriz) superior a um valor limítrofe.
+
+(ref:houghlineexemplo) Resultado da transformada de Hough usada na detecção de linhas em uma imagem.
+
+```{r houghlineexemplo, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:houghlineexemplo)', fig.align='center', out.width='95%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/hough_line_exemplo.jpg'))
+```
+
 ### Transformada de Hough para detecção de círculos
+A transformada de Hough pode ser estendida para detecção de círculos, para isso substituímos a equação da reta pela equação do círculo:
+$$(x-x_0)^2+(y-y_0)^2=r^2$$
+
+Nesse caso também andamos por cada pixel das bordas da imagem e o levamos ao espaço de parâmetro com as seguintes equações:
+
+$$x_0=x-r\cos(\theta)$$
+e
+
+$$y_0=y-\text{sen}(\theta)$$
+
+A diferença é que neste caso o nosso espaço de parâmetro terá três dimensões, isso decorre do fato de que como desenhamos um círculo para cada pixel do círculo da imagem, a variação do diâmetro desse círculo deve levar a uma variação dos círculos descritos no espaço de parâmetros, então além da variação dos valores de $x$ e $y$ também devemos variar os valores de $r$. Uma representação disso pode ser vista na figura \@ref(fig:houghCircle)(a) onde temos três pixels que definem um círculo, na figura \@ref(fig:houghCircle)(b) temos os círculos no espaço de parâmetros e na figura \@ref(fig:houghCircle)(c) podemos ver um representação de um espaço de parâmetros com diferentes raios.
+
+(ref:houghCircle) Transformada de Hough para círculos.[@nixon2019feature, p.255]
+
+```{r houghCircle, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:houghCircle)', fig.align='center', out.width='60%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/houghCircle.png'))
+```
+
+A figura \@ref(fig:moedas) contém uma imagem com algumas moedas, na figura \@ref(fig:houghcircleraios)(a) temos as bordas da imagem detectada com o método de Canny, logo após, na figura \@ref(fig:houghcircleraios)(b) - (f) temos a representação do espaço de Hough para diferentes valores de raio. E na figura \@ref(fig:houghcircleresultado) temos o resultado da detecção de círculo após encontrados os picos do espaço de parâmetros.
+
+(ref:moedas) Imagem original de moedas. [@burger2009, p. 98]
+
+```{r moedas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:moedas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/moedas.jpg'))
+```
+
+(ref:houghcircleraios) Canny e espaço de parâmetros. [@burger2009, p. 98]
+
+```{r houghcircleraios, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:houghcircleraios)', fig.align='center', out.width='100%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/hough_circle_raios.jpg'))
+```
+
+(ref:houghcircleresultado) Resultado final da transformada de Hough para círculos. [@burger2009, p. 98]
+
+```{r houghcircleresultado, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:houghcircleresultado)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/hough_circle_resultado.jpg'))
+```
+
 ## Detecção de blobs
+Blobs, do inglês bolhas, são regiões da imagem em que os pixels têm valores aproximadamente iguais. Uma boa representação - um tanto quanto artificial - disso é a função gaussiana, como pode ser vista na figura  \@ref(fig:gaussianblob)(a) e sua representação 2D na figura \@ref(fig:gaussianblob)(b), nela temos um conjunto de pixels com valores bem próximos, que caracterizam um blob.
+
+(ref:gaussianblob) Função gaussiana em 3D e 2D.
+
+```{r gaussianblob, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:gaussianblob)', fig.align='center', out.width='75%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/gaussian_blob.jpg'))
+```
+
+Apesar do exemplo, a detecção de blobs não se restringe a elementos circulares, mas a qualquer conjunto de pixels.
+
 ### LoG
+Esse método utiliza o do Laplaciano do Gaussiano, que já foi apresentado anteriormente, mas que em resumo é o cálculo de derivadas segunda em uma imagem que foi anteriormente convolucionada com um filtro gaussiano, isso irá gerar fortes respostas positivas em blobs escuros e negativas em blobs escuros nos blobs de tamanho $\sqrt{2\sigma}$. Como existe uma relação entre a respostas e o tamanho do desvio padrão, é necessário realizar a operação com uma gama de valores para o sigma, e assim detectar blobs de diferentes tamanhos. 
+
+(ref:nasahubbledeep) Imagem de Campo Ultraprofundo do Hubble. [@img:hubbledeep]
+
+```{r nasahubbledeep, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:nasahubbledeep)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/nasa_hubble_deep.jpg'))
+```
+
+Como podemos ver na figura \@ref(fig:gaussianblob) com diferentes valores de sigma conseguimos detectar objetos de variados tamanhos, como exemplo na figura \@ref(fig:logsigmas)(a) detectamos as estrelas da figura \@ref(fig:nasahubbledeep) que apresentam uma menor resposta ao filtro laplaciano.
+
+(ref:logsigmas) Laplaciano do Gaussiano com diferentes valores de sigma.
+
+```{r logsigmas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:logsigmas)', fig.align='center', out.width='100%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/log_sigmas.jpg'))
+```
+
+Na figura \@ref(fig:loghubble) temos o resultado da detecção dos blobs utilizando LoG. Note que nem todas as estrelas foram detectadas, isso se deve ao fato do uso de um valor de threshold, onde definimos que queremos as detecções acima de determinado limiar. Na figura \@ref(fig:loghubblebaixo) podemos ver o resultado utilizando um valor de limiar menor, onde muito mais objetos foram localizados.
+
+(ref:loghubble) Resultado da detecção de blobs com LoG.
+
+```{r loghubble, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:loghubble)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/log_hubble.jpg'))
+```
+
+(ref:loghubblebaixo) Resultado da detecção de blobs com LoG com um threshold menor.
+
+```{r loghubblebaixo, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:loghubblebaixo)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/log_hubble_baixo_threshold.jpg'))
+```
+
 ### DoG
+Esse método é basicamente o mesmo do anterior, mas possui uma certa vantagem, que é o fato de ele ser mais eficiente. Como também já foi mencionado no tópico na seção anterior é possível aproximar o Laplaciano do Gaussiano através da Diferença do Gaussiano(DoG), ou seja, primeiramente se realiza a filtragem gaussiano com dois sigmas diferentes e se faz a subtração entre os dois. Realizamos esse processo para diferentes pares de valores, obtendo assim o mesmo espaço de escala construído com o processo do LoG. Na figura \@ref(fig:doghubble) temos um exemplo de detecção por DoG.
+
+(ref:doghubble) Resultado da detecção de blobs com DoG.
+
+```{r doghubble, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:doghubble)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/dog_hubble.jpg'))
+```
+
 ### DoH
+Uma matriz Hessiana é uma matriz que contém as derivadas de uma função. No nosso caso, utilizamos a Hessiana de ordem 2, pois estamos trabalhando com imagens, que possuem duas dimensões. Ela pode ser representada da seguinte maneira:
+
+$$H[f(x_1, x_2, \dots,x_n)]=
+\begin{bmatrix}
+\frac{\partial^2 f}{\partial x_1^2} & \frac{\partial^2 f}{\partial x_1 \partial x_2}\\ 
+\frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2^2}
+\end{bmatrix}$$
+
+A matriz Hessiana tem muita utilidade pois com ela podemos descrever a curvatura em um ponto da função multivariável, o que no nosso caso pode ajudar a detectar os blobs, já que eles são aglomerados de pixels e devem estar separados do restante da imagem, ou seja, um aglomerado claro em um fundo escuro ou o contrário, e isso irá fazer com que sua função tenha uma mudança de sinal que pode ser detectada utilizando-se as informações da matriz. Além disso, como dito por Herbert Bay et al.[@bay2006surf] os detectores baseados na Hessiana são mais estáveis e repetíveis(tem a mesma resposta para a mesma imagem com diferentes ângulos, iluminações etc.).
+
+Um dos principais algoritmos que fazem uso dessa matriz se chama Speeded Up Robust Features (SURF)[@bay2006surf], esse método faz uso de várias técnicas que o tornam muito rápido, como seu próprio nome sugere. Uma dessas técnicas é o cálculo da integral da imagem, realizado a partir da soma de todos os pixels de uma área retangular a partir do x atual, sendo que este varia enquanto se é andado pela imagem. 
+
+(ref:imageIntegral) Integral de uma imagem. [@Cen2016StudyOV]
+
+```{r imageIntegral, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imageIntegral)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imageIntegral.png'))
+```
+
+Como pode ser visto na figura, a integral de uma imagem contém a soma das regiões, por exemplo, a primeira posição contém a soma de somente uma célula, no caso 1, a segunda tem a soma de duas células,  na primeira linha estamos basicamente somando as células de uma só linha, na segunda começamos a formar regiões retangulares, por exemplo, na segunda linha e terceira coluna temos o valor 6, resultante da soma das seis células da primeira linha com a segunda. Com a integral podemos calcular a área de qualquer região com apenas quatro operações, da seguinte forma:
+$$soma = D+A-B-C$$
+
+Onde {A,B,C,D} forma uma região. Como exemplo, caso queiramos calcular a área na região quadrada 2x2 na direita inferior utilizados:
+$$soma = 9 + 1 - 3 - 3 = 4$$
+
+Isso nos ajuda na aplicação de box filters, já que precisaríamos da soma de determinadas áreas, e com isso aumentamos a velocidade do método.
+Sendo $X=(x,y)$ um ponto em uma imagem, sua matriz Hessiana em $X$ a uma escala  é dada por:
+
+$$H(X,\sigma)=\begin{bmatrix}
+L_{xx}(X, \sigma) & L_{xy}(X, \sigma)\\ 
+L_{xy}(X, \sigma) & L_{yy}(X, \sigma)
+\end{bmatrix}$$
+
+Onde $L_{xx}(X, \sigma)$ é a convolução da imagem no ponto X com a derivada de segunda ordem gaussiana $\frac{\partial^2g(\sigma)}{\partial x^²}$ e assim por diante[@bay2006surf]. Aqui entra em cena mais um elemento para melhorar a velocidade do algoritmo, Bay, Herbert et al. utilizam box filters para aproximar o filtro gaussiano. Como podemos ver na figura, onde os dois primeiros filtros são os derivativos gaussianos discretizados e os dois últimos são os aproximados a partir de box filters.
+
+(ref:discretizadogaussiano) Filtro gaussiano discretizado e aproximado na direção $y$ e $xy$. [@bay2006surf]
+
+```{r discretizadogaussiano, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:discretizadogaussiano)', fig.align='center', out.width='85%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/discretizadogaussiano.png'))
+```
+
+Chamamos as derivadas realizadas na imagem de $D_{xx}$, $D_{yy}$, $D_{xy}$. Essas derivadas não são realizadas com somente um valor de $\sigma$, mas como os detectores anteriores usam uma sequência de valores para assim criar um espaço de escalas e conseguir detectar blobs de diferentes tamanhos. Assim, a determinante da Hessiana é dado por:
+
+$$det(H_{\text{aprox}}) = D_{xx}D_{yy}-(0.9D_{xy})^2$$
+
+Sendo que o valor $0.9$ é um peso introduzido pelos autores Bay, Hebert et al. para corrigir as respostas quando utilizamos várias escalas de sigma e obter uma invariância escalar. Na figura temos o resultado de uma detecção de blobs realizada pela Determinante do Hessiano.
+
+(ref:dohhubble) Resultado da detecção de blobs com DoH. 
+
+```{r dohhubble, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:dohhubble)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/doh_hubble.jpg'))
+```
+
 ## Detecção de junções ou cantos
 ## Segmentação por limiarização
 ## método de Otsu
