@@ -28,10 +28,6 @@ Uma matriz é um arranjo (array) de elementos em duas direções (linha e coluna
 Representaremos matriz com a letra M, as direções (linha e coluna) pelas letras L e C. 
 Suponhamos que L  = 4 e C = 4 então $M[4][4]$ possui 4 linhas e 4 colunas, como representada na figura 3.0.
 
-```{r areasPDI, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='40%'}
-knitr::include_graphics(rep('imagens/03-transformacoes/tableMatriz.png'))
-
-```
 
 
 ## Sistema de coordenadas objetos (2D e 3D)
