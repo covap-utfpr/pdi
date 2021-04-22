@@ -21,7 +21,9 @@ Se pensamos em Vem 3D, definindo a origem ao ponto $P(x,y, z)$ seu comprimento s
 $|V| = {\sigma\sqrt{x^2+y^2+z^2}}$
 
 Exemplo 2: Calcule o comprimento de V com $X=2$ , $Y=3$ e $Z=1$.
+
 Resolução:
+
 $|V| = {\sigma\sqrt{x^2+3^2+1^2 = 3.741}}$
 
 Uma matriz é um arranjo (array) de elementos em duas direções (linha e coluna). Para manipulá-la é necessário que definimos a quantidade de elementos existentes em cada direção.
