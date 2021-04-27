@@ -1,6 +1,7 @@
 p {
   text-align: justify;
 }
+/*logo properties*/
 .logo{
   width: 200px !important;
   object-fit: contain;
@@ -12,4 +13,8 @@ p {
   margin-bottom: 10px;
   border-radius: 50%;
 
+}
+.caption{
+  text-align: center;
+  color: #777;
 }
