@@ -1,11 +1,11 @@
 # Segmentação
-## Detecção por descontinuidade
+<!--## Detecção por descontinuidade
 ### Detecção de ponto
 ### Detecção de linha
 ## Detecção de bordas
 ### Modelos de Bordas
-### Método do gradiente ( Roberts, Prewitt, Sobel).
-### Método de Marr-Hildreth
+### Método do gradiente ( Roberts, Prewitt, Sobel)
+### Método de Marr-Hildreth-->
 ## Detecção de Quinas
 Quinas são pontos chaves na visão computacional por serem muito úteis na descrição e correspondência de objetos usando poucos dados. E para identificação dos pontos, existem diferentes métodos, dentre eles o mais comum é o de Harris, que é o sucessor do de Moravec [@nixon2019feature, p. 178].
 
@@ -401,7 +401,7 @@ knitr::include_graphics(rep('imagens/06-segmentacao/doh_hubble.jpg'))
 ```
 
 ## Segmentação por limiarização
-"Na seção anterior, as regiões eram identificadas achando primeiro os segmentos de borda e, em seguida, tentando-se conectá-las com as fronteiras. Nesta seção, discutem-se as técnicas de divisão de imagens diretamente em regiões com base nos valores de intensidade e/ou as propriedades desses valores" [@gonzalez2010, p. 486].
+"a seção anterior, as regiões eram identificadas achando primeiro os segmentos de borda e, em seguida, tentando-se conectá-las com as fronteiras. Nesta seção, discutem-se as técnicas de divisão de imagens diretamente em regiões com base nos valores de intensidade e/ou as propriedades desses valores" [@gonzalez2010, p. 486].
 
 "Em virtude de suas propriedades intuitivas, simplicidade de implementação e velocidade computacional, a limiarização de imagens tem uma posição central nas aplicações de segmentação de imagem" [@gonzalez2010, p. 486].
 
@@ -417,8 +417,6 @@ knitr::include_graphics(rep('imagens/06-segmentacao/doh_hubble.jpg'))
 
 - A uniformidade da reflexão da imagem
 
-
-### As bases da limiarização de intensidade
 Suponha que os histogramas de intensidade de uma imagem composta por objetos claros sobre um fundo escuro, conforme Figura \@ref(fig:histograma4didatica) (a), de tal forma que os *pixels* do objeto e do fundo tenham valores de intensidade agrupados em dois modos ou dois grupos dominantes (Gonzalez; Woods, 2010, p. 486); a idéia é selecionar um limiar $T$ que separa estes modos. E caso tenha três modos, usa-se dois limiares, conforme Figura \@ref(fig:histograma4didatica) (b). Em outras palavras, a segmentação da imagem da Figura \@ref(fig:histograma4didatica) (a) é dada por $g(x,y)$^[se $f(x,y) \leq T$, significa que se desconsida^ o endereço daquele *píxel*]:
 
 $$g(x,y) =
@@ -438,7 +436,8 @@ Quando $T$ é uma constante aplicável em uma imagem inteira, o processo é conh
 Os problemas de segmentação que exigem mais do que dois limiares são difíceis (muitas vezes impossíveis) de resolver e os melhores resultados, geralmente, são obtidos por meio de métodos como a limiarização variável ou aumento da região, como discutido [@gonzalez2010, p. 486].
 
 
-### O papel do ruído da limiarização
+- **O papel do ruído da limiarização**
+
 O ruído de uma imagem é capaz de fazer com que fique difícil achar um limiar ideal para segmentar a imagem sem processamentos adicionais, pois o(s) vale(s) da imagem podem desaparecer [@gonzalez2010. 487]. 
 
 Observe que conforme os exemplos da Figura \@ref(fig:imagemRuido) e seus respectivos histogramas, o aumento no desvio padrão nos níveis de intensidade do ruído gaussiano faz com que o vale que separava os dois modos desapareça, tornando difícil a segmentação do fundo e do objeto.
@@ -449,8 +448,8 @@ Observe que conforme os exemplos da Figura \@ref(fig:imagemRuido) e seus respect
 knitr::include_graphics(rep('imagens/06-segmentacao/imagemRuido.png'))
 ```
 
+- **O papel da iluminação e refletância**
 
-### O papel da iluminação e a refletância
 O problema da iluminação é quando não é possível ter uma incidência uniforme da luz, causando um sombreamento. O mesmo efeito acontece quando o problema não é na iluminação, mas nas características da superfície do objeto; pois a iluminação e refletância produzem o mesmo problema. Note que, pela Figura \@ref(fig:imagemRefletancia), o histograma deixou de ser bimodal. Logo para segmentar imagens com problemas de iluminação e refletância não é simples
 
 (ref:imagemRefletancia) (a) Imagem ruidosa. (b) Rampa de intensidade no intervalo [0.2, 0.6]. (c) Produto de (a) e (b). (d) a (f) Histogramas correspondentes [@gonzalez2010, p. 488].
@@ -463,7 +462,7 @@ E como solução há três abordagens básicas. Corrigir diretamente o padrão d
 
 
 
-## Limiarização global simples
+### Limiarização global simples
 A limiarização global simples é um método iterativo básico e que não é o mais eficiente. Ele é um processo iterativo que denomina o limiar ideal como aquele que produz menor diferença entre as médias de intensidade dos modos, o de segmentação e o desprezado [@gonzalez2010, p. 488].
 
 Ele consiste em:
@@ -488,7 +487,7 @@ knitr::include_graphics(rep('imagens/06-segmentacao/imagemLimiarGlobalSimples.pn
 ```
 
 
-## Limiarização pelo Método de Otsu
+### Limiarização pelo Método de Otsu
 
 O método de Otsu é uma abordagem que relaciona as informações do histograma com conceitos estatísticos para produzir o chamado limiar ótimo, que é denotado por aquele que maximiza a variância entre classes ou minimiza a variância intraclasse [@gonzalez2010, p. 489]. Lembrando que classe é o mesmo que modos do histograma.
 
@@ -544,7 +543,7 @@ knitr::include_graphics(rep('imagens/06-segmentacao/imagemOtsu.png'))
 ```
 
 
-## Uso de suavização para limiarização
+### Uso de suavização para limiarização
 O objetivo da suavização é tentar separar os histogramas de imagens ruidosas, que tendem a ser unimodais, em modos com vales mais profundos; pois, quanto mais profundo o vale, melhor será a segmentação da imagem. 
 
 Atente-se ao tipo de média e ao tamanho do *kernel*, aconselha-se o filtro gaussiano, pois ele minimiza o borramento de fronteira, e suaviza o ruído ainda que de maneira mais branda do que um filtro de média.
@@ -568,7 +567,7 @@ knitr::include_graphics(rep('imagens/06-segmentacao/ImagemSuavizacaoLimiarizacao
 
 Portanto, note que, se a região que deseja segmentar for muito pequena em relação ao background e houver ruído, o que pode surgir na captura da imagem, a chance de não dar certo pelos métodos vistos é grande; pois como os métodos que até agora vimos operam apenas no histograma da imagem, sem uso de maiores recursos. Como visto, imagens com essa característica, um mínimo ruído persiste e nem foi obtido um vale considerável entre as duas regiões. Isso pode ser atribuído ao fato de que a região é tão pequena que sua contribuição para o histograma é insignificante em comparação à intensidade da propagação causada pelo ruído [@gonzalez2010, p. 493]. A solução para isso é o uso de máscaras de borda, que será detalhado a seguir. 
 
-## Uso de bordas para limiarização
+### Uso de bordas para limiarização
 Em uma imagem com ruído na qual a região a ser segmentada é muito pequena, é como se não houvesse aquela região e houvesse apenas o *background*. Isso é observado na aparência unimodal do histograma.
 
 Portanto, fica difícil estimar um limiar ideal pelos algoritmos supracitados. E como visto anteriormente, é preciso uma aparência bimodal para uma boa segmentação, então, precisamos de um histograma equilibrado; para isso, tomamos o histograma das bordas mais destacadas da imagem. Isso pode ser resumido em gerar uma máscara de gradiente ou laplaciano da imagem, limiarizá-la com um valor alto e usar como máscara para imagem original e prosseguir com o processo de segmentação do objeto a partir dessa amostra, pois, dessa forma, é gerado um histograma simétrico e com um vale destacado, porque, com a máscara de borda, há probabilidade de um píxel estar no *background* ou *foreground* tende a ser equilibrada [@gonzalez2010, p. 494]. 
@@ -608,7 +607,7 @@ knitr::include_graphics(rep('imagens/06-segmentacao/imagemLimiarizLaplace.png'))
 
 
 
-## Limiares Múltiplos
+### Limiares Múltiplos
 
 A diferença entre os limiares múltiplos e o que vimos até agora é que se usa mais de um limiar para segmentar a imagem a fim de produzir uma melhor medida de separabilidade entre as classes, por conseguinte, melhor segmentação.
 Entretanto, como as aplicações que requerem mais de dois limiares geralmente são resolvidas com mais do que apenas valores de intensidade. Ao invés disso, o caminho é usar descritores adicionais (por exemplo, cor) e o problema é moldado para reconhecimento de padrões, como explicado a seguir em Limiarização baseada em diversas variáveis [@gonzalez2010, p. 497].
@@ -638,7 +637,7 @@ A Figura \@ref(fig:imagemLimiarizacaoMult) (a) mostra a imagem de um *iceberg*. 
 knitr::include_graphics(rep('imagens/06-segmentacao/imagemLimiarizacaoMult.png'))
 ```
 
-## Limiarização variável
+### Limiarização variável
 Vimos perante seções anteriores, que fatores como ruído e iluminação são impecílios para uma boa segmentação. Também foi visto que suavização e informações das bordas podem ser usadas para resolver isto. No entanto, é frequente o caso que essas estratégias são ineficientes ou nem possíveis. Como solução para tal, usamos limiares variáveis.
 
 ### Particionamento da imagem
