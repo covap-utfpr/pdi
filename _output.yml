@@ -1,6 +1,5 @@
 bookdown::gitbook:
   css: [css/style.css]
-  split_by: section
   config:
     edit: https://github.com/covap-utfpr/pdi/edit/master/%s
     sharing:
