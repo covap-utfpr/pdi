@@ -1,81 +1,11 @@
 # Segmentação
 <!--## Detecção por descontinuidade
 ### Detecção de ponto
-### Detecção de linha
-## Detecção de bordas
-### Modelos de Bordas
+### Detecção de linha-->
+## Detecção de Bordas
+<!--### Modelos de Bordas
 ### Método do gradiente ( Roberts, Prewitt, Sobel)
 ### Método de Marr-Hildreth-->
-## Detecção de Quinas
-Quinas são pontos chaves na visão computacional por serem muito úteis na descrição e correspondência de objetos usando poucos dados. E para identificação dos pontos, existem diferentes métodos, dentre eles o mais comum é o de Harris, que é o sucessor do de Moravec [@nixon2019feature, p. 178].
-
-### Detector de Quinas de Moravec
-Moravec obtém sua medida de curvatura através de uma variação média de intensidade em quatro direções principais: $(0,1), (0,-1), (1,0)$ e $(-1,0)$. Isso é feito através da seguinte equação, considerando a análise sobre o $pixel(x,y)$, o deslocamento $(u,v)$ e a janela $2w+1$ [@nixon2019feature, p. 185].
-
-$$E_{u,v}(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w}[P_{x+i,\ y+j} - P_{x+i+u,\ y+j+v}]^2$$
-Essa equação também aproxima a função de autocorrelação na direção $(u,v)$ [@nixon2019feature, p. 186].
-
-O detector de Moravec apesar de ser intuitivo seu funcionamento, ele considera apenas um pequeno conjunto de mudanças possíveis. Então, Harris propôs ainda avaliar a autocorrelação, mas por uma expressão analítica [@nixon2019feature, p. 185].
-
-### Detector de Quinas de Harris
-O detector de Harris é desenvolvido na ideia de Moravec e sua equação, mas com uma abordagem mais complexa. Harris assume que $P_{x+i+u,\ y+j+v}$ possa ser estimado pela série de Taylor de primeira ordem [@nixon2019feature, p. 193]. Dessa forma,
-
-$$P_{x+i+u,\ y+j+v} = P_{x+i,\ y+j} + \frac{\partial{P_{x+i,\ y+j}}}{\partial x}u + \frac{\partial{P_{x+i,\ y+j}}}{\partial y}v $$
-
-Substituindo na equação de Moravec
-$$E_{u,v}(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w}[\frac{\partial{P_{x+i,\ y+j}}}{\partial x}u + \frac{\partial{P_{x+i,\ y+j}}}{\partial y}v]^2$$ 
-E expandindo a potência
-$$E_{u,v}(x,y) = A(x,y)u^2 + 2C(x,y)uv + B(x,y)v^2$$
-Esta última equação pode ser representada forma de matriz. Representação útil para compreensão mais à frente neste tópico [@nixon2019feature, p. 187].
-$$
-\begin{split}
-E_{u,v}(x,y) &= 
-\begin{bmatrix}u & v\end{bmatrix}
-\begin{bmatrix}A(x,y) & C(x,y)\\ C(x,y) & B(x,y)\end{bmatrix}
-\begin{bmatrix}u \\ v\end{bmatrix}
-\\&= D^TMD
-\end{split}
-$$
-onde
-$$A(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w}(\frac{\partial P_{x+i, y+j}}{\partial x})^2$$
-$$B(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w} (\frac{\partial P_{x+i, y+j}}{\partial y})^2$$
-$$C(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w} (\frac{\partial P_{x+i, y+j}}{\partial x})(\frac{\partial P_{x+i, y+j}}{\partial y})$$
-Como $E_{u.v}(x,y)$ tem a forma de uma função quadrática, então possui dois eixos principais. Podemos rotacioná-la a fim de alinhar seus eixos com os do sistema de coordenadas, obtendo $F_{u,v}(x,y)$ [@nixon2019feature, p. 187].
-$$F_{u,v}(x,y) = \alpha(x,y)^2u^2 + \beta(x,y)^2v^2$$
-Ou em sua forma matricial. Note que são rotacionados os eixos definidos pelo $D$
-$$F_{u,v}(x,y) = R^TD^TMDR$$
-$$F_{u,v}(x,y) = D^TR^TMRD$$
-$$F_{u,v}(x,y) = D^TQD$$
-$$Q = \begin{bmatrix} \alpha & 0\\ 0 & \beta  \end{bmatrix}$$
-Os valores de $\alpha$ e $\beta$ são proporcionais à função de autocorrelação nos principais eixos. Dessa forma,  $\alpha$ e $\beta$  serão pequenos  se o $pixel(x,y)$ for de uma região com intensidade constante, um será de valor grande e outro pequeno se estiverem em uma borda reta, e ambos terão valores grandes se estiverem em uma borda com curvatura acentuada. Portanto, a medida de curvatura é definida como $k_k(x,y)$ [@nixon2019feature, p. 187].
-$$k_k(x,y) = \alpha \beta - k(\alpha + \beta)^2$$
-No qual $k$ controla a sensibilidade do detector.
-
-Como $Q$ é uma composição ortogonal de $M$. Os elementos de Q são chamados de autovalores [@nixon2019feature, p. 188]. Inferimos que
-$$Q = R^TMR$$
-Então, a partir da equivalência de determinantes e traços, é possível produzir uma equação equivalente a $Y$ com os valores da matriz $M$ [@nixon2019feature, p. 188].
-$$\alpha \beta = A(x,y)B(x,y) - C(x,y)^2$$
-$$\alpha + \beta = A(x,y) + B(x,y)$$
-Assim
-$$
-\begin{split}
-k_k(x,y) &= \alpha \beta - k(\alpha + \beta)^2
-\\&= A(x,y)B(x,y) - C(x,y)^2 - k(A(x,y) + B(x,y))^2
-\\&=det(M) - k(trace(M))^2
-\end{split}
-$$
-A Figura \@ref(fig:imagemQuinas) (a) é a imagem original. A Figura \@ref(fig:imagemQuinas) (b) foi gerada usando o detector de Harris com uma vizinhança 5x5 ($w=2$) para cada deslocamento $(u,v)$, com a derivada sendo calculada pelo Operador de Sobel (3x3) e com sensibilizador $k=0.01$. Limiarizou-se a imagem de curvatura, descartando os valores que não fossem maiores que 9% do valor máximo. E nas posições $(x,y)$ da imagem que continham as curvaturas, foi destacado em rosa. 
-Observe que a imagem identificou as quinas do tabuleiro de xadrez e do cubo mágico, porém não detectou outras quinas como as das árvores. Além disso, foi encontrado quinas que não são próprias dos objetos, e sim da iluminação. 
-Variando tanto o sensibilizador da função, $k$, como o limiar é provável que consigamos encontrar mais quinas, com o custo de também poder classificar ruídos que foram identificados como bordas também como quinas. Entretanto, já vimos que o filtro gaussiano pode ser que nos ajude neste problema. 
-
-
-(ref:imagemQuinas) Exemplo de detecção de Quinas pelo método de Harris.
-
-```{r imagemQuinas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemQuinas)', fig.align='center', out.width='55%'}
-knitr::include_graphics(rep('imagens/06-segmentacao/imagemQuinas.png'))
-```
-
-
 ### Método de Canny
 O algoritmo de Canny recebeu esse nome em alusão a John Canny, que o propôs em seu artigo, “A computational Approach to Edge Detection"[@canny1986computational], publicado em 1986. Sua formulação se baseava em três pontos principais:
 
@@ -296,7 +226,77 @@ knitr::include_graphics(rep('imagens/06-segmentacao/hough_circle_raios.jpg'))
 knitr::include_graphics(rep('imagens/06-segmentacao/hough_circle_resultado.jpg'))
 ```
 
-## Detecção de blobs
+## Detecção de Quinas
+Quinas são pontos chaves na visão computacional por serem muito úteis na descrição e correspondência de objetos usando poucos dados. E para identificação dos pontos, existem diferentes métodos, dentre eles o mais comum é o de Harris, que é o sucessor do de Moravec [@nixon2019feature, p. 178].
+
+### Detector de Quinas de Moravec
+Moravec obtém sua medida de curvatura através de uma variação média de intensidade em quatro direções principais: $(0,1), (0,-1), (1,0)$ e $(-1,0)$. Isso é feito através da seguinte equação, considerando a análise sobre o $pixel(x,y)$, o deslocamento $(u,v)$ e a janela $2w+1$ [@nixon2019feature, p. 185].
+
+$$E_{u,v}(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w}[P_{x+i,\ y+j} - P_{x+i+u,\ y+j+v}]^2$$
+Essa equação também aproxima a função de autocorrelação na direção $(u,v)$ [@nixon2019feature, p. 186].
+
+O detector de Moravec apesar de ser intuitivo seu funcionamento, ele considera apenas um pequeno conjunto de mudanças possíveis. Então, Harris propôs ainda avaliar a autocorrelação, mas por uma expressão analítica [@nixon2019feature, p. 185].
+
+### Detector de Quinas de Harris
+O detector de Harris é desenvolvido na ideia de Moravec e sua equação, mas com uma abordagem mais complexa. Harris assume que $P_{x+i+u,\ y+j+v}$ possa ser estimado pela série de Taylor de primeira ordem [@nixon2019feature, p. 193]. Dessa forma,
+
+$$P_{x+i+u,\ y+j+v} = P_{x+i,\ y+j} + \frac{\partial{P_{x+i,\ y+j}}}{\partial x}u + \frac{\partial{P_{x+i,\ y+j}}}{\partial y}v $$
+
+Substituindo na equação de Moravec
+$$E_{u,v}(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w}[\frac{\partial{P_{x+i,\ y+j}}}{\partial x}u + \frac{\partial{P_{x+i,\ y+j}}}{\partial y}v]^2$$ 
+E expandindo a potência
+$$E_{u,v}(x,y) = A(x,y)u^2 + 2C(x,y)uv + B(x,y)v^2$$
+Esta última equação pode ser representada forma de matriz. Representação útil para compreensão mais à frente neste tópico [@nixon2019feature, p. 187].
+$$
+\begin{split}
+E_{u,v}(x,y) &= 
+\begin{bmatrix}u & v\end{bmatrix}
+\begin{bmatrix}A(x,y) & C(x,y)\\ C(x,y) & B(x,y)\end{bmatrix}
+\begin{bmatrix}u \\ v\end{bmatrix}
+\\&= D^TMD
+\end{split}
+$$
+onde
+$$A(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w}(\frac{\partial P_{x+i, y+j}}{\partial x})^2$$
+$$B(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w} (\frac{\partial P_{x+i, y+j}}{\partial y})^2$$
+$$C(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w} (\frac{\partial P_{x+i, y+j}}{\partial x})(\frac{\partial P_{x+i, y+j}}{\partial y})$$
+Como $E_{u.v}(x,y)$ tem a forma de uma função quadrática, então possui dois eixos principais. Podemos rotacioná-la a fim de alinhar seus eixos com os do sistema de coordenadas, obtendo $F_{u,v}(x,y)$ [@nixon2019feature, p. 187].
+$$F_{u,v}(x,y) = \alpha(x,y)^2u^2 + \beta(x,y)^2v^2$$
+Ou em sua forma matricial. Note que são rotacionados os eixos definidos pelo $D$
+$$F_{u,v}(x,y) = R^TD^TMDR$$
+$$F_{u,v}(x,y) = D^TR^TMRD$$
+$$F_{u,v}(x,y) = D^TQD$$
+$$Q = \begin{bmatrix} \alpha & 0\\ 0 & \beta  \end{bmatrix}$$
+Os valores de $\alpha$ e $\beta$ são proporcionais à função de autocorrelação nos principais eixos. Dessa forma,  $\alpha$ e $\beta$  serão pequenos  se o $pixel(x,y)$ for de uma região com intensidade constante, um será de valor grande e outro pequeno se estiverem em uma borda reta, e ambos terão valores grandes se estiverem em uma borda com curvatura acentuada. Portanto, a medida de curvatura é definida como $k_k(x,y)$ [@nixon2019feature, p. 187].
+$$k_k(x,y) = \alpha \beta - k(\alpha + \beta)^2$$
+No qual $k$ controla a sensibilidade do detector.
+
+Como $Q$ é uma composição ortogonal de $M$. Os elementos de Q são chamados de autovalores [@nixon2019feature, p. 188]. Inferimos que
+$$Q = R^TMR$$
+Então, a partir da equivalência de determinantes e traços, é possível produzir uma equação equivalente a $Y$ com os valores da matriz $M$ [@nixon2019feature, p. 188].
+$$\alpha \beta = A(x,y)B(x,y) - C(x,y)^2$$
+$$\alpha + \beta = A(x,y) + B(x,y)$$
+Assim
+$$
+\begin{split}
+k_k(x,y) &= \alpha \beta - k(\alpha + \beta)^2
+\\&= A(x,y)B(x,y) - C(x,y)^2 - k(A(x,y) + B(x,y))^2
+\\&=det(M) - k(trace(M))^2
+\end{split}
+$$
+A Figura \@ref(fig:imagemQuinas) (a) é a imagem original. A Figura \@ref(fig:imagemQuinas) (b) foi gerada usando o detector de Harris com uma vizinhança 5x5 ($w=2$) para cada deslocamento $(u,v)$, com a derivada sendo calculada pelo Operador de Sobel (3x3) e com sensibilizador $k=0.01$. Limiarizou-se a imagem de curvatura, descartando os valores que não fossem maiores que 9% do valor máximo. E nas posições $(x,y)$ da imagem que continham as curvaturas, foi destacado em rosa. 
+Observe que a imagem identificou as quinas do tabuleiro de xadrez e do cubo mágico, porém não detectou outras quinas como as das árvores. Além disso, foi encontrado quinas que não são próprias dos objetos, e sim da iluminação. 
+Variando tanto o sensibilizador da função, $k$, como o limiar é provável que consigamos encontrar mais quinas, com o custo de também poder classificar ruídos que foram identificados como bordas também como quinas. Entretanto, já vimos que o filtro gaussiano pode ser que nos ajude neste problema. 
+
+
+(ref:imagemQuinas) Exemplo de detecção de Quinas pelo método de Harris.
+
+```{r imagemQuinas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemQuinas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemQuinas.png'))
+```
+
+
+## Detecção de Blobs
 Blobs, do inglês bolhas, são regiões da imagem em que os pixels têm valores aproximadamente iguais. Uma boa representação - um tanto quanto artificial - disso é a função gaussiana, como pode ser vista na figura  \@ref(fig:gaussianblob)(a) e sua representação 2D na figura \@ref(fig:gaussianblob)(b), nela temos um conjunto de pixels com valores bem próximos, que caracterizam um blob.
 
 (ref:gaussianblob) Função gaussiana em 3D e 2D.
@@ -400,7 +400,7 @@ Sendo que o valor $0.9$ é um peso introduzido pelos autores Bay, Hebert et al. 
 knitr::include_graphics(rep('imagens/06-segmentacao/doh_hubble.jpg'))
 ```
 
-## Segmentação por limiarização
+## Limiarização
 "a seção anterior, as regiões eram identificadas achando primeiro os segmentos de borda e, em seguida, tentando-se conectá-las com as fronteiras. Nesta seção, discutem-se as técnicas de divisão de imagens diretamente em regiões com base nos valores de intensidade e/ou as propriedades desses valores" [@gonzalez2010, p. 486].
 
 "Em virtude de suas propriedades intuitivas, simplicidade de implementação e velocidade computacional, a limiarização de imagens tem uma posição central nas aplicações de segmentação de imagem" [@gonzalez2010, p. 486].

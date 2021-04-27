@@ -1,4 +1,4 @@
-# Transformacões Geométricas
+# Transformacões geométricas
 
 
 Nessa seção abordaremos conceitos importantes que detalham  processos de transformações geométricas na imagem digitalizada, definiremos a seção proposta, sistema de coordenadas objetos (2D e 3D), representação vetorial e matricial de Imagens digitalizadas, matrizes em computação gráfica, transformações em pontos e objetos; transformações (translação, escala,  rotação).
