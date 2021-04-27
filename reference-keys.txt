@@ -42,6 +42,7 @@ fig:filtrosMediaHubble
 fig:placaEletronicaMediana
 fig:funcaoGaussiana
 fig:lettersGaussianFilter
+fig:imagemQuinas
 fig:edgeorientation
 fig:original
 fig:gaussian
@@ -136,6 +137,9 @@ detecção-de-bordas
 modelos-de-bordas
 método-do-gradiente-roberts-prewitt-sobel.
 método-de-marr-hildreth
+detecção-de-quinas
+detector-de-quinas-de-moravec
+detector-de-quinas-de-harris
 método-de-canny
 transformada-de-hough
 transformada-de-hough-para-detecção-de-linhas
