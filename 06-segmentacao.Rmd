@@ -1,11 +1,239 @@
 # Segmentação
-<!--## Detecção por descontinuidade
-### Detecção de ponto
-### Detecção de linha-->
+A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade [@gonzalez2010, p. 454]. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.
+
+## Detecção por descontinuidade
+Bordas podem ser descritas como o limite ou a fronteira entre duas regiões onde ocorre uma variação brusca de intensidade em uma determinada direção. Uma linha pode ser vista como um segmento de borda em que a intensidade do fundo de cada lado da linha ou é muito superior ou muito inferior à intensidade dos *pixels* da linha. Linhas com o comprimento e largura iguais a um *pixel* são tratados como pontos isolados [@gonzalez2010, p. 456].
+Os métodos de detecção de bordas se baseiam no comportamento das derivadas, que podem detectar mudanças locais abruptas. Em uma função digital, as derivadas são aproximadas como termos de diferenças. Aproximações podem ser obtidas por meio de expansões em séries de Taylor, como demonstrado no livro “Processamento digital de imagens” [@gonzalez2010, p. 457], em que os resultados para a primeira e a segunda ordem no ponto $x$ de uma função $f(x)$ estão descritos respectivamente:
+
+$$\frac{\delta f}{\delta x} = f'(x) = f(x+1) - f(x)$$
+$$\frac{\delta^2 f}{\delta x^2} = f''(x) = f(x+1) + f(x-1) - 2f(x)$$
+
+Para avaliar o comportamento das derivadas na transição de intensidades apresentamos na Figura \@ref(fig:imagemDerivadas) um perfil de intensidade horizontal (linha de digitalização) de uma imagem, juntamente com os resultados das duas últimas equações para alguns pontos. A imagem contém vários objetos sólidos, uma linha e um ponto interno de ruído, e a linha de  digitalização está próxima ao centro, incluindo o ponto isolado. A Figura \@ref(fig:imagemDerivadas) (c) mostra uma simplificação do perfil e como as derivadas de primeira e segunda ordem se comportam quando encontram um ponto isolado, uma linha e as bordas dos objetos.
+
+Com base nos resultados das equações na Figura \@ref(fig:imagemDerivadas) se observa que atendem as propriedades das derivadas. No início e ao longo da rampa de intensidade, a derivada de primeira ordem é diferente de zero, enquanto a segunda derivada é diferente de zero apenas no início e no fim da rampa. Estes comportamentos indicam que as derivadas de primeira ordem produzem **bordas grossas, e as de segunda ordem produzem bordas mais finas** [@gonzalez2010, p.458].
+
+(ref:imagemDerivadas) (a) Imagem. (b) Perfil de intensidade horizontal no centro da imagem. (c) Perfil simplificado e resultados das derivadas. [@gonzalez2010, p. 457]
+
+```{r imagemDerivadas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemDerivadas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemDerivadas.png'))
+```
+
+No ponto de ruído, a resposta para a derivada de segunda ordem é mais forte do que para a primeira derivada. **Derivadas de segunda ordem acentuam as respostas em mudanças bruscas,** podendo melhorar pequenos detalhes [@gonzalez2010, p. 458]. Na linha com detalhes bem finos, a derivada de segunda ordem também tem maior magnitude. Nota-se nas bordas em rampa e nas bordas em degrau, que a segunda derivada tem sinais opostos (negativo para positivo ou vice-versa) conforme entra e sai da borda, o que caracteriza uma **“borda dupla”**. O sinal da segunda derivada também pode ser utilizado para determinar se uma transição em uma borda é de claro para escuro (segunda derivada negativa) ou de escuro para claro (segunda derivada positiva) [@gonzalez2010, p. 458].
+
+### Detecção de pontos isolados
+
+Considerando que as derivadas de segunda ordem têm uma resposta mais forte aos detalhes finos, o operador diferencial laplaciano:
+
+$$\nabla^2f(x,y) = \frac{\partial^2f}{\partial x^2} + \frac{\partial^2f}{\partial y^2}$$
+é ideal para a detecção de pontos [@gonzalez2010, p. 459].  As aproximações das derivadas de segunda ordem por termos de diferenças vistas podem ser estendidas para os dois termos do laplaciano, respectivamente:
+
+$$\frac{\partial^2f}{\partial x^2} = f(x+1, y) + f(x-1, y) -2f(x,y)$$
+$$\frac{\partial^2f}{\partial y^2} = f(x, y+1) + f(x, y-1) -2f(x,y)$$
+Ao se relacionar essas três últimas equações, obtém-se o laplaciano discreto:
+
+$$\nabla^2f(x,y) = f(x+1, y) + f(x-1, y) + f(x, y+1) + f(x, y-1) -4f(x,y)$$
+
+Essa equação pode ser implementada utilizando a máscara de filtragem identificada na Figura \@ref(fig:mascarasLaplacianas) (a). Para incluir as direções diagonais na definição do laplaciano digital se acrescenta mais dois termos a esta equação, um para cada direção diagonal. A Figura \@ref(fig:mascarasLaplacianas) (b) mostra a máscara de filtragem desta atualização que inclui as diagonais.
+
+(ref:mascarasLaplacianas) (a) Máscara referente a equação laplaciana discreta. (b) Máscara que inclui as diagonais. [@gonzalez2010, p. 106]
+
+```{r mascarasLaplacianas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:mascarasLaplacianas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/mascarasLaplacianas.png'))
+```
+
+A intensidade de um ponto isolado será muito diferente do seu entorno, portanto, ao aplicar a máscara, as únicas diferenças de intensidade relevantes serão as mais altas, maiores que um limite determinado ($T$) para serem consideradas pontos isolados [@gonzalez2010, p. 459]. Para detectar o ponto se utiliza a seguinte expressão:
+
+$$
+g(x,y) = 
+\begin{cases}
+  1,\ se\ R(x,y) \geq T
+  \\0,\ caso\ contrário
+\end{cases}
+$$
+em que $g$ é a imagem de saída, $T$ é um limiar não negativo, e $R$ é o operador laplaciano. O ponto isolado será detectado no local $(x, y)$ em que a máscara está centrada se o módulo da resposta nesse ponto exceder o limiar estabelecido. Os pontos detectados são rotulados como $1$ na imagem de saída, e todos os outros são rotulados $0$, o que produz uma imagem binária. 
+
+### Detecção de linhas
+Semelhante à detecção de pontos isolados, as derivadas de segunda ordem geram respostas mais fortes na detecção de linhas, e produzem linhas mais finas do que as derivadas de primeira ordem [@gonzalez2010, p. 460]. Ao utilizar a máscara laplaciana da Figura \ref(fig:mascarasLaplacianas) sobre a imagem de um componente em um circuito eletrônico (parte de uma conexão *wire-bond*), representado na Figura \ref(fig:imagemDeteccaoLinhas) (a), obtém-se como resultado a Figura \ref(fig:imagemDeteccaoLinhas) (b). Na seção ampliada da Figura \ref(fig:imagemDeteccaoLinhas) (b), as linhas mais claras identificam os pontos positivos, o cinza escuro são os valores negativos, e o cinza médio representa zero. O efeito de linha dupla ao se utilizar a segunda derivada é evidente na seção ampliada.
+
+(ref:imagemDeteccaoLinhas) (a) Imagem do circuito. (b) Resultado do filtro laplaciano. (c) Valor absoluto do filtro laplaciano. (d) Valores positivos do filtro laplaciano. [@gonzalez2010, p. 460]
+
+```{r imagemDeteccaoLinhas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemDeteccaoLinhas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemDeteccaoLinhas.png'))
+```
+
+Para destacar as linhas após a aplicação do filtro e remover os valores negativos pode ser utilizado o módulo dos valores calculados ou utilizar apenas os valores positivos do laplaciano [@gonzalez2010, p. 460], os resultados destas metodologias estão identificados na Figura \ref(fig:imagemDeteccaoLinhas) (c) e Figura \ref(fig:imagemDeteccaoLinhas) (d), respectivamente. Nota-se que as linhas geradas pela abordagem do módulo são mais grossas, pois a espessura é o dobro se comparada com a outra metodologia. Nas duas situações, as linhas mais largas que o tamanho do filtro laplaciano são separadas por um “vale” de zeros. A detecção de linhas é ideal quando a espessura é menor que o detector, ao contrário se recomenda tratar o elemento como uma região e utilizar outros métodos [@gonzalez2010, p. 460].
+
+O filtro laplaciano na Figura \@ref(fig:mascarasLaplacianas) é isotrópico, assim a sua resposta independe da direção [@gonzalez2010, p. 460]. No caso das linhas pode ser interessante a detecção em apenas uma determinada direção, utilizando, por exemplo, uma das máscaras apresentadas na Figura \@ref(fig:mascarasDeteccaoLinhas). Para a primeira máscara da Figura \@ref(fig:mascarasDeteccaoLinhas), os sinais mais fortes ocorrem em linhas horizontais da imagem que passam pela linha do meio da máscara. O segundo filtro detecta melhor as linhas com $45°$ de inclinação; o terceiro filtro para linhas verticais e o quarto, para linhas com $-45º$ de inclinação. Vale destacar que estamos utilizando a convenção de que os eixos da imagem têm sua origem no canto superior esquerdo, com o eixo $x$ positivo apontando para baixo, e o eixo $y$ positivo se estendendo à direita. Os ângulos das linhas são medidos em relação ao eixo $x$ positivo. 
+
+(ref:mascarasDeteccaoLinhas) Máscaras para detecção de linhas em uma determinada direção. [@gonzalez2010, p. 461]
+
+```{r mascarasDeteccaoLinhas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:mascarasDeteccaoLinhas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/mascarasDeteccaoLinhas.png'))
+```
+
+Quando o objetivo é detectar todas as linhas da imagem em uma direção específica se aplica a máscara associada a essa direção e se define um limiar ($T$) para selecionar os sinais mais fortes. Para os quatro últimos filtros apresentados, as linhas de $1$ *pixel* de espessura apresentam os maiores resultados [@gonzalez2010, p. 462].
+
+
 ## Detecção de Bordas
-<!--### Modelos de Bordas
+### Modelos de Bordas
+Na Figura \@ref(fig:modelosBordas) estão os principais modelos de borda, que são classificados de acordo com os perfis de intensidade. A primeira borda,  borda em degrau, apresenta uma transição entre dois níveis de intensidade e são consideradas ideais com uma distância de $1$ *pixel*. Na prática, as bordas nas imagens digitais não apresentam uma transição tão bem definida, assim modelos mais apropriados consideram um perfil de rampa como na Figura \@ref(fig:modelosBordas) (b) [@gonzalez2010, p. 462]. Quanto mais indefinida é a transição da borda, menor é a inclinação da rampa. Em vez de uma borda com $1$ *pixel* de espessura, todos os pontos na rampa fazem parte da borda.
+Figura - Modelos de bordas com seus respectivos perfis de intensidade.
+
+(ref:modelosBordas) (a) Borda degrau. (b) Borda rampa. (c) Borda telhado. [@gonzalez2010, p. 462]
+
+```{r modelosBordas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:modelosBordas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/modelosBordas.png'))
+```
+
+No terceiro modelo de borda, Figura \@ref(fig:modelosBordas) (c), em forma de telhado ou *roof edge*, a base (largura) de uma borda é definida pela espessura e a nitidez da linha. Quando a base é igual $1$ *pixel* de espessura, uma borda em forma de telhado é definida como uma linha [@gonzalez2010, p. 462]. 
+
+As imagens da Figura \@ref(fig:derivadasImagensRuidosas) não apresentam ruídos, entretanto os modelos de detecção devem considerar que as bordas estejam desfocadas e com ruídos.  Na primeira coluna da Figura estão três bordas de perfil rampa com diferentes níveis de ruídos, e abaixo de cada imagem está o perfil horizontal de intensidade que passa pelo centro da imagem. A primeira imagem no canto esquerdo não apresenta ruído, e as outras duas imagens da primeira coluna foram alteradas com ruído gaussiano aditivo com média zero e desvio padrão de $0.1$ e $1.0$ níveis de intensidade, respectivamente.
+
+(ref:derivadasImagensRuidosas) Primeira coluna: imagens e perfis de intensidade de uma borda em declive corrompida pelo ruído gaussiano aleatório de desvio padrão $0.0$, $0.1$ e $1.0$ níveis de intensidade, respectivamente. Segunda coluna: imagens da primeira derivada. Terceira coluna: imagens da segunda derivada. [@gonzalez2010, p. 465]
+
+```{r derivadasImagensRuidosas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:derivadasImagensRuidosas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/derivadasImagensRuidosas.png'))
+```
+
+Na segunda e terceira coluna estão identificados, respectivamente, a primeira e a segunda derivada dos perfis de intensidade da primeira coluna. A primeira derivada é utilizada para detectar bordas, pois identifica pontos de transição abrupta de intensidade na imagem.  Para o resultado da primeira derivada na primeira linha, os valores na rampa são positivos e, nas regiões de intensidade constante é igual a zero. As duas faixas pretas na imagem da parte superior da coluna central são os resultados iguais a zero da primeira derivada, e os valores constantes estão identificados como cinza claro.
+
+Como as bordas são uma transição de uma região escura para uma região branca, a segunda derivada na terceira coluna é positiva no início da rampa e negativa no final. A linha que passa por estes dois resultados da derivada se intercepta com o eixo de intensidade zero, gerando o ponto de cruzamento por zero que é utilizado para localizar o centro de bordas espessas [@gonzalez2010, p. 464]. Nas regiões de intensidade constante as derivadas de segunda ordem também são zero, e se apresentam na cor cinza claro nas imagens da terceira coluna. As linhas finas verticais brancas e pretas são os resultados positivos e negativos da segunda derivada.
+
+Mesmo não sendo perceptível os ruídos nas imagens da segunda e terceira linha, eles apresentaram um impacto significativo nas derivadas, principalmente na derivada de segunda ordem que é mais sensível aos ruídos. Quanto maior o ruído mais difícil de se associar com os perfis das derivadas, dificultando a detecção de bordas. Este comportamento pode ser tratado com a suavização da imagem em uma etapa anterior a segmentação [@gonzalez2010, p. 464].
+
 ### Método do gradiente ( Roberts, Prewitt, Sobel)
-### Método de Marr-Hildreth-->
+Na detecção de bordas, as derivadas de primeira ordem são calculadas utilizando a magnitude do gradiente, que é um vetor cuja a direção indica os pontos de maior variação de intensidade [@pedrini2008, p. 155]. Na figura indica que a direção do gradiente sempre será perpendicular à direção tangente da borda. Para uma função $f(x, y)$, o gradiente de $f$ nas coordenadas $(x, y)$ na forma matricial é expresso como:
+
+$$\nabla f 
+= \begin{bmatrix}
+G_x
+\\ G_y
+\end{bmatrix}
+= \begin{bmatrix}
+\frac{\partial f}{\partial x}
+\\ \frac{\partial f}{\partial y}
+\end{bmatrix}$$
+
+(ref:vetorGradiente) Vetor gradiente $\nabla f$ em uma borda. [@pedrini2008, p. 155]
+
+```{r vetorGradiente, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:vetorGradiente)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/vetorGradiente.png'))
+```
+
+O módulo ou magnitude (tamanho) do vetor $\nabla f$ é dado como $M(x,y)$:
+$$M(x,y) = \sqrt{G^2_x + G^2_y}$$
+
+O módulo do gradiente é a maior taxa de variação de  $f(x,y)$  na direção do vetor gradiente. Devido ao custo computacional, a magnitude do gradiente é aproximada pelo uso dos valores absolutos [@pedrini2008, p. 155]:
+$$M(x,y) \simeq |G_x| + |G_y|$$
+A direção do vetor gradiente é dada pelo ângulo:
+$$
+\alpha(x,y) = 
+tg^{-1}
+\begin{bmatrix}
+\frac{G_y}{G_x}
+\end{bmatrix}
+$$
+
+medido em relação ao eixo $x$. Da mesma forma que a magnitude $M(x, y)$, ou imagem gradiente, o ângulo $\alpha(x, y)$ também é uma imagem do mesmo tamanho que a original formado pela divisão da imagem $G_y$ por $G_x$ [@gonzalez2010, p. 466].
+
+Para calcular as derivadas parciais $\partial f/ \partial x$ e $\partial f/ \partial y$ no caso de quantidades digitais  é necessário utilizar aproximações discretas e, em seguida, determinar as máscaras de filtragem correspondentes.  Uma forma de aproximação é considerar a diferença entre os elementos da vizinhança para calcular a magnitude do gradiente [@pedrini2008, p. 157]. Ao se utilizar as diferenças cruzadas como na seguinte equação:
+
+$$M(x,y) \simeq |f(x,y) - f(x+1, y+1)| + |f(x,y+1) - f(x+1, y)|$$
+é o mesmo que aplicar os filtros de tamanho 2x2 da Figura \@ref(fig:operadorRoberts) e somar os resultados absolutos.
+
+(ref:operadorRoberts) Operador de Roberts. [@pedrini2008, p. 157]
+
+```{r operadorRoberts, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:operadorRoberts)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/operadorRoberts.png'))
+```
+
+Estes operadores, conhecidos como operadores de Roberts, foram uma das primeiras tentativas de usar máscaras 2-D, entretanto não são tão úteis quanto máscaras simétricas ao redor do ponto central, em que as menores são de tamanho 3×3 [@gonzalez2010, p. 467]. As aproximações mais simples para as derivadas parciais usando máscaras de tamanho 3×3 são dadas por:
+
+$$ 
+\begin{split}
+M(x,y) &\simeq
+|[f(x+1,y-1) + f(x+1,y) + f(x+1,y+1)]-\\
+ &\ \ \ \ \ [f(x-1,y-1) + f(x-1,y) + f(x-1,y+1)]+\\
+ &\ \ \ \ \ [f(x-1,y+1) + f(x,y+1) + f(x+1,y+1)]-\\
+ &\ \ \ \ \ [f(x-1,y-1) + f(x,y-1) + f(x+1,y-1)]|
+\end{split}
+$$
+
+(ref:operadorPrewitt) Operador de Prewitt. [@pedrini2008, p. 158]
+
+```{r operadorPrewitt, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:operadorPrewitt)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/operadorPrewitt.png'))
+```
+
+A equação pode ser implementada aplicando as máscaras da Figura \@ref(fig:operadorSobel), que recebem o nome de operadores de Prewitt. Uma variação deste último método utiliza o valor $2$ como peso no centro do coeficiente [@pedrini2008, p. 158]:
+
+$$ 
+\begin{split}
+M(x,y) &\simeq
+|[f(x+1,y-1) + 2f(x+1,y) + 2f(x+1,y+1)]-\\
+ &\ \ \ \ \ [f(x-1,y-1) + 2f(x-1,y) + f(x-1,y+1)]+\\
+ &\ \ \ \ \ [f(x-1,y+1) + 2f(x,y+1) + f(x+1,y+1)]-\\
+ &\ \ \ \ \ [f(x-1,y-1) + 2f(x,y-1) + f(x+1,y-1)]|
+\end{split}
+$$
+
+(ref:operadorSobel) Operador de Sobel. [@pedrini2008, p. 158]
+
+```{r operadorSobel, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:operadorSobel)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/operadorSobel.png'))
+```
+
+O resultado das equações pode ser obtido com a soma dos valores absolutos dos resultados das máscaras na Figura \@ref(fig:operadorSobel), chamadas de operadores de Sobel. Mesmo que as máscaras de Prewitt sejam mais simples de implementar do que as máscaras de Sobel, as de Sobel são mais utilizadas por melhor suavização, diminuindo os ruídos [@gonzalez2010, p. 468].
+
+Ao calcular a magnitude como uma aproximação da soma dos valores absolutos dos componentes de gradiente $G_x$ e $G_y$ (Equação) pode se perder a propriedade isotrópica dos filtros. No caso das máscaras de Sobel e de Prewitt este problema não ocorre, pois dão resultados isotrópicos apenas para bordas verticais e horizontais, e que são independentes da equação ou equação [@gonzalez2010, p. 468].
+
+### Método de Marr-Hildreth
+Nos métodos de detecção de bordas utilizando a derivada de segunda ordem se observa maior sensibilidade aos ruídos, assim se recomenda um pré-processamento de suavização. A técnica de detecção proposta por Marr e Hildreth (1980), por exemplo, combina a filtragem Gaussiana com o operador Laplaciano [@pedrini2008, p. 163]. Após a suavização da imagem com o filtro gaussiano, as bordas são identificadas pelos pontos de cruzamento por zero da segunda derivada.
+
+Um aspecto que torna a técnica interessante para imagens de diferentes escalas é que considera as características da borda e dos ruídos, empregando-se operadores de tamanho mais adequado para cada imagem [@gonzalez2010, p. 470]. Operadores de maior tamanho são recomendados para detectar bordas borradas, enquanto operadores menores detectam melhor detalhes finos com foco nítido. Como o laplaciano é isotrópico, respondendo de forma igual às variações nas diferentes direções, evita-se a utilização de várias máscaras [@gonzalez2010, p. 472]. 
+
+O operador proposto por Marr e Hildreth é obtido pela convolução:
+$$g(x,y) = \nabla^2[G(x,y)*f(x,y)]$$
+em que $f(x,y)$ é a imagem, $\nabla^2$ é o operador laplaciano, ($\partial^2 f / \partial x^2 + \partial^2 f / \partial y^2$), e $G$ é a função gaussiana 2-D:
+$$G(x,y) = e^{-\frac{x^2 + y^b}{2\sigma^2}}$$
+com desvio padrão $\sigma$. Em razão da linearidade das operações, a ordem da diferenciação e da convolução podem ser alteradas [@pedrini2008, p. 163], assim após a diferenciação da expressão gaussiana se obtém  o Laplaciano da Gaussiana (LoG):
+$$\nabla^2G(x,y) = 
+\begin{bmatrix}
+\frac{x^2 + y^2 - \sigma^2}{\sigma^4} e^{-\frac{x^2 + y^b}{2\sigma^2}}
+\end{bmatrix}$$
+
+As máscaras podem ser geradas pela amostragem  da equação e ajustando os coeficientes para que a soma seja zero. Um exemplo de máscara 5x5 que atende ao Laplaciano da Gaussiana está na Figura \@ref(fig:laplacianoGaussiana) (d). O comportamento dessa máscara se aproxima do efeito da função LoG na Figura \@ref(fig:laplacianoGaussiana) (a), em que o termo positivo e central é rodeado por uma região negativa cujo os valores aumentam ao se distanciar da origem, e uma região externa com zeros [@gonzalez2010, p. 472].
+
+(ref:laplacianoGaussiana) (a) Gráfico 3-D do negativo de LoG. (b) Imagem do negativo de LoG. (c) Seção transversal de (a). (d) Aproximação de máscara 5x5 para LoG. [@gonzalez2010, p. 471]
+
+```{r laplacianoGaussiana, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:laplacianoGaussiana)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/laplacianoGaussiana.png'))
+```
+
+Devido ao formato na Figura \@ref(fig:laplacianoGaussiana) a função LoG é conhecida como  operador de chapéu mexicano. Na Figura \@ref(fig:laplacianoGaussiana) o gráfico 3-D, a imagem e a seção transversal se referem ao negativo da função LoG. Na seção transversal (Figura \@ref(fig:laplacianoGaussiana) (c)), o cruzamento por zero do LoG ocorre em $x^2 + y^2 = 2 \sigma^2$ , definindo um círculo centrado na origem e de raio $2\sigma$.
+
+Na prática, o filtro LoG é gerado pelas seguintes etapas [@gonzalez2010, p. 472]:
+
+1. Define-se um filtro $n$×$n$ gaussiano a partir de amostragem com a equação.  Lembrando da sugestão que para tamanho do filtro gaussiano $n$ seja o menor inteiro ímpar maior ou igual a $6\sigma$.
+
+2. Após suavização da imagem com o filtro gaussiano, o resultado é processado pelo laplaciano, por exemplo, com uma máscara 3×3 na Figura.
+
+3. Na imagem resultante da etapa anterior são encontrados os pontos de cruzamento por zero. Estes pontos podem ser identificados em um *pixel*, $p$, com base na sua vizinhança de 3x3. No caso de $p$ ser um cruzamento por zero, pelo menos dois de seus vizinhos opostos devem apresentar sinais diferentes. Neste caso são realizados quatro testes:  esquerda/direita, acima/abaixo e com as duas diagonais. Quando se utiliza um limiar para identificar o cruzamento por zero, tanto os sinais dos vizinhos opostos devem ser diferentes quanto o valor absoluto da diferença numérica deve ultrapassar o limiar para que o ponto $p$ seja um cruzamento por zero.
+
+O filtro LoG também pode ser aproximado com a convolução de uma máscara gerada a partir da diferença de duas funções gaussianas (DoG) [@gonzalez2010, p. 473]:
+$$DoG(x,y) = \frac{1}{2\pi \sigma^2_1}  e^  {-\frac{x^2+y^2}{2\sigma^2_1}}
+-
+\frac{1}{2\pi \sigma^2_2}  e^  {-\frac{x^2+y^2}{2\sigma^2_2}}$$
+
+com $\sigma_1 > \sigma_2$. Marr e Hildreth mostraram que para $\sigma_2/\sigma_1 = 1.6$ o operador tem maior aproximação com a função LoG [@gonzalez2010, p. 473]. Para que LoG e DoG tenham os mesmos cruzamentos por zero se sugere que se mantenha a seguinte relação para o valor de $\sigma$ em LoG:
+$$\sigma^2 = \frac{\sigma^2_1\sigma^2_2}{\sigma^2_1 - \sigma^2_2}
+\ln 
+\begin{bmatrix}
+\frac{\sigma^2_1}{\sigma^2_2}
+\end{bmatrix}$$
+
+Para estabelecer uma mesma escala de amplitude no resultado dos dois operadores, ocorre um ajuste para o mesmo valor na origem em ambas as funções [@gonzalez2010, p. 474].  
+
 ### Método de Canny
 O algoritmo de Canny recebeu esse nome em alusão a John Canny, que o propôs em seu artigo, “A computational Approach to Edge Detection"[@canny1986computational], publicado em 1986. Sua formulação se baseava em três pontos principais:
 
