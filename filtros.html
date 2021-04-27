@@ -187,7 +187,7 @@ Figura 5.1: Imagem de ônibus com filtro de aguçamento e de suavização <span 
 <p>Convolução é uma operação muito utilizada no PDI, a qual tem suas origens na matemática, onde ela é definida como uma operação realizada entre duas funções e que resulta numa terceira, ou, em outras palavras, ela recebe dois sinais de entrada e gera um sinal de saída. No caso do PDI, podemos imaginar os sinais de entrada como sendo a nossa imagem e o filtro (<em>kernel</em>), e a nossa saída como sendo a imagem filtrada.</p>
 <p>Quando dizemos <em>kernel</em>, estamos nos referindo a uma função ou, no caso do processamento de imagens, a uma matriz, que é aplicada em nossa imagem e produz como saída o objeto de entrada com modificações. Na tabela <a href="filtros.html#tab:kernelExample">5.1</a>, temos exemplos de alguns tipos de <em>kernels</em> que podem ser utilizados na convolução e seus respectivos resultados. Além dos efeitos mais comuns, como o de desfoque (<em>blur</em>), podemos utilizar <em>kernels</em> que extraem informações mais complexas das imagens, como os detectores de borda, que serão discutidos mais a fundo nos próximos tópicos.</p>
 <table>
-<caption><span id="tab:kernelExample">Tabela 5.1: </span> Exemplo de <em>kernels</em> (adaptada de <span class="citation">[<a href="#ref-tab:kernelExample" role="doc-biblioref">13</a>]</span>).</caption>
+<caption><span id="tab:kernelExample">Tabela 5.1: </span> Exemplo de <em>kernels</em> (adaptada de <span class="citation">[<a href="#ref-tab:kernelExample" role="doc-biblioref">14</a>]</span>).</caption>
 <colgroup>
 <col width="34%" />
 <col width="31%" />
@@ -242,9 +242,9 @@ Figura 5.1: Imagem de ônibus com filtro de aguçamento e de suavização <span 
 <p>Agora, veremos operação de convolução mais detalhadamente. Essa operação geralmente é representada por <span class="math inline">\(*\)</span> e pode ser descrita, em poucas palavras, como uma soma de produtos que é realizada com um deslizamento sobre a função de entrada. A figura <a href="filtros.html#fig:convolutionGif">5.2</a> representa de maneira visual a convolução em um cenário de uma dimensão, através do sinal de entrada (<em>signal</em>) e o <em>kernel</em>. Podemos ainda perceber que o <em>kernel</em> está rotacionado em 180º, isso se deve a definição de convolução.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:convolutionGif"></span>
-<img src="imagens/05-filtros/convolutionGif.png" alt="Convolução em uma dimensão [14]" width="55%" />
+<img src="imagens/05-filtros/convolutionGif.png" alt="Convolução em uma dimensão [15]" width="55%" />
 <p class="caption">
-Figura 5.2: Convolução em uma dimensão <span class="citation">[<a href="#ref-img:convolutionGif" role="doc-biblioref">14</a>]</span>
+Figura 5.2: Convolução em uma dimensão <span class="citation">[<a href="#ref-img:convolutionGif" role="doc-biblioref">15</a>]</span>
 </p>
 </div>
 <p>Algo interessante que podemos observar na imagem <a href="filtros.html#fig:convolutionGif">5.2</a> é que nosso sinal de entrada é quase totalmente 0 e contém um único ponto 1, isso faz com que nosso resultado seja uma cópia do <em>kernel</em>. A partir disso, conseguimos imaginar o por que temos como resultado a própria imagem quando aplicado um <em>kernel</em> identidade, como mostrado na tabela <a href="filtros.html#tab:kernelExample">5.1</a>.</p>
@@ -375,7 +375,7 @@ Como dito no início desta seção, geralmente a convolução é identificada po
 \]</span></p>
 <p><img src="imagens/05-filtros/conv_final.png" width="55%" style="display: block; margin: auto;" />
 Fonte: Autoria própria inspirado em <a href="http://www.songho.ca/dsp/convolution/convolution2d_example.html" class="uri">http://www.songho.ca/dsp/convolution/convolution2d_example.html</a> e <a href="https://arxiv.org/abs/1603.07285" class="uri">https://arxiv.org/abs/1603.07285</a></p>
-<p>O exemplo utiliza um <span class="math inline">\(kernel\)</span> assimétrico, então, como dito anteriormente, os resultados da correlação e convolução são diferentes. Deixaremos isso como um exercício ao leitor, realizar a convolução para provar a diferença. O caso anterior tem também uma característica que é o complemento das bordas com 0’s para que o <span class="math inline">\(kernel\)</span> pudesse ser aplicado sobre toda a imagem. Essa é uma das maneiras de lidar com o problema das bordas, sendo que temos essa e mais algumas possibilidades <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 125]</span> <span class="citation">[<a href="#ref-chityala2020" role="doc-biblioref">15</a>, p. 60]</span>:</p>
+<p>O exemplo utiliza um <span class="math inline">\(kernel\)</span> assimétrico, então, como dito anteriormente, os resultados da correlação e convolução são diferentes. Deixaremos isso como um exercício ao leitor, realizar a convolução para provar a diferença. O caso anterior tem também uma característica que é o complemento das bordas com 0’s para que o <span class="math inline">\(kernel\)</span> pudesse ser aplicado sobre toda a imagem. Essa é uma das maneiras de lidar com o problema das bordas, sendo que temos essa e mais algumas possibilidades <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 125]</span> <span class="citation">[<a href="#ref-chityala2020" role="doc-biblioref">16</a>, p. 60]</span>:</p>
 <ul>
 <li><p>Preenchimento com constante (<em>constant padding</em>):
 Método onde as laterais são preenchidas com um valor constante, comumente 0.</p></li>
@@ -502,13 +502,13 @@ Figura 5.10: Imagem com diferentes tamanhos de filtro gaussiano. (Adaptado:<span
 <p>[8] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
 </div>
 <div id="ref-tab:kernelExample">
-<p>[13] W. Commons, “Kernel (image processing)”. 2020, [Online]. Disponível em: <a href="https://en.wikipedia.org/wiki/Kernel_(image_processing)">https://en.wikipedia.org/wiki/Kernel_(image_processing)</a>.</p>
+<p>[14] W. Commons, “Kernel (image processing)”. 2020, [Online]. Disponível em: <a href="https://en.wikipedia.org/wiki/Kernel_(image_processing)">https://en.wikipedia.org/wiki/Kernel_(image_processing)</a>.</p>
 </div>
 <div id="ref-img:convolutionGif">
-<p>[14] T. e2eML Course Catalog, “Convolution in one dimension for neural networks”. 2020, [Online]. Disponível em: <a href="https://e2eml.school/convolution_one_d.html">https://e2eml.school/convolution_one_d.html</a>.</p>
+<p>[15] T. e2eML Course Catalog, “Convolution in one dimension for neural networks”. 2020, [Online]. Disponível em: <a href="https://e2eml.school/convolution_one_d.html">https://e2eml.school/convolution_one_d.html</a>.</p>
 </div>
 <div id="ref-chityala2020">
-<p>[15] R. CHITYALA e S. PUDIPEDDI, <em>Image processing and acquisition using Python</em>. CRC Press, 2020.</p>
+<p>[16] R. CHITYALA e S. PUDIPEDDI, <em>Image processing and acquisition using Python</em>. CRC Press, 2020.</p>
 </div>
 </div>
 <div class="footnotes">
