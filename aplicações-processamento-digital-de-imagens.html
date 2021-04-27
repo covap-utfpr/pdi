@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>1.2 Aplicações Processamento Digital de Imagens | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="1.2 Aplicações Processamento Digital de Imagens | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="1.2 Aplicações Processamento Digital de Imagens | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="1.2 Aplicações Processamento Digital de Imagens | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="relação-de-processamento-digital-de-imagem-visão-computacional-e-computação-gráfica.html"/>
+<link rel="next" href="etapas-do-processamento-e-análise-de-imagens.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,55 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="aplicações-processamento-digital-de-imagens" class="section level2">
+<h2><span class="header-section-number">1.2</span> Aplicações Processamento Digital de Imagens</h2>
+<p>As primeiras tarefas de processamento de imagens tiveram aplicações significativas por volta da década de 1960, quando se desenvolveram computadores com potencial suficiente para realizá-las. O programa espacial americano também foi um forte impulso para o contínuo desenvolvimento e aprimoramento das técnicas de processamento digital de imagem (PDI), já que imagens, como as obtidas da Lua através de sondas e transmitidas à terra, continham distorções provenientes das câmeras utilizadas. Era necessário então, a utilização de métodos para corrigir essas alterações <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 4]</span>.</p>
+<p>Outra área que também faz uso extensivo do processamento de imagens e impulsionou seu desenvolvimento é a área médica. Nessa área, o uso de imagens auxiliou no diagnóstico de doenças através de exames visuais como os de raio-x <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 4]</span>.</p>
+<p>A utilização do processamento de imagens para melhorar informações visuais, ajudando na interpretação humana, expandiu-se para diferentes setores. No sensoriamento remoto, o pré-processamento contribui para uma melhor análise de imagens aéreas e de satélite, aumentando a compreensão da superfície terrestre. Na arqueologia e nas artes, métodos de processamento de imagens podem restaurar fotografias com registros únicos de objetos raros, pinturas, documentos antigos e conteúdos em vídeos <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 2]</span>. Na física e em áreas da biologia, técnicas computacionais realçam imagens de experimentos em áreas como plasmas de alta energia e microscopia eletrônica <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 5]</span>.</p>
+<p>Com o aumento da automatização de tarefas, o processamento de imagens tem se destacado na aquisição de dados de imagens visando a percepção automática por máquinas <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. Técnicas de identificação de padrões podem ser aplicados no reconhecimento automático de caracteres, de impressões digitais, de faces, e de placas de veículos, contribuindo com setores de segurança. Na automação industrial tem sido utilizado no sistema de visão computacional para inspeção e montagem de produtos. Na área militar, pode ser aplicado na identificação e rastreamento de alvos em imagens de satélites, e na navegação de veículos autônomos. Nas áreas de medicina e biologia, rastreamentos automáticos em imagens radiográficas e amostras de sangue têm contribuído para os exames e testes <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. O processamento computacional de imagens aéreas e de satélites também é utilizado na previsão do tempo e em avaliações ambientais <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 5]</span>.</p>
+<p>Este variado campo de aplicações pode ser justificado pela capacidade dos aparelhos de processamento de imagens trabalharem com imagens de diversas fontes. Diferentemente dos seres humanos, que são limitados à banda visual do espectro eletromagnético (EM), o processamento computacional cobre todo o EM, variando de ondas gama a ondas de rádio <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 1]</span>. No processamento digital ainda é possível trabalhar com imagens geradas por fontes que os humanos não estão acostumados a associar com imagens. Essas fontes incluem acústica, ultrassom, microscopia eletrônica e imagens geradas por computador <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 13]</span>.</p>
+<p>Uma das formas mais fáceis de desenvolver uma compreensão básica da extensão das aplicações do processamento de imagens é categorizar as imagens de acordo com sua fonte. Na Figura <a href="aplicações-processamento-digital-de-imagens.html#fig:espectro">1.2</a> temos uma representação do EM, iremos a seguir explorar cada uma dessa faixas, apresentando algumas das áreas onde podem ser utilizados:</p>
+
+<div class="figure" style="text-align: center"><span id="fig:espectro"></span>
+<img src="imagens/01-introducao/espectro.png" alt="Espectro eletromagnético [4]." width="90%" />
+<p class="caption">
+Figura 1.2: Espectro eletromagnético <span class="citation">[<a href="#ref-img:espectro" role="doc-biblioref">4</a>]</span>.
+</p>
+</div>
+<ul>
+<li><p><strong>Imagens formadas por raios gama</strong></p>
+<p>As imagens formadas a partir de raios gama têm diferentes utilidades, sendo muito utilizadas na medicina e astronomia <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 6]</span>. Na medicina, existem procedimentos onde se injetam isótopos radioativos no paciente e por meio dos detectores de raio gama é formada uma imagem, como exemplo, escaneamento ósseo e tomografia por emissão de pósitrons (PET-scan). Na astronomia, ela pode ser utilizada para se conseguir ver detalhes astronômicos que estão presentes na faixa eletromagnética dos raios gama.</p></li>
+<li><p><strong>Imagens formadas por raios X</strong></p>
+<p>Imagens formadas a partir de raio X têm uma ampla gama de aplicações, desde seu uso na medicina até seu uso no meio industrial <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 6]</span>. Na indústria, pode ser utilizado para se encontrar defeitos de fabricação em produtos, e na medicina, vêm se utilizando muito o processamento de imagem e a visão computacional para ajudar no diagnóstico de doenças, como por exemplo, artérias obstruídas, fraturas e tumores.</p></li>
+<li><p><strong>Imagens na banda ultravioleta</strong></p>
+<p>O espectro ultravioleta também tem inúmeras aplicações, como a inspeção industrial, microscopia, imagens biológicas e observações astronômicas <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 8]</span>.</p></li>
+<li><p><strong>Imagens na banda visível e infravermelho</strong></p>
+<p>Essas duas bandas possuem uma gama extremamente ampla de aplicações, sendo utilizadas juntas ou separadas. Na banda visível, existem diversas aplicações, como em processos industriais, detecção de faces, detecção de placas de carros, etc <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 11]</span>. A banda infravermelho também possui inúmeras aplicações, sendo uma delas imagens a partir de satélites, onde o infravermelho nos permite ver inúmeros detalhes que somente com a banda visível não seria possível <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 9]</span>.</p></li>
+<li><p><strong>Imagens na banda de micro-ondas e rádio</strong></p>
+<p>Na banda de micro-ondas o melhor exemplo que temos é o radar. Essa banda tem uma peculiaridade de ser extremamente penetrante, podendo gerar imagens através de nuvens, vegetação, etc <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 12]</span>. Já a banda de rádio é muito utilizada na medicina, como exemplo na ressonância magnética e na astronomia <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 12]</span>.</p></li>
+</ul>
+<p>Como podemos observar, existem inúmeras maneiras de se conseguir imagens além da clássica imagem no espectro visível, isso nos dá a possibilidade de utilizar o PDI em inúmeras áreas e problemas. Na Figura <a href="aplicações-processamento-digital-de-imagens.html#fig:aplicacoes">1.3</a> temos uma nebulosa observada a partir de diferentes bandas dos EM, sendo possível observar detalhes que passariam despercebidos se usássemos somente alguma delas.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:aplicacoes"></span>
+<img src="imagens/01-introducao/aplicacoes.png" alt="Nebulosa CRAB em diferentes frequências [5]." width="90%" />
+<p class="caption">
+Figura 1.3: Nebulosa CRAB em diferentes frequências <span class="citation">[<a href="#ref-img:nebulosa" role="doc-biblioref">5</a>]</span>.
+</p>
+</div>
 </div>
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
 <div id="ref-gonzalez2010">
 <p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+</div>
+<div id="ref-pedrini2008">
+<p>[3] H. Pedrini e W. Robson Schwartz, <em>Análise de imagens digitais: princípios, algoritmos e aplicações</em>, 3º ed. São Paulo: Thomson Learning Edicoes Ltda, 2007.</p>
+</div>
+<div id="ref-img:espectro">
+<p>[4] B. E. da cor, “Imagem de um espectro eletromagnético”. 2014, [Online]. Disponível em: <a href="https://estudodacor.files.wordpress.com/2014/08/espectro-eletromagnetico1.jpg">https://estudodacor.files.wordpress.com/2014/08/espectro-eletromagnetico1.jpg</a>.</p>
+</div>
+<div id="ref-img:nebulosa">
+<p>[5] W. Commons, “Crab nebula in multiple wavelengths”. [Online]. Disponível em: <a href="%20https://commons.wikimedia.org/wiki/File:Crab_Nebula_in_Multiple_Wavelengths.png">https://commons.wikimedia.org/wiki/File:Crab_Nebula_in_Multiple_Wavelengths.png</a>.</p>
 </div>
 </div>
             </section>
@@ -196,8 +237,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="relação-de-processamento-digital-de-imagem-visão-computacional-e-computação-gráfica.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="etapas-do-processamento-e-análise-de-imagens.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +270,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/01-introducao.Rmd",
 "text": "Editar "
 },
 "history": {

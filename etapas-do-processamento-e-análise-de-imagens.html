@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>1.3 Etapas do Processamento e Análise de Imagens | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="1.3 Etapas do Processamento e Análise de Imagens | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="1.3 Etapas do Processamento e Análise de Imagens | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="1.3 Etapas do Processamento e Análise de Imagens | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="aplicações-processamento-digital-de-imagens.html"/>
+<link rel="next" href="formação-da-imagem.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,73 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="etapas-do-processamento-e-análise-de-imagens" class="section level2">
+<h2><span class="header-section-number">1.3</span> Etapas do Processamento e Análise de Imagens</h2>
+<p>Um dos objetivos deste material é servir de referência para o estudo inicial de Visão computacional, assim, para compreender as relações entre as etapas de processamento e análise de imagens apresentamos na Figura <a href="etapas-do-processamento-e-análise-de-imagens.html#fig:etapasPDI">1.4</a> uma sequência dos principais passos utilizados em uma aplicação de PDI. Neste material nos deteremos nos conteúdos de processamento, desde a aquisição de imagens, pré-processamento até segmentação.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:etapasPDI"></span>
+<img src="imagens/01-introducao/etapasPDI.png" alt="Etapas de aplicação de PDI [3, p. 4]." width="40%" />
+<p class="caption">
+Figura 1.4: Etapas de aplicação de PDI <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 4]</span>.
+</p>
 </div>
+<p>Vale ressaltar que essas etapas não são fixas e podem ser modificadas, sendo que uma base de conhecimentos é importante para orientar em uma aplicação específica <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 4]</span>.</p>
+<ul>
+<li><p><strong>Aquisição da imagem</strong></p>
+<p>Captura a imagem por meio de um dispositivo ou sensor e a converte em uma imagem digitalizada <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. Podemos citar como exemplo as câmeras fotográficas, tomógrafos médicos, satélites e scanners. Na Figura <a href="etapas-do-processamento-e-análise-de-imagens.html#fig:aquisicao">1.5</a>, temos um exemplo de aquisição de imagens do satélite Landsat, neste caso estão identificadas as bandas vermelha, verde e azul visíveis e o infravermelho próximo. Os detalhes sobre a aquisição de imagens serão discutidos no tópico Formação de Imagem.</p></li>
+</ul>
+
+<div class="figure" style="text-align: center"><span id="fig:aquisicao"></span>
+<img src="imagens/01-introducao/aquisicao.png" alt="Aquisição de imagens de satélite.(a) a (d) mostram quatro imagens espectrais de satélite da cidade de Washington, D.C., banda vermelha, verde e azul visíveis e o infravermelho próximo, respectivamente. (e) Imagem colorida como combinação RGB de (a), (b) e (c). (f) Imagem colorida obtida pela combinação de (b), (c) e (d)[2, p. 279]." width="40%" />
+<p class="caption">
+Figura 1.5: Aquisição de imagens de satélite.(a) a (d) mostram quatro imagens espectrais de satélite da cidade de Washington, D.C., banda vermelha, verde e azul visíveis e o infravermelho próximo, respectivamente. (e) Imagem colorida como combinação RGB de (a), (b) e (c). (f) Imagem colorida obtida pela combinação de (b), (c) e (d)<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 279]</span>.
+</p>
+</div>
+<ul>
+<li><p><strong>Pré processamento</strong></p>
+<p>Essa etapa busca realizar mudanças e ajustes na imagem visando melhorar seu uso nas etapas futuras <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. Como exemplo temos casos onde não precisamos das cores de uma imagem, podendo então realizar a conversão para grayscale(tons de cinza), ou precisamos gerar imagens coloridas como na Figura <a href="etapas-do-processamento-e-análise-de-imagens.html#fig:aquisicao">1.5</a> em que são combinadas as bandas espectrais. Além disso, podemos realizar cortes ou realces, isolando somente a parte de maior interesse na imagem como na Figura <a href="etapas-do-processamento-e-análise-de-imagens.html#fig:preProcessamento">1.6</a>, ou também atenuar o ruído na imagem, além de outras técnicas que serão abordadas em outros tópicos.</p></li>
+</ul>
+
+<div class="figure" style="text-align: center"><span id="fig:preProcessamento"></span>
+<img src="imagens/01-introducao/preProcessamento.png" alt="Subtração de imagens para realce de diferenças.(a) Imagem da área de Washington D.C em infravermelho. (b) Resultado ao zerar o bit menos significativo de todos os pixels de (a). (c) Diferença entre as duas imagens ajustada para a faixa [0, 255], sendo que valores em preto (0) indicam pontos nos quais não há nenhuma diferença [2, p. 49]." width="60%" />
+<p class="caption">
+Figura 1.6: Subtração de imagens para realce de diferenças.(a) Imagem da área de Washington D.C em infravermelho. (b) Resultado ao zerar o bit menos significativo de todos os pixels de (a). (c) Diferença entre as duas imagens ajustada para a faixa [0, 255], sendo que valores em preto (0) indicam pontos nos quais não há nenhuma diferença <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 49]</span>.
+</p>
+</div>
+<ul>
+<li><p><strong>Segmentação</strong></p>
+<p>Nessa etapa as informações de interesse são extraídas da imagem, geralmente, pela detecção de descontinuidades (bordas) ou de similaridades na imagem <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 4]</span>. Na Figura <a href="etapas-do-processamento-e-análise-de-imagens.html#fig:segmentacao">1.7</a> é mostrado o resultado de um exemplo de segmentação por similaridade, em que o elemento de maior interesse é o rio.</p></li>
+</ul>
+
+<div class="figure" style="text-align: center"><span id="fig:segmentacao"></span>
+<img src="imagens/01-introducao/segmentacao.png" alt="Extração de características de uma imagem segmentada.(a) Imagem na banda infravermelha da área de Washington, D.C. (b) Segmentação da imagem por limiarização. (c) O maior componente conexo de (b). Técnica de representação por esqueleto de (c) [2, p. 544]." width="50%" />
+<p class="caption">
+Figura 1.7: Extração de características de uma imagem segmentada.(a) Imagem na banda infravermelha da área de Washington, D.C. (b) Segmentação da imagem por limiarização. (c) O maior componente conexo de (b). Técnica de representação por esqueleto de (c) <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 544]</span>.
+</p>
+</div>
+<ul>
+<li><p><strong>Representação e Descrição</strong></p>
+<p>Armazenar e manipular objetos de interesse extraídos da imagem. O processo de descrição visa a extração de características para discriminar classes de objetos <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 4]</span>. Na Figura <a href="etapas-do-processamento-e-análise-de-imagens.html#fig:analise">1.8</a>, o objetivo é determinar o tamanho das ramificações do rio, para isto considerou-se que o tamanho de cada ramificação no esqueleto seria uma boa aproximação <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 545]</span>. O esqueleto é uma representação do rio, e seus elementos são discriminados dentro do maior componente conexo da imagem segmentada.</p></li>
+<li><p><strong>Reconhecimento e Interpretação</strong></p>
+<p>Essa etapa examina as informações produzidas na etapa anterior e classifica cada objeto como sendo de interesse ou não, atribuindo significado ao conjunto de objetos reconhecidos pelos rótulos <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. Uma aplicação de análise de imagens inclui a classificação de áreas em uma imagem multiespectral como na Figura <a href="etapas-do-processamento-e-análise-de-imagens.html#fig:analise">1.8</a>. Neste exemplo utilizou-se o método bayesiano, em que cada pixel da imagem foi avaliado em relação a três classes (água, desenvolvimento urbano e vegetação). Nas Figuras <a href="etapas-do-processamento-e-análise-de-imagens.html#fig:analise">1.8</a>, pontos pretos representam pontos classificados incorretamente, enquanto pontos brancos foram classificados corretamente <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 579]</span>.</p></li>
+</ul>
+
+<div class="figure" style="text-align: center"><span id="fig:analise"></span>
+<img src="imagens/01-introducao/analise.png" alt="Classificação bayesiana em uma imagem multiespectral. Resultado (em branco) da classificação na classe água, desenvolvimento urbano e vegetação, da esquerda para a direita [2, p. 579]." width="60%" />
+<p class="caption">
+Figura 1.8: Classificação bayesiana em uma imagem multiespectral. Resultado (em branco) da classificação na classe água, desenvolvimento urbano e vegetação, da esquerda para a direita <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 579]</span>.
+</p>
+</div>
+
+</div>
+<!-- </div> -->
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
 <div id="ref-gonzalez2010">
 <p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+</div>
+<div id="ref-pedrini2008">
+<p>[3] H. Pedrini e W. Robson Schwartz, <em>Análise de imagens digitais: princípios, algoritmos e aplicações</em>, 3º ed. São Paulo: Thomson Learning Edicoes Ltda, 2007.</p>
 </div>
 </div>
             </section>
@@ -196,8 +255,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="aplicações-processamento-digital-de-imagens.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="formação-da-imagem.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +288,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/01-introducao.Rmd",
 "text": "Editar "
 },
 "history": {

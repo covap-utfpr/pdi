@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>6.3 Transformada de Hough | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="6.3 Transformada de Hough | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="6.3 Transformada de Hough | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="6.3 Transformada de Hough | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="detecção-de-bordas.html"/>
+<link rel="next" href="detecção-de-quinas.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,129 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="transformada-de-hough" class="section level2">
+<h2><span class="header-section-number">6.3</span> Transformada de Hough</h2>
+<p>A Transformada de Hough é uma técnica utilizada para detectar formas em imagens, sejam elas linhas, círculos ou elipses. Apesar de ela ser muito utilizada e ter sido criada para detecção principalmente de linhas, ela pode ser usada para a detecção de outras formas, como dito anteriormente.</p>
+<div id="transformada-de-hough-para-detecção-de-linhas" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Transformada de Hough para detecção de linhas</h3>
+<p>Para começar a entender essa transformada, imaginemos que temos um ponto <span class="math inline">\((x_i, y_i)\)</span> no plano <span class="math inline">\(xy\)</span> e a equação da reta <span class="math inline">\(y_i=ax_i+b\)</span>. Pelo ponto <span class="math inline">\((x_i, y_i)\)</span> passam infinitas retas e todas satisfazem a equação. Podemos escrever a equação anterior em relação a <span class="math inline">\(b\)</span>, ou seja, <span class="math inline">\(b=-x_ia+y_i\)</span>, o que nos leva ao plano <span class="math inline">\(ab\)</span>(espaço de parâmetros) onde essa nova equação gerará uma única reta.</p>
+<p>Agora imaginemos um outro ponto <span class="math inline">\((x_j, y_j)\)</span> no plano <span class="math inline">\(xy\)</span>, podemos também levá-lo ao plano ab com a equação <span class="math inline">\(b=-x_ja+y_j\)</span>. Como podemos ver na figura <a href="transformada-de-hough.html#fig:planoxy">6.19</a>(b) as duas retas geradas no plano <span class="math inline">\(ab\)</span> se cruzam nas coordenadas <span class="math inline">\((a&#39;, b&#39;)\)</span>, e esse ponto de cruzamento representa a reta que cruza os dois pontos no plano <span class="math inline">\(xy\)</span>, como podemos ver na mesma representação <a href="transformada-de-hough.html#fig:planoxy">6.19</a>(b). Na realidade, todos os pontos pertencentes a reta definida por esses dois pontos em <span class="math inline">\(xy\)</span> tem sua reta respectiva em <span class="math inline">\(ab\)</span> e todas elas se cruzam no ponto <span class="math inline">\((a&#39;, b&#39;)\)</span>, isso nos dá uma maneira de realizar a detecção de bordas, pois podemos imaginar essa reta como nossa borda, assim, para achá-la basta localizar o ponto no espaço de parâmetros onde um grande número de retas se cruzam.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:planoxy"></span>
+<img src="imagens/06-segmentacao/planoxy.png" alt="Plano xy e ab. [2, p. 483]" width="65%" />
+<p class="caption">
+Figura 6.19: Plano xy e ab. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 483]</span>
+</p>
+</div>
+<p>Ocorre um pequeno problema nessa forma, pois quando a reta se aproxima da direção vertical, <span class="math inline">\(ab\)</span> se aproxima do infinito. Para resolver essa dificuldade, em vez de levarmos os pontos a retas no espaço <span class="math inline">\(ab\)</span> cartesiano utilizamos um espaço em coordenadas polares. Para isso utilizamos a seguinte equação:
+<span class="math display">\[\rho=x\cos{\theta}+y\ sen{\ \theta}\]</span>
+Na figura <a href="transformada-de-hough.html#fig:planoxyrhotheta">6.20</a>(a) podemos ver isso de maneira gráfica, temos que p corresponde à distância da origem até a reta. Cada uma das curvas senoidais da figura <a href="transformada-de-hough.html#fig:planoxyrhotheta">6.20</a>(b) representa um conjunto de linhas que cruzam os dois pontos da figura <a href="transformada-de-hough.html#fig:planoxyrhotheta">6.20</a>(a), sendo que na interseção das curvas temos a reta que cruza esses pontos.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:planoxyrhotheta"></span>
+<img src="imagens/06-segmentacao/planoxyrhotheta.png" alt="Imagem de ônibus com filtro de aguçamento e de suavização [8, p. 98]" width="90%" />
+<p class="caption">
+Figura 6.20: Imagem de ônibus com filtro de aguçamento e de suavização <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 98]</span>
+</p>
+</div>
+<p>A figura <a href="transformada-de-hough.html#fig:planoxyrhotheta">6.20</a>(c) mostra como fazemos a representação do espaço , usamos uma matriz onde esse espaço é subdividido em várias células, chamadas células acumuladoras. Os valores de <span class="math inline">\(\theta_{\text{min}}\)</span> e <span class="math inline">\(\theta_{\text{max}}\)</span> são geralmente <span class="math inline">\(-90^{\circ}\leq \theta\leq90^{\circ}\)</span> e os valores de <span class="math inline">\(\rho_min\)</span> e <span class="math inline">\(\rho_max\)</span> são <span class="math inline">\(-D\leq\rho\leq D\)</span>, onde <span class="math inline">\(D\)</span> é o comprimento da diagonal da imagem, ou seja, <span class="math inline">\(D=\sqrt{vertical^2+horizontal^2}\)</span>. O que fazemos então é andar por todos os pontos de borda da imagem de entrada e calcular o valor de a partir da equação apresentada anteriormente usando o valor de <span class="math inline">\((x,y)\)</span> e variando o ângulo , com isso a cada valor do ângulo teremos um diferente e somamos mais um na célula correspondente da matriz acumuladora, que inicialmente é toda preenchida com zeros. Ao final de todo o processo termos determinadas células com valores mais altos, essas são conhecidas como picos e correspondem ao cruzamento de duas ou mais curvas senoidais do plano o que corresponde a uma linha ligando pontos no plano <span class="math inline">\(xy\)</span>.</p>
+<p>A seguir temos um exemplo, que nos ajuda a entender e ver na prática o funcionamento da transformada de Hough. A figura <a href="transformada-de-hough.html#fig:houghumponto">6.21</a>(a) contém uma imagem de tamanho 101x101 com um ponto no centro, ou seja <span class="math inline">\((x,y)=(50,50)\)</span> e a figura <a href="transformada-de-hough.html#fig:houghumponto">6.21</a>(b) contém a matriz acumuladora da transformada, onde podemos ver a curva senóide formada pelo ponto. Verificando os valores nela vemos que para <span class="math inline">\(\rho=-90^{\circ}\)</span> temos:</p>
+<p><span class="math display">\[\rho=50 \cdot \cos(-90^{\circ})+50\cdot\text{sen}(-90^{\circ}) = -50\]</span>
+para <span class="math inline">\(\theta=90^{\circ}\)</span> temos:</p>
+<p><span class="math display">\[\rho=50\cdot \cos(90^{\circ})+50\cdot\text{sen}(90^{\circ})=50\]</span>
+para <span class="math inline">\(\theta=45^{\circ}\)</span> temos:</p>
+<p><span class="math display">\[\rho=50\cdot \cos(45^{\circ})+50\cdot \text{sen}(45^{\circ})\approx70,71\]</span>
+e para <span class="math inline">\(\theta=-45^{\circ}\)</span> temos:</p>
+<p><span class="math display">\[\rho=50\cdot\cos(-45º)+50\cdot \text{sen}(-45º)=0\]</span></p>
+
+<div class="figure" style="text-align: center"><span id="fig:houghumponto"></span>
+<img src="imagens/06-segmentacao/hough_um_ponto.jpg" alt="Transformada de Hough para um ponto." width="75%" />
+<p class="caption">
+Figura 6.21: Transformada de Hough para um ponto.
+</p>
+</div>
+<p>Na figura <a href="transformada-de-hough.html#fig:houghdoispontosesquerda">6.22</a>(a) temos dois pontos, a e b, onde foi realizada a transformada de Hough que tem como espaço de saída a figura <a href="transformada-de-hough.html#fig:houghdoispontosesquerda">6.22</a>(b). A reta que passa por esses dois pontos, chamada de reta c é representada por uma reta pontilhada na figura <a href="transformada-de-hough.html#fig:houghdoispontosesquerda">6.22</a>(a) e na figura <a href="transformada-de-hough.html#fig:houghdoispontosesquerda">6.22</a>(b) temos o ponto no plano que representa essa reta, ou seja, uma reta a uma distância <span class="math inline">\(\rho\approx70,71\)</span> da origem com ângulo de <span class="math inline">\(45^{\circ}\)</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:houghdoispontosesquerda"></span>
+<img src="imagens/06-segmentacao/hough_dois_ponto_esquerda.png" alt="Transformada de Hough para um ponto em 45º." width="75%" />
+<p class="caption">
+Figura 6.22: Transformada de Hough para um ponto em 45º.
+</p>
+</div>
+<p>Na figura <a href="transformada-de-hough.html#fig:houghdoispontosdireita">6.23</a>(a) temos mais um exemplo, desta vez com um ponto localizado a sua direita, diferentemente da anterior, esses dois pontos formam uma reta de <span class="math inline">\(-45^{\circ}\)</span>, fato que pode ser visto na figura <a href="transformada-de-hough.html#fig:houghdoispontosdireita">6.23</a>(b) onde o ponto de encontro das duas curvas acontece em <span class="math inline">\(\theta=-45^{\circ}\)</span> com um valor de <span class="math inline">\(\rho=0\)</span> já que a reta cruza a origem, ou seja, não possui distância em relação a ela.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:houghdoispontosdireita"></span>
+<img src="imagens/06-segmentacao/hough_dois_ponto_direita.png" alt="Transformada de Hough para um ponto em -45º." width="75%" />
+<p class="caption">
+Figura 6.23: Transformada de Hough para um ponto em -45º.
+</p>
+</div>
+<p>Nosso último exemplo contém uma imagem com três pontos, onde temos três tipos de retas possíveis. Observando a figura <a href="transformada-de-hough.html#fig:houghtrespontos">6.24</a>(a) podemos ver os pontos a, b e c e as retas que passam por eles d, e e f, e na figura <a href="transformada-de-hough.html#fig:houghtrespontos">6.24</a>(b) temos a transformada de Hough para esse imagem, algo interessante de se notar é o fato de a reta que passa pelos pontos b e c ser detectada duas vezes, isso se deve a uma característica da transformada de Hough chamada relação de adjacência reflexiva, ou seja, isso acontece como resultado pela maneira como <span class="math inline">\(\rho\)</span> e <span class="math inline">\(\theta\)</span> mudam de sinal quando chegamos as extremidades de <span class="math inline">\(\pm90^{\circ}\)</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:houghtrespontos"></span>
+<img src="imagens/06-segmentacao/hough_tres_ponto.png" alt="Transformada de Hough para três pontos." width="75%" />
+<p class="caption">
+Figura 6.24: Transformada de Hough para três pontos.
+</p>
+</div>
+<p>Na figura <a href="transformada-de-hough.html#fig:houghlineexemplo">6.25</a> temos nosso último exemplo na detecção de linhas, dessa vez realizado em uma imagem real, neste caso primeiramente foi realizado a detecção de bordas pelo método de Canny, como pode ser visto na figura <a href="transformada-de-hough.html#fig:houghlineexemplo">6.25</a>(a). Logo após foi realizada a transformação de Hough, com resultado em figura <a href="transformada-de-hough.html#fig:houghlineexemplo">6.25</a>(b) e por fim temos a imagem original com as linhas detectadas em figura <a href="transformada-de-hough.html#fig:houghlineexemplo">6.25</a>(c). Atenção ao fato de que nem todos os picos da transformada podem ser utilizados como linhas, pois teríamos um número enorme delas, para isso utilizamos um threshold, utilizando somente as linhas que tiverem o número de votos(acumulação na matriz) superior a um valor limítrofe.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:houghlineexemplo"></span>
+<img src="imagens/06-segmentacao/hough_line_exemplo.jpg" alt="Resultado da transformada de Hough usada na detecção de linhas em uma imagem." width="95%" />
+<p class="caption">
+Figura 6.25: Resultado da transformada de Hough usada na detecção de linhas em uma imagem.
+</p>
+</div>
+</div>
+<div id="transformada-de-hough-para-detecção-de-círculos" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> Transformada de Hough para detecção de círculos</h3>
+<p>A transformada de Hough pode ser estendida para detecção de círculos, para isso substituímos a equação da reta pela equação do círculo:
+<span class="math display">\[(x-x_0)^2+(y-y_0)^2=r^2\]</span></p>
+<p>Nesse caso também andamos por cada pixel das bordas da imagem e o levamos ao espaço de parâmetro com as seguintes equações:</p>
+<p><span class="math display">\[x_0=x-r\cos(\theta)\]</span>
+e</p>
+<p><span class="math display">\[y_0=y-\text{sen}(\theta)\]</span></p>
+<p>A diferença é que neste caso o nosso espaço de parâmetro terá três dimensões, isso decorre do fato de que como desenhamos um círculo para cada pixel do círculo da imagem, a variação do diâmetro desse círculo deve levar a uma variação dos círculos descritos no espaço de parâmetros, então além da variação dos valores de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> também devemos variar os valores de <span class="math inline">\(r\)</span>. Uma representação disso pode ser vista na figura <a href="transformada-de-hough.html#fig:houghCircle">6.26</a>(a) onde temos três pixels que definem um círculo, na figura <a href="transformada-de-hough.html#fig:houghCircle">6.26</a>(b) temos os círculos no espaço de parâmetros e na figura <a href="transformada-de-hough.html#fig:houghCircle">6.26</a>(c) podemos ver um representação de um espaço de parâmetros com diferentes raios.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:houghCircle"></span>
+<img src="imagens/06-segmentacao/houghCircle.png" alt="Transformada de Hough para círculos.[19, p. 255]" width="60%" />
+<p class="caption">
+Figura 6.26: Transformada de Hough para círculos.<span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 255]</span>
+</p>
+</div>
+<p>A figura <a href="transformada-de-hough.html#fig:moedas">6.27</a> contém uma imagem com algumas moedas, na figura <a href="transformada-de-hough.html#fig:houghcircleraios">6.28</a>(a) temos as bordas da imagem detectada com o método de Canny, logo após, na figura <a href="transformada-de-hough.html#fig:houghcircleraios">6.28</a>(b) - (f) temos a representação do espaço de Hough para diferentes valores de raio. E na figura <a href="transformada-de-hough.html#fig:houghcircleresultado">6.29</a> temos o resultado da detecção de círculo após encontrados os picos do espaço de parâmetros.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:moedas"></span>
+<img src="imagens/06-segmentacao/moedas.jpg" alt="Imagem original de moedas. [8, p. 98]" width="55%" />
+<p class="caption">
+Figura 6.27: Imagem original de moedas. <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 98]</span>
+</p>
+</div>
+
+<div class="figure" style="text-align: center"><span id="fig:houghcircleraios"></span>
+<img src="imagens/06-segmentacao/hough_circle_raios.jpg" alt="Canny e espaço de parâmetros. [8, p. 98]" width="100%" />
+<p class="caption">
+Figura 6.28: Canny e espaço de parâmetros. <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 98]</span>
+</p>
+</div>
+
+<div class="figure" style="text-align: center"><span id="fig:houghcircleresultado"></span>
+<img src="imagens/06-segmentacao/hough_circle_resultado.jpg" alt="Resultado final da transformada de Hough para círculos. [8, p. 98]" width="55%" />
+<p class="caption">
+Figura 6.29: Resultado final da transformada de Hough para círculos. <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 98]</span>
+</p>
+</div>
+</div>
 </div>
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
 <div id="ref-gonzalez2010">
 <p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+</div>
+<div id="ref-burger2009">
+<p>[8] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
+</div>
+<div id="ref-nixon2019feature">
+<p>[19] M. Nixon e A. Aguado, <em>Feature extraction and image processing for computer vision</em>. Academic press, 2019.</p>
 </div>
 </div>
             </section>
@@ -196,8 +311,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="detecção-de-bordas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="detecção-de-quinas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

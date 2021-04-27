@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>1.1 Relação de Processamento Digital de Imagem, Visão Computacional e Computação Gráfica | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="1.1 Relação de Processamento Digital de Imagem, Visão Computacional e Computação Gráfica | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="1.1 Relação de Processamento Digital de Imagem, Visão Computacional e Computação Gráfica | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="1.1 Relação de Processamento Digital de Imagem, Visão Computacional e Computação Gráfica | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="aplicações-processamento-digital-de-imagens.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,12 +181,61 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="relação-de-processamento-digital-de-imagem-visão-computacional-e-computação-gráfica" class="section level2">
+<h2><span class="header-section-number">1.1</span> Relação de Processamento Digital de Imagem, Visão Computacional e Computação Gráfica</h2>
+<p>A visão desempenha um papel importante na vida das pessoas, pois com ela é possível uma percepção incrivelmente rica do mundo ao seu redor. Para tentar reproduzir as capacidades visuais humanas por sistemas autônomos manipulados por computadores foram desenvolvidas pelo menos três grandes áreas <span class="citation">[<a href="#ref-velho2009" role="doc-biblioref">1</a>, p. 2]</span>: <em>Processamento Digital de Imagens</em> (PDI), <em>Visão Computacional</em> (VC) e a <em>Computação Gráfica</em>(CG), apresentados na Figura <a href="relação-de-processamento-digital-de-imagem-visão-computacional-e-computação-gráfica.html#fig:areasPDI">1.1</a>. Essas áreas, apesar de serem correlacionadas, têm objetivos e métodos diferentes, por isso a importância de distingui-las.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:areasPDI"></span>
+<img src="imagens/01-introducao/areasPDI.png" alt="Processos Computacionais com Imagens [1, p. 2]." width="40%" />
+<p class="caption">
+Figura 1.1: Processos Computacionais com Imagens <span class="citation">[<a href="#ref-velho2009" role="doc-biblioref">1</a>, p. 2]</span>.
+</p>
+</div>
+<p>O <em>Processamento Digital de Imagens</em> (PDI) busca realizar o pré-processamento das imagens, utilizando para isso técnicas de tratamento, como a correção da iluminação, eliminação de ruído, e a segmentação. O foco da <em>Visão Computacional</em> (VC) é a análise das imagens, identificando os seus componentes e obtendo informações. Diferente da VC, em que as imagens são os objetos de estudo, na <em>Computação Gráfica</em> (CG), as imagens são o resultado do processo. Na CG são geradas representações visuais seguindo descrições e especificações geométricas <span class="citation">[<a href="#ref-velho2009" role="doc-biblioref">1</a>, p. 3]</span>.</p>
+<p>A Tabela <a href="relação-de-processamento-digital-de-imagem-visão-computacional-e-computação-gráfica.html#tab:processos">1.1</a> apresenta de forma resumida as diferenças entre PDI, VC e CG. Na segunda linha da tabela está uma descrição simples de cada área, e na terceira linha um esquema identificando o objeto e o produto de cada processo.</p>
+<table>
+<caption><span id="tab:processos">Tabela 1.1: </span> Processos Computacionais com Imagens.</caption>
+<colgroup>
+<col width="34%" />
+<col width="31%" />
+<col width="34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Computação Gráfica (CG)</th>
+<th align="center">Visão Computacional (VC)</th>
+<th align="center">Processamento Digital de Imagens (PDI)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Cria e altera imagens a partir de dados.</td>
+<td align="center">Análise de imagem para criação de modelos.</td>
+<td align="center">Transformação de imagem (tratamento).</td>
+</tr>
+<tr class="even">
+<td align="center">modelo → imagem</td>
+<td align="center">imagem → modelo</td>
+<td align="center">imagem → imagem</td>
+</tr>
+</tbody>
+</table>
+<p>As imagens tratadas em PDI têm como uma das finalidades servir de material para a Visão Computacional, como identificado na Figura <a href="relação-de-processamento-digital-de-imagem-visão-computacional-e-computação-gráfica.html#fig:areasPDI">1.1</a>. Muitas vezes as áreas de Visão Computacional e PDI são confundidas devido a dificuldade em se definir em que ponto uma termina e a outra começa. Mesmo não existindo uma linha clara entre os limites destas duas áreas é possível utilizar um paradigma que considera três níveis de processamento <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 2]</span>:</p>
+<ul>
+<li><p><strong>Baixo nível</strong></p>
+<p>A nível de pixel, realiza operações de pré-processamento, sendo utilizada, por exemplo, na redução de ruído, aumento de contraste e restauração.</p></li>
+<li><p><strong>Médio nível</strong></p>
+<p>Operações mais complexas, como segmentação, partição e reconhecimento de objetos individuais. Entrada é uma imagem mas a saída pode ser um conjunto contendo os atributos extraídos das imagens.</p></li>
+<li><p><strong>Alto nível</strong></p>
+<p>Interpretação do conteúdo da imagem e análise.</p></li>
+</ul>
+<p>Baseado nesses níveis, iremos considerar que o processamento de imagem atua nos primeiros dois níveis, ou seja, envolve o pré-processamento e processos de extração de elementos de imagens até o reconhecimento de componentes individuais. Como o foco deste material é o Processamento de Imagens Digitais (PDI), estes dois níveis serão apresentados com detalhes nos próximos tópicos, mas primeiro vejamos alguns exemplos de aplicações do PDI.</p>
 </div>
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
+<div id="ref-velho2009">
+<p>[1] L. Velho, A. C. Frery, e J. Gomes, <em>Image processing for computer graphics and vision</em>, 2º ed. London: Springer, 2009.</p>
+</div>
 <div id="ref-gonzalez2010">
 <p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
 </div>
@@ -196,8 +245,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="aplicações-processamento-digital-de-imagens.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +278,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/01-introducao.Rmd",
 "text": "Editar "
 },
 "history": {

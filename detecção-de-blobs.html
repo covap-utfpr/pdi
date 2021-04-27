@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>6.5 Detecção de Blobs | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="6.5 Detecção de Blobs | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="6.5 Detecção de Blobs | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="6.5 Detecção de Blobs | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="detecção-de-quinas.html"/>
+<link rel="next" href="limiarização.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,119 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="detecção-de-blobs" class="section level2">
+<h2><span class="header-section-number">6.5</span> Detecção de Blobs</h2>
+<p>Blobs, do inglês bolhas, são regiões da imagem em que os pixels têm valores aproximadamente iguais. Uma boa representação - um tanto quanto artificial - disso é a função gaussiana, como pode ser vista na figura <a href="detecção-de-blobs.html#fig:gaussianblob">6.31</a>(a) e sua representação 2D na figura <a href="detecção-de-blobs.html#fig:gaussianblob">6.31</a>(b), nela temos um conjunto de pixels com valores bem próximos, que caracterizam um blob.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:gaussianblob"></span>
+<img src="imagens/06-segmentacao/gaussian_blob.jpg" alt="Função gaussiana em 3D e 2D." width="75%" />
+<p class="caption">
+Figura 6.31: Função gaussiana em 3D e 2D.
+</p>
+</div>
+<p>Apesar do exemplo, a detecção de blobs não se restringe a elementos circulares, mas a qualquer conjunto de pixels.</p>
+<div id="log" class="section level3">
+<h3><span class="header-section-number">6.5.1</span> LoG</h3>
+<p>Esse método utiliza o do Laplaciano do Gaussiano, que já foi apresentado anteriormente, mas que em resumo é o cálculo de derivadas segunda em uma imagem que foi anteriormente convolucionada com um filtro gaussiano, isso irá gerar fortes respostas positivas em blobs escuros e negativas em blobs escuros nos blobs de tamanho <span class="math inline">\(\sqrt{2\sigma}\)</span>. Como existe uma relação entre a respostas e o tamanho do desvio padrão, é necessário realizar a operação com uma gama de valores para o sigma, e assim detectar blobs de diferentes tamanhos.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:nasahubbledeep"></span>
+<img src="imagens/06-segmentacao/nasa_hubble_deep.jpg" alt="Imagem de Campo Ultraprofundo do Hubble. [20]" width="55%" />
+<p class="caption">
+Figura 6.32: Imagem de Campo Ultraprofundo do Hubble. <span class="citation">[<a href="#ref-img:hubbledeep" role="doc-biblioref">20</a>]</span>
+</p>
+</div>
+<p>Como podemos ver na figura <a href="detecção-de-blobs.html#fig:gaussianblob">6.31</a> com diferentes valores de sigma conseguimos detectar objetos de variados tamanhos, como exemplo na figura <a href="detecção-de-blobs.html#fig:logsigmas">6.33</a>(a) detectamos as estrelas da figura <a href="detecção-de-blobs.html#fig:nasahubbledeep">6.32</a> que apresentam uma menor resposta ao filtro laplaciano.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:logsigmas"></span>
+<img src="imagens/06-segmentacao/log_sigmas.jpg" alt="Laplaciano do Gaussiano com diferentes valores de sigma." width="100%" />
+<p class="caption">
+Figura 6.33: Laplaciano do Gaussiano com diferentes valores de sigma.
+</p>
+</div>
+<p>Na figura <a href="detecção-de-blobs.html#fig:loghubble">6.34</a> temos o resultado da detecção dos blobs utilizando LoG. Note que nem todas as estrelas foram detectadas, isso se deve ao fato do uso de um valor de threshold, onde definimos que queremos as detecções acima de determinado limiar. Na figura <a href="detecção-de-blobs.html#fig:loghubblebaixo">6.35</a> podemos ver o resultado utilizando um valor de limiar menor, onde muito mais objetos foram localizados.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:loghubble"></span>
+<img src="imagens/06-segmentacao/log_hubble.jpg" alt="Resultado da detecção de blobs com LoG." width="55%" />
+<p class="caption">
+Figura 6.34: Resultado da detecção de blobs com LoG.
+</p>
+</div>
+
+<div class="figure" style="text-align: center"><span id="fig:loghubblebaixo"></span>
+<img src="imagens/06-segmentacao/log_hubble_baixo_threshold.jpg" alt="Resultado da detecção de blobs com LoG com um threshold menor." width="55%" />
+<p class="caption">
+Figura 6.35: Resultado da detecção de blobs com LoG com um threshold menor.
+</p>
+</div>
+</div>
+<div id="dog" class="section level3">
+<h3><span class="header-section-number">6.5.2</span> DoG</h3>
+<p>Esse método é basicamente o mesmo do anterior, mas possui uma certa vantagem, que é o fato de ele ser mais eficiente. Como também já foi mencionado no tópico na seção anterior é possível aproximar o Laplaciano do Gaussiano através da Diferença do Gaussiano(DoG), ou seja, primeiramente se realiza a filtragem gaussiano com dois sigmas diferentes e se faz a subtração entre os dois. Realizamos esse processo para diferentes pares de valores, obtendo assim o mesmo espaço de escala construído com o processo do LoG. Na figura <a href="detecção-de-blobs.html#fig:doghubble">6.36</a> temos um exemplo de detecção por DoG.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:doghubble"></span>
+<img src="imagens/06-segmentacao/dog_hubble.jpg" alt="Resultado da detecção de blobs com DoG." width="55%" />
+<p class="caption">
+Figura 6.36: Resultado da detecção de blobs com DoG.
+</p>
+</div>
+</div>
+<div id="doh" class="section level3">
+<h3><span class="header-section-number">6.5.3</span> DoH</h3>
+<p>Uma matriz Hessiana é uma matriz que contém as derivadas de uma função. No nosso caso, utilizamos a Hessiana de ordem 2, pois estamos trabalhando com imagens, que possuem duas dimensões. Ela pode ser representada da seguinte maneira:</p>
+<p><span class="math display">\[H[f(x_1, x_2, \dots,x_n)]=
+\begin{bmatrix}
+\frac{\partial^2 f}{\partial x_1^2} &amp; \frac{\partial^2 f}{\partial x_1 \partial x_2}\\ 
+\frac{\partial^2 f}{\partial x_2 \partial x_1} &amp; \frac{\partial^2 f}{\partial x_2^2}
+\end{bmatrix}\]</span></p>
+<p>A matriz Hessiana tem muita utilidade pois com ela podemos descrever a curvatura em um ponto da função multivariável, o que no nosso caso pode ajudar a detectar os blobs, já que eles são aglomerados de pixels e devem estar separados do restante da imagem, ou seja, um aglomerado claro em um fundo escuro ou o contrário, e isso irá fazer com que sua função tenha uma mudança de sinal que pode ser detectada utilizando-se as informações da matriz. Além disso, como dito por Herbert Bay et al.<span class="citation">[<a href="#ref-bay2006surf" role="doc-biblioref">21</a>]</span> os detectores baseados na Hessiana são mais estáveis e repetíveis(tem a mesma resposta para a mesma imagem com diferentes ângulos, iluminações etc.).</p>
+<p>Um dos principais algoritmos que fazem uso dessa matriz se chama Speeded Up Robust Features (SURF)<span class="citation">[<a href="#ref-bay2006surf" role="doc-biblioref">21</a>]</span>, esse método faz uso de várias técnicas que o tornam muito rápido, como seu próprio nome sugere. Uma dessas técnicas é o cálculo da integral da imagem, realizado a partir da soma de todos os pixels de uma área retangular a partir do x atual, sendo que este varia enquanto se é andado pela imagem.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:imageIntegral"></span>
+<img src="imagens/06-segmentacao/imageIntegral.png" alt="Integral de uma imagem. [22]" width="55%" />
+<p class="caption">
+Figura 6.37: Integral de uma imagem. <span class="citation">[<a href="#ref-Cen2016StudyOV" role="doc-biblioref">22</a>]</span>
+</p>
+</div>
+<p>Como pode ser visto na figura, a integral de uma imagem contém a soma das regiões, por exemplo, a primeira posição contém a soma de somente uma célula, no caso 1, a segunda tem a soma de duas células, na primeira linha estamos basicamente somando as células de uma só linha, na segunda começamos a formar regiões retangulares, por exemplo, na segunda linha e terceira coluna temos o valor 6, resultante da soma das seis células da primeira linha com a segunda. Com a integral podemos calcular a área de qualquer região com apenas quatro operações, da seguinte forma:
+<span class="math display">\[soma = D+A-B-C\]</span></p>
+<p>Onde {A,B,C,D} forma uma região. Como exemplo, caso queiramos calcular a área na região quadrada 2x2 na direita inferior utilizados:
+<span class="math display">\[soma = 9 + 1 - 3 - 3 = 4\]</span></p>
+<p>Isso nos ajuda na aplicação de box filters, já que precisaríamos da soma de determinadas áreas, e com isso aumentamos a velocidade do método.
+Sendo <span class="math inline">\(X=(x,y)\)</span> um ponto em uma imagem, sua matriz Hessiana em <span class="math inline">\(X\)</span> a uma escala é dada por:</p>
+<p><span class="math display">\[H(X,\sigma)=\begin{bmatrix}
+L_{xx}(X, \sigma) &amp; L_{xy}(X, \sigma)\\ 
+L_{xy}(X, \sigma) &amp; L_{yy}(X, \sigma)
+\end{bmatrix}\]</span></p>
+<p>Onde <span class="math inline">\(L_{xx}(X, \sigma)\)</span> é a convolução da imagem no ponto X com a derivada de segunda ordem gaussiana <span class="math inline">\(\frac{\partial^2g(\sigma)}{\partial x^²}\)</span> e assim por diante<span class="citation">[<a href="#ref-bay2006surf" role="doc-biblioref">21</a>]</span>. Aqui entra em cena mais um elemento para melhorar a velocidade do algoritmo, Bay, Herbert et al. utilizam box filters para aproximar o filtro gaussiano. Como podemos ver na figura, onde os dois primeiros filtros são os derivativos gaussianos discretizados e os dois últimos são os aproximados a partir de box filters.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:discretizadogaussiano"></span>
+<img src="imagens/06-segmentacao/discretizadogaussiano.png" alt="Filtro gaussiano discretizado e aproximado na direção \(y\) e \(xy\). [21]" width="85%" />
+<p class="caption">
+Figura 6.38: Filtro gaussiano discretizado e aproximado na direção <span class="math inline">\(y\)</span> e <span class="math inline">\(xy\)</span>. <span class="citation">[<a href="#ref-bay2006surf" role="doc-biblioref">21</a>]</span>
+</p>
+</div>
+<p>Chamamos as derivadas realizadas na imagem de <span class="math inline">\(D_{xx}\)</span>, <span class="math inline">\(D_{yy}\)</span>, <span class="math inline">\(D_{xy}\)</span>. Essas derivadas não são realizadas com somente um valor de <span class="math inline">\(\sigma\)</span>, mas como os detectores anteriores usam uma sequência de valores para assim criar um espaço de escalas e conseguir detectar blobs de diferentes tamanhos. Assim, a determinante da Hessiana é dado por:</p>
+<p><span class="math display">\[det(H_{\text{aprox}}) = D_{xx}D_{yy}-(0.9D_{xy})^2\]</span></p>
+<p>Sendo que o valor <span class="math inline">\(0.9\)</span> é um peso introduzido pelos autores Bay, Hebert et al. para corrigir as respostas quando utilizamos várias escalas de sigma e obter uma invariância escalar. Na figura temos o resultado de uma detecção de blobs realizada pela Determinante do Hessiano.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:dohhubble"></span>
+<img src="imagens/06-segmentacao/doh_hubble.jpg" alt="Resultado da detecção de blobs com DoH." width="55%" />
+<p class="caption">
+Figura 6.39: Resultado da detecção de blobs com DoH.
+</p>
+</div>
+</div>
 </div>
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
-<div id="ref-gonzalez2010">
-<p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+<div id="ref-img:hubbledeep">
+<p>[20] Nasa, “Hubble Ultra-Deep Field”. 2004, [Online]. Disponível em: <a href="https://imgsrc.hubblesite.org/hu/db/images/hs-2014-27-a-full_jpg.jpg">https://imgsrc.hubblesite.org/hu/db/images/hs-2014-27-a-full_jpg.jpg</a>.</p>
+</div>
+<div id="ref-bay2006surf">
+<p>[21] H. Bay, T. Tuytelaars, e L. Van Gool, “Surf: Speeded up robust features”, p. 404–417, 2006.</p>
+</div>
+<div id="ref-Cen2016StudyOV">
+<p>[22] K. Cen, “Study of Viola-Jones Real Time Face Detector”, 2016.</p>
 </div>
 </div>
             </section>
@@ -196,8 +301,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="detecção-de-quinas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="limiarização.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

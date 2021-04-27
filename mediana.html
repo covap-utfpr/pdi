@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>5.3 Mediana | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="5.3 Mediana | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="5.3 Mediana | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="5.3 Mediana | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="média.html"/>
+<link rel="next" href="gaussiano.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,9 +181,18 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="mediana" class="section level2">
+<h2><span class="header-section-number">5.3</span> Mediana</h2>
+<p>A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em ordenar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta, que tem uma característica aparência de pixels pretos e brancos.
+Como dito anteriormente que a mediana consiste em ordenar o conjunto de dados, nesse caso os valores da vizinhança do <em>píxel</em>. Se usarmos uma vizinhança de tamanho 3x3, a mediana será o quinto maior valor, pois consideramos também o valor do <em>píxel</em> central.</p>
+<p>Na figura <a href="mediana.html#fig:placaEletronicaMediana">5.8</a>, tem-se um exemplo mostrando uma imagem de raios X de uma placa de circuitos com ruído sal e pimenta (a). As respectivas aplicações de um filtro de média (b) e do filtro da mediana (c), ambos com dimensões 3x3. A partir dela, é visto o quanto o filtro da mediana se sai melhor na remoção do ruído.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:placaEletronicaMediana"></span>
+<img src="imagens/05-filtros/placaEletronicaMediana.png" alt="Remoção de ruído [2, p. 103]" width="55%" />
+<p class="caption">
+Figura 5.8: Remoção de ruído <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 103]</span>
+</p>
+</div>
 </div>
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
@@ -196,8 +205,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="média.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="gaussiano.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +238,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/05-filtros.Rmd",
 "text": "Editar "
 },
 "history": {

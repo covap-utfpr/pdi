@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>6.1 Detecção por descontinuidade | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="6.1 Detecção por descontinuidade | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="6.1 Detecção por descontinuidade | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="6.1 Detecção por descontinuidade | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="segmentação.html"/>
+<link rel="next" href="detecção-de-bordas.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,9 +181,70 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="detecção-por-descontinuidade" class="section level2">
+<h2><span class="header-section-number">6.1</span> Detecção por descontinuidade</h2>
+<p>Bordas podem ser descritas como o limite ou a fronteira entre duas regiões onde ocorre uma variação brusca de intensidade em uma determinada direção. Uma linha pode ser vista como um segmento de borda em que a intensidade do fundo de cada lado da linha ou é muito superior ou muito inferior à intensidade dos <em>pixels</em> da linha. Linhas com o comprimento e largura iguais a um <em>pixel</em> são tratados como pontos isolados <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 456]</span>.
+Os métodos de detecção de bordas se baseiam no comportamento das derivadas, que podem detectar mudanças locais abruptas. Em uma função digital, as derivadas são aproximadas como termos de diferenças. Aproximações podem ser obtidas por meio de expansões em séries de Taylor, como demonstrado no livro “Processamento digital de imagens” <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 457]</span>, em que os resultados para a primeira e a segunda ordem no ponto <span class="math inline">\(x\)</span> de uma função <span class="math inline">\(f(x)\)</span> estão descritos respectivamente:</p>
+<p><span class="math display">\[\frac{\delta f}{\delta x} = f&#39;(x) = f(x+1) - f(x)\]</span>
+<span class="math display">\[\frac{\delta^2 f}{\delta x^2} = f&#39;&#39;(x) = f(x+1) + f(x-1) - 2f(x)\]</span></p>
+<p>Para avaliar o comportamento das derivadas na transição de intensidades apresentamos na Figura <a href="detecção-por-descontinuidade.html#fig:imagemDerivadas">6.1</a> um perfil de intensidade horizontal (linha de digitalização) de uma imagem, juntamente com os resultados das duas últimas equações para alguns pontos. A imagem contém vários objetos sólidos, uma linha e um ponto interno de ruído, e a linha de digitalização está próxima ao centro, incluindo o ponto isolado. A Figura <a href="detecção-por-descontinuidade.html#fig:imagemDerivadas">6.1</a> (c) mostra uma simplificação do perfil e como as derivadas de primeira e segunda ordem se comportam quando encontram um ponto isolado, uma linha e as bordas dos objetos.</p>
+<p>Com base nos resultados das equações na Figura <a href="detecção-por-descontinuidade.html#fig:imagemDerivadas">6.1</a> se observa que atendem as propriedades das derivadas. No início e ao longo da rampa de intensidade, a derivada de primeira ordem é diferente de zero, enquanto a segunda derivada é diferente de zero apenas no início e no fim da rampa. Estes comportamentos indicam que as derivadas de primeira ordem produzem <strong>bordas grossas, e as de segunda ordem produzem bordas mais finas</strong> <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 458]</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:imagemDerivadas"></span>
+<img src="imagens/06-segmentacao/imagemDerivadas.png" alt="(a) Imagem. (b) Perfil de intensidade horizontal no centro da imagem. (c) Perfil simplificado e resultados das derivadas. [2, p. 457]" width="55%" />
+<p class="caption">
+Figura 6.1: (a) Imagem. (b) Perfil de intensidade horizontal no centro da imagem. (c) Perfil simplificado e resultados das derivadas. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 457]</span>
+</p>
+</div>
+<p>No ponto de ruído, a resposta para a derivada de segunda ordem é mais forte do que para a primeira derivada. <strong>Derivadas de segunda ordem acentuam as respostas em mudanças bruscas,</strong> podendo melhorar pequenos detalhes <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 458]</span>. Na linha com detalhes bem finos, a derivada de segunda ordem também tem maior magnitude. Nota-se nas bordas em rampa e nas bordas em degrau, que a segunda derivada tem sinais opostos (negativo para positivo ou vice-versa) conforme entra e sai da borda, o que caracteriza uma <strong>“borda dupla”</strong>. O sinal da segunda derivada também pode ser utilizado para determinar se uma transição em uma borda é de claro para escuro (segunda derivada negativa) ou de escuro para claro (segunda derivada positiva) <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 458]</span>.</p>
+<div id="detecção-de-pontos-isolados" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Detecção de pontos isolados</h3>
+<p>Considerando que as derivadas de segunda ordem têm uma resposta mais forte aos detalhes finos, o operador diferencial laplaciano:</p>
+<p><span class="math display">\[\nabla^2f(x,y) = \frac{\partial^2f}{\partial x^2} + \frac{\partial^2f}{\partial y^2}\]</span>
+é ideal para a detecção de pontos <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 459]</span>. As aproximações das derivadas de segunda ordem por termos de diferenças vistas podem ser estendidas para os dois termos do laplaciano, respectivamente:</p>
+<p><span class="math display">\[\frac{\partial^2f}{\partial x^2} = f(x+1, y) + f(x-1, y) -2f(x,y)\]</span>
+<span class="math display">\[\frac{\partial^2f}{\partial y^2} = f(x, y+1) + f(x, y-1) -2f(x,y)\]</span>
+Ao se relacionar essas três últimas equações, obtém-se o laplaciano discreto:</p>
+<p><span class="math display">\[\nabla^2f(x,y) = f(x+1, y) + f(x-1, y) + f(x, y+1) + f(x, y-1) -4f(x,y)\]</span></p>
+<p>Essa equação pode ser implementada utilizando a máscara de filtragem identificada na Figura <a href="detecção-por-descontinuidade.html#fig:mascarasLaplacianas">6.2</a> (a). Para incluir as direções diagonais na definição do laplaciano digital se acrescenta mais dois termos a esta equação, um para cada direção diagonal. A Figura <a href="detecção-por-descontinuidade.html#fig:mascarasLaplacianas">6.2</a> (b) mostra a máscara de filtragem desta atualização que inclui as diagonais.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:mascarasLaplacianas"></span>
+<img src="imagens/06-segmentacao/mascarasLaplacianas.png" alt="(a) Máscara referente a equação laplaciana discreta. (b) Máscara que inclui as diagonais. [2, p. 106]" width="55%" />
+<p class="caption">
+Figura 6.2: (a) Máscara referente a equação laplaciana discreta. (b) Máscara que inclui as diagonais. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 106]</span>
+</p>
+</div>
+<p>A intensidade de um ponto isolado será muito diferente do seu entorno, portanto, ao aplicar a máscara, as únicas diferenças de intensidade relevantes serão as mais altas, maiores que um limite determinado (<span class="math inline">\(T\)</span>) para serem consideradas pontos isolados <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 459]</span>. Para detectar o ponto se utiliza a seguinte expressão:</p>
+<p><span class="math display">\[
+g(x,y) = 
+\begin{cases}
+  1,\ se\ R(x,y) \geq T
+  \\0,\ caso\ contrário
+\end{cases}
+\]</span>
+em que <span class="math inline">\(g\)</span> é a imagem de saída, <span class="math inline">\(T\)</span> é um limiar não negativo, e <span class="math inline">\(R\)</span> é o operador laplaciano. O ponto isolado será detectado no local <span class="math inline">\((x, y)\)</span> em que a máscara está centrada se o módulo da resposta nesse ponto exceder o limiar estabelecido. Os pontos detectados são rotulados como <span class="math inline">\(1\)</span> na imagem de saída, e todos os outros são rotulados <span class="math inline">\(0\)</span>, o que produz uma imagem binária.</p>
+</div>
+<div id="detecção-de-linhas" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> Detecção de linhas</h3>
+<p>Semelhante à detecção de pontos isolados, as derivadas de segunda ordem geram respostas mais fortes na detecção de linhas, e produzem linhas mais finas do que as derivadas de primeira ordem <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 460]</span>. Ao utilizar a máscara laplaciana da Figura <a href="detecção-por-descontinuidade.html#fig:mascarasLaplacianas">6.2</a> sobre a imagem de um componente em um circuito eletrônico (parte de uma conexão <em>wire-bond</em>), representado na Figura <a href="detecção-por-descontinuidade.html#fig:imagemDeteccaoLinhas">6.3</a> (a), obtém-se como resultado a Figura <a href="detecção-por-descontinuidade.html#fig:imagemDeteccaoLinhas">6.3</a> (b). Na seção ampliada da Figura <a href="detecção-por-descontinuidade.html#fig:imagemDeteccaoLinhas">6.3</a> (b), as linhas mais claras identificam os pontos positivos, o cinza escuro são os valores negativos, e o cinza médio representa zero. O efeito de linha dupla ao se utilizar a segunda derivada é evidente na seção ampliada.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:imagemDeteccaoLinhas"></span>
+<img src="imagens/06-segmentacao/imagemDeteccaoLinhas.png" alt="(a) Imagem do circuito. (b) Resultado do filtro laplaciano. (c) Valor absoluto do filtro laplaciano. (d) Valores positivos do filtro laplaciano. [2, p. 460]" width="55%" />
+<p class="caption">
+Figura 6.3: (a) Imagem do circuito. (b) Resultado do filtro laplaciano. (c) Valor absoluto do filtro laplaciano. (d) Valores positivos do filtro laplaciano. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 460]</span>
+</p>
+</div>
+<p>Para destacar as linhas após a aplicação do filtro e remover os valores negativos pode ser utilizado o módulo dos valores calculados ou utilizar apenas os valores positivos do laplaciano <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 460]</span>, os resultados destas metodologias estão identificados na Figura <a href="detecção-por-descontinuidade.html#fig:imagemDeteccaoLinhas">6.3</a> (c) e Figura <a href="detecção-por-descontinuidade.html#fig:imagemDeteccaoLinhas">6.3</a> (d), respectivamente. Nota-se que as linhas geradas pela abordagem do módulo são mais grossas, pois a espessura é o dobro se comparada com a outra metodologia. Nas duas situações, as linhas mais largas que o tamanho do filtro laplaciano são separadas por um “vale” de zeros. A detecção de linhas é ideal quando a espessura é menor que o detector, ao contrário se recomenda tratar o elemento como uma região e utilizar outros métodos <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 460]</span>.</p>
+<p>O filtro laplaciano na Figura <a href="detecção-por-descontinuidade.html#fig:mascarasLaplacianas">6.2</a> é isotrópico, assim a sua resposta independe da direção <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 460]</span>. No caso das linhas pode ser interessante a detecção em apenas uma determinada direção, utilizando, por exemplo, uma das máscaras apresentadas na Figura <a href="detecção-por-descontinuidade.html#fig:mascarasDeteccaoLinhas">6.4</a>. Para a primeira máscara da Figura <a href="detecção-por-descontinuidade.html#fig:mascarasDeteccaoLinhas">6.4</a>, os sinais mais fortes ocorrem em linhas horizontais da imagem que passam pela linha do meio da máscara. O segundo filtro detecta melhor as linhas com <span class="math inline">\(45°\)</span> de inclinação; o terceiro filtro para linhas verticais e o quarto, para linhas com <span class="math inline">\(-45º\)</span> de inclinação. Vale destacar que estamos utilizando a convenção de que os eixos da imagem têm sua origem no canto superior esquerdo, com o eixo <span class="math inline">\(x\)</span> positivo apontando para baixo, e o eixo <span class="math inline">\(y\)</span> positivo se estendendo à direita. Os ângulos das linhas são medidos em relação ao eixo <span class="math inline">\(x\)</span> positivo.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:mascarasDeteccaoLinhas"></span>
+<img src="imagens/06-segmentacao/mascarasDeteccaoLinhas.png" alt="Máscaras para detecção de linhas em uma determinada direção. [2, p. 461]" width="55%" />
+<p class="caption">
+Figura 6.4: Máscaras para detecção de linhas em uma determinada direção. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 461]</span>
+</p>
+</div>
+<p>Quando o objetivo é detectar todas as linhas da imagem em uma direção específica se aplica a máscara associada a essa direção e se define um limiar (<span class="math inline">\(T\)</span>) para selecionar os sinais mais fortes. Para os quatro últimos filtros apresentados, as linhas de <span class="math inline">\(1\)</span> <em>pixel</em> de espessura apresentam os maiores resultados <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 462]</span>.</p>
+</div>
 </div>
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
@@ -196,8 +257,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="segmentação.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="detecção-de-bordas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

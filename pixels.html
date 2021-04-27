@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>2.7 Pixels | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="2.7 Pixels | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="2.7 Pixels | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="2.7 Pixels | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="resolução-espacial-e-de-intensidade.html"/>
+<link rel="next" href="transformacões-geométricas.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,149 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="pixels" class="section level2">
+<h2><span class="header-section-number">2.7</span> Pixels</h2>
+<p>A topologia de uma imagem digitalizada, desempenha papel importante na especificação, localização e relação entre as coordenadas dos pixels da imagem, tornando mais fácil a manipulação da imagem.</p>
+<p>Uma imagem digitalizada contém as seguintes propriedades de seus pixels: Vizinhança ( 4, D e 8 ), Conectividade, Adjacência, Caminho, Componente Conexa, Medidas de Distância, Operações Lógico-aritméticas.</p>
+<p>Para especificar, localizar, e relacionar topologicamente à imagem, consideramos: p,q denotando os pontos e, <span class="math inline">\(p(x,y)\)</span>, <span class="math inline">\(q(x,y)\)</span>, <span class="math inline">\(u(x,y)\)</span> coordenadas dos pontos denotados, expressaremos <span class="math inline">\(V\)</span> Conjunto de valores em uma imagem binária <span class="math inline">\(V=\{0,1\}\)</span>.</p>
+<div id="vizinhança" class="section level3">
+<h3><span class="header-section-number">2.7.1</span> Vizinhança</h3>
+<ul>
+<li><strong>Vizinhança 4 - <span class="math inline">\(\left[N_4(p)\right]\)</span></strong></li>
+</ul>
+<p><span class="math inline">\(N_4(p)\)</span> em <span class="math inline">\(p(x,y)\)</span> possui quatro vizinhos, dois na horizontal outros dois na vertical suas coordenadas, ou seja, é o conjunto de pixels ao redor de p, sem considerar as diagonais <span class="citation">[<a href="#ref-thome2017" role="doc-biblioref">12</a>, p. 15]</span>. Exemplo na figura <a href="pixels.html#fig:vizinhanca">2.21</a> (a).</p>
+<p><span class="math display">\[p(x,y): p(x+1, y), p(x-1, y), p(x, y+1), p(x, y-1)\]</span></p>
+<ul>
+<li><strong>Vizinhança D - <span class="math inline">\(\left[N_D(p)\right]\)</span></strong></li>
+</ul>
+<p><span class="math inline">\(N_D(p)\)</span> em <span class="math inline">\(p(x,y)\)</span> possui quatro vizinhos, dois na diagonais superiores (direita, esquerda ) outras duas na diagonais inferiores (direita, esquerda) suas coordenadas, ou seja o conjunto de pixels ao redor de <span class="math inline">\(p\)</span>, considerando apenas as diagonais <span class="citation">[<a href="#ref-thome2017" role="doc-biblioref">12</a>, p. 15]</span>.Exemplo na figura <a href="pixels.html#fig:vizinhanca">2.21</a> (b).</p>
+<p><span class="math display">\[p(x,y): p(x+1,y+1), p(x+1, y-1), p(x-1, y+1), p(x-1, y-1)\]</span></p>
+<ul>
+<li><strong>Vizinhança 8 - <span class="math inline">\(\left[N_8(p)\right]\)</span></strong></li>
+</ul>
+<p><span class="math inline">\(N_8(p)\)</span> em <span class="math inline">\(p(x,y)\)</span> possui 8 vizinhos, quatro <span class="math inline">\(N_4(p)\)</span> e outros 4 <span class="math inline">\(N_D(p)\)</span>suas coordenadas ou seja o conjunto de pixels ao redor de <span class="math inline">\(p\)</span>, considerando união das vizinhanças-4 e vizinhança-8 <span class="citation">[<a href="#ref-thome2017" role="doc-biblioref">12</a>, p. 15]</span>. Exemplo na figura <a href="pixels.html#fig:vizinhanca">2.21</a> (c).</p>
+<p><span class="math display">\[p(x,y): N_8(p) = N_4(p) \cup N_D(p)\]</span></p>
+
+<div class="figure" style="text-align: center"><span id="fig:vizinhanca"></span>
+<img src="imagens/02-formacao/vizinhanca.png" alt="Vizinhanças [12]." width="55%" />
+<p class="caption">
+Figura 2.21: Vizinhanças <span class="citation">[<a href="#ref-thome2017" role="doc-biblioref">12</a>]</span>.
+</p>
 </div>
+</div>
+<div id="conectividade" class="section level3">
+<h3><span class="header-section-number">2.7.2</span> Conectividade</h3>
+<p>Conceito importante, usado no estabelecimento limite das bordas de objetos e, identifica componentes das regiões da imagem (obtenção de propriedades específicas do objeto para o processamento de mais alto nível ).</p>
+<p>Dois pixels <span class="math inline">\(p(x,y)\)</span>, <span class="math inline">\(q(x,y)\)</span> estão conectados se:</p>
+<ol style="list-style-type: decimal">
+<li>São de alguma forma vizinhos (<span class="math inline">\(N_4\)</span>,<span class="math inline">\(N_D\)</span> ou <span class="math inline">\(N_8\)</span>).</li>
+<li>Seus níveis de cinza satisfazem algum critério de similaridade (<span class="math inline">\(V = \{ \dots \}\)</span>).</li>
+</ol>
+<ul>
+<li><strong>Conectividade de 4</strong>:</li>
+</ul>
+<p>Os pixels p e q, assumindo valores em &amp;V&amp; , são conectados de 4 somente se q pertence ao conjunto <span class="math inline">\(N_4(p)\)</span>. Exemplo em figura <a href="pixels.html#fig:conectividade">2.22</a> (a).</p>
+<p><span class="math display">\[C4_{p,q} \text{ em } V \Leftrightarrow q \in N_4(p) \wedge f(p) \wedge f(q) \in V \]</span>
+<span class="math display">\[V = \{0\} \to C4_{p.q} \text{ verdadeiro}\]</span></p>
+<ul>
+<li><strong>Conectividade de m(conectividade mista)</strong>:</li>
+</ul>
+<p>Dois pixels <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span>, assumindo valores em <span class="math inline">\(V\)</span>, são conectados de m somente se:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(q\)</span> pertence ao conjunto <span class="math inline">\(N_4(p)\)</span></li>
+<li><span class="math inline">\(q\)</span> pertence ao conjunto <span class="math inline">\(N_D(p)\)</span> e a interseção entre <span class="math inline">\(N_4(p)\)</span> e <span class="math inline">\(N_4(q)\)</span> for vazia.</li>
+</ol>
+<p><span class="math display">\[Cm_{p,q} \text{ em } V\Leftrightarrow (q \in N_4(p) \vee (q \in N_D(p) \wedge N_4(p) \cap N_4(q) = \{\})) \vee f(p) e f(q) \in V  \]</span>
+<span class="math display">\[V = \{0\} \to Cm_{p.q}\text{ falso}\]</span>
+Exemplo em figura <a href="pixels.html#fig:conectividade">2.22</a> (b).</p>
+<ul>
+<li><strong>Conectividade de 8</strong>:</li>
+</ul>
+<p>Os pixels <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span>, assumindo valores em V, são conectados de 8 somente se <span class="math inline">\(q\)</span> pertence ao conjunto <span class="math inline">\(N_8(p)\)</span>. Exemplo em figura <a href="pixels.html#fig:conectividade">2.22</a> (c).</p>
+<p><span class="math display">\[C8_{p,q} \text{ em } V\Leftrightarrow q \in N_8(p) \wedge f(p) \wedge f(q) \in V \]</span>
+<span class="math display">\[V = \{0\} \to C8_{p.q}\text{ verdadeiro}\]</span></p>
+
+<div class="figure" style="text-align: center"><span id="fig:conectividade"></span>
+<img src="imagens/02-formacao/conectividade.png" alt="Conectividades [12]." width="55%" />
+<p class="caption">
+Figura 2.22: Conectividades <span class="citation">[<a href="#ref-thome2017" role="doc-biblioref">12</a>]</span>.
+</p>
+</div>
+</div>
+<div id="adjacência" class="section level3">
+<h3><span class="header-section-number">2.7.3</span> Adjacência</h3>
+<p>Dois pixels <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span>, com valores pertencendo a <span class="math inline">\(V\)</span> são:</p>
+<ol style="list-style-type: decimal">
+<li>Adjacentes-4 se <span class="math inline">\(q\)</span> estiver no conjunto <span class="math inline">\(N_4(p)\)</span>.</li>
+<li>Adjacentes-8 se <span class="math inline">\(q\)</span> estiver no conjunto <span class="math inline">\(N_8(p)\)</span>.</li>
+<li>Adjacentes-m, <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span> subconjuntos de pixels onde <span class="math inline">\(\{(pq) \vee (pp) \vee (q q) \}\)</span>, são ditos adjacentes se pegamos um pixel do primeiro conjunto for adjacente a um pixel do segundo.</li>
+</ol>
+<p>Na figura <a href="pixels.html#fig:adjacencia">2.23</a> temos exemplos de 1. e 2. (em <a href="pixels.html#fig:adjacencia">2.23</a> (a)) e de 3. em <a href="pixels.html#fig:adjacencia">2.23</a> (b).</p>
+
+<div class="figure" style="text-align: center"><span id="fig:adjacencia"></span>
+<img src="imagens/02-formacao/adjacencia.png" alt="Adjacências [12]." width="55%" />
+<p class="caption">
+Figura 2.23: Adjacências <span class="citation">[<a href="#ref-thome2017" role="doc-biblioref">12</a>]</span>.
+</p>
+</div>
+</div>
+<div id="componente-conexa" class="section level3">
+<h3><span class="header-section-number">2.7.4</span> Componente Conexa</h3>
+<p>Dois pixels <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span> de um subconjunto de pixels <span class="math inline">\(V\)</span> da imagem são ditos conexos em <span class="math inline">\(V\)</span> se existir um caminho de pa qinteiramente contido em <span class="math inline">\(V\)</span>.</p>
+<p>Para qualquer pixel <span class="math inline">\(p\)</span> em <span class="math inline">\(V\)</span>, o conjunto de pixels em <span class="math inline">\(V\)</span> que são conexos a pé chamado um componente conexo de <span class="math inline">\(V\)</span>.</p>
+<p>Note que em uma componente conexo qualquer dois pixels deste componentes são conexos entre si.</p>
+<p>Em componentes conexos distintos os pixels são disjuntos (não conectados).</p>
+</div>
+<div id="medidas-de-distância" class="section level3">
+<h3><span class="header-section-number">2.7.5</span> Medidas de Distância</h3>
+<p>Para pixels <span class="math inline">\(p\)</span>, <span class="math inline">\(q\)</span> e <span class="math inline">\(z\)</span> com coordenadas <span class="math inline">\(p(x,y)\)</span>, <span class="math inline">\(q(s,t)\)</span> e <span class="math inline">\((u,v)\)</span>, respectivamente, <span class="math inline">\(D\)</span> é uma função distância ou métrica se:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(D(p,q) &gt;= 0 (D(p,q) = 0 ) \Leftrightarrow p = q\)</span></li>
+<li><span class="math inline">\(D(p,q) = D(q,p)\)</span></li>
+<li><span class="math inline">\(D(p,z) &lt;= D(p,q) + D(q,u)\)</span></li>
+</ol>
+<ul>
+<li>A distância entre dois pontos quaisquer pode ser definida por:</li>
+</ul>
+<p><span class="math display">\[D_e(p,q) = \sqrt{(x-s)^2 + (y-t)^2}\]</span></p>
+<p>conhecida como Distância Euclidiana.</p>
+<ul>
+<li>Distância <span class="math inline">\(D_4\)</span>(City Block ou Quarteirão) entre <span class="math inline">\(p(x,y)\)</span> e <span class="math inline">\(q(s,t)\)</span>é definida por:</li>
+</ul>
+<p><span class="math display">\[D4(p,q)=|x-s|+|y-t|\]</span></p>
+<p>Distância D8(Distância Xadrez) entre <span class="math inline">\(p\)</span> e <span class="math inline">\(q\)</span> é definida como:</p>
+<p><span class="math display">\[D_8 = max(|x-s|,|y-t|)\]</span></p>
+</div>
+<div id="operações-lógico-aritméticas" class="section level3">
+<h3><span class="header-section-number">2.7.6</span> Operações Lógico-aritméticas</h3>
+<p>As operações entre pixels são computadas pixel a pixel, considerando p e qpodemos efetuar as seguintes operações aritméticas e lógicas.</p>
+<ul>
+<li>Operações Aritméticas:
+<ol style="list-style-type: decimal">
+<li><strong>Adição</strong>: <span class="math inline">\(p+q\)</span>. O uso ocorre ao se fazer a média para redução de ruído.</li>
+<li><strong>Subtração</strong>: <span class="math inline">\(p-q\)</span>. É usada para remover informação estática de fundo, Detecção de diferenças entre imagens.</li>
+<li><strong>Multiplicação</strong>: <span class="math inline">\(p\cdot q\)</span>. Calibração de brilho.</li>
+<li><strong>Divisão</strong>: <span class="math inline">\(p\div q\)</span></li>
+</ol></li>
+</ul>
+<p>As operações Aritmética de Multiplicação e Divisão são usadas para corrigir sombras em níveis de cinza, produzidas em não uniformidades da iluminação ou no sensor utilizado para a aquisição da imagem.</p>
+<ul>
+<li>Operações Lógicas:
+<ol style="list-style-type: decimal">
+<li><strong>Conjunção</strong>: <span class="math inline">\(p\wedge q\)</span></li>
+<li><strong>Disjunção</strong>: <span class="math inline">\(p\vee q\)</span></li>
+<li><strong>Complementar</strong>: <span class="math inline">\(\neg q(\bar{q})\)</span></li>
+</ol></li>
+</ul>
+<p>As operações lógicas podem ser combinadas para formar qualquer outra operação lógica, são aplicadas apenas em imagens binárias, tem seu uso no mascaramento, detecção de características e análise de forma.</p>
+
+</div>
+</div>
+<!-- </div> -->
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
-<div id="ref-gonzalez2010">
-<p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+<div id="ref-thome2017">
+<p>[12] A. G. Thomé, “Fundamentos sobre Processamento de Imagens”. Universidade Federal do Rio de Janeiro; <a href="http://hpc.ct.utfpr.edu.br/~charlie/docs/PID/PID_AULA_01.pdf">http://hpc.ct.utfpr.edu.br/~charlie/docs/PID/PID_AULA_01.pdf</a>, 2017.</p>
 </div>
 </div>
             </section>
@@ -196,8 +331,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="resolução-espacial-e-de-intensidade.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transformacões-geométricas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +364,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/02-formacao_imagem.Rmd",
 "text": "Editar "
 },
 "history": {

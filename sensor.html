@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>2.3 Sensor | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="2.3 Sensor | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="2.3 Sensor | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="2.3 Sensor | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="lentes.html"/>
+<link rel="next" href="amostragem-e-quantização.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,70 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="sensor" class="section level2">
+<h2><span class="header-section-number">2.3</span> Sensor</h2>
+<p>Existem dois tipos principais de sensores que são empregados em dispositivos fotográficos. Um deles é o CCD, que é usado principalmente em aplicações mais específicas ou que precisam de uma qualidade muito alta, e o CMOS, usado em casos mais gerais, como câmeras de celulares.
+Após a luz passar por todo o sistema de lentes ela chega a esses sensores, que tem sua estrutura exemplificada na figura <a href="sensor.html#fig:sensor">2.9</a>, conhecido como PDA(Photodiode Array):</p>
+
+<div class="figure" style="text-align: center"><span id="fig:sensor"></span>
+<img src="imagens/02-formacao/sensor.png" alt="Sensor(area matricial de celulas), Single Cell(uma única celula sensora) [7, p. 17]." width="55%" />
+<p class="caption">
+Figura 2.9: Sensor(area matricial de celulas), Single Cell(uma única celula sensora) <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 17]</span>.
+</p>
+</div>
+<p>Como podemos ver, o sensor consiste em várias pequenas células, cada uma um pixel, que recebe a energia luminosa e a converte para um número digital. Quanto maior a incidência de luz em um pixel, maior a quantidade de energia e por isso maior será o valor do número gerado. O trabalho de controlar esse tempo de exposição é do obturador da câmera, sendo que um tempo muito longo ou muito curto podem produzir efeitos indesejados nas imagens obtidas, por isso a maioria das câmeras contam com um sistema que controla automaticamente esse tempo para o melhor resultado. Na figura <a href="sensor.html#fig:exposicao">2.10</a> podemos ver isso em uma imagem real, na primeira temos uma imagem que foi capturada com a exposição correta(correctly exposed), logo em seguida temos uma que sofreu de superexposição(overexposed) e na terceira temos uma com subexposição(under exposed). Por último temos uma imagem que sobre com o movimento do objeto que estava sendo capturado, oque ocasionou o borramento(motion blur).</p>
+
+<div class="figure" style="text-align: center"><span id="fig:exposicao"></span>
+<img src="imagens/02-formacao/exposicao.png" alt="Diferentes níveis de exposição [7, p. 17]." width="60%" />
+<p class="caption">
+Figura 2.10: Diferentes níveis de exposição <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 17]</span>.
+</p>
+</div>
+<p>Vimos até agora, principalmente, como se capturam imagens em tons de cinza, mas em imagens coloridas, como são capturadas?
+Imagens coloridas utilizam, especialmente, o formato RGB, que significa Red-Green-Blue, ou seja, é formado pelas cores primárias vermelho, verde e azul. Podemos a partir disso gerar imagens coloridas tendo as informações sobre sua intensidade de cada uma dessas cores. Na figura <a href="sensor.html#fig:componentes">2.11</a> podemos ver uma imagem com seus componentes separados:</p>
+
+<div class="figure" style="text-align: center"><span id="fig:componentes"></span>
+<img src="imagens/02-formacao/componentes.png" alt="Imagem colorida separada em seus três componentes [7, p. 28]." width="65%" />
+<p class="caption">
+Figura 2.11: Imagem colorida separada em seus três componentes <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 28]</span>.
+</p>
+</div>
+<p>Precisamos assim dessas três informações para formar uma imagem colorida, uma das implementações pensadas para resolver esse problema foi a de dividir a luz de entrada e enviar cada um dos raios filtrados para um sensor diferente, como representado na figura <a href="sensor.html#fig:tressensores">2.12</a>. Apesar de essa implementação funcionar, ela não se tornou o padrão pelo fato de que utilizar três sensores faz com que seu preço de construção fique elevado e o projeto em si muito mais complexo.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:tressensores"></span>
+<img src="imagens/02-formacao/tres_sensores.png" alt="Captura de imagem com três sensores [9, p. 242]." width="60%" />
+<p class="caption">
+Figura 2.12: Captura de imagem com três sensores <span class="citation">[<a href="#ref-teubner2019" role="doc-biblioref">9</a>, p. 242]</span>.
+</p>
+</div>
+<p>Ao invés disso, as câmeras modernas utilizam somente um sensor e fazem uso de um filtro que separa uma das três cores para cada pixel, isso porque os fotodiodos não reconhecem por si só as cores, mas a intensidade, o que nos levaria a ter somente fotos com tons de cinza. Esse filtro pode conter diferentes configurações, sendo que uma das mais utilizadas é o filtro Bayer, que pode ser visto na figura <a href="sensor.html#fig:bayer">2.13</a>:</p>
+
+<div class="figure" style="text-align: center"><span id="fig:bayer"></span>
+<img src="imagens/02-formacao/bayer.png" alt="Filtro Bayer [7, p. 29]." width="80%" />
+<p class="caption">
+Figura 2.13: Filtro Bayer <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 29]</span>.
+</p>
+</div>
+<p>Podemos perceber que ocorre uma maior ocorrência das cores verdes, isso se deve ao fato de que o olho humano é mais sensível a essa cor, logo se dá uma maior ênfase a sua captura. Na figura 14 temos uma esquematização de como cada pixel recebe informação de somente uma cor, por meio da filtragem, onde a luz que entra(Incoming light) é filtrada e somente a cor de interesse consegue passar, após isso ela chega a malha de sensores(sensor array):</p>
+
+<div class="figure" style="text-align: center"><span id="fig:sensorarray"></span>
+<img src="imagens/02-formacao/sensorarray.png" alt="Sensores com padrão Bayer [10]." width="60%" />
+<p class="caption">
+Figura 2.14: Sensores com padrão Bayer <span class="citation">[<a href="#ref-img:sensorarray" role="doc-biblioref">10</a>]</span>.
+</p>
+</div>
+<p>Vemos na figura <a href="sensor.html#fig:sensorarray">2.14</a> que temos ao final três grupos de informações diferentes mas que têm dados faltantes nos pixels referentes às outras cores. As informações desses pixels são preenchidas em um processo chamado interpolação que completa as informações baseada nos valores dos pixels vizinhos.</p>
 </div>
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
-<div id="ref-gonzalez2010">
-<p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+<div id="ref-moeslund2012">
+<p>[7] T. B. Moeslund, <em>Introduction to video and image processing: Building real systems and applications</em>. Springer Science &amp; Business Media, 2012.</p>
+</div>
+<div id="ref-teubner2019">
+<p>[9] U. Teubner e H. J. Brückner, <em>Optical Imaging and Photography: Introduction to Science and Technology of Optics, Sensors and Systems</em>. Walter de Gruyter GmbH &amp; Co KG, 2019.</p>
+</div>
+<div id="ref-img:sensorarray">
+<p>[10] W. Commons, “Bayer pattern on sensor profile”. 2006, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Bayer_pattern_on_sensor_profile.svg">https://commons.wikimedia.org/wiki/File:Bayer_pattern_on_sensor_profile.svg</a>.</p>
 </div>
 </div>
             </section>
@@ -196,8 +252,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lentes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="amostragem-e-quantização.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +285,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/02-formacao_imagem.Rmd",
 "text": "Editar "
 },
 "history": {

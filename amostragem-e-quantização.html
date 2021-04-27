@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>2.4 Amostragem e Quantização | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="2.4 Amostragem e Quantização | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="2.4 Amostragem e Quantização | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="2.4 Amostragem e Quantização | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="sensor.html"/>
+<link rel="next" href="definição-de-imagem-digital.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,47 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="amostragem-e-quantização" class="section level2">
+<h2><span class="header-section-number">2.4</span> Amostragem e Quantização</h2>
+<p>Nas seções anteriores foram apresentados processos para a captura de imagens a partir de sensores (principalmente de câmeras comuns). Ainda como etapas da aquisição de imagens serão abordados nesta seção a amostragem e a quantização, procedimentos em que os dados contínuos dos sensores são convertidos para o formato digital, que é discreto.</p>
+<div id="amostragem" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Amostragem</h3>
+<p>Na amostragem ocorre a discretização espacial, ou seja, a conversão de um espaço contínuo em um espaço discreto, que pode ser representado digitalmente. Este procedimento é exemplificado na Figura <a href="amostragem-e-quantização.html#fig:amostragemquant">2.15</a>, na qual a figura <a href="amostragem-e-quantização.html#fig:amostragemquant">2.15</a> (a) representa um objeto de atributos contínuos, e a linha AB é um segmento horizontal do objeto.</p>
+<p>A figura <a href="amostragem-e-quantização.html#fig:amostragemquant">2.15</a> (b) contém a representação da amplitude (nível de intensidade) da imagem contínua ao longo da linha AB. Nas extremidades do gráfico na figura <a href="amostragem-e-quantização.html#fig:amostragemquant">2.15</a> (b), a intensidade é mais alta devido a parte branca da imagem, já os vales representam as partes com menos intensidade, ou seja, as partes mais escuras. Como o computador ainda não tem a capacidade de armazenar uma sequência infinita de números reais, então na quantização são selecionados pontos espaçados igualmente, como na figura <a href="amostragem-e-quantização.html#fig:amostragemquant">2.15</a> (c).</p>
+<p>Esse procedimento de amostragem, na prática, é realizado pelos sensores, nos casos mais comuns por um sensor de uma câmera, que geralmente é retangular. Desta forma, a quantidade de células sensíveis na matriz do sensor determina os limites da amostragem. Dito isso, percebe-se que para representar de maneira real o mundo teríamos que ter um número infinito de pixels, como isso não é possível recorremos a opção de utilizar o maior número de pixels possíveis. Quanto mais pixels houver no sensor, maior será a quantidade de detalhes por ele capturado, melhorando a qualidade da imagem <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>]</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:amostragemquant"></span>
+<img src="imagens/02-formacao/amostragemquant.png" alt="Filtro Bayer [2, p. 34]." width="70%" />
+<p class="caption">
+Figura 2.15: Filtro Bayer <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 34]</span>.
+</p>
+</div>
+</div>
+<div id="quantização" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Quantização</h3>
+<p>Na figura <a href="amostragem-e-quantização.html#fig:amostragemquant">2.15</a> (c), os níveis de intensidade ainda variam dentro de uma faixa contínua. A função digital da intensidade é obtida pela quantização, em que as intensidades das amostras são mapeadas em um conjunto de quantidades discretas. Na figura <a href="amostragem-e-quantização.html#fig:amostragemquant">2.15</a> (d), os valores contínuos de intensidade são quantizados estabelecendo um dos oito valores para cada amostra de acordo com a escala de intensidade na figura <a href="amostragem-e-quantização.html#fig:amostragemquant">2.15</a> (c).
+Na prática, geralmente a etapa de quantização é realizada diretamente no hardware utilizando um conversor analógico-digital<span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 8]</span>. A conversão dos valores contínuos para valores discretos pode ser realizada por meio de arredondamento, truncamento ou algum outro processo<span class="citation">[<a href="#ref-bovik2009essential" role="doc-biblioref">11</a>, p. 9]</span>.
+No processo de quantização, geralmente os níveis de intensidade são mapeados por uma transformação linear para um conjunto finitos de inteiros não negativos <span class="math inline">\(\{0,\dots, L-1\}\)</span>, onde <span class="math inline">\(L\)</span> é uma potência de dois, ou seja, <span class="math inline">\(L = 2_k\)</span> <span class="citation">[<a href="#ref-bovik2009essential" role="doc-biblioref">11</a>, p. 10]</span>. Isso significa que L é o número de tons de cinza que podem ser representados com uma quantidade k de bits. Em muitas situações é utilizado <span class="math inline">\(k = 8\)</span>, ou seja, temos 256 níveis de cinza.
+Ao realizar a quantização e a amostragem linha por linha no objeto da figura <a href="amostragem-e-quantização.html#fig:quantizacao">2.16</a> (a) é produzida uma imagem digital bidimensional como na figura <a href="amostragem-e-quantização.html#fig:quantizacao">2.16</a>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:quantizacao"></span>
+<img src="imagens/02-formacao/quantizacao.png" alt="Filtro Bayer [2, p. 35]." width="60%" />
+<p class="caption">
+Figura 2.16: Filtro Bayer <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 35]</span>.
+</p>
+</div>
+</div>
 </div>
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
 <div id="ref-gonzalez2010">
 <p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+</div>
+<div id="ref-burger2009">
+<p>[8] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
+</div>
+<div id="ref-bovik2009essential">
+<p>[11] A. C. Bovik, <em>The essential guide to image processing</em>. Academic Press, 2009.</p>
 </div>
 </div>
             </section>
@@ -196,8 +229,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sensor.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="definição-de-imagem-digital.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +262,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/02-formacao_imagem.Rmd",
 "text": "Editar "
 },
 "history": {

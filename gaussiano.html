@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>5.4 Gaussiano | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="5.4 Gaussiano | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="5.4 Gaussiano | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="5.4 Gaussiano | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="mediana.html"/>
+<link rel="next" href="segmentação.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,57 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="gaussiano" class="section level2">
+<h2><span class="header-section-number">5.4</span> Gaussiano</h2>
+<p>Filtro de Gauss é um filtro simétrico (isotrópico) usado para suavizar imagens. Ele funciona análogo a um filtro de média ponderada, mas com um padrão, isto é, dá ênfase ao pixel central da máscara (<em>kernel</em>) e menor ênfase a medida que os demais se distanciam dele, seguindo um gradiente muito similar à distribuição gaussiana. O “similar” se deve somente ao fato que será necessário truncamentos, assim, havendo erros e por ser desconsiderado a constante multiplicadora, o que melhora o perfil da função para aplicação no PDI.</p>
+<ul>
+<li><p><em>Função gaussiana:</em> <span class="math display">\[g(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</span></p></li>
+<li><p><em>Função gaussiana modificada:</em> <span class="math display">\[g(x) = e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</span></p></li>
+</ul>
+<p>Note que a função tem formato de sino, que varia de acordo com os valores atribuídos ao, <span class="math inline">\(\sigma\)</span>, o qual dependerá da ênfase desejada no cálculo. A medida que <span class="math inline">\(\sigma\)</span> aumenta, maior é o peso dado às “caldas”, no caso, aos <em>pixels</em> mais distantes do <em>pixel</em> central. Característica representada no gráfico <a href="gaussiano.html#fig:funcaoGaussiana">5.9</a>.</p>
+<p>A fim de que o <em>pixel</em> central da máscara esteja em <span class="math inline">\((0,0)\)</span>, considera-se <span class="math inline">\(\mu=0\)</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:funcaoGaussiana"></span>
+<img src="imagens/05-filtros/funcaoGaussiana.png" alt="Função gaussiana com \(\mu=0\) e diferentes \(\sigma\)" width="55%" />
+<p class="caption">
+Figura 5.9: Função gaussiana com <span class="math inline">\(\mu=0\)</span> e diferentes <span class="math inline">\(\sigma\)</span>
+</p>
 </div>
+<p>O filtro gaussiano 2D é gerado através da convolução de dois vetores da mesma função - a imagem se refere ao subconjunto do contradomínio -, sendo estas, normalmente, oriundas da mesma função gaussiana modificada. De forma alternativa, ele também pode ser construído a partir da i-ésima linha do Triângulo de Pascal que corresponde ao tamanho do <em>kernel</em> desejado. Como o método é o mesmo para as duas fontes, explicaremos ele utilizando como fonte a função gaussiana modificada.</p>
+<p>O procedimento primário é obter a imagem da função, mas para obter um filtro com intuito gaussiano se deve selecionar a amostragem dos pontos no intervalo de <span class="math inline">\(\pm 2.5\sigma\)</span> ou <span class="math inline">\(\pm 3.5\sigma\)</span> <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 114]</span>. Assim, optando-se pela primeira opção, procura-se <span class="math inline">\(g(-3)\)</span>, <span class="math inline">\(g(-2)\)</span>, <span class="math inline">\(g(-1)\)</span>, <span class="math inline">\(g(0)\)</span>, <span class="math inline">\(g(1)\)</span>, <span class="math inline">\(g(2)\)</span> e <span class="math inline">\(g(3)\)</span>. Entretanto, como alguns valores têm infinitas casas decimais, devemos truncá-los, no qual foi preferido com cinco casas decimais.</p>
+<ul>
+<li><span class="math inline">\(g(-3) = g(3) = 0,01110\)</span></li>
+<li><span class="math inline">\(g(-2) = g(2) = 0,13533\)</span></li>
+<li><span class="math inline">\(g(-1) = g(1) = 0,60653\)</span></li>
+<li><span class="math inline">\(g(0) = 1\)</span></li>
+</ul>
+<p>Então, considera-se o menor valor como 1, no caso <span class="math inline">\(f(3)\)</span> e <span class="math inline">\(f(-3)\)</span>, e interpolamos os demais, truncando-os com propósito de obter a parte inteira. A divisão por 224 é oriunda da soma dos pesos da média. Pronto, temos a máscara gaussiana 1D necessária:</p>
+<p><span class="math inline">\(\frac{1}{224}\begin{bmatrix}1 &amp; 12 &amp; 54 &amp; 90 &amp; 54 &amp; 12 &amp; 1\end{bmatrix}\)</span></p>
+<p>Com a máscara em mãos, convoluciona-se os seguintes fatores:</p>
+<ul>
+<li><p><span class="math inline">\(\frac{1}{224}\begin{bmatrix}1 &amp; 12 &amp; 54 &amp; 90 &amp; 54 &amp; 12 &amp; 1\end{bmatrix}\)</span></p></li>
+<li><p><span class="math inline">\(\frac{1}{224}\begin{bmatrix}1 \\ 12 \\ 54 \\ 90 \\ 54 \\ 12 \\ 1\end{bmatrix}\)</span> é a transposta da máscara 1D</p></li>
+<li><p><span class="math inline">\(f(x,y)\)</span> é a imagem de entrada</p></li>
+</ul>
+<p>Nessa propriedade há uma determinada ordem que é mais eficiente para o sistema digital, que é a convolução entre <span class="math inline">\(f(x,y)\)</span> e uma das máscaras 1D e, depois, a convolução desse resultado com a transposta desta máscara. Pronto, como saída teremos o filtro gaussiano aplicado a imagem.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:lettersGaussianFilter"></span>
+<img src="imagens/05-filtros/LettersGaussianFilter.png" alt="Imagem com diferentes tamanhos de filtro gaussiano. (Adaptado:[2, p. 102])" width="55%" />
+<p class="caption">
+Figura 5.10: Imagem com diferentes tamanhos de filtro gaussiano. (Adaptado:<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 102]</span>)
+</p>
+</div>
+<p>Nesse exemplo, temos um exemplo similar ao usado no filtro de média, porém, usando-se o filtro gaussiano. A imagem de entrada (a) tem tamanho 500x500 onde foram aplicados filtros de diferentes tamanhos, 3x3(b) ; 5x5(c) ; 9x9(d) ; 15x15(e) e 35x35(f). Note que, ao contrário do exemplo anterior, há uma maior preservação da nítidez, todavia não seria um filtro eficiente para redução de ruído. Essa característica é devido ao maior peso dado ao <em>pixel</em> central do <em>kernel</em>.</p>
+
+</div>
+<!-- </div> -->
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
 <div id="ref-gonzalez2010">
 <p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+</div>
+<div id="ref-burger2009">
+<p>[8] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
 </div>
 </div>
             </section>
@@ -196,8 +239,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mediana.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="segmentação.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +272,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/05-filtros.Rmd",
 "text": "Editar "
 },
 "history": {

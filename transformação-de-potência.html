@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>4.3 Transformação de Potência | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="4.3 Transformação de Potência | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="4.3 Transformação de Potência | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="4.3 Transformação de Potência | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="transformação-logarítmica.html"/>
+<link rel="next" href="filtros.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,10 +181,57 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="transformação-de-potência" class="section level2">
+<h2><span class="header-section-number">4.3</span> Transformação de Potência</h2>
+<p>As transformações de potência apresentam a forma básica:</p>
+<p><span class="math display">\[s = cr^y\]</span></p>
+<p>sendo c e γ constantes positivas. Ao plotar a transformação de potência para diferentes valores (y), e c=1, na Figura se observa um comportamento semelhante ao de expansão/compressão da transformação Logarítmica. Curvas de transformação de potência com valores de y menores que 1 (fração) tem um efeito parecido com a função Log, enquanto que para valores de y maiores que 1 se parecem mais com a logarítmica inversa.</p>
+<p>Figura - Plotagens da equação <span class="math display">\[s = cr^γ\]</span> para vários valores de y.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/plotagens_equacao.png" width="40%" style="display: block; margin: auto;" /></p>
+<p>Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 72]</span>.</p>
+<p>Uma das aplicações da transformação de potência é a correção gama em dispositivos que funcionam de acordo com uma lei de potência, como em computadores (Gonzalez; Woods, 2010). Por exemplo, dispositivos de tubo de raios catódicos apresentam relação com a função potência de expoentes variando em aproximadamente 1,8 a 2,5. Para valores de gama próximos de 2,5 a imagem de saída no monitor tende a ser mais escura ( Figura b) que a imagem original (Figura a). A imagem corrigida (Figura c) pela correção gama, neste caso com gama menor que 1, gera uma saída (Figura d) mais parecida com a imagem original (Figura a).</p>
+<p>Figura - Correção Gama.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/variacao_gradativa.png" width="40%" style="display: block; margin: auto;" /></p>
+<ol style="list-style-type: lower-alpha">
+<li>Imagem com variação gradativa de intensidade (gradiente). (b) Imagem vista em um monitor simulado com gama igual a 2,5. (c) Imagem com correção gama. (d) Imagem corrigida vista no mesmo monitor.</li>
+</ol>
+<p>Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 72]</span>.</p>
+<p>Outra utilidade da transformação de potência pode ser vista na Figura, em que a imagem original está desbotada, indicando que se deve aplicar uma compressão dos níveis mais baixos e expandir valores mais altos (Gonzalez; Woods, 2010). Assim, a transformação foi realizada com gama maior que 1. Os resultados do processamento com <span class="math inline">\(y = 3, y = 4,\)</span> e <span class="math inline">\(y = 5\)</span> podem ser vistos nas imagens (b), (c) e (d), respectivamente.</p>
+<p>Figura - Transformações de potência.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/potencial.png" width="40%" style="display: block; margin: auto;" /></p>
+<ol style="list-style-type: lower-alpha">
+<li>Imagem aérea. (b) a (d) Resultados da aplicação da transformação de potência com <span class="math inline">\(c = 1\)</span> e <span class="math inline">\(y = 3, 4\)</span> e <span class="math inline">\(5\)</span>, respectivamente.
+Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 74]</span>.</li>
+</ol>
+<p>A distribuição dos níveis de intensidade (L) de uma imagem podem ser identificados em um histograma, ou seja, um gráfico com o número de pixels na imagem para cada nível de cinza. Assim, os histogramas podem servir de referência para várias manipulações no domínio espacial, além de fornecer estatísticas das imagens e ser útil em aplicações como compressão e segmentação. O histograma também pode ser interpretado como uma distribuição discreta da probabilidade de ocorrência do nível de intensidade <span class="math inline">\(r_k\)</span> em uma imagem (Gonzalez; Woods, 2010):</p>
+<p><span class="math display">\[p(r_k) = \frac{x_k}{MN} k = 0, 1,2, ..., L - 1 ()\]</span></p>
+<p>sendo <span class="math inline">\(M\)</span> e <span class="math inline">\(N\)</span> as dimensões de linha e coluna da imagem, e <span class="math inline">\(n_k\)</span> é o número de pixels da imagem com intensidade <span class="math inline">\(r_k\)</span>.
+Na Figura estão identificados quatro histogramas referentes a cada uma das imagens dos grãos de pólen do lado esquerdo. O eixo horizontal de cada histograma corresponde a valores de intensidade, <span class="math inline">\(r_k\)</span>, e o eixo vertical são os valores de <span class="math inline">\(p(r_k)\)</span>. Cada imagem destaca uma característica em relação à intensidade da imagem: escura, clara, baixo contraste e alto contraste.</p>
+<p>Na imagem do topo, a mais escura, as barras do histograma estão concentradas no lado inferior (escuro) da escala de intensidades, enquanto que na imagem mais clara tendem à região oposta (Gonzalez; Woods, 2010). Uma imagem com baixo contraste, aparência desbotada e sem brilho, tem um histograma estreito normalmente localizado no meio da escala de intensidades. Os componentes do histograma na imagem de alto contraste estão distribuídos quase uniformemente em uma ampla faixa da escala de intensidades, com poucas linhas verticais sendo muito mais altas do que as outras. As imagens de alto contraste tendem a apresentar uma boa correspondência em relação aos detalhes de nível de cinza (Gonzalez; Woods, 2010).</p>
+<p>Figura - Histogramas de uma imagem com grãos de pólen.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/histograma5.png" width="40%" style="display: block; margin: auto;" /></p>
+<p>De cima para baixo: escura, clara, baixo contraste e alto contraste.
+Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 79]</span>.</p>
+<p>Os histogramas são utilizados em grande parte para auxiliar em transformações de intensidade com foco em melhorar o contraste, tornando mais fácil a percepção de informações de interesse na imagem (Pedrini; Schwartz, 2008). Nos exemplos de transformações apresentados nesta seção (linear, logarítmica e de potência), a escolha do operador <span class="math inline">\((T)\)</span> de transformação geralmente é empírica, em que se deve considerar a imagem original e o efeito desejado. Para transformar a imagem de forma que se altere o histograma de uma maneira específica e automática utilizam-se métodos em que o formato dos histogramas são pré-definidos ou atendem a um determinado padrão, como na equalização de histograma e especificação de histograma (Gonzalez; Woods, 2010).</p>
+<p>Na equalização do histograma, o histograma da imagem original <span class="math inline">\(f\)</span> é alterado de maneira que a imagem transformada g tenha uma distribuição aproximadamente uniforme dos níveis de cinza em uma faixa mais ampla de valores, assumindo características próximas de uma imagem de alto contraste (Pedrini; Schwartz, 2008). Neste método se aplica um operador de transformação de intensidade <span class="math inline">\((T)\)</span> na forma contínua, Equação, que gera uma variável aleatória (valores de intensidade da imagem transformada) caracterizada por uma função densidade de probabilidade uniforme (PDF, probability density function) .
+<span class="math inline">\(s = T(r) = (L - 1)0rpr(w) dw ( )\)</span>
+sendo w uma variável local da integração, L os níveis de cinza da imagem e pr(r) a PDF de r (valores de intensidade da imagem original). A demonstração da obtenção da PDF da variável <span class="math inline">\(s (p_s(s))\)</span>, na equação, pode ser vista com detalhes no livro “Processamento digital de imagens” (Gonzalez; Woods, 2010). O gráfico das PDFs de r e s estão identificados na Figura como <span class="math inline">\(pr(r)\)</span> e <span class="math inline">\(p_s(s)\)</span>.</p>
+<p><span class="math display">\[p_s(s) = \frac{1}{L-1} \]</span> para $s <span class="math inline">\(\leq\)</span> L - 1 ()$</p>
+<p>Figura - Equalização de histograma na forma contínua.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/histograma.png" width="55%" style="display: block; margin: auto;" />
+(a) Uma PDF arbitrária. (b) Resultado da aplicação da transformação para equalização.</p>
+<p>Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 81]</span>.</p>
+<p>Para que esses conceitos sejam aplicados no processamento de imagens eles devem ser expressos na forma discreta. A transformação na Equação da forma discreta é:</p>
+<p><span class="math inline">\(S_k = T(r_k) = (L - 1) \sum {i=1}^n x i\)</span></p>
+<!--## Processamento de histograma
+
+
+
+## Equalização do histograma
+## Especificação de histograma-->
+
 </div>
+<!-- </div> -->
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
 <div id="ref-gonzalez2010">
@@ -196,8 +243,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="transformação-logarítmica.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="filtros.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +276,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/04-transformacoes_radiometricas.Rmd",
 "text": "Editar "
 },
 "history": {

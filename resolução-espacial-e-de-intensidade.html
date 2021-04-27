@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>2.6 Resolução espacial e de intensidade | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="2.6 Resolução espacial e de intensidade | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="2.6 Resolução espacial e de intensidade | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="2.6 Resolução espacial e de intensidade | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="definição-de-imagem-digital.html"/>
+<link rel="next" href="pixels.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,37 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="resolução-espacial-e-de-intensidade" class="section level2">
+<h2><span class="header-section-number">2.6</span> Resolução espacial e de intensidade</h2>
+<p>Sem as especificações espaciais da imagem, não se pode inferir sobre a qualidade apenas pelo tamanho (M x N) em quantidades de pixels. Outra medida para especificar a resolução espacial é a densidade de pixels, podendo ser expressa como pontos (pixels) por unidade de distância, comumente dots per inch (pontos por polegada ou dpi). Referências de qualidade em relação à resolução espacial são, por exemplo, jornais impressos com uma resolução de 75 dpi e páginas de livros geralmente impressas com 2.400 dpi <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>]</span>.</p>
+<p>A figura <a href="resolução-espacial-e-de-intensidade.html#fig:resolucaoespacial">2.19</a> mostra os efeitos da redução da resolução espacial em uma imagem em seis resoluções diferentes. A figura <a href="resolução-espacial-e-de-intensidade.html#fig:resolucaoespacial">2.19</a> (a) tem resolução 512 x 512, e a resolução das demais <a href="resolução-espacial-e-de-intensidade.html#fig:resolucaoespacial">2.19</a> (b-f) diminui pela metade de forma sequencial. Todas as imagens têm as mesmas dimensões, ampliando-se o tamanho do pixel para deixar mais evidente a perda de detalhes nas imagens de baixa resolução.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:resolucaoespacial"></span>
+<img src="imagens/02-formacao/resolucaoespacial.png" alt="Efeitos da redução da resolução espacial [3, p. 20]." width="50%" />
+<p class="caption">
+Figura 2.19: Efeitos da redução da resolução espacial <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 20]</span>.
+</p>
+</div>
+<p>A resolução de intensidade ou profundidade corresponde ao número de bits (k) utilizados para estabelecer os níveis de cinza da imagem (<span class="math inline">\(L=2^k\)</span>). Por exemplo, em uma imagem cuja intensidade é quantizada em L= 256 níveis, a profundidade é de k = 8 bits por pixel.</p>
+<p>Os efeitos da redução dos níveis de cinza (profundidade) podem ser vistos na Figura. A imagem (a) apresenta 256 níveis de cinza (k = 8). As imagens (b) e (c) foram geradas pela redução do número de bits k = 4 e k = 2, respectivamente, mas mantendo a mesma dimensão.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:reducaoprofundidade"></span>
+<img src="imagens/02-formacao/reducaoprofundidade.png" alt="Efeitos da redução de profundidade [7, p. 19]." width="90%" />
+<p class="caption">
+Figura 2.20: Efeitos da redução de profundidade <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 19]</span>.
+</p>
+</div>
 </div>
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
 <div id="ref-gonzalez2010">
 <p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+</div>
+<div id="ref-pedrini2008">
+<p>[3] H. Pedrini e W. Robson Schwartz, <em>Análise de imagens digitais: princípios, algoritmos e aplicações</em>, 3º ed. São Paulo: Thomson Learning Edicoes Ltda, 2007.</p>
+</div>
+<div id="ref-moeslund2012">
+<p>[7] T. B. Moeslund, <em>Introduction to video and image processing: Building real systems and applications</em>. Springer Science &amp; Business Media, 2012.</p>
 </div>
 </div>
             </section>
@@ -196,8 +219,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="definição-de-imagem-digital.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pixels.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +252,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/02-formacao_imagem.Rmd",
 "text": "Editar "
 },
 "history": {

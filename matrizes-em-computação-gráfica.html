@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>3.4 Matrizes em Computação gráfica | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="3.4 Matrizes em Computação gráfica | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="3.4 Matrizes em Computação gráfica | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="3.4 Matrizes em Computação gráfica | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="representação-vetorial-e-matricial-de-imagens-digitalizadas.html"/>
+<link rel="next" href="transformações-em-pontos-e-objetos.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,27 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="matrizes-em-computação-gráfica" class="section level2">
+<h2><span class="header-section-number">3.4</span> Matrizes em Computação gráfica</h2>
+<p>As transformações geométricas (translação, escala e rotação) podem ser representadas na forma de equações possibilitando suas manipulações.
+O problema é que manipulações de objetos gráficos normalmente envolvem muitas operações aritméticas simples.</p>
+<p>As matrizes são muito usadas nessas manipulações porque são mais fáceis de usar e entender do que as equações algébricas, o que explica por que programadores e engenheiros as usam extensivamente.</p>
+<p>As matrizes são parecidas com modelo organizacional da memória dos computadores. Suas representações se relacionam diretamente com estas estruturas de armazenamento, facilmente o trabalho dos e permitindo maior velocidade para aplicações críticas como jogos e aplicações em realidade virtual. É devido a esse fato que os computadores com “facilidades vetoriais” têm sido muito usados junto a aplicações de computação gráfica.</p>
+<p>Devido ao padrão de coordenadas usualmente adotado para representação de pontos no plano (x,y) e no espaço tridimensional (x,y,z), pode ser conveniente manipular esses pontos em matrizes quadradas de 2x2 ou 3x3 elementos. Através de matrizes e de sua multiplicação, podemos representar todas as transformações lineares 2D e 3D. Várias transformações podem ser combinadas resultando em uma única matriz denominada de matriz de transformação.</p>
+<p>Na imagem digitalizada, são aplicados elementos básicos como pontos, linhas, curvas e as superfícies tridimensionais ou mesmo os sólidos que mostram os elementos que formam as imagens sintaticamente no computador.
+Em computação gráfica os elementos pontos, linhas, curvas e as superfícies tridimensionais ou mesmo os sólidos são denominados primitivas vetoriais da imagem. As primitivas vetoriais são associadas a um conjunto de atributos que define sua aparência e a um conjunto de dados que define a sua geometria (pontos de controle).
+Para esclarecer melhor, vamos considerar alguns exemplos, dois elementos facilmente caracterizados como vetoriais, pela noção de vetores já discutida são os pontos e linhas retas.</p>
+<p>A cada elemento de um conjunto de pontos associa-se uma posição, que pode ser representada por suas coordenadas (geometria), e uma cor, que será como esses pontos aparecerão na tela (tributos). No caso de um conjunto de linhas retas, cada uma pode ser definida pelas coordenadas de seus pontos extremos (geometria) e sua cor, espessura, ou ainda se aparecerá pontilhada ou tracejada (atributos).</p>
+<p>A descrição matricial é típica das imagens digitalizadas capturadas por scanners ou utilizadas nos vídeos. É a forma de descrição principal na análise e no processamento de imagens. Em computação gráfica sintética, surgem nos processos de finalização (ray tracing, z-buffers).</p>
+<p>Na representação matricial, a imagem é descrita por um conjunto de células em um arranjo especial bidimensional, uma matriz. Cada célula representa os pixels (ou pontos) da imagem matricial. Os objetos são formados usando adequadamente esses pixels. A figura 3.2 explica melhor as formas de descrição de imagens matriciais. Essa é a representação usualmente empregada para formar a imagem nas memórias e telas dos computadores e na maioria dos dispositivos de saída gráficos (impressoras e vídeos).</p>
+<p>Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 14, 15]</span>.</p>
+<p><img src="imagens/03-transformacoes/memoria_tela_imagem.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Figura 3.2: Descrição de imagens matriciais por conjunto de pixels <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 15]</span>.</p>
 </div>
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
-<div id="ref-gonzalez2010">
-<p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+<div id="ref-azevedo2018">
+<p>[13] E. Azevedo, A. Conci, e C. Vasconcelos, <em>Computaç ao gr’afica: Teoria e pr’atica: geraç ao de imagens</em>, vol. 1. Elsevier Brasil, 2018.</p>
 </div>
 </div>
             </section>
@@ -196,8 +209,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="representação-vetorial-e-matricial-de-imagens-digitalizadas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transformações-em-pontos-e-objetos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +242,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/03-transformacoes_geometricas.Rmd",
 "text": "Editar "
 },
 "history": {

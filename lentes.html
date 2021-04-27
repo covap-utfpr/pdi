@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>2.2 Lentes | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="2.2 Lentes | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="2.2 Lentes | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="2.2 Lentes | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="câmera-pinhole-e-geometria.html"/>
+<link rel="next" href="sensor.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,66 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="lentes" class="section level2">
+<h2><span class="header-section-number">2.2</span> Lentes</h2>
+<p>As câmeras mais modernas não possuem somente uma pequena entrada para luz, mas um sistema de lentes que focam a luz recebida no sensor. Discutiremos a seguir alguns dos conceitos por trás disso.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:lente"></span>
+<img src="imagens/02-formacao/lente.png" alt="Ação de uma lente sobre os raios de luz [7, p. 12]." width="55%" />
+<p class="caption">
+Figura 2.4: Ação de uma lente sobre os raios de luz <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 12]</span>.
+</p>
+</div>
+<p>Como podemos ver na figura <a href="lentes.html#fig:lente">2.4</a>, em cada ponto de um objeto há inúmeros raios de luz refletidos - neste caso são ilustrados três - e os que chegam à lente são focalizados no seu lado direito. As imagens são capturadas colocando-se o sensor exatamente onde esses raios são focalizados, ou seja, onde a imagem é formada.
+O ponto <span class="math inline">\(F\)</span> onde os raios paralelos se cruzam é conhecido como Ponto Focal. A distância <span class="math inline">\(f\)</span>, que vai do centro óptico <span class="math inline">\(O\)</span> até <span class="math inline">\(F\)</span> é conhecida como Distância Focal.
+Definindo a distância do objeto real até a lente como g e a distância até a formação da imagem após passa pela lente como b temos que:</p>
+<p><span class="math display">\[\frac{1}{g}+\frac{1}{b}=\frac{1}{f}\]</span></p>
+<p>Como <span class="math inline">\(f\)</span> e <span class="math inline">\(b\)</span> estão normalmente entre 1 mm e 100mm isso mostra que <span class="math inline">\(\frac{1}{g}\)</span> não tem quase nenhum impacto na equação e significa que <span class="math inline">\(b = f\)</span>. Isso significa que a imagem dentro da câmera é formada muito próxima ao ponto focal.
+Outro ponto importante das lentes é conhecido como zoom óptico. Isto deriva de um aspecto das lentes de que o tamanho do objeto na imagem formada, <span class="math inline">\(B\)</span>, aumenta quando <span class="math inline">\(f\)</span> aumenta. Podemos representar isso na seguinte equação, onde <span class="math inline">\(g\)</span> é o tamanho real do objeto:</p>
+<p><span class="math display">\[\frac{b}{B}=\frac{g}{G}\]</span></p>
+<p>Na prática <span class="math inline">\(f\)</span> é alterado através de mudanças na distância entre diferentes lentes dentro do sistema óptico da câmera, aqui estamos usando somente uma lente para exemplificar de maneira fácil alguns de seus conceitos básicos.
+Se o <span class="math inline">\(f\)</span> for constante, quando alteramos a distância do objeto, no caso <span class="math inline">\(g\)</span>, sabemos que <span class="math inline">\(b\)</span> também aumenta, isso significa que o sensor tem que ser movido mais para trás, pois a imagem estará sendo formada mais longe da lente. Se não movermos <span class="math inline">\(b\)</span> temos uma imagem fora de foco, como mostrado a seguir. Quando usamos uma câmera, o ato de colocar a imagem em foco significa que estamos alterando <span class="math inline">\(b\)</span> para que a imagem seja formada onde o sensor está localizado, para que a imagem esteja em foco.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:foco"></span>
+<img src="imagens/02-formacao/foco.png" alt="Uma imagem focada e desfocada [7, p. 11]." width="55%" />
+<p class="caption">
+Figura 2.5: Uma imagem focada e desfocada <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 11]</span>.
+</p>
+</div>
+<p>A figura <a href="lentes.html#fig:foco">2.5</a> ilustra exatamente o que significa uma imagem estar fora de foco, no sensor cada pixel tem um tamanho específico, quando a imagem está em foco os raios de um ponto específico estão dentro da área do pixel. Uma imagem fica fora de foco quando os raios de outros pontos também interceptam o pixel, gerando uma mistura de diferentes pontos.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:profundidade"></span>
+<img src="imagens/02-formacao/profundidade.png" alt="Profundidade de campo [7, p. 13]." width="55%" />
+<p class="caption">
+Figura 2.6: Profundidade de campo <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 13]</span>.
+</p>
+</div>
+<p>A figura <a href="lentes.html#fig:profundidade">2.6</a> apresenta outro ponto muito importante, chamado Profundidade de Campo(Depth of field), que representa a soma das distâncias <span class="math inline">\(g_l\)</span> e <span class="math inline">\(g_r\)</span>, que representam o quando os objetos podem ser movidos e permanecerem em foco.</p>
+<p>Um tópico que também tem muita importância na aquisição de imagens é o Campo de Visão(Field of View ou FOV) que representa a área observável de uma câmera. Na figura <a href="lentes.html#fig:campovisao">2.7</a> essa área observável é denotada pelo ângulo <span class="math inline">\(V\)</span>. O FOV de uma câmera depende de alguns aspectos, como sua distância focal e tamanho do sensor. Em muitos casos os sensores não são quadrados, mas retangulares, então para representarmos matematicamente o campo de visão, utilizamos as equações seguintes para o FOV vertical e horizontal:
+<span class="math display">\[FOV_x = 2*\tan^{-1}\left(\frac{\frac{comprimento\ do\ sensor}{2}}{f}\right) \text{ e }  FOV_y = 2*\tan^{-1}\left(\frac{\frac{altura\ do\ sensor}{2}}{f}\right)\]</span></p>
+
+<div class="figure" style="text-align: center"><span id="fig:campovisao"></span>
+<img src="imagens/02-formacao/campovisao.png" alt="Campo de visão [7, p. 14]." width="55%" />
+<p class="caption">
+Figura 2.7: Campo de visão <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 14]</span>.
+</p>
+</div>
+<p>Por exemplo, se tivermos uma câmera com um sensor que tenha o comprimento de 14mm, altura de 10mm e uma distância focal de 5mm temos:
+<span class="math display">\[FOV_x=2*tan^{-1}\left(\frac{7}{5}\right)=108.0^{\circ} \text{ e } FOV_y=2*tan^{-1}(1)=90^{\circ}\]</span></p>
+<p>Isso significa que essa câmera tem uma área observal de 108.9º horizontalmente e 90º verticalmente. Na figura <a href="lentes.html#fig:diferentesprofundidades">2.8</a> temos o mesmo objeto fotografado com diferentes profundidades de campo:</p>
+
+<div class="figure" style="text-align: center"><span id="fig:diferentesprofundidades"></span>
+<img src="imagens/02-formacao/diferentesprofundidades.png" alt="Diferentes profundidades de campo [7, p. 15]." width="90%" />
+<p class="caption">
+Figura 2.8: Diferentes profundidades de campo <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 15]</span>.
+</p>
+</div>
+<p>Outros dois fatores importantes na aquisição de imagem são a abertura e o obturador. A abertura é, em uma câmera, o mesmo que a íris no olho humano, ela controla a quantidade de luz que chega ao sensor. E o obturador é um dispositivo que controla o tempo ao qual o sensor será exposto à luz para capturar a imagem.</p>
 </div>
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
-<div id="ref-gonzalez2010">
-<p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+<div id="ref-moeslund2012">
+<p>[7] T. B. Moeslund, <em>Introduction to video and image processing: Building real systems and applications</em>. Springer Science &amp; Business Media, 2012.</p>
 </div>
 </div>
             </section>
@@ -196,8 +248,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="câmera-pinhole-e-geometria.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sensor.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +281,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/02-formacao_imagem.Rmd",
 "text": "Editar "
 },
 "history": {

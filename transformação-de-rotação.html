@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>3.8 Transformação de Rotação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="3.8 Transformação de Rotação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="3.8 Transformação de Rotação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="3.8 Transformação de Rotação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="transformação-de-escala.html"/>
+<link rel="next" href="transformações-radiométricas.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,33 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="transformação-de-rotação" class="section level2">
+<h2><span class="header-section-number">3.8</span> Transformação de Rotação</h2>
+<p>A transformação geométrica da rotação tem como objetivo rotacionar objeto(imagem) no espaço (ambiente projetado), é equivalente a gira ao redor da origem do sistema de coordenadas. Figura 3.5.</p>
+<p>Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 41, 42]</span>. Na figura 3.5 rotação de um ponto P em torno da origem, passando para a posição P’. Repare que se chegaria a esse mesmo ponto através de uma rotação de - no sistema de eixos XY.</p>
+<p><img src="imagens/03-transformacoes/rotacao1.png" width="45%" style="display: block; margin: auto;" /></p>
+<p>Figura 3.4: Tranformação de rotação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>.</p>
+<p>Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>. Se um ponto de coordenada (x,y), distante <span class="math inline">\(r=(x2 + y2)^\frac12\)</span> da origem do sistema de coordenadas, for rotacionado de um ângulo <span class="math inline">\(\phi\)</span> em torno da origem, suas coordenadas, que antes eram definidas como: <span class="math inline">\(x = r * \cos(\phi), y =r * \sin(\phi)\)</span>, passam a ser descritas como (x’, y’) dadas por:</p>
+<p><span class="math display">\[x&#39; = r * \cos(\theta + \phi) = r * \cos\phi * cos\theta - r * \sin\phi * \sin\theta\]</span>
+<span class="math display">\[x&#39; = r * \sin(\theta + \phi) = r * \sin\phi * cos\theta + r * \cos\phi * \sin\theta\]</span></p>
+<p>isso equivale às expressões:
+<span class="math display">\[x&#39; = x\cos(\phi) - y\sin(\phi)\]</span>
+<span class="math display">\[y&#39; = y\cos(\phi) + y\sin(\phi)\]</span></p>
+<p>Essas expressões podem ser descritas pela multiplicação do vetor de coordenadas
+do ponto (x,y) pela matriz:</p>
+<p><img src="imagens/03-transformacoes/matriz_rotacao.png" width="15%" style="display: block; margin: auto;" /></p>
+<p>Figura 3.5: Tranformação de rotaão <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>.</p>
+<p>Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>. Para alterar a orientação de um objeto(imagem) em torno de um certo ponto realizando uma combinação da rotação com a translação, é necessário, antes de aplicar a rotação de um ângulo no plano das coordenadas em torno de um ponto, realizar uma translação para localizar esse ponto na origem do sistema, aplicando a rotação desejada e, então, uma translação inversa para localizar o dado ponto na origem.
+A multiplicação de coordenadas por uma matriz de rotação pode resultar em uma translação.</p>
+<p><img src="imagens/03-transformacoes/rotacao2.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>Figura 3.5: Tranformação de rotaão <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 43]</span>.</p>
+
 </div>
+<!-- </div> -->
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
-<div id="ref-gonzalez2010">
-<p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+<div id="ref-azevedo2018">
+<p>[13] E. Azevedo, A. Conci, e C. Vasconcelos, <em>Computaç ao gr’afica: Teoria e pr’atica: geraç ao de imagens</em>, vol. 1. Elsevier Brasil, 2018.</p>
 </div>
 </div>
             </section>
@@ -196,8 +215,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="transformação-de-escala.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transformações-radiométricas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +248,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/03-transformacoes_geometricas.Rmd",
 "text": "Editar "
 },
 "history": {

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>3.7 Transformação de Escala | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="3.7 Transformação de Escala | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="3.7 Transformação de Escala | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="3.7 Transformação de Escala | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussiano.html"/>
-<link rel="next" href="detecção-por-descontinuidade.html"/>
+<link rel="prev" href="transformação-de-translação.html"/>
+<link rel="next" href="transformação-de-rotação.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -181,14 +181,28 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="segmentação" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Segmentação</h1>
-<p>A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 454]</span>. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.</p>
+<div id="transformação-de-escala" class="section level2">
+<h2><span class="header-section-number">3.7</span> Transformação de Escala</h2>
+<p>A transformação geométrica escala tem como objetivo mudar as dimensões (tamanho) do objeto(imagem) no espaço (ambiente projetado). Figura 3.4.<br />
+Fonte: Azevedo Eduardo, edição 2, p. 40. Para fazer com que uma imagem definida por conjunto de pontos mude de tamanho, teremos de multiplicar os valores de suas coordenadas por um fator de escala. Transformar um objeto por alguma operação nada mais é do que fazer essa operação com todos os seus pontos. Nesse caso um dos vetores de suas coordenadas são multiplicados por fatores de escala. Estes fatores de escala em 2D podem, por exemplo ser <span class="math inline">\(Ss\)</span> e <span class="math inline">\(Sy\)</span>:</p>
+<p><span class="math display">\[x’ = x * Sx\]</span></p>
+<p><span class="math display">\[y’ = y * Sy\]</span>
+Essa operação pode ser representada na forma matricial:</p>
+<div class="figure" style="text-align: center"><span id="fig:escala"></span>
+<img src="imagens/03-transformacoes/escala.png" alt="(ref: escala)" width="80%" />
+<p class="caption">
+Figura 3.1: (ref: escala)
+</p>
+</div>
+<p>Figura 3.3: Tranformação de escala <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 40]</span>.</p>
+<p>Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 41]</span>. A mudança de escala de um ponto de um objeto no espaço tridimensional pode ser obtida pela multiplicação de três fatores de escala ao ponto. A operação de mudança de escala pode ser descrita pela multiplicação de coordenadas do ponto por uma matriz diagonal cujos valores dos elementos não-nulos sejam os fatores de escala. Assim, no caso 3D tem-se:</p>
+<p><img src="imagens/03-transformacoes/escala3d.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Figura 3.4: Tranformação de escala <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 41]</span>.</p>
 </div>
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
-<div id="ref-gonzalez2010">
-<p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+<div id="ref-azevedo2018">
+<p>[13] E. Azevedo, A. Conci, e C. Vasconcelos, <em>Computaç ao gr’afica: Teoria e pr’atica: geraç ao de imagens</em>, vol. 1. Elsevier Brasil, 2018.</p>
 </div>
 </div>
             </section>
@@ -196,8 +210,8 @@
           </div>
         </div>
       </div>
-<a href="gaussiano.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="detecção-por-descontinuidade.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="transformação-de-translação.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transformação-de-rotação.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -229,7 +243,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/06-segmentacao.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/03-transformacoes_geometricas.Rmd",
 "text": "Editar "
 },
 "history": {
