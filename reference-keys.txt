@@ -130,13 +130,6 @@ média
 mediana
 gaussiano
 segmentação
-detecção-por-descontinuidade
-detecção-de-ponto
-detecção-de-linha
-detecção-de-bordas
-modelos-de-bordas
-método-do-gradiente-roberts-prewitt-sobel.
-método-de-marr-hildreth
 detecção-de-quinas
 detector-de-quinas-de-moravec
 detector-de-quinas-de-harris
@@ -149,9 +142,6 @@ log
 dog
 doh
 segmentação-por-limiarização
-as-bases-da-limiarização-de-intensidade
-o-papel-do-ruído-da-limiarização
-o-papel-da-iluminação-e-a-refletância
 limiarização-global-simples
 limiarização-pelo-método-de-otsu
 uso-de-suavização-para-limiarização
