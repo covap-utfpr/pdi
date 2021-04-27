@@ -1,5 +1,5 @@
 ---
-title: "Material introdutório de Processamento Digital de Imagens(PDI)"
+title: "Material introdutório de Processamento Digital de Imagens e Visão Computacional"
 author: ""
 lang: pt-BR
 site: bookdown::bookdown_site
