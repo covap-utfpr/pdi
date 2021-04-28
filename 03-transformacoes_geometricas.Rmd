@@ -46,7 +46,7 @@ $$|V| = {\sqrt{x^2 + y^2}}$$
 Exemplo 1: Calcule o comprimento de $V$ com $x=2$ e $y=3$.
 
 Resolução:
-$$|V| = 22+ 32 = 3.60$$
+$$|V| = {\sqrt{22+ 32}} = 3.60$$
 
 Se pensamos em $V$ no espaço 3D, definindo a origem ao ponto $P(x, y, z)$ seu comprimento seria:
 $$|V| = {\sqrt{x^2+y^2+z^2}}$$
