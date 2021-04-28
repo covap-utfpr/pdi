@@ -1,11 +1,239 @@
 # Segmentação
+A segmentação subdivide uma imagem para detecção de regiões ou objetos para uma determinada aplicação. Os principais métodos de segmentação utilizam a distribuição dos valores de intensidade, seja pelos padrões de similaridade ou de descontinuidade [@gonzalez2010, p. 454]. Nas técnicas de similaridade, as imagens são divididas em regiões semelhantes com base em um conjunto de características. Na segmentação por descontinuidade se consideram as mudanças abruptas de intensidades, caracterizadas por pontos isolados, linhas ou bordas na imagem.
+
 ## Detecção por descontinuidade
-### Detecção de ponto
-### Detecção de linha
-## Detecção de bordas
+Bordas podem ser descritas como o limite ou a fronteira entre duas regiões onde ocorre uma variação brusca de intensidade em uma determinada direção. Uma linha pode ser vista como um segmento de borda em que a intensidade do fundo de cada lado da linha ou é muito superior ou muito inferior à intensidade dos *pixels* da linha. Linhas com o comprimento e largura iguais a um *pixel* são tratados como pontos isolados [@gonzalez2010, p. 456].
+Os métodos de detecção de bordas se baseiam no comportamento das derivadas, que podem detectar mudanças locais abruptas. Em uma função digital, as derivadas são aproximadas como termos de diferenças. Aproximações podem ser obtidas por meio de expansões em séries de Taylor, como demonstrado no livro “Processamento digital de imagens” [@gonzalez2010, p. 457], em que os resultados para a primeira e a segunda ordem no ponto $x$ de uma função $f(x)$ estão descritos respectivamente:
+
+$$\frac{\delta f}{\delta x} = f'(x) = f(x+1) - f(x)$$
+$$\frac{\delta^2 f}{\delta x^2} = f''(x) = f(x+1) + f(x-1) - 2f(x)$$
+
+Para avaliar o comportamento das derivadas na transição de intensidades apresentamos na Figura \@ref(fig:imagemDerivadas) um perfil de intensidade horizontal (linha de digitalização) de uma imagem, juntamente com os resultados das duas últimas equações para alguns pontos. A imagem contém vários objetos sólidos, uma linha e um ponto interno de ruído, e a linha de  digitalização está próxima ao centro, incluindo o ponto isolado. A Figura \@ref(fig:imagemDerivadas) (c) mostra uma simplificação do perfil e como as derivadas de primeira e segunda ordem se comportam quando encontram um ponto isolado, uma linha e as bordas dos objetos.
+
+Com base nos resultados das equações na Figura \@ref(fig:imagemDerivadas) se observa que atendem as propriedades das derivadas. No início e ao longo da rampa de intensidade, a derivada de primeira ordem é diferente de zero, enquanto a segunda derivada é diferente de zero apenas no início e no fim da rampa. Estes comportamentos indicam que as derivadas de primeira ordem produzem **bordas grossas, e as de segunda ordem produzem bordas mais finas** [@gonzalez2010, p.458].
+
+(ref:imagemDerivadas) (a) Imagem. (b) Perfil de intensidade horizontal no centro da imagem. (c) Perfil simplificado e resultados das derivadas. [@gonzalez2010, p. 457]
+
+```{r imagemDerivadas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemDerivadas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemDerivadas.png'))
+```
+
+No ponto de ruído, a resposta para a derivada de segunda ordem é mais forte do que para a primeira derivada. **Derivadas de segunda ordem acentuam as respostas em mudanças bruscas,** podendo melhorar pequenos detalhes [@gonzalez2010, p. 458]. Na linha com detalhes bem finos, a derivada de segunda ordem também tem maior magnitude. Nota-se nas bordas em rampa e nas bordas em degrau, que a segunda derivada tem sinais opostos (negativo para positivo ou vice-versa) conforme entra e sai da borda, o que caracteriza uma **“borda dupla”**. O sinal da segunda derivada também pode ser utilizado para determinar se uma transição em uma borda é de claro para escuro (segunda derivada negativa) ou de escuro para claro (segunda derivada positiva) [@gonzalez2010, p. 458].
+
+### Detecção de pontos isolados
+
+Considerando que as derivadas de segunda ordem têm uma resposta mais forte aos detalhes finos, o operador diferencial laplaciano:
+
+$$\nabla^2f(x,y) = \frac{\partial^2f}{\partial x^2} + \frac{\partial^2f}{\partial y^2}$$
+é ideal para a detecção de pontos [@gonzalez2010, p. 459].  As aproximações das derivadas de segunda ordem por termos de diferenças vistas podem ser estendidas para os dois termos do laplaciano, respectivamente:
+
+$$\frac{\partial^2f}{\partial x^2} = f(x+1, y) + f(x-1, y) -2f(x,y)$$
+$$\frac{\partial^2f}{\partial y^2} = f(x, y+1) + f(x, y-1) -2f(x,y)$$
+Ao se relacionar essas três últimas equações, obtém-se o laplaciano discreto:
+
+$$\nabla^2f(x,y) = f(x+1, y) + f(x-1, y) + f(x, y+1) + f(x, y-1) -4f(x,y)$$
+
+Essa equação pode ser implementada utilizando a máscara de filtragem identificada na Figura \@ref(fig:mascarasLaplacianas) (a). Para incluir as direções diagonais na definição do laplaciano digital se acrescenta mais dois termos a esta equação, um para cada direção diagonal. A Figura \@ref(fig:mascarasLaplacianas) (b) mostra a máscara de filtragem desta atualização que inclui as diagonais.
+
+(ref:mascarasLaplacianas) (a) Máscara referente a equação laplaciana discreta. (b) Máscara que inclui as diagonais. [@gonzalez2010, p. 106]
+
+```{r mascarasLaplacianas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:mascarasLaplacianas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/mascarasLaplacianas.png'))
+```
+
+A intensidade de um ponto isolado será muito diferente do seu entorno, portanto, ao aplicar a máscara, as únicas diferenças de intensidade relevantes serão as mais altas, maiores que um limite determinado ($T$) para serem consideradas pontos isolados [@gonzalez2010, p. 459]. Para detectar o ponto se utiliza a seguinte expressão:
+
+$$
+g(x,y) = 
+\begin{cases}
+  1,\ se\ R(x,y) \geq T
+  \\0,\ caso\ contrário
+\end{cases}
+$$
+em que $g$ é a imagem de saída, $T$ é um limiar não negativo, e $R$ é o operador laplaciano. O ponto isolado será detectado no local $(x, y)$ em que a máscara está centrada se o módulo da resposta nesse ponto exceder o limiar estabelecido. Os pontos detectados são rotulados como $1$ na imagem de saída, e todos os outros são rotulados $0$, o que produz uma imagem binária. 
+
+### Detecção de linhas
+Semelhante à detecção de pontos isolados, as derivadas de segunda ordem geram respostas mais fortes na detecção de linhas, e produzem linhas mais finas do que as derivadas de primeira ordem [@gonzalez2010, p. 460]. Ao utilizar a máscara laplaciana da Figura \@ref(fig:mascarasLaplacianas) sobre a imagem de um componente em um circuito eletrônico (parte de uma conexão *wire-bond*), representado na Figura \@ref(fig:imagemDeteccaoLinhas) (a), obtém-se como resultado a Figura \@ref(fig:imagemDeteccaoLinhas) (b). Na seção ampliada da Figura \@ref(fig:imagemDeteccaoLinhas) (b), as linhas mais claras identificam os pontos positivos, o cinza escuro são os valores negativos, e o cinza médio representa zero. O efeito de linha dupla ao se utilizar a segunda derivada é evidente na seção ampliada.
+
+(ref:imagemDeteccaoLinhas) (a) Imagem do circuito. (b) Resultado do filtro laplaciano. (c) Valor absoluto do filtro laplaciano. (d) Valores positivos do filtro laplaciano. [@gonzalez2010, p. 460]
+
+```{r imagemDeteccaoLinhas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemDeteccaoLinhas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemDeteccaoLinhas.png'))
+```
+
+Para destacar as linhas após a aplicação do filtro e remover os valores negativos pode ser utilizado o módulo dos valores calculados ou utilizar apenas os valores positivos do laplaciano [@gonzalez2010, p. 460], os resultados destas metodologias estão identificados na Figura \@ref(fig:imagemDeteccaoLinhas) (c) e Figura \@ref(fig:imagemDeteccaoLinhas) (d), respectivamente. Nota-se que as linhas geradas pela abordagem do módulo são mais grossas, pois a espessura é o dobro se comparada com a outra metodologia. Nas duas situações, as linhas mais largas que o tamanho do filtro laplaciano são separadas por um “vale” de zeros. A detecção de linhas é ideal quando a espessura é menor que o detector, ao contrário se recomenda tratar o elemento como uma região e utilizar outros métodos [@gonzalez2010, p. 460].
+
+O filtro laplaciano na Figura \@ref(fig:mascarasLaplacianas) é isotrópico, assim a sua resposta independe da direção [@gonzalez2010, p. 460]. No caso das linhas pode ser interessante a detecção em apenas uma determinada direção, utilizando, por exemplo, uma das máscaras apresentadas na Figura \@ref(fig:mascarasDeteccaoLinhas). Para a primeira máscara da Figura \@ref(fig:mascarasDeteccaoLinhas), os sinais mais fortes ocorrem em linhas horizontais da imagem que passam pela linha do meio da máscara. O segundo filtro detecta melhor as linhas com $45°$ de inclinação; o terceiro filtro para linhas verticais e o quarto, para linhas com $-45º$ de inclinação. Vale destacar que estamos utilizando a convenção de que os eixos da imagem têm sua origem no canto superior esquerdo, com o eixo $x$ positivo apontando para baixo, e o eixo $y$ positivo se estendendo à direita. Os ângulos das linhas são medidos em relação ao eixo $x$ positivo. 
+
+(ref:mascarasDeteccaoLinhas) Máscaras para detecção de linhas em uma determinada direção. [@gonzalez2010, p. 461]
+
+```{r mascarasDeteccaoLinhas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:mascarasDeteccaoLinhas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/mascarasDeteccaoLinhas.png'))
+```
+
+Quando o objetivo é detectar todas as linhas da imagem em uma direção específica se aplica a máscara associada a essa direção e se define um limiar ($T$) para selecionar os sinais mais fortes. Para os quatro últimos filtros apresentados, as linhas de $1$ *pixel* de espessura apresentam os maiores resultados [@gonzalez2010, p. 462].
+
+
+## Detecção de Bordas
 ### Modelos de Bordas
-### Método do gradiente ( Roberts, Prewitt, Sobel).
+Na Figura \@ref(fig:modelosBordas) estão os principais modelos de borda, que são classificados de acordo com os perfis de intensidade. A primeira borda,  borda em degrau, apresenta uma transição entre dois níveis de intensidade e são consideradas ideais com uma distância de $1$ *pixel*. Na prática, as bordas nas imagens digitais não apresentam uma transição tão bem definida, assim modelos mais apropriados consideram um perfil de rampa como na Figura \@ref(fig:modelosBordas) (b) [@gonzalez2010, p. 462]. Quanto mais indefinida é a transição da borda, menor é a inclinação da rampa. Em vez de uma borda com $1$ *pixel* de espessura, todos os pontos na rampa fazem parte da borda.
+Figura - Modelos de bordas com seus respectivos perfis de intensidade.
+
+(ref:modelosBordas) (a) Borda degrau. (b) Borda rampa. (c) Borda telhado. [@gonzalez2010, p. 462]
+
+```{r modelosBordas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:modelosBordas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/modelosBordas.png'))
+```
+
+No terceiro modelo de borda, Figura \@ref(fig:modelosBordas) (c), em forma de telhado ou *roof edge*, a base (largura) de uma borda é definida pela espessura e a nitidez da linha. Quando a base é igual $1$ *pixel* de espessura, uma borda em forma de telhado é definida como uma linha [@gonzalez2010, p. 462]. 
+
+As imagens da Figura \@ref(fig:derivadasImagensRuidosas) não apresentam ruídos, entretanto os modelos de detecção devem considerar que as bordas estejam desfocadas e com ruídos.  Na primeira coluna da Figura estão três bordas de perfil rampa com diferentes níveis de ruídos, e abaixo de cada imagem está o perfil horizontal de intensidade que passa pelo centro da imagem. A primeira imagem no canto esquerdo não apresenta ruído, e as outras duas imagens da primeira coluna foram alteradas com ruído gaussiano aditivo com média zero e desvio padrão de $0.1$ e $1.0$ níveis de intensidade, respectivamente.
+
+(ref:derivadasImagensRuidosas) Primeira coluna: imagens e perfis de intensidade de uma borda em declive corrompida pelo ruído gaussiano aleatório de desvio padrão $0.0$, $0.1$ e $1.0$ níveis de intensidade, respectivamente. Segunda coluna: imagens da primeira derivada. Terceira coluna: imagens da segunda derivada. [@gonzalez2010, p. 465]
+
+```{r derivadasImagensRuidosas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:derivadasImagensRuidosas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/derivadasImagensRuidosas.png'))
+```
+
+Na segunda e terceira coluna estão identificados, respectivamente, a primeira e a segunda derivada dos perfis de intensidade da primeira coluna. A primeira derivada é utilizada para detectar bordas, pois identifica pontos de transição abrupta de intensidade na imagem.  Para o resultado da primeira derivada na primeira linha, os valores na rampa são positivos e, nas regiões de intensidade constante é igual a zero. As duas faixas pretas na imagem da parte superior da coluna central são os resultados iguais a zero da primeira derivada, e os valores constantes estão identificados como cinza claro.
+
+Como as bordas são uma transição de uma região escura para uma região branca, a segunda derivada na terceira coluna é positiva no início da rampa e negativa no final. A linha que passa por estes dois resultados da derivada se intercepta com o eixo de intensidade zero, gerando o ponto de cruzamento por zero que é utilizado para localizar o centro de bordas espessas [@gonzalez2010, p. 464]. Nas regiões de intensidade constante as derivadas de segunda ordem também são zero, e se apresentam na cor cinza claro nas imagens da terceira coluna. As linhas finas verticais brancas e pretas são os resultados positivos e negativos da segunda derivada.
+
+Mesmo não sendo perceptível os ruídos nas imagens da segunda e terceira linha, eles apresentaram um impacto significativo nas derivadas, principalmente na derivada de segunda ordem que é mais sensível aos ruídos. Quanto maior o ruído mais difícil de se associar com os perfis das derivadas, dificultando a detecção de bordas. Este comportamento pode ser tratado com a suavização da imagem em uma etapa anterior a segmentação [@gonzalez2010, p. 464].
+
+### Método do gradiente ( Roberts, Prewitt, Sobel)
+Na detecção de bordas, as derivadas de primeira ordem são calculadas utilizando a magnitude do gradiente, que é um vetor cuja a direção indica os pontos de maior variação de intensidade [@pedrini2008, p. 155]. Na figura indica que a direção do gradiente sempre será perpendicular à direção tangente da borda. Para uma função $f(x, y)$, o gradiente de $f$ nas coordenadas $(x, y)$ na forma matricial é expresso como:
+
+$$\nabla f 
+= \begin{bmatrix}
+G_x
+\\ G_y
+\end{bmatrix}
+= \begin{bmatrix}
+\frac{\partial f}{\partial x}
+\\ \frac{\partial f}{\partial y}
+\end{bmatrix}$$
+
+(ref:vetorGradiente) Vetor gradiente $\nabla f$ em uma borda. [@pedrini2008, p. 155]
+
+```{r vetorGradiente, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:vetorGradiente)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/vetorGradiente.png'))
+```
+
+O módulo ou magnitude (tamanho) do vetor $\nabla f$ é dado como $M(x,y)$:
+$$M(x,y) = \sqrt{G^2_x + G^2_y}$$
+
+O módulo do gradiente é a maior taxa de variação de  $f(x,y)$  na direção do vetor gradiente. Devido ao custo computacional, a magnitude do gradiente é aproximada pelo uso dos valores absolutos [@pedrini2008, p. 155]:
+$$M(x,y) \simeq |G_x| + |G_y|$$
+A direção do vetor gradiente é dada pelo ângulo:
+$$
+\alpha(x,y) = 
+tg^{-1}
+\begin{bmatrix}
+\frac{G_y}{G_x}
+\end{bmatrix}
+$$
+
+medido em relação ao eixo $x$. Da mesma forma que a magnitude $M(x, y)$, ou imagem gradiente, o ângulo $\alpha(x, y)$ também é uma imagem do mesmo tamanho que a original formado pela divisão da imagem $G_y$ por $G_x$ [@gonzalez2010, p. 466].
+
+Para calcular as derivadas parciais $\partial f/ \partial x$ e $\partial f/ \partial y$ no caso de quantidades digitais  é necessário utilizar aproximações discretas e, em seguida, determinar as máscaras de filtragem correspondentes.  Uma forma de aproximação é considerar a diferença entre os elementos da vizinhança para calcular a magnitude do gradiente [@pedrini2008, p. 157]. Ao se utilizar as diferenças cruzadas como na seguinte equação:
+
+$$M(x,y) \simeq |f(x,y) - f(x+1, y+1)| + |f(x,y+1) - f(x+1, y)|$$
+é o mesmo que aplicar os filtros de tamanho 2x2 da Figura \@ref(fig:operadorRoberts) e somar os resultados absolutos.
+
+(ref:operadorRoberts) Operador de Roberts. [@pedrini2008, p. 157]
+
+```{r operadorRoberts, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:operadorRoberts)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/operadorRoberts.png'))
+```
+
+Estes operadores, conhecidos como operadores de Roberts, foram uma das primeiras tentativas de usar máscaras 2-D, entretanto não são tão úteis quanto máscaras simétricas ao redor do ponto central, em que as menores são de tamanho 3×3 [@gonzalez2010, p. 467]. As aproximações mais simples para as derivadas parciais usando máscaras de tamanho 3×3 são dadas por:
+
+$$ 
+\begin{split}
+M(x,y) &\simeq
+|[f(x+1,y-1) + f(x+1,y) + f(x+1,y+1)]-\\
+ &\ \ \ \ \ [f(x-1,y-1) + f(x-1,y) + f(x-1,y+1)]+\\
+ &\ \ \ \ \ [f(x-1,y+1) + f(x,y+1) + f(x+1,y+1)]-\\
+ &\ \ \ \ \ [f(x-1,y-1) + f(x,y-1) + f(x+1,y-1)]|
+\end{split}
+$$
+
+(ref:operadorPrewitt) Operador de Prewitt. [@pedrini2008, p. 158]
+
+```{r operadorPrewitt, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:operadorPrewitt)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/operadorPrewitt.png'))
+```
+
+A equação pode ser implementada aplicando as máscaras da Figura \@ref(fig:operadorSobel), que recebem o nome de operadores de Prewitt. Uma variação deste último método utiliza o valor $2$ como peso no centro do coeficiente [@pedrini2008, p. 158]:
+
+$$ 
+\begin{split}
+M(x,y) &\simeq
+|[f(x+1,y-1) + 2f(x+1,y) + 2f(x+1,y+1)]-\\
+ &\ \ \ \ \ [f(x-1,y-1) + 2f(x-1,y) + f(x-1,y+1)]+\\
+ &\ \ \ \ \ [f(x-1,y+1) + 2f(x,y+1) + f(x+1,y+1)]-\\
+ &\ \ \ \ \ [f(x-1,y-1) + 2f(x,y-1) + f(x+1,y-1)]|
+\end{split}
+$$
+
+(ref:operadorSobel) Operador de Sobel. [@pedrini2008, p. 158]
+
+```{r operadorSobel, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:operadorSobel)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/operadorSobel.png'))
+```
+
+O resultado das equações pode ser obtido com a soma dos valores absolutos dos resultados das máscaras na Figura \@ref(fig:operadorSobel), chamadas de operadores de Sobel. Mesmo que as máscaras de Prewitt sejam mais simples de implementar do que as máscaras de Sobel, as de Sobel são mais utilizadas por melhor suavização, diminuindo os ruídos [@gonzalez2010, p. 468].
+
+Ao calcular a magnitude como uma aproximação da soma dos valores absolutos dos componentes de gradiente $G_x$ e $G_y$ (Equação) pode se perder a propriedade isotrópica dos filtros. No caso das máscaras de Sobel e de Prewitt este problema não ocorre, pois dão resultados isotrópicos apenas para bordas verticais e horizontais, e que são independentes da equação ou equação [@gonzalez2010, p. 468].
+
 ### Método de Marr-Hildreth
+Nos métodos de detecção de bordas utilizando a derivada de segunda ordem se observa maior sensibilidade aos ruídos, assim se recomenda um pré-processamento de suavização. A técnica de detecção proposta por Marr e Hildreth (1980), por exemplo, combina a filtragem Gaussiana com o operador Laplaciano [@pedrini2008, p. 163]. Após a suavização da imagem com o filtro gaussiano, as bordas são identificadas pelos pontos de cruzamento por zero da segunda derivada.
+
+Um aspecto que torna a técnica interessante para imagens de diferentes escalas é que considera as características da borda e dos ruídos, empregando-se operadores de tamanho mais adequado para cada imagem [@gonzalez2010, p. 470]. Operadores de maior tamanho são recomendados para detectar bordas borradas, enquanto operadores menores detectam melhor detalhes finos com foco nítido. Como o laplaciano é isotrópico, respondendo de forma igual às variações nas diferentes direções, evita-se a utilização de várias máscaras [@gonzalez2010, p. 472]. 
+
+O operador proposto por Marr e Hildreth é obtido pela convolução:
+$$g(x,y) = \nabla^2[G(x,y)*f(x,y)]$$
+em que $f(x,y)$ é a imagem, $\nabla^2$ é o operador laplaciano, ($\partial^2 f / \partial x^2 + \partial^2 f / \partial y^2$), e $G$ é a função gaussiana 2-D:
+$$G(x,y) = e^{-\frac{x^2 + y^b}{2\sigma^2}}$$
+com desvio padrão $\sigma$. Em razão da linearidade das operações, a ordem da diferenciação e da convolução podem ser alteradas [@pedrini2008, p. 163], assim após a diferenciação da expressão gaussiana se obtém  o Laplaciano da Gaussiana (LoG):
+$$\nabla^2G(x,y) = 
+\begin{bmatrix}
+\frac{x^2 + y^2 - \sigma^2}{\sigma^4} e^{-\frac{x^2 + y^b}{2\sigma^2}}
+\end{bmatrix}$$
+
+As máscaras podem ser geradas pela amostragem  da equação e ajustando os coeficientes para que a soma seja zero. Um exemplo de máscara 5x5 que atende ao Laplaciano da Gaussiana está na Figura \@ref(fig:laplacianoGaussiana) (d). O comportamento dessa máscara se aproxima do efeito da função LoG na Figura \@ref(fig:laplacianoGaussiana) (a), em que o termo positivo e central é rodeado por uma região negativa cujo os valores aumentam ao se distanciar da origem, e uma região externa com zeros [@gonzalez2010, p. 472].
+
+(ref:laplacianoGaussiana) (a) Gráfico 3-D do negativo de LoG. (b) Imagem do negativo de LoG. (c) Seção transversal de (a). (d) Aproximação de máscara 5x5 para LoG. [@gonzalez2010, p. 471]
+
+```{r laplacianoGaussiana, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:laplacianoGaussiana)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/laplacianoGaussiana.png'))
+```
+
+Devido ao formato na Figura \@ref(fig:laplacianoGaussiana) a função LoG é conhecida como  operador de chapéu mexicano. Na Figura \@ref(fig:laplacianoGaussiana) o gráfico 3-D, a imagem e a seção transversal se referem ao negativo da função LoG. Na seção transversal (Figura \@ref(fig:laplacianoGaussiana) (c)), o cruzamento por zero do LoG ocorre em $x^2 + y^2 = 2 \sigma^2$ , definindo um círculo centrado na origem e de raio $2\sigma$.
+
+Na prática, o filtro LoG é gerado pelas seguintes etapas [@gonzalez2010, p. 472]:
+
+1. Define-se um filtro $n$×$n$ gaussiano a partir de amostragem com a equação.  Lembrando da sugestão que para tamanho do filtro gaussiano $n$ seja o menor inteiro ímpar maior ou igual a $6\sigma$.
+
+2. Após suavização da imagem com o filtro gaussiano, o resultado é processado pelo laplaciano, por exemplo, com uma máscara 3×3 na Figura.
+
+3. Na imagem resultante da etapa anterior são encontrados os pontos de cruzamento por zero. Estes pontos podem ser identificados em um *pixel*, $p$, com base na sua vizinhança de 3x3. No caso de $p$ ser um cruzamento por zero, pelo menos dois de seus vizinhos opostos devem apresentar sinais diferentes. Neste caso são realizados quatro testes:  esquerda/direita, acima/abaixo e com as duas diagonais. Quando se utiliza um limiar para identificar o cruzamento por zero, tanto os sinais dos vizinhos opostos devem ser diferentes quanto o valor absoluto da diferença numérica deve ultrapassar o limiar para que o ponto $p$ seja um cruzamento por zero.
+
+O filtro LoG também pode ser aproximado com a convolução de uma máscara gerada a partir da diferença de duas funções gaussianas (DoG) [@gonzalez2010, p. 473]:
+$$DoG(x,y) = \frac{1}{2\pi \sigma^2_1}  e^  {-\frac{x^2+y^2}{2\sigma^2_1}}
+-
+\frac{1}{2\pi \sigma^2_2}  e^  {-\frac{x^2+y^2}{2\sigma^2_2}}$$
+
+com $\sigma_1 > \sigma_2$. Marr e Hildreth mostraram que para $\sigma_2/\sigma_1 = 1.6$ o operador tem maior aproximação com a função LoG [@gonzalez2010, p. 473]. Para que LoG e DoG tenham os mesmos cruzamentos por zero se sugere que se mantenha a seguinte relação para o valor de $\sigma$ em LoG:
+$$\sigma^2 = \frac{\sigma^2_1\sigma^2_2}{\sigma^2_1 - \sigma^2_2}
+\ln 
+\begin{bmatrix}
+\frac{\sigma^2_1}{\sigma^2_2}
+\end{bmatrix}$$
+
+Para estabelecer uma mesma escala de amplitude no resultado dos dois operadores, ocorre um ajuste para o mesmo valor na origem em ambas as funções [@gonzalez2010, p. 474].  
+
 ### Método de Canny
 O algoritmo de Canny recebeu esse nome em alusão a John Canny, que o propôs em seu artigo, “A computational Approach to Edge Detection"[@canny1986computational], publicado em 1986. Sua formulação se baseava em três pontos principais:
 
@@ -226,7 +454,77 @@ knitr::include_graphics(rep('imagens/06-segmentacao/hough_circle_raios.jpg'))
 knitr::include_graphics(rep('imagens/06-segmentacao/hough_circle_resultado.jpg'))
 ```
 
-## Detecção de blobs
+## Detecção de Quinas
+Quinas são pontos chaves na visão computacional por serem muito úteis na descrição e correspondência de objetos usando poucos dados. E para identificação dos pontos, existem diferentes métodos, dentre eles o mais comum é o de Harris, que é o sucessor do de Moravec [@nixon2019feature, p. 178].
+
+### Detector de Quinas de Moravec
+Moravec obtém sua medida de curvatura através de uma variação média de intensidade em quatro direções principais: $(0,1), (0,-1), (1,0)$ e $(-1,0)$. Isso é feito através da seguinte equação, considerando a análise sobre o $pixel(x,y)$, o deslocamento $(u,v)$ e a janela $2w+1$ [@nixon2019feature, p. 185].
+
+$$E_{u,v}(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w}[P_{x+i,\ y+j} - P_{x+i+u,\ y+j+v}]^2$$
+Essa equação também aproxima a função de autocorrelação na direção $(u,v)$ [@nixon2019feature, p. 186].
+
+O detector de Moravec apesar de ser intuitivo seu funcionamento, ele considera apenas um pequeno conjunto de mudanças possíveis. Então, Harris propôs ainda avaliar a autocorrelação, mas por uma expressão analítica [@nixon2019feature, p. 185].
+
+### Detector de Quinas de Harris
+O detector de Harris é desenvolvido na ideia de Moravec e sua equação, mas com uma abordagem mais complexa. Harris assume que $P_{x+i+u,\ y+j+v}$ possa ser estimado pela série de Taylor de primeira ordem [@nixon2019feature, p. 193]. Dessa forma,
+
+$$P_{x+i+u,\ y+j+v} = P_{x+i,\ y+j} + \frac{\partial{P_{x+i,\ y+j}}}{\partial x}u + \frac{\partial{P_{x+i,\ y+j}}}{\partial y}v $$
+
+Substituindo na equação de Moravec
+$$E_{u,v}(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w}[\frac{\partial{P_{x+i,\ y+j}}}{\partial x}u + \frac{\partial{P_{x+i,\ y+j}}}{\partial y}v]^2$$ 
+E expandindo a potência
+$$E_{u,v}(x,y) = A(x,y)u^2 + 2C(x,y)uv + B(x,y)v^2$$
+Esta última equação pode ser representada forma de matriz. Representação útil para compreensão mais à frente neste tópico [@nixon2019feature, p. 187].
+$$
+\begin{split}
+E_{u,v}(x,y) &= 
+\begin{bmatrix}u & v\end{bmatrix}
+\begin{bmatrix}A(x,y) & C(x,y)\\ C(x,y) & B(x,y)\end{bmatrix}
+\begin{bmatrix}u \\ v\end{bmatrix}
+\\&= D^TMD
+\end{split}
+$$
+onde
+$$A(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w}(\frac{\partial P_{x+i, y+j}}{\partial x})^2$$
+$$B(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w} (\frac{\partial P_{x+i, y+j}}{\partial y})^2$$
+$$C(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w} (\frac{\partial P_{x+i, y+j}}{\partial x})(\frac{\partial P_{x+i, y+j}}{\partial y})$$
+Como $E_{u.v}(x,y)$ tem a forma de uma função quadrática, então possui dois eixos principais. Podemos rotacioná-la a fim de alinhar seus eixos com os do sistema de coordenadas, obtendo $F_{u,v}(x,y)$ [@nixon2019feature, p. 187].
+$$F_{u,v}(x,y) = \alpha(x,y)^2u^2 + \beta(x,y)^2v^2$$
+Ou em sua forma matricial. Note que são rotacionados os eixos definidos pelo $D$
+$$F_{u,v}(x,y) = R^TD^TMDR$$
+$$F_{u,v}(x,y) = D^TR^TMRD$$
+$$F_{u,v}(x,y) = D^TQD$$
+$$Q = \begin{bmatrix} \alpha & 0\\ 0 & \beta  \end{bmatrix}$$
+Os valores de $\alpha$ e $\beta$ são proporcionais à função de autocorrelação nos principais eixos. Dessa forma,  $\alpha$ e $\beta$  serão pequenos  se o $pixel(x,y)$ for de uma região com intensidade constante, um será de valor grande e outro pequeno se estiverem em uma borda reta, e ambos terão valores grandes se estiverem em uma borda com curvatura acentuada. Portanto, a medida de curvatura é definida como $k_k(x,y)$ [@nixon2019feature, p. 187].
+$$k_k(x,y) = \alpha \beta - k(\alpha + \beta)^2$$
+No qual $k$ controla a sensibilidade do detector.
+
+Como $Q$ é uma composição ortogonal de $M$. Os elementos de Q são chamados de autovalores [@nixon2019feature, p. 188]. Inferimos que
+$$Q = R^TMR$$
+Então, a partir da equivalência de determinantes e traços, é possível produzir uma equação equivalente a $Y$ com os valores da matriz $M$ [@nixon2019feature, p. 188].
+$$\alpha \beta = A(x,y)B(x,y) - C(x,y)^2$$
+$$\alpha + \beta = A(x,y) + B(x,y)$$
+Assim
+$$
+\begin{split}
+k_k(x,y) &= \alpha \beta - k(\alpha + \beta)^2
+\\&= A(x,y)B(x,y) - C(x,y)^2 - k(A(x,y) + B(x,y))^2
+\\&=det(M) - k(trace(M))^2
+\end{split}
+$$
+A Figura \@ref(fig:imagemQuinas) (a) é a imagem original. A Figura \@ref(fig:imagemQuinas) (b) foi gerada usando o detector de Harris com uma vizinhança 5x5 ($w=2$) para cada deslocamento $(u,v)$, com a derivada sendo calculada pelo Operador de Sobel (3x3) e com sensibilizador $k=0.01$. Limiarizou-se a imagem de curvatura, descartando os valores que não fossem maiores que 9% do valor máximo. E nas posições $(x,y)$ da imagem que continham as curvaturas, foi destacado em rosa. 
+Observe que a imagem identificou as quinas do tabuleiro de xadrez e do cubo mágico, porém não detectou outras quinas como as das árvores. Além disso, foi encontrado quinas que não são próprias dos objetos, e sim da iluminação. 
+Variando tanto o sensibilizador da função, $k$, como o limiar é provável que consigamos encontrar mais quinas, com o custo de também poder classificar ruídos que foram identificados como bordas também como quinas. Entretanto, já vimos que o filtro gaussiano pode ser que nos ajude neste problema. 
+
+
+(ref:imagemQuinas) Exemplo de detecção de Quinas pelo método de Harris.
+
+```{r imagemQuinas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemQuinas)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemQuinas.png'))
+```
+
+
+## Detecção de Blobs
 Blobs, do inglês bolhas, são regiões da imagem em que os pixels têm valores aproximadamente iguais. Uma boa representação - um tanto quanto artificial - disso é a função gaussiana, como pode ser vista na figura  \@ref(fig:gaussianblob)(a) e sua representação 2D na figura \@ref(fig:gaussianblob)(b), nela temos um conjunto de pixels com valores bem próximos, que caracterizam um blob.
 
 (ref:gaussianblob) Função gaussiana em 3D e 2D.
@@ -330,7 +628,352 @@ Sendo que o valor $0.9$ é um peso introduzido pelos autores Bay, Hebert et al. 
 knitr::include_graphics(rep('imagens/06-segmentacao/doh_hubble.jpg'))
 ```
 
-## Detecção de junções ou cantos
-## Segmentação por limiarização
-## método de Otsu
-## Segmentação usando watersheds morfológicas
+## Limiarização
+"a seção anterior, as regiões eram identificadas achando primeiro os segmentos de borda e, em seguida, tentando-se conectá-las com as fronteiras. Nesta seção, discutem-se as técnicas de divisão de imagens diretamente em regiões com base nos valores de intensidade e/ou as propriedades desses valores" [@gonzalez2010, p. 486].
+
+"Em virtude de suas propriedades intuitivas, simplicidade de implementação e velocidade computacional, a limiarização de imagens tem uma posição central nas aplicações de segmentação de imagem" [@gonzalez2010, p. 486].
+
+É importante salientar que a chance de sucesso da limiarização de intensidade é proporcional à largura e a profundidade do(s) vale(s) que separam os modos (ou classes) do histograma. E os principais fatores que afetam as propriedades do(s) vale(s) são [@gonzalez2010, p. 487]:
+
+- A separação entre picos: quanto mais distantes forem os picos entre si, melhores as possibilidades de separação da imagem
+
+- Índice de ruído da imagem: os modos ampliam com o aumento do ruído
+
+- O tamanho relativo dos objetos e do fundo
+
+- A uniformidade da fonte de iluminação
+
+- A uniformidade da reflexão da imagem
+
+Suponha que os histogramas de intensidade de uma imagem composta por objetos claros sobre um fundo escuro, conforme Figura \@ref(fig:histograma4didatica) (a), de tal forma que os *pixels* do objeto e do fundo tenham valores de intensidade agrupados em dois modos ou dois grupos dominantes (Gonzalez; Woods, 2010, p. 486); a idéia é selecionar um limiar $T$ que separa estes modos. E caso tenha três modos, usa-se dois limiares, conforme Figura \@ref(fig:histograma4didatica) (b). Em outras palavras, a segmentação da imagem da Figura \@ref(fig:histograma4didatica) (a) é dada por $g(x,y)$^[se $f(x,y) \leq T$, significa que se desconsida^ o endereço daquele *píxel*]:
+
+$$g(x,y) =
+\begin{cases}
+1,\ se f(x,y) > T \\
+0,\ se f(x,y) \leq T
+\end{cases}$$
+
+(ref:histograma4didatica) Histogramas de intensidade que podem ser divididos por um limiar único, (a), e limiares duplos, (b).  [@gonzalez2010, p. 486]
+
+```{r histograma4didatica, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:histograma4didatica)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/histograma4didatica.png'))
+```
+  
+Quando $T$ é uma constante aplicável em uma imagem inteira, o processo é conhecido como limiarização global. Caso $T$ mude ao longo da imagem, usamos o termo limiarização variável. E quando $T$ denotar uma limiarização variável na qual o valor $T$ em qualquer ponto $(x,y)$ em uma imagem depende das propriedades de sua vizinhança (por exemplo, a intensidade média dos *pixels* da vizinhança), o chamamos de limiarização local ou regional^[O uso desses termos não é universal e é provável vê-los sendo utilizados indiferentemente na literatura de processamento de imagem.] [@gonzalez2010, p. 486].  
+
+Os problemas de segmentação que exigem mais do que dois limiares são difíceis (muitas vezes impossíveis) de resolver e os melhores resultados, geralmente, são obtidos por meio de métodos como a limiarização variável ou aumento da região, como discutido [@gonzalez2010, p. 486].
+
+
+- **O papel do ruído da limiarização**
+
+O ruído de uma imagem é capaz de fazer com que fique difícil achar um limiar ideal para segmentar a imagem sem processamentos adicionais, pois o(s) vale(s) da imagem podem desaparecer [@gonzalez2010. 487]. 
+
+Observe que conforme os exemplos da Figura \@ref(fig:imagemRuido) e seus respectivos histogramas, o aumento no desvio padrão nos níveis de intensidade do ruído gaussiano faz com que o vale que separava os dois modos desapareça, tornando difícil a segmentação do fundo e do objeto.
+
+(ref:imagemRuido) (a) Imagem de 8 bits livre de ruído, típica de Computação Gráfica. (b) Imagem com ruído gaussiano aditivo de média 0 e desvio padrão de 10 níveis de intensidade. (c) Imagem com ruído gaussiano aditivo de média 0 e desvio padrão de 50 níveis de intensidade. (d) a (f) Histogramas correspondentes [@gonzalez2010, p. 487].
+
+```{r imagemRuido, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemRuido)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemRuido.png'))
+```
+
+- **O papel da iluminação e refletância**
+
+O problema da iluminação é quando não é possível ter uma incidência uniforme da luz, causando um sombreamento. O mesmo efeito acontece quando o problema não é na iluminação, mas nas características da superfície do objeto; pois a iluminação e refletância produzem o mesmo problema. Note que, pela Figura \@ref(fig:imagemRefletancia), o histograma deixou de ser bimodal. Logo para segmentar imagens com problemas de iluminação e refletância não é simples
+
+(ref:imagemRefletancia) (a) Imagem ruidosa. (b) Rampa de intensidade no intervalo [0.2, 0.6]. (c) Produto de (a) e (b). (d) a (f) Histogramas correspondentes [@gonzalez2010, p. 488].
+
+```{r imagemRefletancia, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemRefletancia)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemRefletancia.png'))
+```
+
+E como solução há três abordagens básicas. Corrigir diretamente o padrão de sombreamento através de uma multiplicação com o comportamento inverso do sombreamento. Por exemplo, a iluminação não uniforme, porém fixa, pode ser corrigida multiplicando a imagem pelo inverso do padrão de iluminação, que pode ser obtida na aquisição de uma imagem de uma superfície plana de intensidade constante. Outra maneira é corrigí-lo por meio do processamento, por exemplo, utilizando a transformada *top-hat*. E a terceira abordagem é a de contornar isso utilizando a limiarização variável [@gonzalez2010, p. 488].
+
+
+
+### Limiarização global simples
+A limiarização global simples é um método iterativo básico e que não é o mais eficiente. Ele é um processo iterativo que denomina o limiar ideal como aquele que produz menor diferença entre as médias de intensidade dos modos, o de segmentação e o desprezado [@gonzalez2010, p. 488].
+
+Ele consiste em:
+
+1. Selecionar uma estimativa inicial para o limiar global, $T$.
+
+2. Segmentar a imagem usando $T$. Isso dará origem a dois grupos de pixels: $G_{1}$ , composto por todos os pixels com valores de intensidade $> T$, e $G_{2}$, composto pelos pixels com valores $\leq T$.
+
+3. Calcular os valores de intensidade média dos grupos, $m_{1}$ e $m_{2}$.
+
+4. Calcular um novo valor de limiar: $T = \frac{m_{1}+m_{2}}{2}$.
+
+5. Repita as etapas 2 a 4 até que a diferença entre os valores de $T$ das iterações sucessivas seja menor que o parâmetro predefinido $\Delta T$.
+
+Exemplo de Limiarização Global:
+A Figura \@ref(fig:imagemLimiarGlobalSimples) (a) consiste na imagem de uma digital com ruído. A Figura \@ref(fig:imagemLimiarGlobalSimples) (b) mostra que seu histograma possui um vale bem nítido e pela aplicação do algoritmo, usando $\Delta T = 0$ e iniciando $T$ igual a média de intensidade da imagem, após três iterações, encontramos o limiar $T = 125.4$. A Figura \@ref(fig:imagemLimiarGlobalSimples) (c) mostra o resultado obtido como $T = 125$. Como esperado, a partir da separação clara entre os modos no histograma, segmentação entre o objeto e o fundo foi bastante eficaz.
+
+(ref:imagemLimiarGlobalSimples) (a) Impressão digital ruidosa. (b) Histograma. (c) Segmentação resultante usando um limiar global. [@gonzalez2010, p. 489].
+
+```{r imagemLimiarGlobalSimples, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemLimiarGlobalSimples)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemLimiarGlobalSimples.png'))
+```
+
+
+### Limiarização pelo Método de Otsu
+
+O método de Otsu é uma abordagem que relaciona as informações do histograma com conceitos estatísticos para produzir o chamado limiar ótimo, que é denotado por aquele que maximiza a variância entre classes ou minimiza a variância intraclasse [@gonzalez2010, p. 489]. Lembrando que classe é o mesmo que modos do histograma.
+
+O primeiro passo é obter o histograma da imagem normalizado, isto é, no qual os pesos de cada intensidade são a probabilidade da ocorrência daquela intensidade na imagem. Segue a equação abaixo que representa um histograma normalizado, no qual $L$ representa a quantidade de níveis de intensidade e $p_{i}$, a probabilidade de ocorrência da intensidade $i$ na imagem [@gonzalez2010, p. 490]. 
+
+$$\sum_{i=0}^{L-1}{p_{i} = 1,\ p_{i} \geq 0}$$
+
+Para entender a equação cerne de Otsu, é preciso compreender algumas equações que a compõe. A probabilidade de ocorrência do modo 1 é dada pela equação abaixo [@gonzalez2010, p. 490]
+
+$$P_{1}(k) = \sum_{i=0}^{k}{p_{i}}$$
+E o valor da intensidade média dos *pixels* da classe 1, $C_{1}$, para dado limiar $k$ pode ser calculado pela equação abaixo [@gonzalez2010, p. 490]
+
+$$\begin{split}
+m_{1}(k) & = \sum_{i=0}^{k}{iP(i/C_{1})}\\
+& = \sum_{i=0}^{k}{iP(C_{1}/i)P(i)/P(C_{i})}\\
+& = \frac{1}{P_{1}(k)}\sum_{i=0}^{k}{ip_{i}}\\
+\end{split}$$
+E a média acumulada (intensidade média) até o nível $k$ ou da classe $C_{1}$ é dada por [@gonzalez2010, p. 490]
+
+$$m(k) = \sum_{i=0}^{k}{ip_{i}}$$
+
+Entendidas as equações anteriores, chegamos a equação cerne, que denota a variância entre classes.
+
+$$\sigma_B^2(k) = \frac{[m_GP_{1}(k) - m(k)]^{2}}{P_1(k)[1 - P_1(k)]}$$
+Então, o limiar ótimo é o valor que maximiza a variância entre classes, denominado $k^*$ [@gonzalez2010, p. 491], representado na equação abaixo. E conforme informado anteriormente, esse resultado é o mesmo que minimiza a variância dentro das classes; isso se deve a uma propriedade estatística que relaciona a variância global de intensidade da imagem, a variância interclasse e a variância intraclasse.
+
+$$\sigma_B^2(k^*) = \max_{0 \leq k \leq L-1} \sigma_B^2(k)$$
+Se o máximo existir para mais de um valor de $k$, é habitual calcular a média dos valores de $k$ [@gonzalez2010, p. 491].
+
+Uma métrica adimensional pode ser usada para obter uma estimativa quantitativa da separabilidade das classes, o que dá uma idéia da facilidade e do resultado da segmentação.
+
+$$\eta = \frac{\sigma_B^2(k^*)}{\sigma_G^2}$$
+Tendo o limiar ótimo, $k^*$, segmentamos a imagem como já visto.
+
+Para o cálculo da métrica adimensional, é preciso conhecer a variância global das intensidades da imagem que pode ser obtida pela seguinte equação:
+$$\sigma_G^2 = \sum_{i=0}^{L-1}{(i - m_G)}^2p_i$$
+Resumo do algoritmo de Otsu [@gonzalez2010, p. 492]:
+
+1. Calcular o histograma normalizado da imagem de entrada. Designar os componentes do histograma como $p_i, i = 0, 1, 2, ..., L-1$.
+2. Calcular as somas acumuladas, $P_1(k)$, para $k = 0, 1, 2, ..., L-1$.
+3. Calcular as médias acumuladas $m(k)$, para $k = 0, 1, 2, ..., L-1$.
+4. Calcular a intensidade média global, $m_G$.
+5. Calcular a variância entre classes, $\sigma_B^2(k)$, para $k = 0, 1, 2, ..., L-1$.
+6. Obter o limiar ideal de Otsu, $k^*$, caso haja mais de um, faz-se a média dos valores.
+7. Obter a medida de separabilidade, $\eta^*$, a fim de estimar a qualidade da segmentação.
+
+A Figura \@ref(fig:imagemOtsu) (a) mostra uma imagem de microscópio ótico de células polimerosomas e a Figura \@ref(fig:imagemOtsu) (b), seu histograma. O objetivo deste exemplo é segmentar as moléculas do fundo. A Figura \@ref(fig:imagemOtsu) (c) é o resultado pela limiarização global simples. Como o histograma não tem vales distintos e a diferença de intensidade entre o fundo e os objetos é pequena, o algoritmo não conseguiu alcançar a segmentação desejada. A Figura \@ref(fig:imagemOtsu) (d) mostra o resultado obtido pelo método de Otsu. Esse resultado, obviamente, é superior ao da Figura \@ref(fig:imagemOtsu) (c). O valor do limiar calculado pelo algoritmo simples foi o de 169, enquanto o limiar calculado pelo método de Otsu era  o de 181, que está mais próximo das áreas mais claras na imagem que define as células. A medida de separabilidade \eta foi 0.467.
+
+(ref:imagemOtsu) (a) Imagem original. (b) Histograma (os picos elevados foram cortados para realçar os detalhes nos valores mais baixos). (c) Resultado da segmentação pela limiarização global simples. (d) Resultado da segmentação pelo método de Otsu. [@gonzalez2010, p. 492].
+
+```{r imagemOtsu, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemOtsu)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemOtsu.png'))
+```
+
+
+### Uso de suavização para limiarização
+O objetivo da suavização é tentar separar os histogramas de imagens ruidosas, que tendem a ser unimodais, em modos com vales mais profundos; pois, quanto mais profundo o vale, melhor será a segmentação da imagem. 
+
+Atente-se ao tipo de média e ao tamanho do *kernel*, aconselha-se o filtro gaussiano, pois ele minimiza o borramento de fronteira, e suaviza o ruído ainda que de maneira mais branda do que um filtro de média.
+
+A Figura \@ref(fig:imagemSuavizacaoLimiarizacao) (a) mostra uma imagem ruidosa, a \@ref(fig:imagemSuavizacaoLimiarizacao) (b) mostra seu histograma, a Figura \@ref(fig:imagemSuavizacaoLimiarizacao) (c) mostra o resultado do método de Otsu. Já a Figura \@ref(fig:imagemSuavizacaoLimiarizacao) (d) mostra a imagem de (a) suavizada usando uma máscara de média de tamanho 5x5 e a Figura \@ref(fig:imagemSuavizacaoLimiarizacao) (e) é seu histograma e a Figura \@ref(fig:imagemSuavizacaoLimiarizacao) (f) é resultado da limiarização pelo método de Otsu.
+
+(ref:imagemSuavizacaoLimiarizacao) Exemplo de suavização antes da aplicação do método de Otsu  [@gonzalez2010, p. 493].
+
+```{r imagemSuavizacaoLimiarizacao, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemSuavizacaoLimiarizacao)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemSuavizacaoLimiarizacao.png'))
+```
+
+
+Apesar do filtro de média poder nos ajudar, nem sempre será capaz disso. A Figura \@ref(fig:ImagemSuavizacaoLimiarizacaoProblem) (a) mostra uma imagem ruidosa e a \@ref(fig:ImagemSuavizacaoLimiarizacaoProblem) (b) mostra o seu histograma, observe que o pontinho branco parece nem estar presente no histograma. E após aplicado o método de Otsu, a \@ref(fig:ImagemSuavizacaoLimiarizacaoProblem) (c), observe que não foi obtida a segmentação desejada. Então, tentou-se um filtro de média 5x5, que reduz o ruído, Figura \@ref(fig:ImagemSuavizacaoLimiarizacaoProblem) (d). O resultado no histograma foi a redução do espalhamento do histograma, Figura \@ref(fig:ImagemSuavizacaoLimiarizacaoProblem) (e), mas a distribuição ainda é unimodal, resultando em falha na segmentação, o que é visto na Figura \@ref(fig:ImagemSuavizacaoLimiarizacaoProblem) (f).
+
+(ref:ImagemSuavizacaoLimiarizacaoProblem) Exemplo de insucesso na segmentação por Otsu, mesmo com prévia suavização.
+
+```{r ImagemSuavizacaoLimiarizacaoProblem, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:ImagemSuavizacaoLimiarizacaoProblem)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/ImagemSuavizacaoLimiarizacaoProblem.png'))
+```
+
+Portanto, note que, se a região que deseja segmentar for muito pequena em relação ao background e houver ruído, o que pode surgir na captura da imagem, a chance de não dar certo pelos métodos vistos é grande; pois como os métodos que até agora vimos operam apenas no histograma da imagem, sem uso de maiores recursos. Como visto, imagens com essa característica, um mínimo ruído persiste e nem foi obtido um vale considerável entre as duas regiões. Isso pode ser atribuído ao fato de que a região é tão pequena que sua contribuição para o histograma é insignificante em comparação à intensidade da propagação causada pelo ruído [@gonzalez2010, p. 493]. A solução para isso é o uso de máscaras de borda, que será detalhado a seguir. 
+
+### Uso de bordas para limiarização
+Em uma imagem com ruído na qual a região a ser segmentada é muito pequena, é como se não houvesse aquela região e houvesse apenas o *background*. Isso é observado na aparência unimodal do histograma.
+
+Portanto, fica difícil estimar um limiar ideal pelos algoritmos supracitados. E como visto anteriormente, é preciso uma aparência bimodal para uma boa segmentação, então, precisamos de um histograma equilibrado; para isso, tomamos o histograma das bordas mais destacadas da imagem. Isso pode ser resumido em gerar uma máscara de gradiente ou laplaciano da imagem, limiarizá-la com um valor alto e usar como máscara para imagem original e prosseguir com o processo de segmentação do objeto a partir dessa amostra, pois, dessa forma, é gerado um histograma simétrico e com um vale destacado, porque, com a máscara de borda, há probabilidade de um píxel estar no *background* ou *foreground* tende a ser equilibrada [@gonzalez2010, p. 494]. 
+
+O que se espera com os tipos de máscaras de borda, conforme visto no estudo detecção de bordas, é que a de gradiente produzirá bordas mais grossas e menor detecção aos ruídos da imagem, e a de laplace, bordas mais finas e maior detecção de ruídos, além de apresentar melhor custo computacional. Entretanto, é possível modificar este algoritmo para que tanto a magnitude do gradiente quanto o valor absoluto das imagens laplacianas sejam utilizadas; nesse caso, poderíamos especificar um limiar para cada imagem e formar a lógica OU dos dois resultados para obter a imagem marcadora, essa abordagem é útil quando se deseja ter mais controle sobre os pontos que foram considerados como sendo pontos válidos de borda [@gonzalez2010, p. 494].
+
+Resumo das etapas de segmentação pela identificação de bordas do objeto [@gonzalez2010, p. 494]:
+
+1. Calcular uma imagem de borda da imagem capturada, $f(x,y)$, ora como a magnitude do gradiente, ora como o valor absoluto do laplaciano, usando qualquer um dos métodos.
+
+2. Especificar um valor de limiar, $T$.
+
+3. Limiarizar a imagem a partir da Etapa 1, utilizando o limiar estabelecido na Etapa 2 para produzir uma imagem binária, $g_{T}(x,y)$. Esta imagem é usada como uma imagem de máscara na etapa seguinte para selecionar os pixels de $f(x,y)$ que correspondem aos pixels “fortes” da borda.
+
+4. Calcular um histograma utilizando apenas os pixels de $f(x,y)$, que correspondem aos endereços de pixel avaliados com o número 1 em $g_{T}(x,y)$.
+
+5. Use o histograma da Etapa 4 para segmentar $f(x,y)$ globalmente, utilizando, por exemplo, o método de Otsu.
+
+A Figura \@ref(fig:imagemLimiarizGradiente) (a) e (b) mostram as mesmas imagens da Figura \@ref(fig:ImagemSuavizacaoLimiarizacaoProblem) e seu histograma. Vimos que essa imagem não adianta ser suavizada. Entretanto, usamos a estratégia de máscara de borda que obteve um ótimo resultado. A Figura \@ref(fig:imagemLimiarizGradiente) (c) mostra o gradiente já limiarizado, A Figura \@ref(fig:imagemLimiarizGradiente) (d) e (e) mostra a máscara multiplicada a imagem original, que tem um histograma mais relevante à segmentação. E a Figura \@ref(fig:imagemLimiarizGradiente) (f) mostra o resultado da segmentação pelo novo histograma, \@ref(fig:imagemLimiarizGradiente) (e), através do Método de Otsu. O limiar foi de $134$, que fica aproximadamente a meio caminho entre os picos no histograma.
+
+(ref:imagemLimiarizGradiente) Exemplo de limiarização por meio de máscara de borda de gradiente.
+
+```{r imagemLimiarizGradiente, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemLimiarizGradiente)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemLimiarizGradiente.png'))
+```
+
+
+
+Já a Figura \@ref(fig:imagemLimiarizLaplace) (a) e (b) mostra uma imagem de 8 bits de células de levedura e seu histograma. A tentativa em detectar em segmentar os pontos claros pelo método de Otsu sem prévia etapa não foi sucedida, embora o método seja capaz de isolar algumas das regiões das células muitas da regiões segmentadas à direita não estão separadas. O limiar calculado foi de $42$ e a medida de separabilidade foi de $0.636$.  
+A Figura \@ref(fig:imagemLimiarizLaplace) (d) mostra a imagem $g_T(x,y)$ obtida pelo cálculo do valor absoluto da imagem laplaciana e a limiarização com $T$ definido a $115$ em uma escala de intensidade no intervalo $[0, 255]$. Este valor de $T$ corresponde aproximadamente ao percentil $99.5$ dos valores da imagem laplaciana absoluta; assim, a limiarização a este nível deve resultar em um conjunto de *pixels* reduzido, como mostra esta Figura. A Figura \@ref(fig:imagemLimiarizLaplace) (e) é o histograma dos *pixels* diferentes a zero no produto de (a) e (d). Finalmente a Figura \@ref(fig:imagemLimiarizLaplace) (f) mostra o resultado da segmentação global da imagem original utilizando o método de Otsu baseado no histograma da Figura \@ref(fig:imagemLimiarizLaplace) (e). Este resultado está de acordo com as localizações dos pontos claros na imagem. O limiar calculado pelo método de Otsu foi $115$ e a medida de separabilidade foi de $0.762$, sendo que ambos são superiores aos valores obtidos utilizando o histograma original [@gonzalez2010, p. 495].
+
+(ref:imagemLimiarizLaplace) Exemplo de limiarização por meio de máscara de borda laplaciana.
+
+```{r imagemLimiarizLaplace, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemLimiarizLaplace)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemLimiarizLaplace.png'))
+```
+
+
+
+### Limiares Múltiplos
+
+A diferença entre os limiares múltiplos e o que vimos até agora é que se usa mais de um limiar para segmentar a imagem a fim de produzir uma melhor medida de separabilidade entre as classes, por conseguinte, melhor segmentação.
+Entretanto, como as aplicações que requerem mais de dois limiares geralmente são resolvidas com mais do que apenas valores de intensidade. Ao invés disso, o caminho é usar descritores adicionais (por exemplo, cor) e o problema é moldado para reconhecimento de padrões, como explicado a seguir em Limiarização baseada em diversas variáveis [@gonzalez2010, p. 497].
+
+No caso das classes $K, C_1, C_2, ..., C_K$, a variância entre classes se generaliza pela expressão
+$$\sigma_{B}^{2} = \sum_{k=1}^K{P_k(m_k-m_G)^2}$$
+na qual
+$$P_k = \sum_{i\in C_k}{p_i}$$
+$$m_k = \frac{1}{P_k} \sum_{i \in C_k}{ip_i} $$
+As classes $K$ são separadas por $K-1$ limiares cujos valores, $k^*_1, k^*_2, ..., k^*_k-1$
+$$
+\sigma_{B}^{2}(k^*_1, k^*_2, ..., k^*_{K-1}) =
+\max_{0<k_1<k_2<...k_{n-1}<L-1}{\sigma_{B}^{2}(k_1, k_2, ..., k_{K-1})}
+$$
+
+Como observado na equação anterior, o valor máximo é obtido testando todas as possibilidades de valores para cada limiar, mas lembre-se que não faz sentido assumir limiares para $0$ e $L-1$, pois são os extremos da faixa de intensidade.
+
+Também pode ser feito a avaliação de sua medida de separabilidade. Como exemplo, tomemos um histograma com três classes [@gonzalez2010, p. 497]. 
+
+$$\eta(k^*_1, k^*_2) = \frac{\sigma^2_{B}(k^*_1,k^*_2)}{\sigma^2_{G}}$$
+
+A Figura \@ref(fig:imagemLimiarizacaoMult) (a) mostra a imagem de um *iceberg*. É notório que será possível dividí-la com dois limiares^[A limiarização com dois limiares às vezes é chamada histerese de limiarização.] a partir das predominâncias de três grupos de intensidade. Olhando no histograma, \@ref(fig:imagemLimiarizacaoMult) (b), pelos vales bem destacados também é observado isso. Encontra-se pelo método de Otsu dois limiares, $80$ e $177$, com uma excelente medida de separabilidade de $0.954$. Limiarizando a Figura \@ref(fig:imagemLimiarizacaoMult) (a) o resultado que se obtém é uma segmentação muito boa, Figura \@ref(fig:imagemLimiarizacaoMult) (c) [@gonzalez2010, p. 498].
+
+(ref:imagemLimiarizacaoMult) (a) Imagem de um *iceberg*. (b) Histograma. (c) Imagem segmentada em três regiões usando os limiares duplos de Otsu.
+
+```{r imagemLimiarizacaoMult, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemLimiarizacaoMult)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemLimiarizacaoMult.png'))
+```
+
+### Limiarização variável
+Vimos perante seções anteriores, que fatores como ruído e iluminação são impecílios para uma boa segmentação. Também foi visto que suavização e informações das bordas podem ser usadas para resolver isto. No entanto, é frequente o caso que essas estratégias são ineficientes ou nem possíveis. Como solução para tal, usamos limiares variáveis.
+
+### Particionamento da imagem
+O particionamento da imagem consiste em fracionar a imagem em retângulos suficientemente pequenos de maneira que eles tenham iluminação e refletância uniformes e aplicar o método de Otsu em cada um deles. O sucesso do método é análogo ao da máscara de bordas, ele produz, para cada fração, histogramas simétricos com vales profundos [@gonzalez2010, p. 498].
+
+A Figura \@ref(fig:imagemLimiarizacaoVariavel) (a) e (b) mostra uma imagem e seu histograma. Pelo seu histograma é plausível que não resultaria em uma boa segmentação, seja pelo método de Otsu, Figura \@ref(fig:imagemLimiarizacaoVariavel) (c) ou pelo método iterativo, Figura \@ref(fig:imagemLimiarizacaoVariavel) (d). Após fracionada a imagem, Figura \@ref(fig:imagemLimiarizacaoVariavel) (e), a segmentação por Otsu teve sucesso, Figura \@ref(fig:imagemLimiarizacaoVariavel) (f). [@gonzalez2010, p. 498]
+
+(ref:imagemLimiarizacaoVariavel) Exemplo da técnica de particionamento da imagem.
+
+```{r imagemLimiarizacaoVariavel, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemLimiarizacaoVariavel)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemLimiarizacaoVariavel.png'))
+```
+
+
+(ref:imagemHistoVari) Representa o histograma das subimagens da Figura \@ref(fig:imagemLimiarizacaoVariavel) (e).
+
+```{r imagemHistoVari, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemHistoVari)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemHistoVari.png'))
+```
+
+### Limiarização variável baseada nas propriedades locais da imagem
+É uma técnica em que se calcula um limiar para cada ponto, $(x,y)$, com base em uma ou mais propriedades calculadas em sua vizinhança. Apesar de parecer trabalhoso, os algoritmos e hardwares modernos permitem o processamento rápido da vizinhança, especialmente para as funções comuns, como as operações lógicas e aritméticas [@gonzalez2010, p. 499].
+Utilizaremos como abordagem básica duas propriedades, $\sigma_{xy}(x,y)$ e $m_{xy}(x,y)$, já que indicam o grau de contraste e intensidade média na vizinhança. Seguem cálculos da limiarização usando apenas a intensidade do ponto, sendo $T_{xy}$, o limiar local. As equações seguintes são formas comuns de limiares variáveis locais [@gonzalez2010, p. 499]:
+
+$$T_{xy} = a\sigma_{xy} + bm_{xy}$$
+em que $a$ e $b$ são constantes não negativas, e
+
+$$T_{xy} = a\sigma_{xy} + bm_{G}$$
+, na qual $m_G$ é a média global da imagem.
+
+Também pode ser usado predicados a fim de determinar o limiar, $T_{xy}$, de segmentação. No entanto, o preço dessa limiarização mais rebuscada é um aumento no custo computacional [@gonzalez2010, p. 499]. E a imagem $g_{xy}$, ficaria conforme um exemplo a seguir:
+
+$$g(x,y) =
+\begin{cases}
+  1,\ se\ f(x,y) > a\sigma_{xy}\ \ E\ \ f(x,y) > bm_{xy}\\
+  0,\ caso\ contrário
+\end{cases}
+$$
+
+
+A Figura \@ref(fig:imagemLimiarizVariavel) (a) é a imagem de células de levedura da Figura anterior \@ref(fig:imagemLimiarizLaplace) (a). A Figura \@ref(fig:imagemLimiarizVariavel) (b) é um exemplo da segmentação da Figura \@ref(fig:imagemLimiarizVariavel) (a) com dois limiares. Entretanto, note que as células do canto superior direito foram segmentadas de forma unida. A Figura \@ref(fig:imagemLimiarizVariavel) (c) é a imagem dos desvios padrão locais da vizinhança de tamanho 3x3 de cada *píxel*. E foi escolhida a média global ao invés da local, pois geralmente produz melhores resultados quando o fundo é quase constante e todas as intensidades de objeto estão acima ou abaixo da intensidade do fundo. Os pesos $a=30$ e $b=1,5$ foram assumidos. E, por fim, foi limiarizada pelo predicado exemplificado na última equação e não pela intensidade de um ponto, Figura \@ref(fig:imagemLimiarizVariavel) (d). 
+
+(ref:imagemLimiarizVariavel) Exemplo de limiarização variável baseada nas propriedades locais [@gonzalez2010, p. 500].
+
+```{r imagemLimiarizVariavel, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemLimiarizVariavel)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemLimiarizVariavel.png'))
+```
+
+
+### Usando média de movimento
+O método de médias móveis é usado geralmente quando os objetos de interesse são pequenos (ou finos) em relação ao tamanho da imagem, uma condição que as imagens de texto digitado ou manuscrito possuem [@gonzalez2010, p. 501]. "Essa aplicação é muito útil no processamento de documentos" [@gonzalez2010, p. 500]. O procedimento consiste em um *kernel* 1D que percorre a imagem linha por linha e calcula média móvel com base em um intervalo de um dado tamanho fixo. A regra inicial é usar um intervalo de tamanho 5 vezes maior que a largura média do objeto que deseja limiarizar [@gonzalez2010, p. 501].
+Digamos que $z_{k+1}$ denota a intensidade do ponto encontrado na sequência de digitalização na Etapa $k+1$. A média móvel (intensidade média) com este novo ponto é dada por
+$$\begin{split}
+m(k+1) 
+& = \frac{1}{n} \sum_{i = k+2-n}^{k+1}{z_i}\\
+& = m(k) + \frac{1}{n}(z_{k+1} - z_{k-n})
+\end{split}$$
+
+na qual $n$ é o tamanho do intervalo ou número de *pixels* utilizados no cálculo da média e $m(1)=\frac{z1}{n}$. Este valor inicial não é rigorosamente correto porque a média de um único ponto é o valor do ponto em si. No entanto, o usamos para que cálculos especiais não sejam necessários quando é executada pela primeira vez. Já que a média móvel é calculada para cada ponto da imagem, a segmentação é baseada no limiar $T_{xy}=bm_{xy}$, em que $b$ é constante e $m_{xy}$ é a média móvel no ponto $(x,y)$ na imagem de entrada [@gonzalez2010, p. 500]. A diferença desse método ao explicado na seção anterior é que neste usasse um *kernel* 1D que avalia linha por linha a imagem.
+
+Na Figura \@ref(fig:imagemMediaMovel1) (a) mostra uma imagem de texto escrito à mão sombreada por um padrão de intensidade. Esta forma de sombreamento de intensidade é típica de imagens obtidas com um flash fotográfico. A Figura \@ref(fig:imagemMediaMovel1) (b) é o resultado da segmentação pela limiarização global de Otsu. A Figura \@ref(fig:imagemMediaMovel1) (b) mostra uma segmentação bem sucedida com limiarização local usando médias móveis, usando $n=20$, já que a largura média do traço era de $4$ *pixels*, e $b=0.5$.
+
+(ref:imagemMediaMovel1) Exemplo de aplicação da limiarização por médias móveis em um documento corrompido por um sombreamento típico de flash fotográfico. (a) Imagem original. (b) Aplicado método de Otsu. (c) Aplicado método de médias móveis. [@gonzalez2010, p. 501].
+
+```{r imagemMediaMovel1, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemMediaMovel1)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemMediaMovel1.png'))
+```
+
+
+Já na Figura \@ref(fig:imagemMediaMovel2) (a) mostra uma imagem de texto escrito à mão corrompida por um sombreamento senoidal. Esta forma de sombreamento de intensidade é típica de quando o fornecimento de energia em um digitalizador de documentos não é apropriado. A Figura \@ref(fig:imagemMediaMovel2) (a) é a imagem original, a Figura \@ref(fig:imagemMediaMovel2) (b) é o resultado da limiarização por Otsu e a Figura \@ref(fig:imagemMediaMovel2) (c) é o resultado pela  média móvel. Os parâmetros utilizados foram o mesmo do anterior, sendo $n=20$ e $b=0.5$, o que mostra relativa robustez do método.
+
+(ref:imagemMediaMovel2) Exemplo de aplicação da limiarização por médias móveis em um documento corrompido por um sombreamento típico de problemas em *scanner* em que o fornecimento de energia não é o apropriado. (a) Imagem original. (b) Aplicado método de Otsu. (c) Aplicado método de médias móveis. [@gonzalez2010, p. 502].
+
+```{r imagemMediaMovel2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemMediaMovel2)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemMediaMovel2.png'))
+```
+
+
+### Limiarização baseada em diversas variáveis
+Até agora, falamos apenas da limiarização baseada em uma única variável: intensidade dos tons de cinza. Em alguns casos, um sensor pode disponibilizar mais de uma variável para identificar cada *pixel* em uma imagem e, assim, permitir uma limiarização multivariada.
+Um exemplo notável é a imagem em cores, na qual os componentes são vermelho (R), verde (G) e azul (B). Neste caso, cada *“pixel”* é identificado por três
+valores e pode ser representado como um vetor 3-D, $z = (z_1+z_2+z_3)^T$, cujos componentes são as cores RGB em um ponto. Estes pontos 3-D são frequentemente chamados de *voxels*, para denotar elementos volumétricos em oposição aos elementos de imagem [@gonzalez2010, p. 501].
+
+Numa limiarização focada na intensidade de cinza, de apenas uma variável, avaliamos apenas a intensidade, um gráfico de duas variáveis (histograma convencional). A sua limiarização é simples. Já no R, G, B, gráfico tridimensional, avaliamos a distância dos píxels da imagem a um píxel de referência, e o limiar é representado pelo contorno de uma Figura(a) simétrica na qual **contém** os *píxels* segmentados e tem como seu centro o *píxel* de referência. Conforme demonstrado na Figura \@ref(fig:imagemLimiarizMultiv).
+
+(ref:imagemLimiarizMultiv) Segmentação multivariada no RGB. Gráfico-3D [@gonzalez2010, p. 295].
+
+```{r imagemLimiarizMultiv, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemLimiarizMultiv)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemLimiarizMultiv.png'))
+```
+
+
+
+Suponha que queiramos extrair de uma imagem colorida todas as regiões com uma faixa de cor específica: por exemplo, tons avermelhados da Figura \@ref(fig:imagemLimiarizMultiv2) (a). Vamos denotar a cor avermelhada média em que estamos interessados, a amostra é demarcada pelo retângulo de bordas claras em Figura \@ref(fig:imagemLimiarizMultiv2) (a). Uma forma de segmentar uma imagem colorida com base neste parâmetro é calcular uma medida de distância, $D(z, a)$, entre um ponto de cor arbitrária, $z$, e a cor média, $a$. Então, tem-se a segmentação, Figura \@ref(fig:imagemLimiarizMultiv2) (b):
+
+$$ g=
+\begin{cases}
+  1,\ se\ D(z,a)\ <\ T\\
+  0,\ caso\ contrário
+\end{cases}
+$$
+
+(ref:imagemLimiarizMultiv2) Exemplo de segmentação multivariada no RGB. [@gonzalez2010, p. 295].
+
+```{r imagemLimiarizMultiv2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagemLimiarizMultiv2)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/06-segmentacao/imagemLimiarizMultiv2.png'))
+```
+
+Porém, esse cálculo de distância dos pontos ao centro em formato esférico é trabalhoso para o computador. Uma maneira mais eficiente é usar um delimitador cúbico. Nessa metodologia, o cubo é centralizado em $a$ e suas dimensões ao longo de cada um dos eixos de cor são escolhidas em proporção ao desvio padrão das amostras da imagem ao longo de cada um dos eixos (R, G e B).
+
+Portanto, o procedimento da Figura \@ref(fig:imagemLimiarizMultiv2) (a) consistiu em calcular o vetor médio $a$ utilizando os pontos de cor contidos no retângulo. Em seguida, calculou-se o desvio padrão dos componentes vermelho, verde e azul dessas amostras. Um cubo foi centralizado em $a$, e as dimensões ao longo de cada um dos eixos RGB foram escolhidas como 1,25 multiplicado pelo desvio padrão ao longo dos eixos correspondentes. Por exemplo, no eixo $R$, vermelho, a dimensão do cubo é de $(a_R - 1,25\sigma_R)$ até $(a_R + 1,25\sigma_R)$, no qual $a_R$ indica o valor do componente vermelho de $a$. E por fim, realizou-se a limiarização.

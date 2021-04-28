@@ -175,6 +175,7 @@ Para que esses conceitos sejam aplicados no processamento de imagens eles devem 
 
 $$S_k = T(r_k) = (L - 1)  \sum_{j=0}^{N} n_j  para k = 0, 1, 2, ..., L - 1 () $$
 
+<<<<<<< HEAD
 Esta expressão deve ser aplicada para cada pixel da imagem de entrada com intensidade rk, obtendo-se um pixel correspondente com nível sk na imagem de saída, estes resultados são arredondados para o nível de cinza mais próximo, que é um valor inteiro. Diferente do equivalente contínuo, não pode ser provado (em geral) que a equalização de um histograma discreto resulta em um histograma uniforme (Gonzalez; Woods, 2010). No entanto, como identificado na Figura, a equalização discreta tende a espalhar o histograma da imagem de entrada, aumentando o intervalo da escala de intensidade. 
 
 
@@ -291,3 +292,11 @@ Fonte: [@gonzalez2010, p. 89].
 
 
 
+=======
+<!--## Processamento de histograma
+
+
+
+## Equalização do histograma
+## Especificação de histograma-->
+>>>>>>> 5d3386a3bd58365ff5d727e6e4fcc6ed19c6603a
