@@ -127,10 +127,16 @@ transformações-em-pontos-e-objetos
 transformação-de-translação
 transformação-de-escala
 transformação-de-rotação
+introdução-opencv
+abrir-imagem-opencvpython
+representação-matricial-da-imagem-opencvpython
 transformações-radiométricas
 transformação-linear
 transformação-logarítmica
 transformação-de-potência
+processamento-de-histograma
+equalização-do-histograma
+especificação-de-histograma
 filtros
 convolução
 definção-matemática-de-convolução

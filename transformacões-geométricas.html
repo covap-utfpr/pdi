@@ -106,11 +106,17 @@
 <li class="chapter" data-level="3.6" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-translação"><i class="fa fa-check"></i><b>3.6</b> Transformação de Translação</a></li>
 <li class="chapter" data-level="3.7" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-escala"><i class="fa fa-check"></i><b>3.7</b> Transformação de Escala</a></li>
 <li class="chapter" data-level="3.8" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-rotação"><i class="fa fa-check"></i><b>3.8</b> Transformação de Rotação</a></li>
+<li class="chapter" data-level="3.9" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#introdução-opencv"><i class="fa fa-check"></i><b>3.9</b> Introdução OpenCv</a></li>
+<li class="chapter" data-level="3.10" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#abrir-imagem-opencvpython"><i class="fa fa-check"></i><b>3.10</b> Abrir imagem OpenCv(Python)</a></li>
+<li class="chapter" data-level="3.11" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#representação-matricial-da-imagem-opencvpython"><i class="fa fa-check"></i><b>3.11</b> Representação matricial da imagem OpenCv(Python)</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html"><i class="fa fa-check"></i><b>4</b> Transformações radiométricas</a><ul>
 <li class="chapter" data-level="4.1" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-linear"><i class="fa fa-check"></i><b>4.1</b> Transformação Linear</a></li>
 <li class="chapter" data-level="4.2" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-logarítmica"><i class="fa fa-check"></i><b>4.2</b> Transformação Logarítmica</a></li>
 <li class="chapter" data-level="4.3" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-de-potência"><i class="fa fa-check"></i><b>4.3</b> Transformação de Potência</a></li>
+<li class="chapter" data-level="4.4" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#processamento-de-histograma"><i class="fa fa-check"></i><b>4.4</b> Processamento de histograma</a></li>
+<li class="chapter" data-level="4.5" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#equalização-do-histograma"><i class="fa fa-check"></i><b>4.5</b> Equalização do histograma</a></li>
+<li class="chapter" data-level="4.6" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#especificação-de-histograma"><i class="fa fa-check"></i><b>4.6</b> Especificação de histograma</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="filtros.html"><a href="filtros.html"><i class="fa fa-check"></i><b>5</b> Filtros</a><ul>
 <li class="chapter" data-level="5.1" data-path="filtros.html"><a href="filtros.html#convolução"><i class="fa fa-check"></i><b>5.1</b> Convolução</a><ul>
@@ -183,7 +189,7 @@
             <section class="normal" id="section-">
 <div id="transformacões-geométricas" class="section level1">
 <h1><span class="header-section-number">Capítulo 3</span> Transformacões geométricas</h1>
-<p>Nessa seção abordaremos conceitos importantes que detalham processos de transformações geométricas na imagem digitalizada, definiremos a seção proposta, sistema de coordenadas objetos (2D e 3D), representação vetorial e matricial de Imagens digitalizadas, matrizes em computação gráfica, transformações em pontos e objetos; transformações (translação, escala, rotação).</p>
+<p>Nessa seção abordaremos conceitos importantes que detalham processos de transformações geométricas na imagem digitalizada, definiremos a seção proposta, sistema de coordenadas objetos (2D e 3D), representação vetorial e matricial de Imagens digitalizadas, matrizes em computação gráfica, transformações em pontos e objetos; transformações (translação, escala, rotação) por último não mesmo importante à introdução OpenCv e implementações de OpenCV (abrir imagem, representação matricial da imagem).</p>
 <div id="definição" class="section level2">
 <h2><span class="header-section-number">3.1</span> Definição</h2>
 <p>As transformações geométricas são operações que podem ser utilizadas sobre uma imagem, visando alterar características como: posição , orientação, forma ou tamanho da imagem apresentada.
@@ -232,10 +238,10 @@ Em computação gráfica os elementos pontos, linhas, curvas e as superfícies t
 Para esclarecer melhor, vamos considerar alguns exemplos, dois elementos facilmente caracterizados como vetoriais, pela noção de vetores já discutida são os pontos e linhas retas.</p>
 <p>A cada elemento de um conjunto de pontos associa-se uma posição, que pode ser representada por suas coordenadas (geometria), e uma cor, que será como esses pontos aparecerão na tela (tributos). No caso de um conjunto de linhas retas, cada uma pode ser definida pelas coordenadas de seus pontos extremos (geometria) e sua cor, espessura, ou ainda se aparecerá pontilhada ou tracejada (atributos).</p>
 <p>A descrição matricial é típica das imagens digitalizadas capturadas por scanners ou utilizadas nos vídeos. É a forma de descrição principal na análise e no processamento de imagens. Em computação gráfica sintética, surgem nos processos de finalização (ray tracing, z-buffers).</p>
-<p>Na representação matricial, a imagem é descrita por um conjunto de células em um arranjo especial bidimensional, uma matriz. Cada célula representa os pixels (ou pontos) da imagem matricial. Os objetos são formados usando adequadamente esses pixels. A figura 3.2 explica melhor as formas de descrição de imagens matriciais. Essa é a representação usualmente empregada para formar a imagem nas memórias e telas dos computadores e na maioria dos dispositivos de saída gráficos (impressoras e vídeos).</p>
+<p>Na representação matricial, a imagem é descrita por um conjunto de células em um arranjo especial bidimensional, uma matriz. Cada célula representa os pixels (ou pontos) da imagem matricial. Os objetos são formados usando adequadamente esses pixels. A figura 3.3 mostra a representação matricial da imagem digitalizada e sua tela. Essa é a representação usualmente empregada para formar a imagem nas memórias e telas dos computadores e na maioria dos dispositivos de saída gráficos (impressoras e vídeos).</p>
 <p>Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 14, 15]</span>.</p>
 <p><img src="imagens/03-transformacoes/memoria_tela_imagem.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>Figura 3.2: Descrição de imagens matriciais por conjunto de pixels <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 15]</span>.</p>
+<p>Figura 3.3: Descrição de imagens matriciais por conjunto de pixels <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 15]</span>.</p>
 </div>
 <div id="transformações-em-pontos-e-objetos" class="section level2">
 <h2><span class="header-section-number">3.5</span> Transformações em Pontos e Objetos</h2>
@@ -250,15 +256,15 @@ Para transladar (mover) um objeto do ponto atual para o novo ponto, p(x) e p(y) 
 No caso do ponto for representado por vetor, p = (x, y), a translação desse mesmo ponto para o novo pode ser obtida pela adição de vetor de deslocamento à posição atual do ponto:
 <span class="math display">\[p’ = p+ T = [x’y’] = [xy] + [Tx Ty]\]</span>.</p>
 <p>Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 38]</span>.</p>
-<p>A figura 3.3, translação de um triângulo de três unidades na horizontal e-4 na vertical.<br />
+<p>A figura 3.4, translação de um triângulo de três unidades na horizontal e-4 na vertical.<br />
 Repare que se teria o mesmo efeito transladado a origem do sistema de coordenadas para o ponto p(-3, 4)na primeira figura.
 Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 39]</span>.</p>
 <p><img src="imagens/03-transformacoes/translacao.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>Figura 3.3: Tranformação de translação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 39]</span>.</p>
+<p>Figura 3.4: Tranformação de translação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 39]</span>.</p>
 </div>
 <div id="transformação-de-escala" class="section level2">
 <h2><span class="header-section-number">3.7</span> Transformação de Escala</h2>
-<p>A transformação geométrica escala tem como objetivo mudar as dimensões (tamanho) do objeto(imagem) no espaço (ambiente projetado). Figura 3.4.<br />
+<p>A transformação geométrica escala tem como objetivo mudar as dimensões (tamanho) do objeto(imagem) no espaço (ambiente projetado). Figura 3.5.<br />
 Fonte: Azevedo Eduardo, edição 2, p. 40. Para fazer com que uma imagem definida por conjunto de pontos mude de tamanho, teremos de multiplicar os valores de suas coordenadas por um fator de escala. Transformar um objeto por alguma operação nada mais é do que fazer essa operação com todos os seus pontos. Nesse caso um dos vetores de suas coordenadas são multiplicados por fatores de escala. Estes fatores de escala em 2D podem, por exemplo ser <span class="math inline">\(Ss\)</span> e <span class="math inline">\(Sy\)</span>:</p>
 <p><span class="math display">\[x’ = x * Sx\]</span></p>
 <p><span class="math display">\[y’ = y * Sy\]</span>
@@ -269,17 +275,17 @@ Essa operação pode ser representada na forma matricial:</p>
 Figura 3.1: (ref: escala)
 </p>
 </div>
-<p>Figura 3.3: Tranformação de escala <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 40]</span>.</p>
+<p>Figura 3.5: Tranformação de escala <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 40]</span>.</p>
 <p>Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 41]</span>. A mudança de escala de um ponto de um objeto no espaço tridimensional pode ser obtida pela multiplicação de três fatores de escala ao ponto. A operação de mudança de escala pode ser descrita pela multiplicação de coordenadas do ponto por uma matriz diagonal cujos valores dos elementos não-nulos sejam os fatores de escala. Assim, no caso 3D tem-se:</p>
 <p><img src="imagens/03-transformacoes/escala3d.png" width="80%" style="display: block; margin: auto;" /></p>
-<p>Figura 3.4: Tranformação de escala <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 41]</span>.</p>
+<p>Figura 3.6: Tranformação de escala <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 41]</span>.</p>
 </div>
 <div id="transformação-de-rotação" class="section level2">
 <h2><span class="header-section-number">3.8</span> Transformação de Rotação</h2>
-<p>A transformação geométrica da rotação tem como objetivo rotacionar objeto(imagem) no espaço (ambiente projetado), é equivalente a gira ao redor da origem do sistema de coordenadas. Figura 3.5.</p>
-<p>Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 41, 42]</span>. Na figura 3.5 rotação de um ponto P em torno da origem, passando para a posição P’. Repare que se chegaria a esse mesmo ponto através de uma rotação de - no sistema de eixos XY.</p>
+<p>A transformação geométrica da rotação tem como objetivo rotacionar objeto(imagem) no espaço (ambiente projetado), é equivalente a gira ao redor da origem do sistema de coordenadas. Figura 3.6.</p>
+<p>Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 41, 42]</span>. Na figura 3.6 rotação de um ponto P em torno da origem, passando para a posição P’. Repare que se chegaria a esse mesmo ponto através de uma rotação de - no sistema de eixos XY.</p>
 <p><img src="imagens/03-transformacoes/rotacao1.png" width="45%" style="display: block; margin: auto;" /></p>
-<p>Figura 3.4: Tranformação de rotação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>.</p>
+<p>Figura 3.6: Tranformação de rotação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>.</p>
 <p>Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>. Se um ponto de coordenada (x,y), distante <span class="math inline">\(r=(x2 + y2)^\frac12\)</span> da origem do sistema de coordenadas, for rotacionado de um ângulo <span class="math inline">\(\phi\)</span> em torno da origem, suas coordenadas, que antes eram definidas como: <span class="math inline">\(x = r * \cos(\phi), y =r * \sin(\phi)\)</span>, passam a ser descritas como (x’, y’) dadas por:</p>
 <p><span class="math display">\[x&#39; = r * \cos(\theta + \phi) = r * \cos\phi * cos\theta - r * \sin\phi * \sin\theta\]</span>
 <span class="math display">\[x&#39; = r * \sin(\theta + \phi) = r * \sin\phi * cos\theta + r * \cos\phi * \sin\theta\]</span></p>
@@ -289,11 +295,28 @@ Figura 3.1: (ref: escala)
 <p>Essas expressões podem ser descritas pela multiplicação do vetor de coordenadas
 do ponto (x,y) pela matriz:</p>
 <p><img src="imagens/03-transformacoes/matriz_rotacao.png" width="15%" style="display: block; margin: auto;" /></p>
-<p>Figura 3.5: Tranformação de rotaão <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>.</p>
+<p>Figura 3.7: Tranformação de rotaão <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>.</p>
 <p>Fonte: <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>. Para alterar a orientação de um objeto(imagem) em torno de um certo ponto realizando uma combinação da rotação com a translação, é necessário, antes de aplicar a rotação de um ângulo no plano das coordenadas em torno de um ponto, realizar uma translação para localizar esse ponto na origem do sistema, aplicando a rotação desejada e, então, uma translação inversa para localizar o dado ponto na origem.
 A multiplicação de coordenadas por uma matriz de rotação pode resultar em uma translação.</p>
 <p><img src="imagens/03-transformacoes/rotacao2.png" width="50%" style="display: block; margin: auto;" /></p>
-<p>Figura 3.5: Tranformação de rotaão <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 43]</span>.</p>
+<p>Figura 3.8: Tranformação de rotaão <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 43]</span>.</p>
+</div>
+<div id="introdução-opencv" class="section level2">
+<h2><span class="header-section-number">3.9</span> Introdução OpenCv</h2>
+<p>OpenCV [OpenCV] é uma biblioteca open source (biblioteca de código aberto, <a href="http://opensource.org" class="uri">http://opensource.org</a>), criada em 1999 por Gary Bradski [Bradski] o código fonte foi implementada pelas linguagens C e C++ [c, c++] sua performance é otimizada e pode tirar proveito de vários núcleos dos processadores.
+A performance do OpenCv é das propriedades da biblioteca que ajuda as áreas (Visão Computação e Inteligência Artificial) facilitando a produção e desempenho nas implementações de soluções no desenvolvimento das aplicações.</p>
+<p>Em transformação geométrica biblioteca OpenCv acelera computacionalmente a implementação das transformações aqui apresentadas (translação, escala, rotação), para isso usaremos a linguagem Python (<a href="https://www.python.org/" class="uri">https://www.python.org/</a>) que maniputa as inúmeras funções que a biblioteca OpenCv possui.
+Para implementação dos exemplos nos subtítulos posteriores usaremos o ambiente de desenvolvimento Colab (<a href="https://colab.research.google.com" class="uri">https://colab.research.google.com</a>) criando notebook.</p>
+</div>
+<div id="abrir-imagem-opencvpython" class="section level2">
+<h2><span class="header-section-number">3.10</span> Abrir imagem OpenCv(Python)</h2>
+<p>Para abrir uma imagem no OpenCv (Python) é necessário importar a biblioteca chamando a nomenclatura cv2, isso permitirá com que tenhamos acesso a função imred, para usá-la no nosso ambiente de trabalho(colab com linguagem python) primeiramente chamamos o da biblioteca e de seguida a função e passamos como parâmetro o caminho da imagem e o nome da imagem caso tenhamos um caminho relativo caso contrário passamos como parâmetro só no nome da imagem.</p>
+<p><img src="imagens/03-transformacoes/img3.9.1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>Figura 3.9: Abrir imagem no OpenCv(Python).</p>
+</div>
+<div id="representação-matricial-da-imagem-opencvpython" class="section level2">
+<h2><span class="header-section-number">3.11</span> Representação matricial da imagem OpenCv(Python)</h2>
+<p>Depois de carregar a imagem utilizando a biblioteca OpenCv(Python) é possível visualizar a representação da imagem em formato matricial onde visualizamos o conjunto de pixels (seção 2.) da imagem, para cada pixel desse conjunto está dentro do limite 0 a 225, onde 0 representa a cor preta e 255 representa a cor branca e no meio deste limite representa outras cores.</p>
 
 </div>
 </div>

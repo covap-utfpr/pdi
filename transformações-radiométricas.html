@@ -106,11 +106,17 @@
 <li class="chapter" data-level="3.6" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-translação"><i class="fa fa-check"></i><b>3.6</b> Transformação de Translação</a></li>
 <li class="chapter" data-level="3.7" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-escala"><i class="fa fa-check"></i><b>3.7</b> Transformação de Escala</a></li>
 <li class="chapter" data-level="3.8" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-rotação"><i class="fa fa-check"></i><b>3.8</b> Transformação de Rotação</a></li>
+<li class="chapter" data-level="3.9" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#introdução-opencv"><i class="fa fa-check"></i><b>3.9</b> Introdução OpenCv</a></li>
+<li class="chapter" data-level="3.10" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#abrir-imagem-opencvpython"><i class="fa fa-check"></i><b>3.10</b> Abrir imagem OpenCv(Python)</a></li>
+<li class="chapter" data-level="3.11" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#representação-matricial-da-imagem-opencvpython"><i class="fa fa-check"></i><b>3.11</b> Representação matricial da imagem OpenCv(Python)</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html"><i class="fa fa-check"></i><b>4</b> Transformações radiométricas</a><ul>
 <li class="chapter" data-level="4.1" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-linear"><i class="fa fa-check"></i><b>4.1</b> Transformação Linear</a></li>
 <li class="chapter" data-level="4.2" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-logarítmica"><i class="fa fa-check"></i><b>4.2</b> Transformação Logarítmica</a></li>
 <li class="chapter" data-level="4.3" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-de-potência"><i class="fa fa-check"></i><b>4.3</b> Transformação de Potência</a></li>
+<li class="chapter" data-level="4.4" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#processamento-de-histograma"><i class="fa fa-check"></i><b>4.4</b> Processamento de histograma</a></li>
+<li class="chapter" data-level="4.5" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#equalização-do-histograma"><i class="fa fa-check"></i><b>4.5</b> Equalização do histograma</a></li>
+<li class="chapter" data-level="4.6" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#especificação-de-histograma"><i class="fa fa-check"></i><b>4.6</b> Especificação de histograma</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="filtros.html"><a href="filtros.html"><i class="fa fa-check"></i><b>5</b> Filtros</a><ul>
 <li class="chapter" data-level="5.1" data-path="filtros.html"><a href="filtros.html#convolução"><i class="fa fa-check"></i><b>5.1</b> Convolução</a><ul>
@@ -245,6 +251,9 @@ Uma maneira de avaliar o efeito da transformação logarítmica é utilizar sobr
 <li>Imagem aérea. (b) a (d) Resultados da aplicação da transformação de potência com <span class="math inline">\(c = 1\)</span> e <span class="math inline">\(y = 3, 4\)</span> e <span class="math inline">\(5\)</span>, respectivamente.
 Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 74]</span>.</li>
 </ol>
+</div>
+<div id="processamento-de-histograma" class="section level2">
+<h2><span class="header-section-number">4.4</span> Processamento de histograma</h2>
 <p>A distribuição dos níveis de intensidade (L) de uma imagem podem ser identificados em um histograma, ou seja, um gráfico com o número de pixels na imagem para cada nível de cinza. Assim, os histogramas podem servir de referência para várias manipulações no domínio espacial, além de fornecer estatísticas das imagens e ser útil em aplicações como compressão e segmentação. O histograma também pode ser interpretado como uma distribuição discreta da probabilidade de ocorrência do nível de intensidade <span class="math inline">\(r_k\)</span> em uma imagem (Gonzalez; Woods, 2010):</p>
 <p><span class="math display">\[p(r_k) = \frac{x_k}{MN} k = 0, 1,2, ..., L - 1 ()\]</span></p>
 <p>sendo <span class="math inline">\(M\)</span> e <span class="math inline">\(N\)</span> as dimensões de linha e coluna da imagem, e <span class="math inline">\(n_k\)</span> é o número de pixels da imagem com intensidade <span class="math inline">\(r_k\)</span>.
@@ -255,22 +264,76 @@ Na Figura estão identificados quatro histogramas referentes a cada uma das imag
 <p>De cima para baixo: escura, clara, baixo contraste e alto contraste.
 Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 79]</span>.</p>
 <p>Os histogramas são utilizados em grande parte para auxiliar em transformações de intensidade com foco em melhorar o contraste, tornando mais fácil a percepção de informações de interesse na imagem (Pedrini; Schwartz, 2008). Nos exemplos de transformações apresentados nesta seção (linear, logarítmica e de potência), a escolha do operador <span class="math inline">\((T)\)</span> de transformação geralmente é empírica, em que se deve considerar a imagem original e o efeito desejado. Para transformar a imagem de forma que se altere o histograma de uma maneira específica e automática utilizam-se métodos em que o formato dos histogramas são pré-definidos ou atendem a um determinado padrão, como na equalização de histograma e especificação de histograma (Gonzalez; Woods, 2010).</p>
+</div>
+<div id="equalização-do-histograma" class="section level2">
+<h2><span class="header-section-number">4.5</span> Equalização do histograma</h2>
 <p>Na equalização do histograma, o histograma da imagem original <span class="math inline">\(f\)</span> é alterado de maneira que a imagem transformada g tenha uma distribuição aproximadamente uniforme dos níveis de cinza em uma faixa mais ampla de valores, assumindo características próximas de uma imagem de alto contraste (Pedrini; Schwartz, 2008). Neste método se aplica um operador de transformação de intensidade <span class="math inline">\((T)\)</span> na forma contínua, Equação, que gera uma variável aleatória (valores de intensidade da imagem transformada) caracterizada por uma função densidade de probabilidade uniforme (PDF, probability density function) .
 <span class="math inline">\(s = T(r) = (L - 1)0rpr(w) dw ( )\)</span>
 sendo w uma variável local da integração, L os níveis de cinza da imagem e pr(r) a PDF de r (valores de intensidade da imagem original). A demonstração da obtenção da PDF da variável <span class="math inline">\(s (p_s(s))\)</span>, na equação, pode ser vista com detalhes no livro “Processamento digital de imagens” (Gonzalez; Woods, 2010). O gráfico das PDFs de r e s estão identificados na Figura como <span class="math inline">\(pr(r)\)</span> e <span class="math inline">\(p_s(s)\)</span>.</p>
-<p><span class="math display">\[p_s(s) = \frac{1}{L-1} \]</span> para $s <span class="math inline">\(\leq\)</span> L - 1 ()$</p>
+<p><span class="math display">\[p_s(s) = \frac{1}{L-1} \]</span></p>
 <p>Figura - Equalização de histograma na forma contínua.</p>
-<p><img src="imagens/04-transformacaoRadiometricas/histograma.png" width="55%" style="display: block; margin: auto;" />
-(a) Uma PDF arbitrária. (b) Resultado da aplicação da transformação para equalização.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/histograma.png" width="55%" style="display: block; margin: auto;" /></p>
+<ol style="list-style-type: lower-alpha">
+<li>Uma PDF arbitrária. (b) Resultado da aplicação da transformação para equalização.</li>
+</ol>
 <p>Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 81]</span>.</p>
 <p>Para que esses conceitos sejam aplicados no processamento de imagens eles devem ser expressos na forma discreta. A transformação na Equação da forma discreta é:</p>
-<p><span class="math inline">\(S_k = T(r_k) = (L - 1) \sum {i=1}^n x i\)</span></p>
+<p><span class="math display">\[S_k = T(r_k) = (L - 1)  \sum_{j=0}^{N} n_j  para k = 0, 1, 2, ..., L - 1 () \]</span></p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Esta expressão deve ser aplicada para cada pixel da imagem de entrada com intensidade rk, obtendo-se um pixel correspondente com nível sk na imagem de saída, estes resultados são arredondados para o nível de cinza mais próximo, que é um valor inteiro. Diferente do equivalente contínuo, não pode ser provado (em geral) que a equalização de um histograma discreto resulta em um histograma uniforme (Gonzalez; Woods, 2010). No entanto, como identificado na Figura, a equalização discreta tende a espalhar o histograma da imagem de entrada, aumentando o intervalo da escala de intensidade.</p>
+<p>Figura - Equalização de histograma.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/histograma2.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>Figura 4.2: <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 113]</span>.</p>
+</div>
+<div id="especificação-de-histograma" class="section level2">
+<h2><span class="header-section-number">4.6</span> Especificação de histograma</h2>
+<p>Algumas vezes é útil poder especificar o formato do histograma da imagem processada. O método conhecido como especificação de histograma modifica uma imagem para que seu histograma tenha uma distribuição particular (Pedrini; Schwartz, 2008).
+Sejam <span class="math inline">\(pr(r)\)</span> e <span class="math inline">\(pz(z)\)</span> as funções densidade de probabilidade (PDF) original e especificada, respectivamente. Pela Equação, o histograma da imagem original pode ser equalizado pela função de transformação <span class="math inline">\(T1(r)\)</span>:</p>
+<p><span class="math display">\[S_k = T(r_k) = (L - 1)  \sum_{j=0}^{N} n_j  para k = 0, 1, 2, ..., L - 1 () \]</span></p>
+<p>Na Figura a, <span class="math inline">\(T2(z)\)</span> é a função de transformação que realiza a equalização do histograma especificado. O método para obter os níveis de cinza z da imagem processada envolve o cálculo da função de transformação inversa <span class="math inline">\(z = T_2⁻¹(s)\)</span>, como identificado na Figura b. O termo s corresponde às intensidades da imagem equalizada para os dois caminhos de transformação, e sua PDF é p_s(s).</p>
+<p>Figura - Etapas de especificação de histograma.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/equalizaca2.png" width="55%" style="display: block; margin: auto;" /></p>
+<ol style="list-style-type: lower-alpha">
+<li>equalização do histograma especificado pela função T_2(z). (b) cálculo da função de transformação inversa T_2⁻¹(s).</li>
+</ol>
+<p>Fonte: <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 116]</span>.</p>
+<p>Assim, a especificação de histograma envolve a aplicação de duas transformações, T_1(r) seguida T_2⁻¹(s). Na forma discreta não é necessário calcular a função inversa <span class="math inline">\(T_2⁻¹(s)\)</span>, é possível determinar os valores de <span class="math inline">\(z\)</span> de forma mais direta por mapeamento em tabela (Gonzalez; Woods, 2010). Após o cálculo das duas transformações (<span class="math inline">\(T_1(r)\)</span> e <span class="math inline">\(T_2(z)\)</span>), os valores são arredondados para os valores inteiros mais próximos cobrindo o intervalo [0, L – 1]. Os valores são organizados em uma tabela. Em seguida, se faz o mapeamento de cada valor de <span class="math inline">\(s_k\)</span>, procurando a melhor correspondência nos valores obtidos em <span class="math inline">\(T_2(zq)\)</span>, determinando a solução mais próxima <span class="math inline">\(z_q\)</span> .
+Estas etapas ficam mais compreensíveis ao se aplicar um exemplo. Suponha que uma imagem de 3 bits (L = 8) de dimensões 64 × 64 pixels (MN = 4096) tenha a distribuição de intensidade mostrada na Tabela, na qual os níveis de cinza são números inteiros no intervalo [0, L – 1] = [0, 7].</p>
+<p>Tabela - Distribuição de intensidades para uma imagem digital de 3 bits, 64 × 64 pixels.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/tabla_pixels.png" width="45%" style="display: block; margin: auto;" /></p>
+<p>Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 83]</span>.</p>
+<p>O histograma da imagem hipotética é apresentado na Figura (a). Os valores ajustados do histograma equalizado (s), obtidos pela função <span class="math inline">\(s =T_1(r)\)</span> na Equação, são:
+<span class="math inline">\(s_0 = 1, s_1 = 3, s_2 = 5, s_3 = 6, s_4 = 6, s_5 = 7, s_6 = 7, s_7 = 7\)</span></p>
+<p>Figura - Exemplo de especificação de histograma.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/histograma3.png" width="35%" style="display: block; margin: auto;" /></p>
+<ol style="list-style-type: lower-alpha">
+<li>Histograma de uma imagem de 3 bits. (b) Histograma especificado desejado. (c) Função de transformação obtida a partir do histograma especificado desejado. (d) Resultado da especificação do histograma.
+Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 87]</span>.</li>
+</ol>
+<p>No próximo passo, todos os valores de <span class="math inline">\(T_2(z_q)\)</span> são calculados utilizando a equação, em que os valores de <span class="math inline">\(p_z(z_q)\)</span> estão na Tabela. Os resultados desta segunda etapa estão na Tabela e a função de transformação é esboçada na Figura(c).</p>
+<p><span class="math display">\[T_2 = T(Z_q) = (L - 1)  \sum_{j=0}^{q} P_z(Z_j) = \frac{L - 1}{MN}  \sum_{j=0}^{q}n_j para q = 0, 1, 2, ..., L - 1 ()\]</span></p>
+<p>Tabela - Histograma especificado.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/tabela_histograma2.png" width="35%" style="display: block; margin: auto;" /></p>
+<p>Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 88]</span>.</p>
+<p>No terceiro passo, verifica-se o menor valor de <span class="math inline">\(z_q\)</span> na Tabela, de modo que o valor <span class="math inline">\(G(z_q) = T_2(z_q)\)</span> seja o mais próximo possível de <span class="math inline">\(s_k\)</span> . Isso é feito para todos os valores de <span class="math inline">\(s_k\)</span> para criar os mapeamentos necessários de <span class="math inline">\(s\)</span> em <span class="math inline">\(z\)</span>, identificados na Tabela.</p>
+<p>Tabela - Valores da função de transformação G(zq) = T2(zq) arredondados.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/tabela_histograma3.png" width="35%" style="display: block; margin: auto;" /></p>
+<p>Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 88]</span>.</p>
+<p>No terceiro passo, verifica-se o menor valor de <span class="math inline">\(z_q\)</span> na Tabela , de modo que o valor <span class="math inline">\(G(z_q) = T_2(z_q)\)</span> seja o mais próximo possível de <span class="math inline">\(s_k\)</span> . Isso é feito para todos os valores de sk para criar os mapeamentos necessários de s em <span class="math inline">\(z\)</span>, identificados na Tabela.</p>
+<p>Tabela - Valores da função de transformação <span class="math inline">\(G(z_q) = T_2(z_q)\)</span> arredondados.</p>
+<p>Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 89]</span>.</p>
+<p>Na última etapa, o mapeamento da Tabela é utilizado para mapear cada pixel na imagem do histograma equalizado <span class="math inline">\((p_s(s))\)</span> em um pixel correspondente na imagem do histograma especificado recém-criado <span class="math inline">\((p_z(z))\)</span>. O histograma resultante da especificação é esboçado na Figura.</p>
+<p>Tabela - Mapeamentos dos valores de <span class="math inline">\(s_k\)</span> nos valores correspondentes de <span class="math inline">\(z_q\)</span>.</p>
+<p><img src="imagens/04-transformacaoRadiometricas/tabela_histograma4.png" width="35%" style="display: block; margin: auto;" /></p>
+<p>Fonte: <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 89]</span>.</p>
+<p>=======
 <!--## Processamento de histograma
 
 
 
 ## Equalização do histograma
 ## Especificação de histograma-->
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 5d3386a3bd58365ff5d727e6e4fcc6ed19c6603a</p>
 
 </div>
 </div>
@@ -278,6 +341,9 @@ sendo w uma variável local da integração, L os níveis de cinza da imagem e p
 <div id="refs" class="references">
 <div id="ref-gonzalez2010">
 <p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
+</div>
+<div id="ref-pedrini2008">
+<p>[3] H. Pedrini e W. Robson Schwartz, <em>Análise de imagens digitais: princípios, algoritmos e aplicações</em>, 3º ed. São Paulo: Thomson Learning Edicoes Ltda, 2007.</p>
 </div>
 </div>
             </section>
