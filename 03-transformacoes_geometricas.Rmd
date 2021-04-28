@@ -222,7 +222,7 @@ Em transformação geométrica biblioteca OpenCv acelera computacionalmente a im
 Para implementação dos exemplos nos subtítulos posteriores usaremos o ambiente de desenvolvimento Colab (https://colab.research.google.com) criando notebook.
 
 
-## Abrir imagem OpenCv(Python)
+## Abrir imagem no OpenCv(Python)
 
 
 Para abrir uma imagem no OpenCv (Python) é necessário importar a biblioteca chamando a nomenclatura cv2,  isso permitirá com que tenhamos acesso a função imred, para usá-la no nosso ambiente de trabalho(colab com linguagem python) primeiramente chamamos o da biblioteca e de seguida a função e passamos como parâmetro o caminho da imagem e o nome da imagem caso tenhamos um caminho relativo caso contrário passamos como parâmetro só no nome da imagem.
