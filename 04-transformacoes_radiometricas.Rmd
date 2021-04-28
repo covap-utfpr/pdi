@@ -124,6 +124,10 @@ knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/potencial.png
 Fonte: [@gonzalez2010, p. 74].
 
 
+
+## Processamento de histograma
+
+
 A distribuição dos níveis de intensidade (L) de uma imagem podem ser identificados em um histograma, ou seja, um gráfico com o número de pixels na imagem para cada nível de cinza. Assim, os histogramas podem servir de referência para várias manipulações no domínio espacial, além de fornecer estatísticas das imagens e ser útil em aplicações como compressão e segmentação. O histograma também pode ser interpretado como uma distribuição discreta da probabilidade de ocorrência do nível de intensidade $r_k$ em uma imagem (Gonzalez; Woods, 2010):
 
 $$p(r_k) = \frac{x_k}{MN} k = 0, 1,2, ..., L - 1 ()$$
@@ -145,11 +149,15 @@ Fonte: [@gonzalez2010, p. 79].
 Os histogramas são utilizados em grande parte para auxiliar em transformações de intensidade com foco em melhorar o contraste, tornando mais fácil a percepção de informações de interesse na imagem (Pedrini; Schwartz, 2008). Nos exemplos de transformações apresentados nesta seção (linear, logarítmica e de potência), a escolha do operador $(T)$ de transformação geralmente é empírica, em que se deve considerar a imagem original e o efeito desejado. Para transformar a imagem de forma que se altere o histograma de uma maneira específica e automática  utilizam-se métodos em que o formato dos histogramas são pré-definidos ou atendem a um determinado padrão, como na equalização de histograma e especificação de histograma (Gonzalez; Woods, 2010). 
 
 
+
+## Equalização do histograma
+
+
 Na equalização do histograma, o histograma da imagem original $f$ é alterado de maneira que a imagem transformada g tenha uma distribuição aproximadamente uniforme dos níveis de cinza em uma faixa mais ampla de valores, assumindo características próximas de uma imagem de alto contraste (Pedrini; Schwartz, 2008). Neste método se aplica um operador  de transformação de intensidade $(T)$ na forma contínua, Equação, que gera uma variável aleatória (valores de intensidade da imagem transformada) caracterizada por uma função densidade de probabilidade uniforme (PDF, probability density function) .
 $s = T(r) = (L - 1)0rpr(w) dw  ( )$
 sendo w uma variável local da integração, L os níveis de cinza da imagem e pr(r) a PDF de r (valores de intensidade da imagem original). A demonstração da obtenção da PDF da variável $s (p_s(s))$, na equação, pode ser vista com detalhes no livro “Processamento digital de imagens” (Gonzalez; Woods, 2010). O gráfico das PDFs de r e s estão identificados na Figura como $pr(r)$ e $p_s(s)$.
 
-$$p_s(s) = \frac{1}{L-1} $$ para $\leq s $\leq$ L - 1 ()$
+$$p_s(s) = \frac{1}{L-1} $$
 
 Figura - Equalização de histograma na forma contínua.
 
@@ -157,18 +165,129 @@ Figura - Equalização de histograma na forma contínua.
 ```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/histograma.png'))
 ```
+
 (a) Uma PDF arbitrária. (b) Resultado da aplicação da transformação para equalização.
 
 Fonte: [@gonzalez2010, p. 81].
 
 Para que esses conceitos sejam aplicados no processamento de imagens eles devem ser expressos na forma discreta. A transformação na Equação da forma discreta  é:
 
-$S_k = T(r_k) = (L - 1) \sum {i=1}^n x i$
+
+$$S_k = T(r_k) = (L - 1)  \sum_{j=0}^{N} n_j  para k = 0, 1, 2, ..., L - 1 () $$
+
+Esta expressão deve ser aplicada para cada pixel da imagem de entrada com intensidade rk, obtendo-se um pixel correspondente com nível sk na imagem de saída, estes resultados são arredondados para o nível de cinza mais próximo, que é um valor inteiro. Diferente do equivalente contínuo, não pode ser provado (em geral) que a equalização de um histograma discreto resulta em um histograma uniforme (Gonzalez; Woods, 2010). No entanto, como identificado na Figura, a equalização discreta tende a espalhar o histograma da imagem de entrada, aumentando o intervalo da escala de intensidade. 
 
 
-## Processamento de histograma
+
+Figura - Equalização de histograma.
+
+
+```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='60%'}
+knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/histograma2.png'))
+```
 
 
 
-## Equalização do histograma
+Figura 4.2:  [@pedrini2008, p. 113].
+
 ## Especificação de histograma
+
+
+Algumas vezes é útil poder especificar o formato do histograma da imagem processada. O método conhecido como especificação de histograma modifica uma imagem para que seu histograma tenha uma distribuição particular (Pedrini; Schwartz, 2008).
+Sejam $pr(r)$ e $pz(z)$ as funções densidade de probabilidade (PDF) original e especificada, respectivamente. Pela Equação, o histograma da imagem original pode ser equalizado pela função de transformação $T1(r)$:
+
+$$S_k = T(r_k) = (L - 1)  \sum_{j=0}^{N} n_j  para k = 0, 1, 2, ..., L - 1 () $$
+
+Na Figura a, $T2(z)$ é a função de transformação que realiza a equalização do histograma especificado. O método para obter os níveis de cinza z da imagem processada envolve o cálculo da função de transformação inversa $z = T_2⁻¹(s)$, como identificado na Figura b. O termo s corresponde às intensidades da imagem equalizada para os dois caminhos de transformação, e sua PDF é p_s(s).
+
+Figura - Etapas de especificação de histograma.
+
+
+
+```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/equalizaca2.png'))
+```
+
+
+(a) equalização do histograma especificado pela função T_2(z). (b) cálculo da função de transformação inversa T_2⁻¹(s).
+
+
+
+Fonte: [@pedrini2008, p. 116].
+
+
+Assim, a especificação de histograma envolve a aplicação de duas transformações, T_1(r) seguida T_2⁻¹(s). Na forma discreta não é necessário calcular a função inversa $T_2⁻¹(s)$, é possível determinar os valores de $z$ de forma mais direta por mapeamento em tabela (Gonzalez; Woods, 2010). Após o cálculo das duas transformações ($T_1(r)$ e $T_2(z)$), os valores são arredondados para os valores inteiros mais próximos cobrindo o intervalo [0, L – 1]. Os valores são organizados em uma tabela. Em seguida, se faz o mapeamento de cada valor de $s_k$, procurando a melhor correspondência nos valores obtidos em $T_2(zq)$, determinando a solução mais próxima $z_q$ .
+	Estas etapas ficam mais compreensíveis ao se aplicar um exemplo. Suponha que uma imagem de 3 bits (L = 8) de dimensões 64 × 64 pixels (MN = 4096) tenha a distribuição de intensidade mostrada na Tabela, na qual os níveis de cinza são números inteiros no intervalo [0, L – 1] = [0, 7].
+
+Tabela - Distribuição de intensidades para uma imagem digital de 3 bits, 64 × 64 pixels.
+
+
+```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='45%'}
+knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/tabla_pixels.png'))
+```
+
+
+Fonte: [@gonzalez2010, p. 83].
+
+
+O histograma da imagem hipotética é apresentado na Figura (a). Os valores ajustados do histograma equalizado (s), obtidos pela função  $s =T_1(r)$ na Equação, são: 
+$s_0 = 1,  s_1 = 3, s_2 = 5,  s_3 = 6, s_4 = 6, s_5 = 7, s_6 = 7, s_7 = 7$
+
+Figura - Exemplo de especificação de histograma.
+
+
+```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='35%'}
+knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/histograma3.png'))
+```
+
+
+(a) Histograma de uma imagem de 3 bits. (b) Histograma especificado desejado. (c) Função de transformação obtida a partir do histograma especificado desejado. (d) Resultado da especificação do histograma.
+Fonte: [@gonzalez2010, p. 87].
+
+No próximo passo, todos os valores de $T_2(z_q)$ são calculados utilizando a equação, em que os valores de $p_z(z_q)$ estão na Tabela. Os resultados desta segunda etapa estão na Tabela  e a função de transformação é esboçada na Figura(c).
+
+$$T_2 = T(Z_q) = (L - 1)  \sum_{j=0}^{q} P_z(Z_j) = \frac{L - 1}{MN}  \sum_{j=0}^{q}n_j para q = 0, 1, 2, ..., L - 1 ()$$
+
+Tabela - Histograma especificado.
+
+
+
+```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='35%'}
+knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/tabela_histograma2.png'))
+```
+
+Fonte: [@gonzalez2010, p. 88].
+
+
+No terceiro passo, verifica-se o menor valor de $z_q$ na Tabela, de modo que o valor $G(z_q) = T_2(z_q)$ seja o mais próximo possível de $s_k$ . Isso é feito para todos os valores de $s_k$ para criar os mapeamentos necessários de $s$ em $z$, identificados na Tabela.
+
+Tabela - Valores da função de transformação G(zq) = T2(zq) arredondados.
+
+
+```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='35%'}
+knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/tabela_histograma3.png'))
+```
+
+Fonte: [@gonzalez2010, p. 88].
+
+
+No terceiro passo, verifica-se o menor valor de $z_q$ na Tabela , de modo que o valor $G(z_q) = T_2(z_q)$ seja o mais próximo possível de $s_k$ . Isso é feito para todos os valores de sk para criar os mapeamentos necessários de s em $z$, identificados na Tabela.
+
+Tabela - Valores da função de transformação $G(z_q) = T_2(z_q)$ arredondados.
+
+
+
+Fonte: [@gonzalez2010, p. 89].
+
+Na última etapa, o mapeamento da Tabela é utilizado para mapear cada pixel na imagem do histograma equalizado $(p_s(s))$ em um pixel correspondente na imagem do histograma especificado recém-criado $(p_z(z))$. O histograma resultante da especificação é esboçado na Figura.
+
+Tabela - Mapeamentos dos valores de $s_k$ nos valores correspondentes de $z_q$.
+
+```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='35%'}
+knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/tabela_histograma4.png'))
+```
+
+Fonte: [@gonzalez2010, p. 89].
+
+
+
