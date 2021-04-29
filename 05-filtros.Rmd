@@ -324,10 +324,10 @@ Na figura \@ref(fig:filtrosMediaHubble), podemos ver como o desfoque pode ser ut
 
 ## Filtro da Mediana
 
-A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em ordenar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta, que tem uma característica aparência de pixels pretos e brancos.
-Como dito anteriormente que a mediana consiste em ordenar o conjunto de dados, nesse caso os valores da vizinhança do *píxel*. Se usarmos uma vizinhança de tamanho 3x3, a mediana será o quinto maior valor, pois consideramos também o valor do *píxel* central.
+A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em colocar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta **coloque uma referência aqui. o Trucco e Verry, por exemplo**, que tem como característica a ocorrencia de pixels pretos e brancos.
+Como dito anteriormente, a mediana consiste em ordenar o conjunto de dados. Nesse caso os valores da vizinhança do *píxel*. Se usarmos uma vizinhança de tamanho 3x3, a mediana será o quinto maior valor, pois consideramos também o valor do *píxel* central na vizinhança ordenada.
 
-Na figura \@ref(fig:placaEletronicaMediana), tem-se um exemplo mostrando uma imagem de raios X de uma placa de circuitos com ruído sal e pimenta (a). As respectivas aplicações de um filtro de média (b) e do filtro da mediana (c), ambos com dimensões 3x3. A partir dela, é visto o quanto o filtro da mediana se sai melhor na remoção do ruído.
+Na figura \@ref(fig:placaEletronicaMediana), temos um exemplo mostrando uma imagem de raios X de uma placa de circuitos eletrônicos com a presença de ruído tipo sal e pimenta (a). A figura também apresenta as respectivas aplicações de um filtro da média (b) e do filtro da mediana (c), ambos com *kernel* de tamanho 3x3. Na figura, é possível perceber o quanto o filtro da mediana se sai melhor na remoção do ruído.
 
 (ref:placaEletronicaMediana) Remoção de ruído [@gonzalez2010, p. 103]
 
@@ -335,7 +335,7 @@ Na figura \@ref(fig:placaEletronicaMediana), tem-se um exemplo mostrando uma ima
 knitr::include_graphics(rep('imagens/05-filtros/placaEletronicaMediana.png'))
 ```
 
-
+**Como o filtro da Média não usa a convolução e o filtro gaussiana sim, é melhor que a ódem dos dois filtros seja trocada, com o filtro do média aparecendo isolado no final**
 
 ## Gaussiano
 Filtro de Gauss é um filtro simétrico (isotrópico) usado para suavizar imagens. Ele funciona análogo a um filtro de média ponderada, mas com um padrão, isto é, dá ênfase ao pixel central da máscara (*kernel*) e menor ênfase a medida que os demais se distanciam dele, seguindo um gradiente muito similar à distribuição gaussiana. O “similar” se deve somente ao fato que será necessário truncamentos, assim, havendo erros e por ser desconsiderado a constante multiplicadora, o que melhora o perfil da função para aplicação no PDI.
