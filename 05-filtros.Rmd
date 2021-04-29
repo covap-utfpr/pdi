@@ -82,20 +82,22 @@ knitr::include_graphics(rep('imagens/05-filtros/correlationNConvolution2D.png'))
 
 **Não ficou claro para mim a questão de posicionar o kernel e multiplicar a componente do kernel pelo correspondente no sinal de entrada. Isso para cada uma das componentes do kernel. Peço um carinho especial nesse ponto para que fique bem claro. Essa será a alma da operação de convolução e a base para todos os filtros mais a frente.**
 
-### Definção matemática de convolução
+### Definção matemática da convolução
 
-Vamos explorar um pouco das notações matemáticas utilizadas para representar a convolução e a correlação, assim também poderemos consolidar a idéia de que ambas são muito correlacionadas.
-Como dito no início desta seção, geralmente a convolução é identificada por $*$, já a correlação costuma ser identificada por ☆. A correlação em duas dimensões segue a seguinte equação (Equação X):
+Vamos explorar um pouco das notações matemáticas utilizadas para representar a convolução e a correlação, assim também poderemos consolidar a idéia de que ambas são muito correlacionadas. **A correlação é corelacionada? hummm... ficou estranho isso! :-)**
+Como dito no início desta seção **(mas aqui é o início da seção!**), geralmente a convolução é identificada por $*$. Já a correlação costuma ser identificada por ☆. A correlação em duas dimensões segue a seguinte equação (Equação X): **equação x?** **centralizar a equação**
 
-$g(x,y) = w(x,y)☆f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x+s,y+t)$
+$g(x,y) = w(x,y)☆f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x+s,y+t)$, **PERFUMARIA: o aspecto da equação ficou estranho. Consegue colocar o subscrito e superscrito abaixo e acima tal como normalmente vemo sem latex?**
+onde $w$ é nosso $kernel$ e $f$ nossa imagem. Podemos perceber que ambas são funções de duas variáveis, $x$ e $y$, pois estamos trabalhando em duas dimensões. 
+Os limites dos somatórios são dados por $a=(m-1)/2$ e $b=(n-1)/2$ e o que essa função faz é andar em cada posição da imagem, ou seja, $(x,y)$, e substituir o *píxel* atual pela soma de produtos da multiplicação dos valores do $kernel$ pelos valores dos *píxels* da imagem. Já a convolução tem uma equação bem similar, sendo diferente apenas pelos sinais negativos em $f$, o que evidência a rotação do $kernel$. Podemos notar que os sinais inversos estão em $f$ e não em $w$. Segundo Gonzalez[@gonzalez2010, p. 98], isso é usado para fins de simplicidade de notação e não alteram o resultado. **Este parágrafo precisa ficar mais claro. Aqui vejo informações muito importantes que precisam ficar bem claras. Peço que seja feita uma expansão aqui para que fique bem claro, mesmo tendo uma explicação detalhada na sequencia.** 
 
-Onde $w$ é nosso $kernel$ e $f$ nossa imagem, podemos perceber que ambas são funções de duas variáveis, $x$ e $y$, pois estamos trabalhando em duas dimensões. Os limites dos somatórios são dados por $a=(m-1)/2$ e $b=(n-1)/2$. E o que essa função faz é andar em cada posição da imagem, ou seja, $(x,y)$, e substituir o *píxel* atual pela soma de produtos da multiplicação dos valores do $kernel$ pelos valores dos *píxels* da imagem. Já a convolução tem uma equação bem similar, sendo diferente apenas pelos sinais negativos em $f$, o que evidência a rotação do $kernel$. Podemos notar que os sinais inversos estão em $f$ e não em $w$; segundo [@gonzalez2010, p. 98], isso é usado para fins de simplicidade de notação e não alteram o resultado.
 
-
-$g(x,y) = w(x,y)*f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x-s,y-t)$
+$g(x,y) = w(x,y)*f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x-s,y-t)$.
 
 
 Uma das melhores maneiras de entender bem as equações é ver um exemplo prático. Veremos isso a seguir, onde temos um exemplo passo-a-passo de correlação:
+
+**ficou bem bom o passo a a passo mas não precisa colocar para todos os pixels. Explique em texto que a imagem verde precisa ser expandida que que o centro do kernel fique sobre o primeiro pixel real. explique como são feitas as contas usando a equação x e na sequencia mostre os cálculos assim como fez. Depois volte no texto dizendo que o mesmo será feito para o próximo pixel. Faça isso para uns 3 pixels e depois coloque lado-alado as figuras dos outros pixels até o final. é importante numerar as equeações e usar o apontamento no texto.**
 
 ```{r conv_1, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/05-filtros/conv_1.png'))
@@ -247,10 +249,10 @@ $$
 ```{r conv_final, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/05-filtros/conv_final.png'))
 ```
-Fonte: Autoria própria inspirado em http://www.songho.ca/dsp/convolution/convolution2d_example.html e https://arxiv.org/abs/1603.07285
+Fonte: Autoria própria inspirado em http://www.songho.ca/dsp/convolution/convolution2d_example.html e https://arxiv.org/abs/1603.07285 **coloque como referência e diga adaptado de [xulambs]**
 
 
-O exemplo utiliza um $kernel$ assimétrico, então, como dito anteriormente, os resultados da correlação e convolução são diferentes. Deixaremos isso como um exercício ao leitor, realizar a convolução para provar a diferença. O caso anterior tem também uma característica que é o complemento das bordas com 0's para que o $kernel$ pudesse ser aplicado sobre toda a imagem. Essa é uma das maneiras de lidar com o problema das bordas, sendo que temos essa e mais algumas possibilidades [@burger2009, p. 125] [@chityala2020, p. 60]:
+O exemplo utiliza um $kernel$ assimétrico **(precisa definir isso)**. Então, os resultados da correlação e convolução são diferentes. Deixaremos isso como um exercício ao leitor, realizar a convolução para provar a diferença. O caso anterior tem também uma característica que é o complemento das bordas com 0's para que o $kernel$ pudesse ser aplicado sobre toda a imagem. Essa é uma das maneiras de lidar com o problema das bordas, sendo que temos essa e mais algumas possibilidades [@burger2009, p. 125] [@chityala2020, p. 60]:
 
 - Preenchimento com constante (*constant padding*):
 Método onde as laterais são preenchidas com um valor constante, comumente 0.
@@ -258,19 +260,20 @@ Método onde as laterais são preenchidas com um valor constante, comumente 0.
 - Preenchimento com vizinho (*nearest neighbor*):
 Se realiza o preenchimento das bordas adicionais com os valores dos vizinhos mais próximos.
 
-- Reflexão (*reflect*):
+- Reflexão (*reflect*): **parece igual ao anterior**
 Os pixels das bordas da imagem são repetidos nas bordas adicionais.
 
-- Repetição (ou *wrap*):
+- Repetição (ou *wrap*): **não entendi**
 A imagem é repetida nas bordas.
 
 
 
 Além dos métodos apresentados existem outras técnicas que podem ser utilizadas, sendo que em cada caso se escolhe a que melhor se ajusta à tarefa realizada. 
-O último ponto a ser explorado é a escolha do tamanho ideal do preenchimento que deve ser aplicado à imagem. De forma geral, se temos uma imagem ($f$), um *kernel* ($w$) e um preenchimento ($p$), podemos escrever a seguinte relação^[Adaptado de https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html]:
+
+O último ponto a ser explorado é a escolha do tamanho ideal do preenchimento que deve ser aplicado à imagem. De forma geral, se temos uma imagem ($f$), um *kernel* ($w$) e um preenchimento ($p$), podemos escrever a seguinte relação^[Adaptado de https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html]: **coloque como referencia**
 
 $$saída = (f_{vertical} - w_{vertical} + p_{vertical} + 1) \times  (f_{horizontal} - w_{horizontal} + p_{horizontal} + 1)$$
-Isso nos leva a perceber que o tamanho da imagem de saída aumenta conforme o preenchimento. Na maioria dos casos, queremos que a imagem de entrada e saída tenha o mesmo tamanho, então usamos $p_{vertical} = k_{vertical} - 1$ e $p_{horizontal} = k_{horizontal} - 1$. E como, geralmente, o *kernel* tem tamanho ímpar, utilizamos $\frac{p_{vertical}}{2}$ e $\frac{p_{horizontal}}{2}$.
+Isso nos leva a perceber que o tamanho da imagem de saída aumenta conforme o preenchimento. Na maioria dos casos, queremos que a imagem de entrada e saída tenha o mesmo tamanho, então usamos $p_{vertical} = k_{vertical} - 1$ e $p_{horizontal} = k_{horizontal} - 1$. E como, geralmente, o *kernel* tem tamanho ímpar, utilizamos $\frac{p_{vertical}}{2}$ e $\frac{p_{horizontal}}{2}$. **esse finalzinho ficou um pouco confuso. Tente melhorar as equações**
 
 
 
