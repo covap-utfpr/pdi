@@ -68,9 +68,9 @@ knitr::include_graphics(rep('imagens/05-filtros/correlationNConvolution1D.png'))
 ```
 
 
-Vamos extender agora essas duas operações à aplicação em duas dimensões. Uma representação disso pode ser vista na figura \@ref(fig:correlationNConvolution2D), onde temos novamente o kernel $w$ e a função $f$. Percebe-se outra vez o efeito de se aplicar o *kernel* em uma imagem com apenas o número 1 no meio, nos dois casos temos como saída a cópia do *kernel*, com a diferença que na correlação ele sai rotacionado. Assim, nota-se que se pré-rotacionarmos o filtro e realizarmos a correlação teremos no final uma convolução.
+Vamos extender agora essas duas operações à aplicação em duas dimensões. Uma representação disso pode ser vista na Figura \@ref(fig:correlationNConvolution2D), onde temos novamente o *kernel* $w$ e a função $f$. Percebe-se outra vez o efeito de se aplicar o *kernel* em uma imagem com apenas o número 1 no meio, nos dois casos temos como saída a cópia do *kernel* aplicado, com a diferença que na correlação o *kernel* aparece rotacionado no resultado. Assim, nota-se que se pré-rotacionarmos o filtro e realizarmos a correlação teremos no final uma convolução.
 
-Já que a correlação e convolução são iguais, quais delas devo utilizar? Segundo Gonzalez, [@gonzalez2010, p. 98], isso é uma questão de preferência e qualquer uma das duas operações conseguem realizar a outra com uma simples rotação do *kernel*. Essa questão se torna ainda menos relevante quando utilizamos filtros que são simétricos, pois, como antes e após a rotação temos o mesmo *kernel*, tanto correlação ou convolução nos darão o mesmo resultado; já em *kernels* assimétricos, temos resultados diferentes. Ainda, segundo Moeslund, [@moeslund2012, p. 87], quando trabalhamos com filtros de desfoque, detectores de borda, entre outros, o processo de se aplicar o *kernel* é comumente chamado de convolução mesmo quando na prática se é implementada a correlação.
+Já que a correlação e convolução são iguais, é preciso saber qual delas utilizar. Segundo Gonzalez, [@gonzalez2010, p. 98], isso é uma questão de preferência e qualquer uma das duas operações conseguem realizar a outra com uma simples rotação do *kernel*. Essa questão se torna ainda menos relevante quando utilizamos filtros que são simétricos, pois, como antes e após a rotação temos o mesmo *kernel*, tanto correlação ou convolução nos darão o mesmo resultado. Já usando *kernels* assimétricos, temos resultados diferentes. Já, segundo Moeslund [@moeslund2012, p. 87], quando trabalhamos com filtros de desfoque, detectores de borda, entre outros, o processo de se aplicar o *kernel* é comumente chamado de convolução mesmo quando na prática se é implementada a correlação.
 
 (ref:correlationNConvolution2D) Ilustração de correlação e convolução bidimensional [@gonzalez2010, p. 98]
 
@@ -78,6 +78,9 @@ Já que a correlação e convolução são iguais, quais delas devo utilizar? Se
 knitr::include_graphics(rep('imagens/05-filtros/correlationNConvolution2D.png'))
 ```
 
+**Aqui precisa de um parágrafo de fechametno da seção e apontamento para a seção seguinte**
+
+**Não ficou claro para mim a questão de posicionar o kernel e multiplicar a componente do kernel pelo correspondente no sinal de entrada. Isso para cada uma das componentes do kernel. Peço um carinho especial nesse ponto para que fique bem claro. Essa será a alma da operação de convolução e a base para todos os filtros mais a frente.**
 
 ### Definção matemática de convolução
 
