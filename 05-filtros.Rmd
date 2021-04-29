@@ -1,6 +1,6 @@
-# Filtros
+# Filtros Digitais
 
-Filtros são uma poderosa ferramenta para se realizar operações em imagens. Diferente das operações de ponto, que operam sobre um único pixel, as operações utilizando filtros levam em consideração os pixels próximos ao pixel atualmente em modificação. Isso nos permite realizar alterações muito mais complexas do que as realizadas anteriormente, como a operação *sharpen* (aguçamento) e *blur* (suavizar), que podem ser observados na figura \@ref(fig:onibusSharpenNBlur) (a) e figura \@ref(fig:onibusSharpenNBlur) (b), respectivamente.
+Filtros digitais representam um conjunto de ferramentas poderosas para realizar operações em imagens. Diferente das operações de ponto que operam sobre um único pixel, **como por exemplo... ,** as operações utilizando filtros levam em consideração os pixels próximos ao pixel que atualmente está em modificação. Isso nos permite realizar alterações muito mais complexas do que as realizadas anteriormente. Como exemplos disso podemos considerar a operação *sharpen* (aguçamento) e *blur* (suavização), que podem ser observados na Figura \@ref(fig:onibusSharpenNBlur) (a) e Figura \@ref(fig:onibusSharpenNBlur) (b), respectivamente. **quando citamos uma figura usando o seu nome, como Figura(a) ou (b) precisamos usar letra maiúscula pois se trata do nome da figura. Quando falamos da figura sem usar o nome, usamos letra minúscula. OK? Precisa corrigir em todo o texto**
 
 
 (ref:onibusSharpenNBlur) Imagem de ônibus com filtro de aguçamento e de suavização [@burger2009, p. 98]
