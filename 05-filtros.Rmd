@@ -277,9 +277,9 @@ Isso nos leva a perceber que o tamanho da imagem de saída aumenta conforme o pr
 
 
 
-## Média
+## Filtro da Média
 
-Um filtro de média é um tipo de filtro que utiliza a média dos valores dos *píxels* próximos ao *píxel* central. Como esse tipo de filtro realiza uma operação linear, ele é classificado como um filtro linear de suavização. Essa suavização se dá exatamente pelo tipo da operação utilizada, a média dos *píxels* vizinhos, que diminui a nitidez pela redução das transições abruptas nos níveis de intensidade. Um dos problemas que podem ocorrer é que as bordas também são mudanças abruptas, então podem ser comprometidas pelo filtro. Na figura \@ref(fig:onibusBoxFilter), temos um exemplo do efeito desse filtro:
+O filtro da média é um tipo de filtro que utiliza a média dos valores dos *píxels* próximos ao *píxel* central. Como esse tipo de filtro realiza uma operação linear, ele é classificado como um filtro linear de suavização. Essa suavização se dá exatamente pelo tipo da operação utilizada, a média dos *píxels* vizinhos, que diminui a nitidez pela redução das transições abruptas nos níveis de intensidade. Um dos problemas que podem ocorrer é que as bordas também são mudanças abruptas, então podem ser comprometidas pelo filtro. Na figura \@ref(fig:onibusBoxFilter), temos um exemplo do efeito desse filtro:
 
 (ref:onibusBoxFilter) Imagem de ônibus com filtro de aguçamento e de suavização [@burger2009, p. 98]
 
@@ -287,6 +287,7 @@ Um filtro de média é um tipo de filtro que utiliza a média dos valores dos *p
 knitr::include_graphics(rep('imagens/05-filtros/onibusShapenNBlur.png'))
 ```
 
+**Antes, diga que esse filtro é baseado na operação de convolução e que o filtro será definido pelo kernel que computa uma média dos pixels**
 A máscara (*kernel*) de um filtro de média pode ser representada por:
 
 $$\begin{bmatrix}
@@ -303,7 +304,7 @@ $$\begin{bmatrix}
 $$
 A primeira forma é a soma de todos os valores divididos por 9, o qual é o tamanho do filtro. A segunda forma, onde todos os coeficientes do *kernel* são 1's, é mais eficiente computacionalmente, pois realizamos todas as somas e multiplicações antes de dividirmos. Esse tipo de filtro é muitas vezes chamado de *box filter*.
 
-(ref:filtrosLetras) Imagem com diferentes tamanhos de filtro de média [@gonzalez2010, p. 102]
+(ref:filtrosLetras) Imagem com diferentes tamanhos de filtro de média **quais são os tamanhos** [@gonzalez2010, p. 102]
 
 ```{r filtrosLetras, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:filtrosLetras)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/05-filtros/filtrosLetras.png'))
@@ -318,10 +319,10 @@ Na figura \@ref(fig:filtrosLetras), temos um exemplo onde foram aplicados filtro
 knitr::include_graphics(rep('imagens/05-filtros/filtrosMediaHubble.png'))
 ```
 
-Na figura \@ref(fig:filtrosMediaHubble), podemos ver como o desfoque pode ser utilizado para encontrar os detalhes principais da imagem. Nesta imagem obtida a partir do telescópio Hubble foi aplicado o desfoque para diminuir a visibilidade dos objetos menores e dar maior ênfase aos da frente. E, então, foi limiarizado o resultado a fim de destacar esses objetos.
+Na figura \@ref(fig:filtrosMediaHubble), podemos ver como o desfoque pode ser utilizado para encontrar os detalhes principais da imagem. Nesta imagem obtida a partir do telescópio Hubble foi aplicado o desfoque para diminuir a visibilidade dos objetos menores e dar maior ênfase aos da frente. E, então, foi limiarizado o resultado a fim de destacar esses objetos. **explique isso no rodapé da figura**
 
 
-## Mediana
+## Filtro da Mediana
 
 A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em ordenar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta, que tem uma característica aparência de pixels pretos e brancos.
 Como dito anteriormente que a mediana consiste em ordenar o conjunto de dados, nesse caso os valores da vizinhança do *píxel*. Se usarmos uma vizinhança de tamanho 3x3, a mediana será o quinto maior valor, pois consideramos também o valor do *píxel* central.
