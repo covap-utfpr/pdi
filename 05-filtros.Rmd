@@ -337,14 +337,16 @@ knitr::include_graphics(rep('imagens/05-filtros/placaEletronicaMediana.png'))
 
 **Como o filtro da Média não usa a convolução e o filtro gaussiana sim, é melhor que a ódem dos dois filtros seja trocada, com o filtro do média aparecendo isolado no final**
 
-## Gaussiano
-Filtro de Gauss é um filtro simétrico (isotrópico) usado para suavizar imagens. Ele funciona análogo a um filtro de média ponderada, mas com um padrão, isto é, dá ênfase ao pixel central da máscara (*kernel*) e menor ênfase a medida que os demais se distanciam dele, seguindo um gradiente muito similar à distribuição gaussiana. O “similar” se deve somente ao fato que será necessário truncamentos, assim, havendo erros e por ser desconsiderado a constante multiplicadora, o que melhora o perfil da função para aplicação no PDI.
+## Filtro Gaussiano
+Filtro de Gauss é um filtro simétrico (isotrópico) usado para suavizar imagens. Ele funciona análogo a um filtro de média ponderada, mas com um padrão, isto é, dá ênfase ao pixel central da máscara (*kernel*) e menor ênfase a medida que os demais se distanciam do centro, seguindo um gradiente muito similar à distribuição gaussiana. O “similar” se deve somente ao fato que será necessário truncamentos, assim, havendo erros e por ser desconsiderado a constante multiplicadora, o que melhora o perfil da função para aplicação em PDI.
 
 - *Função gaussiana:* $$g(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
 
 - *Função gaussiana modificada:* $$g(x) = e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
 
-Note que a função tem formato de sino, que varia de acordo com os valores atribuídos ao, $\sigma$, o qual dependerá da ênfase desejada no cálculo. A medida que $\sigma$ aumenta, maior é o peso dado às “caldas”, no caso, aos *pixels* mais distantes do *pixel* central. Característica representada no gráfico \@ref(fig:funcaoGaussiana). 
+**Aqui as equações estão bem melhores que antes no texto. Só flata a numeração!! :-)**
+
+Note na Figura x que a função tem formato de sino, variando de acordo com os valores atribuídos ao $\sigma$ ou desvio padrão, que dependerá da ênfase desejada no cálculo **(de quê?)**. A medida que $\sigma$ aumenta, maior é o peso dado às “caldas” da função, no caso, aos *pixels* mais distantes do centro do *kernel*. Essa característica é representada no gráfico da Figura \@ref(fig:funcaoGaussiana). 
 
 A fim de que o *pixel* central da máscara esteja em $(0,0)$, considera-se $\mu=0$.
 
@@ -355,20 +357,20 @@ knitr::include_graphics(rep('imagens/05-filtros/funcaoGaussiana.png'))
 ```
 
 
-O filtro gaussiano 2D é gerado através da convolução de dois vetores da mesma função - a imagem se refere ao subconjunto do contradomínio -, sendo estas, normalmente, oriundas da mesma função gaussiana modificada. De forma alternativa, ele também pode ser construído a partir da i-ésima linha do Triângulo de Pascal que corresponde ao tamanho do *kernel* desejado. Como o método é o mesmo para as duas fontes, explicaremos ele utilizando como fonte a função gaussiana modificada. 
+O Filtro Gaussiano 2D é gerado através da convolução de dois vetores da mesma função - a imagem se refere ao subconjunto do contradomínio -, sendo estas, normalmente, oriundas da mesma função gaussiana modificada. De forma alternativa, ele também pode ser construído a partir da i-ésima linha do Triângulo de Pascal que corresponde ao tamanho do *kernel* desejado. Como o método é o mesmo para as duas fontes, explicaremos utilizando como fonte a função gaussiana modificada. 
 
-O procedimento primário é obter a imagem da função, mas para obter um filtro com intuito gaussiano se deve selecionar a amostragem  dos pontos no intervalo de $\pm 2.5\sigma$ ou $\pm 3.5\sigma$ [@burger2009, p. 114]. Assim, optando-se pela primeira opção, procura-se $g(-3)$, $g(-2)$, $g(-1)$, $g(0)$, $g(1)$, $g(2)$ e $g(3)$. Entretanto, como alguns valores têm infinitas casas decimais, devemos truncá-los, no qual foi preferido com cinco casas decimais.
+O procedimento primário é obter a imagem da função, mas para obter um filtro com intuito gaussiano se deve selecionar a amostragem  dos pontos no intervalo de $\pm 2.5\sigma$ ou $\pm 3.5\sigma$ [@burger2009, p. 114]. Assim, escolhendo a pela primeira opção, procura-se $g(-3)$, $g(-2)$, $g(-1)$, $g(0)$, $g(1)$, $g(2)$ e $g(3)$. Entretanto, como alguns valores têm infinitas casas decimais, devemos truncá-los. Aqui escolhemos o uso de cinco casas decimais.
 
 - $g(-3) = g(3) = 0,01110$
 - $g(-2) = g(2) = 0,13533$
 - $g(-1) = g(1) = 0,60653$
 - $g(0) = 1$
 
-Então, considera-se o menor valor como 1, no caso $f(3)$ e $f(-3)$, e interpolamos os demais, truncando-os com propósito de obter a parte inteira. A divisão por 224 é oriunda da soma dos pesos da média. Pronto, temos a máscara gaussiana 1D necessária:
+Então, considera-se o menor valor como 1, no caso $f(3)$ e $f(-3)$, e interpolamos os demais, truncando-os com propósito de obter a parte inteira. A divisão por 224 é oriunda da soma dos valores encontrados. Pronto, temos a máscara gaussiana 1D necessária:
 
 $\frac{1}{224}\begin{bmatrix}1 &  12 &  54 &  90 &  54 &  12 &  1\end{bmatrix}$
 
-Com a máscara em mãos, convoluciona-se os seguintes fatores:
+Com a máscara em mãos, convoluciona-se os seguintes fatores: **não entendi!**
 
 - $\frac{1}{224}\begin{bmatrix}1 &  12 &  54 &  90 &  54 &  12 &  1\end{bmatrix}$
 
@@ -387,3 +389,13 @@ knitr::include_graphics(rep('imagens/05-filtros/LettersGaussianFilter.png'))
 
 
 Nesse exemplo, temos um exemplo similar ao usado no filtro de média, porém, usando-se o filtro gaussiano. A imagem de entrada (a) tem tamanho 500x500 onde foram aplicados filtros de diferentes tamanhos, 3x3(b) ; 5x5(c) ; 9x9(d) ; 15x15(e) e 35x35(f). Note que, ao contrário do exemplo anterior, há uma maior preservação da nítidez, todavia não seria um filtro eficiente para redução de ruído. Essa característica é devido ao maior peso dado ao *pixel* central do *kernel*.
+
+**Precisa melhorar esta seção. Veja:
+
+http://proceedings.sbmac.org.br/sbmac/article/download/477/483
+
+https://docs.opencv.org/master/d4/d13/tutorial_py_filtering.html
+
+https://matthew-brett.github.io/teaching/smoothing_intro.html
+
+e também no livro do trucco e verry
