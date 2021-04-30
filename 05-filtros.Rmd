@@ -75,13 +75,15 @@ knitr::include_graphics(rep('imagens/05-filtros/correlationNConvolution2D.png'))
 ### Definção matemática da convolução
 
 Vamos explorar um pouco das notações matemáticas utilizadas para representar a convolução e a correlação, assim também poderemos consolidar a idéia de que ambas são muito correlacionadas.
-Como dito no início desta seção, geralmente a convolução é identificada por $*$. Já a correlação costuma ser identificada por ☆. A correlação em duas dimensões segue a seguinte equação (Equação X): 
-$g(x,y) = w(x,y)☆f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x+s,y+t)$,
-onde $w$ é nosso $kernel$ e $f$ nossa imagem. Podemos perceber que ambas são funções de duas variáveis, $x$ e $y$, pois estamos trabalhando em duas dimensões. 
+Como dito no início desta seção, geralmente a convolução é identificada por $*$. Já a correlação costuma ser identificada por ☆. A correlação em duas dimensões segue a seguinte equação: 
+
+$$g(x,y) = w(x,y)☆f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x+s,y+t)$$
+
+Onde $w$ é nosso $kernel$ e $f$ nossa imagem. Podemos perceber que ambas são funções de duas variáveis, $x$ e $y$, pois estamos trabalhando em duas dimensões. 
 Os limites dos somatórios são dados por $a=(m-1)/2$ e $b=(n-1)/2$ e o que essa função faz é andar em cada posição da imagem, ou seja, $(x,y)$, e substituir o *píxel* atual pela soma de produtos da multiplicação dos valores do $kernel$ pelos valores dos *píxels* da imagem. Já a convolução tem uma equação bem similar, sendo diferente apenas pelos sinais negativos em $f$, o que evidência a rotação do $kernel$. Podemos notar que os sinais inversos estão em $f$ e não em $w$. Segundo Gonzalez[@gonzalez2010, p. 98], isso é usado para fins de simplicidade de notação e não alteram o resultado.
 
 
-$g(x,y) = w(x,y)*f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x-s,y-t)$.
+$$g(x,y) = w(x,y)*f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x-s,y-t)$$.
 
 
 Uma das melhores maneiras de entender bem as equações é ver um exemplo prático. Veremos isso a seguir, onde temos um exemplo passo-a-passo de correlação:
