@@ -2,7 +2,7 @@
 
 Existem diferentes tipos de fontes utilizadas para geração de imagens, sendo que a mais comum é o espectro eletromagnético na faixa se ondas visíveis. Outras fontes de energia também podem ser utilizadas como energia mecânicana forma de ultrassom, feixe de elétrons em microscópiso eletrônicos, ondas de rádio no radar, etc. Cada fonte necessita de um método específico de captura. Para ondas eletromagnéticas pode ser usada uma câmera fotográfica equipada com sensores adequados ao comprimento de onda. Porém, para outras fontes, é necessário que o computador sintetize a imagem, como o microscópio eletrônico. 
 
-Como já mencionado no tópico de introdução **coloque o link aqui**, o espectro eletromagnético contém diferentes frequências de energia, mas os humanos conseguem enxergar somente uma pequena parte desse espectro, conhecido como luz visível. Isso se deve ao fato de que nossos olhos evoluíram para serem sensíveis a essa faixa de luz, que vêm da luz solar e nos ajuda a realizar nossas atividades cotidianas. Existem outros animais, como pássaros e insetos, que conseguem ver luz em outras faixas de onda, como a ultravioleta[@cuthill2017, p.2]. Caso nossos olhos fossem também sensíveis a outras frequências, como por exemplo a de rádio, nossos celulares e torres telefônicas pareceriam lanternas[@moeslund2012, p.8].
+Como já mencionado no tópico de introdução, o espectro eletromagnético contém diferentes frequências de energia, mas os humanos conseguem enxergar somente uma pequena parte desse espectro, conhecido como luz visível. Isso se deve ao fato de que nossos olhos evoluíram para serem sensíveis a essa faixa de luz, que vêm da luz solar e nos ajuda a realizar nossas atividades cotidianas. Existem outros animais, como pássaros e insetos, que conseguem ver luz em outras faixas de onda, como a ultravioleta[@cuthill2017, p.2]. Caso nossos olhos fossem também sensíveis a outras frequências, como por exemplo a de rádio, nossos celulares e torres telefônicas pareceriam lanternas[@moeslund2012, p.8].
 
 A luz sem cor, isto é, a luz com maior energia dentro do espectro visível humano, é chamada de luz monocromática (ou acromática). Pelo fato de a intensidade da luz monocromática ser percebida como variações de preto a tons de cinza até chegar ao branco, utiliza-se o termo nível de cinza ou escala de cinza. Já a luz cromática (colorida) cobre o espectro de energia eletromagnética na faixa de 0,43 a 0,79 $\mu m$ **( coloque aqui o nome da unidade de medida, tla como fez a seguir)**. Além da frequência, três medidas básicas são utilizadas para descrever a qualidade de uma fonte de luz cromática: radiância, luminância e brilho. A radiância é a quantidade total de energia que é emitida pela fonte de luz e é normalmente medida em watts (W). A luminância, medida em lumens (lm), mede a quantidade de energia que um observador percebe de uma fonte de luz. O brilho, que incorpora a noção acromática de intensidade, é um descritor subjetivo da percepção da luz, então é praticamente impossível mensurar[@gonzalez2010, p.28].
 
@@ -21,7 +21,7 @@ knitr::include_graphics(rep('imagens/02-formacao/aquisicao_imagem.png'))
 
 Baseado nesse princípio pode-se criar um dispositivo muito simples para captura de imagens, conhecido como câmara pinhole(do inglês buraco de alfinete) ou câmara escura. Este dispositivo consiste basicamente de uma caixa fechada com somente um pequeno orifício, tão pequeno quanto possível, por onde os raios de luz possam entrar. Mas por que utilizar somente uma pequena entrada? Como podemos ver na figura \@ref(fig:barreiraluz), se tentarmos realizar a captura da imagem, usando filme fotográfico ou um sensor, sem essa limitação, a área sensível acaba recebendo raios de inúmeras direções, que acabam se misturando tendo como resultado uma imagem ruidosa. Com a barreira de entrada, limitamos a quantidade de luz e conseguimos resultados melhores.
 
-(ref:barreiraluz) Introdução de barreira para captura de imagem [@moeslund2012, p.11] **precisa explicar a imagem. Separe em (a), (b) e (c) para discrever o que está ocorrendo em cada uma das partes. Em latex usamos subfigure para isso.
+(ref:barreiraluz) Introdução de barreira para captura de imagem [@moeslund2012, p.11]
 
 ```{r barreiraluz, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:barreiraluz)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/02-formacao/barreiraluz.png'))
@@ -37,20 +37,17 @@ knitr::include_graphics(rep('imagens/02-formacao/geometriapinhole.png'))
 
 ```
 
-Na figura \@ref(fig:geometriapinhole), considerando que o  eixo óptico corresponde a uma reta perpendicular ao orifício de entrada de luz, que o objeto está localizado a uma distância $Z$ da abertura e a uma distância $Y$ o eixo óptico, podemos definir a altura $y$ e a largura $x$ da projeção do objeto utilizando a simetria de triângulos: **este parágrafo está confuso. Precisa escrever melhor. Uma boa seria definir a orientação da câmra antes, dizendo o que é o eixo ótico, que o o eixo y está apontando para cima e que o eixo z passa pelo centro da câmera. Na apostila do icmc-usp tem um modelo de câmera muito bem contruído mas para outro propósito.**
+Na figura \@ref(fig:geometriapinhole), considerando que o  eixo óptico corresponde a uma reta perpendicular ao orifício de entrada de luz, que o objeto está localizado a uma distância $Z$ da abertura e a uma distância $Y$ o eixo óptico, podemos definir a altura $y$ e a largura $x$ da projeção do objeto utilizando a simetria de triângulos:
 
 $$-\frac{y}{f}=\frac{Y}{Z}\Leftrightarrow y=-f\frac{Y}{Z} \text{ e } -\frac{x}{f}=\frac{x}{f} \Leftrightarrow x=-f\frac{X}{Z}$$
 
-A variável $f$ nessa equação se refere  a distância focal, que é, nesse caso, o tamanho da caixa da câmera **[porquê]**. Os sinais negativos das equações significam que a imagem projetada está rotacionada a 180º verticalmente e horizontalmente **[explique isso melhor]**, como podemos confirmar na imagem acima **não use imagem acima ou abaixo. coloqu sempre a referência para a image**. Câmeras que usavam esse princípio de funcionamento foram utilizadas a partir do século XIII mas hoje em dia não são utilizadas, somente por hobbistas ou curiosos, já que tem muitas desvantagens como precisar de um longo tempo de exposição para captura da imagem. 
+A variável $f$ nessa equação se refere  a distância focal, que é, nesse caso, o tamanho da caixa da câmera. Os sinais negativos das equações significam que a imagem projetada está rotacionada a 180º verticalmente e horizontalmente, como podemos confirmar na imagem acima. Câmeras que usavam esse princípio de funcionamento foram utilizadas a partir do século XIII mas hoje em dia não são utilizadas, somente por hobbistas ou curiosos, já que tem muitas desvantagens como precisar de um longo tempo de exposição para captura da imagem. 
 
 As câmeras mais modernas não possuem somente uma pequena entrada para luz, mas um sistema de lentes que focam a luz recebida no sensor. Discutiremos a seguir alguns dos conceitos por trás desse conceito.
 
 ## Lentes
 
- **[Como retirei o parágrafo que estava auqi para a seção anterior, agora ficou faltando uma introdução nesta seção. Sugiro que leia sobre lentes finas https://pt.wikipedia.org/wiki/Lente https://en.wikipedia.org/wiki/Thin_lens#:~:text=In%20optics%2C%20a%20thin%20lens%20is%20a%20lens,is%20not%20negligible%20are%20sometimes%20called%20thick%20lenses.
- https://courses.cs.washington.edu/courses/cse455/09wi/Lects/lect5.pdf]**
-
-(ref:lente) Ação de uma lente sobre os raios de luz [@moeslund2012, p.12] **precisa explicar melhor a imagem. Aliás toda imagem precisa ser explicada rapidamente em seu rodapé, ok?**.
+(ref:lente) Ação de uma lente sobre os raios de luz [@moeslund2012, p.12]
 
 ```{r lente, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:lente)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/02-formacao/lente.png'))
@@ -111,16 +108,16 @@ Outros dois fatores importantes na aquisição de imagem são a abertura e o obt
 
 ## Sensor
 
-Existem dois tipos principais de sensores que são empregados em dispositivos fotográficos. Um deles é o CCD, que é usado principalmente em aplicações mais específicas ou que precisam de uma qualidade muito alta, e o CMOS, usado em casos mais gerais, como câmeras de celulares. **Precisa definir as siglas CCD e CMOS. De preferência explicar um pouco sobre cada uma delas**
+Existem dois tipos principais de sensores que são empregados em dispositivos fotográficos. Um deles é o CCD, que é usado principalmente em aplicações mais específicas ou que precisam de uma qualidade muito alta, e o CMOS, usado em casos mais gerais, como câmeras de celulares.
 Após a luz passar por todo o sistema de lentes ela chega a esses sensores, que tem sua estrutura exemplificada na figura \@ref(fig:sensor), conhecido como PDA(Photodiode Array):
 
-(ref:sensor) Sensor(area matricial de celulas), Single Cell(uma única celula sensora) [@moeslund2012, p.17] **coloque indicando (a) e (b) para as duas partes da imagem e explique o tem em cada uma delas**.
+(ref:sensor) Sensor(area matricial de celulas), Single Cell(uma única celula sensora) [@moeslund2012, p.17]
 
 ```{r sensor, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:sensor)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/02-formacao/sensor.png'))
 ```
 
-Como podemos ver, o sensor consiste em várias pequenas células, cada uma um pixel, que recebe a energia luminosa e a converte para um número digital. Quanto maior a incidência de luz em um pixel, maior a quantidade de energia e por isso maior será o valor do número gerado. O trabalho de controlar esse tempo de exposição é do obturador da câmera, sendo que um tempo muito longo ou muito curto podem produzir efeitos indesejados nas imagens obtidas, por isso a maioria das câmeras contam com um sistema que controla automaticamente esse tempo para o melhor resultado. Na figura \@ref(fig:exposicao) podemos ver isso em uma imagem real, na primeira temos uma imagem que foi capturada com a exposição correta(correctly exposed), logo em seguida temos uma que sofreu de superexposição(overexposed)  e na terceira temos uma com subexposição(under exposed). Por último temos uma imagem que sofre com o movimento do objeto cuaj imagem estava sendo capturada, o que ocasionou o borramento(motion blur). **aqui também precisa organizar a imgem usando (a), (b), (c), ... e usar este tipo de referência no texto.**
+Como podemos ver, o sensor consiste em várias pequenas células, cada uma um pixel, que recebe a energia luminosa e a converte para um número digital. Quanto maior a incidência de luz em um pixel, maior a quantidade de energia e por isso maior será o valor do número gerado. O trabalho de controlar esse tempo de exposição é do obturador da câmera, sendo que um tempo muito longo ou muito curto podem produzir efeitos indesejados nas imagens obtidas, por isso a maioria das câmeras contam com um sistema que controla automaticamente esse tempo para o melhor resultado. Na figura \@ref(fig:exposicao) podemos ver isso em uma imagem real, na primeira temos uma imagem que foi capturada com a exposição correta(correctly exposed), logo em seguida temos uma que sofreu de superexposição(overexposed)  e na terceira temos uma com subexposição(under exposed). Por último temos uma imagem que sofre com o movimento do objeto cuaj imagem estava sendo capturada, o que ocasionou o borramento(motion blur).
 
 (ref:exposicao) Diferentes níveis de exposição [@moeslund2012, p.17].
 
@@ -131,7 +128,7 @@ knitr::include_graphics(rep('imagens/02-formacao/exposicao.png'))
 Vimos até agora, principalmente, como se capturam imagens em tons de cinza, mas em imagens coloridas, como são capturadas?
 Imagens coloridas utilizam, especialmente, o formato RGB, que significa Red-Green-Blue, ou seja, é formado pelas cores primárias vermelho, verde e azul. Podemos a partir disso gerar imagens coloridas tendo as informações sobre sua intensidade de cada uma dessas cores. Na figura \@ref(fig:componentes) podemos ver uma imagem com seus componentes separados:
 
-(ref:componentes) Imagem colorida separada em seus três componentes [@moeslund2012, p.28]. **Qual é o R, o G e o B?**
+(ref:componentes) Imagem colorida separada em seus três componentes [@moeslund2012, p.28]
 
 ```{r componentes, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:componentes)', fig.align='center', out.width='65%'}
 knitr::include_graphics(rep('imagens/02-formacao/componentes.png'))
@@ -153,7 +150,7 @@ Ao invés disso, as câmeras modernas utilizam somente um sensor e fazem uso de 
 knitr::include_graphics(rep('imagens/02-formacao/bayer.png'))
 ```
 
-Podemos perceber que ocorre uma maior ocorrência das cores verdes. Isso se deve ao fato de que o olho humano é mais sensível a essa cor, logo se dá uma maior ênfase a sua captura.  Na figura 14 **[use o link para a figura]** temos um esquema de como cada pixel recebe informação de somente uma cor, por meio da filtragem. Nesse esquema a luz que entra (Incoming light) é filtrada e somente a cor de interesse consegue passar. Após isso ela chega a malha de sensores (sensor array):
+Podemos perceber que ocorre uma maior ocorrência das cores verdes. Isso se deve ao fato de que o olho humano é mais sensível a essa cor, logo se dá uma maior ênfase a sua captura.  Na figura 14 temos um esquema de como cada pixel recebe informação de somente uma cor, por meio da filtragem. Nesse esquema a luz que entra (Incoming light) é filtrada e somente a cor de interesse consegue passar. Após isso ela chega a malha de sensores (sensor array):
 
 (ref:sensorarray) Sensores com padrão Bayer [@img:sensorarray].
 
@@ -278,7 +275,7 @@ $N_8(p)$ em $p(x,y)$ possui 8 vizinhos, quatro $N_4(p)$ e outros 4 $N_D(p)$suas 
 
 $$p(x,y): N_8(p) = N_4(p) \cup N_D(p)$$
 
-(ref:vizinhanca) Vizinhanças **explique aqui rapidamente as vizinhanças**[@thome2017].
+(ref:vizinhanca) Vizinhanças[@thome2017].
 
 ```{r vizinhanca, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:vizinhanca)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/02-formacao/vizinhanca.png'))
