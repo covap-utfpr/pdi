@@ -129,7 +129,7 @@ transformação-de-escala
 transformação-de-rotação
 introdução-opencv
 abrir-imagem-no-opencvpython
-representação-matricial-da-imagem-opencvpython
+representação-matricial-da-imagem-no-opencvpython
 transformações-radiométricas
 transformação-linear
 transformação-logarítmica
