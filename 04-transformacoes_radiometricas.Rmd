@@ -1,302 +1,197 @@
 # Transformações radiométricas
 
-
 As manipulações no domínio espacial ocorrem diretamente sobre os pixels no plano da imagem. As duas principais categorias de transformações de intensidade a nível espacial são transformações radiométricas e filtragem espacial. A filtragem espacial pode ser representada pela expressão:
 
 $g(x,y) = T[f(x, y)]()$
 
-O componente $f(x, y)$ é a imagem de entrada, $g(x, y)$ é a imagem de saída, e T é um operador em f definido em uma vizinhança do ponto $(x, y)$. Este procedimento pode ser aplicado como na Figura, em que um ponto $(x, y)$ está destacado com sua vizinhança. Geralmente a vizinhança é retangular e bem menor que a imagem, e no caso da Figura é um quadrado de tamanho 3 × 3. 
+O componente $f(x, y)$ é a imagem de entrada, $g(x, y)$ é a imagem de saída, e T é um operador em f definido em uma vizinhança do ponto $(x, y)$. Este procedimento pode ser aplicado como na Figura \@ref(fig:dominioEspacial), em que um ponto $(x, y)$ está destacado com sua vizinhança. Geralmente a vizinhança é retangular e bem menor que a imagem, e no caso da Figura é um quadrado de tamanho 3 × 3. 
 
-Figura - Processamento no domínio espacial.
+(ref:dominioEspacial)  Processamento no domínio espacial[@gonzalez2010, p. 69].
 
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='40%'}
+```{r dominioEspacial, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:dominioEspacial)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/dominioEspecial.png'))
 ```
 
-Figura 4.1:  [@gonzalez2010, p. 69].
-
-Fonte: [@gonzalez2010, p. 69].
-
 Na filtragem espacial, o valor da intensidade no centro da vizinhança é alterado de um pixel ao outro enquanto se aplica um operador T aos pixels na vizinhança para gerar a saída na posição central. O processo pode começar no canto superior esquerdo da imagem de entrada e avançar pixel por pixel horizontalmente, uma linha por vez. Nas bordas, os vizinhos externos são ignorados nos cálculos ou se preenche a imagem com uma borda de 0s ou outros valores predefinidos.
-A vizinhança e uma operação predefinida (T) definem o filtro espacial (também denominada máscara espacial, kernel, template ou janela). A menor vizinhança possível, de tamanho 1 x 1, é tratada como uma função de transformação de intensidade (transformação radiométrica). Na transformação radiométrica, a intensidade (s) em cada ponto da imagem g depende apenas do valor (r) em um único ponto na imagem f , como na expressão:
-s = T(r)
+A vizinhança e uma operação predefinida $(T)$ definem o filtro espacial (também denominada máscara espacial, kernel, template ou janela). A menor vizinhança possível, de tamanho 1 x 1, é tratada como uma função de transformação de intensidade (transformação radiométrica). Na transformação radiométrica, a intensidade $(s)$ em cada ponto da imagem g depende apenas do valor $(r)$ em um único ponto na imagem $f$ , como na expressão:
+
+$$s = T(r)$$
 	
-Como as transformações de intensidade operam individualmente nos pixels de uma imagem, são chamadas de técnicas de processamento ponto a ponto (Gonzalez; Woods, 2010). Este processo é utilizado, por exemplo, para fins de manipulação de contraste e limiarização de imagem. Já a filtragem espacial, também muito aplicada para realce de imagens, é uma técnica de processamento por vizinhança (Gonzalez; Woods, 2010). Nesta seção serão apresentados alguns exemplos de realce de imagem, que tem o foco em melhorar o aspecto da imagem, tornando-a mais viável para o seu objetivo. O realce pode ser utilizado para minimizar na imagem efeitos de ruídos, perda de contraste, borramento e distorções.   
+Como as transformações de intensidade operam individualmente nos pixels de uma imagem, são chamadas de técnicas de processamento ponto a ponto [@gonzalez2010]. Este processo é utilizado, por exemplo, para fins de manipulação de contraste e limiarização de imagem. Já a filtragem espacial, também muito aplicada para realce de imagens, é uma técnica de processamento por vizinhança [@gonzalez2010]. Nesta seção serão apresentados alguns exemplos de realce de imagem, que tem o foco em melhorar o aspecto da imagem, tornando-a mais viável para o seu objetivo. O realce pode ser utilizado para minimizar na imagem efeitos de ruídos, perda de contraste, borramento e distorções.   
 
-Na Figura são mostradas as três funções (T) mais básicas aplicadas na transformação de intensidade, frequentemente utilizadas para o realce de imagens. Para cada uma das três funções - linear (transformações de negativo), logarítmica (transformações de log e log inverso) e de potência (transformações de n-ésima potência e n-ésima raiz) - será apresentado um tópico com mais informações.
+Na Figura \@ref(fig:funcaointensidade) são mostradas as três funções $(T)$ mais básicas aplicadas na transformação de intensidade, frequentemente utilizadas para o realce de imagens. Para cada uma das três funções - linear (transformações de negativo), logarítmica (transformações de log e log inverso) e de potência (transformações de n-ésima potência e n-ésima raiz) - será apresentado um tópico com mais informações.
 	
-Figura - Funções de transformação de intensidade.
+(ref:funcaointensidade) Funções de transformação de intensidade[@gonzalez2010, p. 71].
 
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='40%'}
+```{r funcaointensidade, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:funcaointensidade)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/funcao_itensidade.png'))
 ```
 
-Figura 4.2:  [@gonzalez2010, p. 71].
-
-
 ## Transformação Linear
-
-
 O negativo de uma imagem com níveis de intensidade na faixa $[0, L – 1]$ é  obtido pela transformação: 
 
 $$s = L – 1 – r ()$$
 
-Esse tipo de processamento pode ser utilizado para realçar detalhes brancos ou cinza em regiões escuras de uma imagem  (Gonzalez; Woods, 2010). Na Figura é exemplificado uma aplicação da transformação de negativo. A imagem original é uma mamografia digital mostrando uma pequena lesão. Após a transformação se torna mais fácil analisar o tecido mamário no negativo da imagem (b).
+Esse tipo de processamento pode ser utilizado para realçar detalhes brancos ou cinza em regiões escuras de uma imagem  [@gonzalez2010]. Na Figura \@ref(fig:mamografiadigital) é exemplificado uma aplicação da transformação de negativo. A imagem original é uma mamografia digital mostrando uma pequena lesão. Após a transformação se torna mais fácil analisar o tecido mamário no negativo da imagem \@ref(fig:mamografiadigital)(b).
 
+(ref:mamografiadigital) Transformação Linear (Negativos de Imagens). (a) Mamografia digital original. (b) Negativo da imagem.
+[@gonzalez2010, p. 71].
 
-Figura - Transformação Linear (Negativos de Imagens).
-
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='50%'}
+```{r mamografiadigital, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:mamografiadigital)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/monografia_digital.png'))
 ```
 
-(a) Mamografia digital original. (b) Negativo da imagem.
-
-Fonte: [@gonzalez2010, p. 71].
-
 ## Transformação Logarítmica
-
 
 A forma geral da transformação logarítmica é: 
 
 $$s = c log (1 + r)$$
-em que c é uma constante e considera-se que r ≥ 0. Nas aplicações Log, um dos objetivos é a expansão dos valores de pixels mais escuros em uma imagem, ao mesmo tempo em que se comprime os valores de níveis mais altos (Gonzalez; Woods, 2010). A expansão é quando se mapeia uma faixa estreita de baixos valores de intensidade em uma faixa mais ampla de níveis de saída, como na função Log da Figura. Na compressão ocorre o oposto com os valores mais altos de níveis de intensidade. Na  transformação logarítmica inversa se comprime os pixels mais escuros e se expande os mais claros (Gonzalez; Woods, 2010).
-	Uma maneira de avaliar o efeito da transformação logarítmica é utilizar sobre o espectro de Fourier. Na Figura (a) mostra um espectro de Fourier com valores variando de 0 a 1,5 × 106, com baixo nível de detalhamento. Ao aplicar a transformação Log (com c = 1 neste caso) aos valores do espectro, a faixa de valores do resultado passa a ser de 0 a 6,2, o que melhora o detalhamento na exibição da imagem (b).
-	
-Figura - Transformação Logarítmica.
 
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='50%'}
-knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/logaritimica.png'))
+em que c é uma constante e considera-se que $r \geq 0$. Nas aplicações Log, um dos objetivos é a expansão dos valores de pixels mais escuros em uma imagem, ao mesmo tempo em que se comprime os valores de níveis mais altos [@gonzalez2010]. A expansão é quando se mapeia uma faixa estreita de baixos valores de intensidade em uma faixa mais ampla de níveis de saída, como na função Log da Figura \@ref(fig:logaritimica). Na compressão ocorre o oposto com os valores mais altos de níveis de intensidade. Na  transformação logarítmica inversa se comprime os pixels mais escuros e se expande os mais claros [@gonzalez2010].
+
+Uma maneira de avaliar o efeito da transformação logarítmica é utilizar sobre o espectro de Fourier. Na Figura \@ref(fig:logaritimica)(a) mostra um espectro de Fourier com valores variando de 0 a 1,5 × 106, com baixo nível de detalhamento. Ao aplicar a transformação Log (com $c = 1$ neste caso) aos valores do espectro, a faixa de valores do resultado passa a ser de $0$ a $6,2$, o que melhora o detalhamento na exibição da imagem \@ref(fig:logaritimica)(b).
+	
+(ref:logaritimica) Transformação Logarítmica. (a) Espectro de Fourier. (b) Resultado da aplicação da transformação logarítmica.[@gonzalez2010, p. 72].
+
+```{r logaritimica, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:logaritimica)', fig.align='center', out.width='40%'}
+  knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/logaritimica.png'))
 ```
 
-(a) Espectro de Fourier. (b) Resultado da aplicação da transformação logarítmica.
-
-Fonte: [@gonzalez2010, p. 72].
-
-	
-	
 ## Transformação de Potência
-
 
 As transformações de potência apresentam a forma básica: 
 
-$$s = cr^y$$
+$$s = cr^\gamma$$
 
-sendo c e γ constantes positivas. Ao plotar a transformação de potência para diferentes valores (y), e c=1, na Figura se observa um comportamento semelhante ao de expansão/compressão da transformação Logarítmica.  Curvas de transformação de potência com valores de y menores que 1 (fração) tem um efeito parecido com a função Log, enquanto que para valores de y maiores que 1 se parecem mais com a logarítmica inversa.
+sendo $c$ e $\gamma$ constantes positivas. Ao plotar a transformação de potência para diferentes valores ($\gamma$), e $c=1$, na Figura \@ref(fig:plotagensequacao) se observa um comportamento semelhante ao de expansão/compressão da transformação Logarítmica.  Curvas de transformação de potência com valores de $\gamma$ menores que 1 (fração) tem um efeito parecido com a função Log, enquanto que para valores de $\gamma$ maiores que 1 se parecem mais com a logarítmica inversa.
 	
-Figura - Plotagens da equação $$s = cr^γ$$ para vários valores de y.
+(ref:plotagensequacao) Plotagens da equação $s = cr^\gamma$ para vários valores de $\gamma$[@gonzalez2010, p. 72].
 
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='40%'}
+```{r plotagensequacao, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:plotagensequacao)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/plotagens_equacao.png'))
 ```
 
+Uma das aplicações da transformação de potência é a correção gama em dispositivos que funcionam de acordo com uma lei de potência, como em computadores [@gonzalez2010, p. 72]. Por exemplo, dispositivos de tubo de raios catódicos apresentam relação com a função potência de expoentes variando em aproximadamente 1,8 a 2,5. Para valores de gama próximos de 2,5 a imagem de saída no monitor tende a ser mais escura (Figura \@ref(fig:variacaogradativa)(b)) que a imagem original (Figura \@ref(fig:variacaogradativa)(a)). A imagem corrigida (Figura \@ref(fig:variacaogradativa)(c)) pela correção gama, neste caso com gama menor que 1, gera uma saída (Figura \@ref(fig:variacaogradativa)(d) mais parecida com a imagem original (Figura \@ref(fig:variacaogradativa)(a)).
 
-Fonte: [@gonzalez2010, p. 72].
+(ref:variacaogradativa) Correcão Gama. (a) Imagem com variação gradativa de intensidade (gradiente). (b) Imagem vista em um monitor simulado com gama igual a 2,5. (c) Imagem com correção gama. (d) Imagem corrigida vista no mesmo monitor.
+[@gonzalez2010, p. 72].
 
-Uma das aplicações da transformação de potência é a correção gama em dispositivos que funcionam de acordo com uma lei de potência, como em computadores (Gonzalez; Woods, 2010). Por exemplo, dispositivos de tubo de raios catódicos apresentam relação com a função potência de expoentes variando em aproximadamente 1,8 a 2,5. Para valores de gama próximos de 2,5 a imagem de saída no monitor tende a ser mais escura ( Figura b) que a imagem original (Figura a). A imagem corrigida (Figura c) pela correção gama, neste caso com gama menor que 1, gera uma saída (Figura d) mais parecida com a imagem original (Figura a).
-
-
-Figura - Correção Gama.
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='40%'}
+```{r variacaogradativa, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:variacaogradativa)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/variacao_gradativa.png'))
 ```
 
+Outra utilidade da transformação de potência pode ser vista na Figura \@ref(fig:potencial), em que a imagem original está desbotada, indicando que se deve aplicar uma compressão dos níveis mais baixos e expandir valores mais altos [@gonzalez2010]. Assim, a transformação foi realizada com gama maior que 1. Os resultados do processamento com $\gamma = 3, \gamma = 4,$  e $\gamma = 5$ podem ser vistos nas imagens \@ref(fig:potencial)(b), \@ref(fig:potencial)(c) e \@ref(fig:potencial)(d), respectivamente.
 
-(a) Imagem com variação gradativa de intensidade (gradiente). (b) Imagem vista em um monitor simulado com gama igual a 2,5. (c) Imagem com correção gama. (d) Imagem corrigida vista no mesmo monitor.
+(ref:potencial) Transformações de potência. (a) Imagem aérea. (b) a (d) Resultados da aplicação da transformação de potência com c = 1 e γ = 3, 4 e 5, respectivamente[@gonzalez2010, p. 74].
 
-
-Fonte: [@gonzalez2010, p. 72].
-
-Outra utilidade da transformação de potência pode ser vista na Figura, em que a imagem original está desbotada, indicando que se deve aplicar uma compressão dos níveis mais baixos e expandir valores mais altos (Gonzalez; Woods, 2010). Assim, a transformação foi realizada com gama maior que 1. Os resultados do processamento com $y = 3, y = 4,$  e $y = 5$ podem ser vistos nas imagens (b), (c) e (d), respectivamente.
-
-Figura - Transformações de potência.
-
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='40%'}
+```{r potencial, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:potencial)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/potencial.png'))
 ```
 
-(a) Imagem aérea. (b) a (d) Resultados da aplicação da transformação de potência com $c = 1$ e $y = 3, 4$ e $5$, respectivamente.
-Fonte: [@gonzalez2010, p. 74].
-
-
-
 ## Processamento de histograma
 
-
-A distribuição dos níveis de intensidade (L) de uma imagem podem ser identificados em um histograma, ou seja, um gráfico com o número de pixels na imagem para cada nível de cinza. Assim, os histogramas podem servir de referência para várias manipulações no domínio espacial, além de fornecer estatísticas das imagens e ser útil em aplicações como compressão e segmentação. O histograma também pode ser interpretado como uma distribuição discreta da probabilidade de ocorrência do nível de intensidade $r_k$ em uma imagem (Gonzalez; Woods, 2010):
+A distribuição dos níveis de intensidade (L) de uma imagem podem ser identificados em um histograma, ou seja, um gráfico com o número de pixels na imagem para cada nível de cinza. Assim, os histogramas podem servir de referência para várias manipulações no domínio espacial, além de fornecer estatísticas das imagens e ser útil em aplicações como compressão e segmentação. O histograma também pode ser interpretado como uma distribuição discreta da probabilidade de ocorrência do nível de intensidade $r_k$ em uma imagem [@gonzalez2010]:
 
 $$p(r_k) = \frac{x_k}{MN} k = 0, 1,2, ..., L - 1 ()$$
 
 sendo $M$ e $N$ as dimensões de linha e coluna da imagem, e $n_k$ é o número de pixels da imagem com intensidade $r_k$. 
-Na Figura estão identificados quatro histogramas referentes a cada uma das imagens dos grãos de pólen do lado esquerdo. O eixo horizontal de cada histograma corresponde a valores de intensidade, $r_k$, e o eixo vertical são os valores de $p(r_k)$. Cada imagem destaca uma característica em relação à intensidade da imagem: escura, clara, baixo contraste e alto contraste.
+Na Figura \@ref(fig:histograma5) estão identificados quatro histogramas referentes a cada uma das imagens dos grãos de pólen do lado esquerdo. O eixo horizontal de cada histograma corresponde a valores de intensidade, $r_k$, e o eixo vertical são os valores de $p(r_k)$. Cada imagem destaca uma característica em relação à intensidade da imagem: escura, clara, baixo contraste e alto contraste.
 
-Na imagem do topo, a mais escura, as barras do histograma estão concentradas no lado inferior (escuro) da escala de intensidades, enquanto que na imagem mais clara tendem à região oposta (Gonzalez; Woods, 2010). Uma imagem com baixo contraste, aparência desbotada e sem brilho, tem um histograma estreito normalmente localizado no meio da escala de intensidades. Os componentes do histograma na imagem de alto contraste estão distribuídos quase uniformemente em uma ampla faixa da escala de intensidades, com poucas linhas verticais sendo muito mais altas do que as outras. As imagens de alto contraste tendem a apresentar uma boa correspondência em relação aos detalhes de nível de cinza (Gonzalez; Woods, 2010). 
+Na imagem do topo, a mais escura, as barras do histograma estão concentradas no lado inferior (escuro) da escala de intensidades, enquanto que na imagem mais clara tendem à região oposta [@gonzalez2010]. Uma imagem com baixo contraste, aparência desbotada e sem brilho, tem um histograma estreito normalmente localizado no meio da escala de intensidades. Os componentes do histograma na imagem de alto contraste estão distribuídos quase uniformemente em uma ampla faixa da escala de intensidades, com poucas linhas verticais sendo muito mais altas do que as outras. As imagens de alto contraste tendem a apresentar uma boa correspondência em relação aos detalhes de nível de cinza [@gonzalez2010]. 
 
-Figura - Histogramas de uma imagem com grãos de pólen.
+(ref:histograma5) Histogramas de uma imagem com grãos de pólen. De cima para baixo: escura, clara, baixo contraste e alto contraste.[@gonzalez2010, p. 79].
 
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='40%'}
+```{r histograma5, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:histograma5)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/histograma5.png'))
 ```
 
-De cima para baixo: escura, clara, baixo contraste e alto contraste.
-Fonte: [@gonzalez2010, p. 79].
-
-Os histogramas são utilizados em grande parte para auxiliar em transformações de intensidade com foco em melhorar o contraste, tornando mais fácil a percepção de informações de interesse na imagem (Pedrini; Schwartz, 2008). Nos exemplos de transformações apresentados nesta seção (linear, logarítmica e de potência), a escolha do operador $(T)$ de transformação geralmente é empírica, em que se deve considerar a imagem original e o efeito desejado. Para transformar a imagem de forma que se altere o histograma de uma maneira específica e automática  utilizam-se métodos em que o formato dos histogramas são pré-definidos ou atendem a um determinado padrão, como na equalização de histograma e especificação de histograma (Gonzalez; Woods, 2010). 
-
-
+Os histogramas são utilizados em grande parte para auxiliar em transformações de intensidade com foco em melhorar o contraste, tornando mais fácil a percepção de informações de interesse na imagem [@pedrini2008]. Nos exemplos de transformações apresentados nesta seção (linear, logarítmica e de potência), a escolha do operador $(T)$ de transformação geralmente é empírica, em que se deve considerar a imagem original e o efeito desejado. Para transformar a imagem de forma que se altere o histograma de uma maneira específica e automática  utilizam-se métodos em que o formato dos histogramas são pré-definidos ou atendem a um determinado padrão, como na equalização de histograma e especificação de histograma [@gonzalez2010]. 
 
 ## Equalização do histograma
 
+Na equalização do histograma, o histograma da imagem original $f$ é alterado de maneira que a imagem transformada g tenha uma distribuição aproximadamente uniforme dos níveis de cinza em uma faixa mais ampla de valores, assumindo características próximas de uma imagem de alto contraste [@pedrini2008]. Neste método se aplica um operador  de transformação de intensidade $(T)$ na forma contínua, Equação, que gera uma variável aleatória (valores de intensidade da imagem transformada) caracterizada por uma função densidade de probabilidade uniforme (PDF, probability density function) .
 
-Na equalização do histograma, o histograma da imagem original $f$ é alterado de maneira que a imagem transformada g tenha uma distribuição aproximadamente uniforme dos níveis de cinza em uma faixa mais ampla de valores, assumindo características próximas de uma imagem de alto contraste (Pedrini; Schwartz, 2008). Neste método se aplica um operador  de transformação de intensidade $(T)$ na forma contínua, Equação, que gera uma variável aleatória (valores de intensidade da imagem transformada) caracterizada por uma função densidade de probabilidade uniforme (PDF, probability density function) .
-$s = T(r) = (L - 1)0rpr(w) dw  ( )$
-sendo w uma variável local da integração, L os níveis de cinza da imagem e pr(r) a PDF de r (valores de intensidade da imagem original). A demonstração da obtenção da PDF da variável $s (p_s(s))$, na equação, pode ser vista com detalhes no livro “Processamento digital de imagens” (Gonzalez; Woods, 2010). O gráfico das PDFs de r e s estão identificados na Figura como $pr(r)$ e $p_s(s)$.
+$$s = T(r) = (L - 1)\int_{0}^{r} p_r(w)dw$$
 
-$$p_s(s) = \frac{1}{L-1} $$
+sendo w uma variável local da integração, L os níveis de cinza da imagem e $p_r(r)$ a PDF de $r$ (valores de intensidade da imagem original). A demonstração da obtenção da PDF da variável $s (p_s(s))$, na equação, pode ser vista com detalhes no livro “Processamento digital de imagens” [@gonzalez2010]. O gráfico das PDFs de $r$ e $s$ estão identificados na Figura \@ref(fig:histograma) como $pr(r)$ e $p_s(s)$.
 
-Figura - Equalização de histograma na forma contínua.
+$p_s(s) = \frac{1}{L-1}$ para $0 \leq s \leq L - 1$
 
+(ref:histograma) Equalização de histograma na forma contínua. (a) Uma PDF arbitrária. (b) Resultado da aplicação da transformação para equalização[@gonzalez2010, p. 81].
 
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='55%'}
+```{r histograma, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:histograma)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/histograma.png'))
 ```
 
-(a) Uma PDF arbitrária. (b) Resultado da aplicação da transformação para equalização.
-
-Fonte: [@gonzalez2010, p. 81].
-
 Para que esses conceitos sejam aplicados no processamento de imagens eles devem ser expressos na forma discreta. A transformação na Equação da forma discreta  é:
 
+$$S_k = T(r_k) = (L - 1)  \sum_{j=0}^{k}p_r(r_j) = \frac{(L-1)}{MN}\sum_{j=0}^{k}n_j \text{ para } k = 0, 1, 2,\dots, L - 1$$
 
-$$S_k = T(r_k) = (L - 1)  \sum_{j=0}^{N} n_j  para k = 0, 1, 2, ..., L - 1 () $$
+Esta expressão deve ser aplicada para cada pixel da imagem de entrada com intensidade $r_k$, obtendo-se um pixel correspondente com nível $s_k$ na imagem de saída, estes resultados são arredondados para o nível de cinza mais próximo, que é um valor inteiro. Diferente do equivalente contínuo, não pode ser provado (em geral) que a equalização de um histograma discreto resulta em um histograma uniforme [@gonzalez2010, p. 81]. No entanto, como identificado na Figura, a equalização discreta tende a espalhar o histograma da imagem de entrada, aumentando o intervalo da escala de intensidade. 
 
-<<<<<<< HEAD
-Esta expressão deve ser aplicada para cada pixel da imagem de entrada com intensidade rk, obtendo-se um pixel correspondente com nível sk na imagem de saída, estes resultados são arredondados para o nível de cinza mais próximo, que é um valor inteiro. Diferente do equivalente contínuo, não pode ser provado (em geral) que a equalização de um histograma discreto resulta em um histograma uniforme (Gonzalez; Woods, 2010). No entanto, como identificado na Figura, a equalização discreta tende a espalhar o histograma da imagem de entrada, aumentando o intervalo da escala de intensidade. 
+(ref:histograma2) Equalização de histograma[@pedrini2008, p. 113].
 
-
-
-Figura - Equalização de histograma.
-
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='60%'}
+```{r histograma2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:histograma2)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/histograma2.png'))
 ```
 
-
-
-Figura 4.2:  [@pedrini2008, p. 113].
-
 ## Especificação de histograma
 
+Algumas vezes é útil poder especificar o formato do histograma da imagem processada. O método conhecido como especificação de histograma modifica uma imagem para que seu histograma tenha uma distribuição particular [@pedrini2008].
 
-Algumas vezes é útil poder especificar o formato do histograma da imagem processada. O método conhecido como especificação de histograma modifica uma imagem para que seu histograma tenha uma distribuição particular (Pedrini; Schwartz, 2008).
-Sejam $pr(r)$ e $pz(z)$ as funções densidade de probabilidade (PDF) original e especificada, respectivamente. Pela Equação, o histograma da imagem original pode ser equalizado pela função de transformação $T1(r)$:
+Sejam $p_r(r)$ e $p_z(z)$ as funções densidade de probabilidade (PDF) original e especificada, respectivamente. Pela Equação, o histograma da imagem original pode ser equalizado pela função de transformação $T1(r)$:
 
-$$S_k = T(r_k) = (L - 1)  \sum_{j=0}^{N} n_j  para k = 0, 1, 2, ..., L - 1 () $$
+$$S_k = T_1(r_k) = (L - 1)\sum_{j=0}^{k}p_r(r_j) = \frac{(L-1)}{MN} \sum_{j=0}^{k}n_j\text{ para } k = 0, 1, 2,\dots, L - 1$$
 
-Na Figura a, $T2(z)$ é a função de transformação que realiza a equalização do histograma especificado. O método para obter os níveis de cinza z da imagem processada envolve o cálculo da função de transformação inversa $z = T_2⁻¹(s)$, como identificado na Figura b. O termo s corresponde às intensidades da imagem equalizada para os dois caminhos de transformação, e sua PDF é p_s(s).
+Na Figura \@ref(fig:equalizaca2)(a), $T_2(z)$ é a função de transformação que realiza a equalização do histograma especificado. O método para obter os níveis de cinza $z$ da imagem processada envolve o cálculo da função de transformação inversa $z = T_2^{-1}(s)$, como identificado na Figura \@ref(fig:equalizaca2)(b). O termo s corresponde às intensidades da imagem equalizada para os dois caminhos de transformação, e sua PDF é $p_s(s)$.
 
-Figura - Etapas de especificação de histograma.
+(ref:equalizaca2) Etapas de especificação de histograma. (a) equalização do histograma especificado pela função $T_2(z)$. (b) cálculo da função de transformação inversa $T_2^{-1}(s)$[@pedrini2008, p. 116].
 
-
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='55%'}
+```{r equalizaca2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:equalizaca2)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/equalizaca2.png'))
 ```
 
+Assim, a especificação de histograma envolve a aplicação de duas transformações, $T_1(r)$ seguida $T_2^{-1}(s)$. Na forma discreta não é necessário calcular a função inversa $T_2^{-1}(s)$, é possível determinar os valores de $z$ de forma mais direta por mapeamento em tabela[@gonzalez2010]. Após o cálculo das duas transformações ($T_1(r)$ e $T_2(z)$), os valores são arredondados para os valores inteiros mais próximos cobrindo o intervalo $[0, L – 1]$. Os valores são organizados em uma tabela. Em seguida, se faz o mapeamento de cada valor de $s_k$, procurando a melhor correspondência nos valores obtidos em $T_2(z_q)$, determinando a solução mais próxima $z_q$.
 
-(a) equalização do histograma especificado pela função T_2(z). (b) cálculo da função de transformação inversa T_2⁻¹(s).
+Estas etapas ficam mais compreensíveis ao se aplicar um exemplo. Suponha que uma imagem de 3 bits $(L = 8)$ de dimensões 64 × 64 pixels $(MN = 4096)$ tenha a distribuição de intensidade mostrada na Figura \@ref(fig:tabelapixels), na qual os níveis de cinza são números inteiros no intervalo $[0, L – 1] = [0, 7]$.
 
+(ref:tabelapixels) Distribuição de intensidades para uma imagem digital de 3 bits, 64 × 64 pixels[@gonzalez2010, p. 83].
 
-
-Fonte: [@pedrini2008, p. 116].
-
-
-Assim, a especificação de histograma envolve a aplicação de duas transformações, T_1(r) seguida T_2⁻¹(s). Na forma discreta não é necessário calcular a função inversa $T_2⁻¹(s)$, é possível determinar os valores de $z$ de forma mais direta por mapeamento em tabela (Gonzalez; Woods, 2010). Após o cálculo das duas transformações ($T_1(r)$ e $T_2(z)$), os valores são arredondados para os valores inteiros mais próximos cobrindo o intervalo [0, L – 1]. Os valores são organizados em uma tabela. Em seguida, se faz o mapeamento de cada valor de $s_k$, procurando a melhor correspondência nos valores obtidos em $T_2(zq)$, determinando a solução mais próxima $z_q$ .
-	Estas etapas ficam mais compreensíveis ao se aplicar um exemplo. Suponha que uma imagem de 3 bits (L = 8) de dimensões 64 × 64 pixels (MN = 4096) tenha a distribuição de intensidade mostrada na Tabela, na qual os níveis de cinza são números inteiros no intervalo [0, L – 1] = [0, 7].
-
-Tabela - Distribuição de intensidades para uma imagem digital de 3 bits, 64 × 64 pixels.
-
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='45%'}
+```{r tabelapixels, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:tabelapixels)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/tabla_pixels.png'))
 ```
 
-
-Fonte: [@gonzalez2010, p. 83].
-
-
-O histograma da imagem hipotética é apresentado na Figura (a). Os valores ajustados do histograma equalizado (s), obtidos pela função  $s =T_1(r)$ na Equação, são: 
+O histograma da imagem hipotética é apresentado na Figura \@ref(fig:histograma3)(a). Os valores ajustados do histograma equalizado (s), obtidos pela função  $s =T_1(r)$ na Equação, são: 
 $s_0 = 1,  s_1 = 3, s_2 = 5,  s_3 = 6, s_4 = 6, s_5 = 7, s_6 = 7, s_7 = 7$
 
-Figura - Exemplo de especificação de histograma.
+(ref:histograma3) Exemplo de especificação de histograma. (a) Histograma de uma imagem de 3 bits. (b) Histograma especificado desejado. (c) Função de transformação obtida a partir do histograma especificado desejado. (d) Resultado da especificação do histograma.[@gonzalez2010, p. 88].
 
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='35%'}
+```{r histograma3, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:histograma3)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/histograma3.png'))
 ```
 
+No próximo passo, todos os valores de $T_2(z_q)$ são calculados utilizando a equação, em que os valores de $p_z(z_q)$ estão na Figura \@ref(fig:tabelahistograma2). Os resultados desta segunda etapa estão na Figura \@ref(fig:tabelahistograma2)  e a função de transformação é esboçada na Figura\@ref(fig:histograma3)(c).
 
-(a) Histograma de uma imagem de 3 bits. (b) Histograma especificado desejado. (c) Função de transformação obtida a partir do histograma especificado desejado. (d) Resultado da especificação do histograma.
-Fonte: [@gonzalez2010, p. 87].
+$$T_2 = T(Z_q) = (L - 1)  \sum_{j=0}^{q} P_z(Z_j) = \frac{(L - 1)}{MN}  \sum_{j=0}^{q}n_j \text{ para } q = 0, 1, 2, ..., L - 1$$
 
-No próximo passo, todos os valores de $T_2(z_q)$ são calculados utilizando a equação, em que os valores de $p_z(z_q)$ estão na Tabela. Os resultados desta segunda etapa estão na Tabela  e a função de transformação é esboçada na Figura(c).
+(ref:tabelahistograma2) Histograma especificado. [@gonzalez2010, p. 88].
 
-$$T_2 = T(Z_q) = (L - 1)  \sum_{j=0}^{q} P_z(Z_j) = \frac{L - 1}{MN}  \sum_{j=0}^{q}n_j para q = 0, 1, 2, ..., L - 1 ()$$
-
-Tabela - Histograma especificado.
-
-
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='35%'}
+```{r tabelahistograma2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:tabelahistograma2)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/tabela_histograma2.png'))
 ```
 
-Fonte: [@gonzalez2010, p. 88].
+No terceiro passo, verifica-se o menor valor de $z_q$ na Figura \@ref(fig:histograma3), de modo que o valor $G(z_q) = T_2(z_q)$ seja o mais próximo possível de $s_k$ . Isso é feito para todos os valores de $s_k$ para criar os mapeamentos necessários de $s$ em $z$, identificados na Figura \@ref(fig:tabelahistograma3).
 
+(ref:tabelahistograma3) Valores da função de transformação $G(z_q) = T_2(z_q)$ arredondados. [@gonzalez2010, p. 88].
 
-No terceiro passo, verifica-se o menor valor de $z_q$ na Tabela, de modo que o valor $G(z_q) = T_2(z_q)$ seja o mais próximo possível de $s_k$ . Isso é feito para todos os valores de $s_k$ para criar os mapeamentos necessários de $s$ em $z$, identificados na Tabela.
-
-Tabela - Valores da função de transformação G(zq) = T2(zq) arredondados.
-
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='35%'}
+```{r tabelahistograma3, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:tabelahistograma3)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/tabela_histograma3.png'))
 ```
 
-Fonte: [@gonzalez2010, p. 88].
+Na última etapa, o mapeamento da Figura \@ref(fig:tabelahistograma4) é utilizado para mapear cada pixel na imagem do histograma equalizado $(p_s(s))$ em um pixel correspondente na imagem do histograma especificado recém-criado $(p_z(z))$. O histograma resultante da especificação é esboçado na Figura \@ref(fig:tabelahistograma4).
 
+(ref:tabelahistograma4) Mapeamentos dos valores de $s_k$ nos valores correspondentes de $z_q$.[@gonzalez2010, p. 89].
 
-No terceiro passo, verifica-se o menor valor de $z_q$ na Tabela , de modo que o valor $G(z_q) = T_2(z_q)$ seja o mais próximo possível de $s_k$ . Isso é feito para todos os valores de sk para criar os mapeamentos necessários de s em $z$, identificados na Tabela.
-
-Tabela - Valores da função de transformação $G(z_q) = T_2(z_q)$ arredondados.
-
-
-
-Fonte: [@gonzalez2010, p. 89].
-
-Na última etapa, o mapeamento da Tabela é utilizado para mapear cada pixel na imagem do histograma equalizado $(p_s(s))$ em um pixel correspondente na imagem do histograma especificado recém-criado $(p_z(z))$. O histograma resultante da especificação é esboçado na Figura.
-
-Tabela - Mapeamentos dos valores de $s_k$ nos valores correspondentes de $z_q$.
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='35%'}
+```{r tabelahistograma4, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:tabelahistograma4)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/tabela_histograma4.png'))
 ```
-
-Fonte: [@gonzalez2010, p. 89].
-
-
-
-=======
-<!--## Processamento de histograma
-
-
-
-## Equalização do histograma
-## Especificação de histograma-->
->>>>>>> 5d3386a3bd58365ff5d727e6e4fcc6ed19c6603a
