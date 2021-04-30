@@ -309,7 +309,7 @@ Na figura \@ref(fig:filtrosMediaHubble), podemos ver como o desfoque pode ser ut
 
 ## Filtro da Mediana
 
-A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em colocar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta **coloque uma referência aqui. o Trucco e Verry, por exemplo**, que tem como característica a ocorrencia de pixels pretos e brancos.
+A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em colocar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta, que tem como característica a ocorrencia de pixels pretos e brancos.
 Como dito anteriormente, a mediana consiste em ordenar o conjunto de dados. Nesse caso os valores da vizinhança do *píxel*. Se usarmos uma vizinhança de tamanho 3x3, a mediana será o quinto maior valor, pois consideramos também o valor do *píxel* central na vizinhança ordenada.
 
 Na figura \@ref(fig:placaEletronicaMediana), temos um exemplo mostrando uma imagem de raios X de uma placa de circuitos eletrônicos com a presença de ruído tipo sal e pimenta (a). A figura também apresenta as respectivas aplicações de um filtro da média (b) e do filtro da mediana (c), ambos com *kernel* de tamanho 3x3. Na figura, é possível perceber o quanto o filtro da mediana se sai melhor na remoção do ruído.
@@ -350,7 +350,7 @@ Então, considera-se o menor valor como 1, no caso $f(3)$ e $f(-3)$, e interpola
 
 $\frac{1}{224}\begin{bmatrix}1 &  12 &  54 &  90 &  54 &  12 &  1\end{bmatrix}$
 
-Com a máscara em mãos, convoluciona-se os seguintes fatores: **não entendi!**
+Com a máscara em mãos, convoluciona-se os seguintes fatores:
 
 - $\frac{1}{224}\begin{bmatrix}1 &  12 &  54 &  90 &  54 &  12 &  1\end{bmatrix}$
 
