@@ -229,18 +229,24 @@ Para abrir uma imagem no OpenCv (Python) é necessário importar a biblioteca ch
 
 
 ```{r, echo=FALSE, fig.asp=.7, fig.width= 3, fig.align='center', out.width='90%'}
-knitr::include_graphics(rep('imagens/03-transformacoes/img3.9.1.png'))
+knitr::include_graphics(rep('imagens/03-transformacoes/abrir_imagem_openCv.png'))
 ```
 
 Figura 3.9: Abrir imagem no OpenCv(Python).
 
 
 
-## Representação matricial da imagem OpenCv(Python)
+## Representação matricial da imagem no OpenCv(Python)
 
 
 
 Depois de carregar a imagem utilizando a biblioteca OpenCv(Python) é possível visualizar a representação da imagem em formato matricial onde visualizamos o conjunto de pixels (seção 2.) da imagem, para cada pixel desse conjunto está dentro do limite 0 a 225, onde 0 representa a cor preta e 255 representa a cor branca e no meio deste limite representa outras cores.
+
+
+```{r, echo=FALSE, fig.asp=.7, fig.width= 3, fig.align='center', out.width='90%'}
+knitr::include_graphics(rep('imagens/03-transformacoes/representacao_matricial_da_imagem.png'))
+```
+
 
 
 
