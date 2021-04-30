@@ -1,14 +1,16 @@
 # Formação da imagem 
 
-Existem diferentes tipos de fontes utilizadas para geração de imagens, sendo que a mais comum é do espectro eletromagnético, mas podendo ser também, a partir da energia mecânica (ultrassom), feixe de elétrons, etc.. Cada fonte necessita de um método específico de captura, para algumas pode ser uma câmera fotográfica, porém a outras é necessário que o computador sintetize a imagem, como o microscópio eletrônico. Como já mencionado no tópico de introdução, o espectro eletromagnético contém diferentes frequências de energia, mas os humanos conseguem enxergar somente uma pequena parte desse espectro, conhecido como luz visível. Isso se deve ao fato de que nossos olhos evoluíram para serem sensitivos a essa faixa de luzes, que vêm da luz solar e nos ajuda a realizar nossas atividades. Existem outros animais, como pássaros e insetos, que conseguem ver luz em outras faixas, como a ultravioleta[@cuthill2017, p.2]. Caso nossos olhos fossem também sensíveis a outras frequências, como por exemplo a de rádio, nossos celulares e torres telefônicas pareceriam lanternas[@moeslund2012, p.8].
+Existem diferentes tipos de fontes utilizadas para geração de imagens, sendo que a mais comum é o espectro eletromagnético na faixa se ondas visíveis. Outras fontes de energia também podem ser utilizadas como energia mecânicana forma de ultrassom, feixe de elétrons em microscópiso eletrônicos, ondas de rádio no radar, etc. Cada fonte necessita de um método específico de captura. Para ondas eletromagnéticas pode ser usada uma câmera fotográfica equipada com sensores adequados ao comprimento de onda. Porém, para outras fontes, é necessário que o computador sintetize a imagem, como o microscópio eletrônico. 
 
-A luz sem cor, isto é, a luz com maior energia dentro do espectro visível humano, é chamada de luz monocromática (ou acromática). Pelo fato de a intensidade da luz monocromática ser percebida como variações de preto a tons de cinza até chegar ao branco, utiliza-se o termo nível de cinza. Já a luz cromática (colorida) cobre o espectro de energia eletromagnética na faixa de 0,43 a 0,79 $\mu m$. Além da frequência, três medidas básicas são utilizadas para descrever a qualidade de uma fonte de luz cromática: radiância, luminância e brilho.  A radiância é a quantidade total de energia que é emitida pela fonte de luz e é normalmente medida em watts (W). A luminância, medida em lumens (lm), mede a quantidade de energia que um observador percebe de uma fonte de luz. O brilho, que incorpora a noção acromática de intensidade, é um descritor subjetivo da percepção da luz, então é praticamente impossível mensurar[@gonzalez2010, p.28].
+Como já mencionado no tópico de introdução **coloque o link aqui**, o espectro eletromagnético contém diferentes frequências de energia, mas os humanos conseguem enxergar somente uma pequena parte desse espectro, conhecido como luz visível. Isso se deve ao fato de que nossos olhos evoluíram para serem sensíveis a essa faixa de luz, que vêm da luz solar e nos ajuda a realizar nossas atividades cotidianas. Existem outros animais, como pássaros e insetos, que conseguem ver luz em outras faixas de onda, como a ultravioleta[@cuthill2017, p.2]. Caso nossos olhos fossem também sensíveis a outras frequências, como por exemplo a de rádio, nossos celulares e torres telefônicas pareceriam lanternas[@moeslund2012, p.8].
+
+A luz sem cor, isto é, a luz com maior energia dentro do espectro visível humano, é chamada de luz monocromática (ou acromática). Pelo fato de a intensidade da luz monocromática ser percebida como variações de preto a tons de cinza até chegar ao branco, utiliza-se o termo nível de cinza ou escala de cinza. Já a luz cromática (colorida) cobre o espectro de energia eletromagnética na faixa de 0,43 a 0,79 $\mu m$ **( coloque aqui o nome da unidade de medida, tla como fez a seguir)**. Além da frequência, três medidas básicas são utilizadas para descrever a qualidade de uma fonte de luz cromática: radiância, luminância e brilho. A radiância é a quantidade total de energia que é emitida pela fonte de luz e é normalmente medida em watts (W). A luminância, medida em lumens (lm), mede a quantidade de energia que um observador percebe de uma fonte de luz. O brilho, que incorpora a noção acromática de intensidade, é um descritor subjetivo da percepção da luz, então é praticamente impossível mensurar[@gonzalez2010, p.28].
 
 Nos próximos tópicos iremos explorar alguns conceitos e o funcionamento da aquisição de imagem. Esse processo é um pouco complexo e envolve conceitos de ótica, que serão apresentados, de maneira introdutória, a seguir.
 
 ## Câmera pinhole e geometria
 
-Na figura \@ref(fig:aquisicaoimagem) temos um esquema básico de como geralmente ocorre a aquisição de imagens, primeiramente a energia em forma de luz, vinda de uma fonte, atinge um objeto e é refletida, sendo após isso capturada por um dispositivo, como uma câmera.
+Na figura \@ref(fig:aquisicaoimagem) temos um esquema básico de como geralmente ocorre a aquisição de imagens. Primeiramente a energia em forma de luz, vinda de uma fonte, atinge um objeto e é refletida. A parte refletida é capturada por um dispositivo, como uma câmera fotográfica.
 
 (ref:aquisicaoimagem) Representação de uma típica captura de imagem [@moeslund2012, p.8].
 
@@ -17,16 +19,16 @@ knitr::include_graphics(rep('imagens/02-formacao/aquisicao_imagem.png'))
 
 ```
 
-Baseado nesse princípio pode-se criar um dispositivo muito simples para captura de imagens, este é conhecido como câmara pinhole(do inglês buraco de alfinete) ou câmara escura. Este dispositivo consiste basicamente de uma caixa fechada com somente um pequeno orifício por onde os raios de luz possam entrar. Mas por que utilizar somente uma pequena entrada? Como podemos ver na figura \@ref(fig:barreiraluz), se tentarmos realizar a captura da imagem, usando filme fotográfico ou um sensor, sem essa limitação, a área sensível acaba recebendo raios de inúmeras direções, que acabam se misturando tendo como resultado uma imagem ruim. Com a barreira de entrada, limitamos a quantidade de luz e conseguimos resultados melhores.
+Baseado nesse princípio pode-se criar um dispositivo muito simples para captura de imagens, conhecido como câmara pinhole(do inglês buraco de alfinete) ou câmara escura. Este dispositivo consiste basicamente de uma caixa fechada com somente um pequeno orifício, tão pequeno quanto possível, por onde os raios de luz possam entrar. Mas por que utilizar somente uma pequena entrada? Como podemos ver na figura \@ref(fig:barreiraluz), se tentarmos realizar a captura da imagem, usando filme fotográfico ou um sensor, sem essa limitação, a área sensível acaba recebendo raios de inúmeras direções, que acabam se misturando tendo como resultado uma imagem ruidosa. Com a barreira de entrada, limitamos a quantidade de luz e conseguimos resultados melhores.
 
-(ref:barreiraluz) Introdução de barreira para captura de imagem [@moeslund2012, p.11].
+(ref:barreiraluz) Introdução de barreira para captura de imagem [@moeslund2012, p.11] **precisa explicar a imagem. Separe em (a), (b) e (c) para discrever o que está ocorrendo em cada uma das partes. Em latex usamos subfigure para isso.
 
 ```{r barreiraluz, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:barreiraluz)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/02-formacao/barreiraluz.png'))
 
 ```
 
-Na figura \@ref(fig:barreiraluz) percebemos que a imagem resultante acaba invertida, isso pode ser explicado através de algumas relações geométricas que serão apresentadas a seguir.
+Na figura \@ref(fig:barreiraluz) percebemos que a imagem resultante acaba invertida. Isso pode ser explicado através de algumas relações geométricas que serão apresentadas a seguir.
 
 (ref:geometriapinhole) Geometria de uma câmera pinhole [@burger2009, p.5].
 
@@ -35,30 +37,33 @@ knitr::include_graphics(rep('imagens/02-formacao/geometriapinhole.png'))
 
 ```
 
-Na figura \@ref(fig:geometriapinhole), considerando que o  eixo óptico corresponde a uma reta perpendicular ao orifício de entrada de luz, que o objeto está localizado a uma distância $Z$ da abertura e a uma distância $Y$ o eixo óptico, podemos definir a altura $y$ e a largura $x$ da projeção do objeto utilizando a simetria de triângulos:
+Na figura \@ref(fig:geometriapinhole), considerando que o  eixo óptico corresponde a uma reta perpendicular ao orifício de entrada de luz, que o objeto está localizado a uma distância $Z$ da abertura e a uma distância $Y$ o eixo óptico, podemos definir a altura $y$ e a largura $x$ da projeção do objeto utilizando a simetria de triângulos: **este parágrafo está confuso. Precisa escrever melhor. Uma boa seria definir a orientação da câmra antes, dizendo o que é o eixo ótico, que o o eixo y está apontando para cima e que o eixo z passa pelo centro da câmera. Na apostila do icmc-usp tem um modelo de câmera muito bem contruído mas para outro propósito.**
 
 $$-\frac{y}{f}=\frac{Y}{Z}\Leftrightarrow y=-f\frac{Y}{Z} \text{ e } -\frac{x}{f}=\frac{x}{f} \Leftrightarrow x=-f\frac{X}{Z}$$
 
-A variável $f$ nessa equação se refere  a distância focal, que é, nesse caso, o tamanho da caixa da câmera. Os sinais negativos das equações significam que a imagem projetada está rotacionada a 180º verticalmente e horizontalmente, como podemos confirmar na imagem acima. Câmeras que usavam esse princípio de funcionamento foram utilizadas a partir do século XIII mas hoje em dia não são utilizadas, somente por hobbistas ou curiosos, já que tem muitas desvantagens, como precisar de um longo tempo de exposição para captura da imagem.
+A variável $f$ nessa equação se refere  a distância focal, que é, nesse caso, o tamanho da caixa da câmera **[porquê]**. Os sinais negativos das equações significam que a imagem projetada está rotacionada a 180º verticalmente e horizontalmente **[explique isso melhor]**, como podemos confirmar na imagem acima **não use imagem acima ou abaixo. coloqu sempre a referência para a image**. Câmeras que usavam esse princípio de funcionamento foram utilizadas a partir do século XIII mas hoje em dia não são utilizadas, somente por hobbistas ou curiosos, já que tem muitas desvantagens como precisar de um longo tempo de exposição para captura da imagem. 
+
+As câmeras mais modernas não possuem somente uma pequena entrada para luz, mas um sistema de lentes que focam a luz recebida no sensor. Discutiremos a seguir alguns dos conceitos por trás desse conceito.
 
 ## Lentes
 
-As câmeras mais modernas não possuem somente uma pequena entrada para luz, mas um sistema de lentes que focam a luz recebida no sensor. Discutiremos a seguir alguns dos conceitos por trás disso. 
+ **[Como retirei o parágrafo que estava auqi para a seção anterior, agora ficou faltando uma introdução nesta seção. Sugiro que leia sobre lentes finas https://pt.wikipedia.org/wiki/Lente https://en.wikipedia.org/wiki/Thin_lens#:~:text=In%20optics%2C%20a%20thin%20lens%20is%20a%20lens,is%20not%20negligible%20are%20sometimes%20called%20thick%20lenses.
+ https://courses.cs.washington.edu/courses/cse455/09wi/Lects/lect5.pdf]**
 
-(ref:lente) Ação de uma lente sobre os raios de luz [@moeslund2012, p.12].
+(ref:lente) Ação de uma lente sobre os raios de luz [@moeslund2012, p.12] **precisa explicar melhor a imagem. Aliás toda imagem precisa ser explicada rapidamente em seu rodapé, ok?**.
 
 ```{r lente, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:lente)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/02-formacao/lente.png'))
 
 ```
 
-Como podemos ver na figura \@ref(fig:lente), em cada ponto de um objeto há inúmeros raios de luz refletidos - neste caso são ilustrados três - e os que chegam à lente são focalizados no seu lado direito. As imagens são capturadas colocando-se o sensor exatamente onde esses raios são focalizados, ou seja, onde a imagem é formada.
+Como podemos ver na figura \@ref(fig:lente), em cada ponto de um objeto há inúmeros raios de luz refletidos - neste caso são ilustrados três - e os que chegam à lente são focalizados no seu lado direito. As imagens são capturadas colocando o sensor exatamente onde esses raios são focalizados, ou seja, onde a imagem é formada.
 O ponto $F$ onde os raios paralelos se cruzam é conhecido como Ponto Focal. A distância $f$, que vai do centro óptico $O$ até $F$ é conhecida como Distância Focal.
-Definindo a distância do objeto real até a lente como g e a distância até a formação da imagem após passa pela lente como b temos que:
+Definindo a distância do objeto real até a lente como $g$ e a distância até a formação da imagem após passar pela lente como $b$ temos que:
 
 $$\frac{1}{g}+\frac{1}{b}=\frac{1}{f}$$
 
-Como $f$ e $b$ estão normalmente entre 1 mm e 100mm isso mostra que $\frac{1}{g}$ não tem quase nenhum impacto na equação e significa que $b = f$. Isso significa que a imagem dentro da câmera é formada muito próxima ao ponto focal.
+Como $f$ e $b$ estão normalmente entre 1mm e 100mm isso mostra que $\frac{1}{g}$ não tem quase nenhum impacto na equação e significa que $b = f$. Isso significa que a imagem dentro da câmera é formada muito próxima ao ponto focal.
 Outro ponto importante das lentes é conhecido como zoom óptico. Isto deriva de um aspecto das lentes de que o tamanho do objeto na imagem formada, $B$, aumenta quando $f$ aumenta. Podemos representar isso na seguinte equação, onde $g$ é o tamanho real do objeto:
 
 $$\frac{b}{B}=\frac{g}{G}$$
@@ -66,7 +71,7 @@ $$\frac{b}{B}=\frac{g}{G}$$
 Na prática $f$ é alterado através de mudanças na distância entre diferentes lentes dentro do sistema óptico da câmera, aqui estamos usando somente uma lente para exemplificar de maneira fácil alguns de seus conceitos básicos.
 Se o $f$ for constante, quando alteramos a distância do objeto, no caso $g$, sabemos que $b$ também aumenta, isso significa que o sensor tem que ser movido mais para trás, pois a imagem estará sendo formada mais longe da lente. Se não movermos $b$ temos uma imagem fora de foco, como mostrado a seguir. Quando usamos uma câmera, o ato de colocar a imagem em foco significa que estamos alterando $b$ para que a imagem seja formada onde o sensor está localizado, para que a imagem esteja em foco.
 
-(ref:foco) Uma imagem focada e desfocada [@moeslund2012, p.11].
+(ref:foco) Uma imagem focada em (a) e desfocada em (b) [@moeslund2012, p.11].
 
 ```{r foco, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:foco)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/02-formacao/foco.png'))
@@ -80,7 +85,7 @@ A figura \@ref(fig:foco) ilustra exatamente o que significa uma imagem estar for
 knitr::include_graphics(rep('imagens/02-formacao/profundidade.png'))
 ```
 
-A figura \@ref(fig:profundidade) apresenta outro ponto muito importante, chamado Profundidade de Campo(Depth of field), que representa a soma das distâncias $g_l$ e $g_r$, que representam o quando os objetos podem ser movidos e permanecerem em foco.
+A figura \@ref(fig:profundidade) apresenta outro ponto muito importante, chamado Profundidade de Campo(Depth of field), que representa a soma das distâncias $g_l$ e $g_r$, que representam o quanto os objetos podem ser movidos e permanecerem em foco.
 
 Um tópico que também tem muita importância na aquisição de imagens é o Campo de Visão(Field of View ou FOV) que representa a área observável de uma câmera. Na figura \@ref(fig:campovisao) essa área observável é denotada pelo ângulo $V$. O FOV de uma câmera depende de alguns aspectos, como sua distância focal e tamanho do sensor. Em muitos casos os sensores não são quadrados, mas retangulares, então para representarmos matematicamente o campo de visão, utilizamos as equações seguintes para o FOV vertical e horizontal:
 $$FOV_x = 2*\tan^{-1}\left(\frac{\frac{comprimento\ do\ sensor}{2}}{f}\right) \text{ e }  FOV_y = 2*\tan^{-1}\left(\frac{\frac{altura\ do\ sensor}{2}}{f}\right)$$
@@ -96,26 +101,26 @@ $$FOV_x=2*tan^{-1}\left(\frac{7}{5}\right)=108.0^{\circ} \text{ e } FOV_y=2*tan^
 
 Isso significa que essa câmera tem uma área observal de 108.9º horizontalmente e 90º verticalmente. Na figura \@ref(fig:diferentesprofundidades) temos o mesmo objeto fotografado com diferentes profundidades de campo: 
 
-(ref:diferentesprofundidades) Diferentes profundidades de campo [@moeslund2012, p.15].
+(ref:diferentesprofundidades) Diferentes profundidades de campo. Em (a) ? em (b)? e em (c)? [@moeslund2012, p.15].
 
 ```{r diferentesprofundidades, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:diferentesprofundidades)', fig.align='center', out.width='90%'}
 knitr::include_graphics(rep('imagens/02-formacao/diferentesprofundidades.png'))
 ```
 
-Outros dois fatores importantes na aquisição de imagem são a abertura e o obturador. A abertura é, em uma câmera, o mesmo que a íris no olho humano, ela controla a quantidade de luz que chega ao sensor. E o obturador é um dispositivo que controla o tempo ao qual o sensor será exposto à luz para capturar a imagem.
+Outros dois fatores importantes na aquisição de imagem são a abertura e o obturador. A abertura é, em uma câmera, o mesmo que a íris no olho humano. É ele que controla a quantidade de luz que chega ao sensor. E o obturador é um dispositivo que controla o tempo ao qual o sensor será exposto à luz para a captura da imagem.
 
 ## Sensor
 
-Existem dois tipos principais de sensores que são empregados em dispositivos fotográficos. Um deles é o CCD, que é usado principalmente em aplicações mais específicas ou que precisam de uma qualidade muito alta, e o CMOS, usado em casos mais gerais, como câmeras de celulares.
+Existem dois tipos principais de sensores que são empregados em dispositivos fotográficos. Um deles é o CCD, que é usado principalmente em aplicações mais específicas ou que precisam de uma qualidade muito alta, e o CMOS, usado em casos mais gerais, como câmeras de celulares. **Precisa definir as siglas CCD e CMOS. De preferência explicar um pouco sobre cada uma delas**
 Após a luz passar por todo o sistema de lentes ela chega a esses sensores, que tem sua estrutura exemplificada na figura \@ref(fig:sensor), conhecido como PDA(Photodiode Array):
 
-(ref:sensor) Sensor(area matricial de celulas), Single Cell(uma única celula sensora) [@moeslund2012, p.17].
+(ref:sensor) Sensor(area matricial de celulas), Single Cell(uma única celula sensora) [@moeslund2012, p.17] **coloque indicando (a) e (b) para as duas partes da imagem e explique o tem em cada uma delas**.
 
 ```{r sensor, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:sensor)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/02-formacao/sensor.png'))
 ```
 
-Como podemos ver, o sensor consiste em várias pequenas células, cada uma um pixel, que recebe a energia luminosa e a converte para um número digital. Quanto maior a incidência de luz em um pixel, maior a quantidade de energia e por isso maior será o valor do número gerado. O trabalho de controlar esse tempo de exposição é do obturador da câmera, sendo que um tempo muito longo ou muito curto podem produzir efeitos indesejados nas imagens obtidas, por isso a maioria das câmeras contam com um sistema que controla automaticamente esse tempo para o melhor resultado. Na figura \@ref(fig:exposicao) podemos ver isso em uma imagem real, na primeira temos uma imagem que foi capturada com a exposição correta(correctly exposed), logo em seguida temos uma que sofreu de superexposição(overexposed)  e na terceira temos uma com subexposição(under exposed). Por último temos uma imagem que sobre com o movimento do objeto que estava sendo capturado, oque ocasionou o borramento(motion blur).
+Como podemos ver, o sensor consiste em várias pequenas células, cada uma um pixel, que recebe a energia luminosa e a converte para um número digital. Quanto maior a incidência de luz em um pixel, maior a quantidade de energia e por isso maior será o valor do número gerado. O trabalho de controlar esse tempo de exposição é do obturador da câmera, sendo que um tempo muito longo ou muito curto podem produzir efeitos indesejados nas imagens obtidas, por isso a maioria das câmeras contam com um sistema que controla automaticamente esse tempo para o melhor resultado. Na figura \@ref(fig:exposicao) podemos ver isso em uma imagem real, na primeira temos uma imagem que foi capturada com a exposição correta(correctly exposed), logo em seguida temos uma que sofreu de superexposição(overexposed)  e na terceira temos uma com subexposição(under exposed). Por último temos uma imagem que sofre com o movimento do objeto cuaj imagem estava sendo capturada, o que ocasionou o borramento(motion blur). **aqui também precisa organizar a imgem usando (a), (b), (c), ... e usar este tipo de referência no texto.**
 
 (ref:exposicao) Diferentes níveis de exposição [@moeslund2012, p.17].
 
@@ -126,7 +131,7 @@ knitr::include_graphics(rep('imagens/02-formacao/exposicao.png'))
 Vimos até agora, principalmente, como se capturam imagens em tons de cinza, mas em imagens coloridas, como são capturadas?
 Imagens coloridas utilizam, especialmente, o formato RGB, que significa Red-Green-Blue, ou seja, é formado pelas cores primárias vermelho, verde e azul. Podemos a partir disso gerar imagens coloridas tendo as informações sobre sua intensidade de cada uma dessas cores. Na figura \@ref(fig:componentes) podemos ver uma imagem com seus componentes separados:
 
-(ref:componentes) Imagem colorida separada em seus três componentes [@moeslund2012, p.28].
+(ref:componentes) Imagem colorida separada em seus três componentes [@moeslund2012, p.28]. **Qual é o R, o G e o B?**
 
 ```{r componentes, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:componentes)', fig.align='center', out.width='65%'}
 knitr::include_graphics(rep('imagens/02-formacao/componentes.png'))
@@ -140,7 +145,7 @@ Precisamos assim dessas três informações para formar uma imagem colorida, uma
 knitr::include_graphics(rep('imagens/02-formacao/tres_sensores.png'))
 ```
 
-Ao invés disso, as câmeras modernas utilizam somente um sensor e fazem uso de um filtro que separa uma das três cores para cada pixel, isso porque os fotodiodos não reconhecem por si só as cores, mas a intensidade, o que nos levaria a ter somente fotos com tons de cinza. Esse filtro pode conter diferentes configurações, sendo que uma das mais utilizadas é o filtro Bayer, que pode ser visto na figura \@ref(fig:bayer):
+Ao invés disso, as câmeras modernas utilizam somente um sensor e fazem uso de um filtro que separa uma das três cores para cada pixel. Isso porque os fotodiodos não reconhecem por si só as cores, mas a intensidade, o que nos levaria a ter somente fotos com tons de cinza. Esse filtro pode conter diferentes configurações, sendo que uma das mais utilizadas é o filtro Bayer, que pode ser visto na figura \@ref(fig:bayer):
 
 (ref:bayer) Filtro Bayer [@moeslund2012, p.29].
 
@@ -148,7 +153,7 @@ Ao invés disso, as câmeras modernas utilizam somente um sensor e fazem uso de 
 knitr::include_graphics(rep('imagens/02-formacao/bayer.png'))
 ```
 
-Podemos perceber que ocorre uma maior ocorrência das cores verdes, isso se deve ao fato de que o olho humano é mais sensível a essa cor, logo se dá uma maior ênfase a sua captura.  Na figura 14 temos uma esquematização de como cada pixel recebe informação de somente uma cor, por meio da filtragem, onde a luz que entra(Incoming light) é filtrada e somente a cor de interesse consegue passar, após isso ela chega a malha de sensores(sensor array):
+Podemos perceber que ocorre uma maior ocorrência das cores verdes. Isso se deve ao fato de que o olho humano é mais sensível a essa cor, logo se dá uma maior ênfase a sua captura.  Na figura 14 **[use o link para a figura]** temos um esquema de como cada pixel recebe informação de somente uma cor, por meio da filtragem. Nesse esquema a luz que entra (Incoming light) é filtrada e somente a cor de interesse consegue passar. Após isso ela chega a malha de sensores (sensor array):
 
 (ref:sensorarray) Sensores com padrão Bayer [@img:sensorarray].
 
@@ -166,9 +171,9 @@ Nas seções anteriores foram apresentados processos para a captura de imagens a
 
 Na amostragem ocorre a discretização espacial, ou seja, a conversão de um espaço contínuo em um espaço discreto, que pode ser representado digitalmente. Este procedimento é exemplificado na Figura \@ref(fig:amostragemquant), na qual a figura \@ref(fig:amostragemquant) (a) representa um objeto de atributos contínuos, e a linha AB é um segmento horizontal do objeto.
 
-A figura \@ref(fig:amostragemquant) (b) contém a representação da amplitude (nível de intensidade) da imagem contínua ao longo da linha AB. Nas extremidades do gráfico na figura \@ref(fig:amostragemquant) (b), a intensidade é mais alta devido a parte branca da imagem, já os vales representam as partes com menos intensidade, ou seja, as partes mais escuras. Como o computador ainda não tem a capacidade de armazenar uma sequência infinita de números reais, então na quantização são selecionados pontos espaçados igualmente, como na figura \@ref(fig:amostragemquant) (c).
+A figura \@ref(fig:amostragemquant) (b) contém a representação da amplitude (nível de intensidade) da imagem contínua ao longo da linha AB. Nas extremidades do gráfico na figura \@ref(fig:amostragemquant) (b), a intensidade é mais alta devido a parte branca da imagem. Já os vales representam as partes com menos intensidade, ou seja, as partes mais escuras. Como o computador ainda não tem a capacidade de armazenar uma sequência infinita de números reais, então na quantização são selecionados pontos espaçados igualmente, como na figura \@ref(fig:amostragemquant) (c).
 
-Esse procedimento de amostragem, na prática, é realizado pelos sensores, nos casos mais comuns por um sensor de uma câmera, que geralmente é retangular. Desta forma, a quantidade de células sensíveis na matriz do sensor determina os limites da amostragem. Dito isso, percebe-se que para representar de maneira real o mundo teríamos que ter um número infinito de pixels, como isso não é possível recorremos a opção de utilizar o maior número de pixels possíveis. Quanto mais pixels houver no sensor, maior será a quantidade de detalhes por ele capturado, melhorando a qualidade da imagem [@gonzalez2010].
+Na prática, esse procedimento de amostragem é realizado pelos sensores, nos casos mais comuns por um sensor de uma câmera, que geralmente é retangular. Desta forma, a quantidade de células sensíveis na matriz do sensor determina os limites da amostragem. Dito isso, percebe-se que para representar de maneira real o mundo, teríamos que ter um número infinito de pixels. Como isso não é possível, recorremos a opção de utilizar o maior número de pixels possíveis. Quanto mais pixels houver no sensor, maior será a quantidade de detalhes por ele capturado, melhorando a qualidade da imagem [@gonzalez2010].
 
 (ref:amostragemquant) Filtro Bayer [@gonzalez2010, p.34].
 
@@ -178,10 +183,11 @@ knitr::include_graphics(rep('imagens/02-formacao/amostragemquant.png'))
 
 ### Quantização
 
-Na figura \@ref(fig:amostragemquant) (c), os níveis de intensidade ainda variam dentro de uma faixa contínua. A função digital da intensidade é obtida pela quantização, em que as intensidades das amostras são mapeadas em um conjunto de quantidades discretas. Na figura \@ref(fig:amostragemquant) (d), os valores contínuos de intensidade são quantizados estabelecendo um dos oito valores para cada amostra de acordo com a escala de intensidade na figura \@ref(fig:amostragemquant) (c).
+Na Figura \@ref(fig:amostragemquant) (c), os níveis de intensidade ainda variam dentro de uma faixa contínua. A função digital da intensidade é obtida pela quantização, em que as intensidades das amostras são mapeadas em um conjunto de quantidades discretas. Na Figura \@ref(fig:amostragemquant) (d), os valores contínuos de intensidade são quantizados estabelecendo um dos oito valores para cada amostra de acordo com a escala de intensidade na Figura \@ref(fig:amostragemquant) (c).
+
 Na prática, geralmente a etapa de quantização é realizada diretamente no hardware utilizando um conversor analógico-digital[@burger2009, p.8]. A conversão dos valores contínuos para valores discretos pode ser realizada por meio de arredondamento, truncamento ou algum outro processo[@bovik2009essential, p.9].
-No processo de quantização, geralmente os níveis de intensidade são mapeados por uma transformação linear para um conjunto finitos de inteiros não negativos $\{0,\dots, L-1\}$, onde $L$ é uma potência de dois, ou seja, $L = 2_k$ [@bovik2009essential, p.10]. Isso significa que L é o número de tons de cinza que podem ser representados com uma quantidade k de bits. Em muitas situações é utilizado $k = 8$, ou seja, temos 256 níveis de cinza.
-Ao realizar a quantização e a amostragem linha por linha no objeto da figura \@ref(fig:quantizacao) (a) é produzida uma imagem digital bidimensional como na figura \@ref(fig:quantizacao).
+No processo de quantização, geralmente os níveis de intensidade são mapeados por uma transformação linear para um conjunto finitos de inteiros não negativos $\{0,\dots, L-1\}$, onde $L$ é uma potência de dois, ou seja, $L = 2^k$ [@bovik2009essential, p.10]. Isso significa que $L$ é o número de tons de cinza que podem ser representados com uma quantidade $k$ de bits. Em muitas situações é utilizado $k = 8$, ou seja, temos 256 níveis de cinza.
+Ao realizar a quantização e a amostragem linha por linha no objeto da Figura \@ref(fig:quantizacao) (a) é produzida uma imagem digital bidimensional como na Figura \@ref(fig:quantizacao).
 
 (ref:quantizacao) Filtro Bayer [@gonzalez2010, p.35].
 
@@ -193,7 +199,7 @@ knitr::include_graphics(rep('imagens/02-formacao/quantizacao.png'))
 
 Uma imagem pode ser definida como uma função bidimensional, $f(x, y)$, em que $x$ e $y$ são coordenadas espaciais (plano), e a amplitude de $f$ em qualquer par de coordenadas $(x, y)$ é chamada de intensidade ou nível de cinza da imagem nesse ponto [@gonzalez2010]. Quando $x$, $y$ e os valores de intensidade de f são quantidades finitas e discretas, chamamos de imagem digital. 
 
-A função $f(x, y)$ pode ser representada na forma de uma matriz (M x N) como na Figura, em que as M linhas são identificadas pelas coordenadas em $x$, e as N colunas em $y$. Cada elemento dessa matriz é chamado de elemento de imagem, elemento pictórico, pixel ou pel. O formato numérico da matriz, imagem \@ref(fig:imagemdigital), é apropriado para o desenvolvimento de algoritmos, particularmente quando se escreve a equação da  matriz (M x N):
+A função $f(x, y)$ pode ser representada na forma de uma matriz (M x N) como na Figura **qual?**, em que as $M$ linhas são identificadas pelas coordenadas em $x$, e as $N$ colunas em $y$. Cada elemento dessa matriz é chamado de elemento de imagem, elemento pictórico, pixel ou pel. O formato numérico da matriz, imagem \@ref(fig:imagemdigital), é apropriado para o desenvolvimento de algoritmos, particularmente quando se escreve a equação da  matriz $(M x N)$:
 $$f(x,y) = \begin{bmatrix}
  f(0,0)   & f(0,1)     & \cdots & f(0,N-1)    \\ 
  f(1,0)   & f(1,1)     & \cdots & f(1, N-1)   \\ 
@@ -236,7 +242,7 @@ knitr::include_graphics(rep('imagens/02-formacao/resolucaoespacial.png'))
 
 A resolução de intensidade ou profundidade corresponde ao número de bits (k) utilizados para estabelecer os níveis de cinza da imagem ($L=2^k$). Por exemplo, em uma imagem cuja intensidade é quantizada em L= 256 níveis, a profundidade é de k = 8 bits por pixel. 
 
-Os efeitos da redução dos níveis de cinza (profundidade) podem ser vistos na Figura. A imagem (a) apresenta 256 níveis de cinza (k = 8).  As imagens (b) e (c) foram geradas pela redução do número de bits  k = 4 e k = 2, respectivamente, mas mantendo a mesma dimensão.
+Os efeitos da redução dos níveis de cinza (profundidade) podem ser vistos na Figura **qual?**. A imagem (a) apresenta 256 níveis de cinza (k = 8).  As imagens (b) e (c) foram geradas pela redução do número de bits  k = 4 e k = 2, respectivamente, mas mantendo a mesma dimensão.
 
 (ref:reducaoprofundidade) Efeitos da redução de profundidade [@moeslund2012, p.19].
 
@@ -246,7 +252,7 @@ knitr::include_graphics(rep('imagens/02-formacao/reducaoprofundidade.png'))
 
 ## Pixels
 
-A topologia de uma imagem digitalizada, desempenha papel importante na especificação, localização e relação entre as coordenadas dos pixels da imagem, tornando mais fácil a manipulação da imagem. 
+A topologia digital da imagem desempenha muita importância na especificação, localização e relação entre as coordenadas da imagem, facilitando sua manipulação. A topologia de uma imagem digital contém as seguintes propriedades dos pixels: Vizinhança ( 4, D e 8 ), Conectividade, Adjacência, Caminho, Componente Conexa, Medidas de Distância, Operações Lógico-aritméticas.
 
 Uma imagem digitalizada contém as seguintes propriedades de seus pixels: Vizinhança ( 4, D e 8 ), Conectividade, Adjacência, Caminho, Componente Conexa, Medidas de Distância, Operações Lógico-aritméticas.
 
@@ -272,7 +278,7 @@ $N_8(p)$ em $p(x,y)$ possui 8 vizinhos, quatro $N_4(p)$ e outros 4 $N_D(p)$suas 
 
 $$p(x,y): N_8(p) = N_4(p) \cup N_D(p)$$
 
-(ref:vizinhanca) Vizinhanças [@thome2017].
+(ref:vizinhanca) Vizinhanças **explique aqui rapidamente as vizinhanças**[@thome2017].
 
 ```{r vizinhanca, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:vizinhanca)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/02-formacao/vizinhanca.png'))
@@ -290,12 +296,12 @@ Dois pixels $p(x,y)$, $q(x,y)$ estão conectados se:
 
 - **Conectividade de 4**:
 
-Os pixels p e q, assumindo valores em &V& , são conectados de 4 somente se q pertence ao conjunto $N_4(p)$. Exemplo em figura \@ref(fig:conectividade) (a).
+Os pixels p e q, assumindo valores em $V$ , são conectados de 4 somente se q pertence ao conjunto $N_4(p)$. Exemplo na figura \@ref(fig:conectividade) (a).
 
 $$C4_{p,q} \text{ em } V \Leftrightarrow q \in N_4(p) \wedge f(p) \wedge f(q) \in V $$
 $$V = \{0\} \to C4_{p.q} \text{ verdadeiro}$$
 
-- **Conectividade de m(conectividade mista)**:
+- **Conectividade de m (conectividade mista)**:
 
 Dois pixels $p$ e $q$, assumindo valores em $V$, são conectados de m somente se:
 
@@ -304,11 +310,11 @@ Dois pixels $p$ e $q$, assumindo valores em $V$, são conectados de m somente se
 
 $$Cm_{p,q} \text{ em } V\Leftrightarrow (q \in N_4(p) \vee (q \in N_D(p) \wedge N_4(p) \cap N_4(q) = \{\})) \vee f(p) e f(q) \in V  $$
 $$V = \{0\} \to Cm_{p.q}\text{ falso}$$
-Exemplo em figura \@ref(fig:conectividade) (b).
+Exemplo na figura \@ref(fig:conectividade) (b).
 
 - **Conectividade de 8**:
 
-Os pixels $p$ e $q$, assumindo valores em V, são conectados de 8 somente se $q$ pertence ao conjunto $N_8(p)$. Exemplo em figura \@ref(fig:conectividade) (c).
+Os pixels $p$ e $q$, assumindo valores em V, são conectados de 8 somente se $q$ pertence ao conjunto $N_8(p)$. Exemplo na figura \@ref(fig:conectividade) (c).
 
 $$C8_{p,q} \text{ em } V\Leftrightarrow q \in N_8(p) \wedge f(p) \wedge f(q) \in V $$
 $$V = \{0\} \to C8_{p.q}\text{ verdadeiro}$$
@@ -339,9 +345,9 @@ knitr::include_graphics(rep('imagens/02-formacao/adjacencia.png'))
 
 ### Componente Conexa  
 
-Dois pixels $p$ e $q$ de um subconjunto de pixels $V$ da imagem são ditos conexos em $V$ se existir um caminho de pa qinteiramente contido em $V$.
+Dois pixels $p$ e $q$ de um subconjunto de pixels $V$ da imagem são ditos conexos em $V$ se existir um caminho de $p$ a $q$ inteiramente contido em $V$.
 
-Para qualquer pixel $p$ em $V$, o conjunto de pixels em $V$ que são conexos a pé chamado um componente conexo de $V$.
+Para qualquer pixel $p$ em $V$, o conjunto de pixels em $V$ que são conexos a $p$ é chamado um componente conexo de $V$.
 
 Note que em uma componente conexo qualquer dois pixels deste componentes são conexos entre si.
 
@@ -349,7 +355,7 @@ Em componentes conexos distintos os pixels são disjuntos (não conectados).
 
 ### Medidas de Distância
 
-Para pixels $p$, $q$ e $z$ com coordenadas $p(x,y)$, $q(s,t)$ e $(u,v)$, respectivamente, $D$ é uma função distância ou métrica se: 
+Para pixels $p$, $q$ e $z$ com coordenadas $p(x,y)$, $q(s,t)$ e $z(u,v)$, respectivamente, $D$ é uma função distância ou métrica se: 
 
 1. $D(p,q) >= 0 (D(p,q) = 0 ) \Leftrightarrow  p = q$ 
 1. $D(p,q) = D(q,p)$
@@ -361,7 +367,7 @@ $$D_e(p,q) = \sqrt{(x-s)^2 + (y-t)^2}$$
 
 conhecida como Distância Euclidiana.
 
-- Distância $D_4$(City Block ou Quarteirão) entre $p(x,y)$ e $q(s,t)$é definida por: 
+- Distância $D_4$(City Block ou Quarteirão) entre $p(x,y)$ e $q(s,t)$ é definida por: 
 
 $$D4(p,q)=|x-s|+|y-t|$$
 
@@ -371,7 +377,7 @@ $$D_8 = max(|x-s|,|y-t|)$$
 
 ### Operações Lógico-aritméticas 
 
-As operações entre pixels são computadas pixel a pixel, considerando p e qpodemos efetuar as seguintes operações aritméticas e lógicas.
+As operações entre pixels são computadas pixel a pixel, considerando p e q podemos efetuar as seguintes operações aritméticas e lógicas.
 
 - Operações Aritméticas:
   1. **Adição**: $p+q$. O uso ocorre ao se fazer a média para redução de ruído. 
