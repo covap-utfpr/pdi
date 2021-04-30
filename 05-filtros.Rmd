@@ -1,22 +1,19 @@
-# Filtros Digitais
+# Filtros
 
-Filtros digitais representam um conjunto de ferramentas poderosas para realizar operações em imagens. Diferente das operações de ponto que operam sobre um único pixel, **como por exemplo... ,** as operações utilizando filtros levam em consideração os pixels próximos ao pixel que atualmente está em modificação. Isso nos permite realizar alterações muito mais complexas do que as realizadas anteriormente. Como exemplos disso podemos considerar a operação *sharpen* (aguçamento) e *blur* (suavização), que podem ser observados na Figura \@ref(fig:onibusSharpenNBlur) (a) e Figura \@ref(fig:onibusSharpenNBlur) (b), respectivamente. **quando citamos uma figura usando o seu nome, como Figura(a) ou (b) precisamos usar letra maiúscula pois se trata do nome da figura. Quando falamos da figura sem usar o nome, usamos letra minúscula. OK? Precisa corrigir em todo o texto**
+Filtros são uma poderosa ferramenta para se realizar operações em imagens. Diferente das operações de ponto, que operam sobre um único pixel, as operações utilizando filtros levam em consideração os pixels próximos ao pixel atualmente em modificação. Isso nos permite realizar alterações muito mais complexas do que as realizadas anteriormente, como a operação *sharpen* (aguçamento) e *blur* (suavizar), que podem ser observados na figura \@ref(fig:onibusSharpenNBlur) (a) e figura \@ref(fig:onibusSharpenNBlur) (b), respectivamente.
 
 
-(ref:onibusSharpenNBlur) Imagem de ônibus com filtro de aguçamento e de suavização **coloque também a imagem original para podermos ver o efeito das operações. Além disso os rótulos (a) e (b) precisam estar sempre na parte de baixo das imagens da fiugra.**[@burger2009, p. 98]
+(ref:onibusSharpenNBlur) Imagem de ônibus com filtro de aguçamento e de suavização [@burger2009, p. 98]
 
 ```{r onibusSharpenNBlur, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:onibusSharpenNBlur)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/05-filtros/onibusShapenNBlur.png'))
 ```
 
-**Aqui Está faltando um pouco mais de contexto. Veja, temso apenas um parágrafo introduzindo o capítulo de filtros e logo já vem a seção de convolução. Tente extender mais esta introdução e também fazer a ligação com a seção seguinte para justificar a necessidade dela. Por exemplo dizendo que os filtros usam a convolução para operar e por isso terá uma seção dedicada à convolução. Vai ficar melhor!!**
-
 ## Convolução
 
-Convolução é uma operação muito utilizada em PDI tendo suas origens na matemática, onde é definida como uma operação realizada entre duas funções e que resulta numa terceira. Em outras palavras, a convolução recebe dois sinais como entrada e gera um sinal como saída. No caso de PDI, podemos imaginar os sinais de entrada como sendo a nossa imagem original e o *kernel* do filtro, e a nossa saída como sendo a imagem filtrada. 
+Convolução é uma operação muito utilizada no PDI, a qual tem suas origens na matemática, onde ela é definida como uma operação realizada entre duas funções e que resulta numa terceira, ou, em outras palavras, ela recebe dois sinais de entrada e gera um sinal de saída. No caso do PDI, podemos imaginar os sinais de entrada como sendo a nossa imagem e o filtro (*kernel*), e a nossa saída como sendo a imagem filtrada. 
 
-**Aqui quando fala da imagem como uma função, pode apontar para o texto de formaçãod e imagens, onde é dito que uma imagem é uma função bidimencional f(x,y). Aliás, acho que deve fazer isso. O texto ficará mais claro e com os enlace corretos.**
-Quando dizemos *kernel*, estamos nos referindo a uma função ou, no caso de PDI, a uma matriz que é aplicada a nossa imagem usando a convolução que irá produzir outra imagem como saída. Na Tabela \@ref(tab:kernelExample), temos exemplos de alguns tipos de *kernels* que podem ser utilizados na convolução e seus respectivos resultados. Além dos efeitos mais comuns como o de desfoque (*blur*), podemos utilizar *kernels* que extraiam informações mais complexas das imagens, como os detectores de borda que serão discutidos mais a fundo nos próximos tópicos.
+Quando dizemos *kernel*, estamos nos referindo a uma função ou, no caso do processamento de imagens, a uma matriz, que é aplicada em nossa imagem e produz como saída o objeto de entrada com modificações. Na tabela \@ref(tab:kernelExample), temos exemplos de alguns tipos de *kernels* que podem ser utilizados na convolução e seus respectivos resultados. Além dos efeitos mais comuns, como o de desfoque (*blur*), podemos utilizar *kernels* que extraem informações mais complexas das imagens, como os detectores de borda, que serão discutidos mais a fundo nos próximos tópicos.
 
 
 Table: (#tab:kernelExample) Exemplo de *kernels* (adaptada de [@tab:kernelExample]).
@@ -45,9 +42,7 @@ Table: (#tab:kernelExample) Exemplo de *kernels* (adaptada de [@tab:kernelExampl
 \end{bmatrix}$$|![](imagens/05-filtros/esquilo1.png)|
 
 
-Em porcessamento de sinais a operação de convolução geralmente é representada pelo síbolo $*$ **coloque aqui uma referência** e pode ser descrita, em poucas palavras, como uma soma de produtos entre um ponto do *kernel* e um ponto correspondente da imagem. Essa correspondência é encontrada fazendo um deslizamento sobre a imagem de entrada. A Figura \@ref(fig:convolutionGif) representa de maneira visual a convolução em um cenário de uma dimensão, através do sinal de entrada (*signal*) e o *kernel*. Podemos ainda perceber que o *kernel* está rotacionado em 180º **como assim! Explique melhor o caso dos 180**, isso se deve a definição de convolução.
-
-**fiquei confuso aqui. Até este momento a convolução era descrita sempre no contexto de imagens e por isso a expectativa era em duas dimenções. Aí de repente, ela é mostrada em um dimensão. Precisa organizar isso para que siga uma linha linha lógica de raciocínio. Se optar por manter a explicação em uma dimensão, coloque primeiro e depois passe para duas dimensões e não volte mais. Ou pode ser que opte por retirar a explicação em 1D. Acho que seria melhro ficar por o conteúdo está bem interessante. O fato é que nos dois casos esse parágrafo está estranho aqui.**
+Agora, veremos operação de convolução mais detalhadamente. Essa operação geralmente é representada por $*$ e pode ser descrita, em poucas palavras, como uma soma de produtos que é realizada com um deslizamento sobre a função de entrada. A figura \@ref(fig:convolutionGif) representa de maneira visual a convolução em um cenário de uma dimensão, através do sinal de entrada (*signal*) e o *kernel*. Podemos ainda perceber que o *kernel* está rotacionado em 180º, isso se deve a definição de convolução.
 
 (ref:convolutionGif) Convolução em uma dimensão [@img:convolutionGif]
 
@@ -55,11 +50,11 @@ Em porcessamento de sinais a operação de convolução geralmente é representa
 knitr::include_graphics(rep('imagens/05-filtros/convolutionGif.png'))
 ```
 
-Algo interessante que podemos observar na imagem \@ref(fig:convolutionGif) é que nosso sinal de entrada é quase totalmente 0 e contém um único ponto 1. Isso faz com que nosso resultado seja uma cópia do *kernel*. A partir disso, conseguimos imaginar o por que de termos como resultado a própria imagem quando aplicado um *kernel* identidade, como mostrado na tabela \@ref(tab:kernelExample). 
+Algo interessante que podemos observar na imagem \@ref(fig:convolutionGif) é que nosso sinal de entrada é quase totalmente 0 e contém um único ponto 1, isso faz com que nosso resultado seja uma cópia do *kernel*. A partir disso, conseguimos imaginar o por que temos como resultado a própria imagem quando aplicado um *kernel* identidade, como mostrado na tabela \@ref(tab:kernelExample). 
 
 Antes de irmos mais adiante no assunto, é importante esclarecermos alguns conceitos para que não se tornem confusos. Existe outra operação matemática extremamente parecida com a convolução chamada correlação, sendo que ela também realiza a soma de multiplicações com a diferença de que ela não rotaciona o *kernel*.
 
-Para entendermos bem essa diferença, podemos observar a figura \@ref(fig:correlationNConvolution1D), onde temos um exemplo de correlação e convolução sendo executados em um espaço unidimensional. Temos uma função $f$ e um filtro $w$ na figura \@ref(fig:correlationNConvolution1D) (a) e (b) respectivamente. Na sequência, em (b) e (j), temos as funções e os filtros prontos para iniciar a correlação e a convolução. Nas etapas (c) e (k), podemos ver o preenchimento com zeros. Isso ocorre porque há partes das funções que não se sobrepõem. Dessa forma, permite que $w$ percorra todos os pixels de $f$. Após isso, é realizado o primeiro passo da correlação e convolução, onde podemos observar que o resultado é 0 já que $w$ está sobreposto por somente zeros. Logo, a soma da multiplicação de cada item de $w$ por $f$ será zero. Deslocamos então o filtro $w$ em uma unidade a direita, onde o resultado novamente será 0. O primeiro resultado não nulo se dará no terceiro deslocamento, sendo 8 para a correlação e $1$ para a convolução. Temos o resultado de ambas operações em (g) e (o) e o resultado recortado em (h) e (p), recorte este que remove os zeros até o tamanho ficar igual ao da $f$ inicial.
+Para entendermos bem essa diferença, podemos observar a figura \@ref(fig:correlationNConvolution1D), onde temos um exemplo de correlação e convolução sendo executados em um espaço unidimensional. Temos uma função $f$ e um filtro $w$ na figura \@ref(fig:correlationNConvolution1D) (a) e (b), na sequência, de (b) e (j), temos as funções e os filtros prontos para se realizar a correlação e a convolução. Nas etapas (c) e (k), podemos ver o preenchimento com zeros, isso ocorre porque há partes das funções que não se sobrepõem, dessa forma, permite que $w$ percorra todos os pixels de $f$. Após isso, é realizado o primeiro passo da correlação e convolução, onde podemos observar que o resultado é 0 já que $w$ está sobreposto por somente zeros, logo a soma da multiplicação de cada item de $w$ por $f$ será nulo. Deslocamos então o filtro $w$ em uma unidade a direita, onde o resultado novamente será 0, sendo que o primeiro resultado não nulo se dará no terceiro deslocamento, sendo 8 para a correlação e $1$ para a convolução. Temos o resultado de ambas operações em (g) e (o) e o resultado recortado em (h) e (p), recorte este que remove os zeros até o tamanho ficar igual ao da $f$ inicial.
 
 (ref:correlationNConvolution1D) Ilustração de correlação e convolução unidimensional [@gonzalez2010, p. 96]
 
@@ -68,9 +63,9 @@ knitr::include_graphics(rep('imagens/05-filtros/correlationNConvolution1D.png'))
 ```
 
 
-Vamos extender agora essas duas operações à aplicação em duas dimensões. Uma representação disso pode ser vista na Figura \@ref(fig:correlationNConvolution2D), onde temos novamente o *kernel* $w$ e a função $f$. Percebe-se outra vez o efeito de se aplicar o *kernel* em uma imagem com apenas o número 1 no meio, nos dois casos temos como saída a cópia do *kernel* aplicado, com a diferença que na correlação o *kernel* aparece rotacionado no resultado. Assim, nota-se que se pré-rotacionarmos o filtro e realizarmos a correlação teremos no final uma convolução.
+Vamos extender agora essas duas operações à aplicação em duas dimensões. Uma representação disso pode ser vista na figura \@ref(fig:correlationNConvolution2D), onde temos novamente o kernel $w$ e a função $f$. Percebe-se outra vez o efeito de se aplicar o *kernel* em uma imagem com apenas o número 1 no meio, nos dois casos temos como saída a cópia do *kernel*, com a diferença que na correlação ele sai rotacionado. Assim, nota-se que se pré-rotacionarmos o filtro e realizarmos a correlação teremos no final uma convolução.
 
-Já que a correlação e convolução são iguais, é preciso saber qual delas utilizar. Segundo Gonzalez, [@gonzalez2010, p. 98], isso é uma questão de preferência e qualquer uma das duas operações conseguem realizar a outra com uma simples rotação do *kernel*. Essa questão se torna ainda menos relevante quando utilizamos filtros que são simétricos, pois, como antes e após a rotação temos o mesmo *kernel*, tanto correlação ou convolução nos darão o mesmo resultado. Já usando *kernels* assimétricos, temos resultados diferentes. Já, segundo Moeslund [@moeslund2012, p. 87], quando trabalhamos com filtros de desfoque, detectores de borda, entre outros, o processo de se aplicar o *kernel* é comumente chamado de convolução mesmo quando na prática se é implementada a correlação.
+Já que a correlação e convolução são iguais, quais delas devo utilizar? Segundo Gonzalez, [@gonzalez2010, p. 98], isso é uma questão de preferência e qualquer uma das duas operações conseguem realizar a outra com uma simples rotação do *kernel*. Essa questão se torna ainda menos relevante quando utilizamos filtros que são simétricos, pois, como antes e após a rotação temos o mesmo *kernel*, tanto correlação ou convolução nos darão o mesmo resultado; já em *kernels* assimétricos, temos resultados diferentes. Ainda, segundo Moeslund, [@moeslund2012, p. 87], quando trabalhamos com filtros de desfoque, detectores de borda, entre outros, o processo de se aplicar o *kernel* é comumente chamado de convolução mesmo quando na prática se é implementada a correlação.
 
 (ref:correlationNConvolution2D) Ilustração de correlação e convolução bidimensional [@gonzalez2010, p. 98]
 
@@ -78,26 +73,21 @@ Já que a correlação e convolução são iguais, é preciso saber qual delas u
 knitr::include_graphics(rep('imagens/05-filtros/correlationNConvolution2D.png'))
 ```
 
-**Aqui precisa de um parágrafo de fechametno da seção e apontamento para a seção seguinte**
 
-**Não ficou claro para mim a questão de posicionar o kernel e multiplicar a componente do kernel pelo correspondente no sinal de entrada. Isso para cada uma das componentes do kernel. Peço um carinho especial nesse ponto para que fique bem claro. Essa será a alma da operação de convolução e a base para todos os filtros mais a frente.**
+### Definção matemática de convolução
 
-### Definção matemática da convolução
+Vamos explorar um pouco das notações matemáticas utilizadas para representar a convolução e a correlação, assim também poderemos consolidar a idéia de que ambas são muito correlacionadas.
+Como dito no início desta seção, geralmente a convolução é identificada por $*$, já a correlação costuma ser identificada por ☆. A correlação em duas dimensões segue a seguinte equação (Equação X):
 
-Vamos explorar um pouco das notações matemáticas utilizadas para representar a convolução e a correlação, assim também poderemos consolidar a idéia de que ambas são muito correlacionadas. **A correlação é corelacionada? hummm... ficou estranho isso! :-)**
-Como dito no início desta seção **(mas aqui é o início da seção!**), geralmente a convolução é identificada por $*$. Já a correlação costuma ser identificada por ☆. A correlação em duas dimensões segue a seguinte equação (Equação X): **equação x?** **centralizar a equação**
+$g(x,y) = w(x,y)☆f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x+s,y+t)$
 
-$g(x,y) = w(x,y)☆f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x+s,y+t)$, **PERFUMARIA: o aspecto da equação ficou estranho. Consegue colocar o subscrito e superscrito abaixo e acima tal como normalmente vemo sem latex?**
-onde $w$ é nosso $kernel$ e $f$ nossa imagem. Podemos perceber que ambas são funções de duas variáveis, $x$ e $y$, pois estamos trabalhando em duas dimensões. 
-Os limites dos somatórios são dados por $a=(m-1)/2$ e $b=(n-1)/2$ e o que essa função faz é andar em cada posição da imagem, ou seja, $(x,y)$, e substituir o *píxel* atual pela soma de produtos da multiplicação dos valores do $kernel$ pelos valores dos *píxels* da imagem. Já a convolução tem uma equação bem similar, sendo diferente apenas pelos sinais negativos em $f$, o que evidência a rotação do $kernel$. Podemos notar que os sinais inversos estão em $f$ e não em $w$. Segundo Gonzalez[@gonzalez2010, p. 98], isso é usado para fins de simplicidade de notação e não alteram o resultado. **Este parágrafo precisa ficar mais claro. Aqui vejo informações muito importantes que precisam ficar bem claras. Peço que seja feita uma expansão aqui para que fique bem claro, mesmo tendo uma explicação detalhada na sequencia.** 
+Onde $w$ é nosso $kernel$ e $f$ nossa imagem, podemos perceber que ambas são funções de duas variáveis, $x$ e $y$, pois estamos trabalhando em duas dimensões. Os limites dos somatórios são dados por $a=(m-1)/2$ e $b=(n-1)/2$. E o que essa função faz é andar em cada posição da imagem, ou seja, $(x,y)$, e substituir o *píxel* atual pela soma de produtos da multiplicação dos valores do $kernel$ pelos valores dos *píxels* da imagem. Já a convolução tem uma equação bem similar, sendo diferente apenas pelos sinais negativos em $f$, o que evidência a rotação do $kernel$. Podemos notar que os sinais inversos estão em $f$ e não em $w$; segundo [@gonzalez2010, p. 98], isso é usado para fins de simplicidade de notação e não alteram o resultado.
 
 
-$g(x,y) = w(x,y)*f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x-s,y-t)$.
+$g(x,y) = w(x,y)*f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x-s,y-t)$
 
 
 Uma das melhores maneiras de entender bem as equações é ver um exemplo prático. Veremos isso a seguir, onde temos um exemplo passo-a-passo de correlação:
-
-**ficou bem bom o passo a a passo mas não precisa colocar para todos os pixels. Explique em texto que a imagem verde precisa ser expandida que que o centro do kernel fique sobre o primeiro pixel real. explique como são feitas as contas usando a equação x e na sequencia mostre os cálculos assim como fez. Depois volte no texto dizendo que o mesmo será feito para o próximo pixel. Faça isso para uns 3 pixels e depois coloque lado-alado as figuras dos outros pixels até o final. é importante numerar as equeações e usar o apontamento no texto.**
 
 ```{r conv_1, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/05-filtros/conv_1.png'))
@@ -249,10 +239,10 @@ $$
 ```{r conv_final, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/05-filtros/conv_final.png'))
 ```
-Fonte: Autoria própria inspirado em http://www.songho.ca/dsp/convolution/convolution2d_example.html e https://arxiv.org/abs/1603.07285 **coloque como referência e diga adaptado de [xulambs]**
+Fonte: Autoria própria inspirado em http://www.songho.ca/dsp/convolution/convolution2d_example.html e https://arxiv.org/abs/1603.07285
 
 
-O exemplo utiliza um $kernel$ assimétrico **(precisa definir isso)**. Então, os resultados da correlação e convolução são diferentes. Deixaremos isso como um exercício ao leitor, realizar a convolução para provar a diferença. O caso anterior tem também uma característica que é o complemento das bordas com 0's para que o $kernel$ pudesse ser aplicado sobre toda a imagem. Essa é uma das maneiras de lidar com o problema das bordas, sendo que temos essa e mais algumas possibilidades [@burger2009, p. 125] [@chityala2020, p. 60]:
+O exemplo utiliza um $kernel$ assimétrico, então, como dito anteriormente, os resultados da correlação e convolução são diferentes. Deixaremos isso como um exercício ao leitor, realizar a convolução para provar a diferença. O caso anterior tem também uma característica que é o complemento das bordas com 0's para que o $kernel$ pudesse ser aplicado sobre toda a imagem. Essa é uma das maneiras de lidar com o problema das bordas, sendo que temos essa e mais algumas possibilidades [@burger2009, p. 125] [@chityala2020, p. 60]:
 
 - Preenchimento com constante (*constant padding*):
 Método onde as laterais são preenchidas com um valor constante, comumente 0.
@@ -260,26 +250,25 @@ Método onde as laterais são preenchidas com um valor constante, comumente 0.
 - Preenchimento com vizinho (*nearest neighbor*):
 Se realiza o preenchimento das bordas adicionais com os valores dos vizinhos mais próximos.
 
-- Reflexão (*reflect*): **parece igual ao anterior**
+- Reflexão (*reflect*):
 Os pixels das bordas da imagem são repetidos nas bordas adicionais.
 
-- Repetição (ou *wrap*): **não entendi**
+- Repetição (ou *wrap*):
 A imagem é repetida nas bordas.
 
 
 
 Além dos métodos apresentados existem outras técnicas que podem ser utilizadas, sendo que em cada caso se escolhe a que melhor se ajusta à tarefa realizada. 
-
-O último ponto a ser explorado é a escolha do tamanho ideal do preenchimento que deve ser aplicado à imagem. De forma geral, se temos uma imagem ($f$), um *kernel* ($w$) e um preenchimento ($p$), podemos escrever a seguinte relação^[Adaptado de https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html]: **coloque como referencia**
+O último ponto a ser explorado é a escolha do tamanho ideal do preenchimento que deve ser aplicado à imagem. De forma geral, se temos uma imagem ($f$), um *kernel* ($w$) e um preenchimento ($p$), podemos escrever a seguinte relação^[Adaptado de https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html]:
 
 $$saída = (f_{vertical} - w_{vertical} + p_{vertical} + 1) \times  (f_{horizontal} - w_{horizontal} + p_{horizontal} + 1)$$
-Isso nos leva a perceber que o tamanho da imagem de saída aumenta conforme o preenchimento. Na maioria dos casos, queremos que a imagem de entrada e saída tenha o mesmo tamanho, então usamos $p_{vertical} = k_{vertical} - 1$ e $p_{horizontal} = k_{horizontal} - 1$. E como, geralmente, o *kernel* tem tamanho ímpar, utilizamos $\frac{p_{vertical}}{2}$ e $\frac{p_{horizontal}}{2}$. **esse finalzinho ficou um pouco confuso. Tente melhorar as equações**
+Isso nos leva a perceber que o tamanho da imagem de saída aumenta conforme o preenchimento. Na maioria dos casos, queremos que a imagem de entrada e saída tenha o mesmo tamanho, então usamos $p_{vertical} = k_{vertical} - 1$ e $p_{horizontal} = k_{horizontal} - 1$. E como, geralmente, o *kernel* tem tamanho ímpar, utilizamos $\frac{p_{vertical}}{2}$ e $\frac{p_{horizontal}}{2}$.
 
 
 
-## Filtro da Média
+## Média
 
-O filtro da média é um tipo de filtro que utiliza a média dos valores dos *píxels* próximos ao *píxel* central. Como esse tipo de filtro realiza uma operação linear, ele é classificado como um filtro linear de suavização. Essa suavização se dá exatamente pelo tipo da operação utilizada, a média dos *píxels* vizinhos, que diminui a nitidez pela redução das transições abruptas nos níveis de intensidade. Um dos problemas que podem ocorrer é que as bordas também são mudanças abruptas, então podem ser comprometidas pelo filtro. Na figura \@ref(fig:onibusBoxFilter), temos um exemplo do efeito desse filtro:
+Um filtro de média é um tipo de filtro que utiliza a média dos valores dos *píxels* próximos ao *píxel* central. Como esse tipo de filtro realiza uma operação linear, ele é classificado como um filtro linear de suavização. Essa suavização se dá exatamente pelo tipo da operação utilizada, a média dos *píxels* vizinhos, que diminui a nitidez pela redução das transições abruptas nos níveis de intensidade. Um dos problemas que podem ocorrer é que as bordas também são mudanças abruptas, então podem ser comprometidas pelo filtro. Na figura \@ref(fig:onibusBoxFilter), temos um exemplo do efeito desse filtro:
 
 (ref:onibusBoxFilter) Imagem de ônibus com filtro de aguçamento e de suavização [@burger2009, p. 98]
 
@@ -287,7 +276,6 @@ O filtro da média é um tipo de filtro que utiliza a média dos valores dos *p�
 knitr::include_graphics(rep('imagens/05-filtros/onibusShapenNBlur.png'))
 ```
 
-**Antes, diga que esse filtro é baseado na operação de convolução e que o filtro será definido pelo kernel que computa uma média dos pixels**
 A máscara (*kernel*) de um filtro de média pode ser representada por:
 
 $$\begin{bmatrix}
@@ -304,7 +292,7 @@ $$\begin{bmatrix}
 $$
 A primeira forma é a soma de todos os valores divididos por 9, o qual é o tamanho do filtro. A segunda forma, onde todos os coeficientes do *kernel* são 1's, é mais eficiente computacionalmente, pois realizamos todas as somas e multiplicações antes de dividirmos. Esse tipo de filtro é muitas vezes chamado de *box filter*.
 
-(ref:filtrosLetras) Imagem com diferentes tamanhos de filtro de média **quais são os tamanhos** [@gonzalez2010, p. 102]
+(ref:filtrosLetras) Imagem com diferentes tamanhos de filtro de média [@gonzalez2010, p. 102]
 
 ```{r filtrosLetras, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:filtrosLetras)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/05-filtros/filtrosLetras.png'))
@@ -319,15 +307,15 @@ Na figura \@ref(fig:filtrosLetras), temos um exemplo onde foram aplicados filtro
 knitr::include_graphics(rep('imagens/05-filtros/filtrosMediaHubble.png'))
 ```
 
-Na figura \@ref(fig:filtrosMediaHubble), podemos ver como o desfoque pode ser utilizado para encontrar os detalhes principais da imagem. Nesta imagem obtida a partir do telescópio Hubble foi aplicado o desfoque para diminuir a visibilidade dos objetos menores e dar maior ênfase aos da frente. E, então, foi limiarizado o resultado a fim de destacar esses objetos. **explique isso no rodapé da figura**
+Na figura \@ref(fig:filtrosMediaHubble), podemos ver como o desfoque pode ser utilizado para encontrar os detalhes principais da imagem. Nesta imagem obtida a partir do telescópio Hubble foi aplicado o desfoque para diminuir a visibilidade dos objetos menores e dar maior ênfase aos da frente. E, então, foi limiarizado o resultado a fim de destacar esses objetos.
 
 
-## Filtro da Mediana
+## Mediana
 
-A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em colocar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta **coloque uma referência aqui. o Trucco e Verry, por exemplo**, que tem como característica a ocorrencia de pixels pretos e brancos.
-Como dito anteriormente, a mediana consiste em ordenar o conjunto de dados. Nesse caso os valores da vizinhança do *píxel*. Se usarmos uma vizinhança de tamanho 3x3, a mediana será o quinto maior valor, pois consideramos também o valor do *píxel* central na vizinhança ordenada.
+A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em ordenar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta, que tem uma característica aparência de pixels pretos e brancos.
+Como dito anteriormente que a mediana consiste em ordenar o conjunto de dados, nesse caso os valores da vizinhança do *píxel*. Se usarmos uma vizinhança de tamanho 3x3, a mediana será o quinto maior valor, pois consideramos também o valor do *píxel* central.
 
-Na figura \@ref(fig:placaEletronicaMediana), temos um exemplo mostrando uma imagem de raios X de uma placa de circuitos eletrônicos com a presença de ruído tipo sal e pimenta (a). A figura também apresenta as respectivas aplicações de um filtro da média (b) e do filtro da mediana (c), ambos com *kernel* de tamanho 3x3. Na figura, é possível perceber o quanto o filtro da mediana se sai melhor na remoção do ruído.
+Na figura \@ref(fig:placaEletronicaMediana), tem-se um exemplo mostrando uma imagem de raios X de uma placa de circuitos com ruído sal e pimenta (a). As respectivas aplicações de um filtro de média (b) e do filtro da mediana (c), ambos com dimensões 3x3. A partir dela, é visto o quanto o filtro da mediana se sai melhor na remoção do ruído.
 
 (ref:placaEletronicaMediana) Remoção de ruído [@gonzalez2010, p. 103]
 
@@ -335,18 +323,16 @@ Na figura \@ref(fig:placaEletronicaMediana), temos um exemplo mostrando uma imag
 knitr::include_graphics(rep('imagens/05-filtros/placaEletronicaMediana.png'))
 ```
 
-**Como o filtro da Média não usa a convolução e o filtro gaussiana sim, é melhor que a ódem dos dois filtros seja trocada, com o filtro do média aparecendo isolado no final**
 
-## Filtro Gaussiano
-Filtro de Gauss é um filtro simétrico (isotrópico) usado para suavizar imagens. Ele funciona análogo a um filtro de média ponderada, mas com um padrão, isto é, dá ênfase ao pixel central da máscara (*kernel*) e menor ênfase a medida que os demais se distanciam do centro, seguindo um gradiente muito similar à distribuição gaussiana. O “similar” se deve somente ao fato que será necessário truncamentos, assim, havendo erros e por ser desconsiderado a constante multiplicadora, o que melhora o perfil da função para aplicação em PDI.
+
+## Gaussiano
+Filtro de Gauss é um filtro simétrico (isotrópico) usado para suavizar imagens. Ele funciona análogo a um filtro de média ponderada, mas com um padrão, isto é, dá ênfase ao pixel central da máscara (*kernel*) e menor ênfase a medida que os demais se distanciam dele, seguindo um gradiente muito similar à distribuição gaussiana. O “similar” se deve somente ao fato que será necessário truncamentos, assim, havendo erros e por ser desconsiderado a constante multiplicadora, o que melhora o perfil da função para aplicação no PDI.
 
 - *Função gaussiana:* $$g(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
 
 - *Função gaussiana modificada:* $$g(x) = e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
 
-**Aqui as equações estão bem melhores que antes no texto. Só flata a numeração!! :-)**
-
-Note na Figura x que a função tem formato de sino, variando de acordo com os valores atribuídos ao $\sigma$ ou desvio padrão, que dependerá da ênfase desejada no cálculo **(de quê?)**. A medida que $\sigma$ aumenta, maior é o peso dado às “caldas” da função, no caso, aos *pixels* mais distantes do centro do *kernel*. Essa característica é representada no gráfico da Figura \@ref(fig:funcaoGaussiana). 
+Note que a função tem formato de sino, que varia de acordo com os valores atribuídos ao, $\sigma$, o qual dependerá da ênfase desejada no cálculo. A medida que $\sigma$ aumenta, maior é o peso dado às “caldas”, no caso, aos *pixels* mais distantes do *pixel* central. Característica representada no gráfico \@ref(fig:funcaoGaussiana). 
 
 A fim de que o *pixel* central da máscara esteja em $(0,0)$, considera-se $\mu=0$.
 
@@ -357,20 +343,20 @@ knitr::include_graphics(rep('imagens/05-filtros/funcaoGaussiana.png'))
 ```
 
 
-O Filtro Gaussiano 2D é gerado através da convolução de dois vetores da mesma função - a imagem se refere ao subconjunto do contradomínio -, sendo estas, normalmente, oriundas da mesma função gaussiana modificada. De forma alternativa, ele também pode ser construído a partir da i-ésima linha do Triângulo de Pascal que corresponde ao tamanho do *kernel* desejado. Como o método é o mesmo para as duas fontes, explicaremos utilizando como fonte a função gaussiana modificada. 
+O filtro gaussiano 2D é gerado através da convolução de dois vetores da mesma função - a imagem se refere ao subconjunto do contradomínio -, sendo estas, normalmente, oriundas da mesma função gaussiana modificada. De forma alternativa, ele também pode ser construído a partir da i-ésima linha do Triângulo de Pascal que corresponde ao tamanho do *kernel* desejado. Como o método é o mesmo para as duas fontes, explicaremos ele utilizando como fonte a função gaussiana modificada. 
 
-O procedimento primário é obter a imagem da função, mas para obter um filtro com intuito gaussiano se deve selecionar a amostragem  dos pontos no intervalo de $\pm 2.5\sigma$ ou $\pm 3.5\sigma$ [@burger2009, p. 114]. Assim, escolhendo a pela primeira opção, procura-se $g(-3)$, $g(-2)$, $g(-1)$, $g(0)$, $g(1)$, $g(2)$ e $g(3)$. Entretanto, como alguns valores têm infinitas casas decimais, devemos truncá-los. Aqui escolhemos o uso de cinco casas decimais.
+O procedimento primário é obter a imagem da função, mas para obter um filtro com intuito gaussiano se deve selecionar a amostragem  dos pontos no intervalo de $\pm 2.5\sigma$ ou $\pm 3.5\sigma$ [@burger2009, p. 114]. Assim, optando-se pela primeira opção, procura-se $g(-3)$, $g(-2)$, $g(-1)$, $g(0)$, $g(1)$, $g(2)$ e $g(3)$. Entretanto, como alguns valores têm infinitas casas decimais, devemos truncá-los, no qual foi preferido com cinco casas decimais.
 
 - $g(-3) = g(3) = 0,01110$
 - $g(-2) = g(2) = 0,13533$
 - $g(-1) = g(1) = 0,60653$
 - $g(0) = 1$
 
-Então, considera-se o menor valor como 1, no caso $f(3)$ e $f(-3)$, e interpolamos os demais, truncando-os com propósito de obter a parte inteira. A divisão por 224 é oriunda da soma dos valores encontrados. Pronto, temos a máscara gaussiana 1D necessária:
+Então, considera-se o menor valor como 1, no caso $f(3)$ e $f(-3)$, e interpolamos os demais, truncando-os com propósito de obter a parte inteira. A divisão por 224 é oriunda da soma dos pesos da média. Pronto, temos a máscara gaussiana 1D necessária:
 
 $\frac{1}{224}\begin{bmatrix}1 &  12 &  54 &  90 &  54 &  12 &  1\end{bmatrix}$
 
-Com a máscara em mãos, convoluciona-se os seguintes fatores: **não entendi!**
+Com a máscara em mãos, convoluciona-se os seguintes fatores:
 
 - $\frac{1}{224}\begin{bmatrix}1 &  12 &  54 &  90 &  54 &  12 &  1\end{bmatrix}$
 
@@ -389,13 +375,3 @@ knitr::include_graphics(rep('imagens/05-filtros/LettersGaussianFilter.png'))
 
 
 Nesse exemplo, temos um exemplo similar ao usado no filtro de média, porém, usando-se o filtro gaussiano. A imagem de entrada (a) tem tamanho 500x500 onde foram aplicados filtros de diferentes tamanhos, 3x3(b) ; 5x5(c) ; 9x9(d) ; 15x15(e) e 35x35(f). Note que, ao contrário do exemplo anterior, há uma maior preservação da nítidez, todavia não seria um filtro eficiente para redução de ruído. Essa característica é devido ao maior peso dado ao *pixel* central do *kernel*.
-
-**Precisa melhorar esta seção. Veja:
-
-http://proceedings.sbmac.org.br/sbmac/article/download/477/483
-
-https://docs.opencv.org/master/d4/d13/tutorial_py_filtering.html
-
-https://matthew-brett.github.io/teaching/smoothing_intro.html
-
-e também no livro do trucco e verry
