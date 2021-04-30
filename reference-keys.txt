@@ -137,12 +137,12 @@ transformação-de-potência
 processamento-de-histograma
 equalização-do-histograma
 especificação-de-histograma
-filtros
+filtros-digitais
 convolução
-definção-matemática-de-convolução
-média
-mediana
-gaussiano
+definção-matemática-da-convolução
+filtro-da-média
+filtro-da-mediana
+filtro-gaussiano
 segmentação
 detecção-por-descontinuidade
 detecção-de-pontos-isolados

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 5 Filtros | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 5 Filtros | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>Capítulo 5 Filtros Digitais | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="Capítulo 5 Filtros Digitais | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 5 Filtros | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="Capítulo 5 Filtros Digitais | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 5 Filtros | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="Capítulo 5 Filtros Digitais | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -118,13 +118,13 @@
 <li class="chapter" data-level="4.5" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#equalização-do-histograma"><i class="fa fa-check"></i><b>4.5</b> Equalização do histograma</a></li>
 <li class="chapter" data-level="4.6" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#especificação-de-histograma"><i class="fa fa-check"></i><b>4.6</b> Especificação de histograma</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="filtros.html"><a href="filtros.html"><i class="fa fa-check"></i><b>5</b> Filtros</a><ul>
-<li class="chapter" data-level="5.1" data-path="filtros.html"><a href="filtros.html#convolução"><i class="fa fa-check"></i><b>5.1</b> Convolução</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="filtros.html"><a href="filtros.html#definção-matemática-de-convolução"><i class="fa fa-check"></i><b>5.1.1</b> Definção matemática de convolução</a></li>
+<li class="chapter" data-level="5" data-path="filtros-digitais.html"><a href="filtros-digitais.html"><i class="fa fa-check"></i><b>5</b> Filtros Digitais</a><ul>
+<li class="chapter" data-level="5.1" data-path="filtros-digitais.html"><a href="filtros-digitais.html#convolução"><i class="fa fa-check"></i><b>5.1</b> Convolução</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="filtros-digitais.html"><a href="filtros-digitais.html#definção-matemática-da-convolução"><i class="fa fa-check"></i><b>5.1.1</b> Definção matemática da convolução</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="filtros.html"><a href="filtros.html#média"><i class="fa fa-check"></i><b>5.2</b> Média</a></li>
-<li class="chapter" data-level="5.3" data-path="filtros.html"><a href="filtros.html#mediana"><i class="fa fa-check"></i><b>5.3</b> Mediana</a></li>
-<li class="chapter" data-level="5.4" data-path="filtros.html"><a href="filtros.html#gaussiano"><i class="fa fa-check"></i><b>5.4</b> Gaussiano</a></li>
+<li class="chapter" data-level="5.2" data-path="filtros-digitais.html"><a href="filtros-digitais.html#filtro-da-média"><i class="fa fa-check"></i><b>5.2</b> Filtro da Média</a></li>
+<li class="chapter" data-level="5.3" data-path="filtros-digitais.html"><a href="filtros-digitais.html#filtro-da-mediana"><i class="fa fa-check"></i><b>5.3</b> Filtro da Mediana</a></li>
+<li class="chapter" data-level="5.4" data-path="filtros-digitais.html"><a href="filtros-digitais.html#filtro-gaussiano"><i class="fa fa-check"></i><b>5.4</b> Filtro Gaussiano</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="segmentação.html"><a href="segmentação.html"><i class="fa fa-check"></i><b>6</b> Segmentação</a><ul>
 <li class="chapter" data-level="6.1" data-path="segmentação.html"><a href="segmentação.html#detecção-por-descontinuidade"><i class="fa fa-check"></i><b>6.1</b> Detecção por descontinuidade</a><ul>
@@ -187,20 +187,22 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="filtros" class="section level1">
-<h1><span class="header-section-number">Capítulo 5</span> Filtros</h1>
-<p>Filtros são uma poderosa ferramenta para se realizar operações em imagens. Diferente das operações de ponto, que operam sobre um único pixel, as operações utilizando filtros levam em consideração os pixels próximos ao pixel atualmente em modificação. Isso nos permite realizar alterações muito mais complexas do que as realizadas anteriormente, como a operação <em>sharpen</em> (aguçamento) e <em>blur</em> (suavizar), que podem ser observados na figura <a href="filtros.html#fig:onibusSharpenNBlur">5.1</a> (a) e figura <a href="filtros.html#fig:onibusSharpenNBlur">5.1</a> (b), respectivamente.</p>
+<div id="filtros-digitais" class="section level1">
+<h1><span class="header-section-number">Capítulo 5</span> Filtros Digitais</h1>
+<p>Filtros digitais representam um conjunto de ferramentas poderosas para realizar operações em imagens. Diferente das operações de ponto que operam sobre um único pixel, <strong>como por exemplo… ,</strong> as operações utilizando filtros levam em consideração os pixels próximos ao pixel que atualmente está em modificação. Isso nos permite realizar alterações muito mais complexas do que as realizadas anteriormente. Como exemplos disso podemos considerar a operação <em>sharpen</em> (aguçamento) e <em>blur</em> (suavização), que podem ser observados na Figura <a href="filtros-digitais.html#fig:onibusSharpenNBlur">5.1</a> (a) e Figura <a href="filtros-digitais.html#fig:onibusSharpenNBlur">5.1</a> (b), respectivamente. <strong>quando citamos uma figura usando o seu nome, como Figura(a) ou (b) precisamos usar letra maiúscula pois se trata do nome da figura. Quando falamos da figura sem usar o nome, usamos letra minúscula. OK? Precisa corrigir em todo o texto</strong></p>
 
 <div class="figure" style="text-align: center"><span id="fig:onibusSharpenNBlur"></span>
-<img src="imagens/05-filtros/onibusShapenNBlur.png" alt="Imagem de ônibus com filtro de aguçamento e de suavização [8, p. 98]" width="55%" />
+<img src="imagens/05-filtros/onibusShapenNBlur.png" alt="Imagem de ônibus com filtro de aguçamento e de suavização coloque também a imagem original para podermos ver o efeito das operações. Além disso os rótulos (a) e (b) precisam estar sempre na parte de baixo das imagens da fiugra.[8, p. 98]" width="55%" />
 <p class="caption">
-Figura 5.1: Imagem de ônibus com filtro de aguçamento e de suavização <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 98]</span>
+Figura 5.1: Imagem de ônibus com filtro de aguçamento e de suavização <strong>coloque também a imagem original para podermos ver o efeito das operações. Além disso os rótulos (a) e (b) precisam estar sempre na parte de baixo das imagens da fiugra.</strong><span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 98]</span>
 </p>
 </div>
+<p><strong>Aqui Está faltando um pouco mais de contexto. Veja, temso apenas um parágrafo introduzindo o capítulo de filtros e logo já vem a seção de convolução. Tente extender mais esta introdução e também fazer a ligação com a seção seguinte para justificar a necessidade dela. Por exemplo dizendo que os filtros usam a convolução para operar e por isso terá uma seção dedicada à convolução. Vai ficar melhor!!</strong></p>
 <div id="convolução" class="section level2">
 <h2><span class="header-section-number">5.1</span> Convolução</h2>
-<p>Convolução é uma operação muito utilizada no PDI, a qual tem suas origens na matemática, onde ela é definida como uma operação realizada entre duas funções e que resulta numa terceira, ou, em outras palavras, ela recebe dois sinais de entrada e gera um sinal de saída. No caso do PDI, podemos imaginar os sinais de entrada como sendo a nossa imagem e o filtro (<em>kernel</em>), e a nossa saída como sendo a imagem filtrada.</p>
-<p>Quando dizemos <em>kernel</em>, estamos nos referindo a uma função ou, no caso do processamento de imagens, a uma matriz, que é aplicada em nossa imagem e produz como saída o objeto de entrada com modificações. Na tabela <a href="filtros.html#tab:kernelExample">5.1</a>, temos exemplos de alguns tipos de <em>kernels</em> que podem ser utilizados na convolução e seus respectivos resultados. Além dos efeitos mais comuns, como o de desfoque (<em>blur</em>), podemos utilizar <em>kernels</em> que extraem informações mais complexas das imagens, como os detectores de borda, que serão discutidos mais a fundo nos próximos tópicos.</p>
+<p>Convolução é uma operação muito utilizada em PDI tendo suas origens na matemática, onde é definida como uma operação realizada entre duas funções e que resulta numa terceira. Em outras palavras, a convolução recebe dois sinais como entrada e gera um sinal como saída. No caso de PDI, podemos imaginar os sinais de entrada como sendo a nossa imagem original e o <em>kernel</em> do filtro, e a nossa saída como sendo a imagem filtrada.</p>
+<p><strong>Aqui quando fala da imagem como uma função, pode apontar para o texto de formaçãod e imagens, onde é dito que uma imagem é uma função bidimencional f(x,y). Aliás, acho que deve fazer isso. O texto ficará mais claro e com os enlace corretos.</strong>
+Quando dizemos <em>kernel</em>, estamos nos referindo a uma função ou, no caso de PDI, a uma matriz que é aplicada a nossa imagem usando a convolução que irá produzir outra imagem como saída. Na Tabela <a href="filtros-digitais.html#tab:kernelExample">5.1</a>, temos exemplos de alguns tipos de <em>kernels</em> que podem ser utilizados na convolução e seus respectivos resultados. Além dos efeitos mais comuns como o de desfoque (<em>blur</em>), podemos utilizar <em>kernels</em> que extraiam informações mais complexas das imagens, como os detectores de borda que serão discutidos mais a fundo nos próximos tópicos.</p>
 <table>
 <caption><span id="tab:kernelExample">Tabela 5.1: </span> Exemplo de <em>kernels</em> (adaptada de <span class="citation">[<a href="#ref-tab:kernelExample" role="doc-biblioref">14</a>]</span>).</caption>
 <colgroup>
@@ -254,7 +256,8 @@ Figura 5.1: Imagem de ônibus com filtro de aguçamento e de suavização <span 
 </tr>
 </tbody>
 </table>
-<p>Agora, veremos operação de convolução mais detalhadamente. Essa operação geralmente é representada por <span class="math inline">\(*\)</span> e pode ser descrita, em poucas palavras, como uma soma de produtos que é realizada com um deslizamento sobre a função de entrada. A figura <a href="filtros.html#fig:convolutionGif">5.2</a> representa de maneira visual a convolução em um cenário de uma dimensão, através do sinal de entrada (<em>signal</em>) e o <em>kernel</em>. Podemos ainda perceber que o <em>kernel</em> está rotacionado em 180º, isso se deve a definição de convolução.</p>
+<p>Em porcessamento de sinais a operação de convolução geralmente é representada pelo síbolo <span class="math inline">\(*\)</span> <strong>coloque aqui uma referência</strong> e pode ser descrita, em poucas palavras, como uma soma de produtos entre um ponto do <em>kernel</em> e um ponto correspondente da imagem. Essa correspondência é encontrada fazendo um deslizamento sobre a imagem de entrada. A Figura <a href="filtros-digitais.html#fig:convolutionGif">5.2</a> representa de maneira visual a convolução em um cenário de uma dimensão, através do sinal de entrada (<em>signal</em>) e o <em>kernel</em>. Podemos ainda perceber que o <em>kernel</em> está rotacionado em 180º <strong>como assim! Explique melhor o caso dos 180</strong>, isso se deve a definição de convolução.</p>
+<p><strong>fiquei confuso aqui. Até este momento a convolução era descrita sempre no contexto de imagens e por isso a expectativa era em duas dimenções. Aí de repente, ela é mostrada em um dimensão. Precisa organizar isso para que siga uma linha linha lógica de raciocínio. Se optar por manter a explicação em uma dimensão, coloque primeiro e depois passe para duas dimensões e não volte mais. Ou pode ser que opte por retirar a explicação em 1D. Acho que seria melhro ficar por o conteúdo está bem interessante. O fato é que nos dois casos esse parágrafo está estranho aqui.</strong></p>
 
 <div class="figure" style="text-align: center"><span id="fig:convolutionGif"></span>
 <img src="imagens/05-filtros/convolutionGif.png" alt="Convolução em uma dimensão [15]" width="55%" />
@@ -262,9 +265,9 @@ Figura 5.1: Imagem de ônibus com filtro de aguçamento e de suavização <span 
 Figura 5.2: Convolução em uma dimensão <span class="citation">[<a href="#ref-img:convolutionGif" role="doc-biblioref">15</a>]</span>
 </p>
 </div>
-<p>Algo interessante que podemos observar na imagem <a href="filtros.html#fig:convolutionGif">5.2</a> é que nosso sinal de entrada é quase totalmente 0 e contém um único ponto 1, isso faz com que nosso resultado seja uma cópia do <em>kernel</em>. A partir disso, conseguimos imaginar o por que temos como resultado a própria imagem quando aplicado um <em>kernel</em> identidade, como mostrado na tabela <a href="filtros.html#tab:kernelExample">5.1</a>.</p>
+<p>Algo interessante que podemos observar na imagem <a href="filtros-digitais.html#fig:convolutionGif">5.2</a> é que nosso sinal de entrada é quase totalmente 0 e contém um único ponto 1. Isso faz com que nosso resultado seja uma cópia do <em>kernel</em>. A partir disso, conseguimos imaginar o por que de termos como resultado a própria imagem quando aplicado um <em>kernel</em> identidade, como mostrado na tabela <a href="filtros-digitais.html#tab:kernelExample">5.1</a>.</p>
 <p>Antes de irmos mais adiante no assunto, é importante esclarecermos alguns conceitos para que não se tornem confusos. Existe outra operação matemática extremamente parecida com a convolução chamada correlação, sendo que ela também realiza a soma de multiplicações com a diferença de que ela não rotaciona o <em>kernel</em>.</p>
-<p>Para entendermos bem essa diferença, podemos observar a figura <a href="filtros.html#fig:correlationNConvolution1D">5.3</a>, onde temos um exemplo de correlação e convolução sendo executados em um espaço unidimensional. Temos uma função <span class="math inline">\(f\)</span> e um filtro <span class="math inline">\(w\)</span> na figura <a href="filtros.html#fig:correlationNConvolution1D">5.3</a> (a) e (b), na sequência, de (b) e (j), temos as funções e os filtros prontos para se realizar a correlação e a convolução. Nas etapas (c) e (k), podemos ver o preenchimento com zeros, isso ocorre porque há partes das funções que não se sobrepõem, dessa forma, permite que <span class="math inline">\(w\)</span> percorra todos os pixels de <span class="math inline">\(f\)</span>. Após isso, é realizado o primeiro passo da correlação e convolução, onde podemos observar que o resultado é 0 já que <span class="math inline">\(w\)</span> está sobreposto por somente zeros, logo a soma da multiplicação de cada item de <span class="math inline">\(w\)</span> por <span class="math inline">\(f\)</span> será nulo. Deslocamos então o filtro <span class="math inline">\(w\)</span> em uma unidade a direita, onde o resultado novamente será 0, sendo que o primeiro resultado não nulo se dará no terceiro deslocamento, sendo 8 para a correlação e <span class="math inline">\(1\)</span> para a convolução. Temos o resultado de ambas operações em (g) e (o) e o resultado recortado em (h) e (p), recorte este que remove os zeros até o tamanho ficar igual ao da <span class="math inline">\(f\)</span> inicial.</p>
+<p>Para entendermos bem essa diferença, podemos observar a figura <a href="filtros-digitais.html#fig:correlationNConvolution1D">5.3</a>, onde temos um exemplo de correlação e convolução sendo executados em um espaço unidimensional. Temos uma função <span class="math inline">\(f\)</span> e um filtro <span class="math inline">\(w\)</span> na figura <a href="filtros-digitais.html#fig:correlationNConvolution1D">5.3</a> (a) e (b) respectivamente. Na sequência, em (b) e (j), temos as funções e os filtros prontos para iniciar a correlação e a convolução. Nas etapas (c) e (k), podemos ver o preenchimento com zeros. Isso ocorre porque há partes das funções que não se sobrepõem. Dessa forma, permite que <span class="math inline">\(w\)</span> percorra todos os pixels de <span class="math inline">\(f\)</span>. Após isso, é realizado o primeiro passo da correlação e convolução, onde podemos observar que o resultado é 0 já que <span class="math inline">\(w\)</span> está sobreposto por somente zeros. Logo, a soma da multiplicação de cada item de <span class="math inline">\(w\)</span> por <span class="math inline">\(f\)</span> será zero. Deslocamos então o filtro <span class="math inline">\(w\)</span> em uma unidade a direita, onde o resultado novamente será 0. O primeiro resultado não nulo se dará no terceiro deslocamento, sendo 8 para a correlação e <span class="math inline">\(1\)</span> para a convolução. Temos o resultado de ambas operações em (g) e (o) e o resultado recortado em (h) e (p), recorte este que remove os zeros até o tamanho ficar igual ao da <span class="math inline">\(f\)</span> inicial.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:correlationNConvolution1D"></span>
 <img src="imagens/05-filtros/correlationNConvolution1D.png" alt="Ilustração de correlação e convolução unidimensional [2, p. 96]" width="55%" />
@@ -272,8 +275,8 @@ Figura 5.2: Convolução em uma dimensão <span class="citation">[<a href="#ref-
 Figura 5.3: Ilustração de correlação e convolução unidimensional <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 96]</span>
 </p>
 </div>
-<p>Vamos extender agora essas duas operações à aplicação em duas dimensões. Uma representação disso pode ser vista na figura <a href="filtros.html#fig:correlationNConvolution2D">5.4</a>, onde temos novamente o kernel <span class="math inline">\(w\)</span> e a função <span class="math inline">\(f\)</span>. Percebe-se outra vez o efeito de se aplicar o <em>kernel</em> em uma imagem com apenas o número 1 no meio, nos dois casos temos como saída a cópia do <em>kernel</em>, com a diferença que na correlação ele sai rotacionado. Assim, nota-se que se pré-rotacionarmos o filtro e realizarmos a correlação teremos no final uma convolução.</p>
-<p>Já que a correlação e convolução são iguais, quais delas devo utilizar? Segundo Gonzalez, <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 98]</span>, isso é uma questão de preferência e qualquer uma das duas operações conseguem realizar a outra com uma simples rotação do <em>kernel</em>. Essa questão se torna ainda menos relevante quando utilizamos filtros que são simétricos, pois, como antes e após a rotação temos o mesmo <em>kernel</em>, tanto correlação ou convolução nos darão o mesmo resultado; já em <em>kernels</em> assimétricos, temos resultados diferentes. Ainda, segundo Moeslund, <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 87]</span>, quando trabalhamos com filtros de desfoque, detectores de borda, entre outros, o processo de se aplicar o <em>kernel</em> é comumente chamado de convolução mesmo quando na prática se é implementada a correlação.</p>
+<p>Vamos extender agora essas duas operações à aplicação em duas dimensões. Uma representação disso pode ser vista na Figura <a href="filtros-digitais.html#fig:correlationNConvolution2D">5.4</a>, onde temos novamente o <em>kernel</em> <span class="math inline">\(w\)</span> e a função <span class="math inline">\(f\)</span>. Percebe-se outra vez o efeito de se aplicar o <em>kernel</em> em uma imagem com apenas o número 1 no meio, nos dois casos temos como saída a cópia do <em>kernel</em> aplicado, com a diferença que na correlação o <em>kernel</em> aparece rotacionado no resultado. Assim, nota-se que se pré-rotacionarmos o filtro e realizarmos a correlação teremos no final uma convolução.</p>
+<p>Já que a correlação e convolução são iguais, é preciso saber qual delas utilizar. Segundo Gonzalez, <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 98]</span>, isso é uma questão de preferência e qualquer uma das duas operações conseguem realizar a outra com uma simples rotação do <em>kernel</em>. Essa questão se torna ainda menos relevante quando utilizamos filtros que são simétricos, pois, como antes e após a rotação temos o mesmo <em>kernel</em>, tanto correlação ou convolução nos darão o mesmo resultado. Já usando <em>kernels</em> assimétricos, temos resultados diferentes. Já, segundo Moeslund <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">7</a>, p. 87]</span>, quando trabalhamos com filtros de desfoque, detectores de borda, entre outros, o processo de se aplicar o <em>kernel</em> é comumente chamado de convolução mesmo quando na prática se é implementada a correlação.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:correlationNConvolution2D"></span>
 <img src="imagens/05-filtros/correlationNConvolution2D.png" alt="Ilustração de correlação e convolução bidimensional [2, p. 98]" width="55%" />
@@ -281,14 +284,18 @@ Figura 5.3: Ilustração de correlação e convolução unidimensional <span cla
 Figura 5.4: Ilustração de correlação e convolução bidimensional <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 98]</span>
 </p>
 </div>
-<div id="definção-matemática-de-convolução" class="section level3">
-<h3><span class="header-section-number">5.1.1</span> Definção matemática de convolução</h3>
-<p>Vamos explorar um pouco das notações matemáticas utilizadas para representar a convolução e a correlação, assim também poderemos consolidar a idéia de que ambas são muito correlacionadas.
-Como dito no início desta seção, geralmente a convolução é identificada por <span class="math inline">\(*\)</span>, já a correlação costuma ser identificada por ☆. A correlação em duas dimensões segue a seguinte equação (Equação X):</p>
-<p><span class="math inline">\(g(x,y) = w(x,y)☆f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\  w(s,t)f(x+s,y+t)\)</span></p>
-<p>Onde <span class="math inline">\(w\)</span> é nosso <span class="math inline">\(kernel\)</span> e <span class="math inline">\(f\)</span> nossa imagem, podemos perceber que ambas são funções de duas variáveis, <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>, pois estamos trabalhando em duas dimensões. Os limites dos somatórios são dados por <span class="math inline">\(a=(m-1)/2\)</span> e <span class="math inline">\(b=(n-1)/2\)</span>. E o que essa função faz é andar em cada posição da imagem, ou seja, <span class="math inline">\((x,y)\)</span>, e substituir o <em>píxel</em> atual pela soma de produtos da multiplicação dos valores do <span class="math inline">\(kernel\)</span> pelos valores dos <em>píxels</em> da imagem. Já a convolução tem uma equação bem similar, sendo diferente apenas pelos sinais negativos em <span class="math inline">\(f\)</span>, o que evidência a rotação do <span class="math inline">\(kernel\)</span>. Podemos notar que os sinais inversos estão em <span class="math inline">\(f\)</span> e não em <span class="math inline">\(w\)</span>; segundo <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 98]</span>, isso é usado para fins de simplicidade de notação e não alteram o resultado.</p>
-<p><span class="math inline">\(g(x,y) = w(x,y)*f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\  w(s,t)f(x-s,y-t)\)</span></p>
+<p><strong>Aqui precisa de um parágrafo de fechametno da seção e apontamento para a seção seguinte</strong></p>
+<p><strong>Não ficou claro para mim a questão de posicionar o kernel e multiplicar a componente do kernel pelo correspondente no sinal de entrada. Isso para cada uma das componentes do kernel. Peço um carinho especial nesse ponto para que fique bem claro. Essa será a alma da operação de convolução e a base para todos os filtros mais a frente.</strong></p>
+<div id="definção-matemática-da-convolução" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Definção matemática da convolução</h3>
+<p>Vamos explorar um pouco das notações matemáticas utilizadas para representar a convolução e a correlação, assim também poderemos consolidar a idéia de que ambas são muito correlacionadas. <strong>A correlação é corelacionada? hummm… ficou estranho isso! :-)</strong>
+Como dito no início desta seção <strong>(mas aqui é o início da seção!</strong>), geralmente a convolução é identificada por <span class="math inline">\(*\)</span>. Já a correlação costuma ser identificada por ☆. A correlação em duas dimensões segue a seguinte equação (Equação X): <strong>equação x?</strong> <strong>centralizar a equação</strong></p>
+<p><span class="math inline">\(g(x,y) = w(x,y)☆f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\  w(s,t)f(x+s,y+t)\)</span>, <strong>PERFUMARIA: o aspecto da equação ficou estranho. Consegue colocar o subscrito e superscrito abaixo e acima tal como normalmente vemo sem latex?</strong>
+onde <span class="math inline">\(w\)</span> é nosso <span class="math inline">\(kernel\)</span> e <span class="math inline">\(f\)</span> nossa imagem. Podemos perceber que ambas são funções de duas variáveis, <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>, pois estamos trabalhando em duas dimensões.
+Os limites dos somatórios são dados por <span class="math inline">\(a=(m-1)/2\)</span> e <span class="math inline">\(b=(n-1)/2\)</span> e o que essa função faz é andar em cada posição da imagem, ou seja, <span class="math inline">\((x,y)\)</span>, e substituir o <em>píxel</em> atual pela soma de produtos da multiplicação dos valores do <span class="math inline">\(kernel\)</span> pelos valores dos <em>píxels</em> da imagem. Já a convolução tem uma equação bem similar, sendo diferente apenas pelos sinais negativos em <span class="math inline">\(f\)</span>, o que evidência a rotação do <span class="math inline">\(kernel\)</span>. Podemos notar que os sinais inversos estão em <span class="math inline">\(f\)</span> e não em <span class="math inline">\(w\)</span>. Segundo Gonzalez<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 98]</span>, isso é usado para fins de simplicidade de notação e não alteram o resultado. <strong>Este parágrafo precisa ficar mais claro. Aqui vejo informações muito importantes que precisam ficar bem claras. Peço que seja feita uma expansão aqui para que fique bem claro, mesmo tendo uma explicação detalhada na sequencia.</strong></p>
+<p><span class="math inline">\(g(x,y) = w(x,y)*f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\  w(s,t)f(x-s,y-t)\)</span>.</p>
 <p>Uma das melhores maneiras de entender bem as equações é ver um exemplo prático. Veremos isso a seguir, onde temos um exemplo passo-a-passo de correlação:</p>
+<p><strong>ficou bem bom o passo a a passo mas não precisa colocar para todos os pixels. Explique em texto que a imagem verde precisa ser expandida que que o centro do kernel fique sobre o primeiro pixel real. explique como são feitas as contas usando a equação x e na sequencia mostre os cálculos assim como fez. Depois volte no texto dizendo que o mesmo será feito para o próximo pixel. Faça isso para uns 3 pixels e depois coloque lado-alado as figuras dos outros pixels até o final. é importante numerar as equeações e usar o apontamento no texto.</strong></p>
 <p><img src="imagens/05-filtros/conv_1.png" width="55%" style="display: block; margin: auto;" />
 <span class="math display">\[
 \text{w}\text{*f}\left(0,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,0+t\right)\,\text{=}\,\\
@@ -389,27 +396,27 @@ Como dito no início desta seção, geralmente a convolução é identificada po
 =3+8+0=11
 \]</span></p>
 <p><img src="imagens/05-filtros/conv_final.png" width="55%" style="display: block; margin: auto;" />
-Fonte: Autoria própria inspirado em <a href="http://www.songho.ca/dsp/convolution/convolution2d_example.html" class="uri">http://www.songho.ca/dsp/convolution/convolution2d_example.html</a> e <a href="https://arxiv.org/abs/1603.07285" class="uri">https://arxiv.org/abs/1603.07285</a></p>
-<p>O exemplo utiliza um <span class="math inline">\(kernel\)</span> assimétrico, então, como dito anteriormente, os resultados da correlação e convolução são diferentes. Deixaremos isso como um exercício ao leitor, realizar a convolução para provar a diferença. O caso anterior tem também uma característica que é o complemento das bordas com 0’s para que o <span class="math inline">\(kernel\)</span> pudesse ser aplicado sobre toda a imagem. Essa é uma das maneiras de lidar com o problema das bordas, sendo que temos essa e mais algumas possibilidades <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 125]</span> <span class="citation">[<a href="#ref-chityala2020" role="doc-biblioref">16</a>, p. 60]</span>:</p>
+Fonte: Autoria própria inspirado em <a href="http://www.songho.ca/dsp/convolution/convolution2d_example.html" class="uri">http://www.songho.ca/dsp/convolution/convolution2d_example.html</a> e <a href="https://arxiv.org/abs/1603.07285" class="uri">https://arxiv.org/abs/1603.07285</a> <strong>coloque como referência e diga adaptado de [xulambs]</strong></p>
+<p>O exemplo utiliza um <span class="math inline">\(kernel\)</span> assimétrico <strong>(precisa definir isso)</strong>. Então, os resultados da correlação e convolução são diferentes. Deixaremos isso como um exercício ao leitor, realizar a convolução para provar a diferença. O caso anterior tem também uma característica que é o complemento das bordas com 0’s para que o <span class="math inline">\(kernel\)</span> pudesse ser aplicado sobre toda a imagem. Essa é uma das maneiras de lidar com o problema das bordas, sendo que temos essa e mais algumas possibilidades <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 125]</span> <span class="citation">[<a href="#ref-chityala2020" role="doc-biblioref">16</a>, p. 60]</span>:</p>
 <ul>
 <li><p>Preenchimento com constante (<em>constant padding</em>):
 Método onde as laterais são preenchidas com um valor constante, comumente 0.</p></li>
 <li><p>Preenchimento com vizinho (<em>nearest neighbor</em>):
 Se realiza o preenchimento das bordas adicionais com os valores dos vizinhos mais próximos.</p></li>
-<li><p>Reflexão (<em>reflect</em>):
+<li><p>Reflexão (<em>reflect</em>): <strong>parece igual ao anterior</strong>
 Os pixels das bordas da imagem são repetidos nas bordas adicionais.</p></li>
-<li><p>Repetição (ou <em>wrap</em>):
+<li><p>Repetição (ou <em>wrap</em>): <strong>não entendi</strong>
 A imagem é repetida nas bordas.</p></li>
 </ul>
-<p>Além dos métodos apresentados existem outras técnicas que podem ser utilizadas, sendo que em cada caso se escolhe a que melhor se ajusta à tarefa realizada.
-O último ponto a ser explorado é a escolha do tamanho ideal do preenchimento que deve ser aplicado à imagem. De forma geral, se temos uma imagem (<span class="math inline">\(f\)</span>), um <em>kernel</em> (<span class="math inline">\(w\)</span>) e um preenchimento (<span class="math inline">\(p\)</span>), podemos escrever a seguinte relação<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>:</p>
+<p>Além dos métodos apresentados existem outras técnicas que podem ser utilizadas, sendo que em cada caso se escolhe a que melhor se ajusta à tarefa realizada.</p>
+<p>O último ponto a ser explorado é a escolha do tamanho ideal do preenchimento que deve ser aplicado à imagem. De forma geral, se temos uma imagem (<span class="math inline">\(f\)</span>), um <em>kernel</em> (<span class="math inline">\(w\)</span>) e um preenchimento (<span class="math inline">\(p\)</span>), podemos escrever a seguinte relação<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>: <strong>coloque como referencia</strong></p>
 <p><span class="math display">\[saída = (f_{vertical} - w_{vertical} + p_{vertical} + 1) \times  (f_{horizontal} - w_{horizontal} + p_{horizontal} + 1)\]</span>
-Isso nos leva a perceber que o tamanho da imagem de saída aumenta conforme o preenchimento. Na maioria dos casos, queremos que a imagem de entrada e saída tenha o mesmo tamanho, então usamos <span class="math inline">\(p_{vertical} = k_{vertical} - 1\)</span> e <span class="math inline">\(p_{horizontal} = k_{horizontal} - 1\)</span>. E como, geralmente, o <em>kernel</em> tem tamanho ímpar, utilizamos <span class="math inline">\(\frac{p_{vertical}}{2}\)</span> e <span class="math inline">\(\frac{p_{horizontal}}{2}\)</span>.</p>
+Isso nos leva a perceber que o tamanho da imagem de saída aumenta conforme o preenchimento. Na maioria dos casos, queremos que a imagem de entrada e saída tenha o mesmo tamanho, então usamos <span class="math inline">\(p_{vertical} = k_{vertical} - 1\)</span> e <span class="math inline">\(p_{horizontal} = k_{horizontal} - 1\)</span>. E como, geralmente, o <em>kernel</em> tem tamanho ímpar, utilizamos <span class="math inline">\(\frac{p_{vertical}}{2}\)</span> e <span class="math inline">\(\frac{p_{horizontal}}{2}\)</span>. <strong>esse finalzinho ficou um pouco confuso. Tente melhorar as equações</strong></p>
 </div>
 </div>
-<div id="média" class="section level2">
-<h2><span class="header-section-number">5.2</span> Média</h2>
-<p>Um filtro de média é um tipo de filtro que utiliza a média dos valores dos <em>píxels</em> próximos ao <em>píxel</em> central. Como esse tipo de filtro realiza uma operação linear, ele é classificado como um filtro linear de suavização. Essa suavização se dá exatamente pelo tipo da operação utilizada, a média dos <em>píxels</em> vizinhos, que diminui a nitidez pela redução das transições abruptas nos níveis de intensidade. Um dos problemas que podem ocorrer é que as bordas também são mudanças abruptas, então podem ser comprometidas pelo filtro. Na figura <a href="filtros.html#fig:onibusBoxFilter">5.5</a>, temos um exemplo do efeito desse filtro:</p>
+<div id="filtro-da-média" class="section level2">
+<h2><span class="header-section-number">5.2</span> Filtro da Média</h2>
+<p>O filtro da média é um tipo de filtro que utiliza a média dos valores dos <em>píxels</em> próximos ao <em>píxel</em> central. Como esse tipo de filtro realiza uma operação linear, ele é classificado como um filtro linear de suavização. Essa suavização se dá exatamente pelo tipo da operação utilizada, a média dos <em>píxels</em> vizinhos, que diminui a nitidez pela redução das transições abruptas nos níveis de intensidade. Um dos problemas que podem ocorrer é que as bordas também são mudanças abruptas, então podem ser comprometidas pelo filtro. Na figura <a href="filtros-digitais.html#fig:onibusBoxFilter">5.5</a>, temos um exemplo do efeito desse filtro:</p>
 
 <div class="figure" style="text-align: center"><span id="fig:onibusBoxFilter"></span>
 <img src="imagens/05-filtros/onibusShapenNBlur.png" alt="Imagem de ônibus com filtro de aguçamento e de suavização [8, p. 98]" width="55%" />
@@ -417,7 +424,8 @@ Isso nos leva a perceber que o tamanho da imagem de saída aumenta conforme o pr
 Figura 5.5: Imagem de ônibus com filtro de aguçamento e de suavização <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 98]</span>
 </p>
 </div>
-<p>A máscara (<em>kernel</em>) de um filtro de média pode ser representada por:</p>
+<p><strong>Antes, diga que esse filtro é baseado na operação de convolução e que o filtro será definido pelo kernel que computa uma média dos pixels</strong>
+A máscara (<em>kernel</em>) de um filtro de média pode ser representada por:</p>
 <p><span class="math display">\[\begin{bmatrix}
 \frac{1}{9} &amp; \frac{1}{9} &amp; \frac{1}{9}\\
 \frac{1}{9} &amp; \frac{1}{9} &amp; \frac{1}{9}\\
@@ -433,12 +441,12 @@ Figura 5.5: Imagem de ônibus com filtro de aguçamento e de suavização <span 
 A primeira forma é a soma de todos os valores divididos por 9, o qual é o tamanho do filtro. A segunda forma, onde todos os coeficientes do <em>kernel</em> são 1’s, é mais eficiente computacionalmente, pois realizamos todas as somas e multiplicações antes de dividirmos. Esse tipo de filtro é muitas vezes chamado de <em>box filter</em>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:filtrosLetras"></span>
-<img src="imagens/05-filtros/filtrosLetras.png" alt="Imagem com diferentes tamanhos de filtro de média [2, p. 102]" width="55%" />
+<img src="imagens/05-filtros/filtrosLetras.png" alt="Imagem com diferentes tamanhos de filtro de média quais são os tamanhos [2, p. 102]" width="55%" />
 <p class="caption">
-Figura 5.6: Imagem com diferentes tamanhos de filtro de média <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 102]</span>
+Figura 5.6: Imagem com diferentes tamanhos de filtro de média <strong>quais são os tamanhos</strong> <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 102]</span>
 </p>
 </div>
-<p>Na figura <a href="filtros.html#fig:filtrosLetras">5.6</a>, temos um exemplo onde foram aplicados filtros de média com diferentes tamanhos, 3x3(b) ; 5x5(c) ; 9x9(d) ; 15x15(e) e 35x35(f). Podemos notar que com o menor filtro, o de tamanho 3, temos um leve borramento na imagem toda, mas que as partes que tem o mesmo tamanho ou são menores que o filtro tem um borramento maior. Isso exemplifica umas das importantes aplicações dos filtros de suavização, que é a de desfocar os objetos menores e deixar os maiores em maior evidência.</p>
+<p>Na figura <a href="filtros-digitais.html#fig:filtrosLetras">5.6</a>, temos um exemplo onde foram aplicados filtros de média com diferentes tamanhos, 3x3(b) ; 5x5(c) ; 9x9(d) ; 15x15(e) e 35x35(f). Podemos notar que com o menor filtro, o de tamanho 3, temos um leve borramento na imagem toda, mas que as partes que tem o mesmo tamanho ou são menores que o filtro tem um borramento maior. Isso exemplifica umas das importantes aplicações dos filtros de suavização, que é a de desfocar os objetos menores e deixar os maiores em maior evidência.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:filtrosMediaHubble"></span>
 <img src="imagens/05-filtros/filtrosMediaHubble.png" alt="Exemplo de uso do desfoque [2, p. 103]" width="55%" />
@@ -446,13 +454,13 @@ Figura 5.6: Imagem com diferentes tamanhos de filtro de média <span class="cita
 Figura 5.7: Exemplo de uso do desfoque <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 103]</span>
 </p>
 </div>
-<p>Na figura <a href="filtros.html#fig:filtrosMediaHubble">5.7</a>, podemos ver como o desfoque pode ser utilizado para encontrar os detalhes principais da imagem. Nesta imagem obtida a partir do telescópio Hubble foi aplicado o desfoque para diminuir a visibilidade dos objetos menores e dar maior ênfase aos da frente. E, então, foi limiarizado o resultado a fim de destacar esses objetos.</p>
+<p>Na figura <a href="filtros-digitais.html#fig:filtrosMediaHubble">5.7</a>, podemos ver como o desfoque pode ser utilizado para encontrar os detalhes principais da imagem. Nesta imagem obtida a partir do telescópio Hubble foi aplicado o desfoque para diminuir a visibilidade dos objetos menores e dar maior ênfase aos da frente. E, então, foi limiarizado o resultado a fim de destacar esses objetos. <strong>explique isso no rodapé da figura</strong></p>
 </div>
-<div id="mediana" class="section level2">
-<h2><span class="header-section-number">5.3</span> Mediana</h2>
-<p>A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em ordenar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta, que tem uma característica aparência de pixels pretos e brancos.
-Como dito anteriormente que a mediana consiste em ordenar o conjunto de dados, nesse caso os valores da vizinhança do <em>píxel</em>. Se usarmos uma vizinhança de tamanho 3x3, a mediana será o quinto maior valor, pois consideramos também o valor do <em>píxel</em> central.</p>
-<p>Na figura <a href="filtros.html#fig:placaEletronicaMediana">5.8</a>, tem-se um exemplo mostrando uma imagem de raios X de uma placa de circuitos com ruído sal e pimenta (a). As respectivas aplicações de um filtro de média (b) e do filtro da mediana (c), ambos com dimensões 3x3. A partir dela, é visto o quanto o filtro da mediana se sai melhor na remoção do ruído.</p>
+<div id="filtro-da-mediana" class="section level2">
+<h2><span class="header-section-number">5.3</span> Filtro da Mediana</h2>
+<p>A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em colocar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta <strong>coloque uma referência aqui. o Trucco e Verry, por exemplo</strong>, que tem como característica a ocorrencia de pixels pretos e brancos.
+Como dito anteriormente, a mediana consiste em ordenar o conjunto de dados. Nesse caso os valores da vizinhança do <em>píxel</em>. Se usarmos uma vizinhança de tamanho 3x3, a mediana será o quinto maior valor, pois consideramos também o valor do <em>píxel</em> central na vizinhança ordenada.</p>
+<p>Na figura <a href="filtros-digitais.html#fig:placaEletronicaMediana">5.8</a>, temos um exemplo mostrando uma imagem de raios X de uma placa de circuitos eletrônicos com a presença de ruído tipo sal e pimenta (a). A figura também apresenta as respectivas aplicações de um filtro da média (b) e do filtro da mediana (c), ambos com <em>kernel</em> de tamanho 3x3. Na figura, é possível perceber o quanto o filtro da mediana se sai melhor na remoção do ruído.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:placaEletronicaMediana"></span>
 <img src="imagens/05-filtros/placaEletronicaMediana.png" alt="Remoção de ruído [2, p. 103]" width="55%" />
@@ -460,15 +468,17 @@ Como dito anteriormente que a mediana consiste em ordenar o conjunto de dados, n
 Figura 5.8: Remoção de ruído <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 103]</span>
 </p>
 </div>
+<p><strong>Como o filtro da Média não usa a convolução e o filtro gaussiana sim, é melhor que a ódem dos dois filtros seja trocada, com o filtro do média aparecendo isolado no final</strong></p>
 </div>
-<div id="gaussiano" class="section level2">
-<h2><span class="header-section-number">5.4</span> Gaussiano</h2>
-<p>Filtro de Gauss é um filtro simétrico (isotrópico) usado para suavizar imagens. Ele funciona análogo a um filtro de média ponderada, mas com um padrão, isto é, dá ênfase ao pixel central da máscara (<em>kernel</em>) e menor ênfase a medida que os demais se distanciam dele, seguindo um gradiente muito similar à distribuição gaussiana. O “similar” se deve somente ao fato que será necessário truncamentos, assim, havendo erros e por ser desconsiderado a constante multiplicadora, o que melhora o perfil da função para aplicação no PDI.</p>
+<div id="filtro-gaussiano" class="section level2">
+<h2><span class="header-section-number">5.4</span> Filtro Gaussiano</h2>
+<p>Filtro de Gauss é um filtro simétrico (isotrópico) usado para suavizar imagens. Ele funciona análogo a um filtro de média ponderada, mas com um padrão, isto é, dá ênfase ao pixel central da máscara (<em>kernel</em>) e menor ênfase a medida que os demais se distanciam do centro, seguindo um gradiente muito similar à distribuição gaussiana. O “similar” se deve somente ao fato que será necessário truncamentos, assim, havendo erros e por ser desconsiderado a constante multiplicadora, o que melhora o perfil da função para aplicação em PDI.</p>
 <ul>
 <li><p><em>Função gaussiana:</em> <span class="math display">\[g(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</span></p></li>
 <li><p><em>Função gaussiana modificada:</em> <span class="math display">\[g(x) = e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</span></p></li>
 </ul>
-<p>Note que a função tem formato de sino, que varia de acordo com os valores atribuídos ao, <span class="math inline">\(\sigma\)</span>, o qual dependerá da ênfase desejada no cálculo. A medida que <span class="math inline">\(\sigma\)</span> aumenta, maior é o peso dado às “caldas”, no caso, aos <em>pixels</em> mais distantes do <em>pixel</em> central. Característica representada no gráfico <a href="filtros.html#fig:funcaoGaussiana">5.9</a>.</p>
+<p><strong>Aqui as equações estão bem melhores que antes no texto. Só flata a numeração!! :-)</strong></p>
+<p>Note na Figura x que a função tem formato de sino, variando de acordo com os valores atribuídos ao <span class="math inline">\(\sigma\)</span> ou desvio padrão, que dependerá da ênfase desejada no cálculo <strong>(de quê?)</strong>. A medida que <span class="math inline">\(\sigma\)</span> aumenta, maior é o peso dado às “caldas” da função, no caso, aos <em>pixels</em> mais distantes do centro do <em>kernel</em>. Essa característica é representada no gráfico da Figura <a href="filtros-digitais.html#fig:funcaoGaussiana">5.9</a>.</p>
 <p>A fim de que o <em>pixel</em> central da máscara esteja em <span class="math inline">\((0,0)\)</span>, considera-se <span class="math inline">\(\mu=0\)</span>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:funcaoGaussiana"></span>
@@ -477,17 +487,17 @@ Figura 5.8: Remoção de ruído <span class="citation">[<a href="#ref-gonzalez20
 Figura 5.9: Função gaussiana com <span class="math inline">\(\mu=0\)</span> e diferentes <span class="math inline">\(\sigma\)</span>
 </p>
 </div>
-<p>O filtro gaussiano 2D é gerado através da convolução de dois vetores da mesma função - a imagem se refere ao subconjunto do contradomínio -, sendo estas, normalmente, oriundas da mesma função gaussiana modificada. De forma alternativa, ele também pode ser construído a partir da i-ésima linha do Triângulo de Pascal que corresponde ao tamanho do <em>kernel</em> desejado. Como o método é o mesmo para as duas fontes, explicaremos ele utilizando como fonte a função gaussiana modificada.</p>
-<p>O procedimento primário é obter a imagem da função, mas para obter um filtro com intuito gaussiano se deve selecionar a amostragem dos pontos no intervalo de <span class="math inline">\(\pm 2.5\sigma\)</span> ou <span class="math inline">\(\pm 3.5\sigma\)</span> <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 114]</span>. Assim, optando-se pela primeira opção, procura-se <span class="math inline">\(g(-3)\)</span>, <span class="math inline">\(g(-2)\)</span>, <span class="math inline">\(g(-1)\)</span>, <span class="math inline">\(g(0)\)</span>, <span class="math inline">\(g(1)\)</span>, <span class="math inline">\(g(2)\)</span> e <span class="math inline">\(g(3)\)</span>. Entretanto, como alguns valores têm infinitas casas decimais, devemos truncá-los, no qual foi preferido com cinco casas decimais.</p>
+<p>O Filtro Gaussiano 2D é gerado através da convolução de dois vetores da mesma função - a imagem se refere ao subconjunto do contradomínio -, sendo estas, normalmente, oriundas da mesma função gaussiana modificada. De forma alternativa, ele também pode ser construído a partir da i-ésima linha do Triângulo de Pascal que corresponde ao tamanho do <em>kernel</em> desejado. Como o método é o mesmo para as duas fontes, explicaremos utilizando como fonte a função gaussiana modificada.</p>
+<p>O procedimento primário é obter a imagem da função, mas para obter um filtro com intuito gaussiano se deve selecionar a amostragem dos pontos no intervalo de <span class="math inline">\(\pm 2.5\sigma\)</span> ou <span class="math inline">\(\pm 3.5\sigma\)</span> <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">8</a>, p. 114]</span>. Assim, escolhendo a pela primeira opção, procura-se <span class="math inline">\(g(-3)\)</span>, <span class="math inline">\(g(-2)\)</span>, <span class="math inline">\(g(-1)\)</span>, <span class="math inline">\(g(0)\)</span>, <span class="math inline">\(g(1)\)</span>, <span class="math inline">\(g(2)\)</span> e <span class="math inline">\(g(3)\)</span>. Entretanto, como alguns valores têm infinitas casas decimais, devemos truncá-los. Aqui escolhemos o uso de cinco casas decimais.</p>
 <ul>
 <li><span class="math inline">\(g(-3) = g(3) = 0,01110\)</span></li>
 <li><span class="math inline">\(g(-2) = g(2) = 0,13533\)</span></li>
 <li><span class="math inline">\(g(-1) = g(1) = 0,60653\)</span></li>
 <li><span class="math inline">\(g(0) = 1\)</span></li>
 </ul>
-<p>Então, considera-se o menor valor como 1, no caso <span class="math inline">\(f(3)\)</span> e <span class="math inline">\(f(-3)\)</span>, e interpolamos os demais, truncando-os com propósito de obter a parte inteira. A divisão por 224 é oriunda da soma dos pesos da média. Pronto, temos a máscara gaussiana 1D necessária:</p>
+<p>Então, considera-se o menor valor como 1, no caso <span class="math inline">\(f(3)\)</span> e <span class="math inline">\(f(-3)\)</span>, e interpolamos os demais, truncando-os com propósito de obter a parte inteira. A divisão por 224 é oriunda da soma dos valores encontrados. Pronto, temos a máscara gaussiana 1D necessária:</p>
 <p><span class="math inline">\(\frac{1}{224}\begin{bmatrix}1 &amp; 12 &amp; 54 &amp; 90 &amp; 54 &amp; 12 &amp; 1\end{bmatrix}\)</span></p>
-<p>Com a máscara em mãos, convoluciona-se os seguintes fatores:</p>
+<p>Com a máscara em mãos, convoluciona-se os seguintes fatores: <strong>não entendi!</strong></p>
 <ul>
 <li><p><span class="math inline">\(\frac{1}{224}\begin{bmatrix}1 &amp; 12 &amp; 54 &amp; 90 &amp; 54 &amp; 12 &amp; 1\end{bmatrix}\)</span></p></li>
 <li><p><span class="math inline">\(\frac{1}{224}\begin{bmatrix}1 \\ 12 \\ 54 \\ 90 \\ 54 \\ 12 \\ 1\end{bmatrix}\)</span> é a transposta da máscara 1D</p></li>
@@ -502,6 +512,11 @@ Figura 5.10: Imagem com diferentes tamanhos de filtro gaussiano. (Adaptado:<span
 </p>
 </div>
 <p>Nesse exemplo, temos um exemplo similar ao usado no filtro de média, porém, usando-se o filtro gaussiano. A imagem de entrada (a) tem tamanho 500x500 onde foram aplicados filtros de diferentes tamanhos, 3x3(b) ; 5x5(c) ; 9x9(d) ; 15x15(e) e 35x35(f). Note que, ao contrário do exemplo anterior, há uma maior preservação da nítidez, todavia não seria um filtro eficiente para redução de ruído. Essa característica é devido ao maior peso dado ao <em>pixel</em> central do <em>kernel</em>.</p>
+<p>**Precisa melhorar esta seção. Veja:</p>
+<p><a href="http://proceedings.sbmac.org.br/sbmac/article/download/477/483" class="uri">http://proceedings.sbmac.org.br/sbmac/article/download/477/483</a></p>
+<p><a href="https://docs.opencv.org/master/d4/d13/tutorial_py_filtering.html" class="uri">https://docs.opencv.org/master/d4/d13/tutorial_py_filtering.html</a></p>
+<p><a href="https://matthew-brett.github.io/teaching/smoothing_intro.html" class="uri">https://matthew-brett.github.io/teaching/smoothing_intro.html</a></p>
+<p>e também no livro do trucco e verry</p>
 
 </div>
 </div>
@@ -529,7 +544,7 @@ Figura 5.10: Imagem com diferentes tamanhos de filtro gaussiano. (Adaptado:<span
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>Adaptado de <a href="https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html" class="uri">https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html</a><a href="filtros.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>Adaptado de <a href="https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html" class="uri">https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html</a><a href="filtros-digitais.html#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
