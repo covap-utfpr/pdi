@@ -451,7 +451,7 @@ Figura 5.7: Exemplo de uso do desfoque <span class="citation">[<a href="#ref-gon
 </div>
 <div id="filtro-da-mediana" class="section level2">
 <h2><span class="header-section-number">5.3</span> Filtro da Mediana</h2>
-<p>A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em colocar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta <strong>coloque uma referência aqui. o Trucco e Verry, por exemplo</strong>, que tem como característica a ocorrencia de pixels pretos e brancos.
+<p>A mediana é um filtro não linear que utiliza como princípio a própria técnica estatística, que consiste em colocar um conjunto de dados em ordem e selecionar o valor central. Esse tipo de filtro é muito eficiente na remoção de ruído, principalmente o tipo de ruído conhecido como ruído sal e pimenta, que tem como característica a ocorrencia de pixels pretos e brancos.
 Como dito anteriormente, a mediana consiste em ordenar o conjunto de dados. Nesse caso os valores da vizinhança do <em>píxel</em>. Se usarmos uma vizinhança de tamanho 3x3, a mediana será o quinto maior valor, pois consideramos também o valor do <em>píxel</em> central na vizinhança ordenada.</p>
 <p>Na figura <a href="filtros-digitais.html#fig:placaEletronicaMediana">5.8</a>, temos um exemplo mostrando uma imagem de raios X de uma placa de circuitos eletrônicos com a presença de ruído tipo sal e pimenta (a). A figura também apresenta as respectivas aplicações de um filtro da média (b) e do filtro da mediana (c), ambos com <em>kernel</em> de tamanho 3x3. Na figura, é possível perceber o quanto o filtro da mediana se sai melhor na remoção do ruído.</p>
 
@@ -488,7 +488,7 @@ Figura 5.9: Função gaussiana com <span class="math inline">\(\mu=0\)</span> e 
 </ul>
 <p>Então, considera-se o menor valor como 1, no caso <span class="math inline">\(f(3)\)</span> e <span class="math inline">\(f(-3)\)</span>, e interpolamos os demais, truncando-os com propósito de obter a parte inteira. A divisão por 224 é oriunda da soma dos valores encontrados. Pronto, temos a máscara gaussiana 1D necessária:</p>
 <p><span class="math inline">\(\frac{1}{224}\begin{bmatrix}1 &amp; 12 &amp; 54 &amp; 90 &amp; 54 &amp; 12 &amp; 1\end{bmatrix}\)</span></p>
-<p>Com a máscara em mãos, convoluciona-se os seguintes fatores: <strong>não entendi!</strong></p>
+<p>Com a máscara em mãos, convoluciona-se os seguintes fatores:</p>
 <ul>
 <li><p><span class="math inline">\(\frac{1}{224}\begin{bmatrix}1 &amp; 12 &amp; 54 &amp; 90 &amp; 54 &amp; 12 &amp; 1\end{bmatrix}\)</span></p></li>
 <li><p><span class="math inline">\(\frac{1}{224}\begin{bmatrix}1 \\ 12 \\ 54 \\ 90 \\ 54 \\ 12 \\ 1\end{bmatrix}\)</span> é a transposta da máscara 1D</p></li>
