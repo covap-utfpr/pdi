@@ -16,12 +16,12 @@ Esse site foi desenvolvido pelo grupo **COVAP** (Computação Visual Aplicada) q
 Os conteúdos se encontram organizados na seguinte estrutura:
 
 - [Introdução](#intro)
-- [Formação da imagem](#formacao-da-imagem)
+- [Formação da imagem](#formação-da-imagem)
 - [Transformações geométricas](#transformacões-geométricas)
 - [Transformações radiométricas](#transformações-radiométricas)
-- [Filtros](#filtros)
+- [Filtros Digitais](#filtros-digitais)
 - [Segmentação](#segmentação)
 
-Lembramos ainda que todo o material está hospedado no [Github](https://github.com/covap-utfpr/pdi), agradeçemos então todo apontamento de erros e sugestões, para que assim consigamos sempre disponibilizar um conteudo revisado e livre de quaisquer erros.
+Lembramos ainda que todo o material está hospedado no [Github](https://github.com/covap-utfpr/pdi), agradeçemos então todo apontamento de erros e sugestões, para que assim consigamos sempre disponibilizar um conteúdo revisado e livre de quaisquer erros.
 
 <!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
