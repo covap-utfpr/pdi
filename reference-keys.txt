@@ -10,10 +10,15 @@ fig:analise
 fig:aquisicaoimagem
 fig:barreiraluz
 fig:geometriapinhole
+eq:semelhancaTriangulos
 fig:lente
+eq:relacaoDistancias
+eq:relacaoTamanhoObjetoImagem
 fig:foco
 fig:profundidade
+eq:FOV
 fig:campovisao
+eq:FOVexemplo
 fig:diferentesprofundidades
 fig:sensor
 fig:exposicao
@@ -23,7 +28,9 @@ fig:bayer
 fig:sensorarray
 fig:amostragemquant
 fig:quantizacao
+eq:imagemDigital
 fig:imagemdigital
+eq:tamanhoBits
 fig:tabelabits
 fig:resolucaoespacial
 fig:reducaoprofundidade
