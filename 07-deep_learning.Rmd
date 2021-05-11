@@ -1,0 +1,269 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+  bookdown::gitbook:
+    highlight: pygments
+---
+
+# Deep Learning em visão computacional 
+Antes de iniciarmos o estudo sobre deep learning, e mais especificamente sobre redes neurais artificiais convolucionais, é importante termos uma visão ampla sobre a área e suas subdivisões, para conseguirmos nos localizar em meio a essa área que cresce cada vez mais. Por isso começaremos falando um pouco sobre inteligência artificial e suas subdivisões, além de sua conexão e uso com visão computacional, que é o nosso foco.
+
+## Caracterização de AI, Machine Learning e Deep Learning
+Esses três termos costumam causar certa confusão, principalmente em pessoas que estão começando a estudar essa área. De maneira geral, o termo Inteligência Artificial (IA) denomina uma área que possui muitas vertentes e tópicos de estudos, onde a maioria tem o foco em conseguir fazer os computadores realizarem tarefas complexas, que anteriormente eram realizadas exclusivamente por humanos.
+
+No começo dos estudos sobre IA foram tentados e resolvidos muitos problemas que eram considerados difíceis para seres humanos, mas relativamente fáceis para os computadores[@goodfellow2016, p.1]. Esses eram problemas que podiam ser descritos formalmente, por meio de regras matemáticas, como exemplo temos o jogo de xadrez, onde, em 1997 o campeão Garry Kasparov perdeu para o IBM Deep Blue(Figura \@ref(fig:deepBlue)).
+
+(ref:deepBlue) IBM Deep Blue [@img:deepblue]
+
+```{r deepBlue, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:deepBlue)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/deep-blue.jpg'))
+```
+
+Com o tempo começamos a perceber que a dificuldade não residia nesses problemas, mas naqueles que são realizados facilmente, até instintivamente e intuitivamente pelos humanos, como reconhecer rostos familiares, entender linguagens, etc. A questão é que os seres humanos, no dia a dia, recebem e processam quantidades enormes de informações, e tentar fazer os computadores realizarem essas atividades somente com regras descritas por nós não era algo viável, por isso os pesquisadores começaram a desenvolver técnicas onde o próprio computador, através de algoritmos, aprendesse a retirar essas regras e informações sozinho de bases de dados brutos, a isso chamamos de Machine Learning(Aprendizado de Máquina).
+
+Dentro da área de Machine Learning, temos um conjunto de técnicas e áreas de pesquisa, sendo que uma delas utiliza um modelo baseado na biologia de cérebros biológicos, contendo neurônios e conexões conhecidas como Redes Neurais. Na Figura \@ref(fig:cajalCortex) temos uma representação dos neurônios do córtex cerebral humano, onde podemos ver as conexões formadas por eles, que se assemelham com os modelos de redes neurais como o da Figura \@ref(fig:coloredNeuralNetwork).
+
+(ref:cajalCortex) Representação da conexão de neurônios no córtex cerebral [@cajal, p.363]
+
+```{r cajalCortex, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:cajalCortex)', fig.align='center', out.width='90%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/cajal-cortex.png'))
+```
+
+Atualmente, como ouvimos muito se falar sobre IAs, temos a tendência de pensar que essa é uma técnica moderna, mas ao contrário, a ideia de fazer os computadores imitarem o esquema de funcionamento do cérebro remonta a 1943, quando Warren McCulloch e Walter Pitts sugeriram a ideia em seu artigo “A logical calculus of the ideas immanent in nervous activity”[@mcculloch1943].
+
+Como pode ser visto na Figura \@ref(fig:coloredNeuralNetwork), as redes neurais são formadas por camadas, sendo que os dados entram pela camada de Input, são processadas nas camadas Hidden e temos os dados de saída na camada Output. Cada uma dessas camadas é formada por um número de neurônios(representados pelos círculos) e tem as conexões representadas pelas setas. Por enquanto não nos aprofundaremos tanto no funcionamento das redes neurais, que serão abordadas na seção x.
+
+(ref:coloredNeuralNetwork) Rede neural artificial [@img:coloredNeuralNetwork]
+
+```{r coloredNeuralNetwork, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:coloredNeuralNetwork)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/colored-neural-network.png'))
+```
+
+Nos últimos anos, temos visto um leque de aplicações cada vez maior para as técnicas de IA. Nosso objetivo nesse material é introduzir, principalmente, o uso das Redes Neurais Artificiais na área da Visão Computacional, que é identificada como uma das subáreas da Inteligência Artificial pois busca reproduzir algumas das capacidades humanas a partir de sistemas autônomos. O principal interesse desta área é fazer com que computadores desempenhem funções semelhantes à visão humana, sendo capazes de receber dados visuais e com eles realizar reconhecimentos, classificações e análises. Análogo ao processo de aprendizado dos seres humanos, identifica-se que a melhora no desempenho da visão computacional está fortemente interligada com a evolução do aprendizado de máquina (machine learning), outro segmento da inteligência artificial.
+
+Antes de entrarmos realmente no assunto de redes neurais, vamos apresentar, de maneira resumida, alguns tópicos principais da área de Machine Learning, pois como dito anteriormente, o deep learning e as redes neurais estão dentro dessa área, e o entendimento desses tópicos pode auxiliar no entendimento pleno dos tópicos futuros.
+
+### Aprendizado supervisionado e não supervisionado
+Dentro dos algoritmos de machine learning existe uma característica que os separa em diferentes tipos, baseado em sua forma de aprendizado, sendo os principais os algoritmos de aprendizado supervisionado e não supervisionado. 
+
+Na aprendizagem supervisionada os algoritmos têm previamente os pares entrada-saída, ou seja, para cada entrada já temos conhecimento prévio de como deve ser a saída[@russell2016, p.695], e a partir disso nosso algoritmo deve aprender a generalizar bem as entradas. Podemos formalizar isso da seguinte forma[@russell2016, p.695]:
+
+Dado um conjunto de treinamento de n pares $(x_1,y_1), (x_2,y_2),\dots,(x_n,y_n)$ onde $x_i$ são as entradas e $y_i = f(x_i)$ as saídas, nosso algoritmo deve descobrir uma função $h$, conhecida como hipótese, que aproxime $f$. Para sabermos se nossa hipótese aproxima bem $f$ após ter treinado o algoritmo, utilizamos um conjunto de testes - que contém exemplos diferentes do conjunto de treinamento - e avaliamos o quão bem o algoritmo generaliza(dá respostas corretas) as novas entradas. 
+Já na aprendizagem não supervisionada não há nenhum feedback para as saídas do algoritmo, ou seja, ele recebe somente os dados de entrada. Por isso, uma das principais tarefas designadas a esses tipos de algoritmos é a de clustering(agrupamento), onde o algoritmo aprende a encontrar padrões nos dados de entrada e separá-lo em grupos.
+
+### Redes Neurais Artificiais
+Parte da base teórica que fundamenta o aprendizado profundo surgiu inicialmente como  modelos para entender o aprendizado, ou seja, como o cérebro funciona. Desta forma, estas teorias ficaram conhecidas como Redes Neurais, uma das áreas do aprendizado profundo que mais cresceram nos últimos anos [@goodfellow2016, p.1]. Atualmente, os conceitos de Redes Neurais abordam princípios mais genéricos além da perspectiva da neurociência. Mesmo que as Redes Neurais não sejam capazes de explicar muito sobre o cérebro, não podendo ser encaradas como modelos realistas da função biológica, vários aspectos do aprendizado ainda continuam sendo inspirações.  
+
+<!-- As redes foram pensadas para adquirir o conhecimento por um processo de aprendizagem. Semelhante ao que ocorre no cérebro, as interações entre os neurônios, ou pesos sinápticos, são responsáveis por armazenar o conhecimento. Em termos práticos, o conhecimento de uma rede seria a capacidade de uma máquina de realizar funções complexas de forma autônoma, como classificações e reconhecimentos de padrões.  As redes também são capazes de generalizar a informação aprendida,  extraindo características essenciais de exemplos e garantido respostas coerentes para novos casos[@haykin1999, p.28]. -->
+
+Mesmo que o termo Rede Neural só tenha começado a ganhar destaque nos últimos anos, os primeiros estudos teóricos começaram por volta de 1940[@goodfellow2016, p.12]. Um dos primeiros trabalhos publicados foi “A Logical Calculus of the Ideas Immamente in Nervous Activity” de 1943, em que os autores, Warren McCulloch e Walter Pitts, apresentaram um modelo artificial de um neurônio a partir da teoria de redes lógicas de nós[@goodfellow2016, p.14].
+
+A Figura apresenta uma simplificação de um neurônio biológico, dividido em três partes principais: o corpo da célula, os dendritos e o axônio. Um neurônio recebe informações, ou impulsos nervosos, a partir dos dendritos. Estas informações são processadas no corpo celular e novos impulsos são transmitidos através do axônio para outros neurônios. A comunicação entre os neurônios, a sinapse, controla a transmissão dos impulsos, determinando o fluxo de informações com base na intensidade do sinal recebido[@haykin1999, p.36].
+
+(ref:neuron) Representação de um neurônio biológico[@img:neuronCS]
+
+```{r neuron, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:neuron)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/neuron.png'))
+```
+
+Por analogia, McCulloch e Pitts descreveram matematicamente um neurônio artificial como um modelo com $n$ terminais de entrada $x_m$, representando os dendritos, e apenas um ponto de saída $y_k$ como axônio (Figura ). Para simular o comportamento das sinapses, cada entrada $x_m$ é associada com um peso $w_{km}$, sendo que o somatório representa a intensidade do sinal recebido ($v_k$).
+
+(ref:artificialNeuron) Representação matemática de um neurônio artificial[@haykin1999, p.36]
+
+```{r artificialNeuron, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:artificialNeuron)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/artificial-neuron.png'))
+```
+
+O sinal de resposta é estabelecido por uma função de ativação $\varphi$ aplicada ao valor da soma ponderada, e que apresenta comportamento limiar como na equação, em que a saída é zero ou um dependendo do valor limite (Figura). O modelo também pode incluir um bias ($b_k$) no somatório para aumentar o grau de liberdade da função de ativação e garantir que um neurônio não apresente saída nula mesmo que todas as entradas sejam nulas. O valor do bias é ajustado junto com os pesos sinápticos[@haykin1999, p.37].
+$$y_k=\varphi(\upsilon_k)=
+\begin{cases}
+ 1 \text{ se } \upsilon_k > 0 \\ 
+ 0 \text{ se } \upsilon_k < 0 
+\end{cases}$$
+
+(ref:limiarFunc) Função de ativação de limiar[@haykin1999, p.36]
+
+```{r limiarFunc, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:limiarFunc)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/limiar-function.png'))
+```
+
+O modelo proposto por McCulloch e Walter Pitts poderia realizar classificações em duas categorias, entretanto os pesos precisavam ser ajustados manualmente, pois não tinham a capacidade de aprender[@goodfellow2016, p.14]. Uma das primeiras discussões sobre regras de aprendizagem nas correções dos pesos sinápticos foi publicada em 1949 no livro de Donald Hebb “The Organization of Behavior”[@haykin1999, p.64]. No postulado de Hebb se apresenta que a conexão entre os neurônios é fortalecida cada vez que é utilizada, assim, os caminhos neurais no cérebro são continuamente modificados e formam agrupamentos.
+
+A primeira Rede neural com capacidade de aprender os pesos das categorias foi o Perceptron apresentado por Frank Rosenblatt em 1958[@haykin1999, p.65]. O Perceptron tinha arquitetura semelhante a da Figura, uma rede de camada única além da entrada, e de aprendizado supervisionado. Inicialmente, foram lançadas grandes expectativas sobre as possíveis aplicações do Perceptron, entretanto, as limitações logo começaram a ser destacadas, muitas descritas no livro de Marvin Minsky e Seymour Papert publicado em 1969. Um perceptron de camada única realiza apenas a classificação de padrões linearmente separáveis em duas categorias, não podendo, por exemplo, representar o operador de lógica XOR, que não é linearmente separável[@goodfellow2016, p.14].
+
+(ref:perceptron) Arquitetura Perceptron[@haykin1999, p.47]
+
+```{r perceptron, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:perceptron)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/one-layer-perceptron.png'))
+```
+
+
+A imagem negativa sobre o perceptron e as limitações tecnológicas diminuiram a popularidade das redes neurais, reduzindo o número de pesquisas na área até os anos 80[@goodfellow2016, p.16]. O interesse pelas redes neurais começou a aumentar principalmente pelo uso da abordagem de processamento paralelo distribuído, como o aplicado no algoritmo de retropropagação (back-propagation) apresentado por Rumelhart, Hinton e Williams (1986). Ainda hoje este é o algoritmo mais utilizado para aprendizado profundo e foi crucial para o treinamento dos perceptrons de múltiplas camadas MLP[@haykin1999, p.184].
+
+#### Rede MLP
+Para que a rede de perceptrons de múltiplas camadas pudesse aprender seria necessário a retropropagação dos erros de trás para frente entre as camadas, tornando possível a minimização da função custo. A necessidade do cálculo da derivada do erro implicou no aparecimento de funções de ativação diferentes do utilizado no modelo original do perceptron, que não fossem de limitação abrupta Figura - ativação limiar[@haykin1999, p.184]. Considerando que as funções de ativação são um dos elementos utilizados para a inclusão de não linearidade, ponto chave para que os modelos não se limitem à padrões linearmente separáveis, a abordagem foi a incorporação de funções não lineares, mas “bem comportadas“, ou seja,  que são “quase” lineares contínuas e deriváveis. 
+
+Como as funções de ativação são responsáveis pelo intermédio das respostas entre as camadas, deveriam ser considerados formatos não lineares que não alterassem de forma radical a resposta da rede. Os perfis que mais se aproximavam destes comportamentos são as funções sigmóides, tangente hiperbólica e a função logística[@rateke1999].
+
+A função sigmóide tem um formato em S, em que nas extremidades a função tem um comportamento constante, o que fica evidente no gráfico da função logística (Figura). O parâmetro a da equação logística na equação permite parametrizar o comportamento da função, alterando a inclinação. Quanto maior o valor de a, mais a função sigmóide se aproxima da função de limiar.
+
+$$\varphi(\upsilon)=\frac{1}{1+\exp(-a\upsilon)}$$
+
+Diferente da função limiar que assume valores $0$ ou $1$, a função logística tem resultados em um intervalo contínuo entre $0$ e $1$[@haykin1999, p.40]. A função sigmóide também é diferenciável, enquanto que a função de limiar não. Uma forma anti-simétrica da sigmóide é a função tangente hiperbólica na equação. A função tangente hiperbólica é definida no intervalo $-1$ a $1$, o que permite a função sigmóide assumir também valores negativos[@haykin1999, p.40].
+
+$$\varphi(\upsilon)=\tanh(a\upsilon)$$
+
+Ao se propor um método eficiente no treinamento dos perceptrons de múltiplas camadas se tornou interessante a inclusão de uma ou mais camadas de neurônios ocultos entre a camada de entrada e de saída. A combinação de mais camadas permitiu que a rede fosse implementada para problemas mais complexos, não se restringindo às transformações lineares do modelo original do perceptron. Por meio das camadas ocultas é possível extrair de forma progressiva características importantes que definem os padrões de entrada[@haykin1999, p.184].
+
+O neurônio matemático proposto inicialmente foi estendido para uma estrutura de conexões de elementos de processamento, os nós da rede. Os elementos foram organizados em camadas, e foram propostas diferentes configurações de conexões. Os formatos mais populares são definidos como uma arquitetura de rede neural, reconhecida pelo número de camadas da rede, número de nós em cada camada e tipo de conexão entre os nós. 
+
+A arquitetura da rede MLP é composta por uma camada de entrada que recebe o sinal, uma camada de saída que retorna o resultado, e entre elas um número arbitrário de camadas ocultas (Figura).  Geralmente, a escolha do número de nós na camada de entrada e saída é direta. Por exemplo, em uma aplicação com imagens, o número de neurônios na camada de entrada pode corresponder ao número de pixels da imagem. Neste caso, a saída poderia ser projetada com um único neurônio indicando a probabilidade de um resultado positivo. Já o arranjo das camadas intermediárias não é tão simples, muitas vezes é definido empiricamente com base nas características dos dados de entrada e na complexidade do problema (CARVALHO; BRAGA; LUDERMIR, 1998).
+
+Uma classificação comum das arquiteturas é com base no padrão de conexões, sendo identificadas duas classes principais: redes diretas (feed forward) e redes recorrentes[@haykin1999, p.46]. O modelo MLP tem arquitetura do tipo feedforward, em que a propagação da informação ocorre em uma única direção e os nós de uma mesma camada não são conectados entre si. A saída de uma camada é usada como entrada na próxima, sem loops, ou seja, não são enviadas de volta[@haykin1999, p.47]. 
+
+Já nas tipologias recorrentes ocorre o feedback, um processo de realimentação, em que as saídas de nós são reinseridas como entradas em nós anteriores (Figura). O comportamento dos ciclos é dinâmico controlado por atrasos unitários[@haykin1999, p.49]. A ideia do modelo é estimular sinais em efeito cascata com dependência temporal.
+
+#### Backpropagation
+Para explicar o algoritmo backpropagation no treinamento de redes neurais utilizaremos um exemplo de aplicação de rede MLP para o reconhecimento de números. O código da rede é uma implementação do livro online “Neural Networks and Deep Learning” escrito por Michael Nielsen. Os dados de treinamento foram retirados  do MNIST data set, que contém mais de 60000 imagens escaneadas de números escritos juntamente com os rótulos de classificação. As informações foram coletadas pelo Instituto Nacional de Padrões e Tecnologia dos Estados Unidos (NIST), sendo que as imagens são em escala de cinza e de tamanho 28 x 28 pixels como na Figura.
+
+O conjunto de dados originais do MNIST é dividido em duas partes, uma que contém 60000 imagens para treinamento e a outra com 10000 imagens para a fase de teste em que se avalia a acurácia da rede treinada para reconhecer os dígitos. No exemplo do autor Michael Nielsen, os dados de treinamento original também foram reorganizados em dois grupos, o primeiro com 50000 imagens que foram utilizados no treinamento e a outra parte (10000) foi reservada para a validação em que se definiu os hiperparâmetros da rede. 
+
+Considerando imagens de 28x28 bits os dados de entrada foram definidos como um vetor $x$ de dimensão $784$, em que cada posição corresponde a um valor de pixel da imagem. Para o vetor $y$ de saída da rede se estabeleceu a dimensão $10$, em que cada posição faz referência a um dígito de $0$ a $9$. Assim, se uma entrada corresponde ao número $3$ então a saída esperada será o vetor transposto na forma $y(x)=(0,0,0,1,0,0,0,0,0,0)^T$. Com base no formato dos dados de entrada e saída da rede, o exemplo foi construído com uma rede MLP de três camadas como na Figura, com a primeira camada tendo $784$ nós e a última camada com $10$ nós. Na camada do meio, a camada oculta, utilizaremos $30$ nós, mas vale destacar que o autor Michael Nielsen definiu o número de nós após alguns testes otimizando a escolha dos parâmetros da rede.
+
+Para carregar os dados e configurá-los no formato proposto utiliza-se o método “load_data_wrapper()”. Os dados são retirados do arquivo zip “mnist.pkl.gz'” e subdivididos dentro do método “load_data()” que retorna para o “load_data_wrapper()”, como dados de treinamento, validação e de teste. A função geral é chamada da seguinte forma:
+
+```python
+training_data, validation_data, test_data = load_data_wrapper()
+```
+
+No programa, a rede é construída a partir do comando  Network([784, 30, 10], cost=QuadraticCost), em que cada argumento corresponde ao número de nós na camada. Os atributos da classe Network incluem o número de camadas (num_layers), o número de nós em cada camada (sizes), os pesos e bias iniciais que são gerados de forma aleatória pelo método “default_weight_initializer()”, e a função custo (cost). A função custo aplicada neste exemplo, o erro quadrático (MSE), é definida na classe “QuadraticCost”.
+
+```python
+class Network(object):
+    def __init__(self, sizes, cost=QuadraticCost):
+        self.num_layers = len(sizes)
+        self.sizes = sizes
+        self.default_weight_initializer()
+        self.cost=cost
+```
+
+A seguir apresentaremos um resumo da teoria matemática do método backpropagation e para facilitar este processo utilizaremos a nomenclatura dos elementos de uma rede neural com base no livro “Introduction To The Theory Of Neural Computation” (HERTZ, KROGH, PALMER, 2018, pg. 116). No treinamento de uma rede como a da Figura (rede MLP reconhecimento número) é apresentado um conjunto de treinamento $\{\xi_k^\mu,\zeta_i^\mu\}$ , em que cada padrão $(\mu=1, 2,\dots, p)$ apresentado corresponde a um par de entrada ($\xi_k^\mu$) e saída esperada ($\zeta_i^\mu$). Neste exemplo, o número de padrões no treinamento é $p=50000$. O índice $k$ na camada de entrada faz referência ao valor em cada nó da camada, e o índice $i$ aos nós da camada da saída. A resposta final da rede é identificada como $O_i$ e o sinal de saída da camada oculta é $V_j$. A conexão entre a camada de entrada e a oculta é estabelecida pelos pesos $w_{jk}$, e os pesos $W_{ij}$ conectam a camada de saída com a intermediária. 
+
+O backpropagation é um método supervisionado em que o treinamento ocorre em duas fases (HAYKIN, 1999, pg. 163). Na etapa foward, uma entrada é apresentada para a rede e de acordo com as conexões estabelecidas entre as camadas é propagado sucessivamente os sinais de respostas até a camada de saída, gerando um resultado que se espera ser o mais próximo do padrão. Cada nó de uma camada  seguinte se conecta com todos os nós da camada anterior, sendo que o sinal recebido por este nó é uma ponderação dos pesos de todas as conexões. O sinal de entrada de cada nó recebe um bia e é passado para a próxima camada como uma resposta de uma função de ativação ($g$). A resposta de saída de um nó será denominada $V_j$ se o sinal for para uma camada intermediária, ou $O_i$ se for direcionado para a camada de saída.  
+
+Imagine que um nó ($j$) da camada intermediária recebe como entrada:
+
+$$h_j^\mu=\sum_{k}w_{jk}\xi_k^\mu$$
+
+e produz como resposta:
+
+$$V_j^\mu=g(h_j^\mu)=g(w_{jk}\xi_k^\mu)$$
+
+Assim, um nó na camada de saída recebe como entrada o sinal propagado:
+
+$$h_i^\mu=\sum_kW_{ij}V_j^\mu=\sum_kW_{ij}g(\sum_kw_{jk}\xi_k^\mu)$$
+
+gerando como resposta da saída da rede:
+
+$$O_i^\mu=g(h_i^\mu)=g(\sum_kW_{ij}V_j^\mu)=g(\sum_kW_{ij}g(\sum_kw_{jk}\xi_k^\mu))$$
+
+No programa, a fase forward é representada pelo seguinte método:
+
+```python
+feedforward(self, a):
+        for b, w in zip(self.biases, self.weights):
+            a = sigmoid(np.dot(w, a)+b)
+        return a
+```
+
+Neste exemplo a função de ativação é a função logística definida pelo método “sigmoid” e a sua derivada é calculada no método “sigmoid_prime”.
+
+```python
+sigmoid(z):
+    return 1.0/(1.0+np.exp(-z))
+ 
+sigmoid_prime(z):
+    return sigmoid(z)*(1-sigmoid(z))
+```
+
+Na segunda fase, backward, os pesos e bias são corrigidos camada a camada, no sentido da saída da rede até a entrada, em um processo iterativo de forma que a saída i fique cada vez mais próxima do padrão esperado Oi, reduzindo o erro (HAYKIN, 1999, pg. 163). Uma forma de avaliar como o erro é reduzido em relação às alterações dos parâmetros é determinando uma função Erro, ou custo, dependente dos pesos e bias. Adotamos como função custo o erro quadrático (MSE): 
+
+$$E[w]=\frac{1}{2}\sum_{\mu i}[\zeta_i^\mu-O_i^\mu]^2 = \frac{1}{2}[\zeta_i^\mu W_{ij}g(\sum_kw_{jk}\xi_k^\mu)]$$
+
+No programa, a função custo MSE é apresentada no método “fn(a, y)” na classe “QuadraticCost”:
+
+```python
+fn(a, y):
+        return 0.5*np.linalg.norm(a-y)**2
+```
+
+A redução do erro envolve um processo de otimização, denominado descida em gradiente, em que se busca determinar os parâmetros (pesos e bias) que minimizam a função custo (Nielsen, 2015). Neste método, a variação do erro pode ser escrita como derivadas parciais do erro em função dos pesos, compondo o vetor gradiente do erro. Como o vetor gradiente aponta no sentido de maior acréscimo do erro, a variação dos pesos é dada pelo negativo do gradiente, garantindo a redução mais rápida do erro. Assim, a regra do gradiente descendente aplicada nas conexões entre a camada oculta e de saída pode ser escrita como:
+
+$$\Delta W_{ij}=-\eta\frac{\partial E}{\partial W_{ij}}=\eta\sum_\mu[\zeta_i^\mu-O_i^\mu]g'(h_i^\mu)V_j^\mu=\eta\sum_\mu\delta_i^\mu V$$
+$$\delta_i^\mu=[\zeta_i^\mu-O_i^\mu]g'(h_i^\mu)$$
+
+A fórmula de modificações dos pesos é conhecida como regra delta e recebe o termo $\eta$, a taxa de aprendizagem, para promover uma correção gradativa, sem alterações bruscas (Nielsen, 2015). O termo $g’$ se refere a derivada da função de ativação e surge na fórmula devido a derivação da função erro. A regra delta aplicada nas conexões entre a camada oculta e de entrada utiliza a regra da cadeia pois as derivadas são em relação aos pesos $w_{jk}$, que se apresentam como dependência mais implícita ao erro. A correção dos pesos neste caso ocorre como:
+
+$$\begin{split}
+\Delta w_{ij}&=-\eta\frac{\partial E}{\partial w_{jk}}=-\eta\sum_\mu\frac{\partial E}{\partial V_j^\mu}\frac{\partial V_j^\mu}{\partial w_{jk}}=\eta\sum_{\mu i}[\zeta_i^\mu-O_i^\mu]g'(h_i^\mu)W_{ij}g'(h_j^\mu)\xi_k^\mu
+\\ \\&=\eta\sum_{\mu i}\delta_i^\mu W_{ij}g'(h_j^\mu)\xi_k^\mu=\eta\sum_\mu\delta_j^\mu\xi_k^\mu
+\end{split}$$
+
+$$\delta_j^\mu=g'(h_j^\mu)\sum_i\delta_i^\mu W_{ij}$$
+
+Esta regra também pode ser estendida para redes com mais de uma camada oculta (Fonte: rateke1999). A regra delta generalizada para a m-ésima camada de uma rede pode ser escrita como:
+
+$$\Delta w_{pq}^m=\eta\sum_\mu\delta_p^{m,\mu}V_q^{m-1,\mu}$$
+$$\delta_p^{M,\mu}=[\zeta_p^\mu-O_p^\mu]g'(h_p^{M,\mu}) \text{, para camada de saida } m=M$$
+$$\delta_p^{m,\mu}=g'(h_p^{m,\mu})\sum_r\delta_r^{m+1,\mu}w_{rp}^{m+1} \text{, para m<M}$$
+A correção dos pesos ocorre considerando as conexões entre cada duas camadas, uma mais próxima da saída ($p$) e a outra mais interna ($q$). O vetor $V_q$ representa o sinal de ativação recebido pela camada dos nós “$p$”, e quando o cálculo envolve a camada de entrada e a primeira camada oculta este vetor é o padrão de entrada ($\xi_k^\mu$).  O fator delta ($\delta$) funciona como uma memória das respostas das camadas mais externas, ou seja, para modificar os pesos de trás para frente é necessário que as conexões das camadas mantenham memória das camadas que foram alteradas anteriormente.
+O algoritmo do backpropagation é utilizado na etapa de treinamento pelo programa por meio do método “backprop”:
+
+```python
+backprop(self, x, y):
+nabla_b = [np.zeros(b.shape) for b in self.biases]
+nabla_w = [np.zeros(w.shape) for w in self.weights]
+# feedforward
+activation = x
+activations = [x] 
+zs = [] 
+for b, w in zip(self.biases, self.weights):
+ 	z = np.dot(w, activation)+b
+      zs.append(z)
+      activation = sigmoid(z)
+      activations.append(activation)
+ 
+# backward pass
+delta = (self.cost).delta(zs[-1], activations[-1], y)
+nabla_b[-1] = delta
+nabla_w[-1] = np.dot(delta, activations[-2].transpose())
+for l in range(2, self.num_layers):
+z = zs[-l]
+     	sp = sigmoid_prime(z)
+      delta = np.dot(self.weights[-l+1].transpose(), 
+delta) * sp
+      nabla_b[-l] = delta
+     	nabla_w[-l] = np.dot(delta, 
+activations[-l-1].transpose())
+return (nabla_b, nabla_w)
+```
+
+Como destacado anteriormente, a primeira fase do backpropagation é o feedforward. Nesta etapa é recebido um padrão de entrada ($x$) e os pesos e bias inicializados aleatoriamente. Após o somatório das ponderações dos pesos e bias entre duas camadas, este valor é salvo no vetor “$zs$”, e o resultado da ativação deste valor é salvo em “activations”. A entrada da próxima camada é o sinal de ativação salvo em “actvivation”. Este processo ocorre da entrada até a camada de saída, salvando os sinais de ativação das camadas ocultas ($V_j$) em “activations”.
+Na fase “backward pass”, calcula-se primeiro o delta ($\delta$) a partir da resposta da camada de saída salva como o último elemento do vetor “activations” e do padrão de saída esperado ($y$). O valor de delta neste caso, é calculado a partir do método “delta” da classe “QuadraticCost” como o produto entre a diferença da resposta de saída de rede ($a$) e do valor esperado ($y$) com a derivada do sinal de ativação da última camada:
+
+```python
+delta(z, a, y):
+   return (a-y) * sigmoid_prime(z)
+```
+
+
+## Redes neurais convolucionais(CNN)
+### Blocos de construção de uma CNN
+#### Operador de convolução
+##### Padding
+##### Stride
+#### Pooling
+#### Camadas totalmente conectadas
+### Por que usar convoluções
+#### Córtex visual
