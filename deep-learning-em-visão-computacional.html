@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xml:lang="pt-BR">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 7 Deep Learning em visão computacional | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="Capítulo 7 Deep Learning em visão computacional | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 7 Deep Learning em visão computacional | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 7 Deep Learning em visão computacional | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  
+  
+  
+
+<meta name="author" content="" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="segmentação.html"/>
+<link rel="next" href="refêrencias.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="logo"><a href="./"><img src="imagens/logo.jpeg"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Início</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introdução</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#relação-de-processamento-digital-de-imagem-visão-computacional-e-computação-gráfica"><i class="fa fa-check"></i><b>1.1</b> Relação de Processamento Digital de Imagem, Visão Computacional e Computação Gráfica</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#aplicações-processamento-digital-de-imagens"><i class="fa fa-check"></i><b>1.2</b> Aplicações Processamento Digital de Imagens</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#etapas-do-processamento-e-análise-de-imagens"><i class="fa fa-check"></i><b>1.3</b> Etapas do Processamento e Análise de Imagens</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html"><i class="fa fa-check"></i><b>2</b> Formação da imagem</a><ul>
+<li class="chapter" data-level="2.1" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#câmera-pinhole-e-geometria"><i class="fa fa-check"></i><b>2.1</b> Câmera <em>pinhole</em> e geometria</a></li>
+<li class="chapter" data-level="2.2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#lentes"><i class="fa fa-check"></i><b>2.2</b> Lentes</a></li>
+<li class="chapter" data-level="2.3" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#sensor"><i class="fa fa-check"></i><b>2.3</b> Sensor</a></li>
+<li class="chapter" data-level="2.4" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#amostragem-e-quantização"><i class="fa fa-check"></i><b>2.4</b> Amostragem e Quantização</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#amostragem"><i class="fa fa-check"></i><b>2.4.1</b> Amostragem</a></li>
+<li class="chapter" data-level="2.4.2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#quantização"><i class="fa fa-check"></i><b>2.4.2</b> Quantização</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#definição-de-imagem-digital"><i class="fa fa-check"></i><b>2.5</b> Definição de imagem digital</a></li>
+<li class="chapter" data-level="2.6" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#resolução-espacial-e-de-intensidade"><i class="fa fa-check"></i><b>2.6</b> Resolução espacial e de intensidade</a></li>
+<li class="chapter" data-level="2.7" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#pixels"><i class="fa fa-check"></i><b>2.7</b> <em>Pixels</em></a><ul>
+<li class="chapter" data-level="2.7.1" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#vizinhança"><i class="fa fa-check"></i><b>2.7.1</b> Vizinhança</a></li>
+<li class="chapter" data-level="2.7.2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#conectividade"><i class="fa fa-check"></i><b>2.7.2</b> Conectividade</a></li>
+<li class="chapter" data-level="2.7.3" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#adjacência"><i class="fa fa-check"></i><b>2.7.3</b> Adjacência</a></li>
+<li class="chapter" data-level="2.7.4" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#componente-conexa"><i class="fa fa-check"></i><b>2.7.4</b> Componente Conexa</a></li>
+<li class="chapter" data-level="2.7.5" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#medidas-de-distância"><i class="fa fa-check"></i><b>2.7.5</b> Medidas de Distância</a></li>
+<li class="chapter" data-level="2.7.6" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#operações-lógico-aritméticas"><i class="fa fa-check"></i><b>2.7.6</b> Operações Lógico-aritméticas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html"><i class="fa fa-check"></i><b>3</b> Transformacões geométricas</a><ul>
+<li class="chapter" data-level="3.1" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#definição"><i class="fa fa-check"></i><b>3.1</b> Definição</a></li>
+<li class="chapter" data-level="3.2" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#sistema-de-coordenadas-objetos-2d-e-3d"><i class="fa fa-check"></i><b>3.2</b> Sistema de coordenadas objetos (2D e 3D)</a></li>
+<li class="chapter" data-level="3.3" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#representação-vetorial-e-matricial-de-imagens-digitalizadas"><i class="fa fa-check"></i><b>3.3</b> Representação Vetorial e Matricial de Imagens digitalizadas</a></li>
+<li class="chapter" data-level="3.4" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#matrizes-em-computação-gráfica"><i class="fa fa-check"></i><b>3.4</b> Matrizes em Computação gráfica</a></li>
+<li class="chapter" data-level="3.5" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformações-em-pontos-e-objetos"><i class="fa fa-check"></i><b>3.5</b> Transformações em Pontos e Objetos</a></li>
+<li class="chapter" data-level="3.6" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-translação"><i class="fa fa-check"></i><b>3.6</b> Transformação de Translação</a></li>
+<li class="chapter" data-level="3.7" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-escala"><i class="fa fa-check"></i><b>3.7</b> Transformação de Escala</a></li>
+<li class="chapter" data-level="3.8" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-rotação"><i class="fa fa-check"></i><b>3.8</b> Transformação de Rotação</a></li>
+<li class="chapter" data-level="3.9" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#introdução-opencv"><i class="fa fa-check"></i><b>3.9</b> Introdução OpenCv</a></li>
+<li class="chapter" data-level="3.10" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#abrir-imagem-no-opencvpython"><i class="fa fa-check"></i><b>3.10</b> Abrir imagem no OpenCv(Python)</a></li>
+<li class="chapter" data-level="3.11" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#representação-matricial-da-imagem-no-opencvpython"><i class="fa fa-check"></i><b>3.11</b> Representação matricial da imagem no OpenCv(Python)</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html"><i class="fa fa-check"></i><b>4</b> Transformações radiométricas</a><ul>
+<li class="chapter" data-level="4.1" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-linear"><i class="fa fa-check"></i><b>4.1</b> Transformação Linear</a></li>
+<li class="chapter" data-level="4.2" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-logarítmica"><i class="fa fa-check"></i><b>4.2</b> Transformação Logarítmica</a></li>
+<li class="chapter" data-level="4.3" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-de-potência"><i class="fa fa-check"></i><b>4.3</b> Transformação de Potência</a></li>
+<li class="chapter" data-level="4.4" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#processamento-de-histograma"><i class="fa fa-check"></i><b>4.4</b> Processamento de histograma</a></li>
+<li class="chapter" data-level="4.5" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#equalização-do-histograma"><i class="fa fa-check"></i><b>4.5</b> Equalização do histograma</a></li>
+<li class="chapter" data-level="4.6" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#especificação-de-histograma"><i class="fa fa-check"></i><b>4.6</b> Especificação de histograma</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="filtros-digitais.html"><a href="filtros-digitais.html"><i class="fa fa-check"></i><b>5</b> Filtros Digitais</a><ul>
+<li class="chapter" data-level="5.1" data-path="filtros-digitais.html"><a href="filtros-digitais.html#convolução"><i class="fa fa-check"></i><b>5.1</b> Convolução</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="filtros-digitais.html"><a href="filtros-digitais.html#definção-matemática-da-convolução"><i class="fa fa-check"></i><b>5.1.1</b> Definção matemática da convolução</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="filtros-digitais.html"><a href="filtros-digitais.html#filtro-da-média"><i class="fa fa-check"></i><b>5.2</b> Filtro da Média</a></li>
+<li class="chapter" data-level="5.3" data-path="filtros-digitais.html"><a href="filtros-digitais.html#filtro-da-mediana"><i class="fa fa-check"></i><b>5.3</b> Filtro da Mediana</a></li>
+<li class="chapter" data-level="5.4" data-path="filtros-digitais.html"><a href="filtros-digitais.html#filtro-gaussiano"><i class="fa fa-check"></i><b>5.4</b> Filtro Gaussiano</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="segmentação.html"><a href="segmentação.html"><i class="fa fa-check"></i><b>6</b> Segmentação</a><ul>
+<li class="chapter" data-level="6.1" data-path="segmentação.html"><a href="segmentação.html#detecção-por-descontinuidade"><i class="fa fa-check"></i><b>6.1</b> Detecção por descontinuidade</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="segmentação.html"><a href="segmentação.html#detecção-de-pontos-isolados"><i class="fa fa-check"></i><b>6.1.1</b> Detecção de pontos isolados</a></li>
+<li class="chapter" data-level="6.1.2" data-path="segmentação.html"><a href="segmentação.html#detecção-de-linhas"><i class="fa fa-check"></i><b>6.1.2</b> Detecção de linhas</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="segmentação.html"><a href="segmentação.html#detecção-de-bordas"><i class="fa fa-check"></i><b>6.2</b> Detecção de Bordas</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="segmentação.html"><a href="segmentação.html#modelos-de-bordas"><i class="fa fa-check"></i><b>6.2.1</b> Modelos de Bordas</a></li>
+<li class="chapter" data-level="6.2.2" data-path="segmentação.html"><a href="segmentação.html#método-do-gradiente-roberts-prewitt-sobel"><i class="fa fa-check"></i><b>6.2.2</b> Método do gradiente ( Roberts, Prewitt, Sobel)</a></li>
+<li class="chapter" data-level="6.2.3" data-path="segmentação.html"><a href="segmentação.html#método-de-marr-hildreth"><i class="fa fa-check"></i><b>6.2.3</b> Método de Marr-Hildreth</a></li>
+<li class="chapter" data-level="6.2.4" data-path="segmentação.html"><a href="segmentação.html#método-de-canny"><i class="fa fa-check"></i><b>6.2.4</b> Método de Canny</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="segmentação.html"><a href="segmentação.html#transformada-de-hough"><i class="fa fa-check"></i><b>6.3</b> Transformada de Hough</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="segmentação.html"><a href="segmentação.html#transformada-de-hough-para-detecção-de-linhas"><i class="fa fa-check"></i><b>6.3.1</b> Transformada de Hough para detecção de linhas</a></li>
+<li class="chapter" data-level="6.3.2" data-path="segmentação.html"><a href="segmentação.html#transformada-de-hough-para-detecção-de-círculos"><i class="fa fa-check"></i><b>6.3.2</b> Transformada de Hough para detecção de círculos</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="segmentação.html"><a href="segmentação.html#detecção-de-quinas"><i class="fa fa-check"></i><b>6.4</b> Detecção de Quinas</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="segmentação.html"><a href="segmentação.html#detector-de-quinas-de-moravec"><i class="fa fa-check"></i><b>6.4.1</b> Detector de Quinas de Moravec</a></li>
+<li class="chapter" data-level="6.4.2" data-path="segmentação.html"><a href="segmentação.html#detector-de-quinas-de-harris"><i class="fa fa-check"></i><b>6.4.2</b> Detector de Quinas de Harris</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="segmentação.html"><a href="segmentação.html#detecção-de-blobs"><i class="fa fa-check"></i><b>6.5</b> Detecção de Blobs</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="segmentação.html"><a href="segmentação.html#log"><i class="fa fa-check"></i><b>6.5.1</b> LoG</a></li>
+<li class="chapter" data-level="6.5.2" data-path="segmentação.html"><a href="segmentação.html#dog"><i class="fa fa-check"></i><b>6.5.2</b> DoG</a></li>
+<li class="chapter" data-level="6.5.3" data-path="segmentação.html"><a href="segmentação.html#doh"><i class="fa fa-check"></i><b>6.5.3</b> DoH</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="segmentação.html"><a href="segmentação.html#limiarização"><i class="fa fa-check"></i><b>6.6</b> Limiarização</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="segmentação.html"><a href="segmentação.html#limiarização-global-simples"><i class="fa fa-check"></i><b>6.6.1</b> Limiarização global simples</a></li>
+<li class="chapter" data-level="6.6.2" data-path="segmentação.html"><a href="segmentação.html#limiarização-pelo-método-de-otsu"><i class="fa fa-check"></i><b>6.6.2</b> Limiarização pelo Método de Otsu</a></li>
+<li class="chapter" data-level="6.6.3" data-path="segmentação.html"><a href="segmentação.html#uso-de-suavização-para-limiarização"><i class="fa fa-check"></i><b>6.6.3</b> Uso de suavização para limiarização</a></li>
+<li class="chapter" data-level="6.6.4" data-path="segmentação.html"><a href="segmentação.html#uso-de-bordas-para-limiarização"><i class="fa fa-check"></i><b>6.6.4</b> Uso de bordas para limiarização</a></li>
+<li class="chapter" data-level="6.6.5" data-path="segmentação.html"><a href="segmentação.html#limiares-múltiplos"><i class="fa fa-check"></i><b>6.6.5</b> Limiares Múltiplos</a></li>
+<li class="chapter" data-level="6.6.6" data-path="segmentação.html"><a href="segmentação.html#limiarização-variável"><i class="fa fa-check"></i><b>6.6.6</b> Limiarização variável</a></li>
+<li class="chapter" data-level="6.6.7" data-path="segmentação.html"><a href="segmentação.html#particionamento-da-imagem"><i class="fa fa-check"></i><b>6.6.7</b> Particionamento da imagem</a></li>
+<li class="chapter" data-level="6.6.8" data-path="segmentação.html"><a href="segmentação.html#limiarização-variável-baseada-nas-propriedades-locais-da-imagem"><i class="fa fa-check"></i><b>6.6.8</b> Limiarização variável baseada nas propriedades locais da imagem</a></li>
+<li class="chapter" data-level="6.6.9" data-path="segmentação.html"><a href="segmentação.html#usando-média-de-movimento"><i class="fa fa-check"></i><b>6.6.9</b> Usando média de movimento</a></li>
+<li class="chapter" data-level="6.6.10" data-path="segmentação.html"><a href="segmentação.html#limiarização-baseada-em-diversas-variáveis"><i class="fa fa-check"></i><b>6.6.10</b> Limiarização baseada em diversas variáveis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html"><i class="fa fa-check"></i><b>7</b> Deep Learning em visão computacional</a><ul>
+<li class="chapter" data-level="7.1" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#caracterização-de-ai-machine-learning-e-deep-learning"><i class="fa fa-check"></i><b>7.1</b> Caracterização de AI, Machine Learning e Deep Learning</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#aprendizado-supervisionado-e-não-supervisionado"><i class="fa fa-check"></i><b>7.1.1</b> Aprendizado supervisionado e não supervisionado</a></li>
+<li class="chapter" data-level="7.1.2" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#redes-neurais-artificiais"><i class="fa fa-check"></i><b>7.1.2</b> Redes Neurais Artificiais</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#redes-neurais-convolucionaiscnn"><i class="fa fa-check"></i><b>7.2</b> Redes neurais convolucionais(CNN)</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#blocos-de-construção-de-uma-cnn"><i class="fa fa-check"></i><b>7.2.1</b> Blocos de construção de uma CNN</a></li>
+<li class="chapter" data-level="7.2.2" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#por-que-usar-convoluções"><i class="fa fa-check"></i><b>7.2.2</b> Por que usar convoluções</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="refêrencias.html"><a href="refêrencias.html"><i class="fa fa-check"></i>Refêrencias</a></li>
+<li class="chapter" data-level="" data-path="refêrencias-1.html"><a href="refêrencias-1.html"><i class="fa fa-check"></i>Refêrencias</a></li>
+<li class="divider"></li>
+<li><center>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+</a></li></center>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Material introdutório de Processamento Digital de Imagens e Visão Computacional</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="deep-learning-em-visão-computacional" class="section level1">
+<h1><span class="header-section-number">Capítulo 7</span> Deep Learning em visão computacional</h1>
+<p>Antes de iniciarmos o estudo sobre deep learning, e mais especificamente sobre redes neurais artificiais convolucionais, é importante termos uma visão ampla sobre a área e suas subdivisões, para conseguirmos nos localizar em meio a essa área que cresce cada vez mais. Por isso começaremos falando um pouco sobre inteligência artificial e suas subdivisões, além de sua conexão e uso com visão computacional, que é o nosso foco.</p>
+<div id="caracterização-de-ai-machine-learning-e-deep-learning" class="section level2">
+<h2><span class="header-section-number">7.1</span> Caracterização de AI, Machine Learning e Deep Learning</h2>
+<p>Esses três termos costumam causar certa confusão, principalmente em pessoas que estão começando a estudar essa área. De maneira geral, o termo Inteligência Artificial (IA) denomina uma área que possui muitas vertentes e tópicos de estudos, onde a maioria tem o foco em conseguir fazer os computadores realizarem tarefas complexas, que anteriormente eram realizadas exclusivamente por humanos.</p>
+<p>No começo dos estudos sobre IA foram tentados e resolvidos muitos problemas que eram considerados difíceis para seres humanos, mas relativamente fáceis para os computadores<span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 1]</span>. Esses eram problemas que podiam ser descritos formalmente, por meio de regras matemáticas, como exemplo temos o jogo de xadrez, onde, em 1997 o campeão Garry Kasparov perdeu para o IBM Deep Blue(Figura <a href="deep-learning-em-visão-computacional.html#fig:deepBlue">7.1</a>).</p>
+
+<div class="figure" style="text-align: center"><span id="fig:deepBlue"></span>
+<img src="imagens/07-deepLearning/deep-blue.jpg" alt="IBM Deep Blue [24]" width="55%" />
+<p class="caption">
+Figura 7.1: IBM Deep Blue <span class="citation">[<a href="#ref-img:deepblue" role="doc-biblioref">24</a>]</span>
+</p>
+</div>
+<p>Com o tempo começamos a perceber que a dificuldade não residia nesses problemas, mas naqueles que são realizados facilmente, até instintivamente e intuitivamente pelos humanos, como reconhecer rostos familiares, entender linguagens, etc. A questão é que os seres humanos, no dia a dia, recebem e processam quantidades enormes de informações, e tentar fazer os computadores realizarem essas atividades somente com regras descritas por nós não era algo viável, por isso os pesquisadores começaram a desenvolver técnicas onde o próprio computador, através de algoritmos, aprendesse a retirar essas regras e informações sozinho de bases de dados brutos, a isso chamamos de Machine Learning(Aprendizado de Máquina).</p>
+<p>Dentro da área de Machine Learning, temos um conjunto de técnicas e áreas de pesquisa, sendo que uma delas utiliza um modelo baseado na biologia de cérebros biológicos, contendo neurônios e conexões conhecidas como Redes Neurais. Na Figura <a href="deep-learning-em-visão-computacional.html#fig:cajalCortex">7.2</a> temos uma representação dos neurônios do córtex cerebral humano, onde podemos ver as conexões formadas por eles, que se assemelham com os modelos de redes neurais como o da Figura <a href="deep-learning-em-visão-computacional.html#fig:coloredNeuralNetwork">7.3</a>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:cajalCortex"></span>
+<img src="imagens/07-deepLearning/cajal-cortex.png" alt="Representação da conexão de neurônios no córtex cerebral [25, p. 363]" width="90%" />
+<p class="caption">
+Figura 7.2: Representação da conexão de neurônios no córtex cerebral <span class="citation">[<a href="#ref-cajal" role="doc-biblioref">25</a>, p. 363]</span>
+</p>
+</div>
+<p>Atualmente, como ouvimos muito se falar sobre IAs, temos a tendência de pensar que essa é uma técnica moderna, mas ao contrário, a ideia de fazer os computadores imitarem o esquema de funcionamento do cérebro remonta a 1943, quando Warren McCulloch e Walter Pitts sugeriram a ideia em seu artigo “A logical calculus of the ideas immanent in nervous activity”<span class="citation">[<a href="#ref-mcculloch1943" role="doc-biblioref">26</a>]</span>.</p>
+<p>Como pode ser visto na Figura <a href="deep-learning-em-visão-computacional.html#fig:coloredNeuralNetwork">7.3</a>, as redes neurais são formadas por camadas, sendo que os dados entram pela camada de Input, são processadas nas camadas Hidden e temos os dados de saída na camada Output. Cada uma dessas camadas é formada por um número de neurônios(representados pelos círculos) e tem as conexões representadas pelas setas. Por enquanto não nos aprofundaremos tanto no funcionamento das redes neurais, que serão abordadas na seção x.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:coloredNeuralNetwork"></span>
+<img src="imagens/07-deepLearning/colored-neural-network.png" alt="Rede neural artificial [27]" width="50%" />
+<p class="caption">
+Figura 7.3: Rede neural artificial <span class="citation">[<a href="#ref-img:coloredNeuralNetwork" role="doc-biblioref">27</a>]</span>
+</p>
+</div>
+<p>Nos últimos anos, temos visto um leque de aplicações cada vez maior para as técnicas de IA. Nosso objetivo nesse material é introduzir, principalmente, o uso das Redes Neurais Artificiais na área da Visão Computacional, que é identificada como uma das subáreas da Inteligência Artificial pois busca reproduzir algumas das capacidades humanas a partir de sistemas autônomos. O principal interesse desta área é fazer com que computadores desempenhem funções semelhantes à visão humana, sendo capazes de receber dados visuais e com eles realizar reconhecimentos, classificações e análises. Análogo ao processo de aprendizado dos seres humanos, identifica-se que a melhora no desempenho da visão computacional está fortemente interligada com a evolução do aprendizado de máquina (machine learning), outro segmento da inteligência artificial.</p>
+<p>Antes de entrarmos realmente no assunto de redes neurais, vamos apresentar, de maneira resumida, alguns tópicos principais da área de Machine Learning, pois como dito anteriormente, o deep learning e as redes neurais estão dentro dessa área, e o entendimento desses tópicos pode auxiliar no entendimento pleno dos tópicos futuros.</p>
+<div id="aprendizado-supervisionado-e-não-supervisionado" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> Aprendizado supervisionado e não supervisionado</h3>
+<p>Dentro dos algoritmos de machine learning existe uma característica que os separa em diferentes tipos, baseado em sua forma de aprendizado, sendo os principais os algoritmos de aprendizado supervisionado e não supervisionado.</p>
+<p>Na aprendizagem supervisionada os algoritmos têm previamente os pares entrada-saída, ou seja, para cada entrada já temos conhecimento prévio de como deve ser a saída<span class="citation">[<a href="#ref-russell2016" role="doc-biblioref">28</a>, p. 695]</span>, e a partir disso nosso algoritmo deve aprender a generalizar bem as entradas. Podemos formalizar isso da seguinte forma<span class="citation">[<a href="#ref-russell2016" role="doc-biblioref">28</a>, p. 695]</span>:</p>
+<p>Dado um conjunto de treinamento de n pares <span class="math inline">\((x_1,y_1), (x_2,y_2),\dots,(x_n,y_n)\)</span> onde <span class="math inline">\(x_i\)</span> são as entradas e <span class="math inline">\(y_i = f(x_i)\)</span> as saídas, nosso algoritmo deve descobrir uma função <span class="math inline">\(h\)</span>, conhecida como hipótese, que aproxime <span class="math inline">\(f\)</span>. Para sabermos se nossa hipótese aproxima bem <span class="math inline">\(f\)</span> após ter treinado o algoritmo, utilizamos um conjunto de testes - que contém exemplos diferentes do conjunto de treinamento - e avaliamos o quão bem o algoritmo generaliza(dá respostas corretas) as novas entradas.
+Já na aprendizagem não supervisionada não há nenhum feedback para as saídas do algoritmo, ou seja, ele recebe somente os dados de entrada. Por isso, uma das principais tarefas designadas a esses tipos de algoritmos é a de clustering(agrupamento), onde o algoritmo aprende a encontrar padrões nos dados de entrada e separá-lo em grupos.</p>
+</div>
+<div id="redes-neurais-artificiais" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> Redes Neurais Artificiais</h3>
+<p>Parte da base teórica que fundamenta o aprendizado profundo surgiu inicialmente como modelos para entender o aprendizado, ou seja, como o cérebro funciona. Desta forma, estas teorias ficaram conhecidas como Redes Neurais, uma das áreas do aprendizado profundo que mais cresceram nos últimos anos <span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 1]</span>. Atualmente, os conceitos de Redes Neurais abordam princípios mais genéricos além da perspectiva da neurociência. Mesmo que as Redes Neurais não sejam capazes de explicar muito sobre o cérebro, não podendo ser encaradas como modelos realistas da função biológica, vários aspectos do aprendizado ainda continuam sendo inspirações.</p>
+<!-- As redes foram pensadas para adquirir o conhecimento por um processo de aprendizagem. Semelhante ao que ocorre no cérebro, as interações entre os neurônios, ou pesos sinápticos, são responsáveis por armazenar o conhecimento. Em termos práticos, o conhecimento de uma rede seria a capacidade de uma máquina de realizar funções complexas de forma autônoma, como classificações e reconhecimentos de padrões.  As redes também são capazes de generalizar a informação aprendida,  extraindo características essenciais de exemplos e garantido respostas coerentes para novos casos[@haykin1999, p.28]. -->
+<p>Mesmo que o termo Rede Neural só tenha começado a ganhar destaque nos últimos anos, os primeiros estudos teóricos começaram por volta de 1940<span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 12]</span>. Um dos primeiros trabalhos publicados foi “A Logical Calculus of the Ideas Immamente in Nervous Activity” de 1943, em que os autores, Warren McCulloch e Walter Pitts, apresentaram um modelo artificial de um neurônio a partir da teoria de redes lógicas de nós<span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 14]</span>.</p>
+<p>A Figura apresenta uma simplificação de um neurônio biológico, dividido em três partes principais: o corpo da célula, os dendritos e o axônio. Um neurônio recebe informações, ou impulsos nervosos, a partir dos dendritos. Estas informações são processadas no corpo celular e novos impulsos são transmitidos através do axônio para outros neurônios. A comunicação entre os neurônios, a sinapse, controla a transmissão dos impulsos, determinando o fluxo de informações com base na intensidade do sinal recebido<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 36]</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:neuron"></span>
+<img src="imagens/07-deepLearning/neuron.png" alt="Representação de um neurônio biológico[30]" width="50%" />
+<p class="caption">
+Figura 7.4: Representação de um neurônio biológico<span class="citation">[<a href="#ref-img:neuronCS" role="doc-biblioref">30</a>]</span>
+</p>
+</div>
+<p>Por analogia, McCulloch e Pitts descreveram matematicamente um neurônio artificial como um modelo com <span class="math inline">\(n\)</span> terminais de entrada <span class="math inline">\(x_m\)</span>, representando os dendritos, e apenas um ponto de saída <span class="math inline">\(y_k\)</span> como axônio (Figura ). Para simular o comportamento das sinapses, cada entrada <span class="math inline">\(x_m\)</span> é associada com um peso <span class="math inline">\(w_{km}\)</span>, sendo que o somatório representa a intensidade do sinal recebido (<span class="math inline">\(v_k\)</span>).</p>
+
+<div class="figure" style="text-align: center"><span id="fig:artificialNeuron"></span>
+<img src="imagens/07-deepLearning/artificial-neuron.png" alt="Representação matemática de um neurônio artificial[29, p. 36]" width="50%" />
+<p class="caption">
+Figura 7.5: Representação matemática de um neurônio artificial<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 36]</span>
+</p>
+</div>
+<p>O sinal de resposta é estabelecido por uma função de ativação <span class="math inline">\(\varphi\)</span> aplicada ao valor da soma ponderada, e que apresenta comportamento limiar como na equação, em que a saída é zero ou um dependendo do valor limite (Figura). O modelo também pode incluir um bias (<span class="math inline">\(b_k\)</span>) no somatório para aumentar o grau de liberdade da função de ativação e garantir que um neurônio não apresente saída nula mesmo que todas as entradas sejam nulas. O valor do bias é ajustado junto com os pesos sinápticos<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 37]</span>.
+<span class="math display">\[y_k=\varphi(\upsilon_k)=
+\begin{cases}
+ 1 \text{ se } \upsilon_k &gt; 0 \\ 
+ 0 \text{ se } \upsilon_k &lt; 0 
+\end{cases}\]</span></p>
+
+<div class="figure" style="text-align: center"><span id="fig:limiarFunc"></span>
+<img src="imagens/07-deepLearning/limiar-function.png" alt="Função de ativação de limiar[29, p. 36]" width="50%" />
+<p class="caption">
+Figura 7.6: Função de ativação de limiar<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 36]</span>
+</p>
+</div>
+<p>O modelo proposto por McCulloch e Walter Pitts poderia realizar classificações em duas categorias, entretanto os pesos precisavam ser ajustados manualmente, pois não tinham a capacidade de aprender<span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 14]</span>. Uma das primeiras discussões sobre regras de aprendizagem nas correções dos pesos sinápticos foi publicada em 1949 no livro de Donald Hebb “The Organization of Behavior”<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 64]</span>. No postulado de Hebb se apresenta que a conexão entre os neurônios é fortalecida cada vez que é utilizada, assim, os caminhos neurais no cérebro são continuamente modificados e formam agrupamentos.</p>
+<p>A primeira Rede neural com capacidade de aprender os pesos das categorias foi o Perceptron apresentado por Frank Rosenblatt em 1958<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 65]</span>. O Perceptron tinha arquitetura semelhante a da Figura, uma rede de camada única além da entrada, e de aprendizado supervisionado. Inicialmente, foram lançadas grandes expectativas sobre as possíveis aplicações do Perceptron, entretanto, as limitações logo começaram a ser destacadas, muitas descritas no livro de Marvin Minsky e Seymour Papert publicado em 1969. Um perceptron de camada única realiza apenas a classificação de padrões linearmente separáveis em duas categorias, não podendo, por exemplo, representar o operador de lógica XOR, que não é linearmente separável<span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 14]</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:perceptron"></span>
+<img src="imagens/07-deepLearning/one-layer-perceptron.png" alt="Arquitetura Perceptron[29, p. 47]" width="50%" />
+<p class="caption">
+Figura 7.7: Arquitetura Perceptron<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 47]</span>
+</p>
+</div>
+<p>A imagem negativa sobre o perceptron e as limitações tecnológicas diminuiram a popularidade das redes neurais, reduzindo o número de pesquisas na área até os anos 80<span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 16]</span>. O interesse pelas redes neurais começou a aumentar principalmente pelo uso da abordagem de processamento paralelo distribuído, como o aplicado no algoritmo de retropropagação (back-propagation) apresentado por Rumelhart, Hinton e Williams (1986). Ainda hoje este é o algoritmo mais utilizado para aprendizado profundo e foi crucial para o treinamento dos perceptrons de múltiplas camadas MLP<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 184]</span>.</p>
+<div id="rede-mlp" class="section level4">
+<h4><span class="header-section-number">7.1.2.1</span> Rede MLP</h4>
+<p>Para que a rede de perceptrons de múltiplas camadas pudesse aprender seria necessário a retropropagação dos erros de trás para frente entre as camadas, tornando possível a minimização da função custo. A necessidade do cálculo da derivada do erro implicou no aparecimento de funções de ativação diferentes do utilizado no modelo original do perceptron, que não fossem de limitação abrupta Figura - ativação limiar<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 184]</span>. Considerando que as funções de ativação são um dos elementos utilizados para a inclusão de não linearidade, ponto chave para que os modelos não se limitem à padrões linearmente separáveis, a abordagem foi a incorporação de funções não lineares, mas “bem comportadas“, ou seja, que são “quase” lineares contínuas e deriváveis.</p>
+<p>Como as funções de ativação são responsáveis pelo intermédio das respostas entre as camadas, deveriam ser considerados formatos não lineares que não alterassem de forma radical a resposta da rede. Os perfis que mais se aproximavam destes comportamentos são as funções sigmóides, tangente hiperbólica e a função logística<span class="citation">[<a href="#ref-rateke1999" role="doc-biblioref">31</a>]</span>.</p>
+<p>A função sigmóide tem um formato em S, em que nas extremidades a função tem um comportamento constante, o que fica evidente no gráfico da função logística (Figura). O parâmetro a da equação logística na equação permite parametrizar o comportamento da função, alterando a inclinação. Quanto maior o valor de a, mais a função sigmóide se aproxima da função de limiar.</p>
+<p><span class="math display">\[\varphi(\upsilon)=\frac{1}{1+\exp(-a\upsilon)}\]</span></p>
+<p>Diferente da função limiar que assume valores <span class="math inline">\(0\)</span> ou <span class="math inline">\(1\)</span>, a função logística tem resultados em um intervalo contínuo entre <span class="math inline">\(0\)</span> e <span class="math inline">\(1\)</span><span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 40]</span>. A função sigmóide também é diferenciável, enquanto que a função de limiar não. Uma forma anti-simétrica da sigmóide é a função tangente hiperbólica na equação. A função tangente hiperbólica é definida no intervalo <span class="math inline">\(-1\)</span> a <span class="math inline">\(1\)</span>, o que permite a função sigmóide assumir também valores negativos<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 40]</span>.</p>
+<p><span class="math display">\[\varphi(\upsilon)=\tanh(a\upsilon)\]</span></p>
+<p>Ao se propor um método eficiente no treinamento dos perceptrons de múltiplas camadas se tornou interessante a inclusão de uma ou mais camadas de neurônios ocultos entre a camada de entrada e de saída. A combinação de mais camadas permitiu que a rede fosse implementada para problemas mais complexos, não se restringindo às transformações lineares do modelo original do perceptron. Por meio das camadas ocultas é possível extrair de forma progressiva características importantes que definem os padrões de entrada<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 184]</span>.</p>
+<p>O neurônio matemático proposto inicialmente foi estendido para uma estrutura de conexões de elementos de processamento, os nós da rede. Os elementos foram organizados em camadas, e foram propostas diferentes configurações de conexões. Os formatos mais populares são definidos como uma arquitetura de rede neural, reconhecida pelo número de camadas da rede, número de nós em cada camada e tipo de conexão entre os nós.</p>
+<p>A arquitetura da rede MLP é composta por uma camada de entrada que recebe o sinal, uma camada de saída que retorna o resultado, e entre elas um número arbitrário de camadas ocultas (Figura). Geralmente, a escolha do número de nós na camada de entrada e saída é direta. Por exemplo, em uma aplicação com imagens, o número de neurônios na camada de entrada pode corresponder ao número de pixels da imagem. Neste caso, a saída poderia ser projetada com um único neurônio indicando a probabilidade de um resultado positivo. Já o arranjo das camadas intermediárias não é tão simples, muitas vezes é definido empiricamente com base nas características dos dados de entrada e na complexidade do problema (CARVALHO; BRAGA; LUDERMIR, 1998).</p>
+<p>Uma classificação comum das arquiteturas é com base no padrão de conexões, sendo identificadas duas classes principais: redes diretas (feed forward) e redes recorrentes<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 46]</span>. O modelo MLP tem arquitetura do tipo feedforward, em que a propagação da informação ocorre em uma única direção e os nós de uma mesma camada não são conectados entre si. A saída de uma camada é usada como entrada na próxima, sem loops, ou seja, não são enviadas de volta<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 47]</span>.</p>
+<p>Já nas tipologias recorrentes ocorre o feedback, um processo de realimentação, em que as saídas de nós são reinseridas como entradas em nós anteriores (Figura). O comportamento dos ciclos é dinâmico controlado por atrasos unitários<span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 49]</span>. A ideia do modelo é estimular sinais em efeito cascata com dependência temporal.</p>
+</div>
+<div id="backpropagation" class="section level4">
+<h4><span class="header-section-number">7.1.2.2</span> Backpropagation</h4>
+<p>Para explicar o algoritmo backpropagation no treinamento de redes neurais utilizaremos um exemplo de aplicação de rede MLP para o reconhecimento de números. O código da rede é uma implementação do livro online “Neural Networks and Deep Learning” escrito por Michael Nielsen. Os dados de treinamento foram retirados do MNIST data set, que contém mais de 60000 imagens escaneadas de números escritos juntamente com os rótulos de classificação. As informações foram coletadas pelo Instituto Nacional de Padrões e Tecnologia dos Estados Unidos (NIST), sendo que as imagens são em escala de cinza e de tamanho 28 x 28 pixels como na Figura.</p>
+<p>O conjunto de dados originais do MNIST é dividido em duas partes, uma que contém 60000 imagens para treinamento e a outra com 10000 imagens para a fase de teste em que se avalia a acurácia da rede treinada para reconhecer os dígitos. No exemplo do autor Michael Nielsen, os dados de treinamento original também foram reorganizados em dois grupos, o primeiro com 50000 imagens que foram utilizados no treinamento e a outra parte (10000) foi reservada para a validação em que se definiu os hiperparâmetros da rede.</p>
+<p>Considerando imagens de 28x28 bits os dados de entrada foram definidos como um vetor <span class="math inline">\(x\)</span> de dimensão <span class="math inline">\(784\)</span>, em que cada posição corresponde a um valor de pixel da imagem. Para o vetor <span class="math inline">\(y\)</span> de saída da rede se estabeleceu a dimensão <span class="math inline">\(10\)</span>, em que cada posição faz referência a um dígito de <span class="math inline">\(0\)</span> a <span class="math inline">\(9\)</span>. Assim, se uma entrada corresponde ao número <span class="math inline">\(3\)</span> então a saída esperada será o vetor transposto na forma <span class="math inline">\(y(x)=(0,0,0,1,0,0,0,0,0,0)^T\)</span>. Com base no formato dos dados de entrada e saída da rede, o exemplo foi construído com uma rede MLP de três camadas como na Figura, com a primeira camada tendo <span class="math inline">\(784\)</span> nós e a última camada com <span class="math inline">\(10\)</span> nós. Na camada do meio, a camada oculta, utilizaremos <span class="math inline">\(30\)</span> nós, mas vale destacar que o autor Michael Nielsen definiu o número de nós após alguns testes otimizando a escolha dos parâmetros da rede.</p>
+<p>Para carregar os dados e configurá-los no formato proposto utiliza-se o método “load_data_wrapper()”. Os dados são retirados do arquivo zip “mnist.pkl.gz’” e subdivididos dentro do método “load_data()” que retorna para o “load_data_wrapper()”, como dados de treinamento, validação e de teste. A função geral é chamada da seguinte forma:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="deep-learning-em-visão-computacional.html#cb1-1"></a>training_data, validation_data, test_data <span class="op">=</span> load_data_wrapper()</span></code></pre></div>
+<p>No programa, a rede é construída a partir do comando Network([784, 30, 10], cost=QuadraticCost), em que cada argumento corresponde ao número de nós na camada. Os atributos da classe Network incluem o número de camadas (num_layers), o número de nós em cada camada (sizes), os pesos e bias iniciais que são gerados de forma aleatória pelo método “default_weight_initializer()”, e a função custo (cost). A função custo aplicada neste exemplo, o erro quadrático (MSE), é definida na classe “QuadraticCost”.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="deep-learning-em-visão-computacional.html#cb2-1"></a><span class="kw">class</span> Network(<span class="bu">object</span>):</span>
+<span id="cb2-2"><a href="deep-learning-em-visão-computacional.html#cb2-2"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, sizes, cost<span class="op">=</span>QuadraticCost):</span>
+<span id="cb2-3"><a href="deep-learning-em-visão-computacional.html#cb2-3"></a>        <span class="va">self</span>.num_layers <span class="op">=</span> <span class="bu">len</span>(sizes)</span>
+<span id="cb2-4"><a href="deep-learning-em-visão-computacional.html#cb2-4"></a>        <span class="va">self</span>.sizes <span class="op">=</span> sizes</span>
+<span id="cb2-5"><a href="deep-learning-em-visão-computacional.html#cb2-5"></a>        <span class="va">self</span>.default_weight_initializer()</span>
+<span id="cb2-6"><a href="deep-learning-em-visão-computacional.html#cb2-6"></a>        <span class="va">self</span>.cost<span class="op">=</span>cost</span></code></pre></div>
+<p>A seguir apresentaremos um resumo da teoria matemática do método backpropagation e para facilitar este processo utilizaremos a nomenclatura dos elementos de uma rede neural com base no livro “Introduction To The Theory Of Neural Computation” (HERTZ, KROGH, PALMER, 2018, pg. 116). No treinamento de uma rede como a da Figura (rede MLP reconhecimento número) é apresentado um conjunto de treinamento <span class="math inline">\(\{\xi_k^\mu,\zeta_i^\mu\}\)</span> , em que cada padrão <span class="math inline">\((\mu=1, 2,\dots, p)\)</span> apresentado corresponde a um par de entrada (<span class="math inline">\(\xi_k^\mu\)</span>) e saída esperada (<span class="math inline">\(\zeta_i^\mu\)</span>). Neste exemplo, o número de padrões no treinamento é <span class="math inline">\(p=50000\)</span>. O índice <span class="math inline">\(k\)</span> na camada de entrada faz referência ao valor em cada nó da camada, e o índice <span class="math inline">\(i\)</span> aos nós da camada da saída. A resposta final da rede é identificada como <span class="math inline">\(O_i\)</span> e o sinal de saída da camada oculta é <span class="math inline">\(V_j\)</span>. A conexão entre a camada de entrada e a oculta é estabelecida pelos pesos <span class="math inline">\(w_{jk}\)</span>, e os pesos <span class="math inline">\(W_{ij}\)</span> conectam a camada de saída com a intermediária.</p>
+<p>O backpropagation é um método supervisionado em que o treinamento ocorre em duas fases (HAYKIN, 1999, pg. 163). Na etapa foward, uma entrada é apresentada para a rede e de acordo com as conexões estabelecidas entre as camadas é propagado sucessivamente os sinais de respostas até a camada de saída, gerando um resultado que se espera ser o mais próximo do padrão. Cada nó de uma camada seguinte se conecta com todos os nós da camada anterior, sendo que o sinal recebido por este nó é uma ponderação dos pesos de todas as conexões. O sinal de entrada de cada nó recebe um bia e é passado para a próxima camada como uma resposta de uma função de ativação (<span class="math inline">\(g\)</span>). A resposta de saída de um nó será denominada <span class="math inline">\(V_j\)</span> se o sinal for para uma camada intermediária, ou <span class="math inline">\(O_i\)</span> se for direcionado para a camada de saída.</p>
+<p>Imagine que um nó (<span class="math inline">\(j\)</span>) da camada intermediária recebe como entrada:</p>
+<p><span class="math display">\[h_j^\mu=\sum_{k}w_{jk}\xi_k^\mu\]</span></p>
+<p>e produz como resposta:</p>
+<p><span class="math display">\[V_j^\mu=g(h_j^\mu)=g(w_{jk}\xi_k^\mu)\]</span></p>
+<p>Assim, um nó na camada de saída recebe como entrada o sinal propagado:</p>
+<p><span class="math display">\[h_i^\mu=\sum_kW_{ij}V_j^\mu=\sum_kW_{ij}g(\sum_kw_{jk}\xi_k^\mu)\]</span></p>
+<p>gerando como resposta da saída da rede:</p>
+<p><span class="math display">\[O_i^\mu=g(h_i^\mu)=g(\sum_kW_{ij}V_j^\mu)=g(\sum_kW_{ij}g(\sum_kw_{jk}\xi_k^\mu))\]</span></p>
+<p>No programa, a fase forward é representada pelo seguinte método:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="deep-learning-em-visão-computacional.html#cb3-1"></a>feedforward(<span class="va">self</span>, a):</span>
+<span id="cb3-2"><a href="deep-learning-em-visão-computacional.html#cb3-2"></a>        <span class="cf">for</span> b, w <span class="kw">in</span> <span class="bu">zip</span>(<span class="va">self</span>.biases, <span class="va">self</span>.weights):</span>
+<span id="cb3-3"><a href="deep-learning-em-visão-computacional.html#cb3-3"></a>            a <span class="op">=</span> sigmoid(np.dot(w, a)<span class="op">+</span>b)</span>
+<span id="cb3-4"><a href="deep-learning-em-visão-computacional.html#cb3-4"></a>        <span class="cf">return</span> a</span></code></pre></div>
+<p>Neste exemplo a função de ativação é a função logística definida pelo método “sigmoid” e a sua derivada é calculada no método “sigmoid_prime”.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="deep-learning-em-visão-computacional.html#cb4-1"></a>sigmoid(z):</span>
+<span id="cb4-2"><a href="deep-learning-em-visão-computacional.html#cb4-2"></a>    <span class="cf">return</span> <span class="fl">1.0</span><span class="op">/</span>(<span class="fl">1.0</span><span class="op">+</span>np.exp(<span class="op">-</span>z))</span>
+<span id="cb4-3"><a href="deep-learning-em-visão-computacional.html#cb4-3"></a> </span>
+<span id="cb4-4"><a href="deep-learning-em-visão-computacional.html#cb4-4"></a>sigmoid_prime(z):</span>
+<span id="cb4-5"><a href="deep-learning-em-visão-computacional.html#cb4-5"></a>    <span class="cf">return</span> sigmoid(z)<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>sigmoid(z))</span></code></pre></div>
+<p>Na segunda fase, backward, os pesos e bias são corrigidos camada a camada, no sentido da saída da rede até a entrada, em um processo iterativo de forma que a saída i fique cada vez mais próxima do padrão esperado Oi, reduzindo o erro (HAYKIN, 1999, pg. 163). Uma forma de avaliar como o erro é reduzido em relação às alterações dos parâmetros é determinando uma função Erro, ou custo, dependente dos pesos e bias. Adotamos como função custo o erro quadrático (MSE):</p>
+<p><span class="math display">\[E[w]=\frac{1}{2}\sum_{\mu i}[\zeta_i^\mu-O_i^\mu]^2 = \frac{1}{2}[\zeta_i^\mu W_{ij}g(\sum_kw_{jk}\xi_k^\mu)]\]</span></p>
+<p>No programa, a função custo MSE é apresentada no método “fn(a, y)” na classe “QuadraticCost”:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="deep-learning-em-visão-computacional.html#cb5-1"></a>fn(a, y):</span>
+<span id="cb5-2"><a href="deep-learning-em-visão-computacional.html#cb5-2"></a>        <span class="cf">return</span> <span class="fl">0.5</span><span class="op">*</span>np.linalg.norm(a<span class="op">-</span>y)<span class="op">**</span><span class="dv">2</span></span></code></pre></div>
+<p>A redução do erro envolve um processo de otimização, denominado descida em gradiente, em que se busca determinar os parâmetros (pesos e bias) que minimizam a função custo (Nielsen, 2015). Neste método, a variação do erro pode ser escrita como derivadas parciais do erro em função dos pesos, compondo o vetor gradiente do erro. Como o vetor gradiente aponta no sentido de maior acréscimo do erro, a variação dos pesos é dada pelo negativo do gradiente, garantindo a redução mais rápida do erro. Assim, a regra do gradiente descendente aplicada nas conexões entre a camada oculta e de saída pode ser escrita como:</p>
+<p><span class="math display">\[\Delta W_{ij}=-\eta\frac{\partial E}{\partial W_{ij}}=\eta\sum_\mu[\zeta_i^\mu-O_i^\mu]g&#39;(h_i^\mu)V_j^\mu=\eta\sum_\mu\delta_i^\mu V\]</span>
+<span class="math display">\[\delta_i^\mu=[\zeta_i^\mu-O_i^\mu]g&#39;(h_i^\mu)\]</span></p>
+<p>A fórmula de modificações dos pesos é conhecida como regra delta e recebe o termo <span class="math inline">\(\eta\)</span>, a taxa de aprendizagem, para promover uma correção gradativa, sem alterações bruscas (Nielsen, 2015). O termo <span class="math inline">\(g’\)</span> se refere a derivada da função de ativação e surge na fórmula devido a derivação da função erro. A regra delta aplicada nas conexões entre a camada oculta e de entrada utiliza a regra da cadeia pois as derivadas são em relação aos pesos <span class="math inline">\(w_{jk}\)</span>, que se apresentam como dependência mais implícita ao erro. A correção dos pesos neste caso ocorre como:</p>
+<p><span class="math display">\[\begin{split}
+\Delta w_{ij}&amp;=-\eta\frac{\partial E}{\partial w_{jk}}=-\eta\sum_\mu\frac{\partial E}{\partial V_j^\mu}\frac{\partial V_j^\mu}{\partial w_{jk}}=\eta\sum_{\mu i}[\zeta_i^\mu-O_i^\mu]g&#39;(h_i^\mu)W_{ij}g&#39;(h_j^\mu)\xi_k^\mu
+\\ \\&amp;=\eta\sum_{\mu i}\delta_i^\mu W_{ij}g&#39;(h_j^\mu)\xi_k^\mu=\eta\sum_\mu\delta_j^\mu\xi_k^\mu
+\end{split}\]</span></p>
+<p><span class="math display">\[\delta_j^\mu=g&#39;(h_j^\mu)\sum_i\delta_i^\mu W_{ij}\]</span></p>
+<p>Esta regra também pode ser estendida para redes com mais de uma camada oculta (Fonte: rateke1999). A regra delta generalizada para a m-ésima camada de uma rede pode ser escrita como:</p>
+<p><span class="math display">\[\Delta w_{pq}^m=\eta\sum_\mu\delta_p^{m,\mu}V_q^{m-1,\mu}\]</span>
+<span class="math display">\[\delta_p^{M,\mu}=[\zeta_p^\mu-O_p^\mu]g&#39;(h_p^{M,\mu}) \text{, para camada de saida } m=M\]</span>
+<span class="math display">\[\delta_p^{m,\mu}=g&#39;(h_p^{m,\mu})\sum_r\delta_r^{m+1,\mu}w_{rp}^{m+1} \text{, para m&lt;M}\]</span>
+A correção dos pesos ocorre considerando as conexões entre cada duas camadas, uma mais próxima da saída (<span class="math inline">\(p\)</span>) e a outra mais interna (<span class="math inline">\(q\)</span>). O vetor <span class="math inline">\(V_q\)</span> representa o sinal de ativação recebido pela camada dos nós “<span class="math inline">\(p\)</span>”, e quando o cálculo envolve a camada de entrada e a primeira camada oculta este vetor é o padrão de entrada (<span class="math inline">\(\xi_k^\mu\)</span>). O fator delta (<span class="math inline">\(\delta\)</span>) funciona como uma memória das respostas das camadas mais externas, ou seja, para modificar os pesos de trás para frente é necessário que as conexões das camadas mantenham memória das camadas que foram alteradas anteriormente.
+O algoritmo do backpropagation é utilizado na etapa de treinamento pelo programa por meio do método “backprop”:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="deep-learning-em-visão-computacional.html#cb6-1"></a>backprop(<span class="va">self</span>, x, y):</span>
+<span id="cb6-2"><a href="deep-learning-em-visão-computacional.html#cb6-2"></a>nabla_b <span class="op">=</span> [np.zeros(b.shape) <span class="cf">for</span> b <span class="kw">in</span> <span class="va">self</span>.biases]</span>
+<span id="cb6-3"><a href="deep-learning-em-visão-computacional.html#cb6-3"></a>nabla_w <span class="op">=</span> [np.zeros(w.shape) <span class="cf">for</span> w <span class="kw">in</span> <span class="va">self</span>.weights]</span>
+<span id="cb6-4"><a href="deep-learning-em-visão-computacional.html#cb6-4"></a><span class="co"># feedforward</span></span>
+<span id="cb6-5"><a href="deep-learning-em-visão-computacional.html#cb6-5"></a>activation <span class="op">=</span> x</span>
+<span id="cb6-6"><a href="deep-learning-em-visão-computacional.html#cb6-6"></a>activations <span class="op">=</span> [x] </span>
+<span id="cb6-7"><a href="deep-learning-em-visão-computacional.html#cb6-7"></a>zs <span class="op">=</span> [] </span>
+<span id="cb6-8"><a href="deep-learning-em-visão-computacional.html#cb6-8"></a><span class="cf">for</span> b, w <span class="kw">in</span> <span class="bu">zip</span>(<span class="va">self</span>.biases, <span class="va">self</span>.weights):</span>
+<span id="cb6-9"><a href="deep-learning-em-visão-computacional.html#cb6-9"></a>    z <span class="op">=</span> np.dot(w, activation)<span class="op">+</span>b</span>
+<span id="cb6-10"><a href="deep-learning-em-visão-computacional.html#cb6-10"></a>      zs.append(z)</span>
+<span id="cb6-11"><a href="deep-learning-em-visão-computacional.html#cb6-11"></a>      activation <span class="op">=</span> sigmoid(z)</span>
+<span id="cb6-12"><a href="deep-learning-em-visão-computacional.html#cb6-12"></a>      activations.append(activation)</span>
+<span id="cb6-13"><a href="deep-learning-em-visão-computacional.html#cb6-13"></a> </span>
+<span id="cb6-14"><a href="deep-learning-em-visão-computacional.html#cb6-14"></a><span class="co"># backward pass</span></span>
+<span id="cb6-15"><a href="deep-learning-em-visão-computacional.html#cb6-15"></a>delta <span class="op">=</span> (<span class="va">self</span>.cost).delta(zs[<span class="op">-</span><span class="dv">1</span>], activations[<span class="op">-</span><span class="dv">1</span>], y)</span>
+<span id="cb6-16"><a href="deep-learning-em-visão-computacional.html#cb6-16"></a>nabla_b[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> delta</span>
+<span id="cb6-17"><a href="deep-learning-em-visão-computacional.html#cb6-17"></a>nabla_w[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> np.dot(delta, activations[<span class="op">-</span><span class="dv">2</span>].transpose())</span>
+<span id="cb6-18"><a href="deep-learning-em-visão-computacional.html#cb6-18"></a><span class="cf">for</span> l <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="va">self</span>.num_layers):</span>
+<span id="cb6-19"><a href="deep-learning-em-visão-computacional.html#cb6-19"></a>z <span class="op">=</span> zs[<span class="op">-</span>l]</span>
+<span id="cb6-20"><a href="deep-learning-em-visão-computacional.html#cb6-20"></a>        sp <span class="op">=</span> sigmoid_prime(z)</span>
+<span id="cb6-21"><a href="deep-learning-em-visão-computacional.html#cb6-21"></a>      delta <span class="op">=</span> np.dot(<span class="va">self</span>.weights[<span class="op">-</span>l<span class="op">+</span><span class="dv">1</span>].transpose(), </span>
+<span id="cb6-22"><a href="deep-learning-em-visão-computacional.html#cb6-22"></a>delta) <span class="op">*</span> sp</span>
+<span id="cb6-23"><a href="deep-learning-em-visão-computacional.html#cb6-23"></a>      nabla_b[<span class="op">-</span>l] <span class="op">=</span> delta</span>
+<span id="cb6-24"><a href="deep-learning-em-visão-computacional.html#cb6-24"></a>        nabla_w[<span class="op">-</span>l] <span class="op">=</span> np.dot(delta, </span>
+<span id="cb6-25"><a href="deep-learning-em-visão-computacional.html#cb6-25"></a>activations[<span class="op">-</span>l<span class="dv">-1</span>].transpose())</span>
+<span id="cb6-26"><a href="deep-learning-em-visão-computacional.html#cb6-26"></a><span class="cf">return</span> (nabla_b, nabla_w)</span></code></pre></div>
+<p>Como destacado anteriormente, a primeira fase do backpropagation é o feedforward. Nesta etapa é recebido um padrão de entrada (<span class="math inline">\(x\)</span>) e os pesos e bias inicializados aleatoriamente. Após o somatório das ponderações dos pesos e bias entre duas camadas, este valor é salvo no vetor “<span class="math inline">\(zs\)</span>”, e o resultado da ativação deste valor é salvo em “activations”. A entrada da próxima camada é o sinal de ativação salvo em “actvivation”. Este processo ocorre da entrada até a camada de saída, salvando os sinais de ativação das camadas ocultas (<span class="math inline">\(V_j\)</span>) em “activations”.
+Na fase “backward pass”, calcula-se primeiro o delta (<span class="math inline">\(\delta\)</span>) a partir da resposta da camada de saída salva como o último elemento do vetor “activations” e do padrão de saída esperado (<span class="math inline">\(y\)</span>). O valor de delta neste caso, é calculado a partir do método “delta” da classe “QuadraticCost” como o produto entre a diferença da resposta de saída de rede (<span class="math inline">\(a\)</span>) e do valor esperado (<span class="math inline">\(y\)</span>) com a derivada do sinal de ativação da última camada:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="deep-learning-em-visão-computacional.html#cb7-1"></a>delta(z, a, y):</span>
+<span id="cb7-2"><a href="deep-learning-em-visão-computacional.html#cb7-2"></a>   <span class="cf">return</span> (a<span class="op">-</span>y) <span class="op">*</span> sigmoid_prime(z)</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="redes-neurais-convolucionaiscnn" class="section level2">
+<h2><span class="header-section-number">7.2</span> Redes neurais convolucionais(CNN)</h2>
+<div id="blocos-de-construção-de-uma-cnn" class="section level3">
+<h3><span class="header-section-number">7.2.1</span> Blocos de construção de uma CNN</h3>
+<div id="operador-de-convolução" class="section level4">
+<h4><span class="header-section-number">7.2.1.1</span> Operador de convolução</h4>
+<div id="padding" class="section level5">
+<h5><span class="header-section-number">7.2.1.1.1</span> Padding</h5>
+</div>
+<div id="stride" class="section level5">
+<h5><span class="header-section-number">7.2.1.1.2</span> Stride</h5>
+</div>
+</div>
+<div id="pooling" class="section level4">
+<h4><span class="header-section-number">7.2.1.2</span> Pooling</h4>
+</div>
+<div id="camadas-totalmente-conectadas" class="section level4">
+<h4><span class="header-section-number">7.2.1.3</span> Camadas totalmente conectadas</h4>
+</div>
+</div>
+<div id="por-que-usar-convoluções" class="section level3">
+<h3><span class="header-section-number">7.2.2</span> Por que usar convoluções</h3>
+<div id="córtex-visual" class="section level4">
+<h4><span class="header-section-number">7.2.2.1</span> Córtex visual</h4>
+
+
+</div>
+</div>
+</div>
+</div>
+<h3>Refêrencias</h3>
+<div id="refs" class="references">
+<div id="ref-goodfellow2016">
+<p>[23] I. Goodfellow, Y. Bengio, e A. Courville, <em>Deep Learning</em>. MIT Press, 2016.</p>
+</div>
+<div id="ref-img:deepblue">
+<p>[24] A. Chiang, “IBM Deep Blue at Computer History Museum”. 2020, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:IBM_Deep_Blue_at_Computer_History_Museum_(9361685537).jpg">https://commons.wikimedia.org/wiki/File:IBM_Deep_Blue_at_Computer_History_Museum_(9361685537).jpg</a>.</p>
+</div>
+<div id="ref-cajal">
+<p>[25] S. R. y Cajal, <em>Comparative study of the sensory areas of the human cortex</em>. Clark University, 1899.</p>
+</div>
+<div id="ref-mcculloch1943">
+<p>[26] W. S. McCulloch e W. Pitts, “A logical calculus of the ideas immanent in nervous activity”, <em>The bulletin of mathematical biophysics</em>, vol. 5, nº 4, p. 115–133, 1943.</p>
+</div>
+<div id="ref-img:coloredNeuralNetwork">
+<p>[27] Glosser.ca, “Artificial neural network with layer coloring”. 2013, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Colored_neural_network.svg">https://commons.wikimedia.org/wiki/File:Colored_neural_network.svg</a>.</p>
+</div>
+<div id="ref-russell2016">
+<p>[28] S. Russell e P. Norvig, “Artificial intelligence: a modern approach”, 2016.</p>
+</div>
+<div id="ref-haykin1999">
+<p>[29] H. Simon, <em>Redes Neurais: Princípios e prática</em>, 2º ed. São Paulo: Bookman, 1999.</p>
+</div>
+<div id="ref-img:neuronCS">
+<p>[30] cs231, “Cartoon drawing of a biological neuron”. 2021, [Online]. Disponível em: <a href="https://cs231n.github.io/neural-networks-1/">https://cs231n.github.io/neural-networks-1/</a>.</p>
+</div>
+<div id="ref-rateke1999">
+<p>[31] T. Rateke, “Técnicas Subsimbólicas: Redes Neurais”. LAPIX (Image Processing; Computer Graphics Lab)/Universidade Federal de Santa Catarina, Florianópolis, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-%0A%20%20redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-
+  redes-neurais/</a>.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="segmentação.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="refêrencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": null
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/covap-utfpr/pdi/edit/master/07-deep_learning.Rmd",
+"text": "Editar "
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"citation_package": "biblatex"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
