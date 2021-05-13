@@ -207,7 +207,7 @@ Ao realizar a quantização e a amostragem linha por linha no objeto da Figura \
 knitr::include_graphics(rep('imagens/02-formacao/quantizacao.png'))
 ```
 
-## Definição de imagem digital
+## Definição de imagem digital {#formacaoImg}
 
 Uma imagem pode ser definida como uma função bidimensional, $f(x, y)$, em que $x$ e $y$ são coordenadas espaciais (plano), e a amplitude de $f$ em qualquer par de coordenadas $(x, y)$ é chamada de intensidade ou nível de cinza da imagem nesse ponto [@gonzalez2010, p.36]. Quando $x$, $y$ e os valores de intensidade de $f$ são quantidades finitas e discretas, chamamos de imagem digital. 
 
@@ -252,7 +252,7 @@ Sem as especificações espaciais da imagem, não se pode inferir sobre a qualid
 
 A Figura \@ref(fig:resolucaoespacial) mostra os efeitos da redução da resolução espacial em uma imagem em seis resoluções diferentes. A Figura \@ref(fig:resolucaoespacial) (a) tem resolução 512 x 512, e a resolução das demais \@ref(fig:resolucaoespacial) (b-f) diminui pela metade de forma sequencial. Todas as imagens têm as mesmas dimensões, ampliando-se o tamanho do *pixel* para deixar mais evidente a perda de detalhes nas imagens de baixa resolução. 
 
-(ref:resolucaoespacial) Efeitos da redução da resolução espacial [@pedrini2008, p.20].
+(ref:resolucaoespacial) Efeitos da redução da resolução espacial [@pedrini2008, p.21].
 
 ```{r resolucaoespacial, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:resolucaoespacial)', fig.align='center', out.width='50%'}
 knitr::include_graphics(rep('imagens/02-formacao/resolucaoespacial.png'))
@@ -270,145 +270,159 @@ knitr::include_graphics(rep('imagens/02-formacao/reducaoprofundidade.png'))
 
 ## *Pixels*
 
-A topologia digital da imagem desempenha muita importância na especificação, localização e relação entre as coordenadas da imagem, facilitando sua manipulação. A topologia de uma imagem digital contém as seguintes propriedades dos *pixels*: Vizinhança ( 4, D e 8 ), Conectividade, Adjacência, Caminho, Componente Conexa, Medidas de Distância, Operações Lógico-aritméticas.
 
-Uma imagem digitalizada contém as seguintes propriedades de seus *pixels*: Vizinhança ( 4, D e 8 ), Conectividade, Adjacência, Caminho, Componente Conexa, Medidas de Distância, Operações Lógico-aritméticas.
+Os pixels são elementos principais que formam (constituem coordenadas) a imagem, sua importância determina topologicamente as características da imagem digitalizada, nesta seção mostraremos conceitos básicos da topologia dos elementos (pixels) relacionados em uma imagem. Em memória computacional os pixels de uma imagens são representadas no formato de matrizes (bidimensional ou tridimensional) como foi abordado na [Seção 2.5](#formacaoImg), através delas  é permitido aplicar operações sobre seus elementos (pixels), efetuar análises, identificação de padrões,  acessar regiões, alterar cores, posições e tamanho tendo como referência espaço projetado usando as coordenadas do plano.
 
-Para especificar, localizar, e relacionar topologicamente à imagem, consideramos: $p$, $q$ e $u$ denotando os pontos e, $p(x,y)$, $q(x,y)$, $u(x,y)$ coordenadas dos pontos denotados, expressaremos $V$ Conjunto de valores em uma imagem binária $V=\{0,1\}$.
+Propriedades topológicas dos pixels da imagem:
 
-### Vizinhança
+- Vizinhança ( 4, D,  6, 8 e  26 )
+- Conectividade
+- Adjacência
+- Caminho
+- Componente Conexa
+- Borda e Interior
+- Medidas de Distância
+- Operações Lógico-aritméticas
 
-- **Vizinhança 4 - $\left[N_4(p)\right]$**
 
-$N_4(p)$ em $p(x,y)$ possui quatro vizinhos,  dois na horizontal outros  dois na vertical de suas coordenadas, ou seja, é o conjunto de *pixels* ao redor de $p$, sem considerar as diagonais[@thome2017, p.15]. Exemplo na Figura \@ref(fig:vizinhanca) (a).
 
-$$p(x,y): p(x+1, y), p(x-1, y), p(x, y+1), p(x, y-1)$$
+### Vizinhança {#vizin}
 
-- **Vizinhança D - $\left[N_D(p)\right]$**
 
-$N_D(p)$ em $p(x,y)$ possui quatro vizinhos,  dois na diagonais superiores (direita, esquerda ) outras duas na diagonais inferiores (direita, esquerda) de  suas coordenadas, ou seja, o conjunto de *pixels* ao redor de $p$, considerando apenas as diagonais [@thome2017, p.15].Exemplo na Figura \@ref(fig:vizinhanca) (b).
+Para definir uma vizinhança-4 (denotado $[N_4(f)]$) de um pixel f de coordenadas $(x, y)$ ilustrado na figura \@ref(fig:vizinhanca)  (a), $f(x, y)$ possui quatro vizinhos, dois na horizontal e outros dois na vertical  cuja as coordenadas da vizinhança são $(x + 1, y), (x - 1, y), (x, y + 1) e (x, y -1)$. Os quatros vizinhos diagonais de f são de coordenadas $(x - , y - 1), (x - 1, y + 1), (x + 1, y + 1)$, que constituem o conjunto $[N_d(f)]$. A vizinhança-8 (denotado $[N_8(f)]$ e ilustrada na figura \@ref(fig:vizinhanca) (b), é definida como $N_8(f)=N_4(f) U N_d(f)$. O  conceito de vizinhança pode ser estendido para imagens tridimensionais, sendo que os vizinhos podem ser definidos de acordo com o número de voxels compartilhados, faces, arestas ou vértices em comum nas figuras \@ref(fig:vizinhanca) (c)-(e). A figura \@ref(fig:vizinhanca) (c), por exemplo, ilustra o caso de vizinhança-6, em que os vizinhos do voxel $(x, y, z)$ são $(x - 1, y, z), (x, y, 1)$. [@pedrini2008, p.30].
 
-$$p(x,y): p(x+1,y+1), p(x+1, y-1), p(x-1, y+1), p(x-1, y-1)$$
 
-- **Vizinhança 8 - $\left[N_8(p)\right]$**
 
-$N_8(p)$ em $p(x,y)$ possui oito vizinhos, quatro $N_4(p)$ e outros quatro $N_D(p)$ de suas coordenadas, ou seja, o conjunto de *pixels* ao redor de $p$, considerando união das  vizinhanças-4 e vizinhança-8 [@thome2017, p.15]. Exemplo na Figura \@ref(fig:vizinhanca) (c).
+(ref:vizinhanca) Vizinhanças [@pedrini2008, p. 31].
 
-$$p(x,y): N_8(p) = N_4(p) \cup N_D(p)$$
-
-(ref:vizinhanca) Vizinhanças[@thome2017].
-
-```{r vizinhanca, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:vizinhanca)', fig.align='center', out.width='55%'}
+```{r vizinhanca, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:vizinhanca)', fig.align='center', out.width='70%'}
 knitr::include_graphics(rep('imagens/02-formacao/vizinhanca.png'))
-
 ```
 
-### Conectividade
+ (a) vizinhança-4 de um pixel, (b) vizinhança-8 de pixel, (c) vizinhança-6 de um voxel, (d) vizinhança-18 de um voxel, (e) vizinhança-26 de um voxel.
 
-Conceito importante, usado no estabelecimento limite das bordas de objetos e identificação de componentes das regiões da imagem (obtenção de propriedades específicas do objeto para um processamento de mais alto nível). 
 
-Dois *pixels* $p(x,y)$, $q(x,y)$ estão conectados se:
+### Conectividade {#contiv}
 
-1. São de alguma forma vizinhos ($N_4$,$N_D$ ou $N_8$).
-2. Seus níveis de cinza satisfazem algum critério de similaridade ($V = \{ \dots \}$).
 
-- **Conectividade de 4**:
+A conectividade entre os pixels é um conceito importante na topologia da imagem, é usada para determinar limites de objetos e componentes de regiões na imagem. Dois pixels são conexos entre si  primeiro verificar-se seus tipos de [(vizinhos Seção 2.7.1)](#vizin), de seguida se existe similaridade na intensidade de cinza, cor ou textura. Por exemplo, em uma imagem binária, em que os pixels podem assumir os valores 0 ou 1, dois pixels podem ter vizinhança-4, mas somente serão considerados conexos se possuírem o mesmo valor. [@pedrini2008, p. 31].
 
-Os *pixels* $p$ e $q$, assumindo valores em $V$ , são conectados de 4 somente se $q$ pertence ao conjunto $N_4(p)$. Exemplo na Figura \@ref(fig:conectividade) (a).
 
-$$C4_{p,q} \text{ em } V \Leftrightarrow q \in N_4(p) \wedge f(p) \wedge f(q) \in V $$
-$$V = \{0\} \to C4_{p.q} \text{ verdadeiro}$$
+### Adjacência {#adja}
 
-- **Conectividade de $m$ (conectividade mista)**:
 
-Dois *pixels* $p$ e $q$, assumindo valores em $V$, são conectados de $m$ somente se:
+Um conjunto $V$ com valores de intensidade para definir adjacência, em uma imagem binária, com $V={1}$ e outra imagem com mesmo conjunto contendo escala de nível de cinza no limite 0 a 255 com vários elementos (pixels) o conjunto $V$ poderia ser qualquer subconjunto desses 256 valores se eles estiverem conectados de acordo com o tipo de [(vizinhança Seção 2.7.1)](#vizin) especificado. [@gonzalez2010, p.31].
 
-1. $q$ pertence ao conjunto $N_4(p)$
-2. $q$ pertence ao conjunto $N_D(p)$ e a interseção entre $N_4(p)$ e  $N_4(q)$ for vazia.
 
-$$Cm_{p,q} \text{ em } V\Leftrightarrow (q \in N_4(p) \vee (q \in N_D(p) \wedge N_4(p) \cap N_4(q) = \{\})) \vee f(p) e f(q) \in V  $$
-$$V = \{0\} \to Cm_{p.q}\text{ falso}$$
-Exemplo na Figura \@ref(fig:conectividade) (b).
+### Caminho {#camin}
 
-- **Conectividade de 8**:
 
-Os pixels $p$ e $q$, assumindo valores em V, são conectados de 8 somente se $q$ pertence ao conjunto $N_8(p)$. Exemplo na Figura \@ref(fig:conectividade) (c).
+Uma imagem com coordenada de pixels $(x_1 , y_1), (x_2 , y_2) … (x_n , y_n)$ que determina a sequência do caminho dos variados pixels onde né o comprimento do caminho, e $(x_i , y_i)e (x_i + 1 , y_i + 1)$ são adjacentes, tal que $i = 1,2,...,n - 1$.Se na relação de conectividade considerar vizinhança-4, então existe um caminho-4; para vizinhança-8, tem-se um caminho-8. Exemplo de caminhos são mostrados na figura 11 sendo que o caminho-4 possui comprimento 10 e o caminho-8 possui comprimento 7. O conceito de caminho também pode ser estendido para imagens tridimensionais. [@pedrini2008, p. 31].
 
-$$C8_{p,q} \text{ em } V\Leftrightarrow q \in N_8(p) \wedge f(p) \wedge f(q) \in V $$
-$$V = \{0\} \to C8_{p.q}\text{ verdadeiro}$$
+(ref:caminho) (a) Caminho-4, (b) Caminho-8  [@pedrini2008, p. 31].
 
-(ref:conectividade) Conectividades [@thome2017].
-
-```{r conectividade, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:conectividade)', fig.align='center', out.width='55%'}
-knitr::include_graphics(rep('imagens/02-formacao/conectividade.png'))
-
+```{r caminho, echo=FALSE, fig.asp=.7, fig.width= 4, fig.height= 4,  fig.cap='(ref:caminho)', fig.align='center', out.width='40%'}
+knitr::include_graphics(rep('imagens/02-formacao/caminho.png'))
 ```
 
-### Adjacência
 
-Dois pixels $p$ e $q$, com valores pertencendo a $V$ são:
-
-1. Adjacentes-4 se $q$ estiver no conjunto $N_4(p)$. 
-2. Adjacentes-8 se $q$ estiver no conjunto $N_8(p)$.
-3. Adjacentes-m, $p$ e $q$ subconjuntos de pixels onde $\{(pq) \vee (pp) \vee (q q) \}$, são ditos adjacentes se pegamos um pixel do primeiro conjunto for adjacente a um pixel do segundo.
-
-Na Figura \@ref(fig:adjacencia) temos exemplos de 1. e 2. (em \@ref(fig:adjacencia) (a)) e de 3. em \@ref(fig:adjacencia) (b).
-
-(ref:adjacencia) Adjacências [@thome2017].
-
-```{r adjacencia, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:adjacencia)', fig.align='center', out.width='55%'}
-knitr::include_graphics(rep('imagens/02-formacao/adjacencia.png'))
-
-```
 
 ### Componente Conexa  
 
-Dois pixels $p$ e $q$ de um subconjunto de pixels $V$ da imagem são ditos conexos em $V$ se existir um caminho de $p$ a $q$ inteiramente contido em $V$.
+Componentes conexos de pixels de uma imagem é um conjunto de elementos (pixels) que de alguma forma estão conectados entre si, dois ou mais pixels são componentes conexos se existir um caminho seção 2.7.4 Caminho pertencente ao conjunto. A figura 12 mostra uma imagem bidimensional contendo três componentes conexos caso seja considerada a vizinhança-4 ou, então, dois componentes conexos se considerada a vizinhança-8. [@pedrini2008, p. 32].
 
-Para qualquer pixel $p$ em $V$, o conjunto de pixels em $V$ que são conexos a $p$ é chamado um componente conexo de $V$.
 
-Note que em uma componente conexo qualquer dois pixels deste componentes são conexos entre si.
+(ref:componente) Componentes Conexos de uma imagem bidimensional  [@pedrini2008, p. 32].
 
-Em componentes conexos distintos os pixels são disjuntos (não conectados).
+```{r componente, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:componente)', fig.align='center', out.width='20%'}
+knitr::include_graphics(rep('imagens/02-formacao/componente_conexos.png'))
+```
+
+
+### Borda e Interior
+
+[@pedrini2008, p. 32].  A borda de um componente conexo [seção 2.7.5](### Componente-Conexa) S em uma imagem bidimensional é o conjunto de pixels pertencentes ao componente e que possuem vizinhança-4 com um ou mais pixels externos a S. Intuitivamente, a borda corresponde ao conjunto de pontos no contorno do componente conexo. O interior é o conjunto de pixels de S que não estão em sua borda. A figura 13 mostra um exemplo de uma imagem binária com sua borda interior.
+
+
+(ref:borda) Borda e interior de um componente, Figura do lado esquerdo, mostra a imagem original, a figura do lado direito mostra os pixels da borda e interior. [@pedrini2008, p. 32].
+
+```{r borda, echo=FALSE, fig.asp=.7, fig.width= 4, fig.height=4,  fig.cap='(ref:borda)', fig.align='center', out.width='40%'}
+knitr::include_graphics(rep('imagens/02-formacao/borda_interior.png'))
+```
+
 
 ### Medidas de Distância
 
-Para pixels $p$, $q$ e $z$ com coordenadas $p(x,y)$, $q(s,t)$ e $z(u,v)$, respectivamente, $D$ é uma função distância ou métrica se: 
+As medidas de distância são aplicadas sobre os pixels e componentes da imagem, considerando D uma função com os pixels $f_1, f_2$  e $f_3$ de coordenadas $(x_1, y_1), (x_2, y_2), (x_3, y_3)$, para verificar se $D$ é uma função distância ou medida de distância, deve satisfazer as seguintes propriedades: 
 
-1. $D(p,q) >= 0 (D(p,q) = 0 ) \Leftrightarrow  p = q$ 
-1. $D(p,q) = D(q,p)$
-1. $D(p,z) <= D(p,q) + D(q,u)$ 
 
-- A distância entre dois pontos quaisquer pode ser definida por: 
+1. 
+$$
+D(f_1,f_2) ≥ 0 (D(f_1,f_2) = 0 \ se \ f_1 = f_2 (\#eq:medida1)
+$$ 
+1. $$
+(f_1,f_2) = D(f_2, f_1) (\#eq:medida2)
+$$ 
+1. $$
+D(f_1,f_3) ≤  D(f_1,f_2) + D(f_2,f_3) (\#eq:medida3)
+$$ 
 
-$$D_e(p,q) = \sqrt{(x-s)^2 + (y-t)^2}$$
+Aplicabilidade da fórmula Euclidiana uma das formas de satisfazer as propriedades acima,  desse modo podemos analisar a métrica de dois ou mais pixels de uma imagem, supondo que os pixels $f_1 \ e \ f_2$ de coordenadas $(x1, x2), (y1, y2)$ para medir suas distância aplicamos:
 
-conhecida como Distância Euclidiana.
+$$D_4(f_1 , f_2) = \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2} 
+(\#eq:formEclidiana)
+$$
 
-- Distância $D_4$(City Block ou Quarteirão) entre $p(x,y)$ e $q(s,t)$ é definida por: 
 
-$$D4(p,q)=|x-s|+|y-t|$$
+Na medida de distância Euclidiana, todos os pixels menores ou igual de qualquer valor d formam um disco de raio d centro em $f_1$. Como exemplo, os pontos com distância $D_E ≤ 3$ de um ponto central $(x, y)$ formam o conjunto mostra na Figura: \@ref(fig:medidaD1) 
 
-Distância D8(Distância Xadrez) entre $p$ e $q$ é definida como: 
 
-$$D_8 = max(|x-s|,|y-t|)$$
+
+(ref:medidaD1) Conjunto de pontos com distância Euclidiana menor ou igual de ponto central.  [@pedrini2008, p. 33].
+
+```{r medidaD1, echo=FALSE, fig.asp=.7, fig.width= 4, fig.height=4,  fig.cap='(ref:medidaD1)', fig.align='center', out.width='40%'}
+knitr::include_graphics(rep('imagens/02-formacao/medida_distancia1.png'))
+```
+
+A distância D4entre $f_1 \ e \ f_2$, também chamada de city-block, é definida como: 
+$$
+D4(f1 , f2)   = |x1 - x2 | + |y1 - y2 |
+(\#eq:cityBclock)
+$$
+
+
+
+Os pixels com uma distância $D_4$ de $f_4$ menor ou igual a algum valor d formam um losango centrado em $f_1$. Em particular, os pontos com distância 1 são os pixels com vizinhança-4 de ponto central. Por exemplo, os pontos com distância $D_4≤ 3$ de um ponto central $(x, y)$ formam o conjunto mostrado na figura \@ref(fig:medidaD2)
+
+
+(ref:medidaD2) Conjunto de pontos com distância $D_4$ menor ou igual a 3 de um ponto central.   [@pedrini2008, p. 33].
+
+```{r medidaD2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.height=4,  fig.cap='(ref:medidaD2)', fig.align='center', out.width='40%'}
+knitr::include_graphics(rep('imagens/02-formacao/medida_distancia2.png'))
+```
+
+A distância $D_8$ entre $f_1$ e $f_2$, também chamada de chessboard, é definida como $D_8(f_1 , f_2) = max(| x_1 = x_2 | , | y_1 =y_2 |)$
+
+Os pixels com uma distância $D_8$ de f1menor ou igual a algum valor d formam um quadrado central em $f_1$. Os pontos com distância 1 são os pixels com a vizinhança-8 do ponto central. Por exemplo, os pontos com distância $D_8 ≤ 3$ de um ponto central $(x, y)$ formam o conjunto mostrado na figura
+
+(ref:medidaD3) Conjunto de pontos com distância $D_4$ menor ou igual a 3 de um ponto central.   [@pedrini2008, p. 33].
+
+```{r medidaD3, echo=FALSE, fig.asp=.7, fig.width= 4, fig.height=4,  fig.cap='(ref:medidaD3)', fig.align='center', out.width='40%'}
+knitr::include_graphics(rep('imagens/02-formacao/medida_distancia3.png'))
+```
+
+A distância $D_4$ entre dois pixels $f_1$ e $f_2$é igual ao comprimento do caminho do caminho mais curto entre pixels, considerando-se a vizinhança-4. Do mesmo modo, a distância $D_8$ corresponde ao caminho-8 mais curto entre esses pontos.
 
 ### Operações Lógico-aritméticas 
 
-As operações entre pixels são computadas pixel a pixel, considerando p e q podemos efetuar as seguintes operações aritméticas e lógicas.
+[@pedrini2008, p. 34]. Operações lógicas e aritméticas podem ser utilizadas para modificar imagens. Embora essas operações permitam uma forma simples de processamento, há uma grande variedade de aplicações em que tais operações podem produzir resultados de interesse prático.
+Dadas duas imagens, $f_1$ e $f_2$, as operações aritméticas mais comuns entre dois pixels $f_1(x, y)$ e $f_2(x, y)$ são a adição, subtração. multiplicação e divisão, definida de acordo com:
 
 - Operações Aritméticas:
-  1. **Adição**: $p+q$. O uso ocorre ao se fazer a média para redução de ruído. 
-  2. **Subtração**: $p-q$. É usada para remover informação estática de fundo, Detecção de diferenças entre imagens.
-  3. **Multiplicação**: $p\cdot q$. Calibração de brilho.
-  4. **Divisão**: $p\div q$
+  1. **Adição**: $f_1(x,y) + f_2(x, y)$.
+  2. **Subtração**:$f_1(x,y) - f_2(x, y)$.
+  3. **Multiplicação**: $f_1(x,y) * f_2(x, y)$ $p\cdot q$.
+  4. **Divisão**: $f_1(x,y)\cdot f_2(x, y)$
   
 As operações Aritmética de Multiplicação e Divisão são usadas para corrigir sombras em níveis de cinza, produzidas em não uniformidades da iluminação ou no sensor utilizado para a aquisição da imagem. 
-
-- Operações Lógicas:
-  1. **Conjunção**: $p\wedge q$
-  2. **Disjunção**: $p\vee q$
-  3. **Complementar**: $\neg q(\bar{q})$
-
-As operações lógicas podem ser combinadas para formar qualquer outra operação lógica, são aplicadas apenas em imagens binárias, tem seu uso no mascaramento, detecção de características e análise de forma.
 

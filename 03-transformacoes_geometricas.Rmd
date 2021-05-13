@@ -1,7 +1,7 @@
 # Transformacões geométricas
 
 
-Nessa seção abordaremos conceitos importantes que detalham  processos de transformações geométricas na imagem digitalizada, definiremos a seção proposta, sistema de coordenadas objetos (2D e 3D), representação vetorial e matricial de Imagens digitalizadas, matrizes em computação gráfica, transformações em pontos e objetos; transformações (translação, escala,  rotação) por último não mesmo importante à introdução OpenCv e implementações de OpenCV (abrir imagem, representação matricial da imagem).
+Nessa seção abordaremos conceitos importantes que detalham  processos de transformações geométricas na imagem digitalizada, definiremos a seção proposta, sistema de coordenadas objetos (2D e 3D), representação vetorial e matricial de Imagens digitalizadas, matrizes em computação gráfica, transformações em pontos e objetos; transformações (translação, escala e rotação).
 
 ## Definição
 
@@ -19,17 +19,14 @@ Sistemas de coordenadas nos objetos (2D e 3D) podem ser usadas para modelar obje
 No sistema de coordenadas polares (ao dentro da imagem, figura 3.1), as coordenadas são descritas por raio e ângulo: (r, $\phi$).
 No sistema de coordenadas esférico (à esquerda), as coordenadas são descritas por raio e dois ângulos. 
 Nos sistemas de coordenadas cilíndricos (à direita), as coordenadas são descritas por raio, ângulo e um comprimento. Os dois sistemas de extremidades são 3D.
-Esse tema é abordado com mais profundidade na matéria de Computação Gráfica (CG), transformações geométricas no plano e no espaço.
-Fonte: Coordenadas Polares [@azevedo2018, p. 36].
+Esse tema é abordado com mais profundidade na matéria de Computação Gráfica (CG), transformações geométricas no plano e no espaço. Fonte: Coordenadas Polares [@azevedo2018, p. 36].
 
 
+(ref:cdpolar)  Coordenadas Polares [@azevedo2018, p. 36].
 
-```{r , echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='80%'}
+```{r cdpolar, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:cdpolar)', fig.align='center', out.width='80%'}
 knitr::include_graphics(rep('imagens/03-transformacoes/coordenadaPolar.png'))
 ```
-
-Figura 3.1: Coordenadas Polares [@azevedo2018, p. 36].
-
 
 ## Representação Vetorial e Matricial de Imagens digitalizadas
 
@@ -40,7 +37,10 @@ Fonte: [@azevedo2018, p. 14].
 
 A fórmula abaixo é aplicada para calcular comprimento do vetor 2D:
 
-$$|V| = {\sqrt{x^2 + y^2}}$$
+$$
+|V| = {\sqrt{x^2 + y^2}}
+(\#eq:circulCompre)
+$$
 
 
 Exemplo 1: Calcule o comprimento de $V$ com $x=2$ e $y=3$.
@@ -54,7 +54,10 @@ $$|V| = {\sqrt{x^2+y^2+z^2}}$$
 Exemplo 2: Calcule o comprimento de $V$ com $x=2$ , $y=3$ e $z=1$.
 
 Resolução: 
-$$|V| = {\sqrt{2^2+3^2+1^2} = 3.74}$$
+$$
+|V| = {\sqrt{2^2+3^2+1^2} = 3.74}
+(\#eq:circulCompre3D)
+$$
 
 
 Uma matriz é um arranjo (vetor) de elementos em duas direções (linha e coluna). Para declará-la é necessário definir a quantidade de elementos existentes em cada direção.
@@ -62,12 +65,11 @@ Representaremos matriz com a letra M, as direções (linha e coluna) pelas letra
 Suponhamos que L = 4 e C = 4 então M[4][4] formando matriz quadrática como mostra a figura 3.2, nela pode-se observar a matriz identidade de tamanho 4 x 4. 
 
 
+(ref:repreMatricial)  Representação matricial [@azevedo2018, p. 14].
 
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='40%'}
+```{r repreMatricial, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', fig.cap='(ref:repreMatricial)', out.width='40%'}
 knitr::include_graphics(rep('imagens/03-transformacoes/tableMatriz.png'))
 ```
-
-Figura 3.2: Representação matricial [@azevedo2018, p. 14].
 
 
 
@@ -80,7 +82,7 @@ As matrizes são muito usadas nessas manipulações porque são mais fáceis de 
 
 As matrizes são parecidas com modelo organizacional da memória dos computadores. Suas  representações se relacionam diretamente com estas estruturas de armazenamento, facilmente o trabalho dos e permitindo maior velocidade para aplicações críticas como jogos e aplicações em realidade virtual. É devido a esse fato que os computadores com “facilidades vetoriais" têm sido muito usados junto a aplicações de computação gráfica.
 
-Devido ao padrão de coordenadas usualmente adotado para representação de pontos no plano (x,y) e no espaço tridimensional (x,y,z), pode ser conveniente manipular esses pontos em matrizes quadradas de 2x2 ou 3x3 elementos. Através de matrizes e de sua multiplicação, podemos representar todas as transformações lineares 2D e 3D. Várias transformações podem ser combinadas resultando em uma única matriz denominada de matriz de transformação.
+Devido ao padrão de coordenadas usualmente adotado para representação de pontos no plano $(x,y)$ e no espaço tridimensional $(x,y,z)$, pode ser conveniente manipular esses pontos em matrizes quadradas de 2x2 ou 3x3 elementos. Através de matrizes e de sua multiplicação, podemos representar todas as transformações lineares 2D e 3D. Várias transformações podem ser combinadas resultando em uma única matriz denominada de matriz de transformação.
 
 Na  imagem digitalizada, são aplicados elementos básicos como pontos, linhas, curvas e as superfícies tridimensionais ou mesmo os sólidos que mostram os elementos que formam as imagens sintaticamente no computador.
 Em computação gráfica os elementos pontos, linhas, curvas e as superfícies tridimensionais ou mesmo os sólidos são denominados primitivas vetoriais da imagem. As primitivas vetoriais são associadas a um conjunto de atributos que define sua aparência e a um conjunto de dados que define a sua geometria (pontos de controle). 
@@ -90,17 +92,14 @@ A cada elemento de um conjunto de pontos associa-se uma posição, que pode ser 
 
 A descrição matricial é típica das imagens digitalizadas capturadas por scanners ou utilizadas nos vídeos. É a forma de descrição principal na análise e no processamento de imagens. Em computação gráfica sintética, surgem nos processos de finalização (ray tracing, z-buffers).
 
-Na representação matricial, a imagem é descrita por um conjunto de células em um arranjo especial bidimensional, uma matriz. Cada célula representa os pixels (ou pontos) da imagem matricial. Os objetos são formados usando adequadamente esses pixels. A figura 3.3 mostra a representação matricial da imagem digitalizada e sua tela. Essa é a representação usualmente empregada para formar a imagem nas memórias e telas dos computadores e na maioria dos dispositivos de saída gráficos (impressoras e vídeos). 
-
-Fonte: [@azevedo2018, p. 14, 15].
+Na representação matricial, a imagem é descrita por um conjunto de células em um arranjo especial bidimensional, uma matriz. Cada célula representa os pixels (ou pontos) da imagem matricial. Os objetos são formados usando adequadamente esses pixels. A figura 3.3 mostra a representação matricial da imagem digitalizada e sua tela. Essa é a representação usualmente empregada para formar a imagem nas memórias e telas dos computadores e na maioria dos dispositivos de saída gráficos (impressoras e vídeos). Fonte: [@azevedo2018, p. 14, 15].
 
 
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='70%'}
+(ref:desMatricial) Descrição de imagens matriciais por conjunto de pixels [@azevedo2018, p. 15].
+
+```{r desMatricial, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', fig.cap='(ref:desMatricial)', out.width='70%'}
 knitr::include_graphics(rep('imagens/03-transformacoes/memoria_tela_imagem.png'))
 ```
-
-
-Figura 3.3: Descrição de imagens matriciais por conjunto de pixels [@azevedo2018, p. 15].
 
 
 
@@ -115,10 +114,19 @@ Fonte: Coordenadas Polares [@azevedo2018, p. 38]. A habilidade de representar um
 
 A transformação geométrica translação tem como objetivo movimentar a objeto(imagem) no espaço (ambiente projetado), usando a matriz dedos (pontos) do objeto, aplica-se operações da nova coordenada p(x, y) sobre os pontos da matriz possibilitando transladar ao novo espaço da coordenada definida. 
 Para transladar (mover) um objeto do ponto atual para o novo ponto, p(x) e p(y) pode ser movido por Txunidades em relação ao x, e por Ty, unidades em relação eixo . Logo nova posição do ponto p(x,y) passa a ser p’(x) e p’(y) , que podem ser escrito como: 
-$$x’ = x + Tx$$
-$$y’ = y + Ty$$
+$$
+x’ = x + Tx
+(\#eq:formTranslacao1)
+$$
+$$
+y’ = y + Ty
+(\#eq:formTranslacao2)
+$$
 No caso do ponto for representado por vetor, p = (x, y), a translação desse mesmo ponto para o novo pode ser obtida pela adição de vetor de deslocamento à posição atual do ponto:
-$$p’ = p+ T = [x’y’] = [xy] + [Tx Ty]$$.
+$$
+p’ = p+ T = [x’y’] = [xy] + [Tx Ty]
+(\#eq:formTranslacao3)
+$$.
 
 Fonte: [@azevedo2018, p. 38].
 
@@ -126,12 +134,12 @@ A figura 3.4, translação de um triângulo de três unidades na horizontal e-4 
 Repare que se teria o mesmo efeito transladado a origem do sistema de coordenadas para o ponto p(-3, 4)na primeira figura.
 Fonte: [@azevedo2018, p. 39].
 
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='70%'}
+(ref:translacao)  Tranformação de translação [@azevedo2018, p. 39].
+
+```{r translacao, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', fig.cap='(ref:translacao)', out.width='70%'}
 knitr::include_graphics(rep('imagens/03-transformacoes/translacao.png'))
 ```
 
-
-Figura 3.4: Tranformação de translação [@azevedo2018, p. 39].
 
 
 ## Transformação de Escala
@@ -140,27 +148,35 @@ Figura 3.4: Tranformação de translação [@azevedo2018, p. 39].
 A transformação geométrica escala tem como objetivo mudar as dimensões (tamanho) do objeto(imagem) no espaço (ambiente projetado). Figura 3.5.  
 Fonte: Azevedo Eduardo, edição 2, p. 40. Para fazer com que uma imagem definida por conjunto de pontos mude de tamanho, teremos de multiplicar os valores de suas coordenadas por um fator de escala. Transformar um objeto por alguma operação nada mais é do que fazer essa operação com todos os seus pontos. Nesse caso um dos vetores de suas coordenadas são multiplicados por fatores de escala. Estes fatores de escala em 2D podem, por exemplo ser $Ss$ e $Sy$:
 
-$$x’ = x * Sx$$
+$$
+x’ = x * Sx
+(\#eq:formEscala1)
+$$
 
-$$y’ = y * Sy$$
+$$
+y’ = y * Sy
+(\#eq:formEscala2)
+$$
 Essa operação pode ser representada na forma matricial:
 
-```{r escala, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref: escala)', fig.align='center', out.width='80%'}
+(ref:escala)  Tranformação de escala [@azevedo2018, p. 40].
+
+```{r escala, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:escala)', fig.align='center', out.width='80%'}
 knitr::include_graphics(rep('imagens/03-transformacoes/escala.png'))
 ```
 
 
-Figura 3.5: Tranformação de escala [@azevedo2018, p. 40].
 
 Fonte: [@azevedo2018, p. 41]. A mudança de escala de um ponto de um objeto no espaço tridimensional pode ser obtida pela multiplicação de três fatores de escala ao ponto. A operação de mudança de escala pode ser descrita pela multiplicação de coordenadas do ponto por uma matriz diagonal cujos valores dos elementos não-nulos sejam os fatores de escala. Assim, no caso 3D tem-se:
 
 
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='80%'}
+(ref:escala3d) Escala espaço tridimencional [@azevedo2018, p. 41].
+
+```{r escala3d, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center',  fig.cap='(ref:escala3d)', out.width='80%'}
 knitr::include_graphics(rep('imagens/03-transformacoes/escala3d.png'))
 ```
 
 
-Figura 3.6: Tranformação de escala [@azevedo2018, p. 41].
 
 ## Transformação de Rotação
 
@@ -169,7 +185,10 @@ A transformação geométrica da rotação tem como objetivo rotacionar objeto(i
 
 Fonte: [@azevedo2018, p. 41, 42]. Na figura 3.6 rotação de um ponto P em torno da origem, passando para a posição P’. Repare que se chegaria a esse mesmo ponto através de uma rotação de - no sistema de eixos XY.
 
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='45%'}
+
+(ref:rotacao) Transformação de Rotação [@azevedo2018, p. 42].
+
+```{r rotacao, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', fig.cap='(ref:rotacao)', out.width='45%'}
 knitr::include_graphics(rep('imagens/03-transformacoes/rotacao1.png'))
 ```
 
@@ -178,22 +197,36 @@ Figura 3.6: Tranformação de rotação [@azevedo2018, p. 42].
 
 Fonte: [@azevedo2018, p. 42]. Se um ponto de coordenada (x,y), distante $r=(x2 + y2)^\frac12$ da origem do sistema de coordenadas, for rotacionado de um ângulo $\phi$ em torno da origem, suas coordenadas, que antes eram definidas como: $x = r * \cos(\phi), y =r * \sin(\phi)$, passam a ser descritas como (x’, y’) dadas por: 
 
-$$x' = r * \cos(\theta + \phi) = r * \cos\phi * cos\theta - r * \sin\phi * \sin\theta$$
-$$x' = r * \sin(\theta + \phi) = r * \sin\phi * cos\theta + r * \cos\phi * \sin\theta$$
+$$
+x' = r * \cos(\theta + \phi) = r * \cos\phi * cos\theta - r * \sin\phi * \sin\theta
+(\#eq:formRotacao1)
+$$
+$$
+x' = r * \sin(\theta + \phi) = r * \sin\phi * cos\theta + r * \cos\phi * \sin\theta
+(\#eq:formRotacao2)
+$$
 
 isso equivale às expressões:
-$$x' = x\cos(\phi) - y\sin(\phi)$$
-$$y' = y\cos(\phi) + y\sin(\phi)$$
+$$
+x' = x\cos(\phi) - y\sin(\phi)
+(\#eq:formRotacao3)
+$$
+$$
+y' = y\cos(\phi) + y\sin(\phi)
+(\#eq:formRotacao4)
+$$
+
 
 Essas expressões podem ser descritas pela multiplicação do vetor de coordenadas
 do ponto (x,y) pela matriz: 
 
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='15%'}
+
+(ref:rotacao2) [@azevedo2018, p. 42].
+
+```{r rotacao2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', fig.cap='(ref:rotacao2)', out.width='15%'}
 knitr::include_graphics(rep('imagens/03-transformacoes/matriz_rotacao.png'))
 ```
 
-
-Figura 3.7: Tranformação de rotaão [@azevedo2018, p. 42].
 
 
 Fonte: [@azevedo2018, p. 42]. Para alterar a orientação de um objeto(imagem) em torno de um certo ponto realizando uma combinação da rotação com a translação, é necessário, antes de aplicar a rotação de um ângulo no plano das coordenadas em torno de um ponto, realizar uma translação para localizar esse ponto na origem do sistema, aplicando a rotação desejada e, então, uma translação inversa para localizar o dado ponto na origem.
@@ -201,53 +234,10 @@ A multiplicação de coordenadas por uma matriz de rotação  pode resultar em u
 
 
 
-```{r, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', out.width='50%'}
+(ref:rotacao3) Proceso de aplicação rotação [@azevedo2018, p. 43].
+
+
+```{r rotacao3, echo=FALSE, fig.asp=.7, fig.width= 4, fig.align='center', fig.cap='(ref:rotacao3)', out.width='60%'} 
 knitr::include_graphics(rep('imagens/03-transformacoes/rotacao2.png'))
 ```
-
-
-Figura 3.8: Tranformação de rotaão [@azevedo2018, p. 43].
-
-
-
-
-## Introdução OpenCv
-
-
-
-OpenCV [OpenCV] é uma biblioteca open source (biblioteca de código aberto, http://opensource.org), criada em 1999 por Gary Bradski [Bradski] o código fonte foi implementada pelas linguagens C e C++ [c, c++] sua performance é otimizada e pode tirar proveito de vários núcleos dos processadores.
-A performance do OpenCv é das propriedades da biblioteca que ajuda as áreas (Visão Computação e Inteligência Artificial) facilitando a produção e desempenho nas implementações de soluções no desenvolvimento das aplicações.
-
-Em transformação geométrica biblioteca OpenCv acelera computacionalmente a implementação das transformações aqui apresentadas (translação, escala, rotação), para isso usaremos a linguagem Python (https://www.python.org/) que maniputa as inúmeras funções que a biblioteca OpenCv possui.
-Para implementação dos exemplos nos subtítulos posteriores usaremos o ambiente de desenvolvimento Colab (https://colab.research.google.com) criando notebook.
-
-
-## Abrir imagem no OpenCv(Python)
-
-
-Para abrir uma imagem no OpenCv (Python) é necessário importar a biblioteca chamando a nomenclatura cv2,  isso permitirá com que tenhamos acesso a função imred, para usá-la no nosso ambiente de trabalho(colab com linguagem python) primeiramente chamamos o da biblioteca e de seguida a função e passamos como parâmetro o caminho da imagem e o nome da imagem caso tenhamos um caminho relativo caso contrário passamos como parâmetro só no nome da imagem.
-
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 3, fig.align='center', out.width='90%'}
-knitr::include_graphics(rep('imagens/03-transformacoes/abrir_imagem_openCv.png'))
-```
-
-Figura 3.9: Abrir imagem no OpenCv(Python).
-
-
-
-## Representação matricial da imagem no OpenCv(Python)
-
-
-
-Depois de carregar a imagem utilizando a biblioteca OpenCv(Python) é possível visualizar a representação da imagem em formato matricial onde visualizamos o conjunto de pixels (seção 2.) da imagem, para cada pixel desse conjunto está dentro do limite 0 a 225, onde 0 representa a cor preta e 255 representa a cor branca e no meio deste limite representa outras cores.
-
-
-```{r, echo=FALSE, fig.asp=.7, fig.width= 3, fig.align='center', out.width='90%'}
-knitr::include_graphics(rep('imagens/03-transformacoes/representacao_matricial_da_imagem.png'))
-```
-
-
-
-
 
