@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#formacaoImg"><i class="fa fa-check"></i><b>2.5</b> Definição de imagem digital</a></li>
 <li class="chapter" data-level="2.6" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#resolução-espacial-e-de-intensidade"><i class="fa fa-check"></i><b>2.6</b> Resolução espacial e de intensidade</a></li>
-<li class="chapter" data-level="2.7" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#pixels"><i class="fa fa-check"></i><b>2.7</b> <em>Pixels</em></a><ul>
+<li class="chapter" data-level="2.7" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#pixels"><i class="fa fa-check"></i><b>2.7</b> Pixels</a><ul>
 <li class="chapter" data-level="2.7.1" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#vizin"><i class="fa fa-check"></i><b>2.7.1</b> Vizinhança</a></li>
 <li class="chapter" data-level="2.7.2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#contiv"><i class="fa fa-check"></i><b>2.7.2</b> Conectividade</a></li>
 <li class="chapter" data-level="2.7.3" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#adja"><i class="fa fa-check"></i><b>2.7.3</b> Adjacência</a></li>
@@ -509,8 +509,8 @@ Figura 2.20: Efeitos da redução de profundidade <span class="citation">[<a hre
 </div>
 </div>
 <div id="pixels" class="section level2">
-<h2><span class="header-section-number">2.7</span> <em>Pixels</em></h2>
-<p>Os pixels são elementos principais que formam (constituem coordenadas) a imagem, sua importância determina topologicamente as características da imagem digitalizada, nesta seção mostraremos conceitos básicos da topologia dos elementos (pixels) relacionados em uma imagem. Em memória computacional os pixels de uma imagens são representadas no formato de matrizes (bidimensional ou tridimensional) como foi abordado na <a href="formação-da-imagem.html#formacaoImg">Seção 2.5</a>, através delas é permitido aplicar operações sobre seus elementos (pixels), efetuar análises, identificação de padrões, acessar regiões, alterar cores, posições e tamanho tendo como referência espaço projetado usando as coordenadas do plano.</p>
+<h2><span class="header-section-number">2.7</span> Pixels</h2>
+<p>Os pixels são elementos principais na formação da imagem, sua importância determina topologicamente as características da imagem, nesta seção mostraremos conceitos básicos da topologia da imagem em relação seus elementos (pixels). Em memória computacional os pixels da imagem são representados nos formatos de matrizes (bidimensional ou tridimensional) já abordado na seção <a href="formação-da-imagem.html#formacaoImg">Seção 2.5</a>, através delas é permitido aplicar operações sobre seus elementos (pixels), efetuar análises, identificação de padrões, acessar regiões, alterar cores, posições e tamanho tendo como referência espaço projetado usando as coordenadas do plano.</p>
 <p>Propriedades topológicas dos pixels da imagem:</p>
 <ul>
 <li>Vizinhança ( 4, D, 6, 8 e 26 )</li>
@@ -524,21 +524,19 @@ Figura 2.20: Efeitos da redução de profundidade <span class="citation">[<a hre
 </ul>
 <div id="vizin" class="section level3">
 <h3><span class="header-section-number">2.7.1</span> Vizinhança</h3>
-<p>Para definir uma vizinhança-4 (denotado <span class="math inline">\([N_4(f)]\)</span>) de um pixel f de coordenadas <span class="math inline">\((x, y)\)</span> ilustrado na figura <a href="formação-da-imagem.html#fig:vizinhanca">2.21</a> (a), <span class="math inline">\(f(x, y)\)</span> possui quatro vizinhos, dois na horizontal e outros dois na vertical cuja as coordenadas da vizinhança são <span class="math inline">\((x + 1, y), (x - 1, y), (x, y + 1) e (x, y -1)\)</span>. Os quatros vizinhos diagonais de f são de coordenadas <span class="math inline">\((x - , y - 1), (x - 1, y + 1), (x + 1, y + 1)\)</span>, que constituem o conjunto <span class="math inline">\([N_d(f)]\)</span>. A vizinhança-8 (denotado <span class="math inline">\([N_8(f)]\)</span> e ilustrada na figura <a href="formação-da-imagem.html#fig:vizinhanca">2.21</a> (b), é definida como <span class="math inline">\(N_8(f)=N_4(f) U N_d(f)\)</span>. O conceito de vizinhança pode ser estendido para imagens tridimensionais, sendo que os vizinhos podem ser definidos de acordo com o número de voxels compartilhados, faces, arestas ou vértices em comum nas figuras <a href="formação-da-imagem.html#fig:vizinhanca">2.21</a> (c)-(e). A figura <a href="formação-da-imagem.html#fig:vizinhanca">2.21</a> (c), por exemplo, ilustra o caso de vizinhança-6, em que os vizinhos do voxel <span class="math inline">\((x, y, z)\)</span> são <span class="math inline">\((x - 1, y, z), (x, y, 1)\)</span>. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 30]</span>.</p>
+<p>As vizinhanças de um elemento (pixels) <span class="math inline">\(f\)</span> pertencente ao conjunto <span class="math inline">\(S\)</span> (matriz de pixels) com coordenadas <span class="math inline">\((x,y)\)</span> possui vizinhos dos tipos 4, D e 8.
+Para definir uma vizinhança-4 (denotado <span class="math inline">\([N_4(f)])\)</span> de <span class="math inline">\(f(x,y)\)</span> ilustrado na figura <a href="formação-da-imagem.html#fig:vizinhanca">2.21</a>, <span class="math inline">\(f_{(1,1)}\)</span> possui quatro vizinhos, dois na horizontal e outros dois na vertical cuja as coordenadas da vizinhança são <span class="math inline">\((x + 1, y), (x - 1, y), (x, y + 1) \ e \ (x, y -1)\)</span>. Os quatros vizinhos diagonais de <span class="math inline">\(f_{(5, 1)}\)</span> são de coordenadas <span class="math inline">\((x - 1 , y - 1), (x - 1, y + 1), (x + 1, y + 1)\)</span>, que constituem o conjunto <span class="math inline">\([N_d(f)]\)</span>. A vizinhança-8 (denotado <span class="math inline">\([N_8(f)]\)</span> e ilustrada na figura <a href="formação-da-imagem.html#fig:vizinhanca">2.21</a> <span class="math inline">\(f_{(4, 5)}\)</span>, é definida como <span class="math inline">\(N_8(f)= N_4(f) \ U \ Nd(f)\)</span>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:vizinhanca"></span>
-<img src="imagens/02-formacao/vizinhanca.png" alt="Vizinhanças [3, p. 31]." width="70%" />
+<img src="imagens/02-formacao/vizinhanca4-8-d.png" alt="Vizinhança de 4-D e 8 de um pixel, matriz de pixel da imagem." width="40%" />
 <p class="caption">
-Figura 2.21: Vizinhanças <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 31]</span>.
+Figura 2.21: Vizinhança de 4-D e 8 de um pixel, matriz de pixel da imagem.
 </p>
 </div>
-<ol style="list-style-type: lower-alpha">
-<li>vizinhança-4 de um pixel, (b) vizinhança-8 de pixel, (c) vizinhança-6 de um voxel, (d) vizinhança-18 de um voxel, (e) vizinhança-26 de um voxel.</li>
-</ol>
 </div>
 <div id="contiv" class="section level3">
 <h3><span class="header-section-number">2.7.2</span> Conectividade</h3>
-<p>A conectividade entre os pixels é um conceito importante na topologia da imagem, é usada para determinar limites de objetos e componentes de regiões na imagem. Dois pixels são conexos entre si primeiro verificar-se seus tipos de <a href="formação-da-imagem.html#vizin">(vizinhos Seção 2.7.1)</a>, de seguida se existe similaridade na intensidade de cinza, cor ou textura. Por exemplo, em uma imagem binária, em que os pixels podem assumir os valores 0 ou 1, dois pixels podem ter vizinhança-4, mas somente serão considerados conexos se possuírem o mesmo valor. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 31]</span>.</p>
+<p>A conectividade entre os pixels é outro conceito importante na topologia da imagem, usada para determinar limites de objetos e componentes de regiões na imagem. Dois pixels são conexos entre si primeiro verificar-se seus tipos de <a href="formação-da-imagem.html#vizin">(vizinhos Seção 2.7.1)</a>, de seguida se existe similaridade na intensidade de cinza, cor ou textura. Por exemplo, em uma imagem binária, em que os pixels podem assumir os valores 0 ou 1, dois pixels podem ter vizinhança-4, mas somente serão considerados conexos se possuírem o mesmo valor. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 31]</span>.</p>
 </div>
 <div id="adja" class="section level3">
 <h3><span class="header-section-number">2.7.3</span> Adjacência</h3>
@@ -595,7 +593,7 @@ D(f_1,f_3) ≤  D(f_1,f_2) + D(f_2,f_3) \tag{2.10}
 <p><span class="math display" id="eq:formEclidiana">\[D_4(f_1 , f_2) = \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2} 
 \tag{2.11}
 \]</span></p>
-<p>Na medida de distância Euclidiana, todos os pixels menores ou igual de qualquer valor d formam um disco de raio d centro em <span class="math inline">\(f_1\)</span>. Como exemplo, os pontos com distância <span class="math inline">\(D_E ≤ 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostra na Figura: <a href="formação-da-imagem.html#fig:medidaD1">2.25</a></p>
+<p>Na medida de distância Euclidiana, todos os pixels menores ou igual de qualquer valor d formam um disco de raio d centro em f1. Como exemplo, os pontos com distância <span class="math inline">\(D_E ≤ 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostra na Figura: <a href="formação-da-imagem.html#fig:medidaD1">2.25</a></p>
 
 <div class="figure" style="text-align: center"><span id="fig:medidaD1"></span>
 <img src="imagens/02-formacao/medida_distancia1.png" alt="Conjunto de pontos com distância Euclidiana menor ou igual de ponto central. [3, p. 33]." width="40%" />
@@ -603,12 +601,12 @@ D(f_1,f_3) ≤  D(f_1,f_2) + D(f_2,f_3) \tag{2.10}
 Figura 2.25: Conjunto de pontos com distância Euclidiana menor ou igual de ponto central. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 33]</span>.
 </p>
 </div>
-<p>A distância D4entre <span class="math inline">\(f_1 \ e \ f_2\)</span>, também chamada de city-block, é definida como:
-<span class="math display" id="eq:cityBclock">\[
-D4(f1 , f2)   = |x1 - x2 | + |y1 - y2 |
+<p>A distância <span class="math inline">\(D_4\)</span> entre <span class="math inline">\(f_1\)</span> e <span class="math inline">\(f_2\)</span>, também denotada de city-block, é definida como:
+<span class="math display" id="eq:formCity">\[
+D_4(f_1 , f_2)   = |x_1 - x_2 | + |y_1 - y_2 |
 \tag{2.12}
 \]</span></p>
-<p>Os pixels com uma distância <span class="math inline">\(D_4\)</span> de <span class="math inline">\(f_4\)</span> menor ou igual a algum valor d formam um losango centrado em <span class="math inline">\(f_1\)</span>. Em particular, os pontos com distância 1 são os pixels com vizinhança-4 de ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_4≤ 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na figura <a href="formação-da-imagem.html#fig:medidaD2">2.26</a></p>
+<p>Os pixels com uma distância <span class="math inline">\(D_4\)</span> de <span class="math inline">\(f_4\)</span> menor ou igual a algum valor d formam um losango centrado em <span class="math inline">\(f_1\)</span>. Em particular, os pontos com distância 1 são os pixels com vizinhança-4 de ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_4 ≤ 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na figura <a href="formação-da-imagem.html#fig:medidaD2">2.26</a></p>
 
 <div class="figure" style="text-align: center"><span id="fig:medidaD2"></span>
 <img src="imagens/02-formacao/medida_distancia2.png" alt="Conjunto de pontos com distância \(D_4\) menor ou igual a 3 de um ponto central. [3, p. 33]." width="40%" />
@@ -616,8 +614,9 @@ D4(f1 , f2)   = |x1 - x2 | + |y1 - y2 |
 Figura 2.26: Conjunto de pontos com distância <span class="math inline">\(D_4\)</span> menor ou igual a 3 de um ponto central. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 33]</span>.
 </p>
 </div>
-<p>A distância <span class="math inline">\(D_8\)</span> entre <span class="math inline">\(f_1\)</span> e <span class="math inline">\(f_2\)</span>, também chamada de chessboard, é definida como <span class="math inline">\(D_8(f_1 , f_2) = max(| x_1 = x_2 | , | y_1 =y_2 |)\)</span></p>
-<p>Os pixels com uma distância <span class="math inline">\(D_8\)</span> de f1menor ou igual a algum valor d formam um quadrado central em <span class="math inline">\(f_1\)</span>. Os pontos com distância 1 são os pixels com a vizinhança-8 do ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_8 ≤ 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na figura</p>
+<p>A distância D8entre <span class="math inline">\(f_1\)</span> e <span class="math inline">\(f_2\)</span>, também denotado de chessboard, é definida como
+<span class="math inline">\(D_8(f_1 , f_2) = max(| x_1 = x_2 | , | y_1 =y_2 |)\)</span>
+Os pixels com uma distância D8de f1menor ou igual a algum valor d formam um quadrado central em <span class="math inline">\(f_1\)</span>. Os pontos com distância 1 são os pixels com a vizinhança-8 do ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_8 ≤ 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na figura <a href="formação-da-imagem.html#fig:medidaD3">2.27</a></p>
 
 <div class="figure" style="text-align: center"><span id="fig:medidaD3"></span>
 <img src="imagens/02-formacao/medida_distancia3.png" alt="Conjunto de pontos com distância \(D_4\) menor ou igual a 3 de um ponto central. [3, p. 33]." width="40%" />
@@ -625,22 +624,21 @@ Figura 2.26: Conjunto de pontos com distância <span class="math inline">\(D_4\)
 Figura 2.27: Conjunto de pontos com distância <span class="math inline">\(D_4\)</span> menor ou igual a 3 de um ponto central. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 33]</span>.
 </p>
 </div>
-<p>A distância <span class="math inline">\(D_4\)</span> entre dois pixels <span class="math inline">\(f_1\)</span> e <span class="math inline">\(f_2\)</span>é igual ao comprimento do caminho do caminho mais curto entre pixels, considerando-se a vizinhança-4. Do mesmo modo, a distância <span class="math inline">\(D_8\)</span> corresponde ao caminho-8 mais curto entre esses pontos.</p>
 </div>
 <div id="operações-lógico-aritméticas" class="section level3">
 <h3><span class="header-section-number">2.7.8</span> Operações Lógico-aritméticas</h3>
 <p><span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 34]</span>. Operações lógicas e aritméticas podem ser utilizadas para modificar imagens. Embora essas operações permitam uma forma simples de processamento, há uma grande variedade de aplicações em que tais operações podem produzir resultados de interesse prático.
 Dadas duas imagens, <span class="math inline">\(f_1\)</span> e <span class="math inline">\(f_2\)</span>, as operações aritméticas mais comuns entre dois pixels <span class="math inline">\(f_1(x, y)\)</span> e <span class="math inline">\(f_2(x, y)\)</span> são a adição, subtração. multiplicação e divisão, definida de acordo com:</p>
 <ul>
-<li>Operações Aritméticas:
+<li><p>Operações Aritméticas:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Adição</strong>: <span class="math inline">\(f_1(x,y) + f_2(x, y)\)</span>.</li>
-<li><strong>Subtração</strong>:<span class="math inline">\(f_1(x,y) - f_2(x, y)\)</span>.</li>
-<li><strong>Multiplicação</strong>: <span class="math inline">\(f_1(x,y) * f_2(x, y)\)</span> <span class="math inline">\(p\cdot q\)</span>.</li>
-<li><strong>Divisão</strong>: <span class="math inline">\(f_1(x,y)\cdot f_2(x, y)\)</span></li>
+<li><p><strong>Adição</strong>: <span class="math inline">\(f_1(x_1, y_1) + f_2(x_2, y_2)\)</span>.</p></li>
+<li><p><strong>Subtração</strong>: <span class="math inline">\(f_1(x_1, y_1) - f_2(x_2, y_2)\)</span>.</p></li>
+<li><p><strong>Multiplicação</strong>: <span class="math inline">\(f_1(x_1, y_1) \cdot f_2(x_2, y_2)\)</span></p></li>
+<li><p><strong>Divisão</strong>: <span class="math inline">\(f_1(x_1, y_1) \div f_2(x_2, y_2)\)</span></p></li>
 </ol></li>
 </ul>
-<p>As operações Aritmética de Multiplicação e Divisão são usadas para corrigir sombras em níveis de cinza, produzidas em não uniformidades da iluminação ou no sensor utilizado para a aquisição da imagem.</p>
+<p>Durante o processo de operações aritméticas sobre uma imagem alguns cuidados devem ser tomados para contornar a produção de valores fora do intervalo de níveis de cinza sobre a imagem original no processo. Neste caso, a operação de adição de duas imagens com 256 níveis de cinza, pode resultar em um número maior que valor 255 para determinados pixels, por outro lado, a operação de subtração de duas imagens podem resultar em valores negativos para alguns pixels durante o processo. Para solucionar esse problema depois do processo aritmético (aplicação aritmética), realizar uma transformação de escala de cinza na imagem resultante para manter seus valores do intervalo adequado. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 34]</span>.</p>
 
 </div>
 </div>

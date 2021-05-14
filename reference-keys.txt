@@ -43,7 +43,7 @@ eq:medida2
 eq:medida3
 eq:formEclidiana
 fig:medidaD1
-eq:cityBclock
+eq:formCity
 fig:medidaD2
 fig:medidaD3
 fig:cdpolar
