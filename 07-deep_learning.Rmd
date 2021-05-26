@@ -514,3 +514,338 @@ De uma maneira simplificada, os sinais de luz recebidos pela retina são transmi
 - Células complexas: também respondem a características da imagem, como as células simples, mas são invariantes a posição, ou seja, não fazem grande distinção de onde a característica aparece. Esse tipo de célula inspirou as unidades de pooling, que veremos mais adiante[@goodfellow2016, p.365].
 
 Anatomicamente, quanto mais nos aprofundamos nas camadas do cérebro, mais camadas análogas à convolução e pooling são passadas, e encontramos células mais especializadas que respondem a padrões específicos sem serem afetadas por transformações na entrada. Sendo que até chegar nessas camadas mais profundas, é realizado uma sequência de detecções seguidas de camadas de pooling[@goodfellow2016, p.365].
+
+### Redes CNN's clássicas
+
+#### LeNet
+Após estudar os principais blocos de construção de uma rede convolucional (CNN) - camada de convolução (*convolutional layer*), camada de redução (*pooling layer*) e camadas totalmente conectadas (*fully connected layer*) - torna-se mais fácil comparar as arquiteturas CNN’s e perceber que mesmo com as diferenças elas apresentam um padrão na combinação das camadas. Normalmente as arquiteturas CNN’s possuem uma sequência intercalada de camada de convolução, seguida por uma camada *pooling*, que se repete até a ponta da rede onde se encontram algumas camadas totalmente conectadas com estrutura semelhante às redes MLP. Esta estrutura básica pode ser vista na Figura \@ref(fig:lenet).
+
+À medida que são realizadas as operações ao longo da rede se percebe que os mapas ficam cada vez menores e que as camadas ficam mais profundas, ou seja, aumentam a quantidade de mapas em uma mesma camada. Como a camada de saída geralmente se apresenta como um vetor de probabilidades para as classes de predição, existe uma transição da representação dos dados em mapas para vetor, a partir do processo de *flatten*, que ocorre antes da primeira camada totalmente conectada.
+
+(ref:lenet) Rede Convolucional LeNet - A entrada é uma imagem de um número escrito à mão e a saída um vetor com a probabilidade para cada um dos dez dígitos de 0 à 9 [@zhang2020dive, p.250]
+
+```{r lenet, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:lenet)', fig.align='center', out.width='100%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/lenet.png'))
+```
+
+A rede LeNet foi uma das primeiras CNN’s que demonstrou potencial de aplicação em visão computacional. A rede foi criada por Yann LeCun em 1998 com propósito de reconhecimento de números manuscritos. A LeNet foi posteriormente adaptada para reconhecer dígitos para os depósitos em máquinas ATM, e ainda existem caixas eletrônicos que executam o código desenvolvido por Yann e seu colega Leon Bottou [@zhang2020dive, p.248]. A rede também foi amplamente utilizada para reconhecimento de dígitos do dataset do MNIST [@geron2019, p.449], este dataset foi abordado no tópico de backpropagation. 
+
+Na Figura \@ref(fig:lenet) consideramos como entrada uma imagem padrão do MNIST, de tamanho 28 × 28 pixels e com um canal em escala de cinza. No esquema geral da rede LeNet (Figura \@ref(fig:lenet2)) temos uma visão mais clara da combinação das camadas, em que após a camada de entrada existem duas camadas convolucionais, intercaladas com duas camadas de *pooling* e na ponta três camadas totalmente conectadas.
+
+Cada camada de convolução utiliza um filtro 5x5 e uma função de ativação sigmóide. A primeira camada de convolução tem seis canais ou mapas, enquanto a segunda tem 16. A operação de *pooling* envolve um filtro 2x2 que calcula a média, por isso é identificada como “AvgPool”, e utiliza stride 2 para que cada mapa da camada anterior tenha uma redução pela metade ao longo da largura e da altura, descartando 75% das ativações. O tamanho das três camadas totalmente conectadas (*Full Conect*) são respectivamente, 120, 84, e 10. A última camada, FC(10), corresponde ao número possível de classes, neste caso 10 em razão dos dígitos de 0 à 9. A função de ativação na última camada é uma função gaussiana.
+
+(ref:lenet2) Esquema geral das camadas na rede LeNet - Esquema da rede LeNet com a sequência de camadas convolucionais (Conv), pooling (AvgPool) e camadas totalmente conectadas (FC) [@zhang2020dive, p.252]
+
+```{r lenet2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:lenet2)', fig.align='center', out.width='30%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/lenet2.png'))
+```
+
+Para compreender os efeitos de cada camada sobre o conjunto de dados apresentamos na Tabela \@ref(tab:tablelenet), as dimensões das saídas de cada camada. Comentamos que de um bloco de convolução para o outro ocorre um aumento do número de canais (C) de 6 para 16, entre as camadas de *pooling* estes valores não são alterados, pois o processo só reduz a largura (W) e altura (H) dos canais. Nas camadas totalmente conectadas, as dimensões são reduzidas até se obter o tamanho do número de classes.
+
+É comum nas redes CNN’s que a quantidade de canais praticamente dobre depois de uma camada *pooling* visto que ocorre uma redução pela metade nas dimensões dos mapas. Assim, é possível aumentar o número de mapas, tornando mais sensível a identificação de características de baixo nível, como bordas e texturas, sem aumentar drasticamente o número de parâmetros e recursos computacionais [@zhang2020dive, p.258]. Como a primeira camada de convolução aplica *padding* de 2, os mapas mantêm na saída a mesma dimensão que a imagem original (28x28), entretanto na segunda camada não se tem o *padding*, o que reduz em 4 pixels a largura e altura dos mapas.
+
+Tabela (\#tab:tablelenet) Tabela das configurações, parâmetros e informações das camadas na LeNet - Resumo das configurações das principais camadas da LeNet, como o número de canais e tamanho dos filtros. Apresentação de uma estimativa do número de parâmetros e da quantidade de memória para treinar a rede..
+
+| Layer | Canais - C | Tamanho - H e W | Filtro - K | Memória (kB) | Parâmetros |
+|:------------:|:-----------:|:------------:|:------------:|:------------:|:------------:|
+| Inputs          | 1     | 28    |       |       |       |
+| Convolucional 1 | 6     | 28    | 5     | 18    | 156   |
+| Avg Pooling 1   | 6     | 14    | 2     | 5     | 0     |
+| Convolucional 2 | 16    | 10    | 5     | 6     | 2416  |
+| Avg Pooling 2   | 16    | 5     | 2     | 2     | 0     |
+| Flatten         | 400   |       |       | 1.6   | 0     |
+| Full Connect 1  | 120   |       |       | 0.5   | 48120 |
+| Full Connect 2  | 84    |       |       | 0.3   | 10164 |
+| Full Connect 3  | 10    |       |       | 0.04  | 850   |
+| Total           |       |       |       | 33    | 61706 |
+
+Ao longo dos anos surgiram variações deste modelo e a diferença mais evidente entre as redes é o número de camadas, que foi aumentando ao longo dos anos tornando as redes mais profundas. Ao aumentar o número de camadas se percebia que o desempenho das redes tendia a melhorar, entretanto foram surgindo algumas limitações. Quanto maior a  quantidade de dados, mais memória computacional é exigida, sendo que esta capacidade depende dos requisitos do *hardware*.  
+
+Para avaliar a quantidade de memória utilizada no treinamento da rede LeNet vamos utilizar um cálculo aproximado com base na quantidade de elementos de saída em cada camada. O número de elementos é multiplicado pela quantidade de *bytes* necessária para armazenar cada elemento [@johnson2019]. Considerando que os dados em ponto flutuante ocupam 32 *bit*, então são 4 *bytes* por elemento. Para facilitar a visualização dos resultados foram transformados para *kilobyte* (kB), e por isso foram divididos pelo fator 1024 (1 kB = 1024 B). Na equação a seguir exemplificamos o cálculo da quantidade de memória para a primeira camada de convolução da rede LeNet:
+
+Número de elementos na saída = C x H x W = 6 x 28 x 28 = 4704
+
+*Bytes* por elemento = 4 (por 32-*bit* ponto flutuante)
+
+kB = (Número de elementos) x (*Bytes* por elemento)/1024 = 4704 x 4/1024 = 18,38 kB
+
+O parâmetro C identifica o número de canais ou mapas da camada e o termo H e W, a altura e largura do elemento de saída da camada, respectivamente. Como identificado na equação e na tabela, a quantidade aproximada de memória para a primeira camada seria 18 kB, e no total para a rede 33 kB. As primeiras camadas tendem a precisar de mais memória devido a maior dimensão (W e H) dos canais [@johnson2019].
+
+Aumentar o número de camadas também exige que mais parâmetros sejam considerados, o que afeta tanto o tempo de treinamento quanto o seu desempenho, pois se não ocorrer uma otimização adequada dos parâmetros pode ser maior a probabilidade de ocorrer *overfitting* [@elgendy2020, p.230]. Para determinar aproximadamente a quantidade de parâmetros relacionados com cada camada considerou-se os pesos relacionados aos filtros de cada mapa, calculados como o produto entre as dimensões do filtro (KxK), a quantidade de canais do elemento de entrada e a quantidade de canais de saída da camada [@johnson2019]. Considerou-se também como parâmetros, os bias associados a cada canal de saída. Nas camadas totalmente conectadas,  o número de parâmetros é determinado como produto da quantidade de elementos de entrada  com a quantidade de elementos da saída da camada somado com o número de bias. A seguir exemplificamos os cálculos para a primeira camada de convolução:
+
+Número de Pesos = $C_{\text{saída}}$ x $C_{\text{entrada}}$ x K x K = 6 x 1 x 5 x 5 = 150
+
+Número de Bias = 6
+
+Número de parâmetros = 150 + 6 = 156
+
+Considerando que o filtro na primeira camada é de tamanho 5x5, que a entrada só apresenta um canal e que são 6 canais na camada de convolução, a primeira camada de convolução considera aproximadamente 156 parâmetros. Na tabela também está a quantidade de parâmetros relacionados com cada camada e o total aproximado de parâmetros para a rede LeNet é 61706. À medida que aumenta o número de canais na camada de convolução mais parâmetros são necessários. De maneira geral, a maior parte dos parâmetros se deve às camadas totalmente conectadas devido ao maior número de conexões [@johnson2019].
+
+#### AlexNet
+
+Atualmente existem várias arquiteturas de redes CNNs utilizadas para aplicações na visão computacional. A evolução destas redes pode ser compreendida a partir dos resultados da competição *ImageNet Large Scale Visual Recognition Challenge* (ILSVRC). O principal objetivo da competição era avaliar algoritmos para detecção de objetos e classificação de imagens. A primeira edição da competição, em 2010, envolvia 1,2 milhões de imagens para o treinamento, sendo 1000 categorias de objetos. Nos dois primeiros anos de competição as redes CNNs ainda não tinham sido as primeiras colocadas, porém a partir de 2012 os modelos CNNs começaram a liderar a competição [@imagenet2020]. O progresso das redes pode ser avaliado com base na taxa de erro dos modelos que em sete anos caiu de aproximadamente 26%, no segundo ano da competição, para 2,3% na última edição da competição em 2017 [@johnson2019], como apresentado no gráfico da Figura \@ref(fig:imagenet). 
+
+(ref:imagenet) Taxa de erro dos modelos de melhor desempenho na competição ImageNet - O desempenho dos modelos na competição ImageNet Large Scale Visual Recognition Challenge (ILSVRC) era avaliado principalmente pela taxa de erro. No gráfico são apresentados os modelos que venceram em cada edição da competição, que ocorreu de 2010 à 2017, e também redes que se tornaram populares como a VGG [@johnson2019]
+
+```{r imagenet, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:imagenet)', fig.align='center', out.width='100%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/imagenet.png'))
+```
+
+Para conhecer um pouco dos diferentes modelos de redes CNN’s e perceber algumas diferenças, e estruturas que tiveram bom desempenho e permaneceram em modelos mais atuais, destacaremos a seguir quatro arquiteturas que ficaram bastante conhecidas e tiveram destaque na competição. A rede AlexNet foi a primeira CNN que venceu a competição ImageNet, no ano de 2012 com uma taxa de erro de 16,4%. A rede VGG não liderou a competição em 2014, porém é um dos modelos com bastante popularidade e que apresentou uma estrutura em blocos estabelecidos com base em regras. No ano de 2014, a CNN GoogLeNet que venceu a competição foi o ponto de partida para as redes *Inceptions*. A rede Residual (ResNet) em 2015 além de aproveitar as técnicas de maior desempenho das outras redes também implementou uma abordagem que possibilitou aumentar para mais de 100 camadas. 
+
+A rede AlexNet foi desenvolvida por Alex Krizhevsky, Ilya Sutskever, e Geoffrey Hinton [@geron2019, p.450]. Esta rede é bem semelhante a LeNet-5, porém apresenta mais camadas. Por ser uma rede mais profunda, exigindo maior quantidade de memória, a rede original precisou ser distribuída entre dois GPU’s de 3 GB de forma física [@krizhevsky2012]. Desta forma, a rede foi desenhada como na Figura \@ref(fig:imagenet), com uma estrutura de fluxo de dados duplo para que cada GPU recebesse metade do modelo.
+
+(ref:alexnet) Arquitetura da rede AlexNet - representada como a combinação de duas redes idênticas, pois originalmente o treinamento ocorreria com a distribuição dos dados entre duas GPU’s [@krizhevsky2012]
+
+```{r alexnet, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:alexnet)', fig.align='center', out.width='100%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/alexnet.png'))
+```
+
+Como esquematizado na Figura \@ref(fig:alexnet), a AlexNet tem 5 camadas de convoluções, sendo as três primeiras intercaladas por camadas *pooling*. A diferença mais visível entre as arquiteturas AlexNet e LeNet são as três camadas de convolução a mais na rede AlexNet, que estão seguidas uma depois da outra sem camada *pooling* entre elas. Como as imagens de entrada são maiores que do dataset MNIST abordado na rede LeNet, os filtros de convolução na entrada são maiores (11x11) e se utiliza *stride* 4. Na segunda camada de convolução os filtros têm tamanho 5x5, e nas demais camadas de convolução se utilizam filtros 3x3. 
+
+Com a descoberta que as funções de ativação ReLUs nas camadas de convolução e que o *maxpooling* melhoram o desempenho das redes, a maioria dos modelos foram construídos utilizando estes artifícios [@zhang2020dive, p.250]. Os filtros *maxpooling* de tamanho 3x3 e *stride* 2 reduzem a dimensão dos canais com base no maior valor do campo de recepção. Com exceção da primeira camada, todas as demais camadas de convolução têm *padding* para que a dimensão dos canais não seja alterada após as convoluções.
+
+As três últimas camadas são totalmente conectadas e apresentam respectivamente os tamanhos, 4096, 4096 e 1000. A camada de saída tem dimensão 1000 devido ao número de classes possíveis da competição ImageNet e a função de ativação é a Softmax.
+
+(ref:lenetalexnet) Comparação das redes AlexNet e LeNet - a - Rede AlexNet; b - Rede LeNet. Estes esquemas gerais das camadas apresentam que a principal diferença das redes é que a AlexNet é mais profunda, com três camadas de convolução a mais do que a LeNet [@zhang2020dive, p.261]
+
+```{r lenetalexnet, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:lenetalexnet)', fig.align='center', out.width='40%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/lenetalexnet.png'))
+```
+
+O mesmo padrão para as dimensões dos elementos de saída das camadas visto em LeNet é visto na Tabela \#tab:tablealexnet para a rede AlexNet. Enquanto o tamanho dos canais diminui entre uma camada de convolução para outra, a quantidade de canais cresce, sendo 96 na primeira, seguida por 256, 384, 384 e 256. Após o processo de *flatten*, a dimensão das camadas é reduzida até se estabelecer o tamanho do vetor de classes de predição. 
+
+Ao comparar a quantidade de memória e o número de parâmetros aproximados como foi descrito no tópico anterior (LeNet) observa-se que certamente a quantidade de memória exigida aumenta e o número de parâmetros também. Os cálculos aproximados indicam que enquanto a memória necessária para o treinamento da rede LeNet seria de 33 kB, na AlexNet seria aproximadamente 3 GB. O número de parâmetros calculados para LeNet  foi 62 mil e para AlexNet 62 milhões. Mas de maneira geral nos dois modelos, as primeiras camadas demandam mais memória, enquanto que as camadas totalmente conectadas precisam de mais parâmetros.
+
+Tabela (\#tab:tablealexnet) Tabela das configurações, parâmetros e informações das camadas na AlexNet - Resumo das configurações das principais camadas da AlexNet, como o número de canais e tamanho dos filtros. Apresentação de uma estimativa do número de parâmetros e da quantidade de memória para treinar a rede.
+
+| Layer | Canais - C | Tamanho - H e W | Filtro - K | Memória (kB) | Parâmetros |
+|:------------:|:-----------:|:------------:|:------------:|:------------:|:------------:|
+| Inputs          | 3     | 227 |       |       |       |
+| Convolucional 1 | 96    | 55  | 11    | 1134  | 35    |
+| Max Pooling 1   | 96    | 27  | 3     | 273   | 0     |
+| Convolucional 2 | 256   | 27  | 5     | 729   | 615   |
+| Max Pooling 2   | 256   | 13  | 3     | 169   | 0     |
+| Convolucional 3 | 384   | 13  | 3     | 254   | 885   |
+| Convolucional 4 | 384   | 13  | 3     | 254   | 1327  |
+| Convolucional 5 | 256   | 13  | 3     | 169   | 885   |
+| Max Pooling 3   | 256   | 6   | 3     | 36    | 0     |
+| Flatten         | 9216  |     |       | 36    | 0     |
+| Full Connect 1  | 4096  |     |       | 16    | 37753 |
+| Full Connect 2  | 4096  |     |       | 16    | 16781 |
+| Full Connect 3  | 1000  |     |       | 4     | 4097  |
+| Total           |       |     |       | 3090  | 62378 |
+
+
+#### VGG
+
+A rede VGG foi construída dentro do grupo Visual Geometry Group (VGG)  na Universidade de Oxford pelos pesquisadores Karen Simonyan e Andrew Zisserman [@zhang2020dive, p.265]. Até agora vimos que as redes LeNet e AlexNet apresentam a sua estrutura em duas partes principais, uma com as camadas iniciais contendo uma combinação de camadas convolucionais e *pooling*, e na outra parte estão as camadas totalmente conectadas (*Full Conect*) na ponta da rede. Nestas redes geralmente é necessário selecionar individualmente vários parâmetros, por exemplo, nas camadas de convolução selecionam-se o número de canais,  tamanho dos filtros, do *padding* e do *stride*. Na camada *pooling*, os hiperparâmetros são o tamanho do filtro e do *stride*. Em geral, estas duas redes não apresentam um guia geral de como selecionar os parâmetros, o que torna mais complexo desenhar novas redes e que sejam mais profundas. 
+
+O que se destacou na VGG em relação aos dois modelos anteriores é a introdução  de princípios para estabelecer a estrutura da rede, o que permitiu a construção de modelos mais profundos [@zhang2020dive, p.265]. Outro aspecto característico da VGG é a estrutura em blocos na parte da rede com as camadas convolucionais, em que cada bloco apresenta camadas convolucionais em sequência e na ponta uma camada *pooling*. Enquanto o modelo AlexNet na Figura \@ref(fig:alexnetvgg) apresenta 5 camadas convolucionais, a VGG apresenta cinco blocos com número variável de camadas de convolução, mas que em geral os primeiros blocos apresentam menos camadas. Da mesma forma que a AlexNet, na ponta da rede estão as três camadas totalmente conectadas, com dimensões também iguais nos dois modelos, e uma função de ativação SoftMax na saída.
+
+Na Figura \@ref(fig:alexnetvgg) está a representação da arquitetura VGG com 16 camadas, em que os primeiros dois blocos apresentam duas camadas convolucionais e os três últimos blocos possuem três camadas convolucionais. As camadas de convolução dobram de tamanho a cada bloco, sendo que cada camada no primeiro bloco tem 64 canais, no seguinte 128 e assim por diante até 512 no último bloco. A utilização da função de ativação ReLu na camada de convolução e *pooling* pelo valor máximo são estratégias que apresentaram bom desempenho na AlexNet e continuaram em outros modelos, como no VGG.  
+
+Os principais princípios de design da VGG estabelecem que todos os filtros de convolução são 3x3 e que utilizam *stride* 1 e *pad* 1 e que os filtros *maxpooling* são 2x2 e com *stride* 2. Após cada camada pooling, o número de canais dobra na camada de convolução. A ideia de fixar o tamanho dos filtros convolucionais partiu da percepção de que a combinação de 2 filtros 3x3 apresenta um campo receptivo equivalente a um filtro 5x5, e que 3 filtros 3x3 equivalem a um de 7x7 [@elgendy2020, p.212]. Fixando o tamanho dos filtros e estabelecendo com *pad* e *stride* 1 que a dimensão dos canais não se altere entre as camadas convolucionais, o único hiperparâmetro que precisa ser otimizado é a quantidade de camadas em cada bloco.
+
+Ao utilizar filtros 3x3 menores porém em maior quantidade que os utilizados na AlexNet (11x11 e 5x5) se inclui mais não linearidade, permitindo que a rede aprenda mais características de baixo nível [@elgendy2020, p.212]. Aumentando a profundidade da rede com mais camadas de convolução são incluídas mais funções não lineares de ativação. Mesmo sendo redes mais profundas, esta estratégia de utilizar filtros menores diminui o número de parâmetros. Considerando que duas camadas em sequência tem C canais cada uma, ao utilizar dois filtros 3x3, o número total de parâmetros é 2x3x3x$C^2$ = 18$C^2$, que é menor ao comparar na situação de um único filtro 5x5 com 25$C^2$ parâmetros [@johnson2019]. 
+
+Certamente dobrar o número de canais entre os blocos deve fazer com que o número de parâmetros cresça rapidamente, e por isso se padronizou os filtros *maxpooling* para que se reduza as dimensões dos canais pela metade. Controlando o número de ativações que passam para as próximas camadas é possível manter aproximadamente constante o número de operações. Avaliando superficialmente que o número de operações é dado como a quantidade total de multiplicações e adições, podemos calcular para cada camada como produto de quatro parâmetros [@johnson2019]: tamanho do filtro (KxK), as dimensões do canais de entrada (HxW), a quantidade de canais de entrada  ($C_{\text{entrada}}$) e canais na saída ($C_{\text{saída}}$):
+
+Número de operações = Número de elementos de saída x Operações por elemento de saída
+= ($C_{\text{saída}}$ x H x W) x ($C_{\text{entrada}}$ x K x K)
+= (2C x HW) x (2C x 3 x 3) = 36 HW$C^2$
+
+No caso de duas camadas de convolução com filtros 3x3 e separadas por um *pooling*, com redução pela metade da dimensão dos canais (2Hx2W $\rightarrow$ HxW) e dobrando o número de canais (C $\rightarrow$ 2C), a quantidade de pesos aumenta de 9$C^2$ para 36$C^2$, porém o número de operações se mantêm em 36HW$C^2$.
+
+(ref:alexnetvgg) Comparação das redes VGG e AlexNet - Comparação das redes VGG e AlexNet com base na estrutura geral das camadas. Enquanto a parte final das redes é semelhante em relação às camadas totalmente conectadas, a VGG se diferencia por ser mais profunda e apresentar um padrão das camadas convolucionais organizadas em blocos [@johnson2019]
+
+```{r alexnetvgg, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:alexnetvgg)', fig.align='center', out.width='70%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/alexnetvgg.png'))
+```
+
+#### GoogLenet e Inception
+
+Ao acompanhar a evolução das CNN’s podemos perceber que a principal estratégia para aumentar o desempenho na classificação das imagens foi aumentar o número de camadas que guardam os pesos das redes. As redes AlexNet e VGG-16 foram desenvolvidas com 8 e 16 camadas, respectivamente. À medida que as redes se tornavam mais profundas surgiu o dilema de como tornar os algoritmos mais eficientes, visto que mais camadas significava maior quantidade de parâmetros e operações, exigindo maior recursos computacionais.  Comparando as redes na Figura \@ref(fig:neuralevolution) é possível verificar a acurácia das redes, a quantidade de parâmetros e o número de operações. Verifica-se que para a rede VGG-16 alcançar resultados melhores que a rede AlexNet foi necessário mais do que duplicar a quantidade de parâmetros, de aproximadamente 65 milhões na AlexNet  para um pouco mais que 130 milhões na VGG-16.
+
+Na competição da ImageNet de 2014, um grupo de pesquisa da Google liderado por Christian Szegedy propôs a arquitetura GoogLeNet que deveria ao mesmo tempo garantir boa performance e ser mais eficiente que os modelos existentes [@geron2019, p.452]. O modelo não só ganhou a competição como atendeu os seus requisitos, pois mesmo sendo uma rede com 22 camadas, mais que a VGG-16, precisou de 12 vezes menos parâmetros, 13 milhões em vez de 138 milhões [@elgendy2020, p.217].
+
+(ref:neuralevolution) Gráfico da evolução das redes neurais CNN’s - O desempenho das redes é avaliado pela acurácia versus o número de operações necessárias para uma única etapa forward. O raio dos círculos é proporcional ao número de parâmetros, sendo que a legenda no canto inferior direito indica uma referência de 5x$10^6$  à 155x$10^6$ [@canziani2016]
+
+```{r neuralevolution, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:neuralevolution)', fig.align='center', out.width='70%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/neuralevolution.png'))
+```
+
+Para compreender a rede GoogLenet podemos dividi-la em três partes (Figura \@ref(fig:googlenet)), na primeira parte, as camadas da entrada são semelhantes às redes AlexNet e VGG, na segunda parte, são os blocos inceptions característicos desta rede, e a última parte se refere a estrutura de classificação. A primeira parte contém dois blocos com uma sequência de camadas convolucionais intercaladas com *pooling* 3x3. No primeiro bloco têm apenas uma camada de convolução 7x7, com *stride* 2 e *padding* 3, e uma camada *pooling* com *stride* 2. Ao final destas duas camadas, o elemento tem 64 canais e teve uma redução por 4 em sua dimensão (H e W). No segundo bloco são duas camadas de convolução, a primeira com filtro 1x1 e 64 canais e a segunda 3x3 com 192 canais, sendo que apenas o *pooling* 3x3 na ponta do bloco altera as dimensões dos canais pela metade.
+
+O principal papel destes dois blocos é reduzir de maneira considerável as dimensões da imagem, visto que a maior parte da memória exigida se deve às primeiras camadas [@johnson2019]. Considerando que nesta etapa ocorre uma redução em 8 vezes das dimensões da imagem, uma entrada 224x224 ao se reduzir para 28x28 utilizará aproximadamente 7,5 MB de memória enquanto a mesma redução no VGG-16 precisa de  42,9 MB, quase 6 vezes mais que a GoogLenet [@johnson2019]. Também ao passar para as próximas camadas uma imagem de menor dimensão também se reduz o número de operações e a quantidade de parâmetros para treinar a rede. 
+
+(ref:googlenet) A estrutura geral da rede GoogLenet pode ser dividida em três partes: Parte A - Semelhante a AlexNet e LeNet, contém uma sequência de camadas convolucionais e pooling para reduzir as dimensões da imagem; Parte B - Módulos Inceptions separados por camadas pooling; Parte C - Camada de pooling global e uma Full Conect par classificação [@elgendy2020, p.224]
+
+```{r googlenet, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:googlenet)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/googlenet.png'))
+```
+
+Outra técnica para tornar a rede mais eficiente foi incluir uma camada de AvgPool global antes da camada de classificação [@geron2019, p.455]. Nos modelos CNN’s anteriores era comum incluir um *flattering* para converter os dados em um vetor, perdendo a informação espacial, para ser compatível com as camadas totalmente conectadas que faziam a classificação. Estas últimas camadas acabam sendo as responsáveis pela maior parte dos parâmetros. No modelo VGG-16, por exemplo, as 3 camadas totalmente conectadas geram aproximadamente 123,6 milhões de parâmetros, quase 90% dos parâmetros totais [@johnson2019]. 
+
+Em vez de adotar o *flatering*,  o GoogLenet utiliza um filtro de média de mesma dimensão do elemento de entrada, retornando a média dos mapas para cada posição do vetor. Como o vetor de saída já tem um tamanho reduzido é necessário incluir apenas uma camada totalmente conectada com as 1000 classes. Como a camada de média global não precisa de parâmetros, e considerando que retorna um vetor 1024, são necessários aproximadamente 1 milhão de parâmetros na camada totalmente conectada, 100 vezes menos que na VGG [@johnson2019]. Na última camada, assim como no VGG, associa-se uma ativação Softmax, enquanto nas camadas de convolução é a ReLu.
+
+Já foi comentado sobre a primeira parte e a última da rede GoogLenet, a seção intermediária que estudaremos inclui os módulos *Inceptions* que se tornaram elementos característicos das redes mais modernas intituladas *Inceptions*. Cada módulo se assemelha aos blocos do VGG, em que estão presentes algumas camadas convolucionais em sequência e na ponta uma camada *pooling*. No caso do VGG se viu que para reduzir o número de hiperparâmetros se fixou o tamanho dos filtros em 3x3, e o parâmetro variável ficou sendo o número de camadas convolucionais. A ideia dos *Inceptions* (Figura \@ref(fig:inceptionmodule)) é não se preocupar nem com tamanho dos filtros e nem com o número de camadas no módulo, pois cada módulo consiste em uma combinação de filtros de diferentes tamanhos arranjados de uma forma fixa [@elgendy2020, p.217].
+
+(ref:inceptionmodule) Módulo Incepetion da rede GoogLenet - A parte intermediária da rede GoogLenet é formada por uma sequência de módulos Inceptions separados por camadas pooling. Cada módulo apresenta quatro caminhos para o mesmo dado de entrada, e na saída, os resultados são concatenados [@zhang2020dive, p.274]
+
+```{r inceptionmodule, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:inceptionmodule)', fig.align='center', out.width='100%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/inceptionmodule.png'))
+```
+
+A partir da entrada do módulo *inception*, as cópias do elemento de entrada seguem ao mesmo tempo por quatro caminhos. Ao final destes caminhos não se altera o tamanho da imagem, porém o número de canais é alterado de formas diferentes, sendo a escolha do número de canais de cada camada um hiperparâmetro. Na saída do módulo ocorre uma concatenação de todos estes canais, formando um único elemento de mesma dimensão que na entrada e com número de canais que é soma de todos que resultaram de cada caminho.
+
+O primeiro caminho tem apenas uma convolução 1x1, conhecida como *bottleneck*, que tem como principal função preservar as dimensões (altura e largura) mas diminuir o número de canais, o que reduz o custo computacional e o número de parâmetros [@elgendy2020, p.220]. Como esta convolução inclui mais não linearidade com baixo custo, inclui-se também nas camadas de entrada uma convolução 1x1, contribuindo para uma otimização na primeira parte da rede [@geron2019, p.453]. Esta mesma camada foi acrescentada no início de cada um dos caminhos 2 e 3 para reduzir a complexidade do modelo. Após reduzir o número de camadas se inclui filtros maiores, possibilitando processar as informações em diferentes escalas, sendo que no segundo caminho os filtros são 3x3 e no quarto caminho 5x5 [@zhang2020dive, p.274].
+
+Todos os caminhos, até mesmo o quarto que inclui uma camada de MaxPool, apresentam apropriados *padding* para manter a mesma dimensão dos canais que na entrada. Como o MaxPool não altera o número de canais é incluído no final do quarto caminho uma convolução 1x1, reduzindo o volume. 
+
+Ao concatenar no final todos os canais de cada caminho, o módulo *inception* segue a hipótese de que a informação visual pode ser processada em várias escalas e que os resultados agregados permitem ao próximo nível extrair várias características de diferentes escalas ao mesmo tempo [@elgendy2020, p.222]. Na rede GoogLenet da Figura \@ref(fig:googlenet) se vê três agrupamentos de módulos *inception* intercalados por Maxpooling 3x3, totalizando 9 módulos. 
+
+O diagrama anterior da GoogLenet é uma das representações mais simplificadas do modelo, pois como é visto na Figura \@ref(fig:googlenet2), a arquitetura original inclui dois classificadores que correm paralelamente com os outros blocos descritos anteriormente, um que se inicia depois do terceiro módulo inception e o outro depois do sexto módulo [@geron2019, p.456]. Cada classificador funciona parecido com a parte final da rede, em que ocorre a classificação [@johnson2019]. Os classificadores são formados por uma camada AvgPooling, seguida por uma de convolução, duas camadas totalmente conectadas e na saída uma função de ativação Softmax.
+
+Existe uma peculiaridade ao treinar as redes mais profundas, pois na retropropagação dos erros, as taxas reduzem a valores muito próximo de zeros, dificultando a convergência do algoritmo. A técnica adotada pelo GoogLenet para garantir a convergência foi incluir o cálculo do gradiente dos erros destas classificações intermediárias na retropropagação do erro [@geron2019, p.456].
+
+(ref:googlenet2)  Arquitetura da rede GoogLenet com classificadores intermediários - A rede GoogLenet com dois classificadores, um no terceiro módulo *inception* e o outro no sexto módulo. Estes classificadores intermediários reduzem o efeito de desaparecimento dos gradiente do erro [@szegedy2015]
+
+```{r googlenet2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:googlenet2)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/googlenet.png'))
+```
+
+#### ResNet
+
+A Rede Neural Residual (ResNet) venceu a competição ImageNet em 2015 com uma taxa de erro de 3,6%. A rede desenvolvida por um grupo de pesquisa da Microsoft inclui várias técnicas de otimização e regularização dos modelos anteriores, principalmente da GoogLenet. Enquanto o ponto característico da rede GoogLenet são os módulos *inceptions*, na ResNet as unidades residuais permitiram treinar redes ainda mais profundas. Entre os principais modelos da ResNet são encontradas redes com 50, 101, 152 camadas de pesos [@elgendy2020, p.230], mais que o dobro do número da GoogLenet com 22 camadas.
+
+Da mesma forma que a GoogLenet, a rede ResNet pode ser divida em três partes, sendo que a primeira e a última parte seguem a arquitetura da GoogLenet, e as camadas intermediárias incluem as unidades residuais. As camadas de entrada que permitem uma redução considerável da dimensão da imagem incluem uma camada de convolução com 64 canais e filtros 7x7 de *stride* 2, seguida por uma camada 3x3 de MaxPooling com *stride* 2. A última parte da rede, a estrutura de classificação, apresenta as mesmas camadas da GoogLenet, a camada Global de Pooling média de dimensão 1024 e apenas uma camada totalmente conectada com 1000 unidades representando as classes. Lembrando que a substituição do processo de *flatering* pela média global permitiu reduzir a proporção de parâmetros nas últimas camadas. 
+
+(ref:resnet)  Arquitetura da rede ResNet - A estrutura geral da rede ResNet também pode ser dividida em três partes: Parte A - Semelhante a GoogLenet, contém uma camada convolucional e pooling para reduzir as dimensões da imagem; Parte B - Módulos com unidades residuais; Parte C - Camada de pooling global e uma Full Conect par classificação [@geron2019, p.458]
+
+```{r resnet, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:resnet)', fig.align='center', out.width='100%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/resnet.png'))
+```
+
+Como descrito no tópico (rede GoogLenet) ao acrescentar mais camadas, o número de parâmetros pode aumentar de forma que dificulte o treinamento, não só pelas limitações de recursos computacionais, mas também pela possibilidade de *overfitting* e demora de convergência do algoritmo. O modelo GoogLenet adotou várias abordagens de otimização e regularização, incluindo camadas de classificação intermediária para garantir que o modelo pudesse convergir, evitando o efeito de desaparecimento dos pesos (*vanishing gradients*), que em certos momentos tendiam a zero [@geron2019, p.456].  
+
+Uma das técnicas do ResNet que colaboraram para acelerar a convergência no treinamento foi a normalização em batch. Este método se tornou referência para vários modelos de CNN, pois até aquela época cada modelo adotava abordagens diferentes no treinamento, como as classes intermediárias do GoogLenet [@johnson2019]. A normalização é aplicada individualmente por camada, sendo que a normalização dos dados ocorre com base nas estatísticas dos agrupamentos *minibatch* adotados no treinamento, que foram vistos rapidamente no tópico MLP [@zhang2020dive, p.280]. Nas redes ResNet a normalização é aplicada nos dados no momento de transição entre a camada de convolução e a de ativação.
+
+Mesmo conseguindo convergir redes mais profundas identificou-se nos modelos que ocorria uma degradação da acurácia ao se acrescentar mais camadas [@he2016]. Antigamente se tinha a intuição de que ao se partir de um modelo com número reduzido de camadas para uma rede mais profunda, o erro não deveria aumentar, pois no mínimo a rede mais profunda teria uma parte das suas camadas copiadas da outra rede e a outra parte funcionaria como funções de identidade. Com mais camadas, a otimização de um modelo se torna mais complexa mesmo para problemas facilmente mapeados em redes menores [@he2016]. A ideia na ResNet para lidar com esta complexidade foi forçar que as camadas realizassem o mapeamento da saída incluindo como referência a própria entrada, ou seja, um mapeamento residual [@geron2019, p.457].
+
+No mapeamento comum das camadas na \@ref(fig:residual) se imagina que a partir de uma entrada x se busca com o treinamento estabelecer uma resposta esperada $h(x)$. No caso do mapeamento residual se inclui um desvio do dado de entrada ($x$) na saída para forçar um modelo $h(x) - x$. Com isso se espera que seja mais fácil otimizar um modelo com referência, o mapeamento residual, e que este consiga rapidamente se ajustar a funções identidade, garantindo que as camadas no mínimo estabeleçam a performance das camadas anteriores [@zhang2020dive, p.288]. Os desvios, conexões residuais, também minimizam os efeitos de desaparecimento dos pesos, pois permitem um fluxo alternativo dos gradientes, contribuindo para a retropropagação do erro [@elgendy2020, p.231].
+
+(ref:residual)  Mapeamento convencional e o residual da rede ResNet - a - Mapeamento tradicional da entrada e saída das camadas; b - Mapeamento em uma unidade residual da rede ResNet. No mapeamento comum, para uma entrada x se busca estabelecer uma resposta esperada $h(x)$. No modelo residual se inclui um desvio da entrada ($x$) na saída para forçar uma resposta $h(x) - x$ [@geron2019, p.457]
+
+```{r residual, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:residual)', fig.align='center', out.width='100%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/residual.png'))
+```
+
+A conexão residual parte da entrada de uma unidade residual em direção a saída da mesma, somando a informação de entrada com a resposta antes da camada de ativação ReLu (Figura \@ref(fig:residualblock)). Cada unidade residual tem duas camadas de convolução 3x3, com *stride* 1 e configuração de *padding* para manter as dimensões. Entre as duas camadas existe uma camada de normalização antecedendo uma ativação ReLu.
+
+(ref:residualblock) Unidade residual da rede ResNet - Na parte intermediária da rede ResNet existe uma sequência de módulos com unidades residuais. Cada unidade residual tem duas camadas de convolução intercaladas por um pooling, e as normalizações são aplicadas na saída das convoluções [@geron2019, p.457]
+
+```{r residualblock, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:residualblock)', fig.align='center', out.width='90%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/residualblock.png'))
+```
+
+Após uma sequência de unidades residuais de mesma configuração, entre os módulos, é dobrado o número de canais e ao mesmo tempo se reduz pela metade a largura e altura dos canais. Entre as unidades residuais não são utilizadas camadas *pooling*, assim, para reduzir as dimensões dos canais é utilizado *stride* 2 na convolução que encerra um módulo. Desta forma, na última  unidade residual dos módulos, a entrada tem dimensão diferente da saída. Para poder somar os valores é necessário corrigir as dimensões da entrada com uma convolução 1x1 de *stride* 2 e de mesmo número de canais da saída da unidade [@zhang2020dive, p.289]. 
+
+A estrutura dos módulos com as unidades residuais lembram os blocos da rede VGG, em que cada bloco apresenta uma sequência de camadas de convolução com as mesmas dimensões, e sempre filtro 3x3. De um bloco para o outro no VGG, o número de canais também dobra e a altura e a largura são reduzidas pela metade, neste caso pelo efeito do MaxPooling. O ResNet apresenta 4 módulos, em que o número de unidades residuais varia de modelo a modelo como indicado na Figura - Arquitetura padrão da ResNet. O ResNet-34, por exemplo, com 34 camadas de pesos contém respectivamente nos quatro módulos, três unidades residuais com saída de 64 canais, quatro unidades com 128 canais, seis unidades com 256 canais e três unidades com 512 canais [@he2016]. 
+
+(ref:resnetdefault)  Arquitetura padrão da ResNet - Existem várias versões da ResNet, sendo que a parte inicial e a final das redes são semelhantes, e o que geralmente muda é quantidade de unidades residuais em cada um dos quatro módulos, na parte intermediária da rede [@geron2019, p.457]
+
+```{r resnetdefault, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:resnetdefault)', fig.align='center', out.width='30%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/resnetdefault.png'))
+```
+
+### Aprendizado por transferência
+
+Treinar uma rede neural do zero é uma tarefa complicada, pois necessita de uma enorme quantidade de dados e poder computacional [@elgendy2020, p.242]. Em muitos casos podemos não ter uma quantidade suficiente de algum dos dois, mas isso não impede que criemos nossos modelos. Para isso contamos com uma técnica conhecida como aprendizagem por transferência, que consiste basicamente em utilizar-se modelos já treinados na resolução de nossos problemas. Nesse caso assumimos que muitos dos fatores que explicam o contexto $P_1$(situação na qual o modelo foi treinado) também podem explicar nossa novo contexto $P_2$ [@goodfellow2016, p.536].
+
+Conseguimos utilizar essa técnica pois mesmo modelos treinados em escopos diferentes acabam aprendendo a detectar características parecidas nas camadas mais iniciais, se especificando mais nas suas camadas mais profundas. Podemos ver isso na imagem \@ref(fig:differentscnn), onde temos a representação de quatro redes diferentes sendo a primeira voltada a trabalhar com imagem de pessoas, a segunda com carros, a terceira com elefantes e a última com cadeiras. Mesmo esses sendo objetos completamente diferentes, as redes aprendem, nas camadas iniciais a detectar bordas e quinas, que são características compartilhadas por todos os itens.
+
+(ref:differentscnn)  Diferentes CNN’s e seus mapas de características em diferentes camadas - Na primeira coluna temos as características aprendidas por uma rede especializada no trabalho com rostos humanos, na segunda coluna com carros, na terceira com elefantes e na quarta com cadeiras [@elgendy2020, p.253]
+
+```{r differentscnn, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:differentscnn)', fig.align='center', out.width='100%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/differentscnn.png'))
+```
+
+Existem três principais maneiras de se realizar a transferência de aprendizado [@elgendy2020, p.254], sendo que cada uma delas se enquadra melhor em um cenário ou em outro, são elas:
+
+- **Usar uma rede pré treinada como classificador:** Esse método se enquadra bem se nosso problema tem um domínio muito parecido com a rede já treinada que iremos utilizar, sendo que temos apenas que encaixá-la em nosso uso, não sendo necessário treinamento adicional.
+
+- **Usar uma rede pré treinada como um extrator de características:** Esse método é útil quando estamos resolvendo um problema que tem várias características comuns com uma rede pré treinada mas não de maneira que possamos utilizar como na aproximação anterior. O que fazemos então é “congelar” as camadas da rede que extraem características(ou seja, as camadas de convolução) e substituir a rede totalmente conectada do final, colocando em seu lugar outra rede que classifique conforme nossa necessidade e realizamos seu treinamento.
+
+(ref:vgg16)  Rede VGG16 - Temos, de cima para baixo, as camadas congeladas, as camadas que serão removidas e a camada que será adicionada e treinada [@elgendy2020, p.257]
+
+```{r vgg16, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:vgg16)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/vgg16.png'))
+```
+
+Na figura \@ref(fig:vgg16) temos um exemplo do livro de Mohamed Elgendy [@elgendy2020], onde se queria realizar a classificação com cachorros e gatos, então essa rede foi escolhida pois foi treinada na base de dados ImageNet, que contém muitos exemplos de cachorros e gatos, com isso ela poderia se adaptar bem ao nosso problema.
+
+- **Usar uma rede pré treinada para ajuste fino:** Os métodos anteriores são usados quando temos um domínio parecido, já este terceiro método se enquadra em problemas que têm propriedades bem diferentes. Mesmo nestes casos conseguimos utilizar redes pré-treinadas, pelos motivos já ditos anteriormente, que as redes, principalmente em suas camadas iniciais, aprendem a detectar características parecidas, ficando mais específicas conforme sua profundidade [@elgendy2020, p.259].
+Neste método temos algumas possibilidades, uma delas é “congelar” as primeiras camadas convolucionais e retreinar o resto da rede, o que estaremos fazendo então é um ajuste fino(também conhecido como fine-tune) nas camadas mais profundas da rede, para que consigam se adaptar ao nosso problema atual. 
+Também temos a possibilidade de não “congelar” nenhuma camada e retreinar a rede toda, neste caso, mesmo tendo que gastar um tempo maior e ser necessário uma maior quantidade de dados, a rede tende a convergir mais rapidamente a uma solução ótima, em comparação a uma iniciação randômica [@elgendy2020, p.259].
+
+No livro “Deep Learning for Vision Systems” de Mohamed Elgendy são apresentadas algumas dicas de como escolher a melhor tecnica de transferencia de aprendizado para alguns tipos de cenários, sendo elas apresentadas na tabela \#tab:tabelaaprendizado:
+
+Tabela (\#tab:tabelaaprendizado) Tabela com os diferentes cenários onde podemos utilizar a transferência de aprendizado [Adaptado de @elgendy2020, p.262]
+
+| Cenário | Quantidade de dados disponíveis | Similaridade entre a rede pré treinada e a nova base de dados | Método |
+|:------------:|:-----------:|:------------:|:------------:|
+| 1       | Pequena       | Similar           | Usar uma rede pré treinada como classificador |
+| 2       | Grande        | Similar           | Ajuste fino na rede totalmente conectada      |
+| 3       | Pequena       | Muito diferente   | Ajuste fino em uma parte da rede              |
+| 4       | Grande        | Muito diferente   | Ajuste fino em toda a rede                    |
+
+### Redes neurais na prática
+
+Ao estudar os diferentes modelos de CNN’s percebemos que o principal fator para melhorar a acurácia das redes foi o aumento no número de camadas, tornando as redes mais profundas. Destaca-se que a construção de modelos mais profundos só foi possível pela evolução da performance de hardware, principalmente memória e unidades de processamento, e desenvolvimento de softwares mais específicos, conhecidos como frameworks para deep learning [@zhang2020dive, p.36]. 
+
+O treinamento das redes envolve milhares de operações com elementos multidimensionais, ou seja, *arrays* n-dimensionais com número arbitrário de eixos, conhecidos como tensores [@zhang2020dive, p.42]. Tensores com apenas uma dimensão correspondem matematicamente aos vetores, enquanto os de duas dimensões são as matrizes. No caso das redes CNN’s, muitas vezes as entradas são imagens coloridas que podem ser interpretadas como tensores de três dimensões, a altura, a largura e o volume da imagem (canais RGB). Dentro da rede ocorre uma série de multiplicações e somas a partir do tensor de entrada, resultando em diferentes tensores tridimensionais.
+
+A realização de todas as operações só é possível devido às unidades de processamento das máquinas, que permitem a interação da unidade lógica aritmética (ALU) com a memória. Quando as primeiras redes foram desenvolvidas, o principal recurso de processamento eram as CPU’s, um processador de propósito geral em que a ALU realiza apenas um cálculo por vezes. Como possui aplicações mais gerais precisa de acesso constante à memória para leitura de instruções e armazenamento de dados, o que é uma desvantagem em relação ao tempo de processamento conhecida como “gargalo de von Neumann” [@googlecloud2021]. Geralmente para tornar mais rápido o acesso a memória são integradas tecnologias mais sofisticadas aos caches, porém de tamanho limitado devido ao custo [@zhang2020dive, p.260]. 
+
+As limitações de armazenamento e processamento relacionados a uma única CPU inviabilizam o treinamento de redes mais profundas. O que permitiu a evolução das redes foi a adaptação de unidades de processamento com aplicações mais específicas. A maioria das redes modernas são implementadas com base em unidades de processamento gráfico (GPU’s). Originalmente estes componentes foram desenvolvidos para aplicações gráficas, principalmente para renderização de videogames [@goodfellow2016, p.439]. Entretanto, grande parte da abordagem de processamento da GPU também se mostrou compatível com os cálculos necessários para treinar as redes neurais.
+
+A GPU consegue maior capacidade de processamento que uma CPU, pois integra várias ALUs em um único processador, o que permite a realização de milhares de operações simultaneamente [@googlecloud2021]. Esta estratégia é ideal para aplicações que se adequam ao processamento paralelo, como multiplicação de matrizes de uma rede neural, que envolvem operações independentes [@goodfellow2016, p.440]. As GPU’s foram construídas para realizar operações mais simples, sem envolver muitas ramificações como geralmente é necessário no fluxo de trabalho da CPU. A maior parte dos cálculos do treinamento das redes são previsíveis, com algoritmos que não necessitam de controles sofisticados [@goodfellow2016, p.440]. 
+
+Se por um lado as operações das redes não exigem grande complexidade computacional, por outro, demandam grande quantidade de memória. Durante o treinamento é preciso  armazenar os parâmetros, os valores de ativação, e os gradientes, ou seja, uma quantidade de dados além do limite da cache associada à CPU [@goodfellow2016, p.440]. Neste sentido, além de permitir processamento paralelo, diminuindo o tempo de treinamento, a GPU também oferece maior quantidade de memória.
+
+A utilização da GPU para o treinamento das redes se tornou ainda mais comum após a adaptação para propósitos mais gerais. Um dos principais modelos de GPU, da NVIDIA, suporta uma programação CUDA para o desenvolvimento de códigos arbitrários semelhantes à linguagem C [@goodfellow2016, p.440]. Assim, a GPU pode executar diferentes rotinas que não estejam só associadas a sub rotinas de renderização.
+
+Para garantir códigos de GPU de alta performance foram construídos ao longo dos anos diferentes bibliotecas que lidam com computação numérica, principalmente envolvendo convoluções e outras operações com tensores [@goodfellow2016, p.441]. Assim, no desenvolvimento das redes não é necessário se preocupar com a programação no nível do CUDA, que é mais complexa e envolve computação paralela e distribuída. Geralmente estas bibliotecas, ou frameworks, têm suporte tanto em GPU quanto CPU. As primeiras gerações de muitos frameworks foram desenvolvidas por meio de parcerias entre Universidades e grandes empresas com interesse em Deep Learning.  Algumas das bibliotecas mais comuns destacadas na Figura \@ref(fig:frameworks), são o PyTorch  e Caffe2 mantidos pelo Facebook, o TensorFlow pela Google, o MXNet pela Amazon  e o CNTK pela Microsoft [@johnson2019].
+
+(ref:frameworks)  Principais frameworks para deep learning - Para facilitar a manipulação de tensores e a utilização de GPU’s foram desenvolvidos diferentes frameworks. A maior parte das primeiras gerações dos frameworks surgiram como parcerias entre universidades e grandes empresa [@johnson2019]
+
+```{r frameworks, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:frameworks)', fig.align='center', out.width='100%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/frameworks.png'))
+```
+
+Mesmo com o aumento do desempenho da GPU em relação a CPU para treinar as redes, em muitos casos uma única máquina não é suficiente para todo o processamento. Com a possibilidade do paralelismo se tornou comum distribuir a carga de trabalho entre várias máquinas. No entanto, montar uma rede própria de GPU é um investimento alto, e a tecnologia também iria depreciar em poucos anos, pois os modelos de GPU estão evoluindo rapidamente para acompanhar as redes cada vez maiores [@wangenheim2018]. Uma alternativa para as redes locais é utilizar servidores de GPU em nuvem oferecidos por provedores como Amazon, Google, Microsoft entre outros. 
+
+Nos últimos anos aumentou a oferta de serviços na nuvem para treinar CNN’s, sendo que os custos são com base no tipo de tecnologia da GPU disponível, no tempo de processamento e na quantidade de armazenamento [@wangenheim2018]. Alguns provedores oferecem alguns serviços gratuitos. As redes podem ser desenvolvidas diretamente em plataformas oferecidas pelos próprios provedores, que geralmente apresentam uma IDE baseada em Jupyter Notebooks. Cada plataforma apresenta facilidades para determinados frameworks, geralmente para aquelas bibliotecas que também prestam suporte [@wangenheim2018]. O GoogleCloud, por exemplo, apresenta várias ferramentas para integrar  com o TensorFlow. 
+
+O GoogleCloud oferece além dos serviços de GPU a alternativa de acesso às TPU’s como recursos de computação em nuvem. A TPU (unidades de processamento de tensor) foi projetada especificamente para trabalhar com redes neurais e funciona como processador de matriz especializado. Como a sequência de cálculos já é previamente conhecida, foram conectados vários multiplicadores e somadores, formando uma matriz de operadores, denominada matriz sistólica [@googlecloud2021]. Uma vantagem da TPU em relação a CPU e a GPU é a redução do gargalo de von Neumann, pois os dados são todos carregados de uma única vez da memória, não precisando o acesso durante os cálculos [@googlecloud2021]. 
+
+No tópico sobre backpropagation foi apresentado um exemplo de aplicação de rede MLP para reconhecimento de dígitos em que implementamos na linguagem Python. No código foi desenvolvido manualmente a estrutura da rede, as etapas do treinamento e as funções, utilizando principalmente bibliotecas que lidam com cálculos em Arrays Multidimensionais, como o Numpy. No exemplo MLP, ao manipular os dados como array do numpy não surgiram inconsistências e também não nos deparamos com operações muito complexas, pois até aquele momento as aplicações não envolviam redes muito densas, que exigissem várias otimizações e regularizações. Em modelos de redes maiores, a utilização do algoritmo backpropagation é um desafio maior e muitas vezes pode ser difícil garantir a convergência apenas utilizando as bibliotecas tradicionais de computação numérica (adrian2017, pg. 153). 
+
+Por outro lado, os frameworks que acabamos de apresentar, como o TensorFlow e o Pythorch, foram construídos especificamente para lidar com deep learning, podendo, por exemplo, disponibilizar automaticamente várias funções de otimização e regularização. Os frameworks de deep learning geralmente apresentam uma estrutura de dados multidimensionais, tratados como uma classe tensor, que substitui o “ndarray” do numpy [@zhang2020dive, p.44]. Esta estrutura de dados de tensor apresenta algumas vantagens em relação ao tradicional array do numpy que se adequam melhor a manipulação de dados nas redes. O primeiro ponto é que o numpy apresenta por default uma precisão de 64 bit, enquanto os tensores geralmente usam 32 bit. Como a precisão de 32 bit é suficiente para trabalhar com as redes, ao se reduzir o tamanho dos dados se ocupa menos memória e torna as operações mais rápidas [@geron2019, p.474].   
+
+Por default a manipulação das variáveis são direcionadas para os cálculos na CPU, entretanto, quando existe disponível diferentes dispositivos de CPU e GPU pode ser interessante distribuir os cálculos e armazenamento [@zhang2020dive, p.219].  Diferente do Numpy, os frameworks de deep learning possuem suporte para lidar com vários dispositivos ao mesmo tempo [@zhang2020dive, p.44]. Anteriormente destacamos que o propósito da utilização das GPU’s nas redes é acelerar o treinamento, principalmente adotando processamento distribuído e paralelo, porém se a manipulação dos dados não for adequada, precisando ocorrer muitas transferências entres dispositivos, o tempo de processamento pode aumentar [@zhang2020dive, p.222]. Geralmente, ao se utilizar os frameworks configurados com as GPU’s e CPU’s, não é necessário se preocupar na forma como ocorrem estas transferências, pois os processamentos são otimizados com base em gráficos computacionais [@geron2019, p.368]. 
+
+O que tem popularizado ainda mais as CNN’s mesmo fora dos meios acadêmicos é o desenvolvimento de  interfaces de programação que tornam mais simples a construção e o treinamento das redes neurais. Keras, um dos mais conhecidos API para deep learning em alto nível, foi desenvolvido por François Chollet como um projeto de pesquisa, que foi disponibilizado como software livre em 2015 [@geron2019, p.292]. Foi escrito em Python e funciona como um mecanismo de computação subjacente que roda sob diferentes frameworks de backend, alguns identificados na Figura - Implementações do API Keras, os quais oferecem o suporte de computação numérica, como TensorFlow, Theano,  CNTK e MxNet [@geron2019, p.292].
+
+Grande parte do trabalho com as redes neurais pode ser implementado direto com o API de alto nível, incluindo o desenho da arquitetura, as funções, algoritmo de treinamento, otimizadores e módulos de regularização. Para implementações que necessitam de maiores customizações é necessário recorrer aos frameworks de mais baixo nível, como o TensorFlow.  O TensorFlow, criado por um grupo de pesquisa da Google e liberado como software livre em 2015, tem a sua própria implementação de keras, o tf.keras [@geron2019, p.368]. 
+
+O API tf.keras tem como backend apenas o TensorFlow (Figura \@ref(fig:keras)), porém apresenta maiores facilidades para integrar com customizações do backend.  A inclusão de novos códigos pode ser feita a partir da linguagem python e automaticamente o API converte para funções do tipo TensorFlow que possuem base no C++ [@geron2019, p.398]. Muitas vezes essas adaptações ocorrem quando se precisa de um controle maior, ou customizar funções, camadas, módulos de regularização, processos de inicialização, ou medidas de avaliação [@geron2019, p.398]. 
+
+(ref:keras)   Implementações do API Keras - a - Implementação geral do API keras-team que é compatível com diferentes backends,  como TensorFlow, Theano,  CNTK e MxNet. b - O API tf.keras tem como backend apenas o TensorFlow e comporta aplicações específicas deste framework [@geron2019, p.292]
+
+```{r keras, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:keras)', fig.align='center', out.width='90%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/keras.png'))
+```
+
+No momento a última versão estável do TensorFlow é a 2.4, sendo que a primeira versão do TensorFlow 2.0 foi lançada em março de 2019 [@tensorflow2020]. Enquanto que nas versões 1.0, o módulo simbólico é a parte central [@geron2019, p.396], principalmente pela preferência da abordagem  por gráficos estáticos, a partir das versões 2.0 se começou a ter uma programação mais imperativa de forma semelhante ao PytTorch, e que apresenta como default gráficos dinâmicos [@zhang2020dive, p.516]. O módulo estático busca maior otimização do código, sendo que após a definição de todo o processo e construção do gráfico não se tem mais a dependência do código [@johnson2019]. No formato dinâmico a construção e a execução dos gráficos não podem ser desvinculadas, pois ocorrem simultaneamente. Geralmente, os gráficos dinâmicos são mais fáceis de debugar e apresentam menores inconsistências [@johnson2019].
