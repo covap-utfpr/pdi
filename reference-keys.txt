@@ -194,6 +194,9 @@ fig:vgg16
 tab:tabelaaprendizado
 fig:frameworks
 fig:keras
+fig:onibusMedianaTemporal
+fig:indoorBGmodeling
+fig:outdoorBGmodeling
 intro
 relação-de-processamento-digital-de-imagem-visão-computacional-e-computação-gráfica
 aplicações-processamento-digital-de-imagens
@@ -291,3 +294,8 @@ googlenet-e-inception
 resnet
 aprendizado-por-transferência
 redes-neurais-na-prática
+separação-plano-de-fundo
+fixo
+média-temporal
+mediana-temporal
+exemplos-comparativos-da-média-temporal-média-espaço-temporal-e-mediana-temporal

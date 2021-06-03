@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="segmentação.html"/>
-<link rel="next" href="refêrencias.html"/>
+<link rel="next" href="separação-plano-de-fundo.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -238,6 +238,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.4" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#aprendizado-por-transferência"><i class="fa fa-check"></i><b>7.2.4</b> Aprendizado por transferência</a></li>
 <li class="chapter" data-level="7.2.5" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#redes-neurais-na-prática"><i class="fa fa-check"></i><b>7.2.5</b> Redes neurais na prática</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html"><i class="fa fa-check"></i><b>8</b> Separação Plano de Fundo</a><ul>
+<li class="chapter" data-level="8.1" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html#fixo"><i class="fa fa-check"></i><b>8.1</b> Fixo</a></li>
+<li class="chapter" data-level="8.2" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html#média-temporal"><i class="fa fa-check"></i><b>8.2</b> Média Temporal</a></li>
+<li class="chapter" data-level="8.3" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html#mediana-temporal"><i class="fa fa-check"></i><b>8.3</b> Mediana Temporal</a></li>
+<li class="chapter" data-level="8.4" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html#exemplos-comparativos-da-média-temporal-média-espaço-temporal-e-mediana-temporal"><i class="fa fa-check"></i><b>8.4</b> Exemplos comparativos da Média Temporal, Média Espaço-Temporal e Mediana Temporal</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="refêrencias.html"><a href="refêrencias.html"><i class="fa fa-check"></i>Refêrencias</a></li>
 <li class="divider"></li>
@@ -1184,7 +1190,8 @@ Figura 7.42: Implementações do API Keras - a - Implementação geral do API ke
 </div>
 <p>No momento a última versão estável do TensorFlow é a 2.4, sendo que a primeira versão do TensorFlow 2.0 foi lançada em março de 2019 <span class="citation">[<a href="#ref-tensorflow2020" role="doc-biblioref">46</a>]</span>. Enquanto que nas versões 1.0, o módulo simbólico é a parte central <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">33</a>, p. 396]</span>, principalmente pela preferência da abordagem por gráficos estáticos, a partir das versões 2.0 se começou a ter uma programação mais imperativa de forma semelhante ao PytTorch, e que apresenta como default gráficos dinâmicos <span class="citation">[<a href="#ref-zhang2020dive" role="doc-biblioref">37</a>, p. 516]</span>. O módulo estático busca maior otimização do código, sendo que após a definição de todo o processo e construção do gráfico não se tem mais a dependência do código <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">38</a>]</span>. No formato dinâmico a construção e a execução dos gráficos não podem ser desvinculadas, pois ocorrem simultaneamente. Geralmente, os gráficos dinâmicos são mais fáceis de debugar e apresentam menores inconsistências <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">38</a>]</span>.</p>
 
-
+<!-- nixon2019feature -->
+<!-- davies2017 -->
 </div>
 </div>
 </div>
@@ -1272,7 +1279,7 @@ Figura 7.42: Implementações do API Keras - a - Implementação geral do API ke
         </div>
       </div>
 <a href="segmentação.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="refêrencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="separação-plano-de-fundo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

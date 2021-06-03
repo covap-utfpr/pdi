@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Refêrencias | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Refêrencias | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>Capítulo 8 Separação Plano de Fundo | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="Capítulo 8 Separação Plano de Fundo | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Refêrencias | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="Capítulo 8 Separação Plano de Fundo | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Refêrencias | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="Capítulo 8 Separação Plano de Fundo | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="separação-plano-de-fundo.html"/>
-
+<link rel="prev" href="deep-learning-em-visão-computacional.html"/>
+<link rel="next" href="refêrencias.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -269,168 +269,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="refêrencias" class="section level1 unnumbered">
-<h1>Refêrencias</h1>
+<div id="separação-plano-de-fundo" class="section level1">
+<h1><span class="header-section-number">Capítulo 8</span> Separação Plano de Fundo</h1>
+<p>A visão computacional também é usada para lidar com monitoramento de objetos, auxiliando atividades humanas como vigilância pela procura de eventualidades, como acidentes e crimes <span class="citation"><span class="citeproc-not-found" data-reference-id="davies2017"><strong>???</strong></span></span>. E a ideia da separação do <em>background</em> é remover a paisagem para observar os objetos-alvo em movimento (<em>foreground</em>), em por menores, seria a remoção de objetos estáticos (como edifícios) ou que não são estáticos e compõe o plano de fundo (como um rio, as folhas de uma vegetação, movimentação das nuvens) - sim, é complexo lidar com essa movimentação de <em>background.</em></p>
+<p>O <em>foreground</em> é o resultado da limiarização da diferença entre os <em>pixels</em> do <em>frame</em> atual em relação aos <em>pixels</em> do <em>background</em> estimado. Caso não saiba o que é limiarização, contém esse conteúdo em seções anteriores <a href="segmentação.html#segmentação">Segmentação</a> no tópico Limiarização 6.6.</p>
+<div id="fixo" class="section level2">
+<h2><span class="header-section-number">8.1</span> Fixo</h2>
+<p>A maneira mais simples de se modelar um <em>background</em> é capturando um <em>frame</em> quando não há alvos na cena. Entretanto, isso seria legal para um ambiente controlado, não a um externo, pois como saber que ali não há alvos e de fato é o verdadeiro <em>background</em> e como seria resolvido os problemas de variações de iluminação e movimentos de vegetações <span class="citation"><span class="citeproc-not-found" data-reference-id="davies2017"><strong>???</strong></span></span>.</p>
+</div>
+<div id="média-temporal" class="section level2">
+<h2><span class="header-section-number">8.2</span> Média Temporal</h2>
+<p>Uma sugestão para resolver as dificuldades apresentadas no método fixo é fazer a média a partir de muitos <em>frames</em> sobre um recente período, tendo ou não alvos presentes e, se os alvos forem raros, obtém-se uma boa aproximação de um <em>background</em> ideal. Entretanto, haverá alvos que não serão eliminados, produzindo fantasmas - detecção de movimento onde não há alvo <span class="citation"><span class="citeproc-not-found" data-reference-id="davies2017"><strong>???</strong></span></span>. Essa estratégia é chamada de média temporal ou <em>temporal averaging.</em> Segue exemplo de cálculo da modelagem para 5 <em>frames</em>, produzindo modelo <em>TP</em>.</p>
+<p><span class="math display">\[{TP}_{x,y} = \frac{P_{1_{x,y}} + P_{2_{x,y}} + P_{3_{x,y}} + P_{4_{x,y}} + P_{5_{x,y}}}{5}\]</span></p>
+<p>Outra variação que pode ser usada para uma melhor modelagem, reduzindo detecção de fantasmas, é a de aplicar um filtro de média convencional 5x5, espacial, em cada <em>frame</em> antes da média temporal, cálculo esse denominado média espaço-temporal ou <em>spatiotemporal averaging</em> <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">18</a>, p. 435]</span>; as Figuras <a href="separação-plano-de-fundo.html#fig:indoorBGmodeling">8.2</a> e <a href="separação-plano-de-fundo.html#fig:outdoorBGmodeling">8.3</a> demonstra a aplicação com e sem suavização em controlado e externo. A diferença entre os <em>backgrounds</em> modelados com e sem suavização, a Figura <a href="separação-plano-de-fundo.html#fig:indoorBGmodeling">8.2</a> (F) e (G), pode ser mínima aos nossos olhos, mas, quando aplicados a diferença é notável, conforme ilustram a detecção de movimento nas Figuras <a href="separação-plano-de-fundo.html#fig:indoorBGmodeling">8.2</a> (I) e (J), sem e com suavização respectivamente.</p>
+<p><span class="math display">\[{STP}_{x,y} = media5(P_{1_{x,y}}) + media5(P_{2_{x,y}}) + media5(P_{3_{x,y}}) + media5(P_{4_{x,y}}) + media5(P_{5_{x,y}})\]</span></p>
+</div>
+<div id="mediana-temporal" class="section level2">
+<h2><span class="header-section-number">8.3</span> Mediana Temporal</h2>
+<p>A Mediana Temporal consegue um melhor resultado do que o de Média Temporal, pois os <em>outliers</em>, que podem produzir fantasmas na cena, não influenciam no cálculo <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">18</a>, p. 436]</span>. Segue exemplo de cálculo dessa modelagem para 5 <em>frames</em>, produzindo modelo <em>MP</em>.
+<span class="math display">\[MP_{x,y} = mediana(P_{1_{x,y}}, P_{2_{x,y}}, P_{3_{x,y}}, P_{4_{x,y}}, P_{5_{x,y}})\]</span>
+Apesar de ser capaz de produzir melhores resultados, nada é perfeito. Observe as Figuras <a href="separação-plano-de-fundo.html#fig:onibusMedianaTemporal">8.1</a> (A) e (B), o ônibus que antes estava em movimento vai desaparecendo do <em>foreground</em> à medida que novos frames são capturados e ele se mantém parado, pois, progressivamente, o objeto ônibus vai pertencendo ao <em>background.</em> Porém, ao se mover novamente, ele é identificado como um alvo, mas a região em que ele estava parado ainda detecta um fantasma, por causa da diferença naquela região ainda ser praticamente equivalente, pois no novo <em>frame</em> não há mais ônibus ali, mas, no <em>background</em>, há. Conforme observa-se nas Figuras <a href="separação-plano-de-fundo.html#fig:onibusMedianaTemporal">8.1</a> (C) e (D). Note que à medida que novos <em>frames</em> são captados esse fantasma vai sumindo.</p>
 
+<div class="figure" style="text-align: center"><span id="fig:onibusMedianaTemporal"></span>
+<img src="imagens/08-modelagemBackground/onibusMedianaTemporal.png" alt="Detecção de movimento através da modelagem de background a partir da Mediana Temporal ???." width="55%" />
+<p class="caption">
+Figura 8.1: Detecção de movimento através da modelagem de <em>background</em> a partir da Mediana Temporal <span class="citation"><span class="citeproc-not-found" data-reference-id="davies2017"><strong>???</strong></span></span>.
+</p>
+</div>
+</div>
+<div id="exemplos-comparativos-da-média-temporal-média-espaço-temporal-e-mediana-temporal" class="section level2">
+<h2><span class="header-section-number">8.4</span> Exemplos comparativos da Média Temporal, Média Espaço-Temporal e Mediana Temporal</h2>
+<p>Os exemplos a seguir são complementares a teoria dos tópicos anteriores de modelagem de plano de fundo, a fim de mostrar os resultados dos métodos estudados aplicados em um ambiente controlado e <em>outdoor</em>. Desde os <em>frames</em> capturados, o <em>background</em> modelado e o <em>foreground</em> produzido pela limiarização da diferença entre o primeiro <em>frame</em>, Figura <a href="separação-plano-de-fundo.html#fig:indoorBGmodeling">8.2</a> (A), e os respectivos planos de fundo modelados.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:indoorBGmodeling"></span>
+<img src="imagens/08-modelagemBackground/indoorBGmodeling.png" alt="As imagens A, B, …, E são os frames capturados por uma câmera em um ambiente interno. As imagens F, G e H são os backgrounds estimados. E as imagens I, J e K são os foregrounds produzidos, as detecções de movimento estimadas. Adaptado de [18, p. 435] e [18, p. 436]." width="55%" />
+<p class="caption">
+Figura 8.2: As imagens A, B, …, E são os <em>frames</em> capturados por uma câmera em um ambiente interno. As imagens F, G e H são os <em>backgrounds</em> estimados. E as imagens I, J e K são os <em>foregrounds</em> produzidos, as detecções de movimento estimadas. Adaptado de <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">18</a>, p. 435]</span> e <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">18</a>, p. 436]</span>.
+</p>
+</div>
+<p>Note que apareceram pés fantasmas resultado da interação da luz com o movimento dos pés e sua sombra, mas ao ser aplicado a suavização esse problema é diminuído. Além disso, parte da camiseta da pessoa não foi detectada, isso pode tentar ser corrigido por ajustes no limiar de limiarização <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">18</a>, p. 436]</span>.</p>
+<p>A Figura <a href="separação-plano-de-fundo.html#fig:outdoorBGmodeling">8.3</a> é análoga a anterior, só que em um ambiente externo.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:outdoorBGmodeling"></span>
+<img src="imagens/08-modelagemBackground/outdoorBGmodeling.png" alt="As imagens A, B, …, E são os frames capturados por uma câmera em um ambiente externo. As imagens F, G e H são os backgrounds estimados. E as imagens I, J e K são os foregrounds produzidos, as detecções de movimento estimadas [18, p. 437]." width="55%" />
+<p class="caption">
+Figura 8.3: As imagens A, B, …, E são os <em>frames</em> capturados por uma câmera em um ambiente externo. As imagens F, G e H são os <em>backgrounds</em> estimados. E as imagens I, J e K são os <em>foregrounds</em> produzidos, as detecções de movimento estimadas <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">18</a>, p. 437]</span>.
+</p>
+</div>
+<p>Como pôde ser observado, a modelagem de um <em>background</em> é bem mais difícil quando é em um ambiente externo, dado os intempéres e variações de iluminação. Uma tentativa de melhor modelagem é tentar diferentes limiares e aumentar a quantidade de <em>frames</em> a fim de uma melhor modelagem, mas pode ser que não seja o suficiente. Um dos métodos mais utilizados para separação de plano de fundo é o Mistura de Gaussianas, também chamado de Mistura de Distribuições de Probabilidade, mas deixa-se a interesse do leitor.</p>
+
+
+</div>
+</div>
+<h3>Refêrencias</h3>
 <div id="refs" class="references">
-<div>
-<p>[1] L. Velho, A. C. Frery, e J. Gomes, <em>Image processing for computer graphics and vision</em>, 2º ed. London: Springer, 2009.</p>
-</div>
-<div>
-<p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
-</div>
-<div>
-<p>[3] H. Pedrini e W. Robson Schwartz, <em>Análise de imagens digitais: princípios, algoritmos e aplicações</em>, 3º ed. São Paulo: Thomson Learning Edicoes Ltda, 2007.</p>
-</div>
-<div>
-<p>[4] B. E. da cor, “Imagem de um espectro eletromagnético”. 2014, [Online]. Disponível em: <a href="https://estudodacor.files.wordpress.com/2014/08/espectro-eletromagnetico1.jpg">https://estudodacor.files.wordpress.com/2014/08/espectro-eletromagnetico1.jpg</a>.</p>
-</div>
-<div>
-<p>[5] W. Commons, “Crab nebula in multiple wavelengths”. [Online]. Disponível em: <a href="%20https://commons.wikimedia.org/wiki/File:Crab_Nebula_in_Multiple_Wavelengths.png">https://commons.wikimedia.org/wiki/File:Crab_Nebula_in_Multiple_Wavelengths.png</a>.</p>
-</div>
-<div>
-<p>[6] I. C. Cuthill <em>et al.</em>, “The biology of color”, <em>Science</em>, vol. 357, nº 6350, 2017.</p>
-</div>
-<div>
-<p>[7] T. B. Moeslund, <em>Introduction to video and image processing: Building real systems and applications</em>. Springer Science &amp; Business Media, 2012.</p>
-</div>
-<div>
-<p>[8] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
-</div>
-<div>
-<p>[9] U. Teubner e H. J. Brückner, <em>Optical Imaging and Photography: Introduction to Science and Technology of Optics, Sensors and Systems</em>. Walter de Gruyter GmbH &amp; Co KG, 2019.</p>
-</div>
-<div>
-<p>[10] W. Commons, “Bayer pattern on sensor profile”. 2006, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Bayer_pattern_on_sensor_profile.svg">https://commons.wikimedia.org/wiki/File:Bayer_pattern_on_sensor_profile.svg</a>.</p>
-</div>
-<div>
-<p>[11] A. C. Bovik, <em>The essential guide to image processing</em>. Academic Press, 2009.</p>
-</div>
-<div>
-<p>[12] E. Azevedo, A. Conci, e C. Vasconcelos, <em>Computaç ao gr’afica: Teoria e pr’atica: geraç ao de imagens</em>, vol. 1. Elsevier Brasil, 2018.</p>
-</div>
-<div>
-<p>[13] W. Commons, “Kernel (image processing)”. 2011, [Online]. Disponível em: <a href="https://en.wikipedia.org/wiki/Kernel_(image_processing)">https://en.wikipedia.org/wiki/Kernel_(image_processing)</a>.</p>
-</div>
-<div>
-<p>[14] T. e2eML Course Catalog, “Convolution in one dimension for neural networks”. 2020, [Online]. Disponível em: <a href="https://e2eml.school/convolution_one_d.html">https://e2eml.school/convolution_one_d.html</a>.</p>
-</div>
-<div>
-<p>[15] R. CHITYALA e S. PUDIPEDDI, <em>Image processing and acquisition using Python</em>. CRC Press, 2020.</p>
-</div>
-<div>
-<p>[16] J. Canny, “A computational approach to edge detection”, <em>IEEE Transactions on pattern analysis and machine intelligence</em>, nº 6, p. 679–698, 1986.</p>
-</div>
-<div>
-<p>[17] M. Sonka, V. Hlavac, e R. Boyle, <em>Image processing, analysis, and machine vision</em>. Cengage Learning, 2014.</p>
-</div>
-<div>
+<div id="ref-nixon2019feature">
 <p>[18] M. Nixon e A. Aguado, <em>Feature extraction and image processing for computer vision</em>. Academic press, 2019.</p>
 </div>
-<div>
-<p>[19] Nasa, “Hubble Ultra-Deep Field”. 2004, [Online]. Disponível em: <a href="https://imgsrc.hubblesite.org/hu/db/images/hs-2014-27-a-full_jpg.jpg">https://imgsrc.hubblesite.org/hu/db/images/hs-2014-27-a-full_jpg.jpg</a>.</p>
 </div>
-<div>
-<p>[20] H. Bay, T. Tuytelaars, e L. Van Gool, “Surf: Speeded up robust features”, p. 404–417, 2006.</p>
-</div>
-<div>
-<p>[21] K. Cen, “Study of Viola-Jones Real Time Face Detector”, 2016.</p>
-</div>
-<div>
-<p>[22] I. Goodfellow, Y. Bengio, e A. Courville, <em>Deep Learning</em>. MIT Press, 2016.</p>
-</div>
-<div>
-<p>[23] A. Chiang, “IBM Deep Blue at Computer History Museum”. 2020, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:IBM_Deep_Blue_at_Computer_History_Museum_(9361685537).jpg">https://commons.wikimedia.org/wiki/File:IBM_Deep_Blue_at_Computer_History_Museum_(9361685537).jpg</a>.</p>
-</div>
-<div>
-<p>[24] S. R. y Cajal, <em>Comparative study of the sensory areas of the human cortex</em>. Clark University, 1899.</p>
-</div>
-<div>
-<p>[25] W. S. McCulloch e W. Pitts, “A logical calculus of the ideas immanent in nervous activity”, <em>The bulletin of mathematical biophysics</em>, vol. 5, nº 4, p. 115–133, 1943.</p>
-</div>
-<div>
-<p>[26] Glosser.ca, “Artificial neural network with layer coloring”. 2013, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Colored_neural_network.svg">https://commons.wikimedia.org/wiki/File:Colored_neural_network.svg</a>.</p>
-</div>
-<div>
-<p>[27] S. Russell e P. Norvig, “Artificial intelligence: a modern approach”, 2016.</p>
-</div>
-<div>
-<p>[28] H. Simon, <em>Redes Neurais: Princípios e prática</em>, 2º ed. São Paulo: Bookman, 1999.</p>
-</div>
-<div>
-<p>[29] cs231, “Cartoon drawing of a biological neuron”. 2021, [Online]. Disponível em: <a href="https://cs231n.github.io/neural-networks-1/">https://cs231n.github.io/neural-networks-1/</a>.</p>
-</div>
-<div>
-<p>[30] T. Rateke, “Técnicas Subsimbólicas: Redes Neurais”. LAPIX (Image Processing; Computer Graphics Lab)/Universidade Federal de Santa Catarina, Florianópolis, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-%0A%20%20redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-
-  redes-neurais/</a>.</p>
-</div>
-<div>
-<p>[31] M. A. Nielsen, <em>Neural Networks and Deep Learning</em>. Determination Press, 2015.</p>
-</div>
-<div>
-<p>[32] J. A. Herts, A. S. Krogh, e R. G. Palmer, <em>Introduction to the theory of neural computation</em>. New York: CRC Press, 2018.</p>
-</div>
-<div>
-<p>[33] A. Géron, <em>Hands-on machine learning with Scikit-Learn, Keras, and TensorFlow: Concepts, tools, and techniques to build intelligent systems</em>. O’Reilly Media, 2019.</p>
-</div>
-<div>
-<p>[34] R. D. Adrian, “Deep Learning for Computer Vision with Python”. PyImageSearch, 2017.</p>
-</div>
-<div>
-<p>[35] V. Dumoulin e F. Visin, “A guide to convolution arithmetic for deep learning”, <em>arXiv preprint arXiv:1603.07285</em>, 2016.</p>
-</div>
-<div>
-<p>[36] M. Elgendy, <em>Deep Learning for Vision Systems</em>. Manning Publications, 2020.</p>
-</div>
-<div>
-<p>[37] A. Zhang, Z. C. Lipton, M. Li, e A. J. Smola, <em>Dive into Deep Learning</em>. 2020.</p>
-</div>
-<div>
-<p>[38] J. Johnson, “Deep Learning for Computer Vision - Fall 2019”. Website do curso EECS 498-007 / 598-005 na Universidade de Michigan, Michigan, Estados Unidos, 2019, [Online]. Disponível em: <a href="https://web.eecs.umich.edu/~justincj/teaching/eecs498/FA2020/">https://web.eecs.umich.edu/~justincj/teaching/eecs498/FA2020/</a>.</p>
-</div>
-<div>
-<p>[39] P. U. Stanford Vision Lab Stanford University, “ImageNet Large Scale Visual Recognition Challenge (ILSVRC)”. Website da competição ImageNet Large Scale Visual Recognition Challenge (ILSVRC), 2020, [Online]. Disponível em: <a href="https://image-net.org/challenges/LSVRC/">https://image-net.org/challenges/LSVRC/</a>.</p>
-</div>
-<div>
-<p>[40] A. Krizhevsky, I. Sutskever, e G. E. Hinton, “Imagenet classification with deep convolutional neural networks”, <em>Advances in neural information processing systems</em>, vol. 25, p. 1097–1105, 2012.</p>
-</div>
-<div>
-<p>[41] A. Canziani, A. Paszke, e E. Culurciello, “An analysis of deep neural network models for practical applications”, <em>arXiv preprint arXiv:1605.07678</em>, 2016.</p>
-</div>
-<div>
-<p>[42] C. Szegedy <em>et al.</em>, “Going deeper with convolutions”, in <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em>, 2015, p. 1–9.</p>
-</div>
-<div>
-<p>[43] K. He, X. Zhang, S. Ren, e J. Sun, “Deep residual learning for image recognition”, in <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em>, 2016, p. 770–778.</p>
-</div>
-<div>
-<p>[44] G. Developers, “Guia para iniciantes da Cloud TPU”. Website da Google Cloud, 2021, [Online]. Disponível em: <a href="https://cloud.google.com/tpu/docs/beginners-guide?hl=pt-br">https://cloud.google.com/tpu/docs/beginners-guide?hl=pt-br</a>.</p>
-</div>
-<div>
-<p>[45] A. von Wangenheim, “Deep Learning: Introdução ao Novo Coneccionismo”. LAPIX (Image Processing; Computer Graphics Lab)/Universidade Federal de Santa Catarina, Florianópolis, 2018, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-%0A%20%20redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-
-  redes-neurais/</a>.</p>
-</div>
-<div>
-<p>[46] G. Developers, “Versões da API TensorFlow”. Website do TensorFlow, 2020, [Online]. Disponível em: <a href="https://www.tensorflow.org/versions">https://www.tensorflow.org/versions</a>.</p>
-</div>
-</div>
-</div>
-
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="separação-plano-de-fundo.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="deep-learning-em-visão-computacional.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="refêrencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -462,7 +365,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/08-referencia.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/08-modelagem_background.Rmd",
 "text": "Editar "
 },
 "history": {
