@@ -194,6 +194,9 @@ fig:vgg16
 tab:tabelaaprendizado
 fig:frameworks
 fig:keras
+eq:temporalaverage
+eq:spatiotemporalavg
+eq:median
 fig:onibusMedianaTemporal
 fig:indoorBGmodeling
 fig:outdoorBGmodeling
