@@ -16,17 +16,24 @@ O *foreground* é o resultado da limiarização da diferença entre os *pixels* 
 A maneira mais simples de se modelar um *background* é capturando um *frame* quando não há alvos na cena. Entretanto, isso seria legal para um ambiente controlado, não a um externo, pois como saber que ali não há alvos e de fato é o verdadeiro *background* e como seria resolvido os problemas de variações de iluminação e movimentos de vegetações [@davies2017, p. 669]. 
 
 ## Média Temporal
-Uma sugestão para resolver as dificuldades apresentadas no método fixo é fazer a média a partir de muitos *frames* sobre um recente período, tendo ou não alvos presentes e, se os alvos forem raros, obtém-se uma boa aproximação de um *background* ideal. Entretanto, haverá alvos que não serão eliminados, produzindo fantasmas - detecção de movimento onde não há alvo [@davies2017, p. 669]. Essa estratégia é chamada de média temporal ou *temporal averaging.* Segue exemplo de cálculo da modelagem para 5 *frames*, produzindo modelo *TP*.
+Uma sugestão para resolver as dificuldades apresentadas no método fixo é fazer a média a partir de muitos *frames* sobre um recente período, tendo ou não alvos presentes e, se os alvos forem raros, obtém-se uma boa aproximação de um *background* ideal. Entretanto, haverá alvos que não serão eliminados, produzindo fantasmas - detecção de movimento onde não há alvo [@davies2017, p. 669]. Essa estratégia é chamada de média temporal ou *temporal averaging.* Segue exemplo de cálculo da modelagem para 5 *frames* \@ref(eq:temporalaverage).
 
-$${TP}_{x,y} = \frac{P_{1_{x,y}} + P_{2_{x,y}} + P_{3_{x,y}} + P_{4_{x,y}} + P_{5_{x,y}}}{5}$$
+$$
+{TP}_{x,y} = \frac{P_{1_{x,y}} + P_{2_{x,y}} + P_{3_{x,y}} + P_{4_{x,y}} + P_{5_{x,y}}}{5} (\#eq:temporalaverage)
+$$
 
-Outra variação que pode ser usada para uma melhor modelagem, reduzindo detecção de fantasmas, é a de aplicar um filtro de média convencional 5x5, espacial, em cada *frame* antes da média temporal, cálculo esse denominado média espaço-temporal ou *spatiotemporal averaging* [@nixon2019feature, p. 435]; as Figuras \@ref(fig:indoorBGmodeling) e \@ref(fig:outdoorBGmodeling) demonstra a aplicação com e sem suavização em controlado e externo. A diferença entre os *backgrounds* modelados com e sem suavização, a Figura  \@ref(fig:indoorBGmodeling) (F) e (G), pode ser mínima aos nossos olhos, mas, quando aplicados a diferença é notável, conforme ilustram a detecção de movimento nas Figuras \@ref(fig:indoorBGmodeling) (I) e (J), sem e com suavização respectivamente.
+Outra variação que pode ser usada para uma melhor modelagem, reduzindo detecção de fantasmas, é a de aplicar um filtro de média convencional 5x5, espacial, em cada *frame* antes da média temporal, cálculo esse denominado média espaço-temporal ou *spatiotemporal averaging* [@nixon2019feature, p. 435], como demonstrado na equação \@ref(eq:spatiotemporalavg); as Figuras \@ref(fig:indoorBGmodeling) e \@ref(fig:outdoorBGmodeling) demonstra a aplicação com e sem suavização em um ambiente controlado e *outdoor*. A diferença entre os *backgrounds* modelados com e sem suavização, a Figura  \@ref(fig:indoorBGmodeling) (F) e (G), pode ser mínima aos nossos olhos, mas, quando aplicados a diferença é notável, conforme ilustram a detecção de movimento nas Figuras \@ref(fig:indoorBGmodeling) (I) e (J), sem e com suavização respectivamente.
 
-$${STP}_{x,y} = media5(P_{1_{x,y}}) + media5(P_{2_{x,y}}) + media5(P_{3_{x,y}}) + media5(P_{4_{x,y}}) + media5(P_{5_{x,y}})$$
+$$
+{STP}_{x,y} = media5(P_{1_{x,y}}) + media5(P_{2_{x,y}}) + media5(P_{3_{x,y}}) + media5(P_{4_{x,y}}) + media5(P_{5_{x,y}}) 
+(\#eq:spatiotemporalavg)
+$$
 
 ## Mediana Temporal
-A Mediana Temporal consegue um melhor resultado do que o de Média Temporal, pois os *outliers*, que podem produzir fantasmas na cena, não influenciam no cálculo [@nixon2019feature, p. 436]. Segue exemplo de cálculo dessa modelagem para 5 *frames*, produzindo modelo *MP*.
-$$MP_{x,y} = mediana(P_{1_{x,y}}, P_{2_{x,y}}, P_{3_{x,y}}, P_{4_{x,y}}, P_{5_{x,y}})$$
+A Mediana Temporal consegue um melhor resultado do que o de Média Temporal, pois os *outliers*, que podem produzir fantasmas na cena, não influenciam no cálculo [@nixon2019feature, p. 436]. Segue exemplo de cálculo dessa modelagem para 5 *frames*, \@ref(eq:median).
+$$
+MP_{x,y} = mediana(P_{1_{x,y}}, P_{2_{x,y}}, P_{3_{x,y}}, P_{4_{x,y}}, P_{5_{x,y}}) (\#eq:median)
+$$
 Apesar de ser capaz de produzir melhores resultados, nada é perfeito. Observe as Figuras \@ref(fig:onibusMedianaTemporal) (A) e (B), o ônibus que antes estava em movimento vai desaparecendo do *foreground* à medida que novos frames são capturados e ele se mantém parado, pois, progressivamente, o objeto ônibus vai pertencendo ao *background.* Porém, ao se mover novamente, ele é identificado como um alvo, mas a região em que ele estava parado ainda detecta um fantasma, por causa da diferença naquela região ainda ser praticamente equivalente, pois no novo *frame* não há mais ônibus ali, mas, no *background*, há. Conforme observa-se nas Figuras \@ref(fig:onibusMedianaTemporal) (C) e (D). Note que à medida que novos *frames* são captados esse fantasma vai sumindo.
 
 (ref:onibusMedianaTemporal) Detecção de movimento através da modelagem de *background* a partir da Mediana Temporal [@davies2017, p. 671].

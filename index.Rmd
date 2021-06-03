@@ -21,6 +21,7 @@ Os conteúdos se encontram organizados na seguinte estrutura:
 - [Transformações radiométricas](#transformações-radiométricas)
 - [Filtros Digitais](#filtros-digitais)
 - [Segmentação](#segmentação)
+- [Separação plano de fundo](#separação-plano-de-fundo)
 
 Lembramos ainda que todo o material está hospedado no [Github](https://github.com/covap-utfpr/pdi), agradeçemos então todo apontamento de erros e sugestões, para que assim consigamos sempre disponibilizar um conteúdo revisado e livre de quaisquer erros.
 
