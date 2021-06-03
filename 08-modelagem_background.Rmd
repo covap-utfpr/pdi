@@ -1,0 +1,59 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+  bookdown::gitbook:
+    highlight: pygments
+---
+<!-- nixon2019feature -->
+<!-- davies2017 -->
+# Separação Plano de Fundo
+A visão computacional também é usada para lidar com monitoramento de objetos, auxiliando atividades humanas como vigilância pela procura de eventualidades, como acidentes e crimes [@davies2017, p. 664]. E a ideia da separação do *background* é remover a paisagem para observar os objetos-alvo em movimento (*foreground*), em por menores, seria a remoção de objetos estáticos (como edifícios) ou que não são estáticos e compõe o plano de fundo (como um rio, as folhas de uma vegetação, movimentação das nuvens) - sim, é complexo lidar com essa movimentação de *background.* 
+
+O *foreground* é o resultado da limiarização da diferença entre os *pixels* do *frame* atual em relação aos *pixels* do *background* estimado. Caso não saiba o que é limiarização, contém esse conteúdo em seções anteriores [Segmentação](#segmentação) no tópico Limiarização 6.6.
+
+## Fixo
+A maneira mais simples de se modelar um *background* é capturando um *frame* quando não há alvos na cena. Entretanto, isso seria legal para um ambiente controlado, não a um externo, pois como saber que ali não há alvos e de fato é o verdadeiro *background* e como seria resolvido os problemas de variações de iluminação e movimentos de vegetações [@davies2017, p. 669]. 
+
+## Média Temporal
+Uma sugestão para resolver as dificuldades apresentadas no método fixo é fazer a média a partir de muitos *frames* sobre um recente período, tendo ou não alvos presentes e, se os alvos forem raros, obtém-se uma boa aproximação de um *background* ideal. Entretanto, haverá alvos que não serão eliminados, produzindo fantasmas - detecção de movimento onde não há alvo [@davies2017, p. 669]. Essa estratégia é chamada de média temporal ou *temporal averaging.* Segue exemplo de cálculo da modelagem para 5 *frames*, produzindo modelo *TP*.
+
+$${TP}_{x,y} = \frac{P_{1_{x,y}} + P_{2_{x,y}} + P_{3_{x,y}} + P_{4_{x,y}} + P_{5_{x,y}}}{5}$$
+
+Outra variação que pode ser usada para uma melhor modelagem, reduzindo detecção de fantasmas, é a de aplicar um filtro de média convencional 5x5, espacial, em cada *frame* antes da média temporal, cálculo esse denominado média espaço-temporal ou *spatiotemporal averaging* [@nixon2019feature, p. 435]; as Figuras \@ref(fig:indoorBGmodeling) e \@ref(fig:outdoorBGmodeling) demonstra a aplicação com e sem suavização em controlado e externo. A diferença entre os *backgrounds* modelados com e sem suavização, a Figura  \@ref(fig:indoorBGmodeling) (F) e (G), pode ser mínima aos nossos olhos, mas, quando aplicados a diferença é notável, conforme ilustram a detecção de movimento nas Figuras \@ref(fig:indoorBGmodeling) (I) e (J), sem e com suavização respectivamente.
+
+$${STP}_{x,y} = media5(P_{1_{x,y}}) + media5(P_{2_{x,y}}) + media5(P_{3_{x,y}}) + media5(P_{4_{x,y}}) + media5(P_{5_{x,y}})$$
+
+## Mediana Temporal
+A Mediana Temporal consegue um melhor resultado do que o de Média Temporal, pois os *outliers*, que podem produzir fantasmas na cena, não influenciam no cálculo [@nixon2019feature, p. 436]. Segue exemplo de cálculo dessa modelagem para 5 *frames*, produzindo modelo *MP*.
+$$MP_{x,y} = mediana(P_{1_{x,y}}, P_{2_{x,y}}, P_{3_{x,y}}, P_{4_{x,y}}, P_{5_{x,y}})$$
+Apesar de ser capaz de produzir melhores resultados, nada é perfeito. Observe as Figuras \@ref(fig:onibusMedianaTemporal) (A) e (B), o ônibus que antes estava em movimento vai desaparecendo do *foreground* à medida que novos frames são capturados e ele se mantém parado, pois, progressivamente, o objeto ônibus vai pertencendo ao *background.* Porém, ao se mover novamente, ele é identificado como um alvo, mas a região em que ele estava parado ainda detecta um fantasma, por causa da diferença naquela região ainda ser praticamente equivalente, pois no novo *frame* não há mais ônibus ali, mas, no *background*, há. Conforme observa-se nas Figuras \@ref(fig:onibusMedianaTemporal) (C) e (D). Note que à medida que novos *frames* são captados esse fantasma vai sumindo.
+
+(ref:onibusMedianaTemporal) Detecção de movimento através da modelagem de *background* a partir da Mediana Temporal [@davies2017, p. 671].
+
+```{r onibusMedianaTemporal, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:onibusMedianaTemporal)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/08-modelagemBackground/onibusMedianaTemporal.png'))
+```
+
+## Exemplos comparativos da Média Temporal, Média Espaço-Temporal e Mediana Temporal
+Os exemplos a seguir são complementares a teoria dos tópicos anteriores de modelagem de plano de fundo, a fim de mostrar os resultados dos métodos estudados aplicados em um ambiente controlado e *outdoor*. Desde os *frames* capturados, o *background* modelado e o *foreground* produzido pela limiarização da diferença entre o primeiro *frame*, Figura \@ref(fig:indoorBGmodeling) (A), e os respectivos planos de fundo modelados.
+
+(ref:indoorBGmodeling) As imagens A, B, ..., E são os *frames* capturados por uma câmera em um ambiente interno. As imagens F, G e H são os *backgrounds* estimados. E as imagens I, J e K são os *foregrounds* produzidos, as detecções de movimento estimadas. Adaptado de [@nixon2019feature, p. 435] e [@nixon2019feature, p. 436].
+
+```{r indoorBGmodeling, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:indoorBGmodeling)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/08-modelagemBackground/indoorBGmodeling.png'))
+```
+
+Note que apareceram pés fantasmas resultado da interação da luz com o movimento dos pés e sua sombra, mas ao ser aplicado a suavização esse problema é diminuído. Além disso, parte da camiseta da pessoa não foi detectada, isso pode tentar ser corrigido por ajustes no limiar de limiarização [@nixon2019feature, p. 436]. 
+
+
+
+A Figura \@ref(fig:outdoorBGmodeling) é análoga a anterior, só que em um ambiente externo.
+
+(ref:outdoorBGmodeling) As imagens A, B, ..., E são os *frames* capturados por uma câmera em um ambiente externo. As imagens F, G e H são os *backgrounds* estimados. E as imagens I, J e K são os *foregrounds* produzidos, as detecções de movimento estimadas [@nixon2019feature, p. 437].
+
+```{r outdoorBGmodeling, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:outdoorBGmodeling)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/08-modelagemBackground/outdoorBGmodeling.png'))
+```
+
+Como pôde ser observado, a modelagem de um *background* é bem mais difícil quando é em um ambiente externo, dado os intempéres e variações de iluminação. Uma tentativa de melhor modelagem é tentar diferentes limiares e aumentar a quantidade de *frames* a fim de uma melhor modelagem, mas pode ser que não seja o suficiente. Um dos métodos mais utilizados para separação de plano de fundo é o Mistura de Gaussianas, também chamado de Mistura de Distribuições de Probabilidade, mas deixa-se a interesse do leitor.
