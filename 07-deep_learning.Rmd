@@ -143,7 +143,7 @@ Já nas tipologias recorrentes ocorre o feedback, um processo de realimentação
 knitr::include_graphics(rep('imagens/07-deepLearning/recurrent-network.png'))
 ```
 
-#### Backpropagation
+#### Backpropagation {#backpropagation}
 Para explicar o algoritmo backpropagation no treinamento de redes neurais utilizaremos um exemplo de aplicação de rede MLP para o reconhecimento de números. O código da rede é uma implementação do livro online “Neural Networks and Deep Learning” escrito por Michael Nielsen. Os dados de treinamento foram retirados  do MNIST data set, que contém mais de 60000 imagens escaneadas de números escritos juntamente com os rótulos de classificação. As informações foram coletadas pelo Instituto Nacional de Padrões e Tecnologia dos Estados Unidos (NIST), sendo que as imagens são em escala de cinza e de tamanho 28 x 28 pixels como na Figura \@ref(fig:mnistZero).
 
 (ref:mnistZero) Arquitetura rede recorrente[@nielsen2015]
@@ -849,3 +849,85 @@ knitr::include_graphics(rep('imagens/07-deepLearning/keras.png'))
 ```
 
 No momento a última versão estável do TensorFlow é a 2.4, sendo que a primeira versão do TensorFlow 2.0 foi lançada em março de 2019 [@tensorflow2020]. Enquanto que nas versões 1.0, o módulo simbólico é a parte central [@geron2019, p.396], principalmente pela preferência da abordagem  por gráficos estáticos, a partir das versões 2.0 se começou a ter uma programação mais imperativa de forma semelhante ao PytTorch, e que apresenta como default gráficos dinâmicos [@zhang2020dive, p.516]. O módulo estático busca maior otimização do código, sendo que após a definição de todo o processo e construção do gráfico não se tem mais a dependência do código [@johnson2019]. No formato dinâmico a construção e a execução dos gráficos não podem ser desvinculadas, pois ocorrem simultaneamente. Geralmente, os gráficos dinâmicos são mais fáceis de debugar e apresentam menores inconsistências [@johnson2019].
+
+## Redes Neurais Siamesas
+
+O primeiro trabalho com redes neurais siamesas em 1994 tinha a proposta de comparar duas assinaturas manuscritas, verificando se as duas eram originais ou se uma delas era falsa [@walker2021, p. 75]. Grande parte das redes neurais para classificação com imagens utiliza a estratégia de apresentar o objeto para identificar o que é, enquadrando nas classes definidas no treinamento. As redes siamesas apresentam o problema de uma forma diferente, em vez de descobrir o que foi apresentado, a ideia é comparar duas entradas, verificando se fazem parte da mesma classe ou não. 
+
+Após a utilização das redes siamesas para reconhecimento de assinaturas surgiram diferentes aplicações para análise de imagens com objetivo de avaliar a similaridade entre elas. Na área da saúde, as redes siamesas já foram testadas por diferentes trabalhos para detecção de doenças a partir da análise de imagens de exames [@walker2021, p. 81]. Já foram apresentados trabalhos na área da farmácia para comparação de composições químicas, e na biologia, para avaliar sequências de DNA e classificar cromossomos [@walker2021, p. 78]. Existem adaptações destas redes em diferentes setores, como na robótica, no desenvolvimento de software e no sensoriamento remoto [@walker2021, p. 82]. 
+
+Uma das aplicações que mais teve repercussão foi na verificação de faces, como no trabalho de Chopra et al. (2005) [@chopra2005]. Taigman et al. (2014) apresentaram uma rede para verificação de faces a partir de fotos, como um projeto do Facebook [@taigman2014]. Sabri e Kurita (2018) trabalharam com reconhecimento de faces e expressões faciais [@sabri2018]. As redes neurais siamesas também ganharam popularidade no reconhecimento de imagem *one-shot*, em particular pelo estudo de Koch et al. (2021) [@walker2021, p. 81]. 
+
+Diferente dos modelos tradicionais de redes para classificação que precisam de uma grande quantidade de entradas de treinamento para cada classe, nas redes siamesas *one-shot*, geralmente é necessário apenas um exemplo para cada classe [@lambda2019]. O propósito da rede não é reconhecer a entrada a partir de diferentes classes, o que exige muitos dados de treinamento, e sim, comparar a similaridade entre duas imagens. Por exemplo, em um reconhecimento facial dos funcionários de uma empresa, em vez de treinar uma rede com várias fotos de cada pessoa para que aprenda a classificar um por um, pode ser interessante utilizar uma siamesa *one-shot* que compara uma entrada com as referências verificando se corresponde a algum funcionário. 
+
+Considerando que os vídeos podem ser tratados como uma sequência de imagens, muitas das técnicas de processamento de imagens com redes siamesas foram bem adaptadas para aplicações com vídeos. Além de aspectos estáticos presentes nas imagens, os vídeos podem oferecer informações de movimento e do estado de objetos em diferentes contextos e momentos [@walker2021, p. 83]. Por exemplo, com vídeos é possível não só reconhecer um objeto em uma imagem isolada, como também rastreá-lo ao longo dos quadros de gravações [@zhang2018]. Estas redes conseguiram reconhecer pessoas até mesmo com base no estilo de caminhada, como mostrou um estudo com imagens de vídeos de segurança [@zhang2016].
+	
+O uso das redes com dados de vídeos tem mostrado várias oportunidades na área de segurança, além do monitoramento de pessoas também existem linhas de pesquisa para o setor de veículos e trânsito. O sistema PROVID produzido por Liu et al. (2017) é um exemplo do uso das redes siamesas para identificação de veículos com base nas placas [@liu2017]. Os estudos de redes siamesas para detecção dos limites das estradas e de contornos em vídeos na perspetiva da direção de veículos pode ajudar o desenvolvimento de automóveis autônomos [@wang2017]. 
+
+As possibilidades das redes siamesas se estendem além do processamento de imagens e da visão computacional, já foram apresentados estudos para análise de áudios e no processamento de linguagem natural. Um exemplo de aplicação com áudio foi a rede siamesa de Zhang et al. (2018), desenvolvida para avaliar a similaridade entre sons originais e imitações de vozes para poder diferenciá-las [@zhang2018]. A área de processamento de linguagem natural se propõe gerar e compreender automaticamente a linguagem humana a partir de dados de comunicação, como em documentos com textos e mensagens. Por exemplo, na proposta de González et al. (2019), as redes siamesas extraem as informações mais importantes de um texto para poder resumi-lo [@gonzalez2019]. No trabalho de Das et al. (2016) foram avaliados questões de diferentes *websites* de perguntas e respostas, como *Yahoo Answers* e *Stack Overflow*, para poder detectar as semelhanças entre as mensagens [@das2016].
+
+### Arquitetura
+
+Como dito no tópico anterior, o objetivo de se utilizar uma rede com arquitetura siamesa era comparar diferentes entradas e ter como resultado um valor que representasse sua semelhança ou diferença. O nome “siamesa” por si só já nos dá uma boa ideia de como será sua arquitetura, que consiste basicamente na utilização de duas redes idênticas, como na Figura \@ref(fig:siamesa-bromley), onde temos a rede proposta por Bromley et al. (1993) em seu artigo sobre verificação de assinaturas [@bromley1993]. Nessa arquitetura temos uma camada de entrada de 200 x 8 unidades e como saída um bloco de dados de 16 x 19 unidades, o método utilizado para realizar a comparação entre os vetores de saída das duas redes foi calcular o cosseno do ângulo entre eles.
+
+(ref:siamesa-bromley)   Arquitetura utilizada por Bromley et al. (1993) com duas redes recebendo os dados sobre assinaturas após seu pré processamento. A rede contém uma camada de entrada com 200x8 unidades e uma saída de 16x19 unidades. [@bromley1993]
+
+```{r siamesa-bromley, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:siamesa-bromley)', fig.align='center', out.width='40%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/siamesa-bromley.png'))
+```
+
+Na Figura \@ref(fig:siamesa-chopra) temos um exemplo de outra arquitetura, nesse caso a apresentada por Chopra et al. (2005). Um aspecto importante que devemos notar, é que tanto essa rede quanto a anterior tem os mesmo pesos em ambas as suas redes internas. Nesse caso se optou por utilizar a distância euclidiana entre os dois vetores de características resultantes das duas subredes.
+
+(ref:siamesa-chopra)   Arquitetura utilizada por Chopra et al. [@chopra2005]. Essa arquitetura de rede siamesa tem os parâmetros da rede compartilhados entre as duas. $X_1$ e $X_2$ são as duas entradas da rede e $E_w$ é a saída da diferença euclidiana entre as saídas das duas redes($||G_w(X_1)-G_w(X_2)||$).
+
+```{r siamesa-chopra, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:siamesa-chopra)', fig.align='center', out.width='50%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/siamesa-chopra.png'))
+```
+
+Das redes neurais que apresentamos para aplicações no processamento de imagens e visão computacional, como MLP, CNN’s e siamesas, as abordagens de desenvolvimento, treinamento e operação seguem um padrão semelhante ao se pôr em prática.  A utilização de *frameworks* tem facilitado as aplicações em redes neurais, disponibilizando comandos para criar camadas, montagem da arquitetura, funções de regularização e otimização, medidas de avaliação, algoritmos de treinamento, sendo que a maior parte dos recursos é facilmente adaptável para diferentes modelos de redes. Geralmente, a maior parte do trabalho de quem desenvolve essas redes  está  na obtenção e preparo dos dados de entrada. 
+
+Dependendo do tipo da rede, a imagem de entrada deve ser disponibilizada como um vetor, como na MLP, ou como um tensor, como na CNN’s, e no caso das siamesas pode ser que a entrada seja duas ou mais imagens ao mesmo tempo.  Na maioria das vezes será necessário, dimensionar as imagens, estabelecer as classes, alterar o formato dos dados, e dividir as amostras de treinamento, teste e validação. Cada aplicação pode exigir uma abordagem diferente para que a rede aprenda o problema, o que muitas vezes exige que os dados sejam pré configurados e organizados de forma que se adequem ao tipo de algoritmo adotado no treinamento. 
+
+
+Nas redes estudadas utiliza-se o método supervisionado, especificamente o “*backpropagation*” , ou seja, durante o treinamento devem ser apresentados tanto as entradas do problema como as respostas correspondentes que são previamente conhecidas. Desta forma, o modelo consegue corrigir os parâmetros da rede considerando as diferenças entre as saídas e as respostas esperadas. No algoritmo de *backpropagation*, esta diferença é tratada por uma função de erro que o treinamento busca minimizar.  No tópico [backpropagation](#backpropagation) foi descrita uma das funções de erro que foram utilizadas pelos primeiros modelos de redes neurais, o erro quadrático (MSE). Com o aprimoramento das redes, a substituição por outras funções erros demonstrou melhores resultados no treinamento, como a entropia cruzada  ou *Cross-Entropy* [@nielsen2015]. 
+
+Dado a expressão da função custo entropia cruzada e de sua derivada:
+
+$$
+C = -\frac{1}{n} \sum_{x}[y \ln a + (1 - y) \ln(1 - a)] 
+(\#eq:entropia-cruzada)
+$$
+
+
+$$
+\frac{\partial C}{\partial w_j} = \frac{1}{n} \sum_{x} x_j (\sigma(z) - y)
+(\#eq:derivada-entropia)
+$$
+
+se consegue avaliar que a derivada aumenta com o tamanho do erro ($\sigma(z) - y$). Considerando este comportamento e que o algoritmo de treinamento fica mais rápido quanto maior for a derivada da função custo, o método da entropia cruzada tende a demonstrar menores problemas com a  desaceleração do aprendizado se comparado ao erro quadrático [@nielsen2015]. No erro quadrático, como a derivada da função custo depende diretamente da derivada da função de ativação, o treinamento poderá ficar estagnado nos pontos em que a ativação for próximo dos limites, particularmente se as funções de ativações forem sigmóides [@nielsen2015].   
+
+Geralmente, as funções erro quadrático e entropia cruzada são aplicadas em modelos que se pretende que a saída corresponda a um vetor de probabilidades em relação às classes. Desta forma, é possível associar cada valor a uma classe, ou seja, dado a entrada se determina qual a saída mais provável dentro dos exemplos estabelecidos no treinamento. Outras funções de custo mais comuns nas redes siamesas são as por técnica de ranqueamento, como a perda contrastiva e as funções *triplets*. No ranqueamento, a saída da rede é estabelecida pelas distâncias entre os dados de entrada de acordo com uma distribuição dos exemplos apresentados no treinamento [@gomez2019]. Neste caso, as entradas que pertencem a uma mesma classe tendem a ficar mais próximas, ganhando uma posição de maior prioridade que elementos com menor semelhança, os quais vão se afastando.
+
+O primeiro modelo de rede siamesa, que comparava as assinaturas [@bromley1993], utilizou a função erro contrastiva [@hadsell2006]:
+
+$$
+L(W, Y, X_1, X_2) = (1 - Y)\frac{1}{2}(E_w)^2 + (Y) \frac{1}{2} {max(0,m - E_w)}^2
+(\#eq:erro-contrastivo)
+$$
+
+em que são apresentadas pelo menos duas entradas na rede com propósito de comparar (ou contrastar) e determinar a similaridade. Quando o par de entrada é semelhante ($X_1, X_2$) o parâmetro $Y$ recebe valor 0, e quando são de classes diferentes ($X_1, X’_2$), $Y = 1$. Os pesos da rede ($W$) são corrigidos de forma que a distância ($E_w$) entre dados semelhantes fique menor e os mais diferentes se afastem [@hadsell2006]. Para isto é estabelecido uma margem ($m$) de ajuste, a qual garante uma distância mínima separando o que pertence ou não a um mesmo grupo, $𝐸_𝑊 (𝑋_1, 𝑋_2) + 𝑚 < 𝐸_𝑊 (𝑋_1, 𝑋’_ 2 )$. 
+
+A função de erro *Triplet* tem demonstrado bons desempenhos em alguns estudos com redes siamesas. Diferente da função contrastiva, na rede *Triplet* se utiliza três dados como entrada no treinamento, ou seja, uma siamesa com três  sub-redes idênticas em vez de duas.  Neste método, compara-se ao mesmo tempo o valor âncora ($x^a$), ou valor de referência, com um padrão semelhante (caso positivo $x^p$),  e com um padrão diferente (caso negativo $x^n$) de acordo com a função erro [@schroff2015]:
+
+$$
+C = \sum_{i}\left[||f(x_i^a) - f(x_i^p)||_2^2 - ||f(x_i^a) - f(x_i^n)||_2^2 + \alpha\right]
+(\#eq:erro-triplet)
+$$
+Considerando que as funções $f(x) ∈ R$ podem ser interpretadas como a aplicação de cada sub-rede, o algoritmo de treinamento deve buscar ordenar as entradas com base na similaridade relativa. Assim, a distância entre a âncora e o padrão positivo deve ser menor do que em relação ao caso negativo, como demonstrado na Figura \@ref(fig:erro-triplet). [@schroff2015]. Da mesma forma que no método contrastivo é aplicada uma margem ($\alpha$) de ajuste.
+
+(ref:erro-triplet)   Comportamento da função erro *Triplet*. A função *Triplet* reduz a distância entre os exemplos similares, ou seja, entre a âncora e o padrão positivo, e aumenta a distância entre o padrão diferente (caso negativo) e a âncora [@schroff2015].
+
+```{r erro-triplet, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:erro-triplet)', fig.align='center', out.width='40%'}
+knitr::include_graphics(rep('imagens/07-deepLearning/erro-triplet.png'))
+```
+
