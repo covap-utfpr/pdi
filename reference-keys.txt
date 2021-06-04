@@ -194,6 +194,13 @@ fig:vgg16
 tab:tabelaaprendizado
 fig:frameworks
 fig:keras
+fig:siamesa-bromley
+fig:siamesa-chopra
+eq:entropia-cruzada
+eq:derivada-entropia
+eq:erro-contrastivo
+eq:erro-triplet
+fig:erro-triplet
 eq:temporalaverage
 eq:spatiotemporalavg
 eq:median
@@ -297,6 +304,8 @@ googlenet-e-inception
 resnet
 aprendizado-por-transferência
 redes-neurais-na-prática
+redes-neurais-siamesas
+arquitetura
 separação-plano-de-fundo
 fixo
 média-temporal

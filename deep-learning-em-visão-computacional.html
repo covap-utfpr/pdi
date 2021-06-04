@@ -238,6 +238,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.4" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#aprendizado-por-transferência"><i class="fa fa-check"></i><b>7.2.4</b> Aprendizado por transferência</a></li>
 <li class="chapter" data-level="7.2.5" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#redes-neurais-na-prática"><i class="fa fa-check"></i><b>7.2.5</b> Redes neurais na prática</a></li>
 </ul></li>
+<li class="chapter" data-level="7.3" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#redes-neurais-siamesas"><i class="fa fa-check"></i><b>7.3</b> Redes Neurais Siamesas</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#arquitetura"><i class="fa fa-check"></i><b>7.3.1</b> Arquitetura</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html"><i class="fa fa-check"></i><b>8</b> Separação Plano de Fundo</a><ul>
 <li class="chapter" data-level="8.1" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html#fixo"><i class="fa fa-check"></i><b>8.1</b> Fixo</a></li>
@@ -1189,6 +1192,68 @@ Figura 7.42: Implementações do API Keras - a - Implementação geral do API ke
 </p>
 </div>
 <p>No momento a última versão estável do TensorFlow é a 2.4, sendo que a primeira versão do TensorFlow 2.0 foi lançada em março de 2019 <span class="citation">[<a href="#ref-tensorflow2020" role="doc-biblioref">46</a>]</span>. Enquanto que nas versões 1.0, o módulo simbólico é a parte central <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">33</a>, p. 396]</span>, principalmente pela preferência da abordagem por gráficos estáticos, a partir das versões 2.0 se começou a ter uma programação mais imperativa de forma semelhante ao PytTorch, e que apresenta como default gráficos dinâmicos <span class="citation">[<a href="#ref-zhang2020dive" role="doc-biblioref">37</a>, p. 516]</span>. O módulo estático busca maior otimização do código, sendo que após a definição de todo o processo e construção do gráfico não se tem mais a dependência do código <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">38</a>]</span>. No formato dinâmico a construção e a execução dos gráficos não podem ser desvinculadas, pois ocorrem simultaneamente. Geralmente, os gráficos dinâmicos são mais fáceis de debugar e apresentam menores inconsistências <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">38</a>]</span>.</p>
+</div>
+</div>
+<div id="redes-neurais-siamesas" class="section level2">
+<h2><span class="header-section-number">7.3</span> Redes Neurais Siamesas</h2>
+<p>O primeiro trabalho com redes neurais siamesas em 1994 tinha a proposta de comparar duas assinaturas manuscritas, verificando se as duas eram originais ou se uma delas era falsa <span class="citation">[<a href="#ref-walker2021" role="doc-biblioref">47</a>, p. 75]</span>. Grande parte das redes neurais para classificação com imagens utiliza a estratégia de apresentar o objeto para identificar o que é, enquadrando nas classes definidas no treinamento. As redes siamesas apresentam o problema de uma forma diferente, em vez de descobrir o que foi apresentado, a ideia é comparar duas entradas, verificando se fazem parte da mesma classe ou não.</p>
+<p>Após a utilização das redes siamesas para reconhecimento de assinaturas surgiram diferentes aplicações para análise de imagens com objetivo de avaliar a similaridade entre elas. Na área da saúde, as redes siamesas já foram testadas por diferentes trabalhos para detecção de doenças a partir da análise de imagens de exames <span class="citation">[<a href="#ref-walker2021" role="doc-biblioref">47</a>, p. 81]</span>. Já foram apresentados trabalhos na área da farmácia para comparação de composições químicas, e na biologia, para avaliar sequências de DNA e classificar cromossomos <span class="citation">[<a href="#ref-walker2021" role="doc-biblioref">47</a>, p. 78]</span>. Existem adaptações destas redes em diferentes setores, como na robótica, no desenvolvimento de software e no sensoriamento remoto <span class="citation">[<a href="#ref-walker2021" role="doc-biblioref">47</a>, p. 82]</span>.</p>
+<p>Uma das aplicações que mais teve repercussão foi na verificação de faces, como no trabalho de Chopra et al. (2005) <span class="citation">[<a href="#ref-chopra2005" role="doc-biblioref">48</a>]</span>. Taigman et al. (2014) apresentaram uma rede para verificação de faces a partir de fotos, como um projeto do Facebook <span class="citation">[<a href="#ref-taigman2014" role="doc-biblioref">49</a>]</span>. Sabri e Kurita (2018) trabalharam com reconhecimento de faces e expressões faciais <span class="citation">[<a href="#ref-sabri2018" role="doc-biblioref">50</a>]</span>. As redes neurais siamesas também ganharam popularidade no reconhecimento de imagem <em>one-shot</em>, em particular pelo estudo de Koch et al. (2021) <span class="citation">[<a href="#ref-walker2021" role="doc-biblioref">47</a>, p. 81]</span>.</p>
+<p>Diferente dos modelos tradicionais de redes para classificação que precisam de uma grande quantidade de entradas de treinamento para cada classe, nas redes siamesas <em>one-shot</em>, geralmente é necessário apenas um exemplo para cada classe <span class="citation">[<a href="#ref-lambda2019" role="doc-biblioref">51</a>]</span>. O propósito da rede não é reconhecer a entrada a partir de diferentes classes, o que exige muitos dados de treinamento, e sim, comparar a similaridade entre duas imagens. Por exemplo, em um reconhecimento facial dos funcionários de uma empresa, em vez de treinar uma rede com várias fotos de cada pessoa para que aprenda a classificar um por um, pode ser interessante utilizar uma siamesa <em>one-shot</em> que compara uma entrada com as referências verificando se corresponde a algum funcionário.</p>
+<p>Considerando que os vídeos podem ser tratados como uma sequência de imagens, muitas das técnicas de processamento de imagens com redes siamesas foram bem adaptadas para aplicações com vídeos. Além de aspectos estáticos presentes nas imagens, os vídeos podem oferecer informações de movimento e do estado de objetos em diferentes contextos e momentos <span class="citation">[<a href="#ref-walker2021" role="doc-biblioref">47</a>, p. 83]</span>. Por exemplo, com vídeos é possível não só reconhecer um objeto em uma imagem isolada, como também rastreá-lo ao longo dos quadros de gravações <span class="citation">[<a href="#ref-zhang2018" role="doc-biblioref">52</a>]</span>. Estas redes conseguiram reconhecer pessoas até mesmo com base no estilo de caminhada, como mostrou um estudo com imagens de vídeos de segurança <span class="citation">[<a href="#ref-zhang2016" role="doc-biblioref">53</a>]</span>.</p>
+<p>O uso das redes com dados de vídeos tem mostrado várias oportunidades na área de segurança, além do monitoramento de pessoas também existem linhas de pesquisa para o setor de veículos e trânsito. O sistema PROVID produzido por Liu et al. (2017) é um exemplo do uso das redes siamesas para identificação de veículos com base nas placas <span class="citation">[<a href="#ref-liu2017" role="doc-biblioref">54</a>]</span>. Os estudos de redes siamesas para detecção dos limites das estradas e de contornos em vídeos na perspetiva da direção de veículos pode ajudar o desenvolvimento de automóveis autônomos <span class="citation">[<a href="#ref-wang2017" role="doc-biblioref">55</a>]</span>.</p>
+<p>As possibilidades das redes siamesas se estendem além do processamento de imagens e da visão computacional, já foram apresentados estudos para análise de áudios e no processamento de linguagem natural. Um exemplo de aplicação com áudio foi a rede siamesa de Zhang et al. (2018), desenvolvida para avaliar a similaridade entre sons originais e imitações de vozes para poder diferenciá-las <span class="citation">[<a href="#ref-zhang2018" role="doc-biblioref">52</a>]</span>. A área de processamento de linguagem natural se propõe gerar e compreender automaticamente a linguagem humana a partir de dados de comunicação, como em documentos com textos e mensagens. Por exemplo, na proposta de González et al. (2019), as redes siamesas extraem as informações mais importantes de um texto para poder resumi-lo <span class="citation">[<a href="#ref-gonzalez2019" role="doc-biblioref">56</a>]</span>. No trabalho de Das et al. (2016) foram avaliados questões de diferentes <em>websites</em> de perguntas e respostas, como <em>Yahoo Answers</em> e <em>Stack Overflow</em>, para poder detectar as semelhanças entre as mensagens <span class="citation">[<a href="#ref-das2016" role="doc-biblioref">57</a>]</span>.</p>
+<div id="arquitetura" class="section level3">
+<h3><span class="header-section-number">7.3.1</span> Arquitetura</h3>
+<p>Como dito no tópico anterior, o objetivo de se utilizar uma rede com arquitetura siamesa era comparar diferentes entradas e ter como resultado um valor que representasse sua semelhança ou diferença. O nome “siamesa” por si só já nos dá uma boa ideia de como será sua arquitetura, que consiste basicamente na utilização de duas redes idênticas, como na Figura <a href="deep-learning-em-visão-computacional.html#fig:siamesa-bromley">7.43</a>, onde temos a rede proposta por Bromley et al. (1993) em seu artigo sobre verificação de assinaturas <span class="citation">[<a href="#ref-bromley1993" role="doc-biblioref">58</a>]</span>. Nessa arquitetura temos uma camada de entrada de 200 x 8 unidades e como saída um bloco de dados de 16 x 19 unidades, o método utilizado para realizar a comparação entre os vetores de saída das duas redes foi calcular o cosseno do ângulo entre eles.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:siamesa-bromley"></span>
+<img src="imagens/07-deepLearning/siamesa-bromley.png" alt="Arquitetura utilizada por Bromley et al. (1993) com duas redes recebendo os dados sobre assinaturas após seu pré processamento. A rede contém uma camada de entrada com 200x8 unidades e uma saída de 16x19 unidades. [58]" width="40%" />
+<p class="caption">
+Figura 7.43: Arquitetura utilizada por Bromley et al. (1993) com duas redes recebendo os dados sobre assinaturas após seu pré processamento. A rede contém uma camada de entrada com 200x8 unidades e uma saída de 16x19 unidades. <span class="citation">[<a href="#ref-bromley1993" role="doc-biblioref">58</a>]</span>
+</p>
+</div>
+<p>Na Figura <a href="deep-learning-em-visão-computacional.html#fig:siamesa-chopra">7.44</a> temos um exemplo de outra arquitetura, nesse caso a apresentada por Chopra et al. (2005). Um aspecto importante que devemos notar, é que tanto essa rede quanto a anterior tem os mesmo pesos em ambas as suas redes internas. Nesse caso se optou por utilizar a distância euclidiana entre os dois vetores de características resultantes das duas subredes.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:siamesa-chopra"></span>
+<img src="imagens/07-deepLearning/siamesa-chopra.png" alt="Arquitetura utilizada por Chopra et al. [48]. Essa arquitetura de rede siamesa tem os parâmetros da rede compartilhados entre as duas. \(X_1\) e \(X_2\) são as duas entradas da rede e \(E_w\) é a saída da diferença euclidiana entre as saídas das duas redes(\(||G_w(X_1)-G_w(X_2)||\))." width="50%" />
+<p class="caption">
+Figura 7.44: Arquitetura utilizada por Chopra et al. <span class="citation">[<a href="#ref-chopra2005" role="doc-biblioref">48</a>]</span>. Essa arquitetura de rede siamesa tem os parâmetros da rede compartilhados entre as duas. <span class="math inline">\(X_1\)</span> e <span class="math inline">\(X_2\)</span> são as duas entradas da rede e <span class="math inline">\(E_w\)</span> é a saída da diferença euclidiana entre as saídas das duas redes(<span class="math inline">\(||G_w(X_1)-G_w(X_2)||\)</span>).
+</p>
+</div>
+<p>Das redes neurais que apresentamos para aplicações no processamento de imagens e visão computacional, como MLP, CNN’s e siamesas, as abordagens de desenvolvimento, treinamento e operação seguem um padrão semelhante ao se pôr em prática. A utilização de <em>frameworks</em> tem facilitado as aplicações em redes neurais, disponibilizando comandos para criar camadas, montagem da arquitetura, funções de regularização e otimização, medidas de avaliação, algoritmos de treinamento, sendo que a maior parte dos recursos é facilmente adaptável para diferentes modelos de redes. Geralmente, a maior parte do trabalho de quem desenvolve essas redes está na obtenção e preparo dos dados de entrada.</p>
+<p>Dependendo do tipo da rede, a imagem de entrada deve ser disponibilizada como um vetor, como na MLP, ou como um tensor, como na CNN’s, e no caso das siamesas pode ser que a entrada seja duas ou mais imagens ao mesmo tempo. Na maioria das vezes será necessário, dimensionar as imagens, estabelecer as classes, alterar o formato dos dados, e dividir as amostras de treinamento, teste e validação. Cada aplicação pode exigir uma abordagem diferente para que a rede aprenda o problema, o que muitas vezes exige que os dados sejam pré configurados e organizados de forma que se adequem ao tipo de algoritmo adotado no treinamento.</p>
+<p>Nas redes estudadas utiliza-se o método supervisionado, especificamente o “<em>backpropagation</em>” , ou seja, durante o treinamento devem ser apresentados tanto as entradas do problema como as respostas correspondentes que são previamente conhecidas. Desta forma, o modelo consegue corrigir os parâmetros da rede considerando as diferenças entre as saídas e as respostas esperadas. No algoritmo de <em>backpropagation</em>, esta diferença é tratada por uma função de erro que o treinamento busca minimizar. No tópico <a href="deep-learning-em-visão-computacional.html#backpropagation">backpropagation</a> foi descrita uma das funções de erro que foram utilizadas pelos primeiros modelos de redes neurais, o erro quadrático (MSE). Com o aprimoramento das redes, a substituição por outras funções erros demonstrou melhores resultados no treinamento, como a entropia cruzada ou <em>Cross-Entropy</em> <span class="citation">[<a href="#ref-nielsen2015" role="doc-biblioref">31</a>]</span>.</p>
+<p>Dado a expressão da função custo entropia cruzada e de sua derivada:</p>
+<p><span class="math display" id="eq:entropia-cruzada">\[
+C = -\frac{1}{n} \sum_{x}[y \ln a + (1 - y) \ln(1 - a)] 
+\tag{7.1}
+\]</span></p>
+<p><span class="math display" id="eq:derivada-entropia">\[
+\frac{\partial C}{\partial w_j} = \frac{1}{n} \sum_{x} x_j (\sigma(z) - y)
+\tag{7.2}
+\]</span></p>
+<p>se consegue avaliar que a derivada aumenta com o tamanho do erro (<span class="math inline">\(\sigma(z) - y\)</span>). Considerando este comportamento e que o algoritmo de treinamento fica mais rápido quanto maior for a derivada da função custo, o método da entropia cruzada tende a demonstrar menores problemas com a desaceleração do aprendizado se comparado ao erro quadrático <span class="citation">[<a href="#ref-nielsen2015" role="doc-biblioref">31</a>]</span>. No erro quadrático, como a derivada da função custo depende diretamente da derivada da função de ativação, o treinamento poderá ficar estagnado nos pontos em que a ativação for próximo dos limites, particularmente se as funções de ativações forem sigmóides <span class="citation">[<a href="#ref-nielsen2015" role="doc-biblioref">31</a>]</span>.</p>
+<p>Geralmente, as funções erro quadrático e entropia cruzada são aplicadas em modelos que se pretende que a saída corresponda a um vetor de probabilidades em relação às classes. Desta forma, é possível associar cada valor a uma classe, ou seja, dado a entrada se determina qual a saída mais provável dentro dos exemplos estabelecidos no treinamento. Outras funções de custo mais comuns nas redes siamesas são as por técnica de ranqueamento, como a perda contrastiva e as funções <em>triplets</em>. No ranqueamento, a saída da rede é estabelecida pelas distâncias entre os dados de entrada de acordo com uma distribuição dos exemplos apresentados no treinamento <span class="citation">[<a href="#ref-gomez2019" role="doc-biblioref">59</a>]</span>. Neste caso, as entradas que pertencem a uma mesma classe tendem a ficar mais próximas, ganhando uma posição de maior prioridade que elementos com menor semelhança, os quais vão se afastando.</p>
+<p>O primeiro modelo de rede siamesa, que comparava as assinaturas <span class="citation">[<a href="#ref-bromley1993" role="doc-biblioref">58</a>]</span>, utilizou a função erro contrastiva <span class="citation">[<a href="#ref-hadsell2006" role="doc-biblioref">60</a>]</span>:</p>
+<p><span class="math display" id="eq:erro-contrastivo">\[
+L(W, Y, X_1, X_2) = (1 - Y)\frac{1}{2}(E_w)^2 + (Y) \frac{1}{2} {max(0,m - E_w)}^2
+\tag{7.3}
+\]</span></p>
+<p>em que são apresentadas pelo menos duas entradas na rede com propósito de comparar (ou contrastar) e determinar a similaridade. Quando o par de entrada é semelhante (<span class="math inline">\(X_1, X_2\)</span>) o parâmetro <span class="math inline">\(Y\)</span> recebe valor 0, e quando são de classes diferentes (<span class="math inline">\(X_1, X’_2\)</span>), <span class="math inline">\(Y = 1\)</span>. Os pesos da rede (<span class="math inline">\(W\)</span>) são corrigidos de forma que a distância (<span class="math inline">\(E_w\)</span>) entre dados semelhantes fique menor e os mais diferentes se afastem <span class="citation">[<a href="#ref-hadsell2006" role="doc-biblioref">60</a>]</span>. Para isto é estabelecido uma margem (<span class="math inline">\(m\)</span>) de ajuste, a qual garante uma distância mínima separando o que pertence ou não a um mesmo grupo, <span class="math inline">\(𝐸_𝑊 (𝑋_1, 𝑋_2) + 𝑚 &lt; 𝐸_𝑊 (𝑋_1, 𝑋’_ 2 )\)</span>.</p>
+<p>A função de erro <em>Triplet</em> tem demonstrado bons desempenhos em alguns estudos com redes siamesas. Diferente da função contrastiva, na rede <em>Triplet</em> se utiliza três dados como entrada no treinamento, ou seja, uma siamesa com três sub-redes idênticas em vez de duas. Neste método, compara-se ao mesmo tempo o valor âncora (<span class="math inline">\(x^a\)</span>), ou valor de referência, com um padrão semelhante (caso positivo <span class="math inline">\(x^p\)</span>), e com um padrão diferente (caso negativo <span class="math inline">\(x^n\)</span>) de acordo com a função erro <span class="citation">[<a href="#ref-schroff2015" role="doc-biblioref">61</a>]</span>:</p>
+<p><span class="math display" id="eq:erro-triplet">\[
+C = \sum_{i}\left[||f(x_i^a) - f(x_i^p)||_2^2 - ||f(x_i^a) - f(x_i^n)||_2^2 + \alpha\right]
+\tag{7.4}
+\]</span>
+Considerando que as funções <span class="math inline">\(f(x) ∈ R\)</span> podem ser interpretadas como a aplicação de cada sub-rede, o algoritmo de treinamento deve buscar ordenar as entradas com base na similaridade relativa. Assim, a distância entre a âncora e o padrão positivo deve ser menor do que em relação ao caso negativo, como demonstrado na Figura <a href="deep-learning-em-visão-computacional.html#fig:erro-triplet">7.45</a>. <span class="citation">[<a href="#ref-schroff2015" role="doc-biblioref">61</a>]</span>. Da mesma forma que no método contrastivo é aplicada uma margem (<span class="math inline">\(\alpha\)</span>) de ajuste.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:erro-triplet"></span>
+<img src="imagens/07-deepLearning/erro-triplet.png" alt="Comportamento da função erro Triplet. A função Triplet reduz a distância entre os exemplos similares, ou seja, entre a âncora e o padrão positivo, e aumenta a distância entre o padrão diferente (caso negativo) e a âncora [61]." width="40%" />
+<p class="caption">
+Figura 7.45: Comportamento da função erro <em>Triplet</em>. A função <em>Triplet</em> reduz a distância entre os exemplos similares, ou seja, entre a âncora e o padrão positivo, e aumenta a distância entre o padrão diferente (caso negativo) e a âncora <span class="citation">[<a href="#ref-schroff2015" role="doc-biblioref">61</a>]</span>.
+</p>
+</div>
 
 <!-- nixon2019feature -->
 <!-- davies2017 -->
@@ -1222,8 +1287,8 @@ Figura 7.42: Implementações do API Keras - a - Implementação geral do API ke
 <p>[29] cs231, “Cartoon drawing of a biological neuron”. 2021, [Online]. Disponível em: <a href="https://cs231n.github.io/neural-networks-1/">https://cs231n.github.io/neural-networks-1/</a>.</p>
 </div>
 <div id="ref-rateke1999">
-<p>[30] T. Rateke, “Técnicas Subsimbólicas: Redes Neurais”. LAPIX (Image Processing; Computer Graphics Lab)/Universidade Federal de Santa Catarina, Florianópolis, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-%0A%20%20redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-
-  redes-neurais/</a>.</p>
+<p>[30] T. Rateke, “Técnicas Subsimbólicas: Redes Neurais”. LAPIX (Image Processing; Computer Graphics Lab)/Universidade Federal de Santa Catarina, Florianópolis, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/</a>.</p>
+</div>
 <div id="ref-nielsen2015">
 <p>[31] M. A. Nielsen, <em>Neural Networks and Deep Learning</em>. Determination Press, 2015.</p>
 </div>
@@ -1267,10 +1332,55 @@ Figura 7.42: Implementações do API Keras - a - Implementação geral do API ke
 <p>[44] G. Developers, “Guia para iniciantes da Cloud TPU”. Website da Google Cloud, 2021, [Online]. Disponível em: <a href="https://cloud.google.com/tpu/docs/beginners-guide?hl=pt-br">https://cloud.google.com/tpu/docs/beginners-guide?hl=pt-br</a>.</p>
 </div>
 <div id="ref-wangenheim2018">
-<p>[45] A. von Wangenheim, “Deep Learning: Introdução ao Novo Coneccionismo”. LAPIX (Image Processing; Computer Graphics Lab)/Universidade Federal de Santa Catarina, Florianópolis, 2018, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-%0A%20%20redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-
-  redes-neurais/</a>.</p>
+<p>[45] A. von Wangenheim, “Deep Learning: Introdução ao Novo Coneccionismo”. LAPIX (Image Processing; Computer Graphics Lab)/Universidade Federal de Santa Catarina, Florianópolis, 2018, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/</a>.</p>
+</div>
 <div id="ref-tensorflow2020">
 <p>[46] G. Developers, “Versões da API TensorFlow”. Website do TensorFlow, 2020, [Online]. Disponível em: <a href="https://www.tensorflow.org/versions">https://www.tensorflow.org/versions</a>.</p>
+</div>
+<div id="ref-walker2021">
+<p>[47] J. M. Walker, <em>Artificial Neural Networks</em>, 3º ed. Nova Iorque, Estados Unidos: Humana/Springer Nature, 2021.</p>
+</div>
+<div id="ref-chopra2005">
+<p>[48] S. Chopra, R. Hadsell, e Y. LeCun, “Learning a similarity metric discriminatively, with application to face verification”, in <em>2005 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR’05)</em>, 2005, vol. 1, p. 539–546.</p>
+</div>
+<div id="ref-taigman2014">
+<p>[49] Y. Taigman, M. Yang, M. Ranzato, e L. Wolf, “Deepface: Closing the gap to human-level performance in face verification”, in <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em>, 2014, p. 1701–1708.</p>
+</div>
+<div id="ref-sabri2018">
+<p>[50] M. Sabri e T. Kurita, “Facial expression intensity estimation using Siamese and triplet networks”, <em>Neurocomputing</em>, vol. 313, p. 143–154, 2018.</p>
+</div>
+<div id="ref-lambda2019">
+<p>[51] H. Lamba, “One Shot Learning with Siamese Networks using Keras”. Website Towards Data Science, Florianópolis, 2019, [Online]. Disponível em: <a href="https://towardsdatascience.com/one-shot-learning-with-siamese-networks-using-keras-17f34e75bb3d">https://towardsdatascience.com/one-shot-learning-with-siamese-networks-using-keras-17f34e75bb3d</a>.</p>
+</div>
+<div id="ref-zhang2018">
+<p>[52] H. Zhang, W. Ni, W. Yan, J. Wu, H. Bian, e D. Xiang, “Visual tracking using Siamese convolutional neural network with region proposal and domain specific updating”, <em>Neurocomputing</em>, vol. 275, p. 2645–2655, 2018.</p>
+</div>
+<div id="ref-zhang2016">
+<p>[53] C. Zhang, W. Liu, H. Ma, e H. Fu, “Siamese neural network based gait recognition for human identification”, in <em>2016 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 2016, p. 2832–2836.</p>
+</div>
+<div id="ref-liu2017">
+<p>[54] X. Liu, W. Liu, T. Mei, e H. Ma, “Provid: Progressive and multimodal vehicle reidentification for large-scale urban surveillance”, <em>IEEE Transactions on Multimedia</em>, vol. 20, nº 3, p. 645–658, 2017.</p>
+</div>
+<div id="ref-wang2017">
+<p>[55] Q. Wang, J. Gao, e Y. Yuan, “Embedding structured contour and location prior in siamesed fully convolutional networks for road detection”, <em>IEEE Transactions on Intelligent Transportation Systems</em>, vol. 19, nº 1, p. 230–241, 2017.</p>
+</div>
+<div id="ref-gonzalez2019">
+<p>[56] J.-Á. González, E. Segarra, F. Garcı́a-Granada, E. Sanchis, e L.-F. Hurtado, “Siamese hierarchical attention networks for extractive summarization”, <em>Journal of Intelligent &amp; Fuzzy Systems</em>, vol. 36, nº 5, p. 4599–4607, 2019.</p>
+</div>
+<div id="ref-das2016">
+<p>[57] A. Das, H. Yenala, M. Chinnakotla, e M. Shrivastava, “Together we stand: Siamese networks for similar question retrieval”, in <em>Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</em>, 2016, p. 378–387.</p>
+</div>
+<div id="ref-bromley1993">
+<p>[58] J. Bromley, I. Guyon, Y. LeCun, E. Säckinger, e R. Shah, “Signature verification using a" siamese" time delay neural network”, <em>Advances in neural information processing systems</em>, vol. 6, p. 737–744, 1993.</p>
+</div>
+<div id="ref-gomez2019">
+<p>[59] R. Gmez, “Understanding Ranking Loss, Contrastive Loss, Margin Loss, Triplet Loss, Hinge Loss and all those confusing names”. Blog Raul Gomez, 2019, [Online]. Disponível em: <a href="https://gombru.github.io/2019/04/03/ranking_loss/">https://gombru.github.io/2019/04/03/ranking_loss/</a>.</p>
+</div>
+<div id="ref-hadsell2006">
+<p>[60] R. Hadsell, S. Chopra, e Y. LeCun, “Dimensionality reduction by learning an invariant mapping”, in <em>2006 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR’06)</em>, 2006, vol. 2, p. 1735–1742.</p>
+</div>
+<div id="ref-schroff2015">
+<p>[61] F. Schroff, D. Kalenichenko, e J. Philbin, “Facenet: A unified embedding for face recognition and clustering”, in <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em>, 2015, p. 815–823.</p>
 </div>
 </div>
             </section>

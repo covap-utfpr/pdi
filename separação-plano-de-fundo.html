@@ -238,6 +238,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.4" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#aprendizado-por-transferência"><i class="fa fa-check"></i><b>7.2.4</b> Aprendizado por transferência</a></li>
 <li class="chapter" data-level="7.2.5" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#redes-neurais-na-prática"><i class="fa fa-check"></i><b>7.2.5</b> Redes neurais na prática</a></li>
 </ul></li>
+<li class="chapter" data-level="7.3" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#redes-neurais-siamesas"><i class="fa fa-check"></i><b>7.3</b> Redes Neurais Siamesas</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#arquitetura"><i class="fa fa-check"></i><b>7.3.1</b> Arquitetura</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html"><i class="fa fa-check"></i><b>8</b> Separação Plano de Fundo</a><ul>
 <li class="chapter" data-level="8.1" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html#fixo"><i class="fa fa-check"></i><b>8.1</b> Fixo</a></li>
@@ -271,15 +274,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="separação-plano-de-fundo" class="section level1">
 <h1><span class="header-section-number">Capítulo 8</span> Separação Plano de Fundo</h1>
-<p>A visão computacional também é usada para lidar com monitoramento de objetos, auxiliando atividades humanas como vigilância pela procura de eventualidades, como acidentes e crimes <span class="citation">[<a href="#ref-davies2017" role="doc-biblioref">47</a>, p. 664]</span>. E a ideia da separação do <em>background</em> é remover a paisagem para observar os objetos-alvo em movimento (<em>foreground</em>), em por menores, seria a remoção de objetos estáticos (como edifícios) ou que não são estáticos e compõe o plano de fundo (como um rio, as folhas de uma vegetação, movimentação das nuvens) - sim, é complexo lidar com essa movimentação de <em>background.</em></p>
+<p>A visão computacional também é usada para lidar com monitoramento de objetos, auxiliando atividades humanas como vigilância pela procura de eventualidades, como acidentes e crimes <span class="citation">[<a href="#ref-davies2017" role="doc-biblioref">62</a>, p. 664]</span>. E a ideia da separação do <em>background</em> é remover a paisagem para observar os objetos-alvo em movimento (<em>foreground</em>), em por menores, seria a remoção de objetos estáticos (como edifícios) ou que não são estáticos e compõe o plano de fundo (como um rio, as folhas de uma vegetação, movimentação das nuvens) - sim, é complexo lidar com essa movimentação de <em>background.</em></p>
 <p>O <em>foreground</em> é o resultado da limiarização da diferença entre os <em>pixels</em> do <em>frame</em> atual em relação aos <em>pixels</em> do <em>background</em> estimado. Caso não saiba o que é limiarização, contém esse conteúdo em seções anteriores <a href="segmentação.html#segmentação">Segmentação</a> no tópico Limiarização 6.6.</p>
 <div id="fixo" class="section level2">
 <h2><span class="header-section-number">8.1</span> Fixo</h2>
-<p>A maneira mais simples de se modelar um <em>background</em> é capturando um <em>frame</em> quando não há alvos na cena. Entretanto, isso seria legal para um ambiente controlado, não a um externo, pois como saber que ali não há alvos e de fato é o verdadeiro <em>background</em> e como seria resolvido os problemas de variações de iluminação e movimentos de vegetações <span class="citation">[<a href="#ref-davies2017" role="doc-biblioref">47</a>, p. 669]</span>.</p>
+<p>A maneira mais simples de se modelar um <em>background</em> é capturando um <em>frame</em> quando não há alvos na cena. Entretanto, isso seria legal para um ambiente controlado, não a um externo, pois como saber que ali não há alvos e de fato é o verdadeiro <em>background</em> e como seria resolvido os problemas de variações de iluminação e movimentos de vegetações <span class="citation">[<a href="#ref-davies2017" role="doc-biblioref">62</a>, p. 669]</span>.</p>
 </div>
 <div id="média-temporal" class="section level2">
 <h2><span class="header-section-number">8.2</span> Média Temporal</h2>
-<p>Uma sugestão para resolver as dificuldades apresentadas no método fixo é fazer a média a partir de muitos <em>frames</em> sobre um recente período, tendo ou não alvos presentes e, se os alvos forem raros, obtém-se uma boa aproximação de um <em>background</em> ideal. Entretanto, haverá alvos que não serão eliminados, produzindo fantasmas - detecção de movimento onde não há alvo <span class="citation">[<a href="#ref-davies2017" role="doc-biblioref">47</a>, p. 669]</span>. Essa estratégia é chamada de média temporal ou <em>temporal averaging.</em> Segue exemplo de cálculo da modelagem para 5 <em>frames</em> <a href="separação-plano-de-fundo.html#eq:temporalaverage">(8.1)</a>.</p>
+<p>Uma sugestão para resolver as dificuldades apresentadas no método fixo é fazer a média a partir de muitos <em>frames</em> sobre um recente período, tendo ou não alvos presentes e, se os alvos forem raros, obtém-se uma boa aproximação de um <em>background</em> ideal. Entretanto, haverá alvos que não serão eliminados, produzindo fantasmas - detecção de movimento onde não há alvo <span class="citation">[<a href="#ref-davies2017" role="doc-biblioref">62</a>, p. 669]</span>. Essa estratégia é chamada de média temporal ou <em>temporal averaging.</em> Segue exemplo de cálculo da modelagem para 5 <em>frames</em> <a href="separação-plano-de-fundo.html#eq:temporalaverage">(8.1)</a>.</p>
 <p><span class="math display" id="eq:temporalaverage">\[
 {TP}_{x,y} = \frac{P_{1_{x,y}} + P_{2_{x,y}} + P_{3_{x,y}} + P_{4_{x,y}} + P_{5_{x,y}}}{5} \tag{8.1}
 \]</span></p>
@@ -298,9 +301,9 @@ MP_{x,y} = mediana(P_{1_{x,y}}, P_{2_{x,y}}, P_{3_{x,y}}, P_{4_{x,y}}, P_{5_{x,y
 Apesar de ser capaz de produzir melhores resultados, nada é perfeito. Observe as Figuras <a href="separação-plano-de-fundo.html#fig:onibusMedianaTemporal">8.1</a> (A) e (B), o ônibus que antes estava em movimento vai desaparecendo do <em>foreground</em> à medida que novos frames são capturados e ele se mantém parado, pois, progressivamente, o objeto ônibus vai pertencendo ao <em>background.</em> Porém, ao se mover novamente, ele é identificado como um alvo, mas a região em que ele estava parado ainda detecta um fantasma, por causa da diferença naquela região ainda ser praticamente equivalente, pois no novo <em>frame</em> não há mais ônibus ali, mas, no <em>background</em>, há. Conforme observa-se nas Figuras <a href="separação-plano-de-fundo.html#fig:onibusMedianaTemporal">8.1</a> (C) e (D). Note que à medida que novos <em>frames</em> são captados esse fantasma vai sumindo.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:onibusMedianaTemporal"></span>
-<img src="imagens/08-modelagemBackground/onibusMedianaTemporal.png" alt="Detecção de movimento através da modelagem de background a partir da Mediana Temporal [47, p. 671]." width="55%" />
+<img src="imagens/08-modelagemBackground/onibusMedianaTemporal.png" alt="Detecção de movimento através da modelagem de background a partir da Mediana Temporal [62, p. 671]." width="55%" />
 <p class="caption">
-Figura 8.1: Detecção de movimento através da modelagem de <em>background</em> a partir da Mediana Temporal <span class="citation">[<a href="#ref-davies2017" role="doc-biblioref">47</a>, p. 671]</span>.
+Figura 8.1: Detecção de movimento através da modelagem de <em>background</em> a partir da Mediana Temporal <span class="citation">[<a href="#ref-davies2017" role="doc-biblioref">62</a>, p. 671]</span>.
 </p>
 </div>
 </div>
@@ -334,7 +337,7 @@ Figura 8.3: As imagens A, B, …, E são os <em>frames</em> capturados por uma c
 <p>[18] M. Nixon e A. Aguado, <em>Feature extraction and image processing for computer vision</em>. Academic press, 2019.</p>
 </div>
 <div id="ref-davies2017">
-<p>[47] E. R. Davies, <em>Computer Vision Principles, Algorithms, Applications, Learning</em>. Academic press, 2017.</p>
+<p>[62] E. R. Davies, <em>Computer Vision Principles, Algorithms, Applications, Learning</em>. Academic press, 2017.</p>
 </div>
 </div>
             </section>
