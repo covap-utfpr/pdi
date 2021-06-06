@@ -10,7 +10,7 @@ Nos próximos tópicos iremos explorar alguns conceitos e o funcionamento da aqu
 
 ## Câmera *pinhole* e geometria
 
-Na Figura \@ref(fig:aquisicaoimagem) temos um esquema básico de como geralmente ocorre a aquisição de imagens. Primeiramente a energia em forma de luz, vinda de uma fonte, atinge um objeto e é refletida. A parte refletida é capturada por um dispositivo, como uma câmera fotográfica.
+Na Figura \@ref(fig:aquisicaoimagem), temos um esquema básico de como geralmente ocorre a aquisição de imagens. Primeiramente, a energia em forma de luz, vinda de uma fonte, atinge um objeto e é refletida. A parte refletida é capturada por um dispositivo, como uma câmera fotográfica.
 
 (ref:aquisicaoimagem) Representação de uma típica captura de imagem [@moeslund2012, p.8].
 
@@ -36,8 +36,8 @@ Na Figura \@ref(fig:barreiraluz) percebemos que a imagem resultante acaba invert
 knitr::include_graphics(rep('imagens/02-formacao/geometriapinhole.png'))
 
 ```
-
-Na Figura \@ref(fig:geometriapinhole), considerando que o  eixo óptico corresponde a uma reta perpendicular ao orifício de entrada de luz, que o objeto está localizado a uma distância $Z$ da abertura e a uma distância $Y$ o eixo óptico, podemos definir a altura $y$ e a largura $x$ da projeção do objeto utilizando a simetria de triângulos:
+ 
+Na Figura \@ref(fig:geometriapinhole), considerando que o  eixo óptico corresponde a uma reta perpendicular ao orifício de entrada de luz, que o objeto está localizado a uma distância horizontal $Z$ da abertura e a uma distância vertical $Y$ do eixo óptico, podemos definir a altura $y$ e a largura $x$ da projeção do objeto utilizando a simetria de triângulos:
 
 $$
 -\frac{y}{f}=\frac{Y}{Z}\Leftrightarrow y=-f\frac{Y}{Z} \ \ \ \ \text{e}\ \ \ \ -\frac{x}{f}=\frac{X}{Z} \Leftrightarrow x=-f\frac{X}{Z}
@@ -48,7 +48,7 @@ A variável $f$ nessa equação \@ref(eq:semelhancaTriangulos) se refere  a dist
 
 As câmeras mais modernas não possuem somente uma pequena entrada para luz, mas um sistema de lentes que focam a luz recebida no sensor. Discutiremos a seguir alguns dos conceitos por trás disso.
 
-## Lentes
+## Lentes Finas
 
 (ref:lente) Ação de uma lente sobre os raios de luz [@moeslund2012, p.12].
 
@@ -59,20 +59,24 @@ knitr::include_graphics(rep('imagens/02-formacao/lente.png'))
 
 Como podemos ver na Figura \@ref(fig:lente), em cada ponto de um objeto há inúmeros raios de luz refletidos - neste caso são ilustrados três - e os que chegam à lente são focalizados no seu lado direito. As imagens são capturadas colocando o sensor exatamente onde esses raios são focalizados, ou seja, onde a imagem é formada.
 O ponto $F$ onde os raios paralelos se cruzam é conhecido como Ponto Focal. A distância $f$, que vai do centro óptico $O$ até $F$ é conhecida como Distância Focal.
-Definindo a distância do objeto real até a lente como $g$ e a distância até a formação da imagem após passar pela lente como $b$ temos que:
+Definindo a distância do objeto real até a lente como $g$ e a distância até a formação da imagem, após passar pela lente, como $b$ temos que:
 
 $$
 \frac{1}{g}+\frac{1}{b}=\frac{1}{f}
 (\#eq:relacaoDistancias)
 $$
 
-Como $f$ e $b$ estão normalmente entre 1mm e 100mm isso mostra que $\frac{1}{g}$ não tem quase nenhum impacto na equação \@ref(relacaoDistancias) e significa que $b = f$. Isso significa que a imagem dentro da câmera é formada muito próxima ao ponto focal.
-Outro ponto importante das lentes é conhecido como *zoom* óptico. Isto deriva de um aspecto das lentes de que o tamanho do objeto na imagem formada, $B$, aumenta quando $f$ aumenta. Podemos representar isso na seguinte equação \@ref(relacaoTamanhoObjetoImagem), onde $g$ é o tamanho real do objeto:
+Como $f$ e $b$ estão normalmente entre 1mm e 100mm isso mostra que $\frac{1}{g}$ não tem quase nenhum impacto na equação \@ref(eq:relacaoDistancias) e significa que $b = f$. Isso significa que a imagem dentro da câmera é formada muito próxima ao ponto focal.
+Outro ponto importante das lentes é conhecido como *zoom* óptico, ilustrado na Figura \@ref(fig:proporcaoObjetoImagem). Isto deriva de um aspecto das lentes de que o tamanho do objeto na imagem formada, $B$, aumenta quando $f$ aumenta. Podemos representar isso na seguinte equação \@ref(eq:relacaoTamanhoObjetoImagem), onde $g$ é o tamanho real do objeto:
 
 $$
 \frac{b}{B}=\frac{g}{G}
 (\#eq:relacaoTamanhoObjetoImagem)
 $$
+```{r proporcaoObjetoImagem, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:proporcaoObjetoImagem)', fig.align='center', out.width='55%'}
+knitr::include_graphics(rep('imagens/02-formacao/proporcaoObjetoImagem.png'))
+
+```
 
 Na prática $f$ é alterado através de mudanças na distância entre diferentes lentes dentro do sistema óptico da câmera, aqui estamos usando somente uma lente para exemplificar de maneira fácil alguns de seus conceitos básicos.
 Se o $f$ for constante, quando alteramos a distância do objeto, no caso $g$, sabemos que $b$ também aumenta, isso significa que o sensor tem que ser movido mais para trás, pois a imagem estará sendo formada mais longe da lente. Se não movermos $b$ temos uma imagem fora de foco, como mostrado a seguir. Quando usamos uma câmera, o ato de colocar a imagem em foco significa que estamos alterando $b$ para que a imagem seja formada onde o sensor está localizado, para que a imagem esteja em foco.
@@ -83,7 +87,7 @@ Se o $f$ for constante, quando alteramos a distância do objeto, no caso $g$, sa
 knitr::include_graphics(rep('imagens/02-formacao/foco.png'))
 ```
 
-A Figura \@ref(fig:foco) ilustra exatamente o que significa uma imagem estar fora de foco, no sensor cada pixel tem um tamanho específico, quando a imagem está em foco os raios de um ponto específico estão dentro da área do *pixel*. Uma imagem fica fora de foco quando os raios de outros pontos também interceptam o *pixel*, gerando uma mistura de diferentes pontos.
+A Figura \@ref(fig:foco) ilustra exatamente o que significa uma imagem estar fora de foco, no sensor cada *pixel* tem um tamanho específico, quando a imagem está em foco os raios de um ponto específico estão dentro da área do *pixel*. Uma imagem fica fora de foco quando os raios de outros pontos também interceptam o *pixel*, gerando uma mistura de diferentes pontos.
 
 (ref:profundidade) Profundidade de campo [@moeslund2012, p.13].
 
@@ -93,13 +97,13 @@ knitr::include_graphics(rep('imagens/02-formacao/profundidade.png'))
 
 A Figura \@ref(fig:profundidade) apresenta outro ponto muito importante, chamado Profundidade de Campo (*Depth of field*), que representa a soma das distâncias $g_l$ e $g_r$, que representam o quanto os objetos podem ser movidos e permanecerem em foco.
 
-Um tópico que também tem muita importância na aquisição de imagens é o Campo de Visão (*Field of View* ou FOV) que representa a área observável de uma câmera. Na Figura \@ref(fig:campovisao) essa área observável é denotada pelo ângulo $V$. O FOV de uma câmera depende de alguns aspectos, como sua distância focal e tamanho do sensor. Em muitos casos os sensores não são quadrados, mas retangulares, então para representarmos matematicamente o campo de visão, utilizamos as equações seguintes para o FOV vertical e horizontal:
+Um tópico que também tem muita importância na aquisição de imagens é o Campo de Visão (*Field of View* ou FOV) que representa a área observável de uma câmera. Na Figura \@ref(fig:campovisao), essa área observável é denotada pelo ângulo $V$. O FOV de uma câmera depende de alguns aspectos, como sua distância focal e tamanho do sensor. Em muitos casos os sensores não são quadrados, mas retangulares, então para representarmos matematicamente o campo de visão, utilizamos as equações seguintes para o FOV vertical e horizontal:
 $$
 FOV_x = 2*\tan^{-1}\left(\frac{\frac{comprimento\ do\ sensor}{2}}{f}\right) \ \ \ \ \text{e}\ \ \ \  FOV_y = 2*\tan^{-1}\left(\frac{\frac{altura\ do\ sensor}{2}}{f}\right)
 (\#eq:FOV)
 $$
 
-(ref:campovisao) Campo de visão [@moeslund2012, p.14].
+(ref:campovisao) Dois diferentes Campos de visão [@moeslund2012, p.14].
 
 ```{r campovisao, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:campovisao)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/02-formacao/campovisao.png'))
@@ -111,9 +115,9 @@ FOV_x=2*tan^{-1}\left(\frac{7}{5}\right)=108.9^{\circ} \ \ \ \ \text{e}\ \ \ \  
 (\#eq:FOVexemplo)
 $$
 
-Isso significa que essa câmera tem uma área observável de 108.9º horizontalmente e 90º verticalmente. Na Figura \@ref(fig:diferentesprofundidades) temos o mesmo objeto fotografado com diferentes profundidades de campo: 
+Isso significa que essa câmera tem uma área observável de 108.9º horizontalmente e 90º verticalmente. Na Figura \@ref(fig:diferentesprofundidades), temos o mesmo objeto fotografado com diferentes profundidades de campo: 
 
-(ref:diferentesprofundidades) Diferentes profundidades de campo. Em (a) ? em (b)? e em (c)? [@moeslund2012, p.15].
+(ref:diferentesprofundidades) Objeto fotografado com diferentes profundidades de campo [@moeslund2012, p.15].
 
 ```{r diferentesprofundidades, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:diferentesprofundidades)', fig.align='center', out.width='90%'}
 knitr::include_graphics(rep('imagens/02-formacao/diferentesprofundidades.png'))
@@ -132,7 +136,7 @@ Após a luz passar por todo o sistema de lentes ela chega a esses sensores, que 
 knitr::include_graphics(rep('imagens/02-formacao/sensor.png'))
 ```
 
-Como podemos ver, o sensor consiste em várias pequenas células, cada uma com um *pixel*, que recebe a energia luminosa e a converte para um número digital. Quanto maior a incidência de luz em um *pixel*, maior a quantidade de energia e por isso maior será o valor do número gerado. O trabalho de controlar esse tempo de exposição é do obturador da câmera, sendo que um tempo muito longo ou muito curto podem produzir efeitos indesejados nas imagens obtidas, por isso a maioria das câmeras contam com um sistema que controla automaticamente esse tempo para o melhor resultado. Na Figura \@ref(fig:exposicao) podemos ver isso em uma imagem real, na primeira temos uma imagem que foi capturada com a exposição correta (*correctly exposed*), logo em seguida temos uma que sofreu de superexposição (*overexposed*)  e na terceira temos uma com subexposição (*underexposed*). Por último temos uma imagem que sofre com o movimento do objeto cuja imagem estava sendo capturada, o que ocasionou o borramento (*motion blur*).
+Como podemos ver, o sensor consiste em várias pequenas células, cada uma com um *pixel*, que recebe a energia luminosa e a converte para um número digital. Quanto maior a incidência de luz em um *pixel*, maior a quantidade de energia e por isso maior será o valor do número gerado. O trabalho de controlar esse tempo de exposição é do obturador da câmera, sendo que um tempo muito longo ou muito curto podem produzir efeitos indesejados nas imagens obtidas, por isso a maioria das câmeras contam com um sistema que controla automaticamente esse tempo para o melhor resultado. Na Figura \@ref(fig:exposicao), podemos ver isso em uma imagem real, na primeira temos uma imagem que foi capturada com a exposição correta (*correctly exposed*), logo em seguida temos uma que sofreu de superexposição (*overexposed*)  e na terceira temos uma com subexposição (*underexposed*). Por último temos uma imagem que sofre com o movimento do objeto cuja imagem estava sendo capturada, o que ocasionou o borramento (*motion blur*).
 
 (ref:exposicao) Diferentes níveis de exposição [@moeslund2012, p.17].
 
@@ -141,7 +145,7 @@ knitr::include_graphics(rep('imagens/02-formacao/exposicao.png'))
 ```
 
 Vimos até agora, principalmente, como se capturam imagens em tons de cinza, mas como são capturadas imagens coloridas?
-Imagens coloridas utilizam, especialmente, o formato RGB, que significa *Red-Green-Blue*, ou seja, é formado pelas cores primárias vermelho, verde e azul. Podemos a partir disso gerar imagens coloridas tendo as informações sobre sua intensidade de cada uma dessas cores. Na Figura \@ref(fig:componentes) podemos ver uma imagem com seus componentes separados:
+Imagens coloridas utilizam, especialmente, o formato RGB, que significa *Red-Green-Blue*, ou seja, é formado pelas cores primárias vermelho, verde e azul. Podemos a partir disso gerar imagens coloridas tendo as informações sobre sua intensidade de cada uma dessas cores. Na Figura \@ref(fig:componentes), podemos ver uma imagem com seus componentes separados:
 
 (ref:componentes) Imagem colorida separada em seus três componentes, em que *Red* é a vermelha, *Green* é a verde e *Blue* é a azul [@moeslund2012, p.28].
 
@@ -165,7 +169,7 @@ Ao invés disso, as câmeras modernas utilizam somente um sensor e fazem uso de 
 knitr::include_graphics(rep('imagens/02-formacao/bayer.png'))
 ```
 
-Podemos perceber que ocorre uma maior ocorrência das cores verdes. Isso se deve ao fato de que o olho humano é mais sensível a essa cor, logo se dá uma maior ênfase a sua captura.  Na Figura \@ref(fig:sensorarray) temos um esquema de como cada *pixel* recebe informação de somente uma cor, por meio da filtragem. Nesse esquema a luz que entra (*Incoming light*) é filtrada e somente a cor de interesse consegue passar. Após isso, ela chega a malha de sensores (*sensor array*):
+Podemos perceber que ocorre uma maior ocorrência das cores verdes. Isso se deve ao fato de que o olho humano é mais sensível a essa cor, logo se dá uma maior ênfase à sua captura.  Na Figura \@ref(fig:sensorarray), temos um esquema de como cada *pixel* recebe informação de somente uma cor, por meio da filtragem. Nesse esquema a luz que entra (*Incoming light*) é filtrada e somente a cor de interesse consegue passar. Após isso, ela chega a malha de sensores (*sensor array*):
 
 (ref:sensorarray) Sensores com padrão Bayer [@img:sensorarray].
 
