@@ -14,6 +14,7 @@ eq:semelhancaTriangulos
 fig:lente
 eq:relacaoDistancias
 eq:relacaoTamanhoObjetoImagem
+fig:proporcaoObjetoImagem
 fig:foco
 fig:profundidade
 eq:FOV
@@ -213,7 +214,7 @@ aplicações-processamento-digital-de-imagens
 etapas-do-processamento-e-análise-de-imagens
 formação-da-imagem
 câmera-pinhole-e-geometria
-lentes
+lentes-finas
 sensor
 amostragem-e-quantização
 amostragem
