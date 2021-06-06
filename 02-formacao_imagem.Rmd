@@ -73,9 +73,11 @@ $$
 \frac{b}{B}=\frac{g}{G}
 (\#eq:relacaoTamanhoObjetoImagem)
 $$
+
+(ref:proporcaoObjetoImagem) *Zoom* óptico através de lentes com diferentes distâncias focais [@moeslund2012, p.13].
+
 ```{r proporcaoObjetoImagem, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:proporcaoObjetoImagem)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/02-formacao/proporcaoObjetoImagem.png'))
-
 ```
 
 Na prática $f$ é alterado através de mudanças na distância entre diferentes lentes dentro do sistema óptico da câmera, aqui estamos usando somente uma lente para exemplificar de maneira fácil alguns de seus conceitos básicos.
