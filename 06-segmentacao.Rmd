@@ -436,19 +436,19 @@ knitr::include_graphics(rep('imagens/06-segmentacao/houghCircle.png'))
 
 A figura \@ref(fig:moedas) contém uma imagem com algumas moedas, na figura \@ref(fig:houghcircleraios)(a) temos as bordas da imagem detectada com o método de Canny, logo após, na figura \@ref(fig:houghcircleraios)(b) - (f) temos a representação do espaço de Hough para diferentes valores de raio. E na figura \@ref(fig:houghcircleresultado) temos o resultado da detecção de círculo após encontrados os picos do espaço de parâmetros.
 
-(ref:moedas) Imagem original de moedas. [@burger2009, p. 98]
+(ref:moedas) Imagem original de moedas.
 
 ```{r moedas, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:moedas)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/06-segmentacao/moedas.jpg'))
 ```
 
-(ref:houghcircleraios) Canny e espaço de parâmetros. [@burger2009, p. 98]
+(ref:houghcircleraios) Canny e espaço de parâmetros.
 
 ```{r houghcircleraios, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:houghcircleraios)', fig.align='center', out.width='100%'}
 knitr::include_graphics(rep('imagens/06-segmentacao/hough_circle_raios.jpg'))
 ```
 
-(ref:houghcircleresultado) Resultado final da transformada de Hough para círculos. [@burger2009, p. 98]
+(ref:houghcircleresultado) Resultado final da transformada de Hough para círculos.
 
 ```{r houghcircleresultado, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:houghcircleresultado)', fig.align='center', out.width='55%'}
 knitr::include_graphics(rep('imagens/06-segmentacao/hough_circle_resultado.jpg'))
