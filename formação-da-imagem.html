@@ -599,20 +599,20 @@ Figura 2.25: Borda e interior de um componente, Figura do lado esquerdo, mostra 
 <p>As medidas de distância são aplicadas sobre os pixels e componentes da imagem, considerando D uma função com os pixels <span class="math inline">\(f_1, f_2\)</span> e <span class="math inline">\(f_3\)</span> de coordenadas <span class="math inline">\((x_1, y_1), (x_2, y_2), (x_3, y_3)\)</span>, para verificar se <span class="math inline">\(D\)</span> é uma função distância ou medida de distância, deve satisfazer as seguintes propriedades:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math display" id="eq:medida1">\[
-D(f_1,f_2) ≥ 0 (D(f_1,f_2) = 0 \ se \ f_1 = f_2 \tag{2.8}
+D(f_1,f_2) \geq 0 (D(f_1,f_2) = 0 \ se \ f_1 = f_2 \tag{2.8}
 \]</span></li>
 <li><span class="math display" id="eq:medida2">\[
 (f_1,f_2) = D(f_2, f_1) \tag{2.9}
 \]</span></li>
 <li><span class="math display" id="eq:medida3">\[
-D(f_1,f_3) ≤  D(f_1,f_2) + D(f_2,f_3) \tag{2.10}
+D(f_1,f_3) \leq  D(f_1,f_2) + D(f_2,f_3) \tag{2.10}
 \]</span></li>
 </ol>
 <p>Aplicabilidade da fórmula Euclidiana uma das formas de satisfazer as propriedades acima, desse modo podemos analisar a métrica de dois ou mais pixels de uma imagem, supondo que os pixels <span class="math inline">\(f_1 \ e \ f_2\)</span> de coordenadas <span class="math inline">\((x1, x2), (y1, y2)\)</span> para medir suas distância aplicamos:</p>
 <p><span class="math display" id="eq:formEclidiana">\[D_4(f_1 , f_2) = \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2} 
 \tag{2.11}
 \]</span></p>
-<p>Na medida de distância Euclidiana, todos os pixels menores ou igual de qualquer valor d formam um disco de raio d centro em f1. Como exemplo, os pontos com distância <span class="math inline">\(D_E ≤ 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostra na Figura: <a href="formação-da-imagem.html#fig:medidaD1">2.26</a></p>
+<p>Na medida de distância Euclidiana, todos os pixels menores ou igual de qualquer valor d formam um disco de raio d centro em f1. Como exemplo, os pontos com distância <span class="math inline">\(D_E \leq 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostra na Figura: <a href="formação-da-imagem.html#fig:medidaD1">2.26</a></p>
 
 <div class="figure" style="text-align: center"><span id="fig:medidaD1"></span>
 <img src="imagens/02-formacao/medida_distancia1.png" alt="Conjunto de pontos com distância Euclidiana menor ou igual de ponto central. [3, p. 33]." width="40%" />
@@ -625,7 +625,7 @@ Figura 2.26: Conjunto de pontos com distância Euclidiana menor ou igual de pont
 D_4(f_1 , f_2)   = |x_1 - x_2 | + |y_1 - y_2 |
 \tag{2.12}
 \]</span></p>
-<p>Os pixels com uma distância <span class="math inline">\(D_4\)</span> de <span class="math inline">\(f_4\)</span> menor ou igual a algum valor d formam um losango centrado em <span class="math inline">\(f_1\)</span>. Em particular, os pontos com distância 1 são os pixels com vizinhança-4 de ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_4 ≤ 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na figura <a href="formação-da-imagem.html#fig:medidaD2">2.27</a></p>
+<p>Os pixels com uma distância <span class="math inline">\(D_4\)</span> de <span class="math inline">\(f_4\)</span> menor ou igual a algum valor d formam um losango centrado em <span class="math inline">\(f_1\)</span>. Em particular, os pontos com distância 1 são os pixels com vizinhança-4 de ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_4 \leq 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na figura <a href="formação-da-imagem.html#fig:medidaD2">2.27</a></p>
 
 <div class="figure" style="text-align: center"><span id="fig:medidaD2"></span>
 <img src="imagens/02-formacao/medida_distancia2.png" alt="Conjunto de pontos com distância \(D_4\) menor ou igual a 3 de um ponto central. [3, p. 33]." width="40%" />
@@ -635,7 +635,7 @@ Figura 2.27: Conjunto de pontos com distância <span class="math inline">\(D_4\)
 </div>
 <p>A distância D8entre <span class="math inline">\(f_1\)</span> e <span class="math inline">\(f_2\)</span>, também denotado de chessboard, é definida como
 <span class="math inline">\(D_8(f_1 , f_2) = max(| x_1 = x_2 | , | y_1 =y_2 |)\)</span>
-Os pixels com uma distância D8de f1menor ou igual a algum valor d formam um quadrado central em <span class="math inline">\(f_1\)</span>. Os pontos com distância 1 são os pixels com a vizinhança-8 do ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_8 ≤ 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na figura <a href="formação-da-imagem.html#fig:medidaD3">2.28</a></p>
+Os pixels com uma distância D8de f1menor ou igual a algum valor d formam um quadrado central em <span class="math inline">\(f_1\)</span>. Os pontos com distância 1 são os pixels com a vizinhança-8 do ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_8 \leq 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na figura <a href="formação-da-imagem.html#fig:medidaD3">2.28</a></p>
 
 <div class="figure" style="text-align: center"><span id="fig:medidaD3"></span>
 <img src="imagens/02-formacao/medida_distancia3.png" alt="Conjunto de pontos com distância \(D_4\) menor ou igual a 3 de um ponto central. [3, p. 33]." width="40%" />
