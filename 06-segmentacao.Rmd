@@ -608,7 +608,7 @@ L_{xx}(X, \sigma) & L_{xy}(X, \sigma)\\
 L_{xy}(X, \sigma) & L_{yy}(X, \sigma)
 \end{bmatrix}$$
 
-Onde $L_{xx}(X, \sigma)$ é a convolução da imagem no ponto X com a derivada de segunda ordem gaussiana $\frac{\partial^2g(\sigma)}{\partial x^²}$ e assim por diante[@bay2006surf]. Aqui entra em cena mais um elemento para melhorar a velocidade do algoritmo, Bay, Herbert et al. utilizam box filters para aproximar o filtro gaussiano. Como podemos ver na figura, onde os dois primeiros filtros são os derivativos gaussianos discretizados e os dois últimos são os aproximados a partir de box filters.
+Onde $L_{xx}(X, \sigma)$ é a convolução da imagem no ponto X com a derivada de segunda ordem gaussiana $\frac{\partial^2g(\sigma)}{\partial x^2}$ e assim por diante[@bay2006surf]. Aqui entra em cena mais um elemento para melhorar a velocidade do algoritmo, Bay, Herbert et al. utilizam box filters para aproximar o filtro gaussiano. Como podemos ver na figura, onde os dois primeiros filtros são os derivativos gaussianos discretizados e os dois últimos são os aproximados a partir de box filters.
 
 (ref:discretizadogaussiano) Filtro gaussiano discretizado e aproximado na direção $y$ e $xy$. [@bay2006surf]
 
@@ -762,7 +762,7 @@ Resumo do algoritmo de Otsu [@gonzalez2010, p. 492]:
 6. Obter o limiar ideal de Otsu, $k^*$, caso haja mais de um, faz-se a média dos valores.
 7. Obter a medida de separabilidade, $\eta^*$, a fim de estimar a qualidade da segmentação.
 
-A Figura \@ref(fig:imagemOtsu) (a) mostra uma imagem de microscópio ótico de células polimerosomas e a Figura \@ref(fig:imagemOtsu) (b), seu histograma. O objetivo deste exemplo é segmentar as moléculas do fundo. A Figura \@ref(fig:imagemOtsu) (c) é o resultado pela limiarização global simples. Como o histograma não tem vales distintos e a diferença de intensidade entre o fundo e os objetos é pequena, o algoritmo não conseguiu alcançar a segmentação desejada. A Figura \@ref(fig:imagemOtsu) (d) mostra o resultado obtido pelo método de Otsu. Esse resultado, obviamente, é superior ao da Figura \@ref(fig:imagemOtsu) (c). O valor do limiar calculado pelo algoritmo simples foi o de 169, enquanto o limiar calculado pelo método de Otsu era  o de 181, que está mais próximo das áreas mais claras na imagem que define as células. A medida de separabilidade \eta foi 0.467.
+A Figura \@ref(fig:imagemOtsu) (a) mostra uma imagem de microscópio ótico de células polimerosomas e a Figura \@ref(fig:imagemOtsu) (b), seu histograma. O objetivo deste exemplo é segmentar as moléculas do fundo. A Figura \@ref(fig:imagemOtsu) (c) é o resultado pela limiarização global simples. Como o histograma não tem vales distintos e a diferença de intensidade entre o fundo e os objetos é pequena, o algoritmo não conseguiu alcançar a segmentação desejada. A Figura \@ref(fig:imagemOtsu) (d) mostra o resultado obtido pelo método de Otsu. Esse resultado, obviamente, é superior ao da Figura \@ref(fig:imagemOtsu) (c). O valor do limiar calculado pelo algoritmo simples foi o de 169, enquanto o limiar calculado pelo método de Otsu era  o de 181, que está mais próximo das áreas mais claras na imagem que define as células. A medida de separabilidade $\eta$ foi 0.467.
 
 (ref:imagemOtsu) (a) Imagem original. (b) Histograma (os picos elevados foram cortados para realçar os detalhes nos valores mais baixos). (c) Resultado da segmentação pela limiarização global simples. (d) Resultado da segmentação pelo método de Otsu. [@gonzalez2010, p. 492].
 
