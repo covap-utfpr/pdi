@@ -462,7 +462,7 @@ knitr::include_graphics(rep('imagens/07-deepLearning/cnn_stride.png'))
 ```
 
 #### Pooling
-Essa é uma camada muito importante, que tem como objetivo realizar a subamostragem(subsampling) da imagem, para reduzir seu tamanho, e consequentemente diminuir o total de memória, processamento e parâmetros necessários, além de refrear o risco de overfitting[@geron2019, p.442, @adrian2017, p.187, @elgendy2020, p.114].
+Essa é uma camada muito importante, que tem como objetivo realizar a subamostragem(subsampling) da imagem, para reduzir seu tamanho, e consequentemente diminuir o total de memória, processamento e parâmetros necessários, além de refrear o risco de overfitting[@geron2019, p.442] [@adrian2017, p.187] [@elgendy2020, p.114].
 
 Como nas camadas de convolução, cada unidade da saída é conectada a uma região de entrada, então também devemos levar em consideração o tamanho, stride e padding. Mas, diferentemente da convolução, o “kernel” ou em outras palavras, a região que nos conectará com a entrada, não terá pesos mas apenas realiza uma operação, sendo as mais comuns o máximo ou a média[@geron2019, p.442].
 
@@ -482,10 +482,10 @@ Na Figura \@ref(fig:cnnpooling3d) temos outro exemplo de max pooling, mas desta 
 knitr::include_graphics(rep('imagens/07-deepLearning/cnn_pooling_max_3d.png'))
 ```
 
-Apesar do pooling ser uma técnica muito difundida, podemos encontrar redes onde seus autores preferiram não utilizar pooling para realizar a subamostragem, mas utilizarem camadas de convolução com valores de stride e padding maiores para conseguir essa redução de dimensão[@elgendy2020, p.117, @adrian2017, p.188]. Essa maneira de trabalhar foi proposta por Springenberg et al. em seu artigo “Striving for Simplicity: The All Convolutional Net” de 2014, onde demonstram que mesmo redes sem camadas de pooling podem ter resultados bons em diferentes bases de dados, como o CIFAR-10 e ImageNet.
+Apesar do pooling ser uma técnica muito difundida, podemos encontrar redes onde seus autores preferiram não utilizar pooling para realizar a subamostragem, mas utilizarem camadas de convolução com valores de stride e padding maiores para conseguir essa redução de dimensão[@elgendy2020, p.117] [@adrian2017, p.188]. Essa maneira de trabalhar foi proposta por Springenberg et al. em seu artigo “Striving for Simplicity: The All Convolutional Net” de 2014, onde demonstram que mesmo redes sem camadas de pooling podem ter resultados bons em diferentes bases de dados, como o CIFAR-10 e ImageNet.
 
 #### Camadas totalmente conectadas
-As CNN’s geralmente tem várias camadas de convolução seguidas por camadas de ReLU que por sua vez são seguidas por camadas de pooling, e esse processo vai diminuindo as dimensões mxn e aumentando a profundidade, ou seja, a quantidade de camadas de características(conhecido como feature maps)[@elgendy2020, p.119, @geron2019, p.446]. Na Figura \@ref(fig:cnntypical) temos uma representação desse processo através da topologia da rede, e ao chegar ao final temos uma quantidade grande de camadas com as características extraídas da imagem de entrada e precisamos utilizar essas informações. Nessa mesma figura podemos ver que no final temos camadas totalmente conectadas(Fully connected) que é uma rede neural regular, uma MLP[@elgendy2020, p.119].
+As CNN’s geralmente tem várias camadas de convolução seguidas por camadas de ReLU que por sua vez são seguidas por camadas de pooling, e esse processo vai diminuindo as dimensões mxn e aumentando a profundidade, ou seja, a quantidade de camadas de características(conhecido como feature maps)[@elgendy2020, p.119] [@geron2019, p.446]. Na Figura \@ref(fig:cnntypical) temos uma representação desse processo através da topologia da rede, e ao chegar ao final temos uma quantidade grande de camadas com as características extraídas da imagem de entrada e precisamos utilizar essas informações. Nessa mesma figura podemos ver que no final temos camadas totalmente conectadas(Fully connected) que é uma rede neural regular, uma MLP[@elgendy2020, p.119].
 
 (ref:cnntypical) Típica arquitetura de uma rede neural convolucional[@geron2019, p.447]
 
@@ -509,7 +509,7 @@ Como as próprias redes neurais, as CNN's foram bio-inspiradas em estudos sobre 
 
 De uma maneira simplificada, os sinais de luz recebidos pela retina são transmitidos ao cérebro através do nervo óptico, após isso chegam ao córtex visual primário que é formado principalmente por dois tipos de células[@goodfellow2016, p.365]:
 
-- Células simples: essas células têm comportamentos que podem ser representados por funções lineares em uma imagem em uma pequena área conhecida como campo receptivo[@goodfellow2016, p.365, @geron2019, p.432]. Esse tipo de célula inspirou as unidades detectoras mais simples nas CNNs.
+- Células simples: essas células têm comportamentos que podem ser representados por funções lineares em uma imagem em uma pequena área conhecida como campo receptivo[@goodfellow2016, p.365] [@geron2019, p.432]. Esse tipo de célula inspirou as unidades detectoras mais simples nas CNNs.
 
 - Células complexas: também respondem a características da imagem, como as células simples, mas são invariantes a posição, ou seja, não fazem grande distinção de onde a característica aparece. Esse tipo de célula inspirou as unidades de pooling, que veremos mais adiante[@goodfellow2016, p.365].
 
@@ -915,7 +915,7 @@ L(W, Y, X_1, X_2) = (1 - Y)\frac{1}{2}(E_w)^2 + (Y) \frac{1}{2} {max(0,m - E_w)}
 (\#eq:erro-contrastivo)
 $$
 
-em que são apresentadas pelo menos duas entradas na rede com propósito de comparar (ou contrastar) e determinar a similaridade. Quando o par de entrada é semelhante ($X_1, X_2$) o parâmetro $Y$ recebe valor 0, e quando são de classes diferentes ($X_1, X’_2$), $Y = 1$. Os pesos da rede ($W$) são corrigidos de forma que a distância ($E_w$) entre dados semelhantes fique menor e os mais diferentes se afastem [@hadsell2006]. Para isto é estabelecido uma margem ($m$) de ajuste, a qual garante uma distância mínima separando o que pertence ou não a um mesmo grupo, $𝐸_𝑊 (𝑋_1, 𝑋_2) + 𝑚 < 𝐸_𝑊 (𝑋_1, 𝑋’_ 2 )$. 
+em que são apresentadas pelo menos duas entradas na rede com propósito de comparar (ou contrastar) e determinar a similaridade. Quando o par de entrada é semelhante ($X_1, X_2$) o parâmetro $Y$ recebe valor 0, e quando são de classes diferentes ($X_1, X’_2$), $Y = 1$. Os pesos da rede ($W$) são corrigidos de forma que a distância ($E_w$) entre dados semelhantes fique menor e os mais diferentes se afastem [@hadsell2006]. Para isto é estabelecido uma margem ($m$) de ajuste, a qual garante uma distância mínima separando o que pertence ou não a um mesmo grupo, $E_W (X_1, X_2) + m < E_W (X_1, X’_ 2 )$. 
 
 A função de erro *Triplet* tem demonstrado bons desempenhos em alguns estudos com redes siamesas. Diferente da função contrastiva, na rede *Triplet* se utiliza três dados como entrada no treinamento, ou seja, uma siamesa com três  sub-redes idênticas em vez de duas.  Neste método, compara-se ao mesmo tempo o valor âncora ($x^a$), ou valor de referência, com um padrão semelhante (caso positivo $x^p$),  e com um padrão diferente (caso negativo $x^n$) de acordo com a função erro [@schroff2015]:
 
@@ -923,7 +923,7 @@ $$
 C = \sum_{i}\left[||f(x_i^a) - f(x_i^p)||_2^2 - ||f(x_i^a) - f(x_i^n)||_2^2 + \alpha\right]
 (\#eq:erro-triplet)
 $$
-Considerando que as funções $f(x) ∈ R$ podem ser interpretadas como a aplicação de cada sub-rede, o algoritmo de treinamento deve buscar ordenar as entradas com base na similaridade relativa. Assim, a distância entre a âncora e o padrão positivo deve ser menor do que em relação ao caso negativo, como demonstrado na Figura \@ref(fig:erro-triplet). [@schroff2015]. Da mesma forma que no método contrastivo é aplicada uma margem ($\alpha$) de ajuste.
+Considerando que as funções $f(x) \in R$ podem ser interpretadas como a aplicação de cada sub-rede, o algoritmo de treinamento deve buscar ordenar as entradas com base na similaridade relativa. Assim, a distância entre a âncora e o padrão positivo deve ser menor do que em relação ao caso negativo, como demonstrado na Figura \@ref(fig:erro-triplet). [@schroff2015]. Da mesma forma que no método contrastivo é aplicada uma margem ($\alpha$) de ajuste.
 
 (ref:erro-triplet)   Comportamento da função erro *Triplet*. A função *Triplet* reduz a distância entre os exemplos similares, ou seja, entre a âncora e o padrão positivo, e aumenta a distância entre o padrão diferente (caso negativo) e a âncora [@schroff2015].
 

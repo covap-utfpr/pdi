@@ -74,9 +74,9 @@ knitr::include_graphics(rep('imagens/05-filtros/correlationNConvolution2D.png'))
 
 ### Definção matemática da convolução
 
-Vamos explorar um pouco das notações matemáticas utilizadas para representar a convolução e a correlação, pois, assim, também poderemos consolidar a idéia de como são tão similares. Como dito no início desta seção, geralmente, a convolução é identificada por $*$ e a correlação por ☆. A correlação em duas dimensões segue a Equação \@ref(eq:correlacaoEq)
+Vamos explorar um pouco das notações matemáticas utilizadas para representar a convolução e a correlação, pois, assim, também poderemos consolidar a idéia de como são tão similares. Como dito no início desta seção, geralmente, a convolução é identificada por $*$ e a correlação por $\star$. A correlação em duas dimensões segue a Equação \@ref(eq:correlacaoEq)
 
-$$g(x,y) = w(x,y)☆f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x+s,y+t)
+$$g(x,y) = w(x,y)\star f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x+s,y+t)
 (\#eq:correlacaoEq)$$
 
 em que $w$ é nosso $kernel$ e $f$ nossa imagem. Percebe-se que ambas são funções de duas variáveis, $x$ e $y$, pois estamos trabalhando em duas dimensões. 

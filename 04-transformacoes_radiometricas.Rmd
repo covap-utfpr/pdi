@@ -87,7 +87,7 @@ knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/variacao_grad
 
 Outra utilidade da transformação de potência pode ser vista na Figura \@ref(fig:potencial), em que a imagem original está desbotada, indicando que se deve aplicar uma compressão dos níveis mais baixos e expandir valores mais altos [@gonzalez2010, p. 72]. Assim, a transformação foi realizada com gama maior que 1. Os resultados do processamento com $\gamma = 3, \gamma = 4,$  e $\gamma = 5$ podem ser vistos nas imagens \@ref(fig:potencial)(b), \@ref(fig:potencial)(c) e \@ref(fig:potencial)(d), respectivamente.
 
-(ref:potencial) Transformações de potência. (a) Imagem aérea. (b) a (d) Resultados da aplicação da transformação de potência com $c = 1 \text{ e } γ = 3, 4 \text{ e } 5$, respectivamente. [@gonzalez2010, p. 74].
+(ref:potencial) Transformações de potência. (a) Imagem aérea. (b) a (d) Resultados da aplicação da transformação de potência com $c = 1 \text{ e } \gamma = 3, 4 \text{ e } 5$, respectivamente. [@gonzalez2010, p. 74].
 
 ```{r potencial, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:potencial)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/potencial.png'))
