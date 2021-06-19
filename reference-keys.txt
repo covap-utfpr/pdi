@@ -17,7 +17,8 @@ eq:relacaoTamanhoObjetoImagem
 fig:proporcaoObjetoImagem
 fig:foco
 fig:profundidade
-eq:FOV
+eq:fovH
+eq:fovV
 fig:campovisao
 eq:FOVexemplo
 fig:diferentesprofundidades
