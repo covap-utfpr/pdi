@@ -4,7 +4,7 @@ Existem diferentes tipos de fontes utilizadas para geração de imagens, sendo q
 
 Como já mencionado no tópico de [Introdução](#intro), o espectro eletromagnético contém diferentes frequências de energia, mas os humanos conseguem enxergar somente uma pequena parte desse espectro, conhecido como luz visível. Isso se deve ao fato de que nossos olhos evoluíram para serem sensíveis a essa faixa de luz, que vem da luz solar e nos ajuda a realizar nossas atividades cotidianas. Existem outros animais, como pássaros e insetos, que conseguem ver luz em outras faixas de onda, como a ultravioleta [@cuthill2017, p.2]. Caso nossos olhos fossem também sensíveis a outras frequências, como por exemplo a de rádio, nossos celulares e torres telefônicas pareceriam lanternas [@moeslund2012, p.8].
 
-A luz sem cor, isto é, a luz com maior energia dentro do espectro visível humano, é chamada de luz monocromática (ou acromática). Pelo fato de a intensidade da luz monocromática ser percebida como variações de preto a tons de cinza até chegar ao branco, utiliza-se o termo nível de cinza ou escala de cinza. Já a luz cromática (colorida) cobre o espectro de energia eletromagnética na faixa de 0,43 a 0,79 $\mu m$. Além da frequência, três medidas básicas são utilizadas para descrever a qualidade de uma fonte de luz cromática: radiância, luminância e brilho. A radiância é a quantidade total de energia que é emitida pela fonte de luz e é normalmente medida em watts (W). A luminância, medida em lumens (lm), mede a quantidade de energia que um observador percebe de uma fonte de luz. O brilho, que incorpora a noção acromática de intensidade, é um descritor subjetivo da percepção da luz, então é praticamente impossível mensurar [@gonzalez2010, p.28].
+A luz sem cor, isto é, a luz com maior energia dentro do espectro visível humano, é chamada de luz monocromática (ou acromática). Pelo fato de a intensidade da luz monocromática ser percebida como variações de preto a tons de cinza até chegar ao branco, utiliza-se o termo nível de cinza ou escala de cinza. Já a luz cromática (colorida) cobre o espectro de energia eletromagnética na faixa de $0.43$ a $0.79 \mu m$. Além da frequência, três medidas básicas são utilizadas para descrever a qualidade de uma fonte de luz cromática: radiância, luminância e brilho. A radiância é a quantidade total de energia que é emitida pela fonte de luz e é normalmente medida em watts (W). A luminância, medida em lumens (lm), mede a quantidade de energia que um observador percebe de uma fonte de luz. O brilho, que incorpora a noção acromática de intensidade, é um descritor subjetivo da percepção da luz, então é praticamente impossível mensurar [@gonzalez2010, p.28].
 
 Nos próximos tópicos iremos explorar alguns conceitos e o funcionamento da aquisição de imagem. Esse processo é um pouco complexo e envolve conceitos de ótica, que serão apresentados, de maneira introdutória, a seguir.
 
@@ -44,7 +44,7 @@ $$
 (\#eq:semelhancaTriangulos)
 $$
 
-A variável $f$ nessa equação \@ref(eq:semelhancaTriangulos) se refere  a distância focal, que é, nesse caso, o tamanho da caixa da câmera, pois a imagem é formada em seu fundo [@burger2009, p.4]. Os sinais negativos das equações significam que a imagem projetada está rotacionada a $180^\circ{}$ verticalmente e horizontalmente devido a semelhança de triângulos [@burger2009, p.5], como podemos confirmar na Figura \@ref(fig:geometriapinhole). Câmeras que usavam esse princípio de funcionamento foram utilizadas a partir do século XIII mas hoje em dia não são utilizadas, somente por hobbistas ou curiosos, já que tem muitas desvantagens como precisar de um longo tempo de exposição para captura da imagem. 
+A variável $f$ nessa Equação \@ref(eq:semelhancaTriangulos) se refere  a distância focal, que é, nesse caso, o tamanho da caixa da câmera, pois a imagem é formada em seu fundo [@burger2009, p.4]. Os sinais negativos das equações significam que a imagem projetada está rotacionada a $180^\circ$ verticalmente e horizontalmente devido a semelhança de triângulos [@burger2009, p.5], como podemos confirmar na Figura \@ref(fig:geometriapinhole). Câmeras que usavam esse princípio de funcionamento foram utilizadas a partir do século XIII mas hoje em dia não são utilizadas, somente por hobbistas ou curiosos, já que tem muitas desvantagens como precisar de um longo tempo de exposição para captura da imagem. 
 
 As câmeras mais modernas não possuem somente uma pequena entrada para luz, mas um sistema de lentes que focam a luz recebida no sensor. Discutiremos a seguir alguns dos conceitos por trás disso.
 
@@ -66,8 +66,8 @@ $$
 (\#eq:relacaoDistancias)
 $$
 
-Como $f$ e $b$ estão normalmente entre 1mm e 100mm isso mostra que $\frac{1}{g}$ não tem quase nenhum impacto na equação \@ref(eq:relacaoDistancias) e significa que $b = f$. Isso significa que a imagem dentro da câmera é formada muito próxima ao ponto focal.
-Outro ponto importante das lentes é conhecido como *zoom* óptico, ilustrado na Figura \@ref(fig:proporcaoObjetoImagem). Isto deriva de um aspecto das lentes de que o tamanho do objeto na imagem formada, $B$, aumenta quando $f$ aumenta. Podemos representar isso na seguinte equação \@ref(eq:relacaoTamanhoObjetoImagem), onde $g$ é o tamanho real do objeto:
+Como $f$ e $b$ estão normalmente entre 1mm e 100mm isso mostra que $\frac{1}{g}$ não tem quase nenhum impacto na Equação \@ref(eq:relacaoDistancias) e significa que $b = f$. Isso significa que a imagem dentro da câmera é formada muito próxima ao ponto focal.
+Outro ponto importante das lentes é conhecido como *zoom* óptico, ilustrado na Figura \@ref(fig:proporcaoObjetoImagem). Isto deriva de um aspecto das lentes de que o tamanho do objeto na imagem formada, $B$, aumenta quando $f$ aumenta. Podemos representar isso na seguinte Equação \@ref(eq:relacaoTamanhoObjetoImagem), onde $g$ é o tamanho real do objeto:
 
 $$
 \frac{b}{B}=\frac{g}{G}
@@ -89,7 +89,7 @@ Se o $f$ for constante, quando alteramos a distância do objeto, no caso $g$, sa
 knitr::include_graphics(rep('imagens/02-formacao/foco.png'))
 ```
 
-A Figura \@ref(fig:foco) ilustra exatamente o que significa uma imagem estar fora de foco, no sensor cada *pixel* tem um tamanho específico, quando a imagem está em foco os raios de um ponto específico estão dentro da área do *pixel*. Uma imagem fica fora de foco quando os raios de outros pontos também interceptam o *pixel*, gerando uma mistura de diferentes pontos.
+A Figura \@ref(fig:foco) ilustra exatamente o que significa uma imagem estar fora de foco, no sensor cada pixel tem um tamanho específico, quando a imagem está em foco os raios de um ponto específico estão dentro da área do pixel. Uma imagem fica fora de foco quando os raios de outros pontos também interceptam o pixel, gerando uma mistura de diferentes pontos.
 
 (ref:profundidade) Profundidade de campo [@moeslund2012, p.13].
 
@@ -99,10 +99,14 @@ knitr::include_graphics(rep('imagens/02-formacao/profundidade.png'))
 
 A Figura \@ref(fig:profundidade) apresenta outro ponto muito importante, chamado Profundidade de Campo (*Depth of field*), que representa a soma das distâncias $g_l$ e $g_r$, que representam o quanto os objetos podem ser movidos e permanecerem em foco.
 
-Um tópico que também tem muita importância na aquisição de imagens é o Campo de Visão (*Field of View* ou FOV) que representa a área observável de uma câmera. Na Figura \@ref(fig:campovisao), essa área observável é denotada pelo ângulo $V$. O FOV de uma câmera depende de alguns aspectos, como sua distância focal e tamanho do sensor. Em muitos casos os sensores não são quadrados, mas retangulares, então para representarmos matematicamente o campo de visão, utilizamos as equações seguintes para o FOV vertical e horizontal:
+Um tópico que também tem muita importância na aquisição de imagens é o Campo de Visão (*Field of View* ou FOV) que representa a área observável de uma câmera. Na Figura \@ref(fig:campovisao), essa área observável é denotada pelo ângulo $V$. O FOV de uma câmera depende de alguns aspectos, como sua distância focal e tamanho do sensor. Em muitos casos os sensores não são quadrados, mas retangulares, então para representarmos matematicamente o campo de visão, utilizamos as Equações \@ref(eq:fovH) e \@ref(eq:fovV), respectivamente, do campo de visão horizontal e vertical:
 $$
-FOV_x = 2*\tan^{-1}\left(\frac{\frac{comprimento\ do\ sensor}{2}}{f}\right) \ \ \ \ \text{e}\ \ \ \  FOV_y = 2*\tan^{-1}\left(\frac{\frac{altura\ do\ sensor}{2}}{f}\right)
-(\#eq:FOV)
+FOV_x = 2*\tan^{-1}\left(\frac{\frac{comprimento\ do\ sensor}{2}}{f}\right)
+(\#eq:fovH)
+$$
+$$
+FOV_y = 2*\tan^{-1}\left(\frac{\frac{altura\ do\ sensor}{2}}{f}\right)
+(\#eq:fovV)
 $$
 
 (ref:campovisao) Dois diferentes Campos de visão [@moeslund2012, p.14].
@@ -111,13 +115,13 @@ $$
 knitr::include_graphics(rep('imagens/02-formacao/campovisao.png'))
 ```
 
-Por exemplo, se tivermos uma câmera com um sensor que tenha o comprimento de 14mm, altura de 10mm e uma distância focal de 5mm temos:
+Por exemplo, se tivermos uma câmera com um sensor que tenha o comprimento de $14mm$, altura de $10mm$ e uma distância focal de $5mm$ temos:
 $$
 FOV_x=2*tan^{-1}\left(\frac{7}{5}\right)=108.9^{\circ} \ \ \ \ \text{e}\ \ \ \  FOV_y=2*tan^{-1}(1)=90^{\circ}
 (\#eq:FOVexemplo)
 $$
 
-Isso significa que essa câmera tem uma área observável de 108.9º horizontalmente e 90º verticalmente. Na Figura \@ref(fig:diferentesprofundidades), temos o mesmo objeto fotografado com diferentes profundidades de campo: 
+Isso significa que essa câmera tem uma área observável de $108.9^\circ$ horizontalmente e $90^\circ$ verticalmente. Na Figura \@ref(fig:diferentesprofundidades), temos o mesmo objeto fotografado com diferentes profundidades de campo: 
 
 (ref:diferentesprofundidades) Objeto fotografado com diferentes profundidades de campo [@moeslund2012, p.15].
 
@@ -138,7 +142,7 @@ Após a luz passar por todo o sistema de lentes ela chega a esses sensores, que 
 knitr::include_graphics(rep('imagens/02-formacao/sensor.png'))
 ```
 
-Como podemos ver, o sensor consiste em várias pequenas células, cada uma com um *pixel*, que recebe a energia luminosa e a converte para um número digital. Quanto maior a incidência de luz em um *pixel*, maior a quantidade de energia e por isso maior será o valor do número gerado. O trabalho de controlar esse tempo de exposição é do obturador da câmera, sendo que um tempo muito longo ou muito curto podem produzir efeitos indesejados nas imagens obtidas, por isso a maioria das câmeras contam com um sistema que controla automaticamente esse tempo para o melhor resultado. Na Figura \@ref(fig:exposicao), podemos ver isso em uma imagem real, na primeira temos uma imagem que foi capturada com a exposição correta (*correctly exposed*), logo em seguida temos uma que sofreu de superexposição (*overexposed*)  e na terceira temos uma com subexposição (*underexposed*). Por último temos uma imagem que sofre com o movimento do objeto cuja imagem estava sendo capturada, o que ocasionou o borramento (*motion blur*).
+Como podemos ver, o sensor consiste em várias pequenas células, cada uma com um pixel, que recebe a energia luminosa e a converte para um número digital. Quanto maior a incidência de luz em um pixel, maior a quantidade de energia e por isso maior será o valor do número gerado. O trabalho de controlar esse tempo de exposição é do obturador da câmera, sendo que um tempo muito longo ou muito curto podem produzir efeitos indesejados nas imagens obtidas, por isso a maioria das câmeras contam com um sistema que controla automaticamente esse tempo para o melhor resultado. Na Figura \@ref(fig:exposicao), podemos ver isso em uma imagem real, na primeira temos uma imagem que foi capturada com a exposição correta (*correctly exposed*), logo em seguida temos uma que sofreu de superexposição (*overexposed*)  e na terceira temos uma com subexposição (*underexposed*). Por último temos uma imagem que sofre com o movimento do objeto cuja imagem estava sendo capturada, o que ocasionou o borramento (*motion blur*).
 
 (ref:exposicao) Diferentes níveis de exposição [@moeslund2012, p.17].
 
@@ -163,7 +167,7 @@ Precisamos assim dessas três informações para formar uma imagem colorida, uma
 knitr::include_graphics(rep('imagens/02-formacao/tres_sensores.png'))
 ```
 
-Ao invés disso, as câmeras modernas utilizam somente um sensor e fazem uso de um filtro que separa uma das três cores para cada *pixel*. Isso porque os fotodiodos não reconhecem por si só as cores, mas a intensidade, o que nos levaria a ter somente fotos com tons de cinza. Esse filtro pode conter diferentes configurações, sendo que uma das mais utilizadas é o filtro Bayer, que pode ser visto na Figura \@ref(fig:bayer):
+Ao invés disso, as câmeras modernas utilizam somente um sensor e fazem uso de um filtro que separa uma das três cores para cada pixel. Isso porque os fotodiodos não reconhecem por si só as cores, mas a intensidade, o que nos levaria a ter somente fotos com tons de cinza. Esse filtro pode conter diferentes configurações, sendo que uma das mais utilizadas é o filtro Bayer, que pode ser visto na Figura \@ref(fig:bayer):
 
 (ref:bayer) Filtro Bayer [@moeslund2012, p.29].
 
@@ -171,7 +175,7 @@ Ao invés disso, as câmeras modernas utilizam somente um sensor e fazem uso de 
 knitr::include_graphics(rep('imagens/02-formacao/bayer.png'))
 ```
 
-Podemos perceber que ocorre uma maior ocorrência das cores verdes. Isso se deve ao fato de que o olho humano é mais sensível a essa cor, logo se dá uma maior ênfase à sua captura.  Na Figura \@ref(fig:sensorarray), temos um esquema de como cada *pixel* recebe informação de somente uma cor, por meio da filtragem. Nesse esquema a luz que entra (*Incoming light*) é filtrada e somente a cor de interesse consegue passar. Após isso, ela chega a malha de sensores (*sensor array*):
+Podemos perceber que ocorre uma maior ocorrência das cores verdes. Isso se deve ao fato de que o olho humano é mais sensível a essa cor, logo se dá uma maior ênfase à sua captura.  Na Figura \@ref(fig:sensorarray), temos um esquema de como cada pixel recebe informação de somente uma cor, por meio da filtragem. Nesse esquema a luz que entra (*Incoming light*) é filtrada e somente a cor de interesse consegue passar. Após isso, ela chega a malha de sensores (*sensor array*):
 
 (ref:sensorarray) Sensores com padrão Bayer [@img:sensorarray].
 
@@ -179,7 +183,7 @@ Podemos perceber que ocorre uma maior ocorrência das cores verdes. Isso se deve
 knitr::include_graphics(rep('imagens/02-formacao/sensorarray.png'))
 ```
 
-Vemos na Figura \@ref(fig:sensorarray) que temos ao final três grupos de informações diferentes mas que têm dados faltantes nos *pixels* referentes às outras cores. As informações desses *pixels* são preenchidas em um processo chamado interpolação que completa as informações baseada nos valores dos *pixels* vizinhos.
+Vemos na Figura \@ref(fig:sensorarray) que temos ao final três grupos de informações diferentes mas que têm dados faltantes nos pixels referentes às outras cores. As informações desses pixels são preenchidas em um processo chamado interpolação que completa as informações baseada nos valores dos pixels vizinhos.
 
 ## Amostragem e Quantização
 
@@ -187,13 +191,13 @@ Nas seções anteriores foram apresentados processos para a captura de imagens a
 
 ### Amostragem
 
-Na amostragem ocorre a discretização espacial, ou seja, a conversão de um espaço contínuo em um espaço discreto, que pode ser representado digitalmente. Este procedimento é exemplificado na Figura \@ref(fig:amostragemquant), na qual a Figura \@ref(fig:amostragemquant) (a) representa um objeto de atributos contínuos, e a linha AB é um segmento horizontal do objeto.
+Na amostragem ocorre a discretização espacial, ou seja, a conversão de um espaço contínuo em um espaço discreto, que pode ser representado digitalmente. Este procedimento é exemplificado na Figura \@ref(fig:amostragemquant), na qual a Figura \@ref(fig:amostragemquant)(a) representa um objeto de atributos contínuos, e a linha AB é um segmento horizontal do objeto.
 
-A Figura \@ref(fig:amostragemquant) (b) contém a representação da amplitude (nível de intensidade) da imagem contínua ao longo da linha AB. Nas extremidades do gráfico na Figura \@ref(fig:amostragemquant) (b), a intensidade é mais alta devido a parte branca da imagem. Já os vales representam as partes com menos intensidade, ou seja, as partes mais escuras. Como o computador ainda não tem a capacidade de armazenar uma sequência infinita de números reais, então na quantização são selecionados pontos espaçados igualmente, como na Figura \@ref(fig:amostragemquant) (c).
+A Figura \@ref(fig:amostragemquant)(b) contém a representação da amplitude (nível de intensidade) da imagem contínua ao longo da linha $\overline{AB}$. Nas extremidades do gráfico na Figura \@ref(fig:amostragemquant)(b), a intensidade é mais alta devido a parte branca da imagem. Já os vales representam as partes com menos intensidade, ou seja, as partes mais escuras. Como o computador ainda não tem a capacidade de armazenar uma sequência infinita de números reais, então na quantização são selecionados pontos espaçados igualmente, como na Figura \@ref(fig:amostragemquant)(c).
 
-Na prática, esse procedimento de amostragem é realizado pelos sensores, nos casos mais comuns por um sensor de uma câmera, que geralmente é retangular. Desta forma, a quantidade de células sensíveis na matriz do sensor determina os limites da amostragem. Dito isso, percebe-se que para representar de maneira real o mundo, teríamos que ter um número infinito de *pixels*. Como isso não é possível, recorremos a opção de utilizar o maior número de *pixels* possíveis. Quanto mais *pixels* houver no sensor, maior será a quantidade de detalhes por ele capturado, melhorando a qualidade da imagem [@gonzalez2010, p.34].
+Na prática, esse procedimento de amostragem é realizado pelos sensores, nos casos mais comuns por um sensor de uma câmera, que geralmente é retangular. Desta forma, a quantidade de células sensíveis na matriz do sensor determina os limites da amostragem. Dito isso, percebe-se que para representar de maneira real o mundo, teríamos que ter um número infinito de pixels. Como isso não é possível, recorremos a opção de utilizar o maior número de pixels possíveis. Quanto mais pixels houver no sensor, maior será a quantidade de detalhes por ele capturado, melhorando a qualidade da imagem [@gonzalez2010, p.34].
 
-(ref:amostragemquant) Produzindo uma imagem digital. (a) Imagem contínua. (b) Linha de varredura de A a B na imagem contínua utilizada para ilustrar os conceitos de amostragem e quantização. (c) Amostragem e quantização. (d) Linha de varredura digital [@gonzalez2010, p.34].
+(ref:amostragemquant) Produzindo uma imagem digital. (a) Imagem contínua. (b) Linha de varredura de $A$ a $B$ na imagem contínua utilizada para ilustrar os conceitos de amostragem e quantização. (c) Amostragem e quantização. (d) Linha de varredura digital. [@gonzalez2010, p.34]
 
 ```{r amostragemquant, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:amostragemquant)', fig.align='center', out.width='70%'}
 knitr::include_graphics(rep('imagens/02-formacao/amostragemquant.png'))
@@ -201,23 +205,22 @@ knitr::include_graphics(rep('imagens/02-formacao/amostragemquant.png'))
 
 ### Quantização
 
-Na Figura \@ref(fig:amostragemquant) (c), os níveis de intensidade ainda variam dentro de uma faixa contínua. A função digital da intensidade é obtida pela quantização, em que as intensidades das amostras são mapeadas em um conjunto de quantidades discretas. Na Figura \@ref(fig:amostragemquant) (d), os valores contínuos de intensidade são quantizados estabelecendo um dos oito valores para cada amostra de acordo com a escala de intensidade na Figura \@ref(fig:amostragemquant) (c).
+Na Figura \@ref(fig:amostragemquant)(c), os níveis de intensidade ainda variam dentro de uma faixa contínua. A função digital da intensidade é obtida pela quantização, em que as intensidades das amostras são mapeadas em um conjunto de quantidades discretas. Na Figura \@ref(fig:amostragemquant)(d), os valores contínuos de intensidade são quantizados estabelecendo um dos oito valores para cada amostra de acordo com a escala de intensidade na Figura \@ref(fig:amostragemquant)(c).
 
-Na prática, geralmente a etapa de quantização é realizada diretamente no *hardware* utilizando um conversor analógico-digital [@burger2009, p.8]. A conversão dos valores contínuos para valores discretos pode ser realizada por meio de arredondamento, truncamento ou algum outro processo [@bovik2009essential, p.9].
-No processo de quantização, geralmente os níveis de intensidade são mapeados por uma transformação linear para um conjunto finitos de inteiros não negativos $\{0,\dots, L-1\}$, onde $L$ é uma potência de dois, ou seja, $L = 2^k$ [@bovik2009essential, p.10]. Isso significa que $L$ é o número de tons de cinza que podem ser representados com uma quantidade $k$ de bits. Em muitas situações é utilizado $k = 8$, ou seja, temos 256 níveis de cinza.
-Ao realizar a quantização e a amostragem linha por linha no objeto da Figura \@ref(fig:quantizacao) (a) é produzida uma imagem digital bidimensional como na Figura \@ref(fig:quantizacao).
+Na prática, geralmente a etapa de quantização é realizada diretamente no hardware utilizando um conversor analógico-digital [@burger2009, p.8]. A conversão dos valores contínuos para valores discretos pode ser realizada por meio de arredondamento, truncamento ou algum outro processo [@bovik2009essential, p.9].
+No processo de quantização, geralmente os níveis de intensidade são mapeados por uma transformação linear para um conjunto finitos de inteiros não negativos $\{0,\dots, L-1\}$, onde $L$ é uma potência de dois, ou seja, $L = 2^k$ [@bovik2009essential, p.10]. Isso significa que $L$ é o número de tons de cinza que podem ser representados com uma quantidade $k$ de bits. Em muitas situações é utilizado $k = 8$, ou seja, temos $256$ níveis de cinza.
+Ao realizar a quantização e a amostragem linha por linha no objeto da Figura \@ref(fig:quantizacao)(a) é produzida uma imagem digital bidimensional como na Figura \@ref(fig:quantizacao).
 
-(ref:quantizacao) (a) Imagem contínua projetada em uma matriz de sensores. (b) Resultado da amostragem e quantização da imagem [@gonzalez2010, p.35].
+(ref:quantizacao) (a) Imagem contínua projetada em uma matriz de sensores. (b) Resultado da amostragem e quantização da imagem. [@gonzalez2010, p.35]
 
 ```{r quantizacao, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:quantizacao)', fig.align='center', out.width='60%'}
 knitr::include_graphics(rep('imagens/02-formacao/quantizacao.png'))
 ```
 
 ## Definição de imagem digital {#formacaoImg}
-
 Uma imagem pode ser definida como uma função bidimensional, $f(x, y)$, em que $x$ e $y$ são coordenadas espaciais (plano), e a amplitude de $f$ em qualquer par de coordenadas $(x, y)$ é chamada de intensidade ou nível de cinza da imagem nesse ponto [@gonzalez2010, p.36]. Quando $x$, $y$ e os valores de intensidade de $f$ são quantidades finitas e discretas, chamamos de imagem digital. 
 
-A função $f(x, y)$ pode ser representada na forma de uma matriz $M \times N$ como na equação \@ref(eq:imagemDigital), em que as $M$ linhas são identificadas pelas coordenadas em $x$, e as $N$ colunas em $y$. Cada elemento dessa matriz é chamado de elemento de imagem, elemento pictórico, *pixel* ou *pel*. O formato numérico da matriz, imagem \@ref(fig:imagemdigital), é apropriado para o desenvolvimento de algoritmos, representado pela equação \@ref(eq:imagemDigital).
+A função $f(x, y)$ pode ser representada na forma de uma matriz MxN como na equação \@ref(eq:imagemDigital), em que as $M$ linhas são identificadas pelas coordenadas em $x$, e as $N$ colunas em $y$. Cada elemento dessa matriz é chamado de elemento de imagem, elemento pictórico, pixel ou *pel*. O formato numérico da matriz, imagem \@ref(fig:imagemdigital), é apropriado para o desenvolvimento de algoritmos, representado pela Equação \@ref(eq:imagemDigital).
 
 $$f(x,y) = \begin{bmatrix}
  f(0,0)   & f(0,1)     & \cdots & f(0,N-1)    \\ 
@@ -234,17 +237,17 @@ $$
 knitr::include_graphics(rep('imagens/02-formacao/imagemdigital.png'))
 ```
 
-Na Figura \@ref(fig:imagemdigital) (a) temos a representação da imagem em 3D, onde a intensidade de cada *pixel* é representada no eixo z, ou seja, sua altura. Como a matriz numérica transmite pouca informação visual é comum uma representação como na Figura \@ref(fig:imagemdigital) (b), formato que seria visualizado em um monitor ou uma fotografia [@gonzalez2010, p.36]. Em cada ponto da Figura \@ref(fig:imagemdigital) (a), o nível de cinza é proporcional ao valor da intensidade $f$, assumindo valores 0, 0,5 ou 1. Um monitor ou impressora simplesmente converte esses três valores em preto, cinza ou branco.
+Na Figura \@ref(fig:imagemdigital)(a) temos a representação da imagem em 3-D, onde a intensidade de cada pixel é representada no eixo $z$, ou seja, sua altura. Como a matriz numérica transmite pouca informação visual é comum uma representação como na Figura \@ref(fig:imagemdigital)(b), formato que seria visualizado em um monitor ou uma fotografia [@gonzalez2010, p.36]. Em cada ponto da Figura \@ref(fig:imagemdigital)(a), o nível de cinza é proporcional ao valor da intensidade $f$, assumindo valores $0$, $0.5$ ou $1$. Um monitor ou impressora simplesmente converte esses três valores em preto, cinza ou branco.
 
-Note que na Figura \@ref(fig:imagemdigital), a origem de uma imagem digital se localiza na parte superior esquerda, com o eixo x positivo direcionado para baixo e o eixo y positivo para a direita. Esse padrão segue o comportamento de varredura de dispositivos de visualização de imagem, como os monitores de TV, que começam do canto superior esquerdo da imagem e se movem para a direita, fazendo uma linha por vez [@gonzalez2010, p.36].
-De acordo com o tamanho da matriz ($M \times N$) e dos níveis discretos de tons de cinza ($L = 2^k$) que os *pixels* podem assumir é possível determinar o número, $b$, de bits necessários para armazenar uma imagem digitalizada: 
+Note que na Figura \@ref(fig:imagemdigital), a origem de uma imagem digital se localiza na parte superior esquerda, com o eixo $x$ positivo direcionado para baixo e o eixo $y$ positivo para a direita. Esse padrão segue o comportamento de varredura de dispositivos de visualização de imagem, como os monitores de TV, que começam do canto superior esquerdo da imagem e se movem para a direita, fazendo uma linha por vez [@gonzalez2010, p.36].
+De acordo com o tamanho da matriz (MxN) e dos níveis discretos de tons de cinza ($L = 2^k$) que os pixels podem assumir é possível determinar o número, $b$, de bits necessários para armazenar uma imagem digitalizada: 
 
 $$
 b = M × N × k
 (\#eq:tamanhoBits)
 $$
 
-Quando uma imagem pode ter $2^k$ níveis de intensidade, geralmente ela é denominada como uma “imagem de $k$ bits”. Por exemplo, uma imagem com 256 níveis discretos de intensidade é chamada de uma imagem de 8 bits. A Figura \@ref(fig:tabelabits)  mostra o número de bits utilizados para armazenar imagens quadradas de dimensão ($N \times N$) para diferentes valores de $N$ e $k$. O número de níveis de intensidade ($L$) correspondente a cada valor de $k$ é mostrado entre parênteses. Observa-se na Figura \@ref(fig:tabelabits) que uma imagem de 8 bits com dimensões 1024 × 1024 exigiria aproximadamente 1MB para armazenamento.
+Quando uma imagem pode ter $2^k$ níveis de intensidade, geralmente ela é denominada como uma “imagem de $k$ bits”. Por exemplo, uma imagem com $256$ níveis discretos de intensidade é chamada de uma imagem de $8$ bits. A Figura \@ref(fig:tabelabits)  mostra o número de bits utilizados para armazenar imagens quadradas de dimensão (NxN) para diferentes valores de $N$ e $k$. O número de níveis de intensidade ($L$) correspondente a cada valor de $k$ é mostrado entre parênteses. Observa-se na Figura \@ref(fig:tabelabits) que uma imagem de $8$ bits com dimensões 1024x1024 exigiria aproximadamente 1MB para armazenamento.
 
 (ref:tabelabits) Número de bits de armazenamento para vários valores de $N$ e $k$ [@gonzalez2010, p.38].
 
@@ -253,10 +256,9 @@ knitr::include_graphics(rep('imagens/02-formacao/tabelabits.png'))
 ```
 
 ## Resolução espacial e de intensidade
+Sem as especificações espaciais da imagem, não se pode inferir sobre a qualidade apenas pelo tamanho (MxN) em quantidades de pixels. Outra medida para especificar a resolução espacial é a densidade de pixels, podendo ser expressa  como pontos (pixels)  por unidade de distância, comumente *dots per inch* (pontos por polegada ou dpi). Referências de qualidade em relação à resolução espacial são, por exemplo, jornais impressos com uma resolução de 75 dpi e páginas de livros geralmente impressas com 2400 dpi [@gonzalez2010, p.38].
 
-Sem as especificações espaciais da imagem, não se pode inferir sobre a qualidade apenas pelo tamanho ($M \times N$) em quantidades de *pixels*. Outra medida para especificar a resolução espacial é a densidade de *pixels*, podendo ser expressa  como pontos (*pixels*)  por unidade de distância, comumente *dots per inch* (pontos por polegada ou dpi). Referências de qualidade em relação à resolução espacial são, por exemplo, jornais impressos com uma resolução de 75 dpi e páginas de livros geralmente impressas com 2400 dpi [@gonzalez2010, p.38].
-
-A Figura \@ref(fig:resolucaoespacial) mostra os efeitos da redução da resolução espacial em uma imagem em seis resoluções diferentes. A Figura \@ref(fig:resolucaoespacial) (a) tem resolução 512 x 512, e a resolução das demais \@ref(fig:resolucaoespacial) (b-f) diminui pela metade de forma sequencial. Todas as imagens têm as mesmas dimensões, ampliando-se o tamanho do *pixel* para deixar mais evidente a perda de detalhes nas imagens de baixa resolução. 
+A Figura \@ref(fig:resolucaoespacial) mostra os efeitos da redução da resolução espacial em uma imagem em seis resoluções diferentes. A Figura \@ref(fig:resolucaoespacial)(a) tem resolução 512x512, e a resolução das demais \@ref(fig:resolucaoespacial)(b-f) diminui pela metade de forma sequencial. Todas as imagens têm as mesmas dimensões, ampliando-se o tamanho do pixel para deixar mais evidente a perda de detalhes nas imagens de baixa resolução. 
 
 (ref:resolucaoespacial) Efeitos da redução da resolução espacial [@pedrini2008, p.21].
 
@@ -264,9 +266,9 @@ A Figura \@ref(fig:resolucaoespacial) mostra os efeitos da redução da resoluç
 knitr::include_graphics(rep('imagens/02-formacao/resolucaoespacial.png'))
 ```
 
-A resolução de intensidade ou profundidade corresponde ao número de bits ($k$) utilizados para estabelecer os níveis de cinza da imagem ($L=2^k$). Por exemplo, em uma imagem cuja intensidade é quantizada em $L= 256$ níveis, a profundidade é de $k = 8$ bits por *pixel*. 
+A resolução de intensidade ou profundidade corresponde ao número de bits ($k$) utilizados para estabelecer os níveis de cinza da imagem ($L=2^k$). Por exemplo, em uma imagem cuja intensidade é quantizada em $L= 256$ níveis, a profundidade é de $k = 8$ bits por pixel. 
 
-Os efeitos da redução dos níveis de cinza (profundidade) podem ser vistos na Figura \@ref(fig:reducaoprofundidade). A imagem (a) apresenta 256 níveis de cinza ($k = 8$).  As imagens (b) e (c) foram geradas pela redução do número de bits  $k = 4$ e $k = 2$, respectivamente, mas mantendo a mesma dimensão.
+Os efeitos da redução dos níveis de cinza (profundidade) podem ser vistos na Figura \@ref(fig:reducaoprofundidade). A Figura \@ref(fig:reducaoprofundidade)(a) apresenta $256$ níveis de cinza ($k = 8$). As Figuras \@ref(fig:reducaoprofundidade)(b) e (c) foram geradas pela redução do número de bits  $k = 4$ e $k = 2$, respectivamente, mas mantendo a mesma dimensão.
 
 (ref:reducaoprofundidade) Efeitos da redução de profundidade [@moeslund2012, p.19].
 
@@ -275,13 +277,11 @@ knitr::include_graphics(rep('imagens/02-formacao/reducaoprofundidade.png'))
 ```
 
 ## Pixels
-
-
 Os pixels são elementos principais na formação da imagem, sua importância determina topologicamente as características da imagem, nesta seção mostraremos conceitos básicos da topologia da imagem em relação seus elementos (pixels). Em memória computacional os pixels da imagem são representados nos formatos de matrizes (bidimensional ou tridimensional) já abordado na seção [Seção 2.5](#formacaoImg), através delas é permitido aplicar operações sobre seus elementos (pixels), efetuar análises, identificação de padrões,  acessar regiões, alterar cores, posições e tamanho tendo como referência espaço projetado usando as coordenadas do plano.
 
 Propriedades topológicas dos pixels da imagem:
 
-- Vizinhança ( 4, D,  6, 8 e  26 )
+- Vizinhança (4, D, 6, 8 e 26)
 - Conectividade
 - Adjacência
 - Caminho
@@ -290,16 +290,9 @@ Propriedades topológicas dos pixels da imagem:
 - Medidas de Distância
 - Operações Lógico-aritméticas
 
-
-
 ### Vizinhança {#vizin}
-
-
-
 As vizinhanças de um elemento (pixels) $f$ pertencente ao conjunto $S$ (matriz de pixels) com coordenadas $(x,y)$ possui vizinhos dos tipos 4, D e 8.
-Para definir uma vizinhança-4 (denotado $[N_4(f)])$ de $f(x,y)$ ilustrado na figura \@ref(fig:vizinhanca), $f_{(1,1)}$ possui quatro vizinhos, dois na horizontal e outros dois na vertical cuja as coordenadas da vizinhança são $(x + 1, y), (x - 1, y), (x, y + 1) \ e \ (x, y -1)$. Os quatros vizinhos diagonais de $f_{(5, 1)}$ são de coordenadas $(x - 1 , y - 1), (x - 1, y + 1), (x + 1, y + 1)$, que constituem o conjunto $[N_d(f)]$. A vizinhança-8 (denotado $[N_8(f)]$ e ilustrada na figura \@ref(fig:vizinhanca) $f_{(4, 5)}$, é definida como $N_8(f)= N_4(f) \ U \ Nd(f)$. 
-
-
+Para definir uma vizinhança-4 (denotado $[N_4(f)])$ de $f(x,y)$ ilustrado na Figura \@ref(fig:vizinhanca), $f_{(1,1)}$ possui quatro vizinhos, dois na horizontal e outros dois na vertical cuja as coordenadas da vizinhança são $(x + 1, y), (x - 1, y), (x, y + 1) \ e \ (x, y -1)$. Os quatros vizinhos diagonais de $f_{(5, 1)}$ são de coordenadas $(x - 1 , y - 1), (x - 1, y + 1), (x + 1, y + 1)$, que constituem o conjunto $[N_d(f)]$. A vizinhança-8 (denotado $[N_8(f)]$ e ilustrada na Figura \@ref(fig:vizinhanca) $f_{(4, 5)}$, é definida como $N_8(f)= N_4(f) \ U \ Nd(f)$. 
 
 (ref:vizinhanca) Vizinhança de 4-D e 8 de um pixel, matriz de pixel da imagem.
 
@@ -309,23 +302,17 @@ knitr::include_graphics(rep('imagens/02-formacao/vizinhanca4-8-d.png'))
 
 
 ### Conectividade {#contiv}
-
-
-A conectividade entre os pixels é outro conceito importante na topologia da imagem, usada para determinar limites de objetos e componentes de regiões na imagem. Dois pixels são conexos entre si  primeiro verificar-se seus tipos de [(vizinhos Seção 2.7.1)](#vizin), de seguida se existe similaridade na intensidade de cinza, cor ou textura. Por exemplo, em uma imagem binária, em que os pixels podem assumir os valores 0 ou 1, dois pixels podem ter vizinhança-4, mas somente serão considerados conexos se possuírem o mesmo valor. [@pedrini2008, p. 31].
+A conectividade entre os pixels é outro conceito importante na topologia da imagem, usada para determinar limites de objetos e componentes de regiões na imagem. Dois pixels são conexos entre si  primeiro verificar-se seus tipos de [(vizinhos Seção 2.7.1)](#vizin), de seguida se existe similaridade na intensidade de cinza, cor ou textura. Por exemplo, em uma imagem binária, em que os pixels podem assumir os valores $0$ ou $1$, dois pixels podem ter vizinhança-4, mas somente serão considerados conexos se possuírem o mesmo valor. [@pedrini2008, p. 31].
 
 
 ### Adjacência {#adja}
-
-
-Um conjunto $V$ com valores de intensidade para definir adjacência, em uma imagem binária, com $V={1}$ e outra imagem com mesmo conjunto contendo escala de nível de cinza no limite 0 a 255 com vários elementos (pixels) o conjunto $V$ poderia ser qualquer subconjunto desses 256 valores se eles estiverem conectados de acordo com o tipo de [(vizinhança Seção 2.7.1)](#vizin) especificado. [@gonzalez2010, p.31].
+Um conjunto $V$ com valores de intensidade para definir adjacência, em uma imagem binária, com $V={1}$ e outra imagem com mesmo conjunto contendo escala de nível de cinza no limite $0$ a $255$ com vários elementos (pixels) o conjunto $V$ poderia ser qualquer subconjunto desses $256$ valores se eles estiverem conectados de acordo com o tipo de [(vizinhança Seção 2.7.1)](#vizin) especificado. [@gonzalez2010, p.31].
 
 
 ### Caminho {#camin}
+Uma imagem com coordenada de pixels $(x_1 , y_1), (x_2 , y_2) … (x_n , y_n)$ que determina a sequência do caminho dos variados pixels onde né o comprimento do caminho, e $(x_i , y_i)e (x_i + 1 , y_i + 1)$ são adjacentes, tal que $i = 1,2,...,n - 1$.Se na relação de conectividade considerar vizinhança-4, então existe um caminho-4; para vizinhança-8, tem-se um caminho-8. Exemplo de caminhos são mostrados na Figura \@ref(fig:caminho) sendo que o caminho-4 possui comprimento $10$ e o caminho-8 possui comprimento $7$. O conceito de caminho também pode ser estendido para imagens tridimensionais. [@pedrini2008, p. 31].
 
-
-Uma imagem com coordenada de pixels $(x_1 , y_1), (x_2 , y_2) … (x_n , y_n)$ que determina a sequência do caminho dos variados pixels onde né o comprimento do caminho, e $(x_i , y_i)e (x_i + 1 , y_i + 1)$ são adjacentes, tal que $i = 1,2,...,n - 1$.Se na relação de conectividade considerar vizinhança-4, então existe um caminho-4; para vizinhança-8, tem-se um caminho-8. Exemplo de caminhos são mostrados na figura 11 sendo que o caminho-4 possui comprimento 10 e o caminho-8 possui comprimento 7. O conceito de caminho também pode ser estendido para imagens tridimensionais. [@pedrini2008, p. 31].
-
-(ref:caminho) (a) Caminho-4, (b) Caminho-8  [@pedrini2008, p. 31].
+(ref:caminho) (a) Caminho-4, (b) Caminho-8. [@pedrini2008, p. 31]
 
 ```{r caminho, echo=FALSE, fig.asp=.7, fig.width= 4, fig.height= 4,  fig.cap='(ref:caminho)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/02-formacao/caminho.png'))
@@ -334,8 +321,7 @@ knitr::include_graphics(rep('imagens/02-formacao/caminho.png'))
 
 
 ### Componente Conexa  
-
-Componentes conexos de pixels de uma imagem é um conjunto de elementos (pixels) que de alguma forma estão conectados entre si, dois ou mais pixels são componentes conexos se existir um caminho seção 2.7.4 Caminho pertencente ao conjunto. A figura 12 mostra uma imagem bidimensional contendo três componentes conexos caso seja considerada a vizinhança-4 ou, então, dois componentes conexos se considerada a vizinhança-8. [@pedrini2008, p. 32].
+Componentes conexos de pixels de uma imagem é um conjunto de elementos (pixels) que de alguma forma estão conectados entre si, dois ou mais pixels são componentes conexos se existir um caminho seção 2.7.4 Caminho pertencente ao conjunto. A Figura \@ref(fig:componente) mostra uma imagem bidimensional contendo três componentes conexos caso seja considerada a vizinhança-4 ou, então, dois componentes conexos se considerada a vizinhança-8. [@pedrini2008, p. 32].
 
 
 (ref:componente) Componentes Conexos de uma imagem bidimensional  [@pedrini2008, p. 32].
@@ -346,11 +332,10 @@ knitr::include_graphics(rep('imagens/02-formacao/componente_conexos.png'))
 
 
 ### Borda e Interior
+[@pedrini2008, p. 32].  A borda de um componente conexo [seção 2.7.5](### Componente-Conexa) $S$ em uma imagem bidimensional é o conjunto de pixels pertencentes ao componente e que possuem vizinhança-4 com um ou mais pixels externos a $S$. Intuitivamente, a borda corresponde ao conjunto de pontos no contorno do componente conexo. O interior é o conjunto de pixels de $S$ que não estão em sua borda. A Figura \@ref(fig:borda) mostra um exemplo de uma imagem binária com sua borda interior.
 
-[@pedrini2008, p. 32].  A borda de um componente conexo [seção 2.7.5](### Componente-Conexa) S em uma imagem bidimensional é o conjunto de pixels pertencentes ao componente e que possuem vizinhança-4 com um ou mais pixels externos a S. Intuitivamente, a borda corresponde ao conjunto de pontos no contorno do componente conexo. O interior é o conjunto de pixels de S que não estão em sua borda. A figura 13 mostra um exemplo de uma imagem binária com sua borda interior.
 
-
-(ref:borda) Borda e interior de um componente, Figura do lado esquerdo, mostra a imagem original, a figura do lado direito mostra os pixels da borda e interior. [@pedrini2008, p. 32].
+(ref:borda) Borda e interior de um componente, Figura do lado esquerdo, mostra a imagem original, a Figura do lado direito mostra os pixels da borda e interior. [@pedrini2008, p. 32].
 
 ```{r borda, echo=FALSE, fig.asp=.7, fig.width= 4, fig.height=4,  fig.cap='(ref:borda)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/02-formacao/borda_interior.png'))
@@ -358,8 +343,7 @@ knitr::include_graphics(rep('imagens/02-formacao/borda_interior.png'))
 
 
 ### Medidas de Distância
-
-As medidas de distância são aplicadas sobre os pixels e componentes da imagem, considerando D uma função com os pixels $f_1, f_2$  e $f_3$ de coordenadas $(x_1, y_1), (x_2, y_2), (x_3, y_3)$, para verificar se $D$ é uma função distância ou medida de distância, deve satisfazer as seguintes propriedades: 
+As medidas de distância são aplicadas sobre os pixels e componentes da imagem, considerando $D$ uma função com os pixels $f_1$, $f_2$ e $f_3$ de coordenadas $(x_1, y_1)$, $(x_2, y_2)$, $(x_3, y_3)$, para verificar se $D$ é uma função distância ou medida de distância, deve satisfazer as seguintes propriedades: 
 
 
 1. 
@@ -373,48 +357,44 @@ $$
 D(f_1,f_3) \leq  D(f_1,f_2) + D(f_2,f_3) (\#eq:medida3)
 $$ 
 
-Aplicabilidade da fórmula Euclidiana uma das formas de satisfazer as propriedades acima,  desse modo podemos analisar a métrica de dois ou mais pixels de uma imagem, supondo que os pixels $f_1 \ e \ f_2$ de coordenadas $(x1, x2), (y1, y2)$ para medir suas distância aplicamos:
+Aplicabilidade da fórmula Euclidiana uma das formas de satisfazer as propriedades acima,  desse modo podemos analisar a métrica de dois ou mais pixels de uma imagem, supondo que os pixels $f_1 \ e \ f_2$ de coordenadas $(x_1, x_2), (y_1, y_2)$ para medir suas distância aplicamos:
 
 $$D_4(f_1 , f_2) = \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2} 
 (\#eq:formEclidiana)
 $$
 
 
-Na medida de distância Euclidiana, todos os pixels menores ou igual de qualquer valor d formam um disco de raio d centro em f1. Como exemplo, os pontos com distância $D_E \leq 3$ de um ponto central $(x, y)$ formam o conjunto mostra na Figura: \@ref(fig:medidaD1) 
+Na medida de distância Euclidiana, todos os pixels menores ou igual de qualquer valor $d$ formam um disco de raio $d$ centro em $f_1$. Como exemplo, os pontos com distância $D_E \leq 3$ de um ponto central $(x, y)$ formam o conjunto mostra na Figura: \@ref(fig:medidaD1) 
 
 
 
 (ref:medidaD1) Conjunto de pontos com distância Euclidiana menor ou igual de ponto central.  [@pedrini2008, p. 33].
 
-
-
 ```{r medidaD1, echo=FALSE, fig.asp=.7, fig.width= 4, fig.height=4,  fig.cap='(ref:medidaD1)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/02-formacao/medida_distancia1.png'))
 ```
 
-
-
-A distância $D_4$ entre $f_1$ e $f_2$, também denotada de city-block, é definida como: 
+A distância $D_4$ entre $f_1$ e $f_2$, também denotada de *city-block*, é definida como: 
 $$
 D_4(f_1 , f_2)   = |x_1 - x_2 | + |y_1 - y_2 |
 (\#eq:formCity)
 $$
 
 
-Os pixels com uma distância $D_4$ de $f_4$ menor ou igual a algum valor d formam um losango centrado em $f_1$. Em particular, os pontos com distância 1 são os pixels com vizinhança-4 de ponto central. Por exemplo, os pontos com distância $D_4 \leq 3$ de um ponto central $(x, y)$ formam o conjunto mostrado na figura  \@ref(fig:medidaD2)
+Os pixels com uma distância $D_4$ de $f_4$ menor ou igual a algum valor $d$ formam um losango centrado em $f_1$. Em particular, os pontos com distância $1$ são os pixels com vizinhança-4 de ponto central. Por exemplo, os pontos com distância $D_4 \leq 3$ de um ponto central $(x, y)$ formam o conjunto mostrado na Figura  \@ref(fig:medidaD2)
 
-(ref:medidaD2) Conjunto de pontos com distância $D_4$ menor ou igual a 3 de um ponto central. [@pedrini2008, p. 33].
+(ref:medidaD2) Conjunto de pontos com distância $D_4$ menor ou igual a $3$ de um ponto central [@pedrini2008, p. 33].
 
 ```{r medidaD2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.height=4,  fig.cap='(ref:medidaD2)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/02-formacao/medida_distancia2.png'))
 ```
 
 
-A distância D8entre $f_1$ e  $f_2$, também denotado de chessboard, é definida como 
+A distância $D_8 $entre $f_1$ e  $f_2$, também denotado de *chessboard*, é definida como 
 $D_8(f_1 , f_2) = max(| x_1 = x_2 | , | y_1 =y_2 |)$
-Os pixels com uma distância D8de f1menor ou igual a algum valor d formam um quadrado central em $f_1$. Os pontos com distância 1 são os pixels com a vizinhança-8 do ponto central. Por exemplo, os pontos com distância $D_8 \leq 3$ de um ponto central $(x, y)$ formam o conjunto mostrado na figura \@ref(fig:medidaD3)
+Os pixels com uma distância $D_8$ de $f_1$ menor ou igual a algum valor $d$ formam um quadrado central em $f_1$. Os pontos com distância $1$ são os pixels com a vizinhança-8 do ponto central. Por exemplo, os pontos com distância $D_8 \leq 3$ de um ponto central $(x, y)$ formam o conjunto mostrado na Figura \@ref(fig:medidaD3)
 
-(ref:medidaD3) Conjunto de pontos com distância $D_4$ menor ou igual a 3 de um ponto central. [@pedrini2008, p. 33].
+(ref:medidaD3) Conjunto de pontos com distância $D_4$ menor ou igual a $3$ de um ponto central [@pedrini2008, p. 33].
 
 ```{r medidaD3, echo=FALSE, fig.asp=.7, fig.width= 4, fig.height=4,  fig.cap='(ref:medidaD3)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/02-formacao/medida_distancia3.png'))
@@ -422,18 +402,17 @@ knitr::include_graphics(rep('imagens/02-formacao/medida_distancia3.png'))
 
 
 ### Operações Lógico-aritméticas 
-
-[@pedrini2008, p. 34].  Operações lógicas e aritméticas podem ser utilizadas para modificar imagens. Embora essas operações permitam uma forma simples de processamento, há uma grande variedade de aplicações em que tais operações podem produzir resultados de interesse prático.
+Operações lógicas e aritméticas podem ser utilizadas para modificar imagens. Embora essas operações permitam uma forma simples de processamento, há uma grande variedade de aplicações em que tais operações podem produzir resultados de interesse prático [@pedrini2008, p. 34].
 Dadas duas imagens, $f_1$ e $f_2$, as operações aritméticas mais comuns entre dois pixels $f_1(x, y)$ e $f_2(x, y)$ são a adição, subtração. multiplicação e divisão, definida de acordo com:
 
 - Operações Aritméticas:
 
-  1. **Adição**: $f_1(x_1, y_1) + f_2(x_2, y_2)$. 
+  1. Adição: $f_1(x_1, y_1) + f_2(x_2, y_2)$. 
   
-  2. **Subtração**: $f_1(x_1, y_1) - f_2(x_2, y_2)$.
+  2. Subtração: $f_1(x_1, y_1) - f_2(x_2, y_2)$.
   
-  3. **Multiplicação**: $f_1(x_1, y_1) \cdot f_2(x_2, y_2)$
+  3. Multiplicação: $f_1(x_1, y_1) \cdot f_2(x_2, y_2)$
   
-  4. **Divisão**: $f_1(x_1, y_1) \div f_2(x_2, y_2)$
+  4. Divisão: $f_1(x_1, y_1) \div f_2(x_2, y_2)$
   
-Durante o processo de operações aritméticas sobre uma imagem alguns cuidados devem ser tomados para contornar a produção de valores fora do intervalo de níveis de cinza sobre a imagem original no processo. Neste caso, a operação de adição de duas imagens com 256 níveis de cinza, pode resultar em um número maior que  valor 255 para determinados pixels, por outro lado, a operação de subtração de duas imagens podem resultar em valores negativos para alguns pixels durante o processo. Para solucionar esse problema depois do processo aritmético (aplicação aritmética), realizar uma transformação de escala de cinza na imagem resultante para manter seus valores do intervalo adequado. [@pedrini2008, p. 34].
+Durante o processo de operações aritméticas sobre uma imagem alguns cuidados devem ser tomados para contornar a produção de valores fora do intervalo de níveis de cinza sobre a imagem original no processo. Neste caso, a operação de adição de duas imagens com $256$ níveis de cinza, pode resultar em um número maior que  valor $255$ para determinados pixels, por outro lado, a operação de subtração de duas imagens podem resultar em valores negativos para alguns pixels durante o processo. Para solucionar esse problema depois do processo aritmético (aplicação aritmética), realizar uma transformação de escala de cinza na imagem resultante para manter seus valores do intervalo adequado. [@pedrini2008, p. 34].
