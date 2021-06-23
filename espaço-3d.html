@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xml:lang="pt-BR">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 9 Espaço 3D | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="Capítulo 9 Espaço 3D | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 9 Espaço 3D | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 9 Espaço 3D | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  
+  
+  
+
+<meta name="author" content="" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="separação-plano-de-fundo.html"/>
+<link rel="next" href="refêrencias.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="logo"><a href="./"><img src="imagens/logo.jpeg"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Início</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introdução</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#relação-de-processamento-digital-de-imagem-visão-computacional-e-computação-gráfica"><i class="fa fa-check"></i><b>1.1</b> Relação de Processamento Digital de Imagem, Visão Computacional e Computação Gráfica</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#aplicações-processamento-digital-de-imagens"><i class="fa fa-check"></i><b>1.2</b> Aplicações Processamento Digital de Imagens</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#etapas-do-processamento-e-análise-de-imagens"><i class="fa fa-check"></i><b>1.3</b> Etapas do Processamento e Análise de Imagens</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html"><i class="fa fa-check"></i><b>2</b> Formação da imagem</a><ul>
+<li class="chapter" data-level="2.1" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#câmera-pinhole-e-geometria"><i class="fa fa-check"></i><b>2.1</b> Câmera <em>pinhole</em> e geometria</a></li>
+<li class="chapter" data-level="2.2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#lentes-finas"><i class="fa fa-check"></i><b>2.2</b> Lentes Finas</a></li>
+<li class="chapter" data-level="2.3" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#sensor"><i class="fa fa-check"></i><b>2.3</b> Sensor</a></li>
+<li class="chapter" data-level="2.4" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#amostragem-e-quantização"><i class="fa fa-check"></i><b>2.4</b> Amostragem e Quantização</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#amostragem"><i class="fa fa-check"></i><b>2.4.1</b> Amostragem</a></li>
+<li class="chapter" data-level="2.4.2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#quantização"><i class="fa fa-check"></i><b>2.4.2</b> Quantização</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#formacaoImg"><i class="fa fa-check"></i><b>2.5</b> Definição de imagem digital</a></li>
+<li class="chapter" data-level="2.6" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#resolução-espacial-e-de-intensidade"><i class="fa fa-check"></i><b>2.6</b> Resolução espacial e de intensidade</a></li>
+<li class="chapter" data-level="2.7" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#pixels"><i class="fa fa-check"></i><b>2.7</b> Pixels</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#vizin"><i class="fa fa-check"></i><b>2.7.1</b> Vizinhança</a></li>
+<li class="chapter" data-level="2.7.2" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#contiv"><i class="fa fa-check"></i><b>2.7.2</b> Conectividade</a></li>
+<li class="chapter" data-level="2.7.3" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#adja"><i class="fa fa-check"></i><b>2.7.3</b> Adjacência</a></li>
+<li class="chapter" data-level="2.7.4" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#camin"><i class="fa fa-check"></i><b>2.7.4</b> Caminho</a></li>
+<li class="chapter" data-level="2.7.5" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#componente-conexa"><i class="fa fa-check"></i><b>2.7.5</b> Componente Conexa</a></li>
+<li class="chapter" data-level="2.7.6" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#borda-e-interior"><i class="fa fa-check"></i><b>2.7.6</b> Borda e Interior</a></li>
+<li class="chapter" data-level="2.7.7" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#medidas-de-distância"><i class="fa fa-check"></i><b>2.7.7</b> Medidas de Distância</a></li>
+<li class="chapter" data-level="2.7.8" data-path="formação-da-imagem.html"><a href="formação-da-imagem.html#operações-lógico-aritméticas"><i class="fa fa-check"></i><b>2.7.8</b> Operações Lógico-aritméticas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html"><i class="fa fa-check"></i><b>3</b> Transformacões geométricas</a><ul>
+<li class="chapter" data-level="3.1" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#definição"><i class="fa fa-check"></i><b>3.1</b> Definição</a></li>
+<li class="chapter" data-level="3.2" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#sistema-de-coordenadas-objetos-2d-e-3d"><i class="fa fa-check"></i><b>3.2</b> Sistema de coordenadas objetos (2D e 3D)</a></li>
+<li class="chapter" data-level="3.3" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#representação-vetorial-e-matricial-de-imagens-digitalizadas"><i class="fa fa-check"></i><b>3.3</b> Representação Vetorial e Matricial de Imagens digitalizadas</a></li>
+<li class="chapter" data-level="3.4" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#matrizes-em-computação-gráfica"><i class="fa fa-check"></i><b>3.4</b> Matrizes em Computação gráfica</a></li>
+<li class="chapter" data-level="3.5" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformações-em-pontos-e-objetos"><i class="fa fa-check"></i><b>3.5</b> Transformações em Pontos e Objetos</a></li>
+<li class="chapter" data-level="3.6" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-translação"><i class="fa fa-check"></i><b>3.6</b> Transformação de Translação</a></li>
+<li class="chapter" data-level="3.7" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-escala"><i class="fa fa-check"></i><b>3.7</b> Transformação de Escala</a></li>
+<li class="chapter" data-level="3.8" data-path="transformacões-geométricas.html"><a href="transformacões-geométricas.html#transformação-de-rotação"><i class="fa fa-check"></i><b>3.8</b> Transformação de Rotação</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html"><i class="fa fa-check"></i><b>4</b> Transformações radiométricas</a><ul>
+<li class="chapter" data-level="4.1" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-linear"><i class="fa fa-check"></i><b>4.1</b> Transformação Linear</a></li>
+<li class="chapter" data-level="4.2" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-logarítmica"><i class="fa fa-check"></i><b>4.2</b> Transformação Logarítmica</a></li>
+<li class="chapter" data-level="4.3" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#transformação-de-potência"><i class="fa fa-check"></i><b>4.3</b> Transformação de Potência</a></li>
+<li class="chapter" data-level="4.4" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#processamento-de-histograma"><i class="fa fa-check"></i><b>4.4</b> Processamento de histograma</a></li>
+<li class="chapter" data-level="4.5" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#equalização-do-histograma"><i class="fa fa-check"></i><b>4.5</b> Equalização do histograma</a></li>
+<li class="chapter" data-level="4.6" data-path="transformações-radiométricas.html"><a href="transformações-radiométricas.html#especificação-de-histograma"><i class="fa fa-check"></i><b>4.6</b> Especificação de histograma</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="filtros-digitais.html"><a href="filtros-digitais.html"><i class="fa fa-check"></i><b>5</b> Filtros Digitais</a><ul>
+<li class="chapter" data-level="5.1" data-path="filtros-digitais.html"><a href="filtros-digitais.html#convolução"><i class="fa fa-check"></i><b>5.1</b> Convolução</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="filtros-digitais.html"><a href="filtros-digitais.html#definção-matemática-da-convolução"><i class="fa fa-check"></i><b>5.1.1</b> Definção matemática da convolução</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="filtros-digitais.html"><a href="filtros-digitais.html#filtro-da-média"><i class="fa fa-check"></i><b>5.2</b> Filtro da Média</a></li>
+<li class="chapter" data-level="5.3" data-path="filtros-digitais.html"><a href="filtros-digitais.html#filtro-da-mediana"><i class="fa fa-check"></i><b>5.3</b> Filtro da Mediana</a></li>
+<li class="chapter" data-level="5.4" data-path="filtros-digitais.html"><a href="filtros-digitais.html#filtro-gaussiano"><i class="fa fa-check"></i><b>5.4</b> Filtro Gaussiano</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="segmentação.html"><a href="segmentação.html"><i class="fa fa-check"></i><b>6</b> Segmentação</a><ul>
+<li class="chapter" data-level="6.1" data-path="segmentação.html"><a href="segmentação.html#detecção-por-descontinuidade"><i class="fa fa-check"></i><b>6.1</b> Detecção por descontinuidade</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="segmentação.html"><a href="segmentação.html#detecção-de-pontos-isolados"><i class="fa fa-check"></i><b>6.1.1</b> Detecção de pontos isolados</a></li>
+<li class="chapter" data-level="6.1.2" data-path="segmentação.html"><a href="segmentação.html#detecção-de-linhas"><i class="fa fa-check"></i><b>6.1.2</b> Detecção de linhas</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="segmentação.html"><a href="segmentação.html#detecção-de-bordas"><i class="fa fa-check"></i><b>6.2</b> Detecção de Bordas</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="segmentação.html"><a href="segmentação.html#modelos-de-bordas"><i class="fa fa-check"></i><b>6.2.1</b> Modelos de Bordas</a></li>
+<li class="chapter" data-level="6.2.2" data-path="segmentação.html"><a href="segmentação.html#método-do-gradiente-roberts-prewitt-sobel"><i class="fa fa-check"></i><b>6.2.2</b> Método do gradiente (Roberts, Prewitt, Sobel)</a></li>
+<li class="chapter" data-level="6.2.3" data-path="segmentação.html"><a href="segmentação.html#método-de-marr-hildreth"><i class="fa fa-check"></i><b>6.2.3</b> Método de Marr-Hildreth</a></li>
+<li class="chapter" data-level="6.2.4" data-path="segmentação.html"><a href="segmentação.html#método-de-canny"><i class="fa fa-check"></i><b>6.2.4</b> Método de Canny</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="segmentação.html"><a href="segmentação.html#transformada-de-hough"><i class="fa fa-check"></i><b>6.3</b> Transformada de Hough</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="segmentação.html"><a href="segmentação.html#transformada-de-hough-para-detecção-de-linhas"><i class="fa fa-check"></i><b>6.3.1</b> Transformada de Hough para detecção de linhas</a></li>
+<li class="chapter" data-level="6.3.2" data-path="segmentação.html"><a href="segmentação.html#transformada-de-hough-para-detecção-de-círculos"><i class="fa fa-check"></i><b>6.3.2</b> Transformada de Hough para detecção de círculos</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="segmentação.html"><a href="segmentação.html#detecção-de-quinas"><i class="fa fa-check"></i><b>6.4</b> Detecção de Quinas</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="segmentação.html"><a href="segmentação.html#detector-de-quinas-de-moravec"><i class="fa fa-check"></i><b>6.4.1</b> Detector de Quinas de Moravec</a></li>
+<li class="chapter" data-level="6.4.2" data-path="segmentação.html"><a href="segmentação.html#detector-de-quinas-de-harris"><i class="fa fa-check"></i><b>6.4.2</b> Detector de Quinas de Harris</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="segmentação.html"><a href="segmentação.html#detecção-de-blobs"><i class="fa fa-check"></i><b>6.5</b> Detecção de <em>Blobs</em></a><ul>
+<li class="chapter" data-level="6.5.1" data-path="segmentação.html"><a href="segmentação.html#log"><i class="fa fa-check"></i><b>6.5.1</b> LoG</a></li>
+<li class="chapter" data-level="6.5.2" data-path="segmentação.html"><a href="segmentação.html#dog"><i class="fa fa-check"></i><b>6.5.2</b> DoG</a></li>
+<li class="chapter" data-level="6.5.3" data-path="segmentação.html"><a href="segmentação.html#doh"><i class="fa fa-check"></i><b>6.5.3</b> DoH</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="segmentação.html"><a href="segmentação.html#limiarização"><i class="fa fa-check"></i><b>6.6</b> Limiarização</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="segmentação.html"><a href="segmentação.html#limiarização-global-simples"><i class="fa fa-check"></i><b>6.6.1</b> Limiarização Global Simples</a></li>
+<li class="chapter" data-level="6.6.2" data-path="segmentação.html"><a href="segmentação.html#limiarização-pelo-método-de-otsu"><i class="fa fa-check"></i><b>6.6.2</b> Limiarização pelo Método de Otsu</a></li>
+<li class="chapter" data-level="6.6.3" data-path="segmentação.html"><a href="segmentação.html#uso-de-suavização-para-limiarização"><i class="fa fa-check"></i><b>6.6.3</b> Uso de suavização para limiarização</a></li>
+<li class="chapter" data-level="6.6.4" data-path="segmentação.html"><a href="segmentação.html#uso-de-bordas-para-limiarização"><i class="fa fa-check"></i><b>6.6.4</b> Uso de bordas para limiarização</a></li>
+<li class="chapter" data-level="6.6.5" data-path="segmentação.html"><a href="segmentação.html#limiares-múltiplos"><i class="fa fa-check"></i><b>6.6.5</b> Limiares Múltiplos</a></li>
+<li class="chapter" data-level="6.6.6" data-path="segmentação.html"><a href="segmentação.html#limiarização-variável"><i class="fa fa-check"></i><b>6.6.6</b> Limiarização variável</a></li>
+<li class="chapter" data-level="6.6.7" data-path="segmentação.html"><a href="segmentação.html#limiarização-baseada-em-diversas-variáveis"><i class="fa fa-check"></i><b>6.6.7</b> Limiarização baseada em diversas variáveis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html"><i class="fa fa-check"></i><b>7</b> Deep Learning em visão computacional</a><ul>
+<li class="chapter" data-level="7.1" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#caracterização-de-ai-machine-learning-e-deep-learning"><i class="fa fa-check"></i><b>7.1</b> Caracterização de AI, Machine Learning e Deep Learning</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#aprendizado-supervisionado-e-não-supervisionado"><i class="fa fa-check"></i><b>7.1.1</b> Aprendizado supervisionado e não supervisionado</a></li>
+<li class="chapter" data-level="7.1.2" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#redes-neurais-artificiais"><i class="fa fa-check"></i><b>7.1.2</b> Redes Neurais Artificiais</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#redes-neurais-convolucionaiscnn"><i class="fa fa-check"></i><b>7.2</b> Redes neurais convolucionais(CNN)</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#blocos-de-construção-de-uma-cnn"><i class="fa fa-check"></i><b>7.2.1</b> Blocos de construção de uma CNN</a></li>
+<li class="chapter" data-level="7.2.2" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#por-que-usar-convoluções"><i class="fa fa-check"></i><b>7.2.2</b> Por que usar convoluções</a></li>
+<li class="chapter" data-level="7.2.3" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#redes-cnns-clássicas"><i class="fa fa-check"></i><b>7.2.3</b> Redes CNN’s clássicas</a></li>
+<li class="chapter" data-level="7.2.4" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#aprendizado-por-transferência"><i class="fa fa-check"></i><b>7.2.4</b> Aprendizado por transferência</a></li>
+<li class="chapter" data-level="7.2.5" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#redes-neurais-na-prática"><i class="fa fa-check"></i><b>7.2.5</b> Redes neurais na prática</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#redes-neurais-siamesas"><i class="fa fa-check"></i><b>7.3</b> Redes Neurais Siamesas</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="deep-learning-em-visão-computacional.html"><a href="deep-learning-em-visão-computacional.html#arquitetura"><i class="fa fa-check"></i><b>7.3.1</b> Arquitetura</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html"><i class="fa fa-check"></i><b>8</b> Separação Plano de Fundo</a><ul>
+<li class="chapter" data-level="8.1" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html#fixo"><i class="fa fa-check"></i><b>8.1</b> Fixo</a></li>
+<li class="chapter" data-level="8.2" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html#média-temporal"><i class="fa fa-check"></i><b>8.2</b> Média Temporal</a></li>
+<li class="chapter" data-level="8.3" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html#mediana-temporal"><i class="fa fa-check"></i><b>8.3</b> Mediana Temporal</a></li>
+<li class="chapter" data-level="8.4" data-path="separação-plano-de-fundo.html"><a href="separação-plano-de-fundo.html#exemplos-comparativos-da-média-temporal-média-espaço-temporal-e-mediana-temporal"><i class="fa fa-check"></i><b>8.4</b> Exemplos comparativos da Média Temporal, Média Espaço-Temporal e Mediana Temporal</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="espaço-3d.html"><a href="espaço-3d.html"><i class="fa fa-check"></i><b>9</b> Espaço 3D</a><ul>
+<li class="chapter" data-level="9.1" data-path="espaço-3d.html"><a href="espaço-3d.html#geometria-projetiva"><i class="fa fa-check"></i><b>9.1</b> Geometria projetiva</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="espaço-3d.html"><a href="espaço-3d.html#homogenea"><i class="fa fa-check"></i><b>9.1.1</b> Coordenadas homogêneas</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="espaço-3d.html"><a href="espaço-3d.html#homografia"><i class="fa fa-check"></i><b>9.2</b> Homografia</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="espaço-3d.html"><a href="espaço-3d.html#transformação-linear-direta-dlt"><i class="fa fa-check"></i><b>9.2.1</b> Transformação Linear Direta (DLT)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="espaço-3d.html"><a href="espaço-3d.html#transformações-de-câmera"><i class="fa fa-check"></i><b>9.3</b> Transformações de câmera</a></li>
+<li class="chapter" data-level="9.4" data-path="espaço-3d.html"><a href="espaço-3d.html#distorção-das-lentes"><i class="fa fa-check"></i><b>9.4</b> Distorção das lentes</a></li>
+<li class="chapter" data-level="9.5" data-path="espaço-3d.html"><a href="espaço-3d.html#calibração"><i class="fa fa-check"></i><b>9.5</b> Calibração</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="refêrencias.html"><a href="refêrencias.html"><i class="fa fa-check"></i>Refêrencias</a></li>
+<li class="chapter" data-level="" data-path="refêrencias-1.html"><a href="refêrencias-1.html"><i class="fa fa-check"></i>Refêrencias</a></li>
+<li class="divider"></li>
+<li><center>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+</a></li></center>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Material introdutório de Processamento Digital de Imagens e Visão Computacional</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="espaço-3d" class="section level1">
+<h1><span class="header-section-number">Capítulo 9</span> Espaço 3D</h1>
+<div id="geometria-projetiva" class="section level2">
+<h2><span class="header-section-number">9.1</span> Geometria projetiva</h2>
+<p>Em alguns trabalhos realizados na visão computacional, a geometria euclidiana se torna insuficiente, pois as capturas de imagens com câmeras geram certos problemas, como linhas paralelas que se cruzam (como na Figura <a href="espaço-3d.html#fig:linhasparalelas">9.1</a>) e ângulos que não são preservados, fatos esses que ocorrem por estarmos projetando o mundo 3D em uma plano 2D <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">63</a>, p. 321]</span>. Nesses casos usamos outro tipo de geometria conhecida como geometria projetiva.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:linhasparalelas"></span>
+<img src="imagens/09-espaco_3D/linhas_paralelas.png" alt="Linhas paralelas se cruzam - Como podemos ver nessa imagem de um trilho de trem, duas linhas que no mundo real são paralelas se cruzam no horizonte por causa da perspectiva [64]." width="55%" />
+<p class="caption">
+Figura 9.1: Linhas paralelas se cruzam - Como podemos ver nessa imagem de um trilho de trem, duas linhas que no mundo real são paralelas se cruzam no horizonte por causa da perspectiva <span class="citation">[<a href="#ref-img:linhas_paralelas" role="doc-biblioref">64</a>]</span>.
+</p>
+</div>
+<p>Uma das vantagens de se utilizar a geometria projetiva é o fato que conseguimos representar transformação por simples multiplicação de matrizes, além de que as projeções nos provêem a noção de perspectiva, ou seja, objetos mais distantes têm um tamanho reduzido em relação a objetos mais próximos.</p>
+<p>O espaço projetivo é definido por coordenadas homogêneas assim como o espaço Euclidiano é definido pelas coordenadas Cartesianas. Utilizamos esse espaço e sua geometria pois é a melhor maneira de se representar a relação entre uma imagem e o mundo físico, ou seja, a relação entre as coordenadas da câmera com as coordenadas do mundo real <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">18</a>, p. 484]</span>.</p>
+<div id="homogenea" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> Coordenadas homogêneas</h3>
+<p>As coordenadas homogêneas são a maneira como trabalhamos na geometria projetiva, elas diferem das coordenadas cartesianas por apresentarem uma componente a mais, ou seja, um ponto <span class="math inline">\((X, Y)^T \in \Re^2\)</span> é representado, em coordenadas homogêneas, por <span class="math inline">\((X_1, X_2, X_3)^T\)</span>. A conversão entre os dois sistemas também é muito simples, um ponto <span class="math inline">\(X_c = (x, y)^T\)</span> no sistema cartesiano é convertido a homogêneo da seguinte maneira:</p>
+<p><span class="math display" id="eq:transformacaohomogenea">\[
+X_H = (wx, wy, w)^T \tag{9.1}
+\]</span>
+e convertido ao cartesiano novamente por:</p>
+<p><span class="math display" id="eq:coordenadashomogeneas">\[
+x_c = \frac{wx}{w} \text{ e } y_c =\frac{wy}{w} \tag{9.2}
+\]</span>
+Assim, quando <span class="math inline">\(w = 1\)</span> nossas coordenadas são as mesmas do sistema cartesiano, como pode ser visto na Figura <a href="espaço-3d.html#fig:espacoprojetivo">9.2</a>, onde <span class="math inline">\(w\)</span> é representado por <span class="math inline">\(Z\)</span>. Os pontos que estão no formato <span class="math inline">\(X_H = (x, y, 0)^T\)</span> são conhecidos como pontos ideais, e são os pontos onde as linhas se cruzam no infinito <span class="citation">[<a href="#ref-szeliski2010computer" role="doc-biblioref">65</a>, p. 36]</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:espacoprojetivo"></span>
+<img src="imagens/09-espaco_3D/espaco_projetivo.png" alt="Plano euclidiano e espaço projetivo - Nesta representação podemos ver um ponto do espaço euclidiano sendo projetado no espaço projetivo. [63, p. 605]." width="55%" />
+<p class="caption">
+Figura 9.2: Plano euclidiano e espaço projetivo - Nesta representação podemos ver um ponto do espaço euclidiano sendo projetado no espaço projetivo. <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">63</a>, p. 605]</span>.
+</p>
+</div>
+</div>
+</div>
+<div id="homografia" class="section level2">
+<h2><span class="header-section-number">9.2</span> Homografia</h2>
+<p>As homografias (ou transformações perspectivas) são as transformações realizadas no espaço projetivo. Com elas podemos relacionar uma imagem de uma plano a outra imagem desse mesmo plano obtida de uma outra posição. Podemos observar uma representação disso na Figura <a href="espaço-3d.html#fig:geometriahomografia">9.3</a>, onde temos uma plano do objeto também o plano de duas imagens. O ponto <span class="math inline">\(\tilde{x_0}\)</span> representa o ponto do plano do objeto na imagem 1 e o ponto <span class="math inline">\(\tilde{x_1}\)</span> representa esse mesmo ponto na imagem 2 que é a vista do mesmo ponto a partir de outra posição. Relacionando esses dois pontos temos a homografia <span class="math inline">\(H_{10}\)</span>, que pode ser representada por:</p>
+<p><span class="math display" id="eq:homografia">\[
+\tilde{x_0} = H_{10} \tilde{x_1}  \tag{9.3}
+\]</span>
+Onde <span class="math inline">\(x_0\)</span> e <span class="math inline">\(x_1\)</span> são vetores homogêneos e H uma matriz 3x3:</p>
+<p><span class="math display" id="eq:matrizhomografia">\[
+\begin{bmatrix}x_0 &amp; y_0 &amp; 1_0\end{bmatrix}^T = \begin{bmatrix}h_{11} &amp; h_{12} &amp; h_{13} &amp; h_{21} &amp; h_{22} &amp; h_{23} &amp; h_{31} &amp; h_{32} &amp; h_{33}\end{bmatrix} \begin{bmatrix}x_1 &amp; y_1 &amp; 1_1\end{bmatrix}^T \tag{9.4}
+\]</span></p>
+
+<div class="figure" style="text-align: center"><span id="fig:geometriahomografia"></span>
+<img src="imagens/09-espaco_3D/geometria_homografia.png" alt="Geometria de uma homografia - Temos nessa figura a representação de uma homografia que relaciona pontos entre dois planos de imagem de um mesmo plano no mundo. [65, p. 60]." width="55%" />
+<p class="caption">
+Figura 9.3: Geometria de uma homografia - Temos nessa figura a representação de uma homografia que relaciona pontos entre dois planos de imagem de um mesmo plano no mundo. <span class="citation">[<a href="#ref-szeliski2010computer" role="doc-biblioref">65</a>, p. 60]</span>.
+</p>
+</div>
+<p>E a partir da equação anterior podemos deduzir que:</p>
+<p><span class="math display" id="eq:coordenadashomografia">\[
+x_0 = \frac{h_{11}x_1 + h_{12}y_1 + h_{13}}{h_{31}x_1 + h_{32}y_1 + h_{33}} \text{ e } y_0 = \frac{h_{21}x_1 + h_{22}y_1 + h_{23}}{h_{31}x_1 + h_{32}y_1 + h_{33}}
+\tag{9.5}
+\]</span>
+então:</p>
+<p><span class="math display" id="eq:sistemahomografia1">\[
+\begin{split}
+&amp;h_{31}x_1x_0 + h_{32}y_1x_0 + h_{33}x_0 = h_{11}x_1 + h_{12}y_1 + h_{13}\\
+&amp;h_{31}x_1y_0 + h_{32}y_1y_0 + h_{33}x_0 = h_{21}x_1 + h_{22}y_1 + h_{23}
+\end{split}
+\tag{9.6}
+\]</span></p>
+<p>que pode ser rearranjado em:</p>
+<p><span class="math display" id="eq:sistemahomografia2">\[
+\begin{split}
+&amp;h_{31}x_1x_0 + h_{32}y_1x_0 + h_{33}x_0 - h_{11}x_1 - h_{12}y_1 + h_{13} = 0\\
+&amp;h_{31}x_1x_0 + h_{32}y_1x_0 + h_{33}x_0 - h_{21}x_1 + h_{22}y_1 + h_{23} = 0
+\end{split}
+\tag{9.7}
+\]</span></p>
+<p>e escrito em forma matricial:</p>
+<p><span class="math display" id="eq:formamatricialhomografia1">\[
+\begin{split}
+&amp;\begin{bmatrix}-x_1 &amp;  -y_1 &amp;  -1 &amp;  0 &amp;  0 &amp;  0 &amp; x_1x_0 &amp; y_1x_0 &amp; x_0\end{bmatrix}h^T = 0 \\
+&amp;\begin{bmatrix}0 &amp; 0 &amp; 0 &amp; -x_1 &amp;  -y_1 &amp;  -1  &amp; x_1y_0 &amp; y_1y_0 &amp; y_0\end{bmatrix}h^T = 0 
+\end{split}
+\tag{9.8}
+\]</span></p>
+<p>onde <span class="math inline">\(H = \begin{bmatrix}h_{11} &amp; h_{12} &amp; h_{13} &amp; h_{21} &amp; h_{22} &amp; h_{23} &amp; h_{31} &amp; h_{32} &amp; h_{33}\end{bmatrix}\)</span></p>
+<p>Para que consigamos resolver esse sistema, e achar a homografia H, precisamos de no mínimo 4 pontos correspondentes em cada uma das imagens <span class="citation">[<a href="#ref-hartley2003multiple" role="doc-biblioref">66</a>, p. 88]</span>, o que nos leva ao sistema de equações:</p>
+<p><span class="math display" id="eq:homografiamatriz">\[
+\begin{bmatrix}
+-x_{11} &amp;  -y_{11} &amp;  -1 &amp;  0 &amp;  0 &amp;  0 &amp; x_{11}x_{01} &amp; y_{11}x_{01} &amp; x_{01}\\
+0 &amp;  0 &amp;  0 &amp;  -x_{11} &amp;  -y_{11} &amp;  -1 &amp; x_{11}y_{01} &amp; y_{11}y_{01} &amp; y_{01}\\
+-x_{12} &amp;  -y_{12} &amp;  -1 &amp;  0 &amp;  0 &amp;  0 &amp; x_{12}x_{02} &amp; y_{12}x_{02} &amp; x_{02}\\
+0 &amp;  0 &amp;  0 &amp;  -x_{12} &amp;  -y_{12} &amp;  -1 &amp; x_{12}y_{02} &amp; y_{12}y_{02} &amp; y_{02}\\
+-x_{13} &amp;  -y_{13} &amp;  -1 &amp;  0 &amp;  0 &amp;  0 &amp; x_{13}x_{03} &amp; y_{13}x_{03} &amp; x_{03}\\
+0 &amp;  0 &amp;  0 &amp;  -x_{13} &amp;  -y_{13} &amp;  -1 &amp; x_{13}y_{03} &amp; y_{13}y_{03} &amp; y_{03}\\
+-x_{14} &amp;  -y_{14} &amp;  -1 &amp;  0 &amp;  0 &amp;  0 &amp; x_{14}x_{04} &amp; y_{14}x_{04} &amp; x_{04}\\
+0 &amp;  0 &amp;  0 &amp;  -x_{14} &amp;  -y_{14} &amp;  -1 &amp; x_{14}y_{04} &amp; y_{14}y_{04} &amp; y_{04}
+\end{bmatrix} =
+\begin{bmatrix}
+h_{11}\\
+h_{12}\\
+h_{13}\\
+h_{21}\\
+h_{22}\\
+h_{23}\\
+h_{31}\\
+h_{32}\\
+h_{33}
+\end{bmatrix} = 0
+\tag{9.9}
+\]</span></p>
+<p>Resolvendo o sistema de equações anterior, encontramos a matriz de homografia H entre as duas imagens. Algo importante a se notar é que o tamanho do sistema de equações, e por conseguinte o tamanho da matriz, não é fixo, pois cada ponto adicionará mais duas linhas <a href="espaço-3d.html#eq:formamatricialhomografia1">(9.8)</a> a matriz <a href="espaço-3d.html#eq:homografiamatriz">(9.9)</a>.</p>
+<div id="transformação-linear-direta-dlt" class="section level3">
+<h3><span class="header-section-number">9.2.1</span> Transformação Linear Direta (DLT)</h3>
+<p>A transformação Linear Direta, comumente chamada pela sigla em inglês DLT(Direct Linear Transformation) é uma das maneiras de se calcular a estimação da matriz H. Esse método funciona da seguinte maneira <span class="citation">[<a href="#ref-hartley2003multiple" role="doc-biblioref">66</a>, p. 91]</span>:</p>
+<ol style="list-style-type: decimal">
+<li>Dado <span class="math inline">\(n &gt;= 4\)</span> pontos correspondentes entre dois planos 2d(imagens).</li>
+<li>Para cada correspondência, crie uma matriz como a da equação <a href="espaço-3d.html#eq:formamatricialhomografia1">(9.8)</a> na forma matricial:
+<span class="math display" id="eq:formamatricialhomografia12">\[
+\begin{split}
+&amp;\begin{bmatrix}-x_1 &amp;  -y_1 &amp;  -1 &amp;  0 &amp;  0 &amp;  0 &amp; x_1x_0 &amp; y_1x_0 &amp; x_0\end{bmatrix}\\
+&amp;\begin{bmatrix}0 &amp; 0 &amp; 0 &amp; -x_1 &amp;  -y_1 &amp;  -1  &amp; x_1y_0 &amp; y_1y_0 &amp; y_0\end{bmatrix}
+\end{split}
+\tag{9.10}
+\]</span></li>
+<li>Junte todas as matrizes criadas em uma única matriz A de tamanho <span class="math inline">\(2n x 9\)</span>.</li>
+<li>Obtenha a decomposição em valores singulares(Singular Value Decomposition - SVD) da matriz anterior, <span class="math inline">\(A=U\sum{V^T}\)</span>. O vetor singular unitário que corresponde ao menor valor singular é então a solução para h, ou seja, seja D diagonal com entradas positivas, ordenado em ordem decrescente na diagonal, então h será a última coluna de V.</li>
+<li>Fazendo um reshape do vetor h, temos a matriz de homografia H.</li>
+</ol>
+</div>
+</div>
+<div id="transformações-de-câmera" class="section level2">
+<h2><span class="header-section-number">9.3</span> Transformações de câmera</h2>
+<p>A formação de imagem a partir de uma câmera digital pode ser compreendida por uma sequência de transformações entre sistemas de coordenadas, que fazem a correspondência entres os pontos “P” do espaço tridimensional para os pontos “p” no plano da imagem. Para estudar estas transformações será utilizado como referência os quatros sistemas de coordenadas na Figura <a href="espaço-3d.html#fig:coordenadas">9.4</a>, apresentados por Carvalho et al. (2005) <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 22]</span>:</p>
+
+<div class="figure" style="text-align: center"><span id="fig:coordenadas"></span>
+<img src="imagens/09-espaco_3D/coordenadas.png" alt="Sistemas de coordenadas. Relação entre os sistemas de coordenadas que determina a transformação da posição do objeto de interesse no SCM para a projeção na imagem (SCI). Outros sistemas intermediários são o Sistema de coordenadas da câmera (SCC) e o Sistema de coordenadas em pixel (SCP). [67, p. 22]." width="55%" />
+<p class="caption">
+Figura 9.4: Sistemas de coordenadas. Relação entre os sistemas de coordenadas que determina a transformação da posição do objeto de interesse no SCM para a projeção na imagem (SCI). Outros sistemas intermediários são o Sistema de coordenadas da câmera (SCC) e o Sistema de coordenadas em pixel (SCP). <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 22]</span>.
+</p>
+</div>
+<p>Sistema de coordenadas do mundo (SCM): é tridimensional com origem no ponto “O” e as posições são indicadas por (X, Y, Z).</p>
+<p>Sistema de coordenadas da câmera (SCC): também é tridimensional, tem origem no centro óptico da câmera “Õ” e as coordenadas são referenciadas por (X’, Y’, Z’). O sistema é definido em relação ao plano de projeção <span class="math inline">\(\pi\)</span>, sendo que os eixos X’ e Y’ devem ser paralelos às bordas da imagem no plano, e o eixo Z’ é perpendicular de forma que entre o centro óptico (Õ) e a intersecção deste eixo com o plano exista uma distância f, que é a distância focal da câmera.</p>
+<p>Sistema de coordenadas de imagem (SCI): um sistema bidimensional sobre o plano de projeção <span class="math inline">\(\pi\)</span>, com origem no ponto “C” e com coordenadas (x, y). A origem é definida pelo ponto que marca a projeção ortogonal do centro óptico da câmera (Õ) sobre o plano da imagem.</p>
+<p>Sistema de coordenadas em pixel (SCP): também é um sistema bidimensional, com origem no canto superior (ou inferior) esquerdo da imagem e com posições representadas por (u, v). Identifica os pontos da imagem com relação a grade de pixels.</p>
+<p>As etapas de transformações entre estes sistemas estão resumidas no esquema da Figura <a href="espaço-3d.html#fig:transformacoes">9.5</a>, em que ocorrem sucessivas mudanças de coordenadas dos pontos de interesse, inicialmente referenciados no sistema SCM como (X,Y, Z), passando por todos os sistemas até o nível de pixel (u, v). Entre as transformações realizadas, estão a translação, rotação, escala e projeções que podem ser descritas como combinações de operações matriciais na sua forma homogênea <span class="citation">[<a href="#ref-davies2012" role="doc-biblioref">68</a>, p. 481]</span>, seguindo as abordagens descritas no tópico <a href="espaço-3d.html#homogenea">coordenadas homogêneas</a>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:transformacoes"></span>
+<img src="imagens/09-espaco_3D/transformacoes.png" alt="Mudanças de coordenadas. Etapas de transformação do referencial do objeto de interesse (SCM) para o sistema de coordenadas de pixel (SCP) no plano de projeção. São apresentados quatro sistemas de coordenadas - SCM, SCC, SCI, SCP - cada um com a identificação da origem e dos pontos, por exemplo, no SCM a origem é indicada por “O” e o ponto (X, Y, Z)." width="55%" />
+<p class="caption">
+Figura 9.5: Mudanças de coordenadas. Etapas de transformação do referencial do objeto de interesse (SCM) para o sistema de coordenadas de pixel (SCP) no plano de projeção. São apresentados quatro sistemas de coordenadas - SCM, SCC, SCI, SCP - cada um com a identificação da origem e dos pontos, por exemplo, no SCM a origem é indicada por “O” e o ponto (X, Y, Z).
+</p>
+</div>
+<p>A passagem do referencial real (SCM) para o da câmera (SCC) pode ser descrita como:</p>
+<p><span class="math display" id="eq:transformacaoimagem">\[
+\tilde{P} = RP + T
+\tag{9.11}
+\]</span></p>
+<p>em que ocorre a mudança de coordenada do ponto P (X, Y, Z) em SCM para a correspondência <span class="math inline">\(\tilde{P}\)</span> (X’, Y’, Z’) em SCC. O vetor T é a posição da origem absoluta (O) no sistema SCC. A matriz R fornece a posição dos versores dos eixos do SCM com relação ao SCC <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 23]</span>. Em coordenadas homogêneas esta expressão é escrita:</p>
+<p><span class="math display" id="eq:matriztransformacao">\[
+\begin{bmatrix}
+\tilde{X}\\
+\tilde{Y}\\
+\tilde{Z}\\
+1
+\end{bmatrix} =
+\begin{bmatrix}
+R &amp; T\\
+0 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+X\\
+Y\\
+Z\\
+1
+\end{bmatrix}
+\tag{9.12}
+\]</span>
+Como os dois referenciais são ortogonais, R é uma matriz ortogonal (<span class="math inline">\(RR^t = I\)</span>) e é possível determiná-la apenas com 3 parâmetros em vez de 9, que caracterizam a rotação que leva de um eixo a outro, geralmente tratados como componentes do vetor Rodriguez <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 24]</span>. Assim, para cada posição da câmera existem 6 parâmetros que descrevem o seu estado extrínseco, 3 referentes à matriz R e 3 do vetor T.</p>
+<p>A mudança das coordenadas em relação a câmera (SCC) para o sistema da imagem (SCI) pode ser aproximada como uma projeção perspectiva em uma câmera pinhole com distância focal f <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 24]</span>:</p>
+<p><span class="math display" id="eq:projecaoperspectiva">\[
+\begin{bmatrix}
+x\\
+y\\
+1
+\end{bmatrix} =
+\begin{bmatrix}
+f &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; f &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+\tilde{X}\\
+\tilde{Y}\\
+\tilde{Z}\\
+1
+\end{bmatrix}
+\tag{9.13}
+\]</span>
+Como esta transformação projetiva não é inversível, um ponto da imagem pode ser associado com uma infinidade de pontos no espaço, ou seja, o ponto (x, y) da imagem é tratado como a projeção de todos os pontos do espaço que atendem a forma <span class="math inline">\(\lambda(x, y, f)\)</span>, em que <span class="math inline">\(\lambda != 0\)</span> <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 24]</span>.</p>
+<p>O último nível de transformação que consideramos é do plano de formação da imagem (SCI) para a matriz retangular dos pixels (SCP):</p>
+<p><span class="math display" id="eq:transformacaopixel">\[
+\begin{bmatrix}
+u\\
+v\\
+1
+\end{bmatrix} =
+\begin{bmatrix}
+s_x &amp; \tau &amp; u_c\\
+0 &amp; s_y &amp; v_c\\
+0 &amp; 0 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+\tilde{X}\\
+\tilde{Y}\\
+\tilde{Z}\\
+1
+\end{bmatrix}
+\tag{9.14}
+\]</span>
+Os elementos <span class="math inline">\(s_x\)</span> e <span class="math inline">\(s_y\)</span> são a quantidade de pixels por unidade de comprimento, nas direções horizontal e vertical, respectivamente. Na maior parte das câmeras, o espaçamento entre linhas e colunas da matriz são iguais, ou seja, os pixels são quadrados <span class="math inline">\(s_x = s_y\)</span>. Os valores <span class="math inline">\(u_c\)</span> e <span class="math inline">\(v_c\)</span> descrevem a posição, em pixels, da projeção ortogonal do centro óptico da câmera (O’) sobre o plano de projeção, indicado como a origem C do SCI. Geralmente, o ponto C está no centro da imagem e a origem do SCP está no canto, assim, <span class="math inline">\(u_c\)</span> e <span class="math inline">\(v_c\)</span> são iguais a metade das dimensões da imagem. O elemento <span class="math inline">\(\tau\)</span> reflete o alinhamento das colunas de pixels com as linhas, mais especificamente, é a tangente do ângulo que as colunas formam com a perpendicular às linhas. Quando as colunas são perpendiculares às linhas, <span class="math inline">\(\tau = 0\)</span>.</p>
+<p>Os cinco parâmetros (<span class="math inline">\(s_x, s_y, u_c, v_c, \tau\)</span>) mais a distância focal (f) totalizam os seis parâmetros intrínsecos da câmera, que descrevem o seu funcionamento interno, enquanto que os seis parâmetros extrínsecos (elementos da matriz R e do vetor T) estabelecem a posição e a orientação. A dependência destas variáveis nas transformações indica que para determinadas aplicações na visão computacional, como no rastreamento e na reconstrução 3D, é necessário modelar estes valores <span class="citation">[<a href="#ref-davies2012" role="doc-biblioref">68</a>, p. 479]</span> . O processo da determinação dos parâmetros extrínsecos e intrínsecos da câmera é denominado calibração <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">63</a>, p. 331]</span>.</p>
+<p>As equações anteriores podem ser combinadas como multiplicações de matrizes para estabelecer uma transformação de coordenada de um ponto de interesse (SCM) à sua projeção no referencial da matriz de pixels da câmera (SCP):</p>
+<p><span class="math display" id="eq:transformacaofinal">\[
+[p] =
+\begin{bmatrix}
+fs_x &amp; f\tau &amp; u_c\\
+0 &amp; fs_y &amp; v_c\\
+0 &amp; 0 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+R &amp; T
+\end{bmatrix}
+\begin{bmatrix}
+P
+\end{bmatrix}
+\approx K
+\begin{bmatrix}
+R &amp; T
+\end{bmatrix}
+\begin{bmatrix}
+P
+\end{bmatrix}
+\tag{9.15}
+\]</span>
+em que “P” é a coordenada em SCM e “p” em SCP. A matriz K de calibração define os parâmetros intrínsecos da câmera, enquanto [R T] representa os extrínsecos <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">69</a>]</span>. Na prática os valores de f, <span class="math inline">\(s_x\)</span> e <span class="math inline">\(s_y\)</span> não são determinados individualmente por esta operação, pois estão combinados como produtos (<span class="math inline">\(fs_x\)</span> e <span class="math inline">\(fs_y\)</span>) <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 26]</span>, assim, a matriz de calibração pode ser escrita como:</p>
+<p><span class="math display" id="eq:matrizcalibracao">\[
+K =
+\begin{bmatrix}
+f_x &amp; c &amp; u_c\\
+0 &amp; f_y &amp; v_c\\
+0 &amp; 0 &amp; 1
+\end{bmatrix}
+\tag{9.16}
+\]</span></p>
+</div>
+<div id="distorção-das-lentes" class="section level2">
+<h2><span class="header-section-number">9.4</span> Distorção das lentes</h2>
+<p>Os parâmetros intrínsecos foram modelados com base em uma aproximação do comportamento das câmeras do tipo pinhole, entretanto, as lentes das câmeras reais podem apresentar distorções. Geralmente as distorções mais proeminentes nas imagens são do tipo geométrica, em que os pontos no plano da imagem são deslocados de onde deveriam ser projetados <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">63</a>, p. 331]</span>. A maior parte dos modelos empíricos de distorção consideram as distorções geométricas radiais e tangenciais <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">70</a>]</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:distorcaoradial"></span>
+<img src="imagens/09-espaco_3D/distorcaoradial.png" alt="Distorção radial. Este tipo de distorção faz com que as linhas retas pareçam curvadas, e o efeito é maior nas bordas. (a) Imagem com distorção radial. (b) Imagem sem distorção. [69, p. 3]" width="55%" />
+<p class="caption">
+Figura 9.6: Distorção radial. Este tipo de distorção faz com que as linhas retas pareçam curvadas, e o efeito é maior nas bordas. (a) Imagem com distorção radial. (b) Imagem sem distorção. <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">69</a>, p. 3]</span>
+</p>
+</div>
+<p>A distorção radial faz com que os pontos da imagem sejam transladados ao longo das linhas radiais a partir da origem do plano de projeção (C), fazendo com que as linhas retas pareçam curvadas como na Figura <a href="espaço-3d.html#fig:distorcaoradial">9.6</a>. A distorção radial se torna maior quanto mais longe os pontos estão do centro da imagem <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">70</a>]</span>. A imagem que deveria se formar no ponto (u, v) do plano de projeção é deslocada para o ponto (u’, v’) devido a distorção que pode ser avaliada como <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 27]</span>:</p>
+<p><span class="math display" id="eq:distorcao">\[
+(u&#39;, v&#39;) = (1 + d) (u, v)
+\tag{9.17}
+\]</span>
+em que a distorção (d) depende da distância do ponto da imagem ao ponto de origem (C) descrita como:</p>
+<p><span class="math display" id="eq:distanciaorigem">\[
+r = \sqrt{(x)^2 + (y )^2}
+\tag{9.18}
+\]</span>
+A relação entre “r” e “d” pode ser modelada por uma função polinomial <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 27]</span>:</p>
+<p><span class="math display" id="eq:distorcaoradial">\[
+d = k_1r^2 +k_2r^4 + k_3r^6 + …
+\tag{9.19}
+\]</span>
+sendo <span class="math inline">\(k_n\)</span> os coeficientes de distorção radial. A distorção tangencial acontece pelo desalinhamento da lente com o plano da imagem, que pode não estar perfeitamente paralela, fazendo com que algumas áreas da imagem pareçam mais próximas do que o esperado <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">70</a>]</span>. Considerando as distorções radiais e tangenciais o ponto na imagem é posicionado em:</p>
+<p><span class="math display" id="eq:distorcoes">\[
+u&#39; = u + \delta_u \text{, } v&#39; = v + \delta_v
+\tag{9.20}
+\]</span>
+em que os deslocamentos (<span class="math inline">\(\delta_u\)</span>, <span class="math inline">\(\delta_v\)</span>) são modelados como <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">63</a>, p. 330]</span>:</p>
+<p><span class="math display" id="eq:matrizdistorcoes">\[
+\begin{bmatrix}
+\delta_u\\
+\delta_v
+\end{bmatrix} =
+\begin{bmatrix}
+u(k_1r^2 + k_2r^4 + k_3r^6 + ...)\\
+v(k_1r^2 + k_2r^4 + k_3r^6 + ...)
+\end{bmatrix}
++
+\begin{bmatrix}
+2p_1uv + p_2(r^2 + 2u^2)\\
+p_1(r^2 + 2v^2) + 2p_2uv
+\end{bmatrix}
+\tag{9.21}
+\]</span>
+Geralmente, apenas 3 coeficientes (<span class="math inline">\(k_1, k_2, k_3\)</span>) de distorção radial são suficientes para descrever a distorção radial, que juntamente com os 2 coeficientes tangenciais (<span class="math inline">\(p_1, p_2\)</span>) são considerados como parâmetros intrínsecos adicionais, os parâmetros de distorção (<span class="math inline">\(k_1, k_2, k_3, p_1, p_2\)</span>) <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">63</a>, p. 330]</span>.</p>
+</div>
+<div id="calibração" class="section level2">
+<h2><span class="header-section-number">9.5</span> Calibração</h2>
+<p>Determinar os parâmetros intrínsecos e extrínsecos com base na equação (p = K [R T] [P]) envolve a resolução de um problema de otimização não linear. Geralmente, o problema é formulado como uma minimização de erro com base na diferença entre posições conhecidas da imagem (p) com os valores estimados (p’) utilizando como referência os parâmetros R, T, K e <span class="math inline">\(\delta\)</span> da solução <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 28]</span>. Assim, os parâmetros intrínsecos são estabelecidos de forma que os pontos da imagem (p’) obtidos por uma câmera em calibração sejam os mais próximos dos pontos (p) conhecidos da imagem <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 28]</span>:</p>
+<p><span class="math display" id="eq:otimizacao">\[
+\sum_{i=0}^n {||p&#39;_i - p_i||^2}
+\tag{9.22}
+\]</span>
+Na calibração devem ser utilizadas imagens de amostra de um padrão, como de um tabuleiro de xadrez (Figura <a href="espaço-3d.html#fig:chess">9.7</a>), em que seja possível identificar automaticamente na imagem pontos cujas coordenadas sejam conhecidas <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 29]</span>. No caso do tabuleiro de xadrez, os pontos de referência são as interseções dos quadrados que possibilitam identificar tanto as coordenadas na imagem (p) quanto no real (P) <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">69</a>, p. 12]</span>.</p>
+<p>Para exemplificar as etapas de calibração utilizaremos como guia o material e o código disponibilizados na documentação do OpenCv <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">70</a>]</span>. As etapas de calibração que descreveremos seguem o método Zhang, que usa um padrão bidimensional, mas que é posicionado em diferentes posições do espaço <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 39]</span>. Na prática, as imagens são obtidas a partir de uma câmera estática e o tabuleiro é colocado em diferentes posições e orientações, sendo necessário pelo menos 10 imagens <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">70</a>]</span>. Em cada imagem são utilizados os mesmos pontos de referência, por exemplo, pela Figura <a href="espaço-3d.html#fig:chess">9.7</a> se identifica 9x6 pontos de interseção no tabuleiro, assim, a entrada do algoritmo segue a forma tamanho_tabuleiro = (9,6) .</p>
+
+<div class="figure" style="text-align: center"><span id="fig:chess"></span>
+<img src="imagens/09-espaco_3D/chess.jpg" alt="Tabuleiro de Xadrez. Uma das imagens utilizadas como padrão para realizar a calibração da câmera. Os pontos de contato entre os quadrados de mesma cor são utilizados como posições de referência para o algoritmo de calibração. [70]" width="55%" />
+<p class="caption">
+Figura 9.7: Tabuleiro de Xadrez. Uma das imagens utilizadas como padrão para realizar a calibração da câmera. Os pontos de contato entre os quadrados de mesma cor são utilizados como posições de referência para o algoritmo de calibração. <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">70</a>]</span>
+</p>
+</div>
+<p>Uma abordagem que simplifica a aplicação dos algoritmos é considerar que o tabuleiro se mantém estacionário no plano XY e que é a câmera que se move, desta forma, não é preciso se preocupar com as coordenadas do terceiro eixo (Z= 0) <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">70</a>]</span>. Os valores de X e Y são definidos como a localização dos pontos no tabuleiro, e considerando o formato em grade, são identificados como (0,0), (1,0), (2,0),…, (8,5). No código, os pontos no referencial do espaço real são identificados como pontos objeto e no plano de projeção como pontos imagem.</p>
+<p>As coordenadas dos pontos na imagem do tabuleiro podem ser determinadas pela função “cv.findChessboardCorners(imagem, tamanho_tabuleiro, flags)”, que recebe como entrada a imagem e o tamanho do tabuleiro. Esta função retorna as coordenadas dos pontos de referência na imagem (corners) e a variável “ret” recebe “True” quando isto acontece. Os pontos são salvos de acordo com as posições no tabuleiro, da esquerda para a direita e de cima para baixo.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="espaço-3d.html#cb14-1"></a>ret, corners <span class="op">=</span> cv.findChessboardCorners(imagem, (<span class="dv">9</span>,<span class="dv">6</span>), <span class="va">None</span>)</span></code></pre></div>
+<p>Geralmente é utilizada a função “cv.cornerSubPix(imagem, corners, winSize, zeroZone, criterio)” para aumentar a acurácia do posicionamento dos pontos. A função “cornerSubPix” recebe a imagem e os pontos de referência calculados (corners) e avalia os pontos dentro uma vizinhança estabelecida pelo parâmetro “winSize”, que define a metade do comprimento da janela de pesquisa. O parâmetro “zeroZone” indica o tamanho da região em que os cálculos não são realizados, utilizado às vezes para evitar singularidades da matriz de autocorrelação. Quando “zeroZone = (-1,-1)”, esta estratégia não é utilizada, não existindo regiões “mortas”. Como o algoritmo da função “cornerSubPix” é iterativo é necessário estabelecer um critério de parada, como o número de interações e/ou acurácia.
+Após estabelecer os pontos da imagem é possível desenhá-los sobre o tabuleiro com a função “cv.drawChessboardCorners(imagem, tamanho_tabuleiro, corners, ret).</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="espaço-3d.html#cb15-1"></a>criterio <span class="op">=</span> (cv.TERM_CRITERIA_EPS <span class="op">+</span> cv.TERM_CRITERIA_MAX_ITER, <span class="dv">30</span>, <span class="fl">0.001</span></span>
+<span id="cb15-2"><a href="espaço-3d.html#cb15-2"></a>corners <span class="op">=</span> cv.cornerSubPix(imagem, corners, (<span class="dv">11</span>,<span class="dv">11</span>), (<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>), criterio)</span>
+<span id="cb15-3"><a href="espaço-3d.html#cb15-3"></a>cv.drawChessboardCorners(imagem, (<span class="dv">9</span>,<span class="dv">6</span>), corners, ret)</span></code></pre></div>
+<p>As coordenadas reais identificadas como pontos objeto e as coordenadas na imagem são repassadas como entradas da função “cv2.calibrateCamera(objectPoints, imagePoints, imageSize, flags)”. Esta função retorna os parâmetros intrínsecos e extrínsecos da câmera com base no método Zhang, o qual considera inicialmente nos cálculos uma aproximação da câmera pinhole e depois integra as distorções.</p>
+<p>O problema da calibração se fundamenta em estabelecer os parâmetros das transformações que realizam o mapeamento da coordenada homogênea P=(X,Y, Z, 1) do real para a imagem p=(x, y, 1) <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">69</a>, p. 11]</span>:</p>
+<p><span class="math display" id="eq:transformacaocalibracao">\[
+\lambda
+\begin{bmatrix}
+x\\
+y\\
+1
+\end{bmatrix} =
+K
+\begin{bmatrix}
+r_1 &amp; r_2 &amp; r_3 &amp; t
+\end{bmatrix}
+\begin{bmatrix}
+X\\
+Y\\
+Z = 0\\
+1
+\end{bmatrix}
+K
+\begin{bmatrix}
+r_1 &amp; r_2 &amp; t
+\end{bmatrix}
+\begin{bmatrix}
+X\\
+Y\\
+1
+\end{bmatrix}
+\tag{9.23}
+\]</span></p>
+<p>Ao adotar que o plano de calibração está sobre Z=0 podemos simplificar as coordenadas homogêneas dos pontos reais como (X, Y, 1), o que permite escrever a transformação de coordenadas como <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">69</a>, p. 12]</span>:</p>
+<p><span class="math display" id="eq:transformacaosimplificada">\[
+\lambda
+\begin{bmatrix}
+x &amp; y &amp; 1
+\end{bmatrix} =
+H
+\begin{bmatrix}
+X &amp; Y &amp; 1
+\end{bmatrix}
+\tag{9.24}
+\]</span>
+em que dado os pontos no plano padrão de calibração (P) e os pontos na imagem (p) é possível determinar uma Homografia (H), uma transformação projetiva entre planos, para cada imagem padrão. Assim, ao calcular a Homografia como indicado no tópico <a href="espaço-3d.html#homografia">homografia</a> se consegue estabelecer a seguinte relação:</p>
+<p><span class="math display" id="eq:homografia">\[
+H = \lambda
+K\begin{bmatrix}
+r_1 &amp; r_2 &amp; T
+\end{bmatrix}
+\tag{9.3}
+\]</span>
+O que permite determinar os parâmetros intrínsecos e extrínsecos da câmera. Os elementos da matriz de calibração (K) são estimados considerando a matriz simétrica <span class="math inline">\(B = K^{-T} K^{-1}\)</span> de acordo com as expressões <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">69</a>, p. 14]</span>:</p>
+<p><span class="math display" id="eq:elementoscalibracao">\[
+\begin{split}
+&amp;v_c = \frac{(B_{12}B_{13} - B_{11}B_{23})}{(B_{11}B_{22} - B_{12}^2)}\\
+&amp;\lambda = B_{33} - \frac{[B_{13}^2 + v_c(B_{12}B_{13} - B_{11}B_{23})]}{B_{11}}\\
+&amp;f_x = \sqrt{\frac{\lambda}{B_{11}}}\\
+&amp;f_y = \sqrt{\frac{\lambda B_{11}}{(B_{11}B_{22} - B_{12}^2)}}\\
+&amp;c = \frac{-B_{12}f_x^2f_y}{\lambda}\\
+&amp;u_c = \frac{\lambda v_c}{f_x} - \frac{B_{13}f_x^2}{\lambda}
+\end{split}
+\tag{9.25}
+\]</span>
+Após determinar os cinco elementos da matriz de calibração (<span class="math inline">\(v_c, u_c, f_x, f_y, c\)</span>) e o fator de escala (<span class="math inline">\(\lambda\)</span>) calculam-se os parâmetros extrínsecos (R, T) <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">69</a>, p. 15]</span>:</p>
+<p><span class="math display" id="eq:extrinsecos">\[
+\begin{split}
+&amp;r_1 = \frac{1}{\lambda}K^{-1}h_1\\
+&amp;r_2 = \frac{1}{\lambda}K^{-1}h_2\\
+&amp;r_3 = r_1 x r_2\\
+&amp;t = \frac{1}{\lambda}K^{-1}h_3\\
+\end{split}
+\tag{9.26}
+\]</span>
+As distorções podem ser calculadas com base nos valores estimados das posições (p’) utilizando os parâmetros da calibração, que apresentam distorções, com os pontos ideais da imagem (p). Os modelos de distorções radiais e tangenciais apresentados em são reescritos na forma matricial, o que permite determinar uma solução por mínimos quadrados com os resultados para os coeficientes de distorção radial (<span class="math inline">\(k_1, k_2, k_3\)</span>) e tangencial (<span class="math inline">\(p_1, p_2\)</span>) <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">67</a>, p. 44]</span>.</p>
+<p>Considera-se que os parâmetros intrínsecos são os mesmos em todas as imagens padrão, e que somente os parâmetros extrínsecos se alteram quando a imagem é reposicionada <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">70</a>]</span>. Todas as etapas anteriores são resolvidas por uma única função no OpenCV:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="espaço-3d.html#cb16-1"></a>ret, cameraMatrix, dist, rvecs, tvecs <span class="op">=</span> cv.calibrateCamera(objpoints, imgpoints, imagem.shape[::<span class="op">-</span><span class="dv">1</span>], <span class="va">None</span>, <span class="va">None</span>)</span></code></pre></div>
+<p>em que se tem como saída da função a matriz de calibração (cameraMatriz) e os coeficientes de distorções (dist), que valem para todas as imagens, e o vetor de rotação R (rvecs) e de translação T (tvecs) que são calculados por padrão.</p>
+
+
+</div>
+</div>
+<h3>Refêrencias</h3>
+<div id="refs" class="references">
+<div id="ref-nixon2019feature">
+<p>[18] M. Nixon e A. Aguado, <em>Feature extraction and image processing for computer vision</em>. Academic press, 2019.</p>
+</div>
+<div id="ref-corke2017">
+<p>[63] P. Corke, <em>Robotics, Vision and Control Fundamental Algorithms in MATLAB</em>, 2º ed. Gewerbestrasse, Su/´i/cca: Springer, 2017.</p>
+</div>
+<div id="ref-img:linhas_paralelas">
+<p>[64] W. Commons, “Railroad tracks "vanishing" into the distance”. 2006, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Railroad-Tracks-Perspective.jpg">https://commons.wikimedia.org/wiki/File:Railroad-Tracks-Perspective.jpg</a>.</p>
+</div>
+<div id="ref-szeliski2010computer">
+<p>[65] R. Szeliski, <em>Computer vision: algorithms and applications</em>. Springer Science &amp; Business Media, 2010.</p>
+</div>
+<div id="ref-hartley2003multiple">
+<p>[66] R. Hartley e A. Zisserman, “Multiple view geometry in computer”, <em>Vision, 2nd ed., New York: Cambridge</em>, 2003.</p>
+</div>
+<div id="ref-carvalho2005">
+<p>[67] P. C. Carvalho <em>et al.</em>, “Fotografia 3D – 25 Colóquio Brasileiro de Matemática”, <em>Rio de Janeiro: Associação Instituto de Matemática Pura e Aplicada, IMPA</em>, 2005.</p>
+</div>
+<div id="ref-davies2012">
+<p>[68] E. R. Davies, <em>Computer and Machine Vision: Theory, Algorithms, Practicalities</em>, 4º ed. Waltham, Estados Unidos: Elsevier, 2012.</p>
+</div>
+<div id="ref-santos2012">
+<p>[69] M. C. dos Santos, “Revis/ ao de Conceitos em Proje/cc/ ao, Homografia, Calibra/cc/ ao de C/^amera, Geometria Epipolar, Mapas de Profundidade e Varredura de Planos”. Disciplina Vis/ ao Computacional, Unicamp, sob orienta/cc/ ao do Prof. Dr. H/´elio Pedrini., S/ ao Paulo, 2012, [Online]. Disponível em: <a href="https://www.ic.unicamp.br/~rocha/teaching/2012s1/mc949/aulas/additional-material-revision-of-concepts-homography-and-related-topics.pdf">https://www.ic.unicamp.br/~rocha/teaching/2012s1/mc949/aulas/additional-material-revision-of-concepts-homography-and-related-topics.pdf</a>.</p>
+</div>
+<div id="ref-opencvcalibration">
+<p>[70] “Camera Calibration”. Website do OpenCV, [Online]. Disponível em: <a href="https://docs.opencv.org/master/dc/dbb/tutorial_py_calibration.html">https://docs.opencv.org/master/dc/dbb/tutorial_py_calibration.html</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="separação-plano-de-fundo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="refêrencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": null
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/covap-utfpr/pdi/edit/master/09-espaco_3D.Rmd",
+"text": "Editar "
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"citation_package": "biblatex"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
