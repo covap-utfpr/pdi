@@ -645,7 +645,7 @@ D_4(f_1 , f_2)   = |x_1 - x_2 | + |y_1 - y_2 |
 Figura 2.27: Conjunto de pontos com distância <span class="math inline">\(D_4\)</span> menor ou igual a <span class="math inline">\(3\)</span> de um ponto central <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 33]</span>.
 </p>
 </div>
-<p>A distância $D_8 $entre <span class="math inline">\(f_1\)</span> e <span class="math inline">\(f_2\)</span>, também denotado de <em>chessboard</em>, é definida como
+<p>A distância <span class="math inline">\(D_8\)</span> entre <span class="math inline">\(f_1\)</span> e <span class="math inline">\(f_2\)</span>, também denotado de <em>chessboard</em>, é definida como
 <span class="math inline">\(D_8(f_1 , f_2) = max(| x_1 = x_2 | , | y_1 =y_2 |)\)</span>
 Os pixels com uma distância <span class="math inline">\(D_8\)</span> de <span class="math inline">\(f_1\)</span> menor ou igual a algum valor <span class="math inline">\(d\)</span> formam um quadrado central em <span class="math inline">\(f_1\)</span>. Os pontos com distância <span class="math inline">\(1\)</span> são os pixels com a vizinhança-8 do ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_8 \leq 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na Figura <a href="formação-da-imagem.html#fig:medidaD3">2.28</a></p>
 
@@ -669,7 +669,7 @@ Dadas duas imagens, <span class="math inline">\(f_1\)</span> e <span class="math
 <li><p>Divisão: <span class="math inline">\(f_1(x_1, y_1) \div f_2(x_2, y_2)\)</span></p></li>
 </ol></li>
 </ul>
-<p>Durante o processo de operações aritméticas sobre uma imagem alguns cuidados devem ser tomados para contornar a produção de valores fora do intervalo de níveis de cinza sobre a imagem original no processo. Neste caso, a operação de adição de duas imagens com <span class="math inline">\(256\)</span> níveis de cinza, pode resultar em um número maior que valor <span class="math inline">\(255\)</span> para determinados pixels, por outro lado, a operação de subtração de duas imagens podem resultar em valores negativos para alguns pixels durante o processo. Para solucionar esse problema depois do processo aritmético (aplicação aritmética), realizar uma transformação de escala de cinza na imagem resultante para manter seus valores do intervalo adequado. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 34]</span>.</p>
+<p>Durante o processo de operações aritméticas sobre uma imagem alguns cuidados devem ser tomados para contornar a produção de valores fora do intervalo de níveis de cinza sobre a imagem original no processo. Neste caso, a operação de adição de duas imagens com <span class="math inline">\(256\)</span> níveis de cinza, pode resultar em um número maior que valor <span class="math inline">\(255\)</span> para determinados pixels, por outro lado, a operação de subtração de duas imagens podem resultar em valores negativos para alguns pixels durante o processo. Para solucionar esse problema depois do processo aritmético (aplicação aritmética), realizar uma transformação de escala de cinza na imagem resultante para manter seus valores do intervalo adequado <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 34]</span>.</p>
 
 </div>
 </div>
