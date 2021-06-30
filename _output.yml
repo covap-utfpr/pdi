@@ -24,3 +24,5 @@ bookdown::gitbook:
     citation_package: biblatex
 bookdown::pdf_book:
   citation_package: biblatex
+  toc_appendix: yes
+  toc_bib: yes
