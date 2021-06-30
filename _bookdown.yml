@@ -14,5 +14,5 @@ language:
     edit: "Editar "
     chapter_name: "Capítulo "
 rmd_files:
-  html: ["index.Rmd", "01-introducao.Rmd", "02-formacao_imagem.Rmd", "03-transformacoes_geometricas.Rmd", "04-transformacoes_radiometricas.Rmd", "05-filtros.Rmd", "06-segmentacao.Rmd", "07-deep_learning.Rmd", "08-modelagem_background.Rmd", "09-referencia.Rmd"]
-  latex: ["01-introducao.Rmd", "02-formacao_imagem.Rmd", "03-transformacoes_geometricas.Rmd", "04-transformacoes_radiometricas.Rmd", "05-filtros.Rmd", "06-segmentacao.Rmd", "07-deep_learning.Rmd", "08-modelagem_background.Rmd", "09-referencia.Rmd"]
+  html: ["index.Rmd", "01-introducao.Rmd", "02-formacao_imagem.Rmd", "03-transformacoes_geometricas.Rmd", "04-transformacoes_radiometricas.Rmd", "05-filtros.Rmd", "06-segmentacao.Rmd", "07-deep_learning.Rmd", "08-modelagem_background.Rmd", "09-espaco_3D.Rmd", "10-referencia.Rmd"]
+  latex: ["01-introducao.Rmd", "02-formacao_imagem.Rmd", "03-transformacoes_geometricas.Rmd", "04-transformacoes_radiometricas.Rmd", "05-filtros.Rmd", "06-segmentacao.Rmd", "07-deep_learning.Rmd", "08-modelagem_background.Rmd", "09-espaco_3D.Rmd"]
