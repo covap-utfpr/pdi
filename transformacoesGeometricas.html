@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Refêrencias | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Refêrencias | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>Capítulo 3 Transformacões geométricas | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="Capítulo 3 Transformacões geométricas | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Refêrencias | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="Capítulo 3 Transformacões geométricas | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Refêrencias | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="Capítulo 3 Transformacões geométricas | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="espaco3D.html"/>
-
+<link rel="prev" href="formacaoImagem.html"/>
+<link rel="next" href="transformacoesRadiometricas.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -280,238 +280,200 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="refêrencias" class="section level1 unnumbered">
-<h1>Refêrencias</h1>
+<div id="transformacoesGeometricas" class="section level1">
+<h1><span class="header-section-number">Capítulo 3</span> Transformacões geométricas</h1>
+<p>Nessa seção abordaremos conceitos importantes que detalham processos de transformações geométricas na imagem digitalizada, definiremos a seção proposta, sistema de coordenadas objetos (2D e 3D), representação vetorial e matricial de Imagens digitalizadas, matrizes em computação gráfica, transformações em pontos e objetos; transformações (translação, escala e rotação).</p>
+<div id="definição" class="section level2">
+<h2><span class="header-section-number">3.1</span> Definição</h2>
+<p>As transformações geométricas são operações que podem ser utilizadas sobre uma imagem, visando alterar características como: posição , orientação, forma ou tamanho da imagem apresentada.
+As operações (transformações geométricas) não alteram a topologia (pixels) da imagem operada, apenas possibilitam a projeção da imagem no espaço determinado.</p>
+</div>
+<div id="sistema-de-coordenadas-objetos-2d-e-3d" class="section level2">
+<h2><span class="header-section-number">3.2</span> Sistema de coordenadas objetos (2D e 3D)</h2>
+<p>Sistemas de coordenadas nos objetos (2D e 3D) podem ser usadas para modelar objetos(imagens), servindo de referência em termos de dimensões(tamanhos), rotacionamento e posições dos objetos nas operações geométricas, dentro do ambiente de aplicação.</p>
+<p>No sistema de coordenadas polares (ao dentro da imagem, Figura <a href="transformacoesGeometricas.html#fig:cdpolar">3.1</a>), as coordenadas são descritas por raio e ângulo: (r, <span class="math inline">\(\phi\)</span>).
+No sistema de coordenadas esférico (à esquerda), as coordenadas são descritas por raio e dois ângulos.
+Nos sistemas de coordenadas cilíndricos (à direita), as coordenadas são descritas por raio, ângulo e um comprimento. Os dois sistemas de extremidades são 3D.
+Esse tema é abordado com mais profundidade na matéria de Computação Gráfica (CG), transformações geométricas no plano e no espaço <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 36]</span>.</p>
 
+<div class="figure" style="text-align: center"><span id="fig:cdpolar"></span>
+<img src="imagens/03-transformacoes/coordenadaPolar.png" alt="Coordenadas Polares [14, p. 36]." width="80%" />
+<p class="caption">
+Figura 3.1: Coordenadas Polares <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 36]</span>.
+</p>
+</div>
+</div>
+<div id="representação-vetorial-e-matricial-de-imagens-digitalizadas" class="section level2">
+<h2><span class="header-section-number">3.3</span> Representação Vetorial e Matricial de Imagens digitalizadas</h2>
+<p>Um vetor é basicamente um segmento de reta orientada (sentido e direção). Para representar um vetor em dimensão 2D, usaremos <span class="math inline">\(V\)</span>, como seta que sai da origem do sistema de coordenadas, para o ponto (x, y), tendo assim a direção um sentido e um comprimento específico. <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 14]</span>.</p>
+<p>A fórmula abaixo é aplicada para calcular comprimento do vetor 2D:</p>
+<p><span class="math display" id="eq:circulCompre">\[
+|V| = {\sqrt{x^2 + y^2}}
+\tag{3.1}
+\]</span></p>
+<p>Exemplo 1: Calcule o comprimento de <span class="math inline">\(V\)</span> com <span class="math inline">\(x=2\)</span> e <span class="math inline">\(y=3\)</span>.</p>
+<p>Resolução:
+<span class="math display">\[|V| = {\sqrt{22+ 32}} = 3.60\]</span></p>
+<p>Se pensamos em <span class="math inline">\(V\)</span> no espaço 3D, definindo a origem ao ponto <span class="math inline">\(P(x, y, z)\)</span> seu comprimento seria:
+<span class="math display">\[|V| = {\sqrt{x^2+y^2+z^2}}\]</span>
+Exemplo 2: Calcule o comprimento de <span class="math inline">\(V\)</span> com <span class="math inline">\(x=2\)</span> , <span class="math inline">\(y=3\)</span> e <span class="math inline">\(z=1\)</span>.</p>
+<p>Resolução:
+<span class="math display" id="eq:circulCompre3D">\[
+|V| = {\sqrt{2^2+3^2+1^2} = 3.74}
+\tag{3.2}
+\]</span></p>
+<p>Uma matriz é um arranjo (vetor) de elementos em duas direções (linha e coluna). Para declará-la é necessário definir a quantidade de elementos existentes em cada direção.
+Representaremos matriz com a letra M, as direções (linha e coluna) pelas letras L e C.
+Suponhamos que L = 4 e C = 4 então M[4][4] formando matriz quadrática como mostra a Figura <a href="transformacoesGeometricas.html#fig:repreMatricial">3.2</a>, nela pode-se observar a matriz identidade de tamanho 4 x 4.
+(ref:repreMatricial) Representação matricial <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 14]</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:repreMatricial"></span>
+<img src="imagens/03-transformacoes/tableMatriz.png" alt="(ref:repreMatricial)" width="40%" />
+<p class="caption">
+Figura 3.2: (ref:repreMatricial)
+</p>
+</div>
+</div>
+<div id="matrizes-em-computação-gráfica" class="section level2">
+<h2><span class="header-section-number">3.4</span> Matrizes em Computação gráfica</h2>
+<p>As transformações geométricas (translação, escala e rotação) podem ser representadas na forma de equações possibilitando suas manipulações.
+O problema é que manipulações de objetos gráficos normalmente envolvem muitas operações aritméticas simples.</p>
+<p>As matrizes são muito usadas nessas manipulações porque são mais fáceis de usar e entender do que as equações algébricas, o que explica por que programadores e engenheiros as usam extensivamente.</p>
+<p>As matrizes são parecidas com modelo organizacional da memória dos computadores. Suas representações se relacionam diretamente com estas estruturas de armazenamento, facilmente o trabalho dos e permitindo maior velocidade para aplicações críticas como jogos e aplicações em realidade virtual. É devido a esse fato que os computadores com “facilidades vetoriais” têm sido muito usados junto a aplicações de computação gráfica.</p>
+<p>Devido ao padrão de coordenadas usualmente adotado para representação de pontos no plano <span class="math inline">\((x,y)\)</span> e no espaço tridimensional <span class="math inline">\((x,y,z)\)</span>, pode ser conveniente manipular esses pontos em matrizes quadradas de 2x2 ou 3x3 elementos. Através de matrizes e de sua multiplicação, podemos representar todas as transformações lineares 2D e 3D. Várias transformações podem ser combinadas resultando em uma única matriz denominada de matriz de transformação.</p>
+<p>Na imagem digitalizada, são aplicados elementos básicos como pontos, linhas, curvas e as superfícies tridimensionais ou mesmo os sólidos que mostram os elementos que formam as imagens sintaticamente no computador.
+Em computação gráfica os elementos pontos, linhas, curvas e as superfícies tridimensionais ou mesmo os sólidos são denominados primitivas vetoriais da imagem. As primitivas vetoriais são associadas a um conjunto de atributos que define sua aparência e a um conjunto de dados que define a sua geometria (pontos de controle).
+Para esclarecer melhor, vamos considerar alguns exemplos, dois elementos facilmente caracterizados como vetoriais, pela noção de vetores já discutida são os pontos e linhas retas.</p>
+<p>A cada elemento de um conjunto de pontos associa-se uma posição, que pode ser representada por suas coordenadas (geometria), e uma cor, que será como esses pontos aparecerão na tela (tributos). No caso de um conjunto de linhas retas, cada uma pode ser definida pelas coordenadas de seus pontos extremos (geometria) e sua cor, espessura, ou ainda se aparecerá pontilhada ou tracejada (atributos).</p>
+<p>A descrição matricial é típica das imagens digitalizadas capturadas por scanners ou utilizadas nos vídeos. É a forma de descrição principal na análise e no processamento de imagens. Em computação gráfica sintética, surgem nos processos de finalização (ray tracing, z-buffers).</p>
+<p>Na representação matricial, a imagem é descrita por um conjunto de células em um arranjo especial bidimensional, uma matriz. Cada célula representa os pixels (ou pontos) da imagem matricial. Os objetos são formados usando adequadamente esses pixels. A figura 3.3 mostra a representação matricial da imagem digitalizada e sua tela. Essa é a representação usualmente empregada para formar a imagem nas memórias e telas dos computadores e na maioria dos dispositivos de saída gráficos (impressoras e vídeos) <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 14]</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:desMatricial"></span>
+<img src="imagens/03-transformacoes/memoria_tela_imagem.png" alt="Descrição de imagens matriciais por conjunto de pixels [14, p. 15]." width="70%" />
+<p class="caption">
+Figura 3.3: Descrição de imagens matriciais por conjunto de pixels <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 15]</span>.
+</p>
+</div>
+</div>
+<div id="transformações-em-pontos-e-objetos" class="section level2">
+<h2><span class="header-section-number">3.5</span> Transformações em Pontos e Objetos</h2>
+<p>A habilidade de representar uma objeto em várias posições no espaço para compreender sua forma. A possibilidade de submetê-lo a diversas transformações é importante em diversas aplicações da computação gráfica [Rogers, 1990]. As operações geométricas de rotação e translação de objetos são chamadas operações de corpos rígidos<span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 38]</span>.</p>
+</div>
+<div id="transformação-de-translação" class="section level2">
+<h2><span class="header-section-number">3.6</span> Transformação de Translação</h2>
+<p>A transformação geométrica translação tem como objetivo movimentar a objeto(imagem) no espaço (ambiente projetado), usando a matriz dedos (pontos) do objeto, aplica-se operações da nova coordenada p(x, y) sobre os pontos da matriz possibilitando transladar ao novo espaço da coordenada definida.
+Para transladar (mover) um objeto do ponto atual para o novo ponto, p(x) e p(y) pode ser movido por Txunidades em relação ao x, e por Ty, unidades em relação eixo . Logo nova posição do ponto p(x,y) passa a ser p’(x) e p’(y) , que podem ser escrito como:</p>
+<p><span class="math display" id="eq:formTranslacao1">\[
+x’ = x + Tx
+\tag{3.3}
+\]</span>
+<span class="math display" id="eq:formTranslacao2">\[
+y’ = y + Ty
+\tag{3.4}
+\]</span>
+No caso do ponto for representado por vetor, p = (x, y), a translação desse mesmo ponto para o novo pode ser obtida pela adição de vetor de deslocamento à posição atual do ponto <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 38]</span>:
+<span class="math display" id="eq:formTranslacao3">\[
+p’ = p+ T = [x’y’] = [xy] + [Tx Ty]
+\tag{3.5}
+\]</span>.</p>
+<p>A figura 3.4, translação de um triângulo de três unidades na horizontal e-4 na vertical.<br />
+Repare que se teria o mesmo efeito transladado a origem do sistema de coordenadas para o ponto p(-3, 4)na primeira figura <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 39]</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:translacao"></span>
+<img src="imagens/03-transformacoes/translacao.png" alt="Tranformação de translação [14, p. 39]." width="70%" />
+<p class="caption">
+Figura 3.4: Tranformação de translação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 39]</span>.
+</p>
+</div>
+</div>
+<div id="transformação-de-escala" class="section level2">
+<h2><span class="header-section-number">3.7</span> Transformação de Escala</h2>
+<p>A transformação geométrica escala tem como objetivo mudar as dimensões (tamanho) do objeto(imagem) no espaço (ambiente projetado)<span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 40]</span>. Para fazer com que uma imagem definida por conjunto de pontos mude de tamanho, teremos de multiplicar os valores de suas coordenadas por um fator de escala. Transformar um objeto por alguma operação nada mais é do que fazer essa operação com todos os seus pontos. Nesse caso um dos vetores de suas coordenadas são multiplicados por fatores de escala. Estes fatores de escala em 2D podem, por exemplo ser <span class="math inline">\(Ss\)</span> e <span class="math inline">\(Sy\)</span>:</p>
+<p><span class="math display" id="eq:formEscala1">\[
+x’ = x * Sx
+\tag{3.6}
+\]</span></p>
+<p><span class="math display" id="eq:formEscala2">\[
+y’ = y * Sy
+\tag{3.7}
+\]</span>
+Essa operação pode ser representada na forma matricial:</p>
+
+<div class="figure" style="text-align: center"><span id="fig:escala"></span>
+<img src="imagens/03-transformacoes/escala.png" alt="Tranformação de escala [14, p. 40]." width="80%" />
+<p class="caption">
+Figura 3.5: Tranformação de escala <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 40]</span>.
+</p>
+</div>
+<p>A mudança de escala de um ponto de um objeto no espaço tridimensional pode ser obtida pela multiplicação de três fatores de escala ao ponto. A operação de mudança de escala pode ser descrita pela multiplicação de coordenadas do ponto por uma matriz diagonal cujos valores dos elementos não-nulos sejam os fatores de escala <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 41]</span>. Assim, no caso 3D tem-se:</p>
+
+<div class="figure" style="text-align: center"><span id="fig:escala3d"></span>
+<img src="imagens/03-transformacoes/escala3d.png" alt="Escala espaço tridimencional [14, p. 41]." width="80%" />
+<p class="caption">
+Figura 3.6: Escala espaço tridimencional <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 41]</span>.
+</p>
+</div>
+</div>
+<div id="transformação-de-rotação" class="section level2">
+<h2><span class="header-section-number">3.8</span> Transformação de Rotação</h2>
+<p>A transformação geométrica da rotação tem como objetivo rotacionar objeto(imagem) no espaço (ambiente projetado), é equivalente a girar ao redor da origem do sistema de coordenadas como na Figura <a href="transformacoesGeometricas.html#fig:rotacao">3.7</a>.</p>
+<p>Na Figura <a href="transformacoesGeometricas.html#fig:rotacao">3.7</a> rotação de um ponto P em torno da origem, passando para a posição P’. Repare que se chegaria a esse mesmo ponto através de uma rotação de - no sistema de eixos XY <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 41]</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:rotacao"></span>
+<img src="imagens/03-transformacoes/rotacao1.png" alt="Transformação de Rotação [14, p. 42]." width="45%" />
+<p class="caption">
+Figura 3.7: Transformação de Rotação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 42]</span>.
+</p>
+</div>
+<p>Se um ponto de coordenada (x,y), distante <span class="math inline">\(r=(x2 + y2)^\frac12\)</span> da origem do sistema de coordenadas, for rotacionado de um ângulo <span class="math inline">\(\phi\)</span> em torno da origem, suas coordenadas, que antes eram definidas como: <span class="math inline">\(x = r * \cos(\phi), y =r * \sin(\phi)\)</span>, passam a ser descritas como (x’, y’) dadas por <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 42]</span>:</p>
+<p><span class="math display" id="eq:formRotacao1">\[
+x&#39; = r * \cos(\theta + \phi) = r * \cos\phi * cos\theta - r * \sin\phi * \sin\theta
+\tag{3.8}
+\]</span>
+<span class="math display" id="eq:formRotacao2">\[
+x&#39; = r * \sin(\theta + \phi) = r * \sin\phi * cos\theta + r * \cos\phi * \sin\theta
+\tag{3.9}
+\]</span></p>
+<p>isso equivale às expressões:
+<span class="math display" id="eq:formRotacao3">\[
+x&#39; = x\cos(\phi) - y\sin(\phi)
+\tag{3.10}
+\]</span>
+<span class="math display" id="eq:formRotacao4">\[
+y&#39; = y\cos(\phi) + y\sin(\phi)
+\tag{3.11}
+\]</span></p>
+<p>Essas expressões podem ser descritas pela multiplicação do vetor de coordenadas do ponto (x,y) pela matriz:</p>
+
+<div class="figure" style="text-align: center"><span id="fig:rotacao2"></span>
+<img src="imagens/03-transformacoes/matriz_rotacao.png" alt="Matriz de rotação [14, p. 42]." width="15%" />
+<p class="caption">
+Figura 3.8: Matriz de rotação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 42]</span>.
+</p>
+</div>
+<p>Para alterar a orientação de um objeto(imagem) em torno de um certo ponto realizando uma combinação da rotação com a translação, é necessário, antes de aplicar a rotação de um ângulo no plano das coordenadas em torno de um ponto, realizar uma translação para localizar esse ponto na origem do sistema, aplicando a rotação desejada e, então, uma translação inversa para localizar o dado ponto na origem <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 42]</span>. A multiplicação de coordenadas por uma matriz de rotação pode resultar em uma translação.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:rotacao3"></span>
+<img src="imagens/03-transformacoes/rotacao2.png" alt="Proceso de aplicação rotação [14, p. 43]." width="60%" />
+<p class="caption">
+Figura 3.9: Proceso de aplicação rotação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">14</a>, p. 43]</span>.
+</p>
+</div>
+
+</div>
+</div>
+<h3>Refêrencias</h3>
 <div id="refs" class="references">
-<div>
-<p>[1] L. Velho, A. C. Frery, e J. Gomes, <em>Image processing for computer graphics and vision</em>, 2º ed. London: Springer, 2009.</p>
-</div>
-<div>
-<p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
-</div>
-<div>
-<p>[3] H. Pedrini e W. Robson Schwartz, <em>Análise de imagens digitais: princípios, algoritmos e aplicações</em>, 3º ed. São Paulo: Thomson Learning Edicoes Ltda, 2007.</p>
-</div>
-<div>
-<p>[4] T. B. Moeslund, <em>Introduction to video and image processing: Building real systems and applications</em>. Springer Science &amp; Business Media, 2012.</p>
-</div>
-<div>
-<p>[5] M. Nixon e A. Aguado, <em>Feature extraction and image processing for computer vision</em>. Academic press, 2019.</p>
-</div>
-<div>
-<p>[6] M. Elgendy, <em>Deep Learning for Vision Systems</em>. Manning Publications, 2020.</p>
-</div>
-<div>
-<p>[7] B. E. da cor, “Imagem de um espectro eletromagnético”. 2014, [Online]. Disponível em: <a href="https://estudodacor.files.wordpress.com/2014/08/espectro-eletromagnetico1.jpg">https://estudodacor.files.wordpress.com/2014/08/espectro-eletromagnetico1.jpg</a>.</p>
-</div>
-<div>
-<p>[8] W. Commons, “Crab nebula in multiple wavelengths”. [Online]. Disponível em: <a href="%20https://commons.wikimedia.org/wiki/File:Crab_Nebula_in_Multiple_Wavelengths.png">https://commons.wikimedia.org/wiki/File:Crab_Nebula_in_Multiple_Wavelengths.png</a>.</p>
-</div>
-<div>
-<p>[9] I. C. Cuthill <em>et al.</em>, “The biology of color”, <em>Science</em>, vol. 357, nº 6350, 2017.</p>
-</div>
-<div>
-<p>[10] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
-</div>
-<div>
-<p>[11] U. Teubner e H. J. Brückner, <em>Optical Imaging and Photography: Introduction to Science and Technology of Optics, Sensors and Systems</em>. Walter de Gruyter GmbH &amp; Co KG, 2019.</p>
-</div>
-<div>
-<p>[12] W. Commons, “Bayer pattern on sensor profile”. 2006, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Bayer_pattern_on_sensor_profile.svg">https://commons.wikimedia.org/wiki/File:Bayer_pattern_on_sensor_profile.svg</a>.</p>
-</div>
-<div>
-<p>[13] A. C. Bovik, <em>The essential guide to image processing</em>. Academic Press, 2009.</p>
-</div>
-<div>
+<div id="ref-azevedo2018">
 <p>[14] E. Azevedo, A. Conci, e C. Vasconcelos, <em>Computaç ao gr’afica: Teoria e pr’atica: geraç ao de imagens</em>, vol. 1. Elsevier Brasil, 2018.</p>
 </div>
-<div>
-<p>[15] W. Commons, “Kernel (image processing)”. 2011, [Online]. Disponível em: <a href="https://en.wikipedia.org/wiki/Kernel_(image_processing)">https://en.wikipedia.org/wiki/Kernel_(image_processing)</a>.</p>
 </div>
-<div>
-<p>[16] T. e2eML Course Catalog, “Convolution in one dimension for neural networks”. 2020, [Online]. Disponível em: <a href="https://e2eml.school/convolution_one_d.html">https://e2eml.school/convolution_one_d.html</a>.</p>
-</div>
-<div>
-<p>[17] R. CHITYALA e S. PUDIPEDDI, <em>Image processing and acquisition using Python</em>. CRC Press, 2020.</p>
-</div>
-<div>
-<p>[18] J. Canny, “A computational approach to edge detection”, <em>IEEE Transactions on pattern analysis and machine intelligence</em>, nº 6, p. 679–698, 1986.</p>
-</div>
-<div>
-<p>[19] M. Sonka, V. Hlavac, e R. Boyle, <em>Image processing, analysis, and machine vision</em>. Cengage Learning, 2014.</p>
-</div>
-<div>
-<p>[20] Nasa, “Hubble Ultra-Deep Field”. 2004, [Online]. Disponível em: <a href="https://imgsrc.hubblesite.org/hu/db/images/hs-2014-27-a-full_jpg.jpg">https://imgsrc.hubblesite.org/hu/db/images/hs-2014-27-a-full_jpg.jpg</a>.</p>
-</div>
-<div>
-<p>[21] H. Bay, T. Tuytelaars, e L. Van Gool, “Surf: Speeded up robust features”, p. 404–417, 2006.</p>
-</div>
-<div>
-<p>[22] K. Cen, “Study of Viola-Jones Real Time Face Detector”, 2016.</p>
-</div>
-<div>
-<p>[23] I. Goodfellow, Y. Bengio, e A. Courville, <em>Deep Learning</em>. MIT Press, 2016.</p>
-</div>
-<div>
-<p>[24] A. Chiang, “IBM Deep Blue at Computer History Museum”. 2020, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:IBM_Deep_Blue_at_Computer_History_Museum_(9361685537).jpg">https://commons.wikimedia.org/wiki/File:IBM_Deep_Blue_at_Computer_History_Museum_(9361685537).jpg</a>.</p>
-</div>
-<div>
-<p>[25] S. R. y Cajal, <em>Comparative study of the sensory areas of the human cortex</em>. Clark University, 1899.</p>
-</div>
-<div>
-<p>[26] W. S. McCulloch e W. Pitts, “A logical calculus of the ideas immanent in nervous activity”, <em>The bulletin of mathematical biophysics</em>, vol. 5, nº 4, p. 115–133, 1943.</p>
-</div>
-<div>
-<p>[27] Glosser.ca, “Artificial neural network with layer coloring”. 2013, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Colored_neural_network.svg">https://commons.wikimedia.org/wiki/File:Colored_neural_network.svg</a>.</p>
-</div>
-<div>
-<p>[28] S. Russell e P. Norvig, “Artificial intelligence: a modern approach”, 2016.</p>
-</div>
-<div>
-<p>[29] H. Simon, <em>Redes Neurais: Princípios e prática</em>, 2º ed. São Paulo: Bookman, 1999.</p>
-</div>
-<div>
-<p>[30] cs231, “Cartoon drawing of a biological neuron”. 2021, [Online]. Disponível em: <a href="https://cs231n.github.io/neural-networks-1/">https://cs231n.github.io/neural-networks-1/</a>.</p>
-</div>
-<div>
-<p>[31] T. Rateke, “Técnicas Subsimbólicas: Redes Neurais”. LAPIX (Image Processing; Computer Graphics Lab)/Universidade Federal de Santa Catarina, Florianópolis, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/</a>.</p>
-</div>
-<div>
-<p>[32] M. A. Nielsen, <em>Neural Networks and Deep Learning</em>. Determination Press, 2015.</p>
-</div>
-<div>
-<p>[33] J. A. Herts, A. S. Krogh, e R. G. Palmer, <em>Introduction to the theory of neural computation</em>. New York: CRC Press, 2018.</p>
-</div>
-<div>
-<p>[34] A. Géron, <em>Hands-on machine learning with Scikit-Learn, Keras, and TensorFlow: Concepts, tools, and techniques to build intelligent systems</em>. O’Reilly Media, 2019.</p>
-</div>
-<div>
-<p>[35] R. D. Adrian, “Deep Learning for Computer Vision with Python”. PyImageSearch, 2017.</p>
-</div>
-<div>
-<p>[36] V. Dumoulin e F. Visin, “A guide to convolution arithmetic for deep learning”, <em>arXiv preprint arXiv:1603.07285</em>, 2016.</p>
-</div>
-<div>
-<p>[37] A. Zhang, Z. C. Lipton, M. Li, e A. J. Smola, <em>Dive into Deep Learning</em>. 2020.</p>
-</div>
-<div>
-<p>[38] J. Johnson, “Deep Learning for Computer Vision - Fall 2019”. Website do curso EECS 498-007 / 598-005 na Universidade de Michigan, Michigan, Estados Unidos, 2019, [Online]. Disponível em: <a href="https://web.eecs.umich.edu/~justincj/teaching/eecs498/FA2020/">https://web.eecs.umich.edu/~justincj/teaching/eecs498/FA2020/</a>.</p>
-</div>
-<div>
-<p>[39] P. U. Stanford Vision Lab Stanford University, “ImageNet Large Scale Visual Recognition Challenge (ILSVRC)”. Website da competição ImageNet Large Scale Visual Recognition Challenge (ILSVRC), 2020, [Online]. Disponível em: <a href="https://image-net.org/challenges/LSVRC/">https://image-net.org/challenges/LSVRC/</a>.</p>
-</div>
-<div>
-<p>[40] A. Krizhevsky, I. Sutskever, e G. E. Hinton, “Imagenet classification with deep convolutional neural networks”, <em>Advances in neural information processing systems</em>, vol. 25, p. 1097–1105, 2012.</p>
-</div>
-<div>
-<p>[41] A. Canziani, A. Paszke, e E. Culurciello, “An analysis of deep neural network models for practical applications”, <em>arXiv preprint arXiv:1605.07678</em>, 2016.</p>
-</div>
-<div>
-<p>[42] C. Szegedy <em>et al.</em>, “Going deeper with convolutions”, in <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em>, 2015, p. 1–9.</p>
-</div>
-<div>
-<p>[43] K. He, X. Zhang, S. Ren, e J. Sun, “Deep residual learning for image recognition”, in <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em>, 2016, p. 770–778.</p>
-</div>
-<div>
-<p>[44] G. Developers, “Guia para iniciantes da Cloud TPU”. Website da Google Cloud, 2021, [Online]. Disponível em: <a href="https://cloud.google.com/tpu/docs/beginners-guide?hl=pt-br">https://cloud.google.com/tpu/docs/beginners-guide?hl=pt-br</a>.</p>
-</div>
-<div>
-<p>[45] A. von Wangenheim, “Deep Learning: Introdução ao Novo Coneccionismo”. LAPIX (Image Processing; Computer Graphics Lab)/Universidade Federal de Santa Catarina, Florianópolis, 2018, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/</a>.</p>
-</div>
-<div>
-<p>[46] G. Developers, “Versões da API TensorFlow”. Website do TensorFlow, 2020, [Online]. Disponível em: <a href="https://www.tensorflow.org/versions">https://www.tensorflow.org/versions</a>.</p>
-</div>
-<div>
-<p>[47] J. M. Walker, <em>Artificial Neural Networks</em>, 3º ed. Nova Iorque, Estados Unidos: Humana/Springer Nature, 2021.</p>
-</div>
-<div>
-<p>[48] S. Chopra, R. Hadsell, e Y. LeCun, “Learning a similarity metric discriminatively, with application to face verification”, in <em>2005 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR’05)</em>, 2005, vol. 1, p. 539–546.</p>
-</div>
-<div>
-<p>[49] Y. Taigman, M. Yang, M. Ranzato, e L. Wolf, “Deepface: Closing the gap to human-level performance in face verification”, in <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em>, 2014, p. 1701–1708.</p>
-</div>
-<div>
-<p>[50] M. Sabri e T. Kurita, “Facial expression intensity estimation using Siamese and triplet networks”, <em>Neurocomputing</em>, vol. 313, p. 143–154, 2018.</p>
-</div>
-<div>
-<p>[51] H. Lamba, “One Shot Learning with Siamese Networks using Keras”. Website Towards Data Science, Florianópolis, 2019, [Online]. Disponível em: <a href="https://towardsdatascience.com/one-shot-learning-with-siamese-networks-using-keras-17f34e75bb3d">https://towardsdatascience.com/one-shot-learning-with-siamese-networks-using-keras-17f34e75bb3d</a>.</p>
-</div>
-<div>
-<p>[52] H. Zhang, W. Ni, W. Yan, J. Wu, H. Bian, e D. Xiang, “Visual tracking using Siamese convolutional neural network with region proposal and domain specific updating”, <em>Neurocomputing</em>, vol. 275, p. 2645–2655, 2018.</p>
-</div>
-<div>
-<p>[53] C. Zhang, W. Liu, H. Ma, e H. Fu, “Siamese neural network based gait recognition for human identification”, in <em>2016 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 2016, p. 2832–2836.</p>
-</div>
-<div>
-<p>[54] X. Liu, W. Liu, T. Mei, e H. Ma, “Provid: Progressive and multimodal vehicle reidentification for large-scale urban surveillance”, <em>IEEE Transactions on Multimedia</em>, vol. 20, nº 3, p. 645–658, 2017.</p>
-</div>
-<div>
-<p>[55] Q. Wang, J. Gao, e Y. Yuan, “Embedding structured contour and location prior in siamesed fully convolutional networks for road detection”, <em>IEEE Transactions on Intelligent Transportation Systems</em>, vol. 19, nº 1, p. 230–241, 2017.</p>
-</div>
-<div>
-<p>[56] J.-Á. González, E. Segarra, F. Garcı́a-Granada, E. Sanchis, e L.-F. Hurtado, “Siamese hierarchical attention networks for extractive summarization”, <em>Journal of Intelligent &amp; Fuzzy Systems</em>, vol. 36, nº 5, p. 4599–4607, 2019.</p>
-</div>
-<div>
-<p>[57] A. Das, H. Yenala, M. Chinnakotla, e M. Shrivastava, “Together we stand: Siamese networks for similar question retrieval”, in <em>Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</em>, 2016, p. 378–387.</p>
-</div>
-<div>
-<p>[58] J. Bromley, I. Guyon, Y. LeCun, E. Säckinger, e R. Shah, “Signature verification using a" siamese" time delay neural network”, <em>Advances in neural information processing systems</em>, vol. 6, p. 737–744, 1993.</p>
-</div>
-<div>
-<p>[59] R. Gómez, “Understanding Ranking Loss, Contrastive Loss, Margin Loss, Triplet Loss, Hinge Loss and all those confusing names”. Blog Raúl Gómez, 2019, [Online]. Disponível em: <a href="https://gombru.github.io/2019/04/03/ranking_loss/">https://gombru.github.io/2019/04/03/ranking_loss/</a>.</p>
-</div>
-<div>
-<p>[60] R. Hadsell, S. Chopra, e Y. LeCun, “Dimensionality reduction by learning an invariant mapping”, in <em>2006 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR’06)</em>, 2006, vol. 2, p. 1735–1742.</p>
-</div>
-<div>
-<p>[61] F. Schroff, D. Kalenichenko, e J. Philbin, “Facenet: A unified embedding for face recognition and clustering”, in <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em>, 2015, p. 815–823.</p>
-</div>
-<div>
-<p>[62] E. R. Davies, <em>Computer Vision Principles, Algorithms, Applications, Learning</em>. Academic press, 2017.</p>
-</div>
-<div>
-<p>[63] P. Corke, <em>Robotics, Vision and Control Fundamental Algorithms in MATLAB</em>, 2º ed. Gewerbestrasse, Su/´i/cca: Springer, 2017.</p>
-</div>
-<div>
-<p>[64] W. Commons, “Railroad tracks "vanishing" into the distance”. 2006, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Railroad-Tracks-Perspective.jpg">https://commons.wikimedia.org/wiki/File:Railroad-Tracks-Perspective.jpg</a>.</p>
-</div>
-<div>
-<p>[65] R. Szeliski, <em>Computer vision: algorithms and applications</em>. Springer Science &amp; Business Media, 2010.</p>
-</div>
-<div>
-<p>[66] R. Hartley e A. Zisserman, “Multiple view geometry in computer”, <em>Vision, 2nd ed., New York: Cambridge</em>, 2003.</p>
-</div>
-<div>
-<p>[67] P. C. Carvalho <em>et al.</em>, “Fotografia 3D – 25 Colóquio Brasileiro de Matemática”, <em>Rio de Janeiro: Associação Instituto de Matemática Pura e Aplicada, IMPA</em>, 2005.</p>
-</div>
-<div>
-<p>[68] E. R. Davies, <em>Computer and Machine Vision: Theory, Algorithms, Practicalities</em>, 4º ed. Waltham, Estados Unidos: Elsevier, 2012.</p>
-</div>
-<div>
-<p>[69] M. C. dos Santos, “Revis/ ao de Conceitos em Proje/cc/ ao, Homografia, Calibra/cc/ ao de C/^amera, Geometria Epipolar, Mapas de Profundidade e Varredura de Planos”. Disciplina Vis/ ao Computacional, Unicamp, sob orienta/cc/ ao do Prof. Dr. H/´elio Pedrini., S/ ao Paulo, 2012, [Online]. Disponível em: <a href="https://www.ic.unicamp.br/~rocha/teaching/2012s1/mc949/aulas/additional-material-revision-of-concepts-homography-and-related-topics.pdf">https://www.ic.unicamp.br/~rocha/teaching/2012s1/mc949/aulas/additional-material-revision-of-concepts-homography-and-related-topics.pdf</a>.</p>
-</div>
-<div>
-<p>[70] “Camera Calibration”. Website do OpenCV, [Online]. Disponível em: <a href="https://docs.opencv.org/master/dc/dbb/tutorial_py_calibration.html">https://docs.opencv.org/master/dc/dbb/tutorial_py_calibration.html</a>.</p>
-</div>
-</div>
-</div>
-
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="espaco3D.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="formacaoImagem.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="transformacoesRadiometricas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -543,7 +505,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/10-referencia.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/03-transformacoes_geometricas.Rmd",
 "text": "Editar "
 },
 "history": {
