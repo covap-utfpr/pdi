@@ -316,16 +316,16 @@ knitr::include_graphics(rep('imagens/02-formacao/caminho.png'))
 ```
 
 ### Componente Conexa  
-Componentes conexos de pixels de uma imagem é um conjunto de elementos (pixels) que de alguma forma estão conectados entre si, dois ou mais pixels são componentes conexos se existir um caminho seção 2.7.4 Caminho pertencente ao conjunto. A Figura \@ref(fig:componente) mostra uma imagem bidimensional contendo três componentes conexos caso seja considerada a vizinhança-4 ou, então, dois componentes conexos se considerada a vizinhança-8. [@pedrini2008, p. 32].
+Componentes conexos de pixels de uma imagem é um conjunto de elementos (pixels) que de alguma forma estão conectados entre si, dois ou mais pixels são componentes conexos se existir um caminho seção 2.7.4 Caminho pertencente ao conjunto. A Figura \@ref(fig:componente_conexa) mostra uma imagem bidimensional contendo três componentes conexos caso seja considerada a vizinhança-4 ou, então, dois componentes conexos se considerada a vizinhança-8. [@pedrini2008, p. 32].
 
-(ref:componente) Componentes Conexos de uma imagem bidimensional [@pedrini2008, p. 32].
+(ref:componente_conexa) Componentes Conexos de uma imagem bidimensional [@pedrini2008, p. 32].
 
-```{r componente, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:componente)', fig.align='center', out.width='20%'}
+```{r componente_conexa, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:componente_conexa)', fig.align='center', out.width='20%'}
 knitr::include_graphics(rep('imagens/02-formacao/componente_conexos.png'))
 ```
 
 ### Borda e Interior
-[@pedrini2008, p. 32].  A borda de um componente conexo [seção 2.7.5](### Componente-Conexa) $S$ em uma imagem bidimensional é o conjunto de pixels pertencentes ao componente e que possuem vizinhança-4 com um ou mais pixels externos a $S$. Intuitivamente, a borda corresponde ao conjunto de pontos no contorno do componente conexo. O interior é o conjunto de pixels de $S$ que não estão em sua borda. A Figura \@ref(fig:borda) mostra um exemplo de uma imagem binária com sua borda interior.
+A borda de um componente conexo [seção 2.7.5](### Componente-Conexa) $S$ em uma imagem bidimensional é o conjunto de pixels pertencentes ao componente e que possuem vizinhança-4 com um ou mais pixels externos a $S$ [@pedrini2008, p. 32]. Intuitivamente, a borda corresponde ao conjunto de pontos no contorno do componente conexo. O interior é o conjunto de pixels de $S$ que não estão em sua borda. A Figura \@ref(fig:borda) mostra um exemplo de uma imagem binária com sua borda interior.
 
 (ref:borda) Borda e interior de um componente, Figura do lado esquerdo, mostra a imagem original, a Figura do lado direito mostra os pixels da borda e interior. [@pedrini2008, p. 32].
 
