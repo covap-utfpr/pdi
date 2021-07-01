@@ -119,7 +119,7 @@ knitr::include_graphics(rep('imagens/03-transformacoes/translacao.png'))
 
 ## Transformação de Escala
 
-A transformação geométrica escala tem como objetivo mudar as dimensões (tamanho) do objeto(imagem) no espaço (ambiente projetado)[@azevedo, p. 40]. Para fazer com que uma imagem definida por conjunto de pontos mude de tamanho, teremos de multiplicar os valores de suas coordenadas por um fator de escala. Transformar um objeto por alguma operação nada mais é do que fazer essa operação com todos os seus pontos. Nesse caso um dos vetores de suas coordenadas são multiplicados por fatores de escala. Estes fatores de escala em 2D podem, por exemplo ser $Ss$ e $Sy$:
+A transformação geométrica escala tem como objetivo mudar as dimensões (tamanho) do objeto(imagem) no espaço (ambiente projetado)[@azevedo2018, p. 40]. Para fazer com que uma imagem definida por conjunto de pontos mude de tamanho, teremos de multiplicar os valores de suas coordenadas por um fator de escala. Transformar um objeto por alguma operação nada mais é do que fazer essa operação com todos os seus pontos. Nesse caso um dos vetores de suas coordenadas são multiplicados por fatores de escala. Estes fatores de escala em 2D podem, por exemplo ser $Ss$ e $Sy$:
 
 $$
 x’ = x * Sx

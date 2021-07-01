@@ -75,22 +75,22 @@ Para destacar como os capítulos se relacionam com estas etapas será apresentad
 
 - Aquisição da imagem
 
-Captura a imagem por meio de um dispositivo ou sensor e a converte em uma imagem digitalizada [@pedrini2008, p. 3]. Podemos citar como exemplo as câmeras fotográficas, tomógrafos médicos, satélites e scanners. Na figura \@ref(fig:componentes), temos um exemplo de imagem colorida separadas em suas três componentes, e mais detalhes sobre a aquisição e formação deste tipo de imagem e de outras são abordados no Capítulo [Formação de Imagem](#formacaoImagem). Como será discutido no Capítulo [Espaço 3D](#espaco3D), algumas aplicações da Visão computacional dependem de parâmetros determinados pelo equipamento e das condições durante a aquisição das imagens.
+Captura a imagem por meio de um dispositivo ou sensor e a converte em uma imagem digitalizada [@pedrini2008, p. 3]. Podemos citar como exemplo as câmeras fotográficas, tomógrafos médicos, satélites e scanners. Na figura \@ref(fig:componentes_2), temos um exemplo de imagem colorida separadas em suas três componentes, e mais detalhes sobre a aquisição e formação deste tipo de imagem e de outras são abordados no Capítulo [Formação de Imagem](#formacaoImagem). Como será discutido no Capítulo [Espaço 3D](#espaco3D), algumas aplicações da Visão computacional dependem de parâmetros determinados pelo equipamento e das condições durante a aquisição das imagens.
 
 
-(ref:componentes) Imagem colorida - Imagem separada em seus três componentes, em que *Red* é a vermelha, *Green* é a verde e *Blue* é a azul [@moeslund2012, p.28].
+(ref:componentes_2) Imagem colorida - Imagem separada em seus três componentes, em que *Red* é a vermelha, *Green* é a verde e *Blue* é a azul [@moeslund2012, p.28].
 
-```{r componentes, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:componentes)', fig.align='center', out.width='65%'}
+```{r componentes_2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:componentes_2)', fig.align='center', out.width='65%'}
 knitr::include_graphics(rep('imagens/02-formacao/componentes.png'))
 ```
 
 - Pré processamento
 
-Essa etapa busca realizar mudanças e ajustes na imagem visando melhorar seu uso nas etapas futuras [@pedrini2008, p. 3]. Como exemplo temos casos onde não precisamos das cores de uma imagem, podendo então realizar a conversão para *grayscale* (tons de cinza), ou precisamos gerar imagens coloridas. Além disso, podemos realizar cortes ou realces, isolando somente a parte de maior interesse na imagem utilizando algumas das técnicas apresentadas no Capítulo [Transformações Geométricas](#transformacoesGeometricas) e no Capítulo [Transformações Radiométricas](#transformacoesRadiometricas). Na Figura \@ref(fig:placaEletronicaMediana) se destaca uma das abordagens recorrentes no tratamento de imagem, a atenuação de ruídos e a suavização, utilizando principalmente alguns dos filtros do Capítulo [Filtros Digitais](#filtros).
+Essa etapa busca realizar mudanças e ajustes na imagem visando melhorar seu uso nas etapas futuras [@pedrini2008, p. 3]. Como exemplo temos casos onde não precisamos das cores de uma imagem, podendo então realizar a conversão para *grayscale* (tons de cinza), ou precisamos gerar imagens coloridas. Além disso, podemos realizar cortes ou realces, isolando somente a parte de maior interesse na imagem utilizando algumas das técnicas apresentadas no Capítulo [Transformações Geométricas](#transformacoesGeometricas) e no Capítulo [Transformações Radiométricas](#transformacoesRadiometricas). Na Figura \@ref(fig:placaEletronicaMediana_2) se destaca uma das abordagens recorrentes no tratamento de imagem, a atenuação de ruídos e a suavização, utilizando principalmente alguns dos filtros do Capítulo [Filtros Digitais](#filtros).
 
-(ref:placaEletronicaMediana) Remoção de ruído sal e pimenta por meio do filtro de Mediana - No Capítulo [Filtros Digitais](#filtros) serão apresentados alguns filtros como este que tratam as imagens, por exemplo, revomendo ruídos, aumentando o realce ou suavizando[@gonzalez2010, p. 103].
+(ref:placaEletronicaMediana_2) Remoção de ruído sal e pimenta por meio do filtro de Mediana - No Capítulo [Filtros Digitais](#filtros) serão apresentados alguns filtros como este que tratam as imagens, por exemplo, revomendo ruídos, aumentando o realce ou suavizando[@gonzalez2010, p. 103].
 
-```{r placaEletronicaMediana, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:placaEletronicaMediana)', fig.align='center', out.width='85%'}
+```{r placaEletronicaMediana_2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:placaEletronicaMediana_2)', fig.align='center', out.width='85%'}
 knitr::include_graphics(rep('imagens/05-filtros/placaEletronicaMediana.png'))
 ```
 
@@ -104,29 +104,29 @@ Nessa etapa, as informações de interesse são extraídas da imagem, geralmente
 knitr::include_graphics(rep('imagens/01-introducao/cannyEOriginal.png'))
 ```
 
-Ao individualizar estes componentes da imagem por meio de diferentes detectores, como na Figura \@ref(fig:doghubble) em que se utilizou um detector de Blob, as informações assumem um formato mais adequado para o processamento computacional. 
+Ao individualizar estes componentes da imagem por meio de diferentes detectores, como na Figura \@ref(fig:doghubble_2) em que se utilizou um detector de Blob, as informações assumem um formato mais adequado para o processamento computacional. 
 
-(ref:doghubble) Resultado da detecção de *blobs* com DoG para identificação de estrelas - Outros detectores no Capítulo [Segmentação](#segmentacao) podem identificar pontos, linhas, quinas, círculos, e objetos de outros formatos como estas estrelas.
+(ref:doghubble_2) Resultado da detecção de *blobs* com DoG para identificação de estrelas - Outros detectores no Capítulo [Segmentação](#segmentacao) podem identificar pontos, linhas, quinas, círculos, e objetos de outros formatos como estas estrelas.
 
-```{r doghubble, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:doghubble)', fig.align='center', out.width='35%'}
+```{r doghubble_2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:doghubble_2)', fig.align='center', out.width='35%'}
 knitr::include_graphics(rep('imagens/06-segmentacao/dog_hubble.jpg'))
 ```
 
-Outro exemplo da separação de elementos de uma imagem também está no Capítulo [Separação de Fundo](#separacaoFundo), em que modelos são utilizados para detectar o que é o *background*, ou plano de fundo, e o que é o objeto de interesse (*foreground*) como na Figura \@ref(fig:indoorBGmodeling).
+Outro exemplo da separação de elementos de uma imagem também está no Capítulo [Separação de Fundo](#separacaoFundo), em que modelos são utilizados para detectar o que é o *background*, ou plano de fundo, e o que é o objeto de interesse (*foreground*) como na Figura \@ref(fig:indoorBGmodeling_2).
 
-(ref:indoorBGmodeling) As imagens A, B, ..., E são os *frames* capturados por uma câmera em um ambiente interno. As imagens F, G e H são os *backgrounds* estimados. E as imagens I, J e K são os *foregrounds* produzidos, as detecções de movimento estimadas. Adaptado de [@nixon2019feature, p. 435] e [@nixon2019feature, p. 436].
+(ref:indoorBGmodeling_2) As imagens A, B, ..., E são os *frames* capturados por uma câmera em um ambiente interno. As imagens F, G e H são os *backgrounds* estimados. E as imagens I, J e K são os *foregrounds* produzidos, as detecções de movimento estimadas. Adaptado de [@nixon2019feature, p. 435] e [@nixon2019feature, p. 436].
 
-```{r indoorBGmodeling, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:indoorBGmodeling)', fig.align='center', out.width='50%'}
+```{r indoorBGmodeling_2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:indoorBGmodeling_2)', fig.align='center', out.width='50%'}
 knitr::include_graphics(rep('imagens/08-modelagemBackground/indoorBGmodeling.png'))
 ```
 
 - Análise 
 
-À parte de Análise atribuímos todos os processos que fazem uso da informação visual para compor um sistema de aplicação na área de Visão Computacional. Atualmente é mais comum ver estes processos englobados dentro de modelos de aprendizado de máquina mais genéricos como em redes neurais, capazes por exemplo, de classificar, identificar e rastrear objetos em diferentes situações. No Capítulo [Deep Learning em Visão Computacional](#deepLearning), assim como na Figura \@ref(fig:differentscnn) é possível se ter uma pequena noção de como as redes neurais, em particular as redes convolucionais (CNN), enxergam as imagens e como desagregam suas informações para disponibilizar resultados satisfatórios no campo da VC. 
+À parte de Análise atribuímos todos os processos que fazem uso da informação visual para compor um sistema de aplicação na área de Visão Computacional. Atualmente é mais comum ver estes processos englobados dentro de modelos de aprendizado de máquina mais genéricos como em redes neurais, capazes por exemplo, de classificar, identificar e rastrear objetos em diferentes situações. No Capítulo [Deep Learning em Visão Computacional](#deepLearning), assim como na Figura \@ref(fig:differentscnn_2) é possível se ter uma pequena noção de como as redes neurais, em particular as redes convolucionais (CNN), enxergam as imagens e como desagregam suas informações para disponibilizar resultados satisfatórios no campo da VC. 
 
-(ref:differentscnn) Diferentes CNN’s e seus mapas de características em diferentes camadas - Na primeira coluna temos as características aprendidas por uma rede especializada no trabalho com rostos humanos, na segunda coluna com carros, na terceira com elefantes e na quarta com cadeiras [@elgendy2020, p.253]
+(ref:differentscnn_2) Diferentes CNN’s e seus mapas de características em diferentes camadas - Na primeira coluna temos as características aprendidas por uma rede especializada no trabalho com rostos humanos, na segunda coluna com carros, na terceira com elefantes e na quarta com cadeiras [@elgendy2020, p.253]
 
-```{r differentscnn, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:differentscnn)', fig.align='center', out.width='80%'}
+```{r differentscnn_2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:differentscnn_2)', fig.align='center', out.width='80%'}
 knitr::include_graphics(rep('imagens/07-deepLearning/differentscnn.png'))
 ```
 
