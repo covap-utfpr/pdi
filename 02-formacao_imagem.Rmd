@@ -1,4 +1,4 @@
-# Formação da imagem 
+# Formação da imagem {#formacaoImagem}
 
 Existem diferentes tipos de fontes utilizadas para geração de imagens, sendo que a mais comum é o espectro eletromagnético na faixa de ondas visíveis. Outras fontes de energia também podem ser utilizadas como energia mecânica na forma de ultrassom, feixe de elétrons em microscópio eletrônicos, ondas de rádio no radar, etc. Cada fonte necessita de um método específico de captura. Para ondas eletromagnéticas pode ser usada uma câmera fotográfica equipada com sensores adequados ao comprimento de onda. Porém, para outras fontes, é necessário que o computador sintetize a imagem, como o microscópio eletrônico. 
 

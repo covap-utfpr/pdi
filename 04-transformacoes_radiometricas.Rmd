@@ -1,4 +1,4 @@
-# Transformações radiométricas
+# Transformações radiométricas {#transformacoesRadiometricas}
 
 As manipulações no domínio espacial ocorrem diretamente sobre os *pixels* no plano da imagem. As duas principais categorias de transformações de intensidade a nível espacial são transformações radiométricas e filtragem espacial. A filtragem espacial pode ser representada pela expressão \@ref(eq:filtragemEspacial).
 

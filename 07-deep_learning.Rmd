@@ -6,7 +6,7 @@ output:
     highlight: pygments
 ---
 
-# Deep Learning em visão computacional 
+# Deep Learning em visão computacional {#deepLearning}
 Antes de iniciarmos o estudo sobre deep learning, e mais especificamente sobre redes neurais artificiais convolucionais, é importante termos uma visão ampla sobre a área e suas subdivisões, para conseguirmos nos localizar em meio a essa área que cresce cada vez mais. Por isso começaremos falando um pouco sobre inteligência artificial e suas subdivisões, além de sua conexão e uso com visão computacional, que é o nosso foco.
 
 ## Caracterização de AI, Machine Learning e Deep Learning
