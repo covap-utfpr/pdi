@@ -352,61 +352,61 @@ Figura 1.2: Etapas para o desenvolvimento de aplicações na Visão Computaciona
 <ul>
 <li>Aquisição da imagem</li>
 </ul>
-<p>Captura a imagem por meio de um dispositivo ou sensor e a converte em uma imagem digitalizada <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. Podemos citar como exemplo as câmeras fotográficas, tomógrafos médicos, satélites e scanners. Na figura @ref(fig:componentes_2), temos um exemplo de imagem colorida separadas em suas três componentes, e mais detalhes sobre a aquisição e formação deste tipo de imagem e de outras são abordados no Capítulo <a href="formacaoImagem.html#formacaoImagem">Formação de Imagem</a>. Como será discutido no Capítulo <a href="espaco3D.html#espaco3D">Espaço 3D</a>, algumas aplicações da Visão computacional dependem de parâmetros determinados pelo equipamento e das condições durante a aquisição das imagens.</p>
-<p>(ref:componentes_2) Imagem colorida - Imagem separada em seus três componentes, em que <em>Red</em> é a vermelha, <em>Green</em> é a verde e <em>Blue</em> é a azul <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">4</a>, p. 28]</span>.</p>
-<div class="figure" style="text-align: center">
-<img src="imagens/02-formacao/componentes.png" alt="(ref:componentes_2)" width="65%" />
+<p>Captura a imagem por meio de um dispositivo ou sensor e a converte em uma imagem digitalizada <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. Podemos citar como exemplo as câmeras fotográficas, tomógrafos médicos, satélites e scanners. Na figura <a href="intro.html#fig:componentes2">1.3</a>, temos um exemplo de imagem colorida separadas em suas três componentes, e mais detalhes sobre a aquisição e formação deste tipo de imagem e de outras são abordados no Capítulo <a href="formacaoImagem.html#formacaoImagem">Formação de Imagem</a>. Como será discutido no Capítulo <a href="espaco3D.html#espaco3D">Espaço 3D</a>, algumas aplicações da Visão computacional dependem de parâmetros determinados pelo equipamento e das condições durante a aquisição das imagens.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:componentes2"></span>
+<img src="imagens/02-formacao/componentes.png" alt="Imagem colorida - Imagem separada em seus três componentes, em que Red é a vermelha, Green é a verde e Blue é a azul [4, p. 28]." width="65%" />
 <p class="caption">
-(#fig:componentes_2)(ref:componentes_2)
+Figura 1.3: Imagem colorida - Imagem separada em seus três componentes, em que <em>Red</em> é a vermelha, <em>Green</em> é a verde e <em>Blue</em> é a azul <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">4</a>, p. 28]</span>.
 </p>
 </div>
 <ul>
 <li>Pré processamento</li>
 </ul>
-<p>Essa etapa busca realizar mudanças e ajustes na imagem visando melhorar seu uso nas etapas futuras <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. Como exemplo temos casos onde não precisamos das cores de uma imagem, podendo então realizar a conversão para <em>grayscale</em> (tons de cinza), ou precisamos gerar imagens coloridas. Além disso, podemos realizar cortes ou realces, isolando somente a parte de maior interesse na imagem utilizando algumas das técnicas apresentadas no Capítulo <a href="transformacoesGeometricas.html#transformacoesGeometricas">Transformações Geométricas</a> e no Capítulo <a href="transformacoesRadiometricas.html#transformacoesRadiometricas">Transformações Radiométricas</a>. Na Figura @ref(fig:placaEletronicaMediana_2) se destaca uma das abordagens recorrentes no tratamento de imagem, a atenuação de ruídos e a suavização, utilizando principalmente alguns dos filtros do Capítulo <a href="filtros.html#filtros">Filtros Digitais</a>.</p>
-<p>(ref:placaEletronicaMediana_2) Remoção de ruído sal e pimenta por meio do filtro de Mediana - No Capítulo <a href="filtros.html#filtros">Filtros Digitais</a> serão apresentados alguns filtros como este que tratam as imagens, por exemplo, revomendo ruídos, aumentando o realce ou suavizando<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 103]</span>.</p>
-<div class="figure" style="text-align: center">
-<img src="imagens/05-filtros/placaEletronicaMediana.png" alt="(ref:placaEletronicaMediana_2)" width="85%" />
+<p>Essa etapa busca realizar mudanças e ajustes na imagem visando melhorar seu uso nas etapas futuras <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. Como exemplo temos casos onde não precisamos das cores de uma imagem, podendo então realizar a conversão para <em>grayscale</em> (tons de cinza), ou precisamos gerar imagens coloridas. Além disso, podemos realizar cortes ou realces, isolando somente a parte de maior interesse na imagem utilizando algumas das técnicas apresentadas no Capítulo <a href="transformacoesGeometricas.html#transformacoesGeometricas">Transformações Geométricas</a> e no Capítulo <a href="transformacoesRadiometricas.html#transformacoesRadiometricas">Transformações Radiométricas</a>. Na Figura <a href="intro.html#fig:placaEletronicaMediana2">1.4</a> se destaca uma das abordagens recorrentes no tratamento de imagem, a atenuação de ruídos e a suavização, utilizando principalmente alguns dos filtros do Capítulo <a href="filtros.html#filtros">Filtros Digitais</a>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:placaEletronicaMediana2"></span>
+<img src="imagens/05-filtros/placaEletronicaMediana.png" alt="Remoção de ruído sal e pimenta por meio do filtro de Mediana - No Capítulo Filtros Digitais serão apresentados alguns filtros como este que tratam as imagens, por exemplo, revomendo ruídos, aumentando o realce ou suavizando[2, p. 103]." width="85%" />
 <p class="caption">
-(#fig:placaEletronicaMediana_2)(ref:placaEletronicaMediana_2)
+Figura 1.4: Remoção de ruído sal e pimenta por meio do filtro de Mediana - No Capítulo <a href="filtros.html#filtros">Filtros Digitais</a> serão apresentados alguns filtros como este que tratam as imagens, por exemplo, revomendo ruídos, aumentando o realce ou suavizando<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 103]</span>.
 </p>
 </div>
 <ul>
 <li>Segmentação</li>
 </ul>
-<p>Nessa etapa, as informações de interesse são extraídas da imagem, geralmente, pela detecção de descontinuidades (bordas) ou de similaridades na imagem <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 4]</span> como abordaremos no Capítulo <a href="segmentacao.html#segmentacao">Segmentação</a>. Cada método abordado dentro da segmentação tem uma finalidade mais específica, buscando separar determinado elemento, partes ou objeto da imagem, por exemplo, na Figura <a href="intro.html#fig:cannyEOriginal">1.3</a> está o resultado de detecção de bordas pelo método de Canny descrito no Capítulo <a href="segmentacao.html#segmentacao">Segmentação</a>.</p>
+<p>Nessa etapa, as informações de interesse são extraídas da imagem, geralmente, pela detecção de descontinuidades (bordas) ou de similaridades na imagem <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 4]</span> como abordaremos no Capítulo <a href="segmentacao.html#segmentacao">Segmentação</a>. Cada método abordado dentro da segmentação tem uma finalidade mais específica, buscando separar determinado elemento, partes ou objeto da imagem, por exemplo, na Figura <a href="intro.html#fig:cannyEOriginal">1.5</a> está o resultado de detecção de bordas pelo método de Canny descrito no Capítulo <a href="segmentacao.html#segmentacao">Segmentação</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:cannyEOriginal"></span>
 <img src="imagens/01-introducao/cannyEOriginal.png" alt="Resultado final da detecção de bordas de Canny. (a) Imagem Original. (b) Resultado da detecção de borda - Com o método Canny entre outros apresentados no Capítulo Segmentação é possível partir de uma imagem como em (a) e determinar as bordas, tendo como resultado (b)." width="60%" />
 <p class="caption">
-Figura 1.3: Resultado final da detecção de bordas de Canny. (a) Imagem Original. (b) Resultado da detecção de borda - Com o método Canny entre outros apresentados no Capítulo <a href="segmentacao.html#segmentacao">Segmentação</a> é possível partir de uma imagem como em (a) e determinar as bordas, tendo como resultado (b).
+Figura 1.5: Resultado final da detecção de bordas de Canny. (a) Imagem Original. (b) Resultado da detecção de borda - Com o método Canny entre outros apresentados no Capítulo <a href="segmentacao.html#segmentacao">Segmentação</a> é possível partir de uma imagem como em (a) e determinar as bordas, tendo como resultado (b).
 </p>
 </div>
-<p>Ao individualizar estes componentes da imagem por meio de diferentes detectores, como na Figura @ref(fig:doghubble_2) em que se utilizou um detector de Blob, as informações assumem um formato mais adequado para o processamento computacional.</p>
-<p>(ref:doghubble_2) Resultado da detecção de <em>blobs</em> com DoG para identificação de estrelas - Outros detectores no Capítulo <a href="segmentacao.html#segmentacao">Segmentação</a> podem identificar pontos, linhas, quinas, círculos, e objetos de outros formatos como estas estrelas.</p>
-<div class="figure" style="text-align: center">
-<img src="imagens/06-segmentacao/dog_hubble.jpg" alt="(ref:doghubble_2)" width="35%" />
+<p>Ao individualizar estes componentes da imagem por meio de diferentes detectores, como na Figura <a href="intro.html#fig:doghubble2">1.6</a> em que se utilizou um detector de Blob, as informações assumem um formato mais adequado para o processamento computacional.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:doghubble2"></span>
+<img src="imagens/06-segmentacao/dog_hubble.jpg" alt="Resultado da detecção de blobs com DoG para identificação de estrelas - Outros detectores no Capítulo Segmentação podem identificar pontos, linhas, quinas, círculos, e objetos de outros formatos como estas estrelas." width="35%" />
 <p class="caption">
-(#fig:doghubble_2)(ref:doghubble_2)
+Figura 1.6: Resultado da detecção de <em>blobs</em> com DoG para identificação de estrelas - Outros detectores no Capítulo <a href="segmentacao.html#segmentacao">Segmentação</a> podem identificar pontos, linhas, quinas, círculos, e objetos de outros formatos como estas estrelas.
 </p>
 </div>
-<p>Outro exemplo da separação de elementos de uma imagem também está no Capítulo <a href="separacaoFundo.html#separacaoFundo">Separação de Fundo</a>, em que modelos são utilizados para detectar o que é o <em>background</em>, ou plano de fundo, e o que é o objeto de interesse (<em>foreground</em>) como na Figura @ref(fig:indoorBGmodeling_2).</p>
-<p>(ref:indoorBGmodeling_2) As imagens A, B, …, E são os <em>frames</em> capturados por uma câmera em um ambiente interno. As imagens F, G e H são os <em>backgrounds</em> estimados. E as imagens I, J e K são os <em>foregrounds</em> produzidos, as detecções de movimento estimadas. Adaptado de <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 435]</span> e <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 436]</span>.</p>
-<div class="figure" style="text-align: center">
-<img src="imagens/08-modelagemBackground/indoorBGmodeling.png" alt="(ref:indoorBGmodeling_2)" width="50%" />
+<p>Outro exemplo da separação de elementos de uma imagem também está no Capítulo <a href="separacaoFundo.html#separacaoFundo">Separação de Fundo</a>, em que modelos são utilizados para detectar o que é o <em>background</em>, ou plano de fundo, e o que é o objeto de interesse (<em>foreground</em>) como na Figura <a href="intro.html#fig:indoorBGmodeling2">1.7</a>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:indoorBGmodeling2"></span>
+<img src="imagens/08-modelagemBackground/indoorBGmodeling.png" alt="As imagens A, B, …, E são os frames capturados por uma câmera em um ambiente interno. As imagens F, G e H são os backgrounds estimados. E as imagens I, J e K são os foregrounds produzidos, as detecções de movimento estimadas. Adaptado de [5, p. 435] e [5, p. 436]." width="50%" />
 <p class="caption">
-(#fig:indoorBGmodeling_2)(ref:indoorBGmodeling_2)
+Figura 1.7: As imagens A, B, …, E são os <em>frames</em> capturados por uma câmera em um ambiente interno. As imagens F, G e H são os <em>backgrounds</em> estimados. E as imagens I, J e K são os <em>foregrounds</em> produzidos, as detecções de movimento estimadas. Adaptado de <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 435]</span> e <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 436]</span>.
 </p>
 </div>
 <ul>
 <li>Análise</li>
 </ul>
-<p>À parte de Análise atribuímos todos os processos que fazem uso da informação visual para compor um sistema de aplicação na área de Visão Computacional. Atualmente é mais comum ver estes processos englobados dentro de modelos de aprendizado de máquina mais genéricos como em redes neurais, capazes por exemplo, de classificar, identificar e rastrear objetos em diferentes situações. No Capítulo <a href="deepLearning.html#deepLearning">Deep Learning em Visão Computacional</a>, assim como na Figura @ref(fig:differentscnn_2) é possível se ter uma pequena noção de como as redes neurais, em particular as redes convolucionais (CNN), enxergam as imagens e como desagregam suas informações para disponibilizar resultados satisfatórios no campo da VC.</p>
-<p>(ref:differentscnn_2) Diferentes CNN’s e seus mapas de características em diferentes camadas - Na primeira coluna temos as características aprendidas por uma rede especializada no trabalho com rostos humanos, na segunda coluna com carros, na terceira com elefantes e na quarta com cadeiras <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">6</a>, p. 253]</span></p>
-<div class="figure" style="text-align: center">
-<img src="imagens/07-deepLearning/differentscnn.png" alt="(ref:differentscnn_2)" width="80%" />
+<p>À parte de Análise atribuímos todos os processos que fazem uso da informação visual para compor um sistema de aplicação na área de Visão Computacional. Atualmente é mais comum ver estes processos englobados dentro de modelos de aprendizado de máquina mais genéricos como em redes neurais, capazes por exemplo, de classificar, identificar e rastrear objetos em diferentes situações. No Capítulo <a href="deepLearning.html#deepLearning">Deep Learning em Visão Computacional</a>, assim como na Figura <a href="intro.html#fig:differentscnn2">1.8</a> é possível se ter uma pequena noção de como as redes neurais, em particular as redes convolucionais (CNN), enxergam as imagens e como desagregam suas informações para disponibilizar resultados satisfatórios no campo da VC.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:differentscnn2"></span>
+<img src="imagens/07-deepLearning/differentscnn.png" alt="Diferentes CNN’s e seus mapas de características em diferentes camadas - Na primeira coluna temos as características aprendidas por uma rede especializada no trabalho com rostos humanos, na segunda coluna com carros, na terceira com elefantes e na quarta com cadeiras [6, p. 253]" width="80%" />
 <p class="caption">
-(#fig:differentscnn_2)(ref:differentscnn_2)
+Figura 1.8: Diferentes CNN’s e seus mapas de características em diferentes camadas - Na primeira coluna temos as características aprendidas por uma rede especializada no trabalho com rostos humanos, na segunda coluna com carros, na terceira com elefantes e na quarta com cadeiras <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">6</a>, p. 253]</span>
 </p>
 </div>
 </div>
@@ -417,12 +417,12 @@ Figura 1.3: Resultado final da detecção de bordas de Canny. (a) Imagem Origina
 <p>A utilização do processamento de imagens para melhorar informações visuais, ajudando na interpretação humana, expandiu-se para diferentes setores. No sensoriamento remoto, o pré-processamento contribui para uma melhor análise de imagens aéreas e de satélite, aumentando a compreensão da superfície terrestre. Na arqueologia e nas artes, métodos de processamento de imagens podem restaurar fotografias com registros únicos de objetos raros, pinturas, documentos antigos e conteúdos em vídeos <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 2]</span>. Na física e em áreas da biologia, técnicas computacionais realçam imagens de experimentos em áreas como plasmas de alta energia e microscopia eletrônica <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 5]</span>.</p>
 <p>Com o aumento da automatização de tarefas, o processamento de imagens tem se destacado na aquisição de dados de imagens visando a percepção automática por máquinas <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. Técnicas de identificação de padrões podem ser aplicados no reconhecimento automático de caracteres, de impressões digitais, de faces, e de placas de veículos, contribuindo com setores de segurança. Na automação industrial tem sido utilizado no sistema de visão computacional para inspeção e montagem de produtos. Na área militar, pode ser aplicado na identificação e rastreamento de alvos em imagens de satélites, e na navegação de veículos autônomos. Nas áreas de medicina e biologia, rastreamentos automáticos em imagens radiográficas e amostras de sangue têm contribuído para os exames e testes <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. O processamento computacional de imagens aéreas e de satélites também é utilizado na previsão do tempo e em avaliações ambientais <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 5]</span>.</p>
 <p>Este variado campo de aplicações pode ser justificado pela capacidade dos aparelhos de processamento de imagens trabalharem com imagens de diversas fontes. Diferentemente dos seres humanos, que são limitados à banda visual do espectro eletromagnético (EM), o processamento computacional cobre todo o EM, variando de ondas gama a ondas de rádio <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 1]</span>. No processamento digital ainda é possível trabalhar com imagens geradas por fontes que os humanos não estão acostumados a associar com imagens. Essas fontes incluem acústica, ultrassom, microscopia eletrônica e imagens geradas por computador <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 13]</span>.</p>
-<p>Uma das formas mais fáceis de desenvolver uma compreensão básica da extensão das aplicações de PDI é categorizar as imagens de acordo com sua fonte. Na Figura <a href="intro.html#fig:espectro">1.4</a> ttemos uma representação do EM e iremos a seguir explorar cada uma dessas faixas, apresentando algumas das áreas onde podem ser utilizados:</p>
+<p>Uma das formas mais fáceis de desenvolver uma compreensão básica da extensão das aplicações de PDI é categorizar as imagens de acordo com sua fonte. Na Figura <a href="intro.html#fig:espectro">1.9</a> ttemos uma representação do EM e iremos a seguir explorar cada uma dessas faixas, apresentando algumas das áreas onde podem ser utilizados:</p>
 
 <div class="figure" style="text-align: center"><span id="fig:espectro"></span>
 <img src="imagens/01-introducao/espectro.png" alt="Espectro eletromagnético - As imagens podem ser geradas a partir de diferentes fontes eletromagnéticas, incluindo raios gama, raio x, ultravioleta, visível, infravermelho, microondas e rádio [7]." width="90%" />
 <p class="caption">
-Figura 1.4: Espectro eletromagnético - As imagens podem ser geradas a partir de diferentes fontes eletromagnéticas, incluindo raios gama, raio x, ultravioleta, visível, infravermelho, microondas e rádio <span class="citation">[<a href="#ref-img:espectro" role="doc-biblioref">7</a>]</span>.
+Figura 1.9: Espectro eletromagnético - As imagens podem ser geradas a partir de diferentes fontes eletromagnéticas, incluindo raios gama, raio x, ultravioleta, visível, infravermelho, microondas e rádio <span class="citation">[<a href="#ref-img:espectro" role="doc-biblioref">7</a>]</span>.
 </p>
 </div>
 <ul>
@@ -437,12 +437,12 @@ Figura 1.4: Espectro eletromagnético - As imagens podem ser geradas a partir de
 <li><p><strong>Imagens na banda de micro-ondas e rádio</strong></p>
 <p>Na banda de micro-ondas o melhor exemplo que temos é o radar. Essa banda tem uma peculiaridade de ser extremamente penetrante, podendo gerar imagens através de nuvens, vegetação, etc <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 12]</span>. Já a banda de rádio é muito utilizada na medicina, como exemplo na ressonância magnética e na astronomia <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 12]</span>.</p></li>
 </ul>
-<p>Como podemos observar, existem inúmeras maneiras de se conseguir imagens além da clássica imagem no espectro visível, isso nos dá a possibilidade de utilizar o PDI em inúmeras áreas e problemas. Na Figura <a href="intro.html#fig:aplicacoes">1.5</a> temos uma nebulosa observada a partir de diferentes bandas do EM, sendo possível observar detalhes que passariam despercebidos se usássemos somente alguma delas.</p>
+<p>Como podemos observar, existem inúmeras maneiras de se conseguir imagens além da clássica imagem no espectro visível, isso nos dá a possibilidade de utilizar o PDI em inúmeras áreas e problemas. Na Figura <a href="intro.html#fig:aplicacoes">1.10</a> temos uma nebulosa observada a partir de diferentes bandas do EM, sendo possível observar detalhes que passariam despercebidos se usássemos somente alguma delas.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:aplicacoes"></span>
 <img src="imagens/01-introducao/aplicacoes.png" alt="Nebulosa CRAB em diferentes frequências - Ao observar um mesmo objeto a partir de várias bandas do EM é possível avaliar diferentes aspectos [8]." width="90%" />
 <p class="caption">
-Figura 1.5: Nebulosa CRAB em diferentes frequências - Ao observar um mesmo objeto a partir de várias bandas do EM é possível avaliar diferentes aspectos <span class="citation">[<a href="#ref-img:nebulosa" role="doc-biblioref">8</a>]</span>.
+Figura 1.10: Nebulosa CRAB em diferentes frequências - Ao observar um mesmo objeto a partir de várias bandas do EM é possível avaliar diferentes aspectos <span class="citation">[<a href="#ref-img:nebulosa" role="doc-biblioref">8</a>]</span>.
 </p>
 </div>
 
