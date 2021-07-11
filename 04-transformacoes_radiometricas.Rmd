@@ -115,7 +115,7 @@ Os histogramas são utilizados em grande parte para auxiliar em transformações
 
 ## Equalização do histograma
 
-Na equalização do histograma, o histograma da imagem original $f$ é alterado de maneira que a imagem transformada $g$ tenha uma distribuição aproximadamente uniforme dos níveis de cinza em uma faixa mais ampla de valores, assumindo características próximas de uma imagem de alto contraste [@pedrini2008]. Neste método se aplica um operador  de transformação de intensidade $T$ na forma contínua, Equação \@ref(eq:eqEqualizHist), que gera uma variável aleatória (valores de intensidade da imagem transformada) caracterizada por uma função densidade de probabilidade uniforme (PDF, *probability density function*) .
+Na equalização do histograma, o histograma da imagem original é alterado de maneira que a imagem transformada tenha uma distribuição aproximadamente uniforme dos níveis de cinza em uma faixa mais ampla de valores, assumindo características próximas de uma imagem de alto contraste [@pedrini2008]. Neste método se aplica um operador  de transformação de intensidade $T$ na forma contínua, Equação \@ref(eq:eqEqualizHist), que gera uma variável aleatória (valores de intensidade da imagem transformada) caracterizada por uma função densidade de probabilidade uniforme (PDF, *probability density function*) .
 
 $$s = T(r) = (L - 1)\int_{0}^{r} p_r(w)dw
 (\#eq:eqEqualizHist)$$
@@ -154,7 +154,7 @@ Na Figura \@ref(fig:equalizaca2)(a), $T_2(z)$ é a função de transformação q
 
 (ref:equalizaca2) Etapas de especificação de histograma. (a) equalização do histograma especificado pela função $T_2(z)$. (b) cálculo da função de transformação inversa $T_2^{-1}(s)$[@pedrini2008, p. 116].
 
-```{r equalizaca2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:equalizaca2)', fig.align='center', out.width='40%'}
+```{r equalizaca2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:equalizaca2)', fig.align='center', out.width='90%'}
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/equalizaca2.png'))
 ```
 
@@ -177,7 +177,7 @@ $s_0 = 1,  s_1 = 3, s_2 = 5,  s_3 = 6, s_4 = 6, s_5 = 7, s_6 = 7, s_7 = 7$
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/histograma3.png'))
 ```
 
-No próximo passo, todos os valores de $T_2(z_q)$ são calculados da mesma forma que $T_1(r)$, Equação \@ref(eq:eqEqualizHistDiscret) de equalização. Os resultados desta segunda etapa estão na Figura \@ref(fig:tabelahistograma2)  e a função de transformação é esboçada na Figura \@ref(fig:histograma3)(c).
+No próximo passo, todos os valores de $T_2(z_q)$ são calculados da mesma forma que $T_1(r)$, Equação \@ref(eq:eqEqualizHistDiscret) de equalização, em que os valores de $p_z(z_q)$ estão na Figura \@ref(fig:tabelahistograma2). Os resultados desta segunda etapa estão na Figura \@ref(fig:tabelahistograma3) e a função de transformação é esboçada na Figura \@ref(fig:histograma3)(c).
 
 (ref:tabelahistograma2) Histograma especificado[@gonzalez2010, p. 88].
 
@@ -185,7 +185,7 @@ No próximo passo, todos os valores de $T_2(z_q)$ são calculados da mesma forma
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/tabela_histograma2.png'))
 ```
 
-No terceiro passo, sendo $G(z_q) = T_2(z_q)$, verifica-se o menor valor de $z_q$ na Figura \@ref(fig:histograma3)(c) de modo que $G(z_q)$ seja o mais próximo possível de $s_k$ . Isso é feito para todos os valores de $s_k$ para criar os mapeamentos necessários de $s$ em $z$, Figura \@ref(fig:tabelahistograma4). A Figura \@ref(fig:tabelahistograma3) mostra os resultados do gráfico de \@ref(fig:histograma3)(c) em uma tabela.
+No terceiro passo, sendo $G(z_q) = T_2(z_q)$, verifica-se o menor valor de $z_q$ na Figura \@ref(fig:tabelahistograma3) de modo que $G(z_q)$ seja o mais próximo possível de $s_k$ . Isso é feito para todos os valores de $s_k$ para criar os mapeamentos necessários de $s$ em $z$, Figura \@ref(fig:tabelahistograma4).
 
 (ref:tabelahistograma3) Valores da função de transformação $G(z_q) = T_2(z_q)$ arredondados[@gonzalez2010, p. 88].
 
@@ -193,7 +193,7 @@ No terceiro passo, sendo $G(z_q) = T_2(z_q)$, verifica-se o menor valor de $z_q$
 knitr::include_graphics(rep('imagens/04-transformacaoRadiometricas/tabela_histograma3.png'))
 ```
 
-Na última etapa, mapea-se cada intensidade da imagem do histograma equalizado, $p_s(s)$, em uma intensidade correspondente na imagem do histograma especificado recém-criado, $p_z(z)$, conforme ilustrado no mapeamento na Figura \@ref(fig:tabelahistograma4). O histograma resultante da especificação é esboçado na Figura \@ref(fig:histograma3)(d).
+Na última etapa, o mapeamento na Figura \@ref(fig:tabelahistograma4) juntamente com a distribuição dos pixels na Figura \@ref(fig:tabelapixels) é utilizado para mapear cada pixel na imagem do histograma equalizado $p_s(s)$ em um pixel correspondente na imagem do histograma especificado recém-criado  $p_z(z)$. O histograma resultante da especificação, calculado com base na equação \@ref(eq:histogEquacao) é esboçado na Figura \@ref(fig:histograma3)(d).
 
 (ref:tabelahistograma4) Mapeamentos dos valores de $s_k$ nos valores correspondentes de $z_q$.[@gonzalez2010, p. 89].
 
