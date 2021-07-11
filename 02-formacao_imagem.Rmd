@@ -316,11 +316,11 @@ knitr::include_graphics(rep('imagens/02-formacao/caminho.png'))
 ```
 
 ### Componente Conexa  
-Componentes conexos de pixels de uma imagem é um conjunto de elementos (pixels) que de alguma forma estão conectados entre si, dois ou mais pixels são componentes conexos se existir um caminho seção 2.7.4 Caminho pertencente ao conjunto. A Figura \@ref(fig:componente_conexa) mostra uma imagem bidimensional contendo três componentes conexos caso seja considerada a vizinhança-4 ou, então, dois componentes conexos se considerada a vizinhança-8. [@pedrini2008, p. 32].
+Componentes conexos de pixels de uma imagem é um conjunto de elementos (pixels) que de alguma forma estão conectados entre si, dois ou mais pixels são componentes conexos se existir um caminho seção 2.7.4 Caminho pertencente ao conjunto. A Figura \@ref(fig:componenteconexa) mostra uma imagem bidimensional contendo três componentes conexos caso seja considerada a vizinhança-4 ou, então, dois componentes conexos se considerada a vizinhança-8. [@pedrini2008, p. 32].
 
-(ref:componente_conexa) Componentes Conexos de uma imagem bidimensional [@pedrini2008, p. 32].
+(ref:componenteconexa) Componentes Conexos de uma imagem bidimensional [@pedrini2008, p. 32].
 
-```{r componente_conexa, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:componente_conexa)', fig.align='center', out.width='20%'}
+```{r componenteconexa, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:componenteconexa)', fig.align='center', out.width='20%'}
 knitr::include_graphics(rep('imagens/02-formacao/componente_conexos.png'))
 ```
 
