@@ -285,9 +285,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Filtros digitais representam um conjunto de ferramentas poderosas para realizar operações em imagens. Diferente das operações de ponto que operam sobre um único pixel, as operações utilizando filtros levam em consideração os pixels próximos ao pixel que atualmente está em modificação. Isso nos permite realizar alterações muito mais complexas do que as realizadas anteriormente. Como exemplos disso podemos considerar a operação <em>sharpen</em> (aguçamento) e <em>blur</em> (suavização), que podem ser observados na Figura <a href="filtros.html#fig:onibusSharpenNBlur">5.1</a>(a) e (b), respectivamente.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:onibusSharpenNBlur"></span>
-<img src="imagens/05-filtros/onibusShapenNBlur.png" alt="Imagem de ônibus com filtro de aguçamento e de suavização[10, p. 98]" width="55%" />
+<img src="imagens/05-filtros/onibusShapenNBlur.png" alt="Imagem de ônibus com filtro de aguçamento e de suavização[9, p. 98]" width="55%" />
 <p class="caption">
-Figura 5.1: Imagem de ônibus com filtro de aguçamento e de suavização<span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">10</a>, p. 98]</span>
+Figura 5.1: Imagem de ônibus com filtro de aguçamento e de suavização<span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">9</a>, p. 98]</span>
 </p>
 </div>
 <div id="convolução" class="section level2">
@@ -295,7 +295,7 @@ Figura 5.1: Imagem de ônibus com filtro de aguçamento e de suavização<span c
 <p>A convolução é uma operação muito utilizada em PDI tendo suas origens na matemática, onde é definida como uma operação realizada entre duas funções que resulta numa terceira. Em outras palavras, a convolução recebe dois sinais como entrada e gera um sinal como saída. No caso de PDI, podemos imaginar os sinais de entrada como sendo a nossa imagem original e o <em>kernel</em> do filtro, e a nossa saída como sendo a imagem filtrada.</p>
 <p>Quando dizemos <em>kernel</em>, estamos nos referindo a uma função ou, no caso de PDI, a uma matriz que é aplicada a nossa imagem usando a convolução que irá produzir outra imagem como saída. Na Tabela <a href="filtros.html#tab:kernelExample">5.1</a>, temos exemplos de alguns tipos de <em>kernels</em> que podem ser utilizados na convolução e seus respectivos resultados. Além dos efeitos mais comuns, como o de desfoque (<em>blur</em>), podemos utilizar <em>kernels</em> que extraiam informações mais complexas das imagens, como os detectores de borda, que serão explicados nos próximos tópicos.</p>
 <table>
-<caption><span id="tab:kernelExample">Tabela 5.1: </span> Exemplo de <em>kernels</em> (adaptada de <span class="citation">[<a href="#ref-tab:kernelExample" role="doc-biblioref">15</a>]</span>).</caption>
+<caption><span id="tab:kernelExample">Tabela 5.1: </span> Exemplo de <em>kernels</em> (adaptada de <span class="citation">[<a href="#ref-tab:kernelExample" role="doc-biblioref">14</a>]</span>).</caption>
 <colgroup>
 <col width="34%" />
 <col width="31%" />
@@ -350,9 +350,9 @@ Figura 5.1: Imagem de ônibus com filtro de aguçamento e de suavização<span c
 <p>Em porcessamento de sinais, a operação de convolução, geralmente, é representada pelo símbolo <span class="math inline">\(*\)</span> e pode ser descrita, em poucas palavras, como uma soma de produtos entre um ponto do <em>kernel</em> e um ponto correspondente da imagem. Essa correspondência é encontrada fazendo um deslizamento sobre a imagem de entrada. A Figura <a href="filtros.html#fig:convolutionGif">5.2</a> representa de maneira visual a convolução em um cenário de uma dimensão, através do sinal de entrada (<em>signal</em>) e o <em>kernel</em>. Pode-se ainda perceber que o <em>kernel</em> está rotacionado em 180º, pelo fato da definição de convolução.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:convolutionGif"></span>
-<img src="imagens/05-filtros/convolutionGif.png" alt="Convolução unidimensional[16]." width="55%" />
+<img src="imagens/05-filtros/convolutionGif.png" alt="Convolução unidimensional[15]." width="55%" />
 <p class="caption">
-Figura 5.2: Convolução unidimensional<span class="citation">[<a href="#ref-img:convolutionGif" role="doc-biblioref">16</a>]</span>.
+Figura 5.2: Convolução unidimensional<span class="citation">[<a href="#ref-img:convolutionGif" role="doc-biblioref">15</a>]</span>.
 </p>
 </div>
 <p>Algo interessante que podemos observar na Figura <a href="filtros.html#fig:convolutionGif">5.2</a> é que nosso sinal de entrada é quase totalmente 0 e contém um único ponto com o valor 1, assim, nosso resultado será uma cópia do <em>kernel</em>. A partir disso, conseguimos imaginar o porquê de termos como resultado a própria imagem quando aplicado um <em>kernel</em> identidade, como mostrado na primeira linha da Tabela <a href="filtros.html#tab:kernelExample">5.1</a>.</p>
@@ -516,7 +516,7 @@ Os limites dos somatórios são dados por <span class="math inline">\(a=(m-1)/2\
 Figura 5.5: Exemplo da aplicação da correlação sobre uma imagem. A matriz verde é a imagem, a azul claro é o kernel e a azul escuro é a imagem resultante. Fonte: autoria própria inspirado em <a href="http://www.songho.ca/dsp/convolution/convolution2d_example.html" class="uri">http://www.songho.ca/dsp/convolution/convolution2d_example.html</a> e <a href="https://arxiv.org/abs/1603.07285" class="uri">https://arxiv.org/abs/1603.07285</a>.
 </p>
 </div>
-<p>O exemplo utiliza um <span class="math inline">\(kernel\)</span> assimétrico. Então, os resultados da correlação e convolução são diferentes. Deixaremos isso como um exercício ao leitor, realizar a convolução para provar essa diferença. O caso anterior também tem uma característica que é o complemento das bordas com 0’s, <em>constant padding</em>, para que o <span class="math inline">\(kernel\)</span> pudesse ser aplicado sobre toda a imagem. A seguir, tem-se métodos alternativos para lidar com essa característica<span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">10</a>, p. 125], [<a href="#ref-chityala2020" role="doc-biblioref">17</a>, p. 60]</span>:</p>
+<p>O exemplo utiliza um <span class="math inline">\(kernel\)</span> assimétrico. Então, os resultados da correlação e convolução são diferentes. Deixaremos isso como um exercício ao leitor, realizar a convolução para provar essa diferença. O caso anterior também tem uma característica que é o complemento das bordas com 0’s, <em>constant padding</em>, para que o <span class="math inline">\(kernel\)</span> pudesse ser aplicado sobre toda a imagem. A seguir, tem-se métodos alternativos para lidar com essa característica<span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">9</a>, p. 125], [<a href="#ref-chityala2020" role="doc-biblioref">16</a>, p. 60]</span>:</p>
 <ul>
 <li><p>Preenchimento com constante (<em>constant padding</em>):
 Método onde as laterais são preenchidas com um valor constante, comumente 0.</p></li>
@@ -539,9 +539,9 @@ A imagem é repetida nas bordas.</p></li>
 <p>O filtro da média é um tipo de filtro que utiliza a média dos valores dos pixels próximos ao pixel central. Como esse tipo de filtro realiza uma operação linear, ele é classificado como um filtro linear de suavização <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 101]</span>. Essa suavização se dá exatamente pelo tipo da operação utilizada, a média dos pixels vizinhos, que diminui a nitidez pela redução das transições abruptas nos níveis de intensidade. Um dos problemas que podem ocorrer é que as bordas também são mudanças abruptas, então podem ser comprometidas pelo filtro<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 101]</span>. Na Figura <a href="filtros.html#fig:onibusBoxFilter">5.6</a>, temos um exemplo do efeito desse filtro.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:onibusBoxFilter"></span>
-<img src="imagens/05-filtros/onibusShapenNBlur.png" alt="Imagem de ônibus com filtro de aguçamento e de suavização[10, p. 98]." width="55%" />
+<img src="imagens/05-filtros/onibusShapenNBlur.png" alt="Imagem de ônibus com filtro de aguçamento e de suavização[9, p. 98]." width="55%" />
 <p class="caption">
-Figura 5.6: Imagem de ônibus com filtro de aguçamento e de suavização<span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">10</a>, p. 98]</span>.
+Figura 5.6: Imagem de ônibus com filtro de aguçamento e de suavização<span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">9</a>, p. 98]</span>.
 </p>
 </div>
 <p>A máscara (<em>kernel</em>) de um filtro de média 3x3 pode ser representada por <a href="filtros.html#eq:averageKernel">(5.3)</a>:</p>
@@ -610,7 +610,7 @@ Figura 5.10: Função gaussiana com <span class="math inline">\(\mu=0\)</span> e
 </p>
 </div>
 <p>O Filtro Gaussiano 2D pode ser gerado através da convolução de dois vetores resultantes de <span class="math inline">\(G&#39;(x)\)</span> sendo <span class="math inline">\(x\)</span> ora as linhas, representando um vetor da matriz 2D, ora as colunas, representando o outro vetor da matriz 2D. De forma alternativa, ele também pode ser construído a partir da n-ésima linha do Triângulo de Pascal que corresponde ao tamanho do <em>kernel</em> desejado <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 126]</span>. Como o método é o mesmo para as duas fontes, optamos explicá-lo pela função gaussiana modificada, <a href="filtros.html#eq:gaussModificada">(5.5)</a>.</p>
-<p>O procedimento primário é obter a imagem da função, mas, para obter um filtro com intuito gaussiano, deve-se selecionar a amostragem dos pontos no intervalo de <span class="math inline">\(\pm 2.5\sigma\)</span> ou <span class="math inline">\(\pm 3.5\sigma\)</span> <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">10</a>, p. 114]</span>. Assim, escolhendo a primeira opção, para modelagem de um <em>kernel</em> 7x7, procura-se <span class="math inline">\(G&#39;(0)\)</span>, <span class="math inline">\(G&#39;(1)\)</span>, <span class="math inline">\(G&#39;(2)\)</span> e <span class="math inline">\(G&#39;(3)\)</span>, pela simetria da função, esses valores já bastam, conforme demonstrado em <a href="filtros.html#eq:exemploGauss">(5.6)</a>. Entretanto, como os valores têm infinitas casas decimais, devem ser truncados. Aqui escolhemos o uso de cinco casas decimais.</p>
+<p>O procedimento primário é obter a imagem da função, mas, para obter um filtro com intuito gaussiano, deve-se selecionar a amostragem dos pontos no intervalo de <span class="math inline">\(\pm 2.5\sigma\)</span> ou <span class="math inline">\(\pm 3.5\sigma\)</span> <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">9</a>, p. 114]</span>. Assim, escolhendo a primeira opção, para modelagem de um <em>kernel</em> 7x7, procura-se <span class="math inline">\(G&#39;(0)\)</span>, <span class="math inline">\(G&#39;(1)\)</span>, <span class="math inline">\(G&#39;(2)\)</span> e <span class="math inline">\(G&#39;(3)\)</span>, pela simetria da função, esses valores já bastam, conforme demonstrado em <a href="filtros.html#eq:exemploGauss">(5.6)</a>. Entretanto, como os valores têm infinitas casas decimais, devem ser truncados. Aqui escolhemos o uso de cinco casas decimais.</p>
 <p><span class="math display" id="eq:exemploGauss">\[\begin{split}
 &amp;G&#39;(-3) = G&#39;(3) = 0,01110\\
 &amp;G&#39;(-2) = G&#39;(2) = 0,13533\\
@@ -651,16 +651,16 @@ Figura 5.11: Imagem com diferentes tamanhos de filtro gaussiano. Adaptado de <sp
 <p>[4] T. B. Moeslund, <em>Introduction to video and image processing: Building real systems and applications</em>. Springer Science &amp; Business Media, 2012.</p>
 </div>
 <div id="ref-burger2009">
-<p>[10] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
+<p>[9] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
 </div>
 <div id="ref-tab:kernelExample">
-<p>[15] W. Commons, “Kernel (image processing)”. 2011, [Online]. Disponível em: <a href="https://en.wikipedia.org/wiki/Kernel_(image_processing)">https://en.wikipedia.org/wiki/Kernel_(image_processing)</a>.</p>
+<p>[14] W. Commons, “Kernel (image processing)”. 2011, [Online]. Disponível em: <a href="https://en.wikipedia.org/wiki/Kernel_(image_processing)">https://en.wikipedia.org/wiki/Kernel_(image_processing)</a>.</p>
 </div>
 <div id="ref-img:convolutionGif">
-<p>[16] T. e2eML Course Catalog, “Convolution in one dimension for neural networks”. 2020, [Online]. Disponível em: <a href="https://e2eml.school/convolution_one_d.html">https://e2eml.school/convolution_one_d.html</a>.</p>
+<p>[15] T. e2eML Course Catalog, “Convolution in one dimension for neural networks”. 2020, [Online]. Disponível em: <a href="https://e2eml.school/convolution_one_d.html">https://e2eml.school/convolution_one_d.html</a>.</p>
 </div>
 <div id="ref-chityala2020">
-<p>[17] R. CHITYALA e S. PUDIPEDDI, <em>Image processing and acquisition using Python</em>. CRC Press, 2020.</p>
+<p>[16] R. CHITYALA e S. PUDIPEDDI, <em>Image processing and acquisition using Python</em>. CRC Press, 2020.</p>
 </div>
 </div>
 <div class="footnotes">

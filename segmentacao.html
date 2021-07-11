@@ -511,7 +511,7 @@ Figura 6.11: (a) Gráfico 3-D do negativo de LoG. (b) Imagem do negativo de LoG.
 </div>
 <div id="método-de-canny" class="section level3">
 <h3><span class="header-section-number">6.2.4</span> Método de Canny</h3>
-<p>O algoritmo de Canny recebeu esse nome em alusão a John Canny, que o propôs em seu artigo, “A computational Approach to Edge Detection” <span class="citation">[<a href="#ref-canny1986computational" role="doc-biblioref">18</a>]</span>, publicado em 1986. Sua formulação se baseava em três pontos principais:</p>
+<p>O algoritmo de Canny recebeu esse nome em alusão a John Canny, que o propôs em seu artigo, “A computational Approach to Edge Detection” <span class="citation">[<a href="#ref-canny1986computational" role="doc-biblioref">17</a>]</span>, publicado em 1986. Sua formulação se baseava em três pontos principais:</p>
 <ul>
 <li>Uma baixa taxa de erro, ou seja, todas as bordas presentes na imagem devem ser encontradas e não deve haver respostas espúrias.</li>
 <li>O segundo critério diz que as bordas detectadas devem estar bem localizadas, em outras palavras, elas devem estar o mais próximo possível das bordas verdadeiras.</li>
@@ -521,7 +521,7 @@ Figura 6.11: (a) Gráfico 3-D do negativo de LoG. (b) Imagem do negativo de LoG.
 <p><span class="math display" id="eq:primeiraDerGauss">\[\frac{\mathrm{d} }{\mathrm{d} x}e^{\frac{-x^2}{2\sigma^2}} = \frac{-x}{\sigma^2}e^{\frac{-x^2}{2\sigma^2}}
 \tag{6.20}\]</span></p>
 <p>Canny demonstrou que a utilização dessa aproximação pode ser feita com uma taxa 20% inferior à solução numérica, o que a torna, praticamente, imperceptível para muitas das aplicações <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 474]</span>.</p>
-<p>A ideia anterior foi imaginada em um aspecto 1-D, precisamos expandir esse conceito para uma generalização 2-D. Uma borda de degrau pode ser caracterizada pela sua posição, orientação e possível magnitude. Aplicar um filtro Gaussiano em uma imagem e depois diferenciá-la forma um simples e efetivo operador direcional <span class="citation">[<a href="#ref-sonka2014" role="doc-biblioref">19</a>, p. 145]</span>. Digamos, então, que <span class="math inline">\(f(x,y)\)</span> seja uma imagem e <span class="math inline">\(G(x,y)\)</span>, a função gaussiana, Equação <a href="segmentacao.html#eq:funcGauss2-DCanny">(6.21)</a>:</p>
+<p>A ideia anterior foi imaginada em um aspecto 1-D, precisamos expandir esse conceito para uma generalização 2-D. Uma borda de degrau pode ser caracterizada pela sua posição, orientação e possível magnitude. Aplicar um filtro Gaussiano em uma imagem e depois diferenciá-la forma um simples e efetivo operador direcional <span class="citation">[<a href="#ref-sonka2014" role="doc-biblioref">18</a>, p. 145]</span>. Digamos, então, que <span class="math inline">\(f(x,y)\)</span> seja uma imagem e <span class="math inline">\(G(x,y)\)</span>, a função gaussiana, Equação <a href="segmentacao.html#eq:funcGauss2-DCanny">(6.21)</a>:</p>
 <p><span class="math display" id="eq:funcGauss2-DCanny">\[G(x,y) = e^{-\frac{x^2+y^2}{2\sigma^2}}
 \tag{6.21}\]</span></p>
 <p>Temos como saída a imagem suavizada, <span class="math inline">\(f_s\)</span>, Equação <a href="segmentacao.html#eq:cannyGauss">(6.22)</a>:</p>
@@ -593,9 +593,9 @@ Figura 6.14: Imagem filtrada com filtro gaussiano.
 </ol>
 
 <div class="figure" style="text-align: center"><span id="fig:derivadas"></span>
-<img src="imagens/06-segmentacao/derivadas.jpg" alt="(a) Sobel na direção vertical. (b) Sobel na direção horizontal. (c) Gradiente. (d) Ângulos. [10, p. 98]" width="75%" />
+<img src="imagens/06-segmentacao/derivadas.jpg" alt="(a) Sobel na direção vertical. (b) Sobel na direção horizontal. (c) Gradiente. (d) Ângulos. [9, p. 98]" width="75%" />
 <p class="caption">
-Figura 6.15: (a) Sobel na direção vertical. (b) Sobel na direção horizontal. (c) Gradiente. (d) Ângulos. <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">10</a>, p. 98]</span>
+Figura 6.15: (a) Sobel na direção vertical. (b) Sobel na direção horizontal. (c) Gradiente. (d) Ângulos. <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">9</a>, p. 98]</span>
 </p>
 </div>
 <ol start="4" style="list-style-type: decimal">
@@ -650,9 +650,9 @@ Figura 6.19: Planos <span class="math inline">\(xy\)</span> e <span class="math 
 <p>A Figura <a href="segmentacao.html#fig:planoxyrhotheta">6.20</a> mostra a aplicação de coordenadas polares nesse contexto por exemplos gráficos. Na Figura <a href="segmentacao.html#fig:planoxyrhotheta">6.20</a>(a), <span class="math inline">\(\rho\)</span> é a distância da origem até a reta. Na Figura <a href="segmentacao.html#fig:planoxyrhotheta">6.20</a>(b), mostra-se que cada uma das curvas senoidais representa as infinitas retas que passam por cada um dos dois pontos, <span class="math inline">\((x_i,y_i)\)</span> e <span class="math inline">\((x_j,y_j)\)</span> e a interseção das curvas, <span class="math inline">\((\rho&#39;,\theta&#39;)\)</span>, é a reta que passa por esses dois pontos.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:planoxyrhotheta"></span>
-<img src="imagens/06-segmentacao/planoxyrhotheta.png" alt="Exemplo de conversão de uma reta no plano cartesiano para o plano polar. (a) Pode ser dois pontos arbitrários de uma imagemImagem de ônibus com filtro de aguçamento e de suavização. [10, p. 98]" width="90%" />
+<img src="imagens/06-segmentacao/planoxyrhotheta.png" alt="Exemplo de conversão de uma reta no plano cartesiano para o plano polar. (a) Pode ser dois pontos arbitrários de uma imagemImagem de ônibus com filtro de aguçamento e de suavização. [9, p. 98]" width="90%" />
 <p class="caption">
-Figura 6.20: Exemplo de conversão de uma reta no plano cartesiano para o plano polar. (a) Pode ser dois pontos arbitrários de uma imagemImagem de ônibus com filtro de aguçamento e de suavização. <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">10</a>, p. 98]</span>
+Figura 6.20: Exemplo de conversão de uma reta no plano cartesiano para o plano polar. (a) Pode ser dois pontos arbitrários de uma imagemImagem de ônibus com filtro de aguçamento e de suavização. <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">9</a>, p. 98]</span>
 </p>
 </div>
 <p>A Figura <a href="segmentacao.html#fig:planoxyrhotheta">6.20</a>(c) mostra como fazemos a representação digital do espaço de coordenadas polares, usamos uma matriz onde esse espaço é subdividido em várias células, chamadas células acumuladoras. Os valores de <span class="math inline">\(\theta_{\text{min}}\)</span> e <span class="math inline">\(\theta_{\text{max}}\)</span> são, geralmente, <span class="math inline">\(-90^{\circ}\leq \theta\leq90^{\circ}\)</span> e os valores de <span class="math inline">\(\rho_{min}\)</span> e <span class="math inline">\(\rho_{max}\)</span> são <span class="math inline">\(-D\leq\rho\leq D\)</span>, onde <span class="math inline">\(D\)</span> é o comprimento da diagonal da imagem, ou seja, <span class="math inline">\(D=\sqrt{altura^2+largura^2}\)</span>. Essa etapa consiste em andar por todos os pontos, <span class="math inline">\((x,y)\)</span>, de borda da imagem de entrada e calcular o valor de <span class="math inline">\(\rho\)</span>, a partir da Equação <a href="segmentacao.html#eq:coordPolar">(6.28)</a>, variando o ângulo <span class="math inline">\(\theta\)</span>. Com isso, a cada valor do ângulo, teremos um <span class="math inline">\(\rho\)</span> diferente e, então, na célula acumuladora <span class="math inline">\((\rho,\theta)\)</span> da matriz, <a href="segmentacao.html#fig:planoxyrhotheta">6.20</a>(c), incrementa-se 1, uma espécie de voto a candidato de reta. Ao final de todo o processo, temos determinadas células com valores mais altos, conhecidas como picos, que correspondem ao cruzamento de duas ou mais curvas senoidais do plano <span class="math inline">\((\rho,\theta)\)</span> e a uma linha que liga pontos no plano <span class="math inline">\(xy\)</span>.</p>
@@ -722,9 +722,9 @@ Figura 6.25: Resultado da transformada de Hough usada na detecção de linhas em
 <p>A diferença é que, neste caso, o nosso espaço de parâmetro terá três dimensões, porque, como desenhamos um círculo para cada pixel do círculo da imagem, a variação do diâmetro desse círculo deve levar a uma variação dos círculos descritos no espaço de parâmetros, então, também devemos variar os valores de <span class="math inline">\(r\)</span> além dos valores de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>. Uma representação disso é vista na Figura <a href="segmentacao.html#fig:houghCircle">6.26</a>(a), a qual temos três pixels que definem um círculo, na Figura <a href="segmentacao.html#fig:houghCircle">6.26</a>(b), a qual temos os círculos no espaço de parâmetros, e, na Figura <a href="segmentacao.html#fig:houghCircle">6.26</a>(c), podemos ver uma representação de um espaço de parâmetros com diferentes raios.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:houghCircle"></span>
-<img src="imagens/06-segmentacao/houghCircle.png" alt="Transformada de Hough para círculos [5, p. 255]." width="60%" />
+<img src="imagens/06-segmentacao/houghCircle.png" alt="Transformada de Hough para círculos [19, p. 255]." width="60%" />
 <p class="caption">
-Figura 6.26: Transformada de Hough para círculos <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 255]</span>.
+Figura 6.26: Transformada de Hough para círculos <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 255]</span>.
 </p>
 </div>
 <p>A Figura <a href="segmentacao.html#fig:moedas">6.27</a> contém uma imagem com algumas moedas. Na figura <a href="segmentacao.html#fig:houghcircleraios">6.28</a>(a), temos as bordas da imagem detectada com o método de Canny. Logo após, na Figura <a href="segmentacao.html#fig:houghcircleraios">6.28</a>(b) - (f), temos a representação do espaço de Hough para diferentes valores de raio. E, na figura <a href="segmentacao.html#fig:houghcircleresultado">6.29</a>, temos o resultado da detecção de círculo após encontrados os picos do espaço de parâmetros.</p>
@@ -753,18 +753,18 @@ Figura 6.29: Resultado final da transformada de Hough para círculos.
 </div>
 <div id="detecção-de-quinas" class="section level2">
 <h2><span class="header-section-number">6.4</span> Detecção de Quinas</h2>
-<p>Quinas são pontos chaves na visão computacional por serem muito úteis na descrição e correspondência de objetos usando poucos dados. E existem diferentes métodos para identificação dos pontos, dentre eles o mais comum é o de Harris, que é o sucessor do de Moravec <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 178]</span>.</p>
+<p>Quinas são pontos chaves na visão computacional por serem muito úteis na descrição e correspondência de objetos usando poucos dados. E existem diferentes métodos para identificação dos pontos, dentre eles o mais comum é o de Harris, que é o sucessor do de Moravec <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 178]</span>.</p>
 <div id="detector-de-quinas-de-moravec" class="section level3">
 <h3><span class="header-section-number">6.4.1</span> Detector de Quinas de Moravec</h3>
-<p>Moravec obtém sua medida de curvatura através de uma variação média de intensidade em quatro direções principais: <span class="math inline">\((0,1), (0,-1), (1,0)\)</span> e <span class="math inline">\((-1,0)\)</span>. Isso é feito através da seguinte Equação <a href="segmentacao.html#eq:moravec">(6.32)</a>, considerando a análise sobre o pixel <span class="math inline">\((x,y)\)</span>, o deslocamento <span class="math inline">\((u,v)\)</span> e a janela <span class="math inline">\(2w+1\)</span> <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 185]</span>.</p>
+<p>Moravec obtém sua medida de curvatura através de uma variação média de intensidade em quatro direções principais: <span class="math inline">\((0,1), (0,-1), (1,0)\)</span> e <span class="math inline">\((-1,0)\)</span>. Isso é feito através da seguinte Equação <a href="segmentacao.html#eq:moravec">(6.32)</a>, considerando a análise sobre o pixel <span class="math inline">\((x,y)\)</span>, o deslocamento <span class="math inline">\((u,v)\)</span> e a janela <span class="math inline">\(2w+1\)</span> <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 185]</span>.</p>
 <p><span class="math display" id="eq:moravec">\[E_{u,v}(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w}[P_{x+i,\ y+j} - P_{x+i+u,\ y+j+v}]^2
 \tag{6.32}\]</span></p>
-<p>Essa equação também aproxima a função de autocorrelação na direção <span class="math inline">\((u,v)\)</span> <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 186]</span>.</p>
-<p>O detector de Moravec apesar de ser intuitivo seu funcionamento, ele considera apenas um pequeno conjunto de mudanças possíveis. Então, Harris propôs ainda avaliar a autocorrelação, mas por uma expressão analítica <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 185]</span>.</p>
+<p>Essa equação também aproxima a função de autocorrelação na direção <span class="math inline">\((u,v)\)</span> <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 186]</span>.</p>
+<p>O detector de Moravec apesar de ser intuitivo seu funcionamento, ele considera apenas um pequeno conjunto de mudanças possíveis. Então, Harris propôs ainda avaliar a autocorrelação, mas por uma expressão analítica <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 185]</span>.</p>
 </div>
 <div id="detector-de-quinas-de-harris" class="section level3">
 <h3><span class="header-section-number">6.4.2</span> Detector de Quinas de Harris</h3>
-<p>O detector de Harris é desenvolvido na ideia de Moravec e sua equação, mas com uma abordagem mais complexa. Harris assume que <span class="math inline">\(P_{x+i+u,\ y+j+v}\)</span> possa ser estimado pela série de Taylor de primeira ordem <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 193]</span>. Dessa forma <a href="segmentacao.html#eq:taylor1Ordem">(6.33)</a>,</p>
+<p>O detector de Harris é desenvolvido na ideia de Moravec e sua equação, mas com uma abordagem mais complexa. Harris assume que <span class="math inline">\(P_{x+i+u,\ y+j+v}\)</span> possa ser estimado pela série de Taylor de primeira ordem <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 193]</span>. Dessa forma <a href="segmentacao.html#eq:taylor1Ordem">(6.33)</a>,</p>
 <p><span class="math display" id="eq:taylor1Ordem">\[P_{x+i+u,\ y+j+v} = P_{x+i,\ y+j} + \frac{\partial{P_{x+i,\ y+j}}}{\partial x}u + \frac{\partial{P_{x+i,\ y+j}}}{\partial y}v
 \tag{6.33}\]</span></p>
 <p>Substituindo a equação anterior, <a href="segmentacao.html#eq:taylor1Ordem">(6.33)</a>, na equação de Moravec, <a href="segmentacao.html#eq:moravec">(6.32)</a>, produz-se <a href="segmentacao.html#eq:taylor1OrdemMoravec">(6.34)</a>
@@ -773,7 +773,7 @@ Figura 6.29: Resultado final da transformada de Hough para círculos.
 E expandindo a potência, <a href="segmentacao.html#eq:HarrisExpandPotencia">(6.35)</a>
 <span class="math display" id="eq:HarrisExpandPotencia">\[E_{u,v}(x,y) = A(x,y)u^2 + 2C(x,y)uv + B(x,y)v^2
 \tag{6.35}\]</span>
-Esta última equação pode ser representada na forma de matriz <a href="segmentacao.html#eq:HarrisMatrices">(6.36)</a>. Representação útil para compreensão mais à frente neste tópico <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 187]</span>.
+Esta última equação pode ser representada na forma de matriz <a href="segmentacao.html#eq:HarrisMatrices">(6.36)</a>. Representação útil para compreensão mais à frente neste tópico <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 187]</span>.
 <span class="math display" id="eq:HarrisMatrices">\[
 \begin{split}
 E_{u,v}(x,y) &amp;= 
@@ -790,7 +790,7 @@ onde
 \tag{6.38}\]</span>
 <span class="math display" id="eq:C">\[C(x,y) = \sum_{i=-w}^{w} \sum_{j=-w}^{w} (\frac{\partial P_{x+i, y+j}}{\partial x})(\frac{\partial P_{x+i, y+j}}{\partial y})
 \tag{6.39}\]</span></p>
-<p>Como <span class="math inline">\(E_{u.v}(x,y)\)</span> tem a forma de uma função quadrática, então possui dois eixos principais. Então, podemos rotacioná-la a fim de alinhar seus eixos com os do sistema de coordenadas, obtendo <span class="math inline">\(F_{u,v}(x,y)\)</span>, Equação <a href="segmentacao.html#eq:harrisRotacionada">(6.40)</a> <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 187]</span>.
+<p>Como <span class="math inline">\(E_{u.v}(x,y)\)</span> tem a forma de uma função quadrática, então possui dois eixos principais. Então, podemos rotacioná-la a fim de alinhar seus eixos com os do sistema de coordenadas, obtendo <span class="math inline">\(F_{u,v}(x,y)\)</span>, Equação <a href="segmentacao.html#eq:harrisRotacionada">(6.40)</a> <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 187]</span>.
 <span class="math display" id="eq:harrisRotacionada">\[F_{u,v}(x,y) = \alpha(x,y)^2u^2 + \beta(x,y)^2v^2
 \tag{6.40}\]</span></p>
 <p>ou em sua forma matricial <a href="segmentacao.html#eq:harrisRotMatrix">(6.41)</a>. Note que são rotacionados os eixos definidos por <span class="math inline">\(D\)</span>.
@@ -804,14 +804,14 @@ F_{u,v}(x,y) &amp;= R^TD^TMDR\\
 \]</span></p>
 <p><span class="math display" id="eq:qMatrix">\[Q = \begin{bmatrix} \alpha &amp; 0\\ 0 &amp; \beta  \end{bmatrix}
 \tag{6.42}\]</span>
-Os valores de <span class="math inline">\(\alpha\)</span> e <span class="math inline">\(\beta\)</span> são proporcionais à função de autocorrelação nos principais eixos. Dessa forma, <span class="math inline">\(\alpha\)</span> e <span class="math inline">\(\beta\)</span> serão pequenos se o pixel <span class="math inline">\((x,y)\)</span> for de uma região com intensidade constante, um será de valor grande e outro pequeno se estiverem em uma borda reta, e ambos terão valores grandes se estiverem em uma borda com curvatura acentuada. Portanto, a medida de curvatura em um determinado ponto é definida como <span class="math inline">\(k_k(x,y)\)</span>, <a href="segmentacao.html#eq:medidaCurvatura">(6.43)</a> <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 187]</span>.
+Os valores de <span class="math inline">\(\alpha\)</span> e <span class="math inline">\(\beta\)</span> são proporcionais à função de autocorrelação nos principais eixos. Dessa forma, <span class="math inline">\(\alpha\)</span> e <span class="math inline">\(\beta\)</span> serão pequenos se o pixel <span class="math inline">\((x,y)\)</span> for de uma região com intensidade constante, um será de valor grande e outro pequeno se estiverem em uma borda reta, e ambos terão valores grandes se estiverem em uma borda com curvatura acentuada. Portanto, a medida de curvatura em um determinado ponto é definida como <span class="math inline">\(k_k(x,y)\)</span>, <a href="segmentacao.html#eq:medidaCurvatura">(6.43)</a> <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 187]</span>.
 <span class="math display" id="eq:medidaCurvatura">\[k_k(x,y) = \alpha \beta - k(\alpha + \beta)^2
 \tag{6.43}\]</span>
 No qual <span class="math inline">\(k\)</span> controla a sensibilidade do detector.</p>
-<p>Como <span class="math inline">\(Q\)</span> é uma composição ortogonal de <span class="math inline">\(M\)</span>. Os elementos de Q são chamados de autovalores <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 188]</span>. Inferimos que
+<p>Como <span class="math inline">\(Q\)</span> é uma composição ortogonal de <span class="math inline">\(M\)</span>. Os elementos de Q são chamados de autovalores <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 188]</span>. Inferimos que
 <span class="math display" id="eq:qCompOrtogonal">\[Q = R^TMR
 \tag{6.44}\]</span>
-Então, a partir da equivalência de determinantes e traços, é possível produzir uma relação equivalente a <span class="math inline">\(Q\)</span> com os valores da matriz <span class="math inline">\(M\)</span>, <a href="segmentacao.html#eq:harris1de2">(6.45)</a> e <a href="segmentacao.html#eq:harris2-De2">(6.46)</a> <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 188]</span>.
+Então, a partir da equivalência de determinantes e traços, é possível produzir uma relação equivalente a <span class="math inline">\(Q\)</span> com os valores da matriz <span class="math inline">\(M\)</span>, <a href="segmentacao.html#eq:harris1de2">(6.45)</a> e <a href="segmentacao.html#eq:harris2-De2">(6.46)</a> <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 188]</span>.
 <span class="math display" id="eq:harris1de2">\[\alpha \beta = A(x,y)B(x,y) - C(x,y)^2
 \tag{6.45}\]</span></p>
 <p><span class="math display" id="eq:harris2-De2">\[\alpha + \beta = A(x,y) + B(x,y)
@@ -1273,17 +1273,17 @@ Figura 6.56: Exemplo de segmentação multivariada no RGB <span class="citation"
 <div id="ref-pedrini2008">
 <p>[3] H. Pedrini e W. Robson Schwartz, <em>Analise de imagens digitais: principios, algoritmos e aplicações</em>, 3º ed. São Paulo: Thomson Learning Edicoes Ltda, 2007.</p>
 </div>
-<div id="ref-nixon2019feature">
-<p>[5] M. Nixon e A. Aguado, <em>Feature extraction and image processing for computer vision</em>. Academic press, 2019.</p>
-</div>
 <div id="ref-burger2009">
-<p>[10] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
+<p>[9] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
 </div>
 <div id="ref-canny1986computational">
-<p>[18] J. Canny, “A computational approach to edge detection”, <em>IEEE Transactions on pattern analysis and machine intelligence</em>, nº 6, p. 679–698, 1986.</p>
+<p>[17] J. Canny, “A computational approach to edge detection”, <em>IEEE Transactions on pattern analysis and machine intelligence</em>, nº 6, p. 679–698, 1986.</p>
 </div>
 <div id="ref-sonka2014">
-<p>[19] M. Sonka, V. Hlavac, e R. Boyle, <em>Image processing, analysis, and machine vision</em>. Cengage Learning, 2014.</p>
+<p>[18] M. Sonka, V. Hlavac, e R. Boyle, <em>Image processing, analysis, and machine vision</em>. Cengage Learning, 2014.</p>
+</div>
+<div id="ref-nixon2019feature">
+<p>[19] M. Nixon e A. Aguado, <em>Feature extraction and image processing for computer vision</em>. Academic press, 2019.</p>
 </div>
 <div id="ref-img:hubbledeep">
 <p>[20] Nasa, “Hubble Ultra-Deep Field”. 2004, [Online]. Disponível em: <a href="https://imgsrc.hubblesite.org/hu/db/images/hs-2014-27-a-full_jpg.jpg">https://imgsrc.hubblesite.org/hu/db/images/hs-2014-27-a-full_jpg.jpg</a>.</p>

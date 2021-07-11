@@ -283,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="formacaoImagem" class="section level1">
 <h1><span class="header-section-number">Capítulo 2</span> Formação da imagem</h1>
 <p>Existem diferentes tipos de fontes utilizadas para geração de imagens, sendo que a mais comum é o espectro eletromagnético na faixa de ondas visíveis. Outras fontes de energia também podem ser utilizadas como energia mecânica na forma de ultrassom, feixe de elétrons em microscópio eletrônicos, ondas de rádio no radar, etc. Cada fonte necessita de um método específico de captura. Para ondas eletromagnéticas pode ser usada uma câmera fotográfica equipada com sensores adequados ao comprimento de onda. Porém, para outras fontes, é necessário que o computador sintetize a imagem, como o microscópio eletrônico.</p>
-<p>Como já mencionado no tópico de <a href="intro.html#intro">Introdução</a>, o espectro eletromagnético contém diferentes frequências de energia, mas os humanos conseguem enxergar somente uma pequena parte desse espectro, conhecido como luz visível. Isso se deve ao fato de que nossos olhos evoluíram para serem sensíveis a essa faixa de luz, que vem da luz solar e nos ajuda a realizar nossas atividades cotidianas. Existem outros animais, como pássaros e insetos, que conseguem ver luz em outras faixas de onda, como a ultravioleta <span class="citation">[<a href="#ref-cuthill2017" role="doc-biblioref">9</a>, p. 2]</span>. Caso nossos olhos fossem também sensíveis a outras frequências, como por exemplo a de rádio, nossos celulares e torres telefônicas pareceriam lanternas <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">4</a>, p. 8]</span>.</p>
+<p>Como já mencionado no tópico de <a href="intro.html#intro">Introdução</a>, o espectro eletromagnético contém diferentes frequências de energia, mas os humanos conseguem enxergar somente uma pequena parte desse espectro, conhecido como luz visível. Isso se deve ao fato de que nossos olhos evoluíram para serem sensíveis a essa faixa de luz, que vem da luz solar e nos ajuda a realizar nossas atividades cotidianas. Existem outros animais, como pássaros e insetos, que conseguem ver luz em outras faixas de onda, como a ultravioleta <span class="citation">[<a href="#ref-cuthill2017" role="doc-biblioref">8</a>, p. 2]</span>. Caso nossos olhos fossem também sensíveis a outras frequências, como por exemplo a de rádio, nossos celulares e torres telefônicas pareceriam lanternas <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">4</a>, p. 8]</span>.</p>
 <p>A luz sem cor, isto é, a luz com maior energia dentro do espectro visível humano, é chamada de luz monocromática (ou acromática). Pelo fato de a intensidade da luz monocromática ser percebida como variações de preto a tons de cinza até chegar ao branco, utiliza-se o termo nível de cinza ou escala de cinza. Já a luz cromática (colorida) cobre o espectro de energia eletromagnética na faixa de <span class="math inline">\(0.43\)</span> a <span class="math inline">\(0.79 \mu m\)</span>. Além da frequência, três medidas básicas são utilizadas para descrever a qualidade de uma fonte de luz cromática: radiância, luminância e brilho. A radiância é a quantidade total de energia que é emitida pela fonte de luz e é normalmente medida em watts (W). A luminância, medida em lumens (lm), mede a quantidade de energia que um observador percebe de uma fonte de luz. O brilho, que incorpora a noção acromática de intensidade, é um descritor subjetivo da percepção da luz, então é praticamente impossível mensurar <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 28]</span>.</p>
 <p>Nos próximos tópicos iremos explorar alguns conceitos e o funcionamento da aquisição de imagem. Esse processo é um pouco complexo e envolve conceitos de ótica, que serão apresentados, de maneira introdutória, a seguir.</p>
 <div id="câmera-pinhole-e-geometria" class="section level2">
@@ -307,9 +307,9 @@ Figura 2.2: Introdução de barreira para captura de imagem <span class="citatio
 <p>Na Figura <a href="formacaoImagem.html#fig:barreiraluz">2.2</a> percebemos que a imagem resultante acaba invertida. Isso pode ser explicado através de algumas relações geométricas que serão apresentadas a seguir.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:geometriapinhole"></span>
-<img src="imagens/02-formacao/geometriapinhole.png" alt="Geometria de uma câmera pinhole [10, p. 5]." width="55%" />
+<img src="imagens/02-formacao/geometriapinhole.png" alt="Geometria de uma câmera pinhole [9, p. 5]." width="55%" />
 <p class="caption">
-Figura 2.3: Geometria de uma câmera pinhole <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">10</a>, p. 5]</span>.
+Figura 2.3: Geometria de uma câmera pinhole <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">9</a>, p. 5]</span>.
 </p>
 </div>
 <p>Na Figura <a href="formacaoImagem.html#fig:geometriapinhole">2.3</a>, considerando que o eixo óptico corresponde a uma reta perpendicular ao orifício de entrada de luz, que o objeto está localizado a uma distância horizontal <span class="math inline">\(Z\)</span> da abertura e a uma distância vertical <span class="math inline">\(Y\)</span> do eixo óptico, podemos definir a altura <span class="math inline">\(y\)</span> e a largura <span class="math inline">\(x\)</span> da projeção do objeto utilizando a simetria de triângulos:</p>
@@ -317,7 +317,7 @@ Figura 2.3: Geometria de uma câmera pinhole <span class="citation">[<a href="#r
 -\frac{y}{f}=\frac{Y}{Z}\Leftrightarrow y=-f\frac{Y}{Z} \ \ \ \ \text{e}\ \ \ \ -\frac{x}{f}=\frac{X}{Z} \Leftrightarrow x=-f\frac{X}{Z}
 \tag{2.1}
 \]</span></p>
-<p>A variável <span class="math inline">\(f\)</span> nessa Equação <a href="formacaoImagem.html#eq:semelhancaTriangulos">(2.1)</a> se refere a distância focal, que é, nesse caso, o tamanho da caixa da câmera, pois a imagem é formada em seu fundo <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">10</a>, p. 4]</span>. Os sinais negativos das equações significam que a imagem projetada está rotacionada a <span class="math inline">\(180^\circ\)</span> verticalmente e horizontalmente devido a semelhança de triângulos <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">10</a>, p. 5]</span>, como podemos confirmar na Figura <a href="formacaoImagem.html#fig:geometriapinhole">2.3</a>. Câmeras que usavam esse princípio de funcionamento foram utilizadas a partir do século XIII mas hoje em dia não são utilizadas, somente por hobbistas ou curiosos, já que tem muitas desvantagens como precisar de um longo tempo de exposição para captura da imagem.</p>
+<p>A variável <span class="math inline">\(f\)</span> nessa Equação <a href="formacaoImagem.html#eq:semelhancaTriangulos">(2.1)</a> se refere a distância focal, que é, nesse caso, o tamanho da caixa da câmera, pois a imagem é formada em seu fundo <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">9</a>, p. 4]</span>. Os sinais negativos das equações significam que a imagem projetada está rotacionada a <span class="math inline">\(180^\circ\)</span> verticalmente e horizontalmente devido a semelhança de triângulos <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">9</a>, p. 5]</span>, como podemos confirmar na Figura <a href="formacaoImagem.html#fig:geometriapinhole">2.3</a>. Câmeras que usavam esse princípio de funcionamento foram utilizadas a partir do século XIII mas hoje em dia não são utilizadas, somente por hobbistas ou curiosos, já que tem muitas desvantagens como precisar de um longo tempo de exposição para captura da imagem.</p>
 <p>As câmeras mais modernas não possuem somente uma pequena entrada para luz, mas um sistema de lentes que focam a luz recebida no sensor. Discutiremos a seguir alguns dos conceitos por trás disso.</p>
 </div>
 <div id="lentes-finas" class="section level2">
@@ -429,9 +429,9 @@ Figura 2.12: Imagem colorida separada em seus três componentes, em que <em>Red<
 <p>Precisamos assim dessas três informações para formar uma imagem colorida, uma das implementações pensadas para resolver esse problema foi a de dividir a luz de entrada e enviar cada um dos raios filtrados para um sensor diferente, como representado na Figura <a href="formacaoImagem.html#fig:tressensores">2.13</a>. Apesar de essa implementação funcionar, ela não se tornou o padrão pelo fato de que utilizar três sensores faz com que seu preço de construção fique elevado e o projeto em si muito mais complexo.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:tressensores"></span>
-<img src="imagens/02-formacao/tres_sensores.png" alt="Captura de imagem com três sensores [11, p. 242]." width="60%" />
+<img src="imagens/02-formacao/tres_sensores.png" alt="Captura de imagem com três sensores [10, p. 242]." width="60%" />
 <p class="caption">
-Figura 2.13: Captura de imagem com três sensores <span class="citation">[<a href="#ref-teubner2019" role="doc-biblioref">11</a>, p. 242]</span>.
+Figura 2.13: Captura de imagem com três sensores <span class="citation">[<a href="#ref-teubner2019" role="doc-biblioref">10</a>, p. 242]</span>.
 </p>
 </div>
 <p>Ao invés disso, as câmeras modernas utilizam somente um sensor e fazem uso de um filtro que separa uma das três cores para cada pixel. Isso porque os fotodiodos não reconhecem por si só as cores, mas a intensidade, o que nos levaria a ter somente fotos com tons de cinza. Esse filtro pode conter diferentes configurações, sendo que uma das mais utilizadas é o filtro Bayer, que pode ser visto na Figura <a href="formacaoImagem.html#fig:bayer">2.14</a>:</p>
@@ -445,9 +445,9 @@ Figura 2.14: Filtro Bayer <span class="citation">[<a href="#ref-moeslund2012" ro
 <p>Podemos perceber que ocorre uma maior ocorrência das cores verdes. Isso se deve ao fato de que o olho humano é mais sensível a essa cor, logo se dá uma maior ênfase à sua captura. Na Figura <a href="formacaoImagem.html#fig:sensorarray">2.15</a>, temos um esquema de como cada pixel recebe informação de somente uma cor, por meio da filtragem. Nesse esquema a luz que entra (<em>Incoming light</em>) é filtrada e somente a cor de interesse consegue passar. Após isso, ela chega a malha de sensores (<em>sensor array</em>):</p>
 
 <div class="figure" style="text-align: center"><span id="fig:sensorarray"></span>
-<img src="imagens/02-formacao/sensorarray.png" alt="Sensores com padrão Bayer [12]." width="60%" />
+<img src="imagens/02-formacao/sensorarray.png" alt="Sensores com padrão Bayer [11]." width="60%" />
 <p class="caption">
-Figura 2.15: Sensores com padrão Bayer <span class="citation">[<a href="#ref-img:sensorarray" role="doc-biblioref">12</a>]</span>.
+Figura 2.15: Sensores com padrão Bayer <span class="citation">[<a href="#ref-img:sensorarray" role="doc-biblioref">11</a>]</span>.
 </p>
 </div>
 <p>Vemos na Figura <a href="formacaoImagem.html#fig:sensorarray">2.15</a> que temos ao final três grupos de informações diferentes mas que têm dados faltantes nos pixels referentes às outras cores. As informações desses pixels são preenchidas em um processo chamado interpolação que completa as informações baseada nos valores dos pixels vizinhos.</p>
@@ -471,8 +471,8 @@ Figura 2.16: Produzindo uma imagem digital. (a) Imagem contínua. (b) Linha de v
 <div id="quantização" class="section level3">
 <h3><span class="header-section-number">2.4.2</span> Quantização</h3>
 <p>Na Figura <a href="formacaoImagem.html#fig:amostragemquant">2.16</a>(c), os níveis de intensidade ainda variam dentro de uma faixa contínua. A função digital da intensidade é obtida pela quantização, em que as intensidades das amostras são mapeadas em um conjunto de quantidades discretas. Na Figura <a href="formacaoImagem.html#fig:amostragemquant">2.16</a>(d), os valores contínuos de intensidade são quantizados estabelecendo um dos oito valores para cada amostra de acordo com a escala de intensidade na Figura <a href="formacaoImagem.html#fig:amostragemquant">2.16</a>(c).</p>
-<p>Na prática, geralmente a etapa de quantização é realizada diretamente no hardware utilizando um conversor analógico-digital <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">10</a>, p. 8]</span>. A conversão dos valores contínuos para valores discretos pode ser realizada por meio de arredondamento, truncamento ou algum outro processo <span class="citation">[<a href="#ref-bovik2009essential" role="doc-biblioref">13</a>, p. 9]</span>.
-No processo de quantização, geralmente os níveis de intensidade são mapeados por uma transformação linear para um conjunto finitos de inteiros não negativos <span class="math inline">\(\{0,\dots, L-1\}\)</span>, onde <span class="math inline">\(L\)</span> é uma potência de dois, ou seja, <span class="math inline">\(L = 2^k\)</span> <span class="citation">[<a href="#ref-bovik2009essential" role="doc-biblioref">13</a>, p. 10]</span>. Isso significa que <span class="math inline">\(L\)</span> é o número de tons de cinza que podem ser representados com uma quantidade <span class="math inline">\(k\)</span> de bits. Em muitas situações é utilizado <span class="math inline">\(k = 8\)</span>, ou seja, temos <span class="math inline">\(256\)</span> níveis de cinza.
+<p>Na prática, geralmente a etapa de quantização é realizada diretamente no hardware utilizando um conversor analógico-digital <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">9</a>, p. 8]</span>. A conversão dos valores contínuos para valores discretos pode ser realizada por meio de arredondamento, truncamento ou algum outro processo <span class="citation">[<a href="#ref-bovik2009essential" role="doc-biblioref">12</a>, p. 9]</span>.
+No processo de quantização, geralmente os níveis de intensidade são mapeados por uma transformação linear para um conjunto finitos de inteiros não negativos <span class="math inline">\(\{0,\dots, L-1\}\)</span>, onde <span class="math inline">\(L\)</span> é uma potência de dois, ou seja, <span class="math inline">\(L = 2^k\)</span> <span class="citation">[<a href="#ref-bovik2009essential" role="doc-biblioref">12</a>, p. 10]</span>. Isso significa que <span class="math inline">\(L\)</span> é o número de tons de cinza que podem ser representados com uma quantidade <span class="math inline">\(k\)</span> de bits. Em muitas situações é utilizado <span class="math inline">\(k = 8\)</span>, ou seja, temos <span class="math inline">\(256\)</span> níveis de cinza.
 Ao realizar a quantização e a amostragem linha por linha no objeto da Figura <a href="formacaoImagem.html#fig:quantizacao">2.17</a>(a) é produzida uma imagem digital bidimensional como na Figura <a href="formacaoImagem.html#fig:quantizacao">2.17</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:quantizacao"></span>
@@ -686,19 +686,19 @@ Dadas duas imagens, <span class="math inline">\(f_1\)</span> e <span class="math
 <p>[4] T. B. Moeslund, <em>Introduction to video and image processing: Building real systems and applications</em>. Springer Science &amp; Business Media, 2012.</p>
 </div>
 <div id="ref-cuthill2017">
-<p>[9] I. C. Cuthill <em>et al.</em>, “The biology of color”, <em>Science</em>, vol. 357, nº 6350, 2017.</p>
+<p>[8] I. C. Cuthill <em>et al.</em>, “The biology of color”, <em>Science</em>, vol. 357, nº 6350, 2017.</p>
 </div>
 <div id="ref-burger2009">
-<p>[10] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
+<p>[9] W. Burger, M. J. Burge, M. J. Burge, e M. J. Burge, <em>Principles of digital image processing</em>, vol. 111. Springer, 2009.</p>
 </div>
 <div id="ref-teubner2019">
-<p>[11] U. Teubner e H. J. Bruckner, <em>Optical Imaging and Photography: Introduction to Science and Technology of Optics, Sensors and Systems</em>. Walter de Gruyter GmbH &amp; Co KG, 2019.</p>
+<p>[10] U. Teubner e H. J. Bruckner, <em>Optical Imaging and Photography: Introduction to Science and Technology of Optics, Sensors and Systems</em>. Walter de Gruyter GmbH &amp; Co KG, 2019.</p>
 </div>
 <div id="ref-img:sensorarray">
-<p>[12] W. Commons, “Bayer pattern on sensor profile”. 2006, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Bayer_pattern_on_sensor_profile.svg">https://commons.wikimedia.org/wiki/File:Bayer_pattern_on_sensor_profile.svg</a>.</p>
+<p>[11] W. Commons, “Bayer pattern on sensor profile”. 2006, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Bayer_pattern_on_sensor_profile.svg">https://commons.wikimedia.org/wiki/File:Bayer_pattern_on_sensor_profile.svg</a>.</p>
 </div>
 <div id="ref-bovik2009essential">
-<p>[13] A. C. Bovik, <em>The essential guide to image processing</em>. Academic Press, 2009.</p>
+<p>[12] A. C. Bovik, <em>The essential guide to image processing</em>. Academic Press, 2009.</p>
 </div>
 </div>
             </section>

@@ -284,16 +284,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Capítulo 9</span> Espaço 3D</h1>
 <div id="geometria-projetiva" class="section level2">
 <h2><span class="header-section-number">9.1</span> Geometria projetiva</h2>
-<p>Em alguns trabalhos realizados na visão computacional, a geometria euclidiana se torna insuficiente, pois as capturas de imagens com câmeras geram certos problemas, como linhas paralelas que se cruzam (como na Figura <a href="espaco3D.html#fig:linhasparalelas">9.1</a>) e ângulos que não são preservados, fatos esses que ocorrem por estarmos projetando o mundo 3D em uma plano 2D <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">64</a>, p. 321]</span>. Nesses casos usamos outro tipo de geometria conhecida como geometria projetiva.</p>
+<p>Em alguns trabalhos realizados na visão computacional, a geometria euclidiana se torna insuficiente, pois as capturas de imagens com câmeras geram certos problemas, como linhas paralelas que se cruzam (como na Figura <a href="espaco3D.html#fig:linhasparalelas">9.1</a>) e ângulos que não são preservados, fatos esses que ocorrem por estarmos projetando o mundo 3D em uma plano 2D <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">65</a>, p. 321]</span>. Nesses casos usamos outro tipo de geometria conhecida como geometria projetiva.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:linhasparalelas"></span>
-<img src="imagens/09-espaco_3D/linhas_paralelas.png" alt="Linhas paralelas se cruzam - Como podemos ver nessa imagem de um trilho de trem, duas linhas que no mundo real são paralelas se cruzam no horizonte por causa da perspectiva [65]." width="55%" />
+<img src="imagens/09-espaco_3D/linhas_paralelas.png" alt="Linhas paralelas se cruzam - Como podemos ver nessa imagem de um trilho de trem, duas linhas que no mundo real são paralelas se cruzam no horizonte por causa da perspectiva [66]." width="55%" />
 <p class="caption">
-Figura 9.1: Linhas paralelas se cruzam - Como podemos ver nessa imagem de um trilho de trem, duas linhas que no mundo real são paralelas se cruzam no horizonte por causa da perspectiva <span class="citation">[<a href="#ref-img:linhas_paralelas" role="doc-biblioref">65</a>]</span>.
+Figura 9.1: Linhas paralelas se cruzam - Como podemos ver nessa imagem de um trilho de trem, duas linhas que no mundo real são paralelas se cruzam no horizonte por causa da perspectiva <span class="citation">[<a href="#ref-img:linhas_paralelas" role="doc-biblioref">66</a>]</span>.
 </p>
 </div>
 <p>Uma das vantagens de se utilizar a geometria projetiva é o fato que conseguimos representar transformação por simples multiplicação de matrizes, além de que as projeções nos provêem a noção de perspectiva, ou seja, objetos mais distantes têm um tamanho reduzido em relação a objetos mais próximos.</p>
-<p>O espaço projetivo é definido por coordenadas homogêneas assim como o espaço Euclidiano é definido pelas coordenadas Cartesianas. Utilizamos esse espaço e sua geometria pois é a melhor maneira de se representar a relação entre uma imagem e o mundo físico, ou seja, a relação entre as coordenadas da câmera com as coordenadas do mundo real <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">5</a>, p. 484]</span>.</p>
+<p>O espaço projetivo é definido por coordenadas homogêneas assim como o espaço Euclidiano é definido pelas coordenadas Cartesianas. Utilizamos esse espaço e sua geometria pois é a melhor maneira de se representar a relação entre uma imagem e o mundo físico, ou seja, a relação entre as coordenadas da câmera com as coordenadas do mundo real <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 484]</span>.</p>
 <div id="homogenea" class="section level3">
 <h3><span class="header-section-number">9.1.1</span> Coordenadas homogêneas</h3>
 <p>As coordenadas homogêneas são a maneira como trabalhamos na geometria projetiva, elas diferem das coordenadas cartesianas por apresentarem uma componente a mais, ou seja, um ponto <span class="math inline">\((X, Y)^T \in \Re^2\)</span> é representado, em coordenadas homogêneas, por <span class="math inline">\((X_1, X_2, X_3)^T\)</span>. A conversão entre os dois sistemas também é muito simples, um ponto <span class="math inline">\(X_c = (x, y)^T\)</span> no sistema cartesiano é convertido a homogêneo da seguinte maneira:</p>
@@ -304,12 +304,12 @@ e convertido ao cartesiano novamente por:</p>
 <p><span class="math display" id="eq:coordenadashomogeneas">\[
 x_c = \frac{wx}{w} \text{ e } y_c =\frac{wy}{w} \tag{9.2}
 \]</span>
-Assim, quando <span class="math inline">\(w = 1\)</span> nossas coordenadas são as mesmas do sistema cartesiano, como pode ser visto na Figura <a href="espaco3D.html#fig:espacoprojetivo">9.2</a>, onde <span class="math inline">\(w\)</span> é representado por <span class="math inline">\(Z\)</span>. Os pontos que estão no formato <span class="math inline">\(X_H = (x, y, 0)^T\)</span> são conhecidos como pontos ideais, e são os pontos onde as linhas se cruzam no infinito <span class="citation">[<a href="#ref-szeliski2010computer" role="doc-biblioref">66</a>, p. 36]</span>.</p>
+Assim, quando <span class="math inline">\(w = 1\)</span> nossas coordenadas são as mesmas do sistema cartesiano, como pode ser visto na Figura <a href="espaco3D.html#fig:espacoprojetivo">9.2</a>, onde <span class="math inline">\(w\)</span> é representado por <span class="math inline">\(Z\)</span>. Os pontos que estão no formato <span class="math inline">\(X_H = (x, y, 0)^T\)</span> são conhecidos como pontos ideais, e são os pontos onde as linhas se cruzam no infinito <span class="citation">[<a href="#ref-szeliski2010computer" role="doc-biblioref">67</a>, p. 36]</span>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:espacoprojetivo"></span>
-<img src="imagens/09-espaco_3D/espaco_projetivo.png" alt="Plano euclidiano e espaço projetivo - Nesta representação podemos ver um ponto do espaço euclidiano sendo projetado no espaço projetivo. [64, p. 605]." width="55%" />
+<img src="imagens/09-espaco_3D/espaco_projetivo.png" alt="Plano euclidiano e espaço projetivo - Nesta representação podemos ver um ponto do espaço euclidiano sendo projetado no espaço projetivo. [65, p. 605]." width="55%" />
 <p class="caption">
-Figura 9.2: Plano euclidiano e espaço projetivo - Nesta representação podemos ver um ponto do espaço euclidiano sendo projetado no espaço projetivo. <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">64</a>, p. 605]</span>.
+Figura 9.2: Plano euclidiano e espaço projetivo - Nesta representação podemos ver um ponto do espaço euclidiano sendo projetado no espaço projetivo. <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">65</a>, p. 605]</span>.
 </p>
 </div>
 </div>
@@ -326,9 +326,9 @@ Onde <span class="math inline">\(x_0\)</span> e <span class="math inline">\(x_1\
 \]</span></p>
 
 <div class="figure" style="text-align: center"><span id="fig:geometriahomografia"></span>
-<img src="imagens/09-espaco_3D/geometria_homografia.png" alt="Geometria de uma homografia - Temos nessa figura a representação de uma homografia que relaciona pontos entre dois planos de imagem de um mesmo plano no mundo. [66, p. 60]." width="55%" />
+<img src="imagens/09-espaco_3D/geometria_homografia.png" alt="Geometria de uma homografia - Temos nessa figura a representação de uma homografia que relaciona pontos entre dois planos de imagem de um mesmo plano no mundo. [67, p. 60]." width="55%" />
 <p class="caption">
-Figura 9.3: Geometria de uma homografia - Temos nessa figura a representação de uma homografia que relaciona pontos entre dois planos de imagem de um mesmo plano no mundo. <span class="citation">[<a href="#ref-szeliski2010computer" role="doc-biblioref">66</a>, p. 60]</span>.
+Figura 9.3: Geometria de uma homografia - Temos nessa figura a representação de uma homografia que relaciona pontos entre dois planos de imagem de um mesmo plano no mundo. <span class="citation">[<a href="#ref-szeliski2010computer" role="doc-biblioref">67</a>, p. 60]</span>.
 </p>
 </div>
 <p>E a partir da equação anterior podemos deduzir que:</p>
@@ -361,7 +361,7 @@ então:</p>
 \tag{9.8}
 \]</span></p>
 <p>onde <span class="math inline">\(H = \begin{bmatrix}h_{11} &amp; h_{12} &amp; h_{13} &amp; h_{21} &amp; h_{22} &amp; h_{23} &amp; h_{31} &amp; h_{32} &amp; h_{33}\end{bmatrix}\)</span></p>
-<p>Para que consigamos resolver esse sistema, e achar a homografia H, precisamos de no mínimo 4 pontos correspondentes em cada uma das imagens <span class="citation">[<a href="#ref-hartley2003multiple" role="doc-biblioref">67</a>, p. 88]</span>, o que nos leva ao sistema de equações:</p>
+<p>Para que consigamos resolver esse sistema, e achar a homografia H, precisamos de no mínimo 4 pontos correspondentes em cada uma das imagens <span class="citation">[<a href="#ref-hartley2003multiple" role="doc-biblioref">68</a>, p. 88]</span>, o que nos leva ao sistema de equações:</p>
 <p><span class="math display" id="eq:homografiamatriz">\[
 \begin{bmatrix}
 -x_{11} &amp;  -y_{11} &amp;  -1 &amp;  0 &amp;  0 &amp;  0 &amp; x_{11}x_{01} &amp; y_{11}x_{01} &amp; x_{01}\\
@@ -389,7 +389,7 @@ h_{33}
 <p>Resolvendo o sistema de equações anterior, encontramos a matriz de homografia H entre as duas imagens. Algo importante a se notar é que o tamanho do sistema de equações, e por conseguinte o tamanho da matriz, não é fixo, pois cada ponto adicionará mais duas linhas <a href="espaco3D.html#eq:formamatricialhomografia1">(9.8)</a> a matriz <a href="espaco3D.html#eq:homografiamatriz">(9.9)</a>.</p>
 <div id="transformação-linear-direta-dlt" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> Transformação Linear Direta (DLT)</h3>
-<p>A transformação Linear Direta, comumente chamada pela sigla em inglês DLT(Direct Linear Transformation) é uma das maneiras de se calcular a estimação da matriz H. Esse método funciona da seguinte maneira <span class="citation">[<a href="#ref-hartley2003multiple" role="doc-biblioref">67</a>, p. 91]</span>:</p>
+<p>A transformação Linear Direta, comumente chamada pela sigla em inglês DLT(Direct Linear Transformation) é uma das maneiras de se calcular a estimação da matriz H. Esse método funciona da seguinte maneira <span class="citation">[<a href="#ref-hartley2003multiple" role="doc-biblioref">68</a>, p. 91]</span>:</p>
 <ol style="list-style-type: decimal">
 <li>Dado <span class="math inline">\(n &gt;= 4\)</span> pontos correspondentes entre dois planos 2d(imagens).</li>
 <li>Para cada correspondência, crie uma matriz como a da equação <a href="espaco3D.html#eq:formamatricialhomografia1">(9.8)</a> na forma matricial:
@@ -408,19 +408,19 @@ h_{33}
 </div>
 <div id="transformações-de-câmera" class="section level2">
 <h2><span class="header-section-number">9.3</span> Transformações de câmera</h2>
-<p>A formação de imagem a partir de uma câmera digital pode ser compreendida por uma sequência de transformações entre sistemas de coordenadas, que fazem a correspondência entres os pontos “P” do espaço tridimensional para os pontos “p” no plano da imagem. Para estudar estas transformações será utilizado como referência os quatros sistemas de coordenadas na Figura <a href="espaco3D.html#fig:coordenadas">9.4</a>, apresentados por Carvalho et al. (2005) <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 22]</span>:</p>
+<p>A formação de imagem a partir de uma câmera digital pode ser compreendida por uma sequência de transformações entre sistemas de coordenadas, que fazem a correspondência entres os pontos “P” do espaço tridimensional para os pontos “p” no plano da imagem. Para estudar estas transformações será utilizado como referência os quatros sistemas de coordenadas na Figura <a href="espaco3D.html#fig:coordenadas">9.4</a>, apresentados por Carvalho et al. (2005) <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 22]</span>:</p>
 
 <div class="figure" style="text-align: center"><span id="fig:coordenadas"></span>
-<img src="imagens/09-espaco_3D/coordenadas.png" alt="Sistemas de coordenadas. Relação entre os sistemas de coordenadas que determina a transformação da posição do objeto de interesse no SCM para a projeção na imagem (SCI). Outros sistemas intermediários são o Sistema de coordenadas da câmera (SCC) e o Sistema de coordenadas em pixel (SCP). [68, p. 22]." width="55%" />
+<img src="imagens/09-espaco_3D/coordenadas.png" alt="Sistemas de coordenadas. Relação entre os sistemas de coordenadas que determina a transformação da posição do objeto de interesse no SCM para a projeção na imagem (SCI). Outros sistemas intermediários são o Sistema de coordenadas da câmera (SCC) e o Sistema de coordenadas em pixel (SCP). [69, p. 22]." width="55%" />
 <p class="caption">
-Figura 9.4: Sistemas de coordenadas. Relação entre os sistemas de coordenadas que determina a transformação da posição do objeto de interesse no SCM para a projeção na imagem (SCI). Outros sistemas intermediários são o Sistema de coordenadas da câmera (SCC) e o Sistema de coordenadas em pixel (SCP). <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 22]</span>.
+Figura 9.4: Sistemas de coordenadas. Relação entre os sistemas de coordenadas que determina a transformação da posição do objeto de interesse no SCM para a projeção na imagem (SCI). Outros sistemas intermediários são o Sistema de coordenadas da câmera (SCC) e o Sistema de coordenadas em pixel (SCP). <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 22]</span>.
 </p>
 </div>
 <p>Sistema de coordenadas do mundo (SCM): é tridimensional com origem no ponto “O” e as posições são indicadas por (X, Y, Z).</p>
 <p>Sistema de coordenadas da câmera (SCC): também é tridimensional, tem origem no centro óptico da câmera “Õ” e as coordenadas são referenciadas por (X’, Y’, Z’). O sistema é definido em relação ao plano de projeção <span class="math inline">\(\pi\)</span>, sendo que os eixos X’ e Y’ devem ser paralelos às bordas da imagem no plano, e o eixo Z’ é perpendicular de forma que entre o centro óptico (Õ) e a intersecção deste eixo com o plano exista uma distância f, que é a distância focal da câmera.</p>
 <p>Sistema de coordenadas de imagem (SCI): um sistema bidimensional sobre o plano de projeção <span class="math inline">\(\pi\)</span>, com origem no ponto “C” e com coordenadas (x, y). A origem é definida pelo ponto que marca a projeção ortogonal do centro óptico da câmera (Õ) sobre o plano da imagem.</p>
 <p>Sistema de coordenadas em pixel (SCP): também é um sistema bidimensional, com origem no canto superior (ou inferior) esquerdo da imagem e com posições representadas por (u, v). Identifica os pontos da imagem com relação a grade de pixels.</p>
-<p>As etapas de transformações entre estes sistemas estão resumidas no esquema da Figura <a href="espaco3D.html#fig:transformacoes">9.5</a>, em que ocorrem sucessivas mudanças de coordenadas dos pontos de interesse, inicialmente referenciados no sistema SCM como (X,Y, Z), passando por todos os sistemas até o nível de pixel (u, v). Entre as transformações realizadas, estão a translação, rotação, escala e projeções que podem ser descritas como combinações de operações matriciais na sua forma homogênea <span class="citation">[<a href="#ref-davies2012" role="doc-biblioref">69</a>, p. 481]</span>, seguindo as abordagens descritas no tópico <a href="espaco3D.html#homogenea">coordenadas homogêneas</a>.</p>
+<p>As etapas de transformações entre estes sistemas estão resumidas no esquema da Figura <a href="espaco3D.html#fig:transformacoes">9.5</a>, em que ocorrem sucessivas mudanças de coordenadas dos pontos de interesse, inicialmente referenciados no sistema SCM como (X,Y, Z), passando por todos os sistemas até o nível de pixel (u, v). Entre as transformações realizadas, estão a translação, rotação, escala e projeções que podem ser descritas como combinações de operações matriciais na sua forma homogênea <span class="citation">[<a href="#ref-davies2012" role="doc-biblioref">70</a>, p. 481]</span>, seguindo as abordagens descritas no tópico <a href="espaco3D.html#homogenea">coordenadas homogêneas</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:transformacoes"></span>
 <img src="imagens/09-espaco_3D/transformacoes.png" alt="Mudanças de coordenadas. Etapas de transformação do referencial do objeto de interesse (SCM) para o sistema de coordenadas de pixel (SCP) no plano de projeção. São apresentados quatro sistemas de coordenadas - SCM, SCC, SCI, SCP - cada um com a identificação da origem e dos pontos, por exemplo, no SCM a origem é indicada por “O” e o ponto (X, Y, Z)." width="55%" />
@@ -433,7 +433,7 @@ Figura 9.5: Mudanças de coordenadas. Etapas de transformação do referencial d
 \tilde{P} = RP + T
 \tag{9.11}
 \]</span></p>
-<p>em que ocorre a mudança de coordenada do ponto P (X, Y, Z) em SCM para a correspondência <span class="math inline">\(\tilde{P}\)</span> (X’, Y’, Z’) em SCC. O vetor T é a posição da origem absoluta (O) no sistema SCC. A matriz R fornece a posição dos versores dos eixos do SCM com relação ao SCC <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 23]</span>. Em coordenadas homogêneas esta expressão é escrita:</p>
+<p>em que ocorre a mudança de coordenada do ponto P (X, Y, Z) em SCM para a correspondência <span class="math inline">\(\tilde{P}\)</span> (X’, Y’, Z’) em SCC. O vetor T é a posição da origem absoluta (O) no sistema SCC. A matriz R fornece a posição dos versores dos eixos do SCM com relação ao SCC <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 23]</span>. Em coordenadas homogêneas esta expressão é escrita:</p>
 <p><span class="math display" id="eq:matriztransformacao">\[
 \begin{bmatrix}
 \tilde{X}\\
@@ -453,8 +453,8 @@ Z\\
 \end{bmatrix}
 \tag{9.12}
 \]</span>
-Como os dois referenciais são ortogonais, R é uma matriz ortogonal (<span class="math inline">\(RR^t = I\)</span>) e é possível determiná-la apenas com 3 parâmetros em vez de 9, que caracterizam a rotação que leva de um eixo a outro, geralmente tratados como componentes do vetor Rodriguez <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 24]</span>. Assim, para cada posição da câmera existem 6 parâmetros que descrevem o seu estado extrínseco, 3 referentes à matriz R e 3 do vetor T.</p>
-<p>A mudança das coordenadas em relação a câmera (SCC) para o sistema da imagem (SCI) pode ser aproximada como uma projeção perspectiva em uma câmera pinhole com distância focal f <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 24]</span>:</p>
+Como os dois referenciais são ortogonais, R é uma matriz ortogonal (<span class="math inline">\(RR^t = I\)</span>) e é possível determiná-la apenas com 3 parâmetros em vez de 9, que caracterizam a rotação que leva de um eixo a outro, geralmente tratados como componentes do vetor Rodriguez <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 24]</span>. Assim, para cada posição da câmera existem 6 parâmetros que descrevem o seu estado extrínseco, 3 referentes à matriz R e 3 do vetor T.</p>
+<p>A mudança das coordenadas em relação a câmera (SCC) para o sistema da imagem (SCI) pode ser aproximada como uma projeção perspectiva em uma câmera pinhole com distância focal f <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 24]</span>:</p>
 <p><span class="math display" id="eq:projecaoperspectiva">\[
 \begin{bmatrix}
 x\\
@@ -474,7 +474,7 @@ f &amp; 0 &amp; 0 &amp; 0\\
 \end{bmatrix}
 \tag{9.13}
 \]</span>
-Como esta transformação projetiva não é inversível, um ponto da imagem pode ser associado com uma infinidade de pontos no espaço, ou seja, o ponto (x, y) da imagem é tratado como a projeção de todos os pontos do espaço que atendem a forma <span class="math inline">\(\lambda(x, y, f)\)</span>, em que <span class="math inline">\(\lambda != 0\)</span> <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 24]</span>.</p>
+Como esta transformação projetiva não é inversível, um ponto da imagem pode ser associado com uma infinidade de pontos no espaço, ou seja, o ponto (x, y) da imagem é tratado como a projeção de todos os pontos do espaço que atendem a forma <span class="math inline">\(\lambda(x, y, f)\)</span>, em que <span class="math inline">\(\lambda != 0\)</span> <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 24]</span>.</p>
 <p>O último nível de transformação que consideramos é do plano de formação da imagem (SCI) para a matriz retangular dos pixels (SCP):</p>
 <p><span class="math display" id="eq:transformacaopixel">\[
 \begin{bmatrix}
@@ -496,7 +496,7 @@ s_x &amp; \tau &amp; u_c\\
 \tag{9.14}
 \]</span>
 Os elementos <span class="math inline">\(s_x\)</span> e <span class="math inline">\(s_y\)</span> são a quantidade de pixels por unidade de comprimento, nas direções horizontal e vertical, respectivamente. Na maior parte das câmeras, o espaçamento entre linhas e colunas da matriz são iguais, ou seja, os pixels são quadrados <span class="math inline">\(s_x = s_y\)</span>. Os valores <span class="math inline">\(u_c\)</span> e <span class="math inline">\(v_c\)</span> descrevem a posição, em pixels, da projeção ortogonal do centro óptico da câmera (O’) sobre o plano de projeção, indicado como a origem C do SCI. Geralmente, o ponto C está no centro da imagem e a origem do SCP está no canto, assim, <span class="math inline">\(u_c\)</span> e <span class="math inline">\(v_c\)</span> são iguais a metade das dimensões da imagem. O elemento <span class="math inline">\(\tau\)</span> reflete o alinhamento das colunas de pixels com as linhas, mais especificamente, é a tangente do ângulo que as colunas formam com a perpendicular às linhas. Quando as colunas são perpendiculares às linhas, <span class="math inline">\(\tau = 0\)</span>.</p>
-<p>Os cinco parâmetros (<span class="math inline">\(s_x, s_y, u_c, v_c, \tau\)</span>) mais a distância focal (f) totalizam os seis parâmetros intrínsecos da câmera, que descrevem o seu funcionamento interno, enquanto que os seis parâmetros extrínsecos (elementos da matriz R e do vetor T) estabelecem a posição e a orientação. A dependência destas variáveis nas transformações indica que para determinadas aplicações na visão computacional, como no rastreamento e na reconstrução 3D, é necessário modelar estes valores <span class="citation">[<a href="#ref-davies2012" role="doc-biblioref">69</a>, p. 479]</span> . O processo da determinação dos parâmetros extrínsecos e intrínsecos da câmera é denominado calibração <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">64</a>, p. 331]</span>.</p>
+<p>Os cinco parâmetros (<span class="math inline">\(s_x, s_y, u_c, v_c, \tau\)</span>) mais a distância focal (f) totalizam os seis parâmetros intrínsecos da câmera, que descrevem o seu funcionamento interno, enquanto que os seis parâmetros extrínsecos (elementos da matriz R e do vetor T) estabelecem a posição e a orientação. A dependência destas variáveis nas transformações indica que para determinadas aplicações na visão computacional, como no rastreamento e na reconstrução 3D, é necessário modelar estes valores <span class="citation">[<a href="#ref-davies2012" role="doc-biblioref">70</a>, p. 479]</span> . O processo da determinação dos parâmetros extrínsecos e intrínsecos da câmera é denominado calibração <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">65</a>, p. 331]</span>.</p>
 <p>As equações anteriores podem ser combinadas como multiplicações de matrizes para estabelecer uma transformação de coordenada de um ponto de interesse (SCM) à sua projeção no referencial da matriz de pixels da câmera (SCP):</p>
 <p><span class="math display" id="eq:transformacaofinal">\[
 [p] =
@@ -520,7 +520,7 @@ P
 \end{bmatrix}
 \tag{9.15}
 \]</span>
-em que “P” é a coordenada em SCM e “p” em SCP. A matriz K de calibração define os parâmetros intrínsecos da câmera, enquanto [R T] representa os extrínsecos <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">70</a>]</span>. Na prática os valores de f, <span class="math inline">\(s_x\)</span> e <span class="math inline">\(s_y\)</span> não são determinados individualmente por esta operação, pois estão combinados como produtos (<span class="math inline">\(fs_x\)</span> e <span class="math inline">\(fs_y\)</span>) <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 26]</span>, assim, a matriz de calibração pode ser escrita como:</p>
+em que “P” é a coordenada em SCM e “p” em SCP. A matriz K de calibração define os parâmetros intrínsecos da câmera, enquanto [R T] representa os extrínsecos <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">71</a>]</span>. Na prática os valores de f, <span class="math inline">\(s_x\)</span> e <span class="math inline">\(s_y\)</span> não são determinados individualmente por esta operação, pois estão combinados como produtos (<span class="math inline">\(fs_x\)</span> e <span class="math inline">\(fs_y\)</span>) <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 26]</span>, assim, a matriz de calibração pode ser escrita como:</p>
 <p><span class="math display" id="eq:matrizcalibracao">\[
 K =
 \begin{bmatrix}
@@ -533,15 +533,15 @@ f_x &amp; c &amp; u_c\\
 </div>
 <div id="distorção-das-lentes" class="section level2">
 <h2><span class="header-section-number">9.4</span> Distorção das lentes</h2>
-<p>Os parâmetros intrínsecos foram modelados com base em uma aproximação do comportamento das câmeras do tipo pinhole, entretanto, as lentes das câmeras reais podem apresentar distorções. Geralmente as distorções mais proeminentes nas imagens são do tipo geométrica, em que os pontos no plano da imagem são deslocados de onde deveriam ser projetados <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">64</a>, p. 331]</span>. A maior parte dos modelos empíricos de distorção consideram as distorções geométricas radiais e tangenciais <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">71</a>]</span>.</p>
+<p>Os parâmetros intrínsecos foram modelados com base em uma aproximação do comportamento das câmeras do tipo pinhole, entretanto, as lentes das câmeras reais podem apresentar distorções. Geralmente as distorções mais proeminentes nas imagens são do tipo geométrica, em que os pontos no plano da imagem são deslocados de onde deveriam ser projetados <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">65</a>, p. 331]</span>. A maior parte dos modelos empíricos de distorção consideram as distorções geométricas radiais e tangenciais <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">72</a>]</span>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:distorcaoradial"></span>
-<img src="imagens/09-espaco_3D/distorcaoradial.png" alt="Distorção radial. Este tipo de distorção faz com que as linhas retas pareçam curvadas, e o efeito é maior nas bordas. (a) Imagem com distorção radial. (b) Imagem sem distorção. [70, p. 3]" width="55%" />
+<img src="imagens/09-espaco_3D/distorcaoradial.png" alt="Distorção radial. Este tipo de distorção faz com que as linhas retas pareçam curvadas, e o efeito é maior nas bordas. (a) Imagem com distorção radial. (b) Imagem sem distorção. [71, p. 3]" width="55%" />
 <p class="caption">
-Figura 9.6: Distorção radial. Este tipo de distorção faz com que as linhas retas pareçam curvadas, e o efeito é maior nas bordas. (a) Imagem com distorção radial. (b) Imagem sem distorção. <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">70</a>, p. 3]</span>
+Figura 9.6: Distorção radial. Este tipo de distorção faz com que as linhas retas pareçam curvadas, e o efeito é maior nas bordas. (a) Imagem com distorção radial. (b) Imagem sem distorção. <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">71</a>, p. 3]</span>
 </p>
 </div>
-<p>A distorção radial faz com que os pontos da imagem sejam transladados ao longo das linhas radiais a partir da origem do plano de projeção (C), fazendo com que as linhas retas pareçam curvadas como na Figura <a href="espaco3D.html#fig:distorcaoradial">9.6</a>. A distorção radial se torna maior quanto mais longe os pontos estão do centro da imagem <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">71</a>]</span>. A imagem que deveria se formar no ponto (u, v) do plano de projeção é deslocada para o ponto (u’, v’) devido a distorção que pode ser avaliada como <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 27]</span>:</p>
+<p>A distorção radial faz com que os pontos da imagem sejam transladados ao longo das linhas radiais a partir da origem do plano de projeção (C), fazendo com que as linhas retas pareçam curvadas como na Figura <a href="espaco3D.html#fig:distorcaoradial">9.6</a>. A distorção radial se torna maior quanto mais longe os pontos estão do centro da imagem <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">72</a>]</span>. A imagem que deveria se formar no ponto (u, v) do plano de projeção é deslocada para o ponto (u’, v’) devido a distorção que pode ser avaliada como <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 27]</span>:</p>
 <p><span class="math display" id="eq:distorcao">\[
 (u&#39;, v&#39;) = (1 + d) (u, v)
 \tag{9.17}
@@ -551,17 +551,17 @@ em que a distorção (d) depende da distância do ponto da imagem ao ponto de or
 r = \sqrt{(x)^2 + (y )^2}
 \tag{9.18}
 \]</span>
-A relação entre “r” e “d” pode ser modelada por uma função polinomial <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 27]</span>:</p>
+A relação entre “r” e “d” pode ser modelada por uma função polinomial <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 27]</span>:</p>
 <p><span class="math display" id="eq:distorcaoradial">\[
 d = k_1r^2 +k_2r^4 + k_3r^6 + …
 \tag{9.19}
 \]</span>
-sendo <span class="math inline">\(k_n\)</span> os coeficientes de distorção radial. A distorção tangencial acontece pelo desalinhamento da lente com o plano da imagem, que pode não estar perfeitamente paralela, fazendo com que algumas áreas da imagem pareçam mais próximas do que o esperado <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">71</a>]</span>. Considerando as distorções radiais e tangenciais o ponto na imagem é posicionado em:</p>
+sendo <span class="math inline">\(k_n\)</span> os coeficientes de distorção radial. A distorção tangencial acontece pelo desalinhamento da lente com o plano da imagem, que pode não estar perfeitamente paralela, fazendo com que algumas áreas da imagem pareçam mais próximas do que o esperado <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">72</a>]</span>. Considerando as distorções radiais e tangenciais o ponto na imagem é posicionado em:</p>
 <p><span class="math display" id="eq:distorcoes">\[
 u&#39; = u + \delta_u \text{, } v&#39; = v + \delta_v
 \tag{9.20}
 \]</span>
-em que os deslocamentos (<span class="math inline">\(\delta_u\)</span>, <span class="math inline">\(\delta_v\)</span>) são modelados como <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">64</a>, p. 330]</span>:</p>
+em que os deslocamentos (<span class="math inline">\(\delta_u\)</span>, <span class="math inline">\(\delta_v\)</span>) são modelados como <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">65</a>, p. 330]</span>:</p>
 <p><span class="math display" id="eq:matrizdistorcoes">\[
 \begin{bmatrix}
 \delta_u\\
@@ -578,25 +578,25 @@ p_1(r^2 + 2v^2) + 2p_2uv
 \end{bmatrix}
 \tag{9.21}
 \]</span>
-Geralmente, apenas 3 coeficientes (<span class="math inline">\(k_1, k_2, k_3\)</span>) de distorção radial são suficientes para descrever a distorção radial, que juntamente com os 2 coeficientes tangenciais (<span class="math inline">\(p_1, p_2\)</span>) são considerados como parâmetros intrínsecos adicionais, os parâmetros de distorção (<span class="math inline">\(k_1, k_2, k_3, p_1, p_2\)</span>) <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">64</a>, p. 330]</span>.</p>
+Geralmente, apenas 3 coeficientes (<span class="math inline">\(k_1, k_2, k_3\)</span>) de distorção radial são suficientes para descrever a distorção radial, que juntamente com os 2 coeficientes tangenciais (<span class="math inline">\(p_1, p_2\)</span>) são considerados como parâmetros intrínsecos adicionais, os parâmetros de distorção (<span class="math inline">\(k_1, k_2, k_3, p_1, p_2\)</span>) <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">65</a>, p. 330]</span>.</p>
 </div>
 <div id="calibração" class="section level2">
 <h2><span class="header-section-number">9.5</span> Calibração</h2>
-<p>Determinar os parâmetros intrínsecos e extrínsecos com base na equação (p = K [R T] [P]) envolve a resolução de um problema de otimização não linear. Geralmente, o problema é formulado como uma minimização de erro com base na diferença entre posições conhecidas da imagem (p) com os valores estimados (p’) utilizando como referência os parâmetros R, T, K e <span class="math inline">\(\delta\)</span> da solução <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 28]</span>. Assim, os parâmetros intrínsecos são estabelecidos de forma que os pontos da imagem (p’) obtidos por uma câmera em calibração sejam os mais próximos dos pontos (p) conhecidos da imagem <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 28]</span>:</p>
+<p>Determinar os parâmetros intrínsecos e extrínsecos com base na equação (p = K [R T] [P]) envolve a resolução de um problema de otimização não linear. Geralmente, o problema é formulado como uma minimização de erro com base na diferença entre posições conhecidas da imagem (p) com os valores estimados (p’) utilizando como referência os parâmetros R, T, K e <span class="math inline">\(\delta\)</span> da solução <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 28]</span>. Assim, os parâmetros intrínsecos são estabelecidos de forma que os pontos da imagem (p’) obtidos por uma câmera em calibração sejam os mais próximos dos pontos (p) conhecidos da imagem <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 28]</span>:</p>
 <p><span class="math display" id="eq:otimizacao">\[
 \sum_{i=0}^n {||p&#39;_i - p_i||^2}
 \tag{9.22}
 \]</span>
-Na calibração devem ser utilizadas imagens de amostra de um padrão, como de um tabuleiro de xadrez (Figura <a href="espaco3D.html#fig:chess">9.7</a>), em que seja possível identificar automaticamente na imagem pontos cujas coordenadas sejam conhecidas <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 29]</span>. No caso do tabuleiro de xadrez, os pontos de referência são as interseções dos quadrados que possibilitam identificar tanto as coordenadas na imagem (p) quanto no real (P) <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">70</a>, p. 12]</span>.</p>
-<p>Para exemplificar as etapas de calibração utilizaremos como guia o material e o código disponibilizados na documentação do OpenCv <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">71</a>]</span>. As etapas de calibração que descreveremos seguem o método Zhang, que usa um padrão bidimensional, mas que é posicionado em diferentes posições do espaço <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 39]</span>. Na prática, as imagens são obtidas a partir de uma câmera estática e o tabuleiro é colocado em diferentes posições e orientações, sendo necessário pelo menos 10 imagens <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">71</a>]</span>. Em cada imagem são utilizados os mesmos pontos de referência, por exemplo, pela Figura <a href="espaco3D.html#fig:chess">9.7</a> se identifica 9x6 pontos de interseção no tabuleiro, assim, a entrada do algoritmo segue a forma tamanho_tabuleiro = (9,6) .</p>
+Na calibração devem ser utilizadas imagens de amostra de um padrão, como de um tabuleiro de xadrez (Figura <a href="espaco3D.html#fig:chess">9.7</a>), em que seja possível identificar automaticamente na imagem pontos cujas coordenadas sejam conhecidas <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 29]</span>. No caso do tabuleiro de xadrez, os pontos de referência são as interseções dos quadrados que possibilitam identificar tanto as coordenadas na imagem (p) quanto no real (P) <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">71</a>, p. 12]</span>.</p>
+<p>Para exemplificar as etapas de calibração utilizaremos como guia o material e o código disponibilizados na documentação do OpenCv <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">72</a>]</span>. As etapas de calibração que descreveremos seguem o método Zhang, que usa um padrão bidimensional, mas que é posicionado em diferentes posições do espaço <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 39]</span>. Na prática, as imagens são obtidas a partir de uma câmera estática e o tabuleiro é colocado em diferentes posições e orientações, sendo necessário pelo menos 10 imagens <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">72</a>]</span>. Em cada imagem são utilizados os mesmos pontos de referência, por exemplo, pela Figura <a href="espaco3D.html#fig:chess">9.7</a> se identifica 9x6 pontos de interseção no tabuleiro, assim, a entrada do algoritmo segue a forma tamanho_tabuleiro = (9,6) .</p>
 
 <div class="figure" style="text-align: center"><span id="fig:chess"></span>
-<img src="imagens/09-espaco_3D/chess.jpg" alt="Tabuleiro de Xadrez. Uma das imagens utilizadas como padrão para realizar a calibração da câmera. Os pontos de contato entre os quadrados de mesma cor são utilizados como posições de referência para o algoritmo de calibração. [71]" width="55%" />
+<img src="imagens/09-espaco_3D/chess.jpg" alt="Tabuleiro de Xadrez. Uma das imagens utilizadas como padrão para realizar a calibração da câmera. Os pontos de contato entre os quadrados de mesma cor são utilizados como posições de referência para o algoritmo de calibração. [72]" width="55%" />
 <p class="caption">
-Figura 9.7: Tabuleiro de Xadrez. Uma das imagens utilizadas como padrão para realizar a calibração da câmera. Os pontos de contato entre os quadrados de mesma cor são utilizados como posições de referência para o algoritmo de calibração. <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">71</a>]</span>
+Figura 9.7: Tabuleiro de Xadrez. Uma das imagens utilizadas como padrão para realizar a calibração da câmera. Os pontos de contato entre os quadrados de mesma cor são utilizados como posições de referência para o algoritmo de calibração. <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">72</a>]</span>
 </p>
 </div>
-<p>Uma abordagem que simplifica a aplicação dos algoritmos é considerar que o tabuleiro se mantém estacionário no plano XY e que é a câmera que se move, desta forma, não é preciso se preocupar com as coordenadas do terceiro eixo (Z= 0) <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">71</a>]</span>. Os valores de X e Y são definidos como a localização dos pontos no tabuleiro, e considerando o formato em grade, são identificados como (0,0), (1,0), (2,0),…, (8,5). No código, os pontos no referencial do espaço real são identificados como pontos objeto e no plano de projeção como pontos imagem.</p>
+<p>Uma abordagem que simplifica a aplicação dos algoritmos é considerar que o tabuleiro se mantém estacionário no plano XY e que é a câmera que se move, desta forma, não é preciso se preocupar com as coordenadas do terceiro eixo (Z= 0) <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">72</a>]</span>. Os valores de X e Y são definidos como a localização dos pontos no tabuleiro, e considerando o formato em grade, são identificados como (0,0), (1,0), (2,0),…, (8,5). No código, os pontos no referencial do espaço real são identificados como pontos objeto e no plano de projeção como pontos imagem.</p>
 <p>As coordenadas dos pontos na imagem do tabuleiro podem ser determinadas pela função “cv.findChessboardCorners(imagem, tamanho_tabuleiro, flags)”, que recebe como entrada a imagem e o tamanho do tabuleiro. Esta função retorna as coordenadas dos pontos de referência na imagem (corners) e a variável “ret” recebe “True” quando isto acontece. Os pontos são salvos de acordo com as posições no tabuleiro, da esquerda para a direita e de cima para baixo.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="espaco3D.html#cb1-1"></a>ret, corners <span class="op">=</span> cv.findChessboardCorners(imagem, (<span class="dv">9</span>,<span class="dv">6</span>), <span class="va">None</span>)</span></code></pre></div>
 <p>Geralmente é utilizada a função “cv.cornerSubPix(imagem, corners, winSize, zeroZone, criterio)” para aumentar a acurácia do posicionamento dos pontos. A função “cornerSubPix” recebe a imagem e os pontos de referência calculados (corners) e avalia os pontos dentro uma vizinhança estabelecida pelo parâmetro “winSize”, que define a metade do comprimento da janela de pesquisa. O parâmetro “zeroZone” indica o tamanho da região em que os cálculos não são realizados, utilizado às vezes para evitar singularidades da matriz de autocorrelação. Quando “zeroZone = (-1,-1)”, esta estratégia não é utilizada, não existindo regiões “mortas”. Como o algoritmo da função “cornerSubPix” é iterativo é necessário estabelecer um critério de parada, como o número de interações e/ou acurácia.
@@ -605,7 +605,7 @@ Após estabelecer os pontos da imagem é possível desenhá-los sobre o tabuleir
 <span id="cb2-2"><a href="espaco3D.html#cb2-2"></a>corners <span class="op">=</span> cv.cornerSubPix(imagem, corners, (<span class="dv">11</span>,<span class="dv">11</span>), (<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>), criterio)</span>
 <span id="cb2-3"><a href="espaco3D.html#cb2-3"></a>cv.drawChessboardCorners(imagem, (<span class="dv">9</span>,<span class="dv">6</span>), corners, ret)</span></code></pre></div>
 <p>As coordenadas reais identificadas como pontos objeto e as coordenadas na imagem são repassadas como entradas da função “cv2.calibrateCamera(objectPoints, imagePoints, imageSize, flags)”. Esta função retorna os parâmetros intrínsecos e extrínsecos da câmera com base no método Zhang, o qual considera inicialmente nos cálculos uma aproximação da câmera pinhole e depois integra as distorções.</p>
-<p>O problema da calibração se fundamenta em estabelecer os parâmetros das transformações que realizam o mapeamento da coordenada homogênea P=(X,Y, Z, 1) do real para a imagem p=(x, y, 1) <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">70</a>, p. 11]</span>:</p>
+<p>O problema da calibração se fundamenta em estabelecer os parâmetros das transformações que realizam o mapeamento da coordenada homogênea P=(X,Y, Z, 1) do real para a imagem p=(x, y, 1) <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">71</a>, p. 11]</span>:</p>
 <p><span class="math display" id="eq:transformacaocalibracao">\[
 \lambda
 \begin{bmatrix}
@@ -634,7 +634,7 @@ Y\\
 \end{bmatrix}
 \tag{9.23}
 \]</span></p>
-<p>Ao adotar que o plano de calibração está sobre Z=0 podemos simplificar as coordenadas homogêneas dos pontos reais como (X, Y, 1), o que permite escrever a transformação de coordenadas como <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">70</a>, p. 12]</span>:</p>
+<p>Ao adotar que o plano de calibração está sobre Z=0 podemos simplificar as coordenadas homogêneas dos pontos reais como (X, Y, 1), o que permite escrever a transformação de coordenadas como <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">71</a>, p. 12]</span>:</p>
 <p><span class="math display" id="eq:transformacaosimplificada">\[
 \lambda
 \begin{bmatrix}
@@ -654,7 +654,7 @@ r_1 &amp; r_2 &amp; T
 \end{bmatrix}
 \tag{9.3}
 \]</span>
-O que permite determinar os parâmetros intrínsecos e extrínsecos da câmera. Os elementos da matriz de calibração (K) são estimados considerando a matriz simétrica <span class="math inline">\(B = K^{-T} K^{-1}\)</span> de acordo com as expressões <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">70</a>, p. 14]</span>:</p>
+O que permite determinar os parâmetros intrínsecos e extrínsecos da câmera. Os elementos da matriz de calibração (K) são estimados considerando a matriz simétrica <span class="math inline">\(B = K^{-T} K^{-1}\)</span> de acordo com as expressões <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">71</a>, p. 14]</span>:</p>
 <p><span class="math display" id="eq:elementoscalibracao">\[
 \begin{split}
 &amp;v_c = \frac{(B_{12}B_{13} - B_{11}B_{23})}{(B_{11}B_{22} - B_{12}^2)}\\
@@ -666,7 +666,7 @@ O que permite determinar os parâmetros intrínsecos e extrínsecos da câmera. 
 \end{split}
 \tag{9.25}
 \]</span>
-Após determinar os cinco elementos da matriz de calibração (<span class="math inline">\(v_c, u_c, f_x, f_y, c\)</span>) e o fator de escala (<span class="math inline">\(\lambda\)</span>) calculam-se os parâmetros extrínsecos (R, T) <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">70</a>, p. 15]</span>:</p>
+Após determinar os cinco elementos da matriz de calibração (<span class="math inline">\(v_c, u_c, f_x, f_y, c\)</span>) e o fator de escala (<span class="math inline">\(\lambda\)</span>) calculam-se os parâmetros extrínsecos (R, T) <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">71</a>, p. 15]</span>:</p>
 <p><span class="math display" id="eq:extrinsecos">\[
 \begin{split}
 &amp;r_1 = \frac{1}{\lambda}K^{-1}h_1\\
@@ -676,8 +676,8 @@ Após determinar os cinco elementos da matriz de calibração (<span class="math
 \end{split}
 \tag{9.26}
 \]</span>
-As distorções podem ser calculadas com base nos valores estimados das posições (p’) utilizando os parâmetros da calibração, que apresentam distorções, com os pontos ideais da imagem (p). Os modelos de distorções radiais e tangenciais apresentados em são reescritos na forma matricial, o que permite determinar uma solução por mínimos quadrados com os resultados para os coeficientes de distorção radial (<span class="math inline">\(k_1, k_2, k_3\)</span>) e tangencial (<span class="math inline">\(p_1, p_2\)</span>) <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">68</a>, p. 44]</span>.</p>
-<p>Considera-se que os parâmetros intrínsecos são os mesmos em todas as imagens padrão, e que somente os parâmetros extrínsecos se alteram quando a imagem é reposicionada <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">71</a>]</span>. Todas as etapas anteriores são resolvidas por uma única função no OpenCV:</p>
+As distorções podem ser calculadas com base nos valores estimados das posições (p’) utilizando os parâmetros da calibração, que apresentam distorções, com os pontos ideais da imagem (p). Os modelos de distorções radiais e tangenciais apresentados em são reescritos na forma matricial, o que permite determinar uma solução por mínimos quadrados com os resultados para os coeficientes de distorção radial (<span class="math inline">\(k_1, k_2, k_3\)</span>) e tangencial (<span class="math inline">\(p_1, p_2\)</span>) <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 44]</span>.</p>
+<p>Considera-se que os parâmetros intrínsecos são os mesmos em todas as imagens padrão, e que somente os parâmetros extrínsecos se alteram quando a imagem é reposicionada <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">72</a>]</span>. Todas as etapas anteriores são resolvidas por uma única função no OpenCV:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="espaco3D.html#cb3-1"></a>ret, cameraMatrix, dist, rvecs, tvecs <span class="op">=</span> cv.calibrateCamera(objpoints, imgpoints, imagem.shape[::<span class="op">-</span><span class="dv">1</span>], <span class="va">None</span>, <span class="va">None</span>)</span></code></pre></div>
 <p>em que se tem como saída da função a matriz de calibração (cameraMatriz) e os coeficientes de distorções (dist), que valem para todas as imagens, e o vetor de rotação R (rvecs) e de translação T (tvecs) que são calculados por padrão.</p>
 
@@ -687,31 +687,31 @@ As distorções podem ser calculadas com base nos valores estimados das posiçõ
 <h3>Refêrencias</h3>
 <div id="refs" class="references">
 <div id="ref-nixon2019feature">
-<p>[5] M. Nixon e A. Aguado, <em>Feature extraction and image processing for computer vision</em>. Academic press, 2019.</p>
+<p>[19] M. Nixon e A. Aguado, <em>Feature extraction and image processing for computer vision</em>. Academic press, 2019.</p>
 </div>
 <div id="ref-corke2017">
-<p>[64] P. Corke, <em>Robotics, Vision and Control Fundamental Algorithms in MATLAB</em>, 2º ed. Gewerbestrasse, Suiça: Springer, 2017.</p>
+<p>[65] P. Corke, <em>Robotics, Vision and Control Fundamental Algorithms in MATLAB</em>, 2º ed. Gewerbestrasse, Suiça: Springer, 2017.</p>
 </div>
 <div id="ref-img:linhas_paralelas">
-<p>[65] W. Commons, “Railroad tracks "vanishing" into the distance”. 2006, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Railroad-Tracks-Perspective.jpg">https://commons.wikimedia.org/wiki/File:Railroad-Tracks-Perspective.jpg</a>.</p>
+<p>[66] W. Commons, “Railroad tracks "vanishing" into the distance”. 2006, [Online]. Disponível em: <a href="https://commons.wikimedia.org/wiki/File:Railroad-Tracks-Perspective.jpg">https://commons.wikimedia.org/wiki/File:Railroad-Tracks-Perspective.jpg</a>.</p>
 </div>
 <div id="ref-szeliski2010computer">
-<p>[66] R. Szeliski, <em>Computer vision: algorithms and applications</em>. Springer Science &amp; Business Media, 2010.</p>
+<p>[67] R. Szeliski, <em>Computer vision: algorithms and applications</em>. Springer Science &amp; Business Media, 2010.</p>
 </div>
 <div id="ref-hartley2003multiple">
-<p>[67] R. Hartley e A. Zisserman, “Multiple view geometry in computer”, <em>Vision, 2nd ed., New York: Cambridge</em>, 2003.</p>
+<p>[68] R. Hartley e A. Zisserman, “Multiple view geometry in computer”, <em>Vision, 2nd ed., New York: Cambridge</em>, 2003.</p>
 </div>
 <div id="ref-carvalho2005">
-<p>[68] P. C. Carvalho <em>et al.</em>, “Fotografia 3D – 25 Coloquio Brasileiro de Matematica”, <em>Rio de Janeiro: Associação Instituto de Matematica Pura e Aplicada, IMPA</em>, 2005.</p>
+<p>[69] P. C. Carvalho <em>et al.</em>, “Fotografia 3D – 25 Coloquio Brasileiro de Matematica”, <em>Rio de Janeiro: Associação Instituto de Matematica Pura e Aplicada, IMPA</em>, 2005.</p>
 </div>
 <div id="ref-davies2012">
-<p>[69] E. R. Davies, <em>Computer and Machine Vision: Theory, Algorithms, Practicalities</em>, 4º ed. Waltham, Estados Unidos: Elsevier, 2012.</p>
+<p>[70] E. R. Davies, <em>Computer and Machine Vision: Theory, Algorithms, Practicalities</em>, 4º ed. Waltham, Estados Unidos: Elsevier, 2012.</p>
 </div>
 <div id="ref-santos2012">
-<p>[70] M. C. dos Santos, “Revisão de Conceitos em Projeção, Homografia, Calibração de Câmera, Geometria Epipolar, Mapas de Profundidade e Varredura de Planos”. Disciplina Visão Computacional, Unicamp, sob orientação do Prof. Dr. Helio Pedrini., São Paulo, 2012, [Online]. Disponível em: <a href="https://www.ic.unicamp.br/~rocha/teaching/2012s1/mc949/aulas/additional-material-revision-of-concepts-homography-and-related-topics.pdf">https://www.ic.unicamp.br/~rocha/teaching/2012s1/mc949/aulas/additional-material-revision-of-concepts-homography-and-related-topics.pdf</a>.</p>
+<p>[71] M. C. dos Santos, “Revisão de Conceitos em Projeção, Homografia, Calibração de Câmera, Geometria Epipolar, Mapas de Profundidade e Varredura de Planos”. Disciplina Visão Computacional, Unicamp, sob orientação do Prof. Dr. Helio Pedrini., São Paulo, 2012, [Online]. Disponível em: <a href="https://www.ic.unicamp.br/~rocha/teaching/2012s1/mc949/aulas/additional-material-revision-of-concepts-homography-and-related-topics.pdf">https://www.ic.unicamp.br/~rocha/teaching/2012s1/mc949/aulas/additional-material-revision-of-concepts-homography-and-related-topics.pdf</a>.</p>
 </div>
 <div id="ref-opencvcalibration">
-<p>[71] “Camera Calibration”. Website do OpenCV, [Online]. Disponível em: <a href="https://docs.opencv.org/master/dc/dbb/tutorial_py_calibration.html">https://docs.opencv.org/master/dc/dbb/tutorial_py_calibration.html</a>.</p>
+<p>[72] “Camera Calibration”. Website do OpenCV, [Online]. Disponível em: <a href="https://docs.opencv.org/master/dc/dbb/tutorial_py_calibration.html">https://docs.opencv.org/master/dc/dbb/tutorial_py_calibration.html</a>.</p>
 </div>
 </div>
             </section>

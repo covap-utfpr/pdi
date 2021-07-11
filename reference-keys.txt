@@ -3,10 +3,7 @@ tab:processos
 fig:capitulos
 fig:componentes2
 fig:placaEletronicaMediana2
-fig:cannyEOriginal
-fig:doghubble2
-fig:indoorBGmodeling2
-fig:differentscnn2
+fig:exemploMLP
 fig:espectro
 fig:aplicacoes
 fig:aquisicaoimagem
