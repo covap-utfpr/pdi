@@ -6,7 +6,7 @@ output:
     highlight: pygments
 ---
 
-# Espaço 3D
+# Espaço 3D {#espaco3D}
 
 ## Geometria projetiva
 Em alguns trabalhos realizados na visão computacional, a geometria euclidiana se torna insuficiente, pois as capturas de imagens com câmeras geram certos problemas, como linhas paralelas que se cruzam (como na Figura \@ref(fig:linhasparalelas)) e ângulos que não são preservados, fatos esses que ocorrem por estarmos projetando o mundo 3D em uma plano 2D [@corke2017, p. 321]. Nesses casos usamos outro tipo de geometria conhecida como geometria projetiva.

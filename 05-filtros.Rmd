@@ -1,4 +1,4 @@
-# Filtros Digitais
+# Filtros Digitais {#filtros}
 
 Filtros digitais representam um conjunto de ferramentas poderosas para realizar operações em imagens. Diferente das operações de ponto que operam sobre um único pixel, as operações utilizando filtros levam em consideração os pixels próximos ao pixel que atualmente está em modificação. Isso nos permite realizar alterações muito mais complexas do que as realizadas anteriormente. Como exemplos disso podemos considerar a operação *sharpen* (aguçamento) e *blur* (suavização), que podem ser observados na Figura \@ref(fig:onibusSharpenNBlur)(a) e (b), respectivamente.
 

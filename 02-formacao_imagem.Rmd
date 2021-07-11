@@ -1,4 +1,4 @@
-# Formação da imagem 
+# Formação da imagem {#formacaoImagem}
 
 Existem diferentes tipos de fontes utilizadas para geração de imagens, sendo que a mais comum é o espectro eletromagnético na faixa de ondas visíveis. Outras fontes de energia também podem ser utilizadas como energia mecânica na forma de ultrassom, feixe de elétrons em microscópio eletrônicos, ondas de rádio no radar, etc. Cada fonte necessita de um método específico de captura. Para ondas eletromagnéticas pode ser usada uma câmera fotográfica equipada com sensores adequados ao comprimento de onda. Porém, para outras fontes, é necessário que o computador sintetize a imagem, como o microscópio eletrônico. 
 
@@ -300,14 +300,11 @@ Para definir uma vizinhança-4 (denotado $[N_4(f)])$ de $f(x,y)$ ilustrado na Fi
 knitr::include_graphics(rep('imagens/02-formacao/vizinhanca4-8-d.png'))
 ```
 
-
 ### Conectividade {#contiv}
 A conectividade entre os pixels é outro conceito importante na topologia da imagem, usada para determinar limites de objetos e componentes de regiões na imagem. Dois pixels são conexos entre si  primeiro verificar-se seus tipos de [(vizinhos Seção 2.7.1)](#vizin), de seguida se existe similaridade na intensidade de cinza, cor ou textura. Por exemplo, em uma imagem binária, em que os pixels podem assumir os valores $0$ ou $1$, dois pixels podem ter vizinhança-4, mas somente serão considerados conexos se possuírem o mesmo valor. [@pedrini2008, p. 31].
 
-
 ### Adjacência {#adja}
 Um conjunto $V$ com valores de intensidade para definir adjacência, em uma imagem binária, com $V={1}$ e outra imagem com mesmo conjunto contendo escala de nível de cinza no limite $0$ a $255$ com vários elementos (pixels) o conjunto $V$ poderia ser qualquer subconjunto desses $256$ valores se eles estiverem conectados de acordo com o tipo de [(vizinhança Seção 2.7.1)](#vizin) especificado. [@gonzalez2010, p.31].
-
 
 ### Caminho {#camin}
 Uma imagem com coordenada de pixels $(x_1 , y_1), (x_2 , y_2) … (x_n , y_n)$ que determina a sequência do caminho dos variados pixels onde né o comprimento do caminho, e $(x_i , y_i)e (x_i + 1 , y_i + 1)$ são adjacentes, tal que $i = 1,2,...,n - 1$.Se na relação de conectividade considerar vizinhança-4, então existe um caminho-4; para vizinhança-8, tem-se um caminho-8. Exemplo de caminhos são mostrados na Figura \@ref(fig:caminho) sendo que o caminho-4 possui comprimento $10$ e o caminho-8 possui comprimento $7$. O conceito de caminho também pode ser estendido para imagens tridimensionais. [@pedrini2008, p. 31].
@@ -318,22 +315,17 @@ Uma imagem com coordenada de pixels $(x_1 , y_1), (x_2 , y_2) … (x_n , y_n)$ q
 knitr::include_graphics(rep('imagens/02-formacao/caminho.png'))
 ```
 
-
-
 ### Componente Conexa  
-Componentes conexos de pixels de uma imagem é um conjunto de elementos (pixels) que de alguma forma estão conectados entre si, dois ou mais pixels são componentes conexos se existir um caminho seção 2.7.4 Caminho pertencente ao conjunto. A Figura \@ref(fig:componente) mostra uma imagem bidimensional contendo três componentes conexos caso seja considerada a vizinhança-4 ou, então, dois componentes conexos se considerada a vizinhança-8. [@pedrini2008, p. 32].
+Componentes conexos de pixels de uma imagem é um conjunto de elementos (pixels) que de alguma forma estão conectados entre si, dois ou mais pixels são componentes conexos se existir um caminho seção 2.7.4 Caminho pertencente ao conjunto. A Figura \@ref(fig:componente_conexa) mostra uma imagem bidimensional contendo três componentes conexos caso seja considerada a vizinhança-4 ou, então, dois componentes conexos se considerada a vizinhança-8. [@pedrini2008, p. 32].
 
+(ref:componente_conexa) Componentes Conexos de uma imagem bidimensional [@pedrini2008, p. 32].
 
-(ref:componente) Componentes Conexos de uma imagem bidimensional  [@pedrini2008, p. 32].
-
-```{r componente, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:componente)', fig.align='center', out.width='20%'}
+```{r componente_conexa, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:componente_conexa)', fig.align='center', out.width='20%'}
 knitr::include_graphics(rep('imagens/02-formacao/componente_conexos.png'))
 ```
 
-
 ### Borda e Interior
-[@pedrini2008, p. 32].  A borda de um componente conexo [seção 2.7.5](### Componente-Conexa) $S$ em uma imagem bidimensional é o conjunto de pixels pertencentes ao componente e que possuem vizinhança-4 com um ou mais pixels externos a $S$. Intuitivamente, a borda corresponde ao conjunto de pontos no contorno do componente conexo. O interior é o conjunto de pixels de $S$ que não estão em sua borda. A Figura \@ref(fig:borda) mostra um exemplo de uma imagem binária com sua borda interior.
-
+A borda de um componente conexo [seção 2.7.5](### Componente-Conexa) $S$ em uma imagem bidimensional é o conjunto de pixels pertencentes ao componente e que possuem vizinhança-4 com um ou mais pixels externos a $S$ [@pedrini2008, p. 32]. Intuitivamente, a borda corresponde ao conjunto de pontos no contorno do componente conexo. O interior é o conjunto de pixels de $S$ que não estão em sua borda. A Figura \@ref(fig:borda) mostra um exemplo de uma imagem binária com sua borda interior.
 
 (ref:borda) Borda e interior de um componente, Figura do lado esquerdo, mostra a imagem original, a Figura do lado direito mostra os pixels da borda e interior. [@pedrini2008, p. 32].
 
@@ -341,10 +333,8 @@ knitr::include_graphics(rep('imagens/02-formacao/componente_conexos.png'))
 knitr::include_graphics(rep('imagens/02-formacao/borda_interior.png'))
 ```
 
-
 ### Medidas de Distância
 As medidas de distância são aplicadas sobre os pixels e componentes da imagem, considerando $D$ uma função com os pixels $f_1$, $f_2$ e $f_3$ de coordenadas $(x_1, y_1)$, $(x_2, y_2)$, $(x_3, y_3)$, para verificar se $D$ é uma função distância ou medida de distância, deve satisfazer as seguintes propriedades: 
-
 
 1. 
 $$
@@ -366,9 +356,7 @@ $$
 
 Na medida de distância Euclidiana, todos os pixels menores ou igual de qualquer valor $d$ formam um disco de raio $d$ centro em $f_1$. Como exemplo, os pontos com distância $D_E \leq 3$ de um ponto central $(x, y)$ formam o conjunto mostra na Figura: \@ref(fig:medidaD1) 
 
-
-
-(ref:medidaD1) Conjunto de pontos com distância Euclidiana menor ou igual de ponto central.  [@pedrini2008, p. 33].
+(ref:medidaD1) Conjunto de pontos com distância Euclidiana menor ou igual de ponto central. [@pedrini2008, p. 33].
 
 ```{r medidaD1, echo=FALSE, fig.asp=.7, fig.width= 4, fig.height=4,  fig.cap='(ref:medidaD1)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/02-formacao/medida_distancia1.png'))
@@ -380,7 +368,6 @@ D_4(f_1 , f_2)   = |x_1 - x_2 | + |y_1 - y_2 |
 (\#eq:formCity)
 $$
 
-
 Os pixels com uma distância $D_4$ de $f_4$ menor ou igual a algum valor $d$ formam um losango centrado em $f_1$. Em particular, os pontos com distância $1$ são os pixels com vizinhança-4 de ponto central. Por exemplo, os pontos com distância $D_4 \leq 3$ de um ponto central $(x, y)$ formam o conjunto mostrado na Figura  \@ref(fig:medidaD2)
 
 (ref:medidaD2) Conjunto de pontos com distância $D_4$ menor ou igual a $3$ de um ponto central [@pedrini2008, p. 33].
@@ -389,8 +376,7 @@ Os pixels com uma distância $D_4$ de $f_4$ menor ou igual a algum valor $d$ for
 knitr::include_graphics(rep('imagens/02-formacao/medida_distancia2.png'))
 ```
 
-
-A distância $D_8 $entre $f_1$ e  $f_2$, também denotado de *chessboard*, é definida como 
+A distância $D_8$ entre $f_1$ e  $f_2$, também denotado de *chessboard*, é definida como 
 $D_8(f_1 , f_2) = max(| x_1 = x_2 | , | y_1 =y_2 |)$
 Os pixels com uma distância $D_8$ de $f_1$ menor ou igual a algum valor $d$ formam um quadrado central em $f_1$. Os pontos com distância $1$ são os pixels com a vizinhança-8 do ponto central. Por exemplo, os pontos com distância $D_8 \leq 3$ de um ponto central $(x, y)$ formam o conjunto mostrado na Figura \@ref(fig:medidaD3)
 
@@ -399,7 +385,6 @@ Os pixels com uma distância $D_8$ de $f_1$ menor ou igual a algum valor $d$ for
 ```{r medidaD3, echo=FALSE, fig.asp=.7, fig.width= 4, fig.height=4,  fig.cap='(ref:medidaD3)', fig.align='center', out.width='40%'}
 knitr::include_graphics(rep('imagens/02-formacao/medida_distancia3.png'))
 ```
-
 
 ### Operações Lógico-aritméticas 
 Operações lógicas e aritméticas podem ser utilizadas para modificar imagens. Embora essas operações permitam uma forma simples de processamento, há uma grande variedade de aplicações em que tais operações podem produzir resultados de interesse prático [@pedrini2008, p. 34].
@@ -415,4 +400,4 @@ Dadas duas imagens, $f_1$ e $f_2$, as operações aritméticas mais comuns entre
   
   4. Divisão: $f_1(x_1, y_1) \div f_2(x_2, y_2)$
   
-Durante o processo de operações aritméticas sobre uma imagem alguns cuidados devem ser tomados para contornar a produção de valores fora do intervalo de níveis de cinza sobre a imagem original no processo. Neste caso, a operação de adição de duas imagens com $256$ níveis de cinza, pode resultar em um número maior que  valor $255$ para determinados pixels, por outro lado, a operação de subtração de duas imagens podem resultar em valores negativos para alguns pixels durante o processo. Para solucionar esse problema depois do processo aritmético (aplicação aritmética), realizar uma transformação de escala de cinza na imagem resultante para manter seus valores do intervalo adequado. [@pedrini2008, p. 34].
+Durante o processo de operações aritméticas sobre uma imagem alguns cuidados devem ser tomados para contornar a produção de valores fora do intervalo de níveis de cinza sobre a imagem original no processo. Neste caso, a operação de adição de duas imagens com $256$ níveis de cinza, pode resultar em um número maior que  valor $255$ para determinados pixels, por outro lado, a operação de subtração de duas imagens podem resultar em valores negativos para alguns pixels durante o processo. Para solucionar esse problema depois do processo aritmético (aplicação aritmética), realizar uma transformação de escala de cinza na imagem resultante para manter seus valores do intervalo adequado [@pedrini2008, p. 34].

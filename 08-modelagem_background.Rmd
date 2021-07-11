@@ -7,7 +7,7 @@ output:
 ---
 <!-- nixon2019feature -->
 <!-- davies2017 -->
-# Separação Plano de Fundo
+# Separação Plano de Fundo {#separacaoFundo}
 A visão computacional também é usada para lidar com monitoramento de objetos, auxiliando atividades humanas como vigilância pela procura de eventualidades, como acidentes e crimes [@davies2017, p. 664]. E a ideia da separação do *background* é remover a paisagem para observar os objetos-alvo em movimento (*foreground*), em por menores, seria a remoção de objetos estáticos (como edifícios) ou que não são estáticos e compõe o plano de fundo (como um rio, as folhas de uma vegetação, movimentação das nuvens) - sim, é complexo lidar com essa movimentação de *background.* 
 
 O *foreground* é o resultado da limiarização da diferença entre os *pixels* do *frame* atual em relação aos *pixels* do *background* estimado. Caso não saiba o que é limiarização, contém esse conteúdo em seções anteriores [Segmentação](#segmentação) no tópico Limiarização 6.6.

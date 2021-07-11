@@ -6,9 +6,8 @@ output:
     highlight: pygments
 ---
 
-# Deep Learning em visão computacional 
+# Deep Learning em visão computacional {#deepLearning}
 Antes de iniciarmos o estudo sobre *Deep Learning*, e mais especificamente sobre redes neurais artificiais convolucionais, é importante termos uma visão ampla sobre a área e suas subdivisões para conseguirmos nos localizar em meio a essa área que cresce cada vez mais. Por isso começaremos falando um pouco sobre inteligência artificial e suas subdivisões, além de sua conexão e uso com visão computacional, que é o nosso foco.
-
 
 ## Caracterização de IA, Machine Learning e Deep Learning
 Esses três termos costumam causar certa confusão, principalmente em pessoas que estão começando a estudar essa área. De maneira geral, o termo Inteligência Artificial (IA) denomina uma área que possui muitas vertentes e tópicos de estudos, onde a maioria tem o foco em conseguir fazer os computadores realizarem tarefas complexas, que anteriormente eram realizadas exclusivamente por humanos.
@@ -405,7 +404,8 @@ Os casos mais comuns de se ocorrer *overfitting* é quando o número de dados do
 
 Observar o comportamento da acurácia da validação é um dos métodos para definir até quando a rede deve ser treinada, ou seja, o número de épocas. Os dados de validação ajudam no teste de diferentes configurações de hiperparâmetros da rede, como épocas de treinamento, taxa de aprendizado e número de nós. Só depois de definir estes parâmetros e treinar a rede que se recomenda a utilização dos dados de teste para verificar realmente a acurácia da rede, utilizando dados que ela ainda não teve contato [@nielsen2015]. Um teste com dados não conhecidos permite verificar se os parâmetros da rede podem ser aplicados em casos mais gerais ou se enquadram apenas em particularidades dos dados treinados. Por esta razão, na maioria dos casos os dados são divididos em três conjuntos - treinamento, validação e teste. 
 
-## Redes neurais convolucionais (CNN)
+
+## Redes neurais convolucionais (CNN) {#cnn}
 A área de *deep learning* tem conseguido ótimo desempenho em aplicações, principalmente, pelo desenvolvimento da área e pelo aumento do poder computacional e da quantidade de dados disponíveis [@geron2019, p.431]. Um dos tipos de redes neurais, conhecida como Redes Neurais Convolucionais (*Convolutional Neural Networks* - CNN), também tem conseguido resultados ótimos, um dos motivos pelos quais foram adotadas com relevância pela área de visão computacional, substituindo muitas das técnicas antigas, que por utilizarem algoritmos mais "estáticos" eram difíceis de serem aplicados em diferentes áreas. 
 
 ### Blocos de construção de uma CNN
