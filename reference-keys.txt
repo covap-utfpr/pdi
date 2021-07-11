@@ -40,6 +40,7 @@ fig:resolucaoespacial
 fig:reducaoprofundidade
 fig:vizinhanca
 fig:caminho
+fig:componenteconexa
 fig:borda
 eq:medida1
 eq:medida2

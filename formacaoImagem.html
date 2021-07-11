@@ -586,23 +586,23 @@ Figura 2.23: (a) Caminho-4, (b) Caminho-8. <span class="citation">[<a href="#ref
 </div>
 <div id="componente-conexa" class="section level3">
 <h3><span class="header-section-number">2.7.5</span> Componente Conexa</h3>
-<p>Componentes conexos de pixels de uma imagem é um conjunto de elementos (pixels) que de alguma forma estão conectados entre si, dois ou mais pixels são componentes conexos se existir um caminho seção 2.7.4 Caminho pertencente ao conjunto. A Figura @ref(fig:componente_conexa) mostra uma imagem bidimensional contendo três componentes conexos caso seja considerada a vizinhança-4 ou, então, dois componentes conexos se considerada a vizinhança-8. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 32]</span>.</p>
-<p>(ref:componente_conexa) Componentes Conexos de uma imagem bidimensional <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 32]</span>.</p>
-<div class="figure" style="text-align: center">
-<img src="imagens/02-formacao/componente_conexos.png" alt="(ref:componente_conexa)" width="20%" />
+<p>Componentes conexos de pixels de uma imagem é um conjunto de elementos (pixels) que de alguma forma estão conectados entre si, dois ou mais pixels são componentes conexos se existir um caminho seção 2.7.4 Caminho pertencente ao conjunto. A Figura <a href="formacaoImagem.html#fig:componenteconexa">2.24</a> mostra uma imagem bidimensional contendo três componentes conexos caso seja considerada a vizinhança-4 ou, então, dois componentes conexos se considerada a vizinhança-8. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 32]</span>.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:componenteconexa"></span>
+<img src="imagens/02-formacao/componente_conexos.png" alt="Componentes Conexos de uma imagem bidimensional [3, p. 32]." width="20%" />
 <p class="caption">
-(#fig:componente_conexa)(ref:componente_conexa)
+Figura 2.24: Componentes Conexos de uma imagem bidimensional <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 32]</span>.
 </p>
 </div>
 </div>
 <div id="borda-e-interior" class="section level3">
 <h3><span class="header-section-number">2.7.6</span> Borda e Interior</h3>
-<p>A borda de um componente conexo <a href="###%20Componente-Conexa">seção 2.7.5</a> <span class="math inline">\(S\)</span> em uma imagem bidimensional é o conjunto de pixels pertencentes ao componente e que possuem vizinhança-4 com um ou mais pixels externos a <span class="math inline">\(S\)</span> <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 32]</span>. Intuitivamente, a borda corresponde ao conjunto de pontos no contorno do componente conexo. O interior é o conjunto de pixels de <span class="math inline">\(S\)</span> que não estão em sua borda. A Figura <a href="formacaoImagem.html#fig:borda">2.24</a> mostra um exemplo de uma imagem binária com sua borda interior.</p>
+<p>A borda de um componente conexo <a href="###%20Componente-Conexa">seção 2.7.5</a> <span class="math inline">\(S\)</span> em uma imagem bidimensional é o conjunto de pixels pertencentes ao componente e que possuem vizinhança-4 com um ou mais pixels externos a <span class="math inline">\(S\)</span> <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 32]</span>. Intuitivamente, a borda corresponde ao conjunto de pontos no contorno do componente conexo. O interior é o conjunto de pixels de <span class="math inline">\(S\)</span> que não estão em sua borda. A Figura <a href="formacaoImagem.html#fig:borda">2.25</a> mostra um exemplo de uma imagem binária com sua borda interior.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:borda"></span>
 <img src="imagens/02-formacao/borda_interior.png" alt="Borda e interior de um componente, Figura do lado esquerdo, mostra a imagem original, a Figura do lado direito mostra os pixels da borda e interior. [3, p. 32]." width="40%" />
 <p class="caption">
-Figura 2.24: Borda e interior de um componente, Figura do lado esquerdo, mostra a imagem original, a Figura do lado direito mostra os pixels da borda e interior. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 32]</span>.
+Figura 2.25: Borda e interior de um componente, Figura do lado esquerdo, mostra a imagem original, a Figura do lado direito mostra os pixels da borda e interior. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 32]</span>.
 </p>
 </div>
 </div>
@@ -624,12 +624,12 @@ D(f_1,f_3) \leq  D(f_1,f_2) + D(f_2,f_3) \tag{2.11}
 <p><span class="math display" id="eq:formEclidiana">\[D_4(f_1 , f_2) = \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2} 
 \tag{2.12}
 \]</span></p>
-<p>Na medida de distância Euclidiana, todos os pixels menores ou igual de qualquer valor <span class="math inline">\(d\)</span> formam um disco de raio <span class="math inline">\(d\)</span> centro em <span class="math inline">\(f_1\)</span>. Como exemplo, os pontos com distância <span class="math inline">\(D_E \leq 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostra na Figura: <a href="formacaoImagem.html#fig:medidaD1">2.25</a></p>
+<p>Na medida de distância Euclidiana, todos os pixels menores ou igual de qualquer valor <span class="math inline">\(d\)</span> formam um disco de raio <span class="math inline">\(d\)</span> centro em <span class="math inline">\(f_1\)</span>. Como exemplo, os pontos com distância <span class="math inline">\(D_E \leq 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostra na Figura: <a href="formacaoImagem.html#fig:medidaD1">2.26</a></p>
 
 <div class="figure" style="text-align: center"><span id="fig:medidaD1"></span>
 <img src="imagens/02-formacao/medida_distancia1.png" alt="Conjunto de pontos com distância Euclidiana menor ou igual de ponto central. [3, p. 33]." width="40%" />
 <p class="caption">
-Figura 2.25: Conjunto de pontos com distância Euclidiana menor ou igual de ponto central. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 33]</span>.
+Figura 2.26: Conjunto de pontos com distância Euclidiana menor ou igual de ponto central. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 33]</span>.
 </p>
 </div>
 <p>A distância <span class="math inline">\(D_4\)</span> entre <span class="math inline">\(f_1\)</span> e <span class="math inline">\(f_2\)</span>, também denotada de <em>city-block</em>, é definida como:
@@ -637,22 +637,22 @@ Figura 2.25: Conjunto de pontos com distância Euclidiana menor ou igual de pont
 D_4(f_1 , f_2)   = |x_1 - x_2 | + |y_1 - y_2 |
 \tag{2.13}
 \]</span></p>
-<p>Os pixels com uma distância <span class="math inline">\(D_4\)</span> de <span class="math inline">\(f_4\)</span> menor ou igual a algum valor <span class="math inline">\(d\)</span> formam um losango centrado em <span class="math inline">\(f_1\)</span>. Em particular, os pontos com distância <span class="math inline">\(1\)</span> são os pixels com vizinhança-4 de ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_4 \leq 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na Figura <a href="formacaoImagem.html#fig:medidaD2">2.26</a></p>
+<p>Os pixels com uma distância <span class="math inline">\(D_4\)</span> de <span class="math inline">\(f_4\)</span> menor ou igual a algum valor <span class="math inline">\(d\)</span> formam um losango centrado em <span class="math inline">\(f_1\)</span>. Em particular, os pontos com distância <span class="math inline">\(1\)</span> são os pixels com vizinhança-4 de ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_4 \leq 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na Figura <a href="formacaoImagem.html#fig:medidaD2">2.27</a></p>
 
 <div class="figure" style="text-align: center"><span id="fig:medidaD2"></span>
 <img src="imagens/02-formacao/medida_distancia2.png" alt="Conjunto de pontos com distância \(D_4\) menor ou igual a \(3\) de um ponto central [3, p. 33]." width="40%" />
 <p class="caption">
-Figura 2.26: Conjunto de pontos com distância <span class="math inline">\(D_4\)</span> menor ou igual a <span class="math inline">\(3\)</span> de um ponto central <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 33]</span>.
+Figura 2.27: Conjunto de pontos com distância <span class="math inline">\(D_4\)</span> menor ou igual a <span class="math inline">\(3\)</span> de um ponto central <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 33]</span>.
 </p>
 </div>
 <p>A distância <span class="math inline">\(D_8\)</span> entre <span class="math inline">\(f_1\)</span> e <span class="math inline">\(f_2\)</span>, também denotado de <em>chessboard</em>, é definida como
 <span class="math inline">\(D_8(f_1 , f_2) = max(| x_1 = x_2 | , | y_1 =y_2 |)\)</span>
-Os pixels com uma distância <span class="math inline">\(D_8\)</span> de <span class="math inline">\(f_1\)</span> menor ou igual a algum valor <span class="math inline">\(d\)</span> formam um quadrado central em <span class="math inline">\(f_1\)</span>. Os pontos com distância <span class="math inline">\(1\)</span> são os pixels com a vizinhança-8 do ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_8 \leq 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na Figura <a href="formacaoImagem.html#fig:medidaD3">2.27</a></p>
+Os pixels com uma distância <span class="math inline">\(D_8\)</span> de <span class="math inline">\(f_1\)</span> menor ou igual a algum valor <span class="math inline">\(d\)</span> formam um quadrado central em <span class="math inline">\(f_1\)</span>. Os pontos com distância <span class="math inline">\(1\)</span> são os pixels com a vizinhança-8 do ponto central. Por exemplo, os pontos com distância <span class="math inline">\(D_8 \leq 3\)</span> de um ponto central <span class="math inline">\((x, y)\)</span> formam o conjunto mostrado na Figura <a href="formacaoImagem.html#fig:medidaD3">2.28</a></p>
 
 <div class="figure" style="text-align: center"><span id="fig:medidaD3"></span>
 <img src="imagens/02-formacao/medida_distancia3.png" alt="Conjunto de pontos com distância \(D_4\) menor ou igual a \(3\) de um ponto central [3, p. 33]." width="40%" />
 <p class="caption">
-Figura 2.27: Conjunto de pontos com distância <span class="math inline">\(D_4\)</span> menor ou igual a <span class="math inline">\(3\)</span> de um ponto central <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 33]</span>.
+Figura 2.28: Conjunto de pontos com distância <span class="math inline">\(D_4\)</span> menor ou igual a <span class="math inline">\(3\)</span> de um ponto central <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 33]</span>.
 </p>
 </div>
 </div>
