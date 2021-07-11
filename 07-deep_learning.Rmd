@@ -165,11 +165,7 @@ Considerando imagens de $28 \text{ x } 28$ pixels, os dados de entrada foram def
 knitr::include_graphics(rep('imagens/07-deepLearning/mlp-two-layers.png'))
 ```
 
-Para carregar os dados e configurá-los no formato proposto utiliza-se o método "*load_data_wrapper()*". Os dados são retirados do arquivo compactado "*mnist.pkl.gz*" e subdivididos dentro do método "*load_data()*" que retorna para o "load_data_wrapper()", como dados de treinamento, validação e de teste. A função geral é chamada da seguinte forma:
-
-```{#pythonMLP1Camada.1 .py}
-training_data, validation_data, test_data = load_data_wrapper()
-```
+Os dados são retirados do arquivo zip “mnist.pkl.gz'”, subdivididos em treinamento, validação e de teste, e em seguida configurados no formato proposto da rede.
 
 No [*Code Block 2*](#pythonMLP1Camada.2), a rede é construída a partir do comando "*Network([784, 30, 10], cost=QuadraticCost)*", em que cada argumento corresponde ao número de nós na camada. Os atributos da classe "*Network*" incluem o número de camadas "*num_layers*", o número de nós em cada camada "*sizes*", os pesos e bias iniciais, que são gerados aleatoriamente pelo método "*default_weight_initializer()*", e a função custo "*cost*". A função custo aplicada neste exemplo é definida na classe *QuadraticCost*, e foi usada a erro quadrático (*Mean Squared Error* - MSE).
 

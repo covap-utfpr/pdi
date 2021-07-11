@@ -58,7 +58,7 @@ Com o avanço do aprendizado de máquina (*Machine Learning*), principalmente co
 
 Um dos objetivos deste material é servir de referência para o estudo inicial da Visão Computacional, assim, para compreender as relações entre os três temas discutidos no final do tópico anterior - Processamento de Imagens, Visão Computacional e Aprendizado de Máquina - indicamos um guia para o presente material de estudo, em que se descreve como os capítulos foram organizados dentro destes três temas mais amplos. 
 
-Com base na abordagem adotada no diagrama da Figura \@ref(fig:capitulos), as principais etapas para o tratamento de problemas envolvem: aquisição da imagem; pré-processamento; segmentação; e análise da informação visual. Dentro de cada um destes níveis é possível subdividir vários outros subtópicos dependendo da aplicação de interesse, e neste material apresentamos algumas de usos mais gerais, que estão organizadas em capítulos. 
+Com base na abordagem adotada no diagrama da Figura \@ref(fig:capitulos), as principais etapas para o tratamento de problemas envolvem: aquisição da imagem; pré-processamento; e análise da informação visual. Dentro de cada um destes níveis é possível subdividir vários outros subtópicos dependendo da aplicação de interesse, e neste material apresentamos algumas de usos mais gerais, que estão organizadas em capítulos. 
 
 (ref:capitulos)  Etapas para o desenvolvimento de aplicações na Visão Computacional - Diagrama com a distribuição dos capítulos com base nas principais etapas dentro do processamento de imagem e do aprendizado de máquina orientados à visão computacional.
 
@@ -67,7 +67,7 @@ knitr::include_graphics(rep('imagens/01-introducao/capitulos.png'))
 
 ```
 
-As primeiras etapas - Aquisição de imagens, Pré-Processamento e Segmentação - são temas que a área de Processamento de Imagem tem apresentado forte contribuição durante muito tempo, em que vários algoritmos, técnicas e conceitos continuam sendo a base para a Visão Computacional. Antigamente, os resultados do processamento de imagens que eram as informações de maior interesse da VC, eram dados tratados que podiam ser avaliados e aplicados em modelos estatísticos, possibilitando a análise e resolução do problema. 
+As primeiras etapas - Aquisição de imagens e Pré-Processamento - são temas que a área de Processamento de Imagem tem apresentado forte contribuição durante muito tempo, em que vários algoritmos, técnicas e conceitos continuam sendo a base para a Visão Computacional. Antigamente, os resultados do processamento de imagens que eram as informações de maior interesse da VC, eram dados tratados que podiam ser avaliados e aplicados em modelos estatísticos, possibilitando a análise e resolução do problema. 
 
 Com o surgimento de outros paradigmas, todas estas etapas que eram tratadas separadamente, com técnicas e softwares diferentes, passaram a ser tratadas dentro de um único sistema, utilizando modelos de aprendizado de máquina, como as redes neurais. Nesta nova abordagem, as imagens brutas também podem ser vistas como entradas diretas das aplicações. Por esta razão, tanto a Visão Computacional quanto o Aprendizado de Máquina tem as suas fronteiras na Figura \@ref(fig:capitulos) demarcando do início ao fim todos os processos.    
 
@@ -93,40 +93,14 @@ Essa etapa busca realizar mudanças e ajustes na imagem visando melhorar seu uso
 knitr::include_graphics(rep('imagens/05-filtros/placaEletronicaMediana.png'))
 ```
 
-- Segmentação
-
-Nessa etapa, as informações de interesse são extraídas da imagem, geralmente, pela detecção de descontinuidades (bordas) ou de similaridades na imagem [@pedrini2008, p. 4] como abordaremos no Capítulo [Segmentação](#segmentacao). Cada método abordado dentro da segmentação tem uma finalidade mais específica, buscando separar determinado elemento, partes ou objeto da imagem, por exemplo, na Figura \@ref(fig:cannyEOriginal)  está o resultado de detecção de bordas pelo método de Canny descrito no Capítulo [Segmentação](#segmentacao). 
-
-(ref:cannyEOriginal) Resultado final da detecção de bordas de Canny. (a) Imagem Original. (b) Resultado da detecção de borda - Com o método Canny entre outros apresentados no Capítulo [Segmentação](#segmentacao) é possível partir de uma imagem como em (a) e determinar as bordas, tendo como resultado (b).
-
-```{r cannyEOriginal, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:cannyEOriginal)', fig.align='center', out.width='60%'}
-knitr::include_graphics(rep('imagens/01-introducao/cannyEOriginal.png'))
-```
-
-Ao individualizar estes componentes da imagem por meio de diferentes detectores, como na Figura \@ref(fig:doghubble2) em que se utilizou um detector de Blob, as informações assumem um formato mais adequado para o processamento computacional. 
-
-(ref:doghubble2) Resultado da detecção de *blobs* com DoG para identificação de estrelas - Outros detectores no Capítulo [Segmentação](#segmentacao) podem identificar pontos, linhas, quinas, círculos, e objetos de outros formatos como estas estrelas.
-
-```{r doghubble2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:doghubble2)', fig.align='center', out.width='35%'}
-knitr::include_graphics(rep('imagens/06-segmentacao/dog_hubble.jpg'))
-```
-
-Outro exemplo da separação de elementos de uma imagem também está no Capítulo [Separação de Fundo](#separacaoFundo), em que modelos são utilizados para detectar o que é o *background*, ou plano de fundo, e o que é o objeto de interesse (*foreground*) como na Figura \@ref(fig:indoorBGmodeling2).
-
-(ref:indoorBGmodeling2) As imagens A, B, ..., E são os *frames* capturados por uma câmera em um ambiente interno. As imagens F, G e H são os *backgrounds* estimados. E as imagens I, J e K são os *foregrounds* produzidos, as detecções de movimento estimadas. Adaptado de [@nixon2019feature, p. 435] e [@nixon2019feature, p. 436].
-
-```{r indoorBGmodeling2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:indoorBGmodeling2)', fig.align='center', out.width='50%'}
-knitr::include_graphics(rep('imagens/08-modelagemBackground/indoorBGmodeling.png'))
-```
-
 - Análise 
 
-À parte de Análise atribuímos todos os processos que fazem uso da informação visual para compor um sistema de aplicação na área de Visão Computacional. Atualmente é mais comum ver estes processos englobados dentro de modelos de aprendizado de máquina mais genéricos como em redes neurais, capazes por exemplo, de classificar, identificar e rastrear objetos em diferentes situações. No Capítulo [Deep Learning em Visão Computacional](#deepLearning), assim como na Figura \@ref(fig:differentscnn2) é possível se ter uma pequena noção de como as redes neurais, em particular as redes convolucionais (CNN), enxergam as imagens e como desagregam suas informações para disponibilizar resultados satisfatórios no campo da VC. 
+À parte de Análise atribuímos todos os processos que fazem uso da informação visual para compor um sistema de aplicação na área de Visão Computacional. Atualmente é mais comum ver estes processos englobados dentro de modelos de aprendizado de máquina mais genéricos como em redes neurais, capazes por exemplo, de classificar, identificar e rastrear objetos em diferentes situações. No Capítulo [Deep Learning em Visão Computacional](#deepLearning), assim como na Figura \@ref(fig:exemploMLP) é possível se ter uma pequena noção de como as redes neurais, em particular as redes multicamadas de perceptrons (MLP), enxergam as imagens e como desagregam suas informações para disponibilizar resultados satisfatórios no campo da VC. 
 
-(ref:differentscnn2) Diferentes CNN’s e seus mapas de características em diferentes camadas - Na primeira coluna temos as características aprendidas por uma rede especializada no trabalho com rostos humanos, na segunda coluna com carros, na terceira com elefantes e na quarta com cadeiras [@elgendy2020, p.253]
+(ref:exemploMLP) Aplicação das Redes Neurais na Visão Computacional - Utilização das redes multicamadas de perceptrons para classificar dígitos de números em imagens [@img:exemploMLP]
 
-```{r differentscnn2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:differentscnn2)', fig.align='center', out.width='80%'}
-knitr::include_graphics(rep('imagens/07-deepLearning/differentscnn.png'))
+```{r exemploMLP, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:exemploMLP)', fig.align='center', out.width='80%'}
+knitr::include_graphics(rep('imagens/01-introducao/exemploMLP.jpg'))
 ```
 
 
