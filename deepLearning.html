@@ -567,7 +567,7 @@ Figura 7.13: Curva de custo no treinamento com 30 épocas e 50000 imagens.
 Figura 7.14: Curva de custo no treinamento com 100 épocas e 1000 imagens.
 </p>
 </div>
-<p>No fim do treinamento, as duas redes apresentaram erros na mesma ordem de grandeza, mas a capacidade de reconhecer números é bem diferente entre as duas. Esta diferença pode ser percebida ao comparar os gráficos de acurácia (Figuras <a href="deepLearning.html#fig:acur30">7.15</a> e <a href="deepLearning.html#fig:acur100">7.16</a>) considerando tanto os dados de treinamento quanto os de validação. O resultado do treinamento com todo o conjunto de dados mostra que a acurácia da rede para os dados de validação é bem próxima do resultado para os valores de treinamento, uma diferença de <span class="math inline">\(1\text{%}\)</span>. Já para a situação que utilizou apenas 1000 dados de treinamento, as curvas de acurácia para os dados de validação e de treinamento estão mais afastadas, apresentando uma diferença próxima de <span class="math inline">\(14\text{%}\)</span>.</p>
+<p>No fim do treinamento, as duas redes apresentaram erros na mesma ordem de grandeza, mas a capacidade de reconhecer números é bem diferente entre as duas. Esta diferença pode ser percebida ao comparar os gráficos de acurácia (Figuras <a href="deepLearning.html#fig:acur30">7.15</a> e <a href="deepLearning.html#fig:acur100">7.16</a>) considerando tanto os dados de treinamento quanto os de validação. O resultado do treinamento com todo o conjunto de dados mostra que a acurácia da rede para os dados de validação é bem próxima do resultado para os valores de treinamento, uma diferença de <span class="math inline">\(1\%\)</span>. Já para a situação que utilizou apenas 1000 dados de treinamento, as curvas de acurácia para os dados de validação e de treinamento estão mais afastadas, apresentando uma diferença próxima de <span class="math inline">\(14\%\)</span>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:acur30"></span>
 <img src="imagens/07-deepLearning/acuracia_30.jpg" alt="Curvas de acurácia para rede treinada com \(30\) épocas e \(1000\) imagens." width="70%" />
@@ -607,13 +607,13 @@ Figura 7.16: Curvas de acurácia para rede treinada com <span class="math inline
 \tag{7.16}\]</span></p>
 <p>Como podemos perceber observando as duas equações, essas operações são bem simples, sendo basicamente uma soma de produtos. Na Figura <a href="deepLearning.html#fig:cnnconv">7.17</a>, temos uma representação de um passo da convolução, onde podemos observar a seguinte operação:</p>
 <p><span class="math display" id="eq:exemploConvolucao">\[
-\text{w}\text{*f}\left(0,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,0+t\right)\,\text{=}\,\\
-\text{+w}\left(-1,-1\right)\text{f}\left(-1,-1\right)\text{+w}\left(-1,0\right)\text{f}\left(-1,0\right)\text{+w}\left(-1,1\right)\text{f}\left(-1,1\right)\\
-\text{+w}\left(0,-1\right)\text{f}\left(0,-1\right)\text{+w}\left(0,0\right)\text{f}\left(0,0\right)\text{+w}\left(0,1\right)\text{f}\left(0,1\right)\\
-\text{+w}\left(1,-1\right)\text{f}\left(1,-1\right)\text{+w}\left(0,1\right)\text{f}\left(0,-1\right)\text{+w}\left(1,1\right)\text{f}\left(-1,-1\right)\\
-=\,1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
-+2\cdot0+0\cdot2+\left(-2\right)\cdot1\\
-+1\cdot0+0\cdot9+\left(-1\right)\cdot3\\
+\text{w}\text{*f}\left(0,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,0+t\right)\,\text{=}\,
+\text{+w}\left(-1,-1\right)\text{f}\left(-1,-1\right)\text{+w}\left(-1,0\right)\text{f}\left(-1,0\right)\text{+w}\left(-1,1\right)\text{f}\left(-1,1\right)
+\text{+w}\left(0,-1\right)\text{f}\left(0,-1\right)\text{+w}\left(0,0\right)\text{f}\left(0,0\right)\text{+w}\left(0,1\right)\text{f}\left(0,1\right)
+\text{+w}\left(1,-1\right)\text{f}\left(1,-1\right)\text{+w}\left(0,1\right)\text{f}\left(0,-1\right)\text{+w}\left(1,1\right)\text{f}\left(-1,-1\right)
+=\,1\cdot0+0\cdot0+\left(-1\right)\cdot0
++2\cdot0+0\cdot2+\left(-2\right)\cdot1
++1\cdot0+0\cdot9+\left(-1\right)\cdot3
 =0\,-2-3\,=\,-5
 \tag{7.17}
 \]</span></p>
@@ -734,7 +734,7 @@ Figura 7.25: Rede Convolucional LeNet - A entrada é uma imagem de um número es
 </div>
 <p>A rede LeNet foi uma das primeiras CNN’s que demonstrou potencial de aplicação em visão computacional. A rede foi criada por Yann LeCun em 1998 com propósito de reconhecimento de números manuscritos. A LeNet foi posteriormente adaptada para reconhecer dígitos para os depósitos em máquinas ATM, e ainda existem caixas eletrônicos que executam o código desenvolvido por Yann e seu colega Leon Bottou <span class="citation">[<a href="#ref-zhang2020dive" role="doc-biblioref">38</a>, p. 248]</span>. A rede também foi amplamente utilizada para reconhecimento de dígitos do dataset do MNIST <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 449]</span>, este dataset foi abordado no Tópico <a href="deepLearning.html#backpropagation">Backpropagation</a>.</p>
 <p>Na Figura <a href="deepLearning.html#fig:lenet">7.25</a>, consideramos como entrada uma imagem padrão do MNIST, de tamanho <span class="math inline">\(28 \text{ x } 28\)</span> pixels e com um canal em escala de cinza. No esquema geral da rede LeNet (Figura <a href="deepLearning.html#fig:lenet2">7.26</a>), temos uma visão mais clara da combinação das camadas, em que após a camada de entrada existem duas camadas convolucionais, intercaladas com duas camadas de <em>pooling</em> e na ponta três camadas totalmente conectadas.</p>
-<p>Cada camada de convolução utiliza um filtro <span class="math inline">\(5 \text{ x } 5\)</span> e uma <em>função de ativação sigmóide</em>. A primeira camada de convolução tem seis canais ou mapas, enquanto a segunda tem 16. A operação de <em>pooling</em> envolve um filtro <span class="math inline">\(2 \text{ x } 2\)</span> que calcula a <em>média</em>, por isso é identificada como “AvgPool”, e utiliza <span class="math inline">\(\text{stride}=2\)</span> para que cada mapa da camada anterior tenha uma redução pela metade ao longo da largura e da altura, descartando <span class="math inline">\(75 \text{%}\)</span> das ativações. O tamanho das três camadas totalmente conectadas (<em>fully conected</em>) são respectivamente, 120, 84, e 10. A última camada, “FC(10)”, corresponde ao número possível de classes, neste caso, 10 em razão dos dígitos de 0 à 9. A função de ativação na última camada é uma <em>função gaussiana</em>.</p>
+<p>Cada camada de convolução utiliza um filtro <span class="math inline">\(5 \text{ x } 5\)</span> e uma <em>função de ativação sigmóide</em>. A primeira camada de convolução tem seis canais ou mapas, enquanto a segunda tem 16. A operação de <em>pooling</em> envolve um filtro <span class="math inline">\(2 \text{ x } 2\)</span> que calcula a <em>média</em>, por isso é identificada como “AvgPool”, e utiliza <span class="math inline">\(\text{stride}=2\)</span> para que cada mapa da camada anterior tenha uma redução pela metade ao longo da largura e da altura, descartando <span class="math inline">\(75\%\)</span> das ativações. O tamanho das três camadas totalmente conectadas (<em>fully conected</em>) são respectivamente, 120, 84, e 10. A última camada, “FC(10)”, corresponde ao número possível de classes, neste caso, 10 em razão dos dígitos de 0 à 9. A função de ativação na última camada é uma <em>função gaussiana</em>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:lenet2"></span>
 <img src="imagens/07-deepLearning/lenet2.png" alt="Esquema geral das camadas na rede LeNet - Esquema da rede LeNet com a sequência de camadas convolucionais (“Conv”), pooling (“AvgPool”) e camadas totalmente conectadas (“FC”) [38, p. 252]." width="30%" />
@@ -854,25 +854,23 @@ Figura 7.26: Esquema geral das camadas na rede LeNet - Esquema da rede LeNet com
 <p>O parâmetro C identifica o número de canais ou mapas da camada e o termo H e W, a altura e largura do elemento de saída da camada, respectivamente. Como identificado na Equação <a href="deepLearning.html#eq:qtdMemoria">(7.19)</a> e na Tabela <a href="deepLearning.html#tab:tablelenet">7.1</a>, a quantidade aproximada de memória para a primeira camada seria <span class="math inline">\(18 \text{ kB}\)</span>, e no total para a rede <span class="math inline">\(33 \text{ kB}\)</span>. As primeiras camadas tendem a precisar de mais memória devido a maior dimensão (W e H) dos canais <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">39</a>]</span>.</p>
 <p>Aumentar o número de camadas também exige que mais parâmetros sejam considerados, o que afeta tanto o tempo de treinamento quanto o seu desempenho, pois se não ocorrer uma otimização adequada dos parâmetros pode ser maior a probabilidade de ocorrer <em>overfitting</em> <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">6</a>, p. 230]</span>. Para determinar aproximadamente a quantidade de parâmetros relacionados com cada camada considerou-se os pesos relacionados aos filtros de cada mapa, calculados como o produto entre as dimensões do filtro (<span class="math inline">\(\text{K x K}\)</span>), a quantidade de canais do elemento de entrada e a quantidade de canais de saída da camada <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">39</a>]</span>. Considerou-se também como parâmetros, os bias associados a cada canal de saída. Nas camadas totalmente conectadas, o número de parâmetros é determinado como produto da quantidade de elementos de entrada com a quantidade de elementos da saída da camada somado com o número de bias. A Equação <a href="deepLearning.html#eq:calcConvInfos">(7.20)</a> exemplifica os cálculos para a primeira camada de convolução:</p>
 <!-- $$ não funcionava, usei begin/end equation mesmo -->
-<p><span class="math display" id="eq:calcConvInfos">\[\begin{equation}
+<p><span class="math display" id="eq:calcConvInfos">\[
 \begin{split}
   \text{Número de Pesos} &amp;= \text{C}_\text{saída} \text{ x } \text{C}_\text{saída} \text{ x } \text{K} \text{ x } \text{K}\\ 
   &amp;= 6\text{ x }1 \text{ x } 5 \text{ x } 5\\
   &amp;= 150\\\\
-
   \text{Número de Bias} &amp;= 6\\\\
-
   \text{Número de parâmetros} &amp;= \text{Número de Pesos} + \text{Número de parâmetros}\\
   &amp;= 150 + 6\\
-  &amp; = 156
+  &amp;= 156
 \end{split}
 \tag{7.20}
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Considerando que o filtro na primeira camada é de tamanho <span class="math inline">\(5\text{ x }5\)</span>, que a entrada só apresenta um canal e que são 6 canais na camada de convolução, a primeira camada de convolução considera aproximadamente 156 parâmetros. Na Tabela <a href="deepLearning.html#tab:tablelenet">7.1</a>, também está a quantidade de parâmetros relacionados com cada camada e o total aproximado de parâmetros para a rede LeNet é 61706. À medida que aumenta o número de canais na camada de convolução mais parâmetros são necessários. De maneira geral, a maior parte dos parâmetros se deve às camadas totalmente conectadas devido ao maior número de conexões <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">39</a>]</span>.</p>
 </div>
 <div id="alexnet" class="section level4">
 <h4><span class="header-section-number">7.2.3.2</span> AlexNet</h4>
-<p>Atualmente existem várias arquiteturas de redes CNN’s utilizadas para aplicações na visão computacional. A evolução destas redes pode ser compreendida a partir dos resultados da competição <em>ImageNet Large Scale Visual Recognition Challenge</em> (ILSVRC). O principal objetivo da competição era avaliar algoritmos para detecção de objetos e classificação de imagens. A primeira edição da competição, em 2010, envolvia 1,2 milhões de imagens para o treinamento, sendo 1000 categorias de objetos. Nos dois primeiros anos de competição as redes CNN’s ainda não tinham sido as primeiras colocadas, porém a partir de 2012 os modelos CNN’s começaram a liderar a competição <span class="citation">[<a href="#ref-imagenet2020" role="doc-biblioref">40</a>]</span>. O progresso das redes pode ser avaliado com base na taxa de erro dos modelos que em sete anos caiu de aproximadamente <span class="math inline">\(26\text{%}\)</span>, no segundo ano da competição, para <span class="math inline">\(2.3\text{%}\)</span> na última edição da competição em 2017 <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">39</a>]</span>, como apresentado no gráfico da Figura <a href="deepLearning.html#fig:imagenet">7.27</a>.</p>
+<p>Atualmente existem várias arquiteturas de redes CNN’s utilizadas para aplicações na visão computacional. A evolução destas redes pode ser compreendida a partir dos resultados da competição <em>ImageNet Large Scale Visual Recognition Challenge</em> (ILSVRC). O principal objetivo da competição era avaliar algoritmos para detecção de objetos e classificação de imagens. A primeira edição da competição, em 2010, envolvia 1,2 milhões de imagens para o treinamento, sendo 1000 categorias de objetos. Nos dois primeiros anos de competição as redes CNN’s ainda não tinham sido as primeiras colocadas, porém a partir de 2012 os modelos CNN’s começaram a liderar a competição <span class="citation">[<a href="#ref-imagenet2020" role="doc-biblioref">40</a>]</span>. O progresso das redes pode ser avaliado com base na taxa de erro dos modelos que em sete anos caiu de aproximadamente <span class="math inline">\(26\%\)</span>, no segundo ano da competição, para <span class="math inline">\(2.3\%\)</span> na última edição da competição em 2017 <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">39</a>]</span>, como apresentado no gráfico da Figura <a href="deepLearning.html#fig:imagenet">7.27</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:imagenet"></span>
 <img src="imagens/07-deepLearning/imagenet.png" alt="Taxa de erro dos modelos de melhor desempenho na competição ImageNet - O desempenho dos modelos na competição ImageNet Large Scale Visual Recognition Challenge (ILSVRC) era avaliado principalmente pela taxa de erro. No gráfico são apresentados os modelos que venceram em cada edição da competição, que ocorreu de 2010 à 2017, e também redes que se tornaram populares como a VGG [39]." width="100%" />
@@ -880,7 +878,7 @@ Figura 7.26: Esquema geral das camadas na rede LeNet - Esquema da rede LeNet com
 Figura 7.27: Taxa de erro dos modelos de melhor desempenho na competição ImageNet - O desempenho dos modelos na competição ImageNet Large Scale Visual Recognition Challenge (ILSVRC) era avaliado principalmente pela taxa de erro. No gráfico são apresentados os modelos que venceram em cada edição da competição, que ocorreu de 2010 à 2017, e também redes que se tornaram populares como a VGG <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">39</a>]</span>.
 </p>
 </div>
-<p>Para conhecer um pouco dos diferentes modelos de redes CNN’s e perceber algumas diferenças, e estruturas que tiveram bom desempenho e permaneceram em modelos mais atuais, destacaremos a seguir quatro arquiteturas que ficaram bastante conhecidas e tiveram destaque na competição. A rede AlexNet foi a primeira CNN que venceu a competição ImageNet, no ano de 2012 com uma taxa de erro de <span class="math inline">\(16.4\text{%}\)</span>. A rede VGG não liderou a competição em 2014, porém é um dos modelos com bastante popularidade e que apresentou uma estrutura em blocos estabelecidos com base em regras. No ano de 2014, a CNN GoogLeNet que venceu a competição foi o ponto de partida para as redes <em>Inceptions</em>. A rede Residual (ResNet) em 2015 além de aproveitar as técnicas de maior desempenho das outras redes também implementou uma abordagem que possibilitou aumentar para mais de 100 camadas.</p>
+<p>Para conhecer um pouco dos diferentes modelos de redes CNN’s e perceber algumas diferenças, e estruturas que tiveram bom desempenho e permaneceram em modelos mais atuais, destacaremos a seguir quatro arquiteturas que ficaram bastante conhecidas e tiveram destaque na competição. A rede AlexNet foi a primeira CNN que venceu a competição ImageNet, no ano de 2012 com uma taxa de erro de <span class="math inline">\(16.4\%\)</span>. A rede VGG não liderou a competição em 2014, porém é um dos modelos com bastante popularidade e que apresentou uma estrutura em blocos estabelecidos com base em regras. No ano de 2014, a CNN GoogLeNet que venceu a competição foi o ponto de partida para as redes <em>Inceptions</em>. A rede Residual (ResNet) em 2015 além de aproveitar as técnicas de maior desempenho das outras redes também implementou uma abordagem que possibilitou aumentar para mais de 100 camadas.</p>
 <p>A rede AlexNet foi desenvolvida por Alex Krizhevsky, Ilya Sutskever, e Geoffrey Hinton <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 450]</span>. Esta rede é bem semelhante a LeNet-5, porém apresenta mais camadas. Por ser uma rede mais profunda, exigindo maior quantidade de memória, a rede original precisou ser distribuída entre dois GPU’s de 3 GB de forma física <span class="citation">[<a href="#ref-krizhevsky2012" role="doc-biblioref">41</a>]</span>. Desta forma, a rede foi desenhada como na Figura <a href="deepLearning.html#fig:imagenet">7.27</a>, com uma estrutura de fluxo de dados duplo para que cada GPU recebesse metade do modelo.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:alexnet"></span>
@@ -1075,7 +1073,7 @@ Figura 7.31: Gráfico da evolução das redes neurais CNN’s - O desempenho das
 Figura 7.32: A estrutura geral da rede GoogLenet pode ser dividida em três partes: Parte A - Semelhante a AlexNet e LeNet, contém uma sequência de camadas convolucionais e pooling para reduzir as dimensões da imagem; Parte B - Módulos Inceptions separados por camadas <em>pooling</em>; Parte C - Camada de pooling global e uma Full Conect para classificação <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">6</a>, p. 224]</span>.
 </p>
 </div>
-<p>Outra técnica para tornar a rede mais eficiente foi incluir uma camada de <em>AvgPool</em> global antes da camada de classificação <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 455]</span>. Nos modelos CNN’s anteriores era comum incluir um <em>flattering</em> para converter os dados em um vetor, perdendo a informação espacial, para ser compatível com as camadas totalmente conectadas que faziam a classificação. Estas últimas camadas acabam sendo as responsáveis pela maior parte dos parâmetros. No modelo VGG-16, por exemplo, as 3 camadas totalmente conectadas geram aproximadamente <span class="math inline">\(123.6\)</span> milhões de parâmetros, quase <span class="math inline">\(90\text{%}\)</span> dos parâmetros totais <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">39</a>]</span>.</p>
+<p>Outra técnica para tornar a rede mais eficiente foi incluir uma camada de <em>AvgPool</em> global antes da camada de classificação <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 455]</span>. Nos modelos CNN’s anteriores era comum incluir um <em>flattering</em> para converter os dados em um vetor, perdendo a informação espacial, para ser compatível com as camadas totalmente conectadas que faziam a classificação. Estas últimas camadas acabam sendo as responsáveis pela maior parte dos parâmetros. No modelo VGG-16, por exemplo, as 3 camadas totalmente conectadas geram aproximadamente <span class="math inline">\(123.6\)</span> milhões de parâmetros, quase <span class="math inline">\(90\%\)</span> dos parâmetros totais <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">39</a>]</span>.</p>
 <p>Em vez de adotar o <em>flattering</em>, o GoogLenet utiliza um filtro de média de mesma dimensão do elemento de entrada, retornando a média dos mapas para cada posição do vetor. Como o vetor de saída já tem um tamanho reduzido é necessário incluir apenas uma camada totalmente conectada com as <span class="math inline">\(1000\)</span> classes. Como a camada de média global não precisa de parâmetros, e considerando que retorna um vetor <span class="math inline">\(1024\)</span>, são necessários aproximadamente <span class="math inline">\(1\)</span> milhão de parâmetros na camada totalmente conectada, <span class="math inline">\(100\)</span> vezes menos que na VGG <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">39</a>]</span>. Na última camada, assim como no VGG, associa-se uma ativação <em>Softmax</em>, enquanto nas camadas de convolução é a <em>ReLu</em>.</p>
 <p>Já foi comentado sobre a primeira parte e a última da rede GoogLenet, a seção intermediária que estudaremos inclui os módulos <em>Inceptions</em> que se tornaram elementos característicos das redes mais modernas intituladas <em>Inceptions</em>. Cada módulo se assemelha aos blocos do VGG, em que estão presentes algumas camadas convolucionais em sequência e na ponta uma camada <em>pooling</em>. No caso do VGG, viu-se que para reduzir o número de hiperparâmetros se fixou o tamanho dos filtros em <span class="math inline">\(3\text{ x }3\)</span>, e o parâmetro variável ficou sendo o número de camadas convolucionais. A ideia dos <em>Inceptions</em> (Figura <a href="deepLearning.html#fig:inceptionmodule">7.33</a>) é não se preocupar nem com tamanho dos filtros e nem com o número de camadas no módulo, pois cada módulo consiste em uma combinação de filtros de diferentes tamanhos arranjados de uma forma fixa <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">6</a>, p. 217]</span>.</p>
 
@@ -1101,7 +1099,7 @@ Figura 7.34: Arquitetura da rede GoogLenet com classificadores intermediários -
 </div>
 <div id="resnet" class="section level4">
 <h4><span class="header-section-number">7.2.3.5</span> ResNet</h4>
-<p>A Rede Neural Residual (<em>ResNet</em>) venceu a competição ImageNet em 2015 com uma taxa de erro de <span class="math inline">\(3.6 \text{% }\)</span>. A rede desenvolvida por um grupo de pesquisa da Microsoft inclui várias técnicas de otimização e regularização dos modelos anteriores, principalmente da GoogLenet. Enquanto o ponto característico da rede GoogLenet são os módulos <em>inceptions</em>, na ResNet as unidades residuais permitiram treinar redes ainda mais profundas. Entre os principais modelos da ResNet são encontradas redes com 50, 101, 152 camadas de pesos <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">6</a>, p. 230]</span>, mais que o dobro do número da GoogLenet com 22 camadas.</p>
+<p>A Rede Neural Residual (<em>ResNet</em>) venceu a competição ImageNet em 2015 com uma taxa de erro de <span class="math inline">\(3.6\%\)</span>. A rede desenvolvida por um grupo de pesquisa da Microsoft inclui várias técnicas de otimização e regularização dos modelos anteriores, principalmente da GoogLenet. Enquanto o ponto característico da rede GoogLenet são os módulos <em>inceptions</em>, na ResNet as unidades residuais permitiram treinar redes ainda mais profundas. Entre os principais modelos da ResNet são encontradas redes com 50, 101, 152 camadas de pesos <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">6</a>, p. 230]</span>, mais que o dobro do número da GoogLenet com 22 camadas.</p>
 <p>Da mesma forma que a GoogLenet, a rede <em>ResNet</em> pode ser divida em três partes, sendo que a primeira e a última parte seguem a arquitetura da GoogLenet, e as camadas intermediárias incluem as unidades residuais. As camadas de entrada que permitem uma redução considerável da dimensão da imagem incluem uma camada de convolução com 64 canais e filtros <span class="math inline">\(7\text{ x }7\)</span> de <span class="math inline">\(\text{stride}=2\)</span>, seguida por uma camada <span class="math inline">\(3\text{ x }3\)</span> de <em>MaxPooling</em> com <span class="math inline">\(\text{stride}=2\)</span>. A última parte da rede, a estrutura de classificação, apresenta as mesmas camadas da GoogLenet, a camada Global de <em>Pooling</em> média de dimensão 1024 e apenas uma camada totalmente conectada com 1000 unidades representando as classes. Lembrando que a substituição do processo de <em>flattering</em> pela média global permitiu reduzir a proporção de parâmetros nas últimas camadas.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:resnet"></span>
@@ -1340,16 +1338,16 @@ Figura 7.45: Comportamento da função erro <em>Triplet</em>. A função <em>Tri
 <p>[28] S. Russell e P. Norvig, “Artificial intelligence: a modern approach”, 2016.</p>
 </div>
 <div id="ref-haykin1999">
-<p>[29] H. Simon, <em>Redes Neurais: Princípios e prática</em>, 2º ed. São Paulo: Bookman, 1999.</p>
+<p>[29] H. Simon, <em>Redes Neurais: Principios e pratica</em>, 2º ed. São Paulo: Bookman, 1999.</p>
 </div>
 <div id="ref-img:neuronCS">
 <p>[30] cs231, “Cartoon drawing of a biological neuron”. 2021, [Online]. Disponível em: <a href="https://cs231n.github.io/neural-networks-1/">https://cs231n.github.io/neural-networks-1/</a>.</p>
 </div>
 <div id="ref-rateke1999">
-<p>[31] T. Rateke, “Técnicas Subsimbólicas: Redes Neurais”. LAPIX (Image Processing; Computer Graphics Lab)/Universidade Federal de Santa Catarina, Florianópolis, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/</a>.</p>
+<p>[31] T. Rateke, “Tecnicas Subsimbolicas: Redes Neurais”. LAPIX (Image Processing; Computer Graphics Lab) Universidade Federal de Santa Catarina, Florianopolis, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/</a>.</p>
 </div>
 <div id="ref-braga1998fundamentos">
-<p>[32] A. de P. BRAGA, A. Carvalho, e T. B. Ludemir, “Fundamentos de redes neurais artificiais”, <em>Rio de Janeiro: 11a Escola de Computaç ao</em>, 1998.</p>
+<p>[32] A. de P. BRAGA, A. Carvalho, e T. B. Ludemir, “Fundamentos de redes neurais artificiais”, <em>Rio de Janeiro: 11a Escola de Computação</em>, 1998.</p>
 </div>
 <div id="ref-nielsen2015">
 <p>[33] M. A. Nielsen, <em>Neural Networks and Deep Learning</em>. Determination Press, 2015.</p>
@@ -1358,7 +1356,7 @@ Figura 7.45: Comportamento da função erro <em>Triplet</em>. A função <em>Tri
 <p>[34] J. A. Herts, A. S. Krogh, e R. G. Palmer, <em>Introduction to the theory of neural computation</em>. New York: CRC Press, 2018.</p>
 </div>
 <div id="ref-geron2019">
-<p>[35] A. Géron, <em>Hands-on machine learning with Scikit-Learn, Keras, and TensorFlow: Concepts, tools, and techniques to build intelligent systems</em>. O’Reilly Media, 2019.</p>
+<p>[35] A. Geron, <em>Hands-on machine learning with Scikit-Learn, Keras, and TensorFlow: Concepts, tools, and techniques to build intelligent systems</em>. O’Reilly Media, 2019.</p>
 </div>
 <div id="ref-adrian2017">
 <p>[36] R. D. Adrian, “Deep Learning for Computer Vision with Python”. PyImageSearch, 2017.</p>
@@ -1391,7 +1389,7 @@ Figura 7.45: Comportamento da função erro <em>Triplet</em>. A função <em>Tri
 <p>[45] G. Developers, “Guia para iniciantes da Cloud TPU”. Website da Google Cloud, 2021, [Online]. Disponível em: <a href="https://cloud.google.com/tpu/docs/beginners-guide?hl=pt-br">https://cloud.google.com/tpu/docs/beginners-guide?hl=pt-br</a>.</p>
 </div>
 <div id="ref-wangenheim2018">
-<p>[46] A. von Wangenheim, “Deep Learning: Introdução ao Novo Coneccionismo”. LAPIX (Image Processing; Computer Graphics Lab)/Universidade Federal de Santa Catarina, Florianópolis, 2018, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/</a>.</p>
+<p>[46] A. von Wangenheim, “Deep Learning: Introdução ao Novo Coneccionismo”. LAPIX (Image Processing; Computer Graphics Lab) Universidade Federal de Santa Catarina, Florianopolis, 2018, [Online]. Disponível em: <a href="http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/">http://www.lapix.ufsc.br/ensino/reconhecimento-de-padroes/tecnicas-sub-simbolicas-redes-neurais/</a>.</p>
 </div>
 <div id="ref-tensorflow2020">
 <p>[47] G. Developers, “Versões da API TensorFlow”. Website do TensorFlow, 2020, [Online]. Disponível em: <a href="https://www.tensorflow.org/versions">https://www.tensorflow.org/versions</a>.</p>
@@ -1400,16 +1398,16 @@ Figura 7.45: Comportamento da função erro <em>Triplet</em>. A função <em>Tri
 <p>[48] J. M. Walker, <em>Artificial Neural Networks</em>, 3º ed. Nova Iorque, Estados Unidos: Humana/Springer Nature, 2021.</p>
 </div>
 <div id="ref-chopra2005">
-<p>[49] S. Chopra, R. Hadsell, e Y. LeCun, “Learning a similarity metric discriminatively, with application to face verification”, in <em>2005 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR’05)</em>, 2005, vol. 1, p. 539–546.</p>
+<p>[49] S. Chopra, R. Hadsell, e Y. LeCun, “Learning a similarity metric discriminatively, with application to face verification”, in <em>2005 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR05)</em>, 2005, vol. 1, p. 539–546.</p>
 </div>
 <div id="ref-taigman2014">
-<p>[50] Y. Taigman, M. Yang, M. Ranzato, e L. Wolf, “Deepface: Closing the gap to human-level performance in face verification”, in <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em>, 2014, p. 1701–1708.</p>
+<p>[50] Y. Taigman, M. Yang, M. A. Ranzato, e L. Wolf, “Deepface: Closing the gap to human-level performance in face verification”, in <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em>, 2014, p. 1701–1708.</p>
 </div>
 <div id="ref-sabri2018">
 <p>[51] M. Sabri e T. Kurita, “Facial expression intensity estimation using Siamese and triplet networks”, <em>Neurocomputing</em>, vol. 313, p. 143–154, 2018.</p>
 </div>
 <div id="ref-lambda2019">
-<p>[52] H. Lamba, “One Shot Learning with Siamese Networks using Keras”. Website Towards Data Science, Florianópolis, 2019, [Online]. Disponível em: <a href="https://towardsdatascience.com/one-shot-learning-with-siamese-networks-using-keras-17f34e75bb3d">https://towardsdatascience.com/one-shot-learning-with-siamese-networks-using-keras-17f34e75bb3d</a>.</p>
+<p>[52] H. Lamba, “One Shot Learning with Siamese Networks using Keras”. Website Towards Data Science, Florian0polis, 2019, [Online]. Disponível em: <a href="https://towardsdatascience.com/one-shot-learning-with-siamese-networks-using-keras-17f34e75bb3d">https://towardsdatascience.com/one-shot-learning-with-siamese-networks-using-keras-17f34e75bb3d</a>.</p>
 </div>
 <div id="ref-zhang2018">
 <p>[53] H. Zhang, W. Ni, W. Yan, J. Wu, H. Bian, e D. Xiang, “Visual tracking using Siamese convolutional neural network with region proposal and domain specific updating”, <em>Neurocomputing</em>, vol. 275, p. 2645–2655, 2018.</p>
@@ -1424,7 +1422,7 @@ Figura 7.45: Comportamento da função erro <em>Triplet</em>. A função <em>Tri
 <p>[56] Q. Wang, J. Gao, e Y. Yuan, “Embedding structured contour and location prior in siamesed fully convolutional networks for road detection”, <em>IEEE Transactions on Intelligent Transportation Systems</em>, vol. 19, nº 1, p. 230–241, 2017.</p>
 </div>
 <div id="ref-gonzalez2019">
-<p>[57] J.-Á. González, E. Segarra, F. Garcı́a-Granada, E. Sanchis, e L.-F. Hurtado, “Siamese hierarchical attention networks for extractive summarization”, <em>Journal of Intelligent &amp; Fuzzy Systems</em>, vol. 36, nº 5, p. 4599–4607, 2019.</p>
+<p>[57] J.-A. Gonzalez, E. Segarra, F. Garcia-Granada, E. Sanchis, e L.-F. Hurtado, “Siamese hierarchical attention networks for extractive summarization”, <em>Journal of Intelligent &amp; Fuzzy Systems</em>, vol. 36, nº 5, p. 4599–4607, 2019.</p>
 </div>
 <div id="ref-das2016">
 <p>[58] A. Das, H. Yenala, M. Chinnakotla, e M. Shrivastava, “Together we stand: Siamese networks for similar question retrieval”, in <em>Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</em>, 2016, p. 378–387.</p>
@@ -1433,10 +1431,10 @@ Figura 7.45: Comportamento da função erro <em>Triplet</em>. A função <em>Tri
 <p>[59] J. Bromley, I. Guyon, Y. LeCun, E. Säckinger, e R. Shah, “Signature verification using a" siamese" time delay neural network”, <em>Advances in neural information processing systems</em>, vol. 6, p. 737–744, 1993.</p>
 </div>
 <div id="ref-gomez2019">
-<p>[60] R. Gómez, “Understanding Ranking Loss, Contrastive Loss, Margin Loss, Triplet Loss, Hinge Loss and all those confusing names”. Blog Raúl Gómez, 2019, [Online]. Disponível em: <a href="https://gombru.github.io/2019/04/03/ranking_loss/">https://gombru.github.io/2019/04/03/ranking_loss/</a>.</p>
+<p>[60] R. Gomez, “Understanding Ranking Loss, Contrastive Loss, Margin Loss, Triplet Loss, Hinge Loss and all those confusing names”. Blog Raul Gomez, 2019, [Online]. Disponível em: <a href="https://gombru.github.io/2019/04/03/ranking_loss/">https://gombru.github.io/2019/04/03/ranking_loss/</a>.</p>
 </div>
 <div id="ref-hadsell2006">
-<p>[61] R. Hadsell, S. Chopra, e Y. LeCun, “Dimensionality reduction by learning an invariant mapping”, in <em>2006 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR’06)</em>, 2006, vol. 2, p. 1735–1742.</p>
+<p>[61] R. Hadsell, S. Chopra, e Y. LeCun, “Dimensionality reduction by learning an invariant mapping”, in <em>2006 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR06)</em>, 2006, vol. 2, p. 1735–1742.</p>
 </div>
 <div id="ref-schroff2015">
 <p>[62] F. Schroff, D. Kalenichenko, e J. Philbin, “Facenet: A unified embedding for face recognition and clustering”, in <em>Proceedings of the IEEE conference on computer vision and pattern recognition</em>, 2015, p. 815–823.</p>

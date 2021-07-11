@@ -377,15 +377,16 @@ Figura 5.4: Ilustração de correlação e convolução bidimensional<span class
 <div id="definção-matemática-da-convolução" class="section level3">
 <h3><span class="header-section-number">5.1.1</span> Definção matemática da convolução</h3>
 <p>Vamos explorar um pouco das notações matemáticas utilizadas para representar a convolução e a correlação, pois, assim, também poderemos consolidar a idéia de como são tão similares. Como dito no início desta seção, geralmente, a convolução é identificada por <span class="math inline">\(*\)</span> e a correlação por <span class="math inline">\(\star\)</span>. A correlação em duas dimensões segue a Equação <a href="filtros.html#eq:correlacaoEq">(5.1)</a></p>
-<p><span class="math display" id="eq:correlacaoEq">\[g(x,y) = w(x,y)\star f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x+s,y+t)
+<p><span class="math display" id="eq:correlacaoEq">\[g(x,y) = w(x,y)\star f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\ w(s,t)f(x+s,y+t)
 \tag{5.1}\]</span></p>
 <p>em que <span class="math inline">\(w\)</span> é nosso <span class="math inline">\(kernel\)</span> e <span class="math inline">\(f\)</span> nossa imagem. Percebe-se que ambas são funções de duas variáveis, <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>, pois estamos trabalhando em duas dimensões.
 Os limites dos somatórios são dados por <span class="math inline">\(a=(m-1)/2\)</span> e <span class="math inline">\(b=(n-1)/2\)</span> e o que essa função faz é andar em cada posição da imagem, ou seja, <span class="math inline">\((x,y)\)</span>, e substituir o pixel atual pela soma de produtos entre os valores do <span class="math inline">\(kernel\)</span> e os valores dos pixels da imagem. Já a convolução tem uma equação bem similar, sendo diferente apenas pelos sinais negativos em <span class="math inline">\(f\)</span>, o que evidência a rotação do <span class="math inline">\(kernel\)</span>. Pode-se notar que os sinais inversos estão em <span class="math inline">\(f\)</span> e não em <span class="math inline">\(w\)</span>. Segundo Gonzalez<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 98]</span>, isso é usado para fins de simplicidade de notação e não alteram o resultado.</p>
-<p><span class="math display">\[g(x,y) = w(x,y)*f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\   w(s,t)f(x-s,y-t)\]</span>.</p>
+<p><span class="math display">\[g(x,y) = w(x,y)*f(x,y) = \sum_{s=-a}^{a}\sum_{t=-b}^{b}\ w(s,t)f(x-s,y-t)\]</span>.</p>
 <p>Uma das melhores maneiras de entender bem as equações é através de um exemplo prático. A seguir, um exemplo passo-a-passo de correlação:</p>
 <p>Etapa 1 de 9</p>
-<p><img src="imagens/05-filtros/conv_1.png" width="55%" style="display: block; margin: auto;" />
-<span class="math display">\[
+<p><img src="imagens/05-filtros/conv_1.png" width="55%" style="display: block; margin: auto;" /></p>
+<p><span class="math display">\[
+\begin{gathered}
 \text{w}\text{*f}\left(0,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,0+t\right)\,\text{=}\,\\
 \text{+w}\left(-1,-1\right)\text{f}\left(-1,-1\right)\text{+w}\left(-1,0\right)\text{f}\left(-1,0\right)\text{+w}\left(-1,1\right)\text{f}\left(-1,1\right)\\
 \text{+w}\left(0,-1\right)\text{f}\left(0,-1\right)\text{+w}\left(0,0\right)\text{f}\left(0,0\right)\text{+w}\left(0,1\right)\text{f}\left(0,1\right)\\
@@ -394,102 +395,119 @@ Os limites dos somatórios são dados por <span class="math inline">\(a=(m-1)/2\
 +2\cdot0+0\cdot2+\left(-2\right)\cdot1\\
 +1\cdot0+0\cdot9+\left(-1\right)\cdot3\\
 =0\,-2-3\,=\,-5
+\end{gathered}
 \]</span></p>
 <p>Etapa 2 de 9</p>
-<p><img src="imagens/05-filtros/conv_2.png" width="55%" style="display: block; margin: auto;" />
-<span class="math display">\[
-\text{w}\text{*f}\left(0,1\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,1+t\right)\,\text{=}\,\\
-\text{+w}\left(-1,-1\right)\text{f}\left(-1,0\right)\text{+w}\left(-1,0\right)\text{f}\left(-1,1\right)\text{+w}\left(-1,1\right)\text{f}\left(-1,2\right)\\
-\text{+w}\left(0,-1\right)\text{f}\left(0,0\right)\text{+w}\left(0,0\right)\text{f}\left(0,1\right)\text{+w}\left(0,1\right)\text{f}\left(0,2\right)\\
-\text{+w}\left(1,-1\right)\text{f}\left(1,0\right)\text{+w}\left(1,0\right)\text{f}\left(1,1\right)\text{+w}\left(1,1\right)\text{f}\left(1,2\right)\\
-=\,1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
-+2\cdot2+0\cdot1+\left(-2\right)\cdot0\\
-+1\cdot9+0\cdot3+\left(-1\right)\cdot1\\
+<p><img src="imagens/05-filtros/conv_2.png" width="55%" style="display: block; margin: auto;" /></p>
+<p><span class="math display">\[
+\begin{gathered}
+\text{w}\text{*f}\left(0,1\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,1+t\right)\,\text{=}\,
+\text{+w}\left(-1,-1\right)\text{f}\left(-1,0\right)\text{+w}\left(-1,0\right)\text{f}\left(-1,1\right)\text{+w}\left(-1,1\right)\text{f}\left(-1,2\right)
+\text{+w}\left(0,-1\right)\text{f}\left(0,0\right)\text{+w}\left(0,0\right)\text{f}\left(0,1\right)\text{+w}\left(0,1\right)\text{f}\left(0,2\right)
+\text{+w}\left(1,-1\right)\text{f}\left(1,0\right)\text{+w}\left(1,0\right)\text{f}\left(1,1\right)\text{+w}\left(1,1\right)\text{f}\left(1,2\right)
+=\,1\cdot0+0\cdot0+\left(-1\right)\cdot0
++2\cdot2+0\cdot1+\left(-2\right)\cdot0
++1\cdot9+0\cdot3+\left(-1\right)\cdot1
 =0\,+4+8=\,12
+\end{gathered}
 \]</span></p>
 <p>Etapa 3 de 9</p>
 <p><img src="imagens/05-filtros/conv_3.png" width="55%" style="display: block; margin: auto;" />
 <span class="math display">\[
-\text{w}\text{*f}\left(0,2\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,2+t\right)\,\text{=}\,\\
-\text{+w}\left(-1,-1\right)\text{f}\left(-1,1\right)\text{+w}\left(-1,0\right)\text{f}\left(-1,2\right)\text{+w}\left(-1,1\right)\text{f}\left(-1,3\right)\\
-\text{+w}\left(0,-1\right)\text{f}\left(0,1\right)\text{+w}\left(0,0\right)\text{f}\left(0,2\right)\text{+w}\left(0,1\right)\text{f}\left(0,3\right)\\
-\text{+w}\left(1,-1\right)\text{f}\left(1,1\right)\text{+w}\left(1,0\right)\text{f}\left(1,2\right)\text{+w}\left(1,1\right)\text{f}\left(1,3\right)\\
-=\,1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
-+2\cdot1+0\cdot0+\left(-2\right)\cdot0\\
-+1\cdot3+0\cdot1+\left(-1\right)\cdot0\\
+\begin{gathered}
+\text{w}\text{*f}\left(0,2\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,2+t\right)\,\text{=}\,
+\text{+w}\left(-1,-1\right)\text{f}\left(-1,1\right)\text{+w}\left(-1,0\right)\text{f}\left(-1,2\right)\text{+w}\left(-1,1\right)\text{f}\left(-1,3\right)
+\text{+w}\left(0,-1\right)\text{f}\left(0,1\right)\text{+w}\left(0,0\right)\text{f}\left(0,2\right)\text{+w}\left(0,1\right)\text{f}\left(0,3\right)
+\text{+w}\left(1,-1\right)\text{f}\left(1,1\right)\text{+w}\left(1,0\right)\text{f}\left(1,2\right)\text{+w}\left(1,1\right)\text{f}\left(1,3\right)
+=\,1\cdot0+0\cdot0+\left(-1\right)\cdot0
++2\cdot1+0\cdot0+\left(-2\right)\cdot0
++1\cdot3+0\cdot1+\left(-1\right)\cdot0
 =0\,+2+3=\,5
+\end{gathered}
 \]</span></p>
 <p>Etapa 4 de 9</p>
 <p><img src="imagens/05-filtros/conv_4.png" width="55%" style="display: block; margin: auto;" />
 <span class="math display">\[
-\text{w}\text{*f}\left(1,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(1+s,0+t\right)\,\text{=}\,\\
-\text{+w}\left(-1,-1\right)\text{f}\left(0,-1\right)\text{+w}\left(-1,0\right)\text{f}\left(0,0\right)\text{+w}\left(-1,1\right)\text{f}\left(0,1\right)\\
-\text{+w}\left(0,-1\right)\text{f}\left(1,-1\right)\text{+w}\left(0,0\right)\text{f}\left(1,0\right)\text{+w}\left(0,1\right)\text{f}\left(1,1\right)\\
-\text{+w}\left(1,-1\right)\text{f}\left(2,-1\right)\text{+w}\left(1,0\right)\text{f}\left(2,0\right)\text{+w}\left(1,1\right)\text{f}\left(2,1\right)\\
-=\,1\cdot0+0\cdot2+\left(-1\right)\cdot1\\
-+2\cdot0+0\cdot9+\left(-2\right)\cdot3\\
-+1\cdot0+0\cdot5+\left(-1\right)\cdot4\\
+\begin{gathered}
+\text{w}\text{*f}\left(1,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(1+s,0+t\right)\,\text{=}\,
+\text{+w}\left(-1,-1\right)\text{f}\left(0,-1\right)\text{+w}\left(-1,0\right)\text{f}\left(0,0\right)\text{+w}\left(-1,1\right)\text{f}\left(0,1\right)
+\text{+w}\left(0,-1\right)\text{f}\left(1,-1\right)\text{+w}\left(0,0\right)\text{f}\left(1,0\right)\text{+w}\left(0,1\right)\text{f}\left(1,1\right)
+\text{+w}\left(1,-1\right)\text{f}\left(2,-1\right)\text{+w}\left(1,0\right)\text{f}\left(2,0\right)\text{+w}\left(1,1\right)\text{f}\left(2,1\right)
+=\,1\cdot0+0\cdot2+\left(-1\right)\cdot1
++2\cdot0+0\cdot9+\left(-2\right)\cdot3
++1\cdot0+0\cdot5+\left(-1\right)\cdot4
 =\left(-1\right)\,+\left(-6\right)+\left(-4\right)=\,-11    
+\end{gathered}
 \]</span></p>
 <p>Etapa 5 de 9</p>
 <p><img src="imagens/05-filtros/conv_5.png" width="55%" style="display: block; margin: auto;" />
 <span class="math display">\[
-\text{w}\text{*f}\left(1,1\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(1+s,1+t\right)\,\text{=}\,\\
-\text{+w}\left(-1,-1\right)\text{f}\left(0,0\right)\text{+w}\left(-1,0\right)\text{f}\left(0,1\right)\text{+w}\left(-1,1\right)\text{f}\left(0,2\right)\\
-\text{+w}\left(0,-1\right)\text{f}\left(1,0\right)\text{+w}\left(0,0\right)\text{f}\left(1,1\right)\text{+w}\left(0,1\right)\text{f}\left(1,2\right)\\
-\text{+w}\left(1,-1\right)\text{f}\left(2,0\right)\text{+w}\left(1,0\right)\text{f}\left(2,1\right)\text{+w}\left(1,1\right)\text{f}\left(2,2\right)\\
-=\,1\cdot2+0\cdot1+\left(-1\right)\cdot0\\
-+2\cdot9+0\cdot3+\left(-2\right)\cdot1\\
-+1\cdot5+0\cdot4+\left(-1\right)\cdot2\\
-=2\,+16+3=\,21    
+\begin{gathered}
+\text{w}\text{*f}\left(1,1\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(1+s,1+t\right)\,\text{=}\,
+\text{+w}\left(-1,-1\right)\text{f}\left(0,0\right)\text{+w}\left(-1,0\right)\text{f}\left(0,1\right)\text{+w}\left(-1,1\right)\text{f}\left(0,2\right)
+\text{+w}\left(0,-1\right)\text{f}\left(1,0\right)\text{+w}\left(0,0\right)\text{f}\left(1,1\right)\text{+w}\left(0,1\right)\text{f}\left(1,2\right)
+\text{+w}\left(1,-1\right)\text{f}\left(2,0\right)\text{+w}\left(1,0\right)\text{f}\left(2,1\right)\text{+w}\left(1,1\right)\text{f}\left(2,2\right)
+=\,1\cdot2+0\cdot1+\left(-1\right)\cdot0
++2\cdot9+0\cdot3+\left(-2\right)\cdot1
++1\cdot5+0\cdot4+\left(-1\right)\cdot2
+=2\,+16+3=\,21   
+\end{gathered}
 \]</span></p>
 <p>Etapa 6 de 9</p>
 <p><img src="imagens/05-filtros/conv_6.png" width="55%" style="display: block; margin: auto;" />
 <span class="math display">\[
-\text{w}\text{*f}\left(1,2\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(1+s,2+t\right)\,\text{=}\,\\
-\text{+w}\left(-1,-1\right)\text{f}\left(0,1\right)\text{+w}\left(-1,0\right)\text{f}\left(0,2\right)\text{+w}\left(-1,1\right)\text{f}\left(0,3\right)\\
-\text{+w}\left(0,-1\right)\text{f}\left(1,1\right)\text{+w}\left(0,0\right)\text{f}\left(1,2\right)\text{+w}\left(0,1\right)\text{f}\left(1,3\right)\\
-\text{+w}\left(1,-1\right)\text{f}\left(2,1\right)\text{+w}\left(1,0\right)\text{f}\left(2,2\right)\text{+w}\left(1,1\right)\text{f}\left(2,3\right)\\
-=\,1\cdot1+0\cdot1+\left(-1\right)\cdot0\\
-+2\cdot3+0\cdot1+\left(-2\right)\cdot0\\
-+1\cdot4+0\cdot2+\left(-1\right)\cdot0\\
-=1\,+6+4=\,11    
+\begin{gathered}
+\text{w}\text{*f}\left(1,2\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(1+s,2+t\right)\,\text{=}\,
+\text{+w}\left(-1,-1\right)\text{f}\left(0,1\right)\text{+w}\left(-1,0\right)\text{f}\left(0,2\right)\text{+w}\left(-1,1\right)\text{f}\left(0,3\right)
+\text{+w}\left(0,-1\right)\text{f}\left(1,1\right)\text{+w}\left(0,0\right)\text{f}\left(1,2\right)\text{+w}\left(0,1\right)\text{f}\left(1,3\right)
+\text{+w}\left(1,-1\right)\text{f}\left(2,1\right)\text{+w}\left(1,0\right)\text{f}\left(2,2\right)\text{+w}\left(1,1\right)\text{f}\left(2,3\right)
+=\,1\cdot1+0\cdot1+\left(-1\right)\cdot0
++2\cdot3+0\cdot1+\left(-2\right)\cdot0
++1\cdot4+0\cdot2+\left(-1\right)\cdot0
+=1\,+6+4=\,11   
+\end{gathered}
 \]</span></p>
 <p>Etapa 7 de 9</p>
 <p><img src="imagens/05-filtros/conv_7.png" width="55%" style="display: block; margin: auto;" />
 <span class="math display">\[
-\text{w}\text{*f}\left(2,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(2+s,0+t\right)\text{=}\\
-\text{+w}\left(-1,-1\right)\text{f}\left(1,-1\right)\text{+w}\left(-1,0\right)\text{f}\left(1,0\right)\text{+w}\left(-1,1\right)\text{f}\left(1,1\right)\\
-\text{+w}\left(0,-1\right)\text{f}\left(2,-1\right)\text{+w}\left(0,0\right)\text{f}\left(2,0\right)\text{+w}\left(0,1\right)\text{f}\left(2,1\right)\\
-\text{+w}\left(1,-1\right)\text{f}\left(3,-1\right)\text{+w}\left(1,0\right)\text{f}\left(3,0\right)\text{+w}\left(1,1\right)\text{f}\left(3,1\right)\\
-=\,1\cdot0+0\cdot9+\left(-1\right)\cdot3\\
-+2\cdot0+0\cdot5+\left(-2\right)\cdot4\\
-+1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
+\begin{gathered}
+\text{w}\text{*f}\left(2,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(2+s,0+t\right)\text{=}
+\text{+w}\left(-1,-1\right)\text{f}\left(1,-1\right)\text{+w}\left(-1,0\right)\text{f}\left(1,0\right)\text{+w}\left(-1,1\right)\text{f}\left(1,1\right)
+\text{+w}\left(0,-1\right)\text{f}\left(2,-1\right)\text{+w}\left(0,0\right)\text{f}\left(2,0\right)\text{+w}\left(0,1\right)\text{f}\left(2,1\right)
+\text{+w}\left(1,-1\right)\text{f}\left(3,-1\right)\text{+w}\left(1,0\right)\text{f}\left(3,0\right)\text{+w}\left(1,1\right)\text{f}\left(3,1\right)
+=\,1\cdot0+0\cdot9+\left(-1\right)\cdot3
++2\cdot0+0\cdot5+\left(-2\right)\cdot4
++1\cdot0+0\cdot0+\left(-1\right)\cdot0
 =\left(-3\right)+\left(-8\right)+0=\,-11
+\end{gathered}
 \]</span></p>
 <p>Etapa 8 de 9</p>
 <p><img src="imagens/05-filtros/conv_8.png" width="55%" style="display: block; margin: auto;" />
 <span class="math display">\[
-\text{w}\text{*f}\left(2,1\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(2+s,1+t\right)\,\text{=}\,\\
-\text{+w}\left(-1,-1\right)\text{f}\left(1,0\right)\text{+w}\left(-1,0\right)\text{f}\left(1,1\right)\text{+w}\left(-1,1\right)\text{f}\left(1,2\right)\\
-\text{+w}\left(0,-1\right)\text{f}\left(2,0\right)\text{+w}\left(0,0\right)\text{f}\left(2,1\right)\text{+w}\left(0,1\right)\text{f}\left(2,2\right)\\
-\text{+w}\left(1,-1\right)\text{f}\left(3,0\right)\text{+w}\left(1,0\right)\text{f}\left(3,1\right)\text{+w}\left(1,1\right)\text{f}\left(3,2\right)\\
-=\,1\cdot9+0\cdot3+\left(-1\right)\cdot1\\
-+2\cdot5+0\cdot4+\left(-2\right)\cdot2\\
-+1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
-=8+6+0=\,14\\
+\begin{gathered}
+\text{w}\text{*f}\left(2,1\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(2+s,1+t\right)\,\text{=}\,
+\text{+w}\left(-1,-1\right)\text{f}\left(1,0\right)\text{+w}\left(-1,0\right)\text{f}\left(1,1\right)\text{+w}\left(-1,1\right)\text{f}\left(1,2\right)
+\text{+w}\left(0,-1\right)\text{f}\left(2,0\right)\text{+w}\left(0,0\right)\text{f}\left(2,1\right)\text{+w}\left(0,1\right)\text{f}\left(2,2\right)
+\text{+w}\left(1,-1\right)\text{f}\left(3,0\right)\text{+w}\left(1,0\right)\text{f}\left(3,1\right)\text{+w}\left(1,1\right)\text{f}\left(3,2\right)
+=\,1\cdot9+0\cdot3+\left(-1\right)\cdot1
++2\cdot5+0\cdot4+\left(-2\right)\cdot2
++1\cdot0+0\cdot0+\left(-1\right)\cdot0
+=8+6+0=\,14
+\end{gathered}
 \]</span></p>
 <p>Etapa 9 de 9</p>
 <p><img src="imagens/05-filtros/conv_9.png" width="55%" style="display: block; margin: auto;" />
 <span class="math display">\[
-\text{w}\text{f}\left(2,2\right)\text{=}\sum{s}^{}\sum{t}^{}\text{w}\left(s,t\right)\text{f}\left(2+s,2+t\right)\text{=}\\
-\text{+w}\left(-1,-1\right)\text{f}\left(1,1\right)\text{+w}\left(-1,0\right)\text{f}\left(1,2\right)\text{+w}\left(-1,1\right)\text{f}\left(1,3\right)\\
-\text{+w}\left(0,-1\right)\text{f}\left(2,1\right)\text{+w}\left(0,0\right)\text{f}\left(2,2\right)\text{+w}\left(0,1\right)\text{f}\left(2,3\right)\\
-\text{+w}\left(1,-1\right)\text{f}\left(3,1\right)\text{+w}\left(1,0\right)\text{f}\left(3,2\right)\text{+w}\left(1,1\right)\text{f}\left(3,3\right)\\
-=,1\cdot3+0\cdot1+\left(-1\right)\cdot0\\
-+2\cdot4+0\cdot2+\left(-2\right)\cdot0\\
-+1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
+\begin{gathered}
+\text{w}\text{f}\left(2,2\right)\text{=}\sum{s}^{}\sum{t}^{}\text{w}\left(s,t\right)\text{f}\left(2+s,2+t\right)\text{=}
+\text{+w}\left(-1,-1\right)\text{f}\left(1,1\right)\text{+w}\left(-1,0\right)\text{f}\left(1,2\right)\text{+w}\left(-1,1\right)\text{f}\left(1,3\right)
+\text{+w}\left(0,-1\right)\text{f}\left(2,1\right)\text{+w}\left(0,0\right)\text{f}\left(2,2\right)\text{+w}\left(0,1\right)\text{f}\left(2,3\right)
+\text{+w}\left(1,-1\right)\text{f}\left(3,1\right)\text{+w}\left(1,0\right)\text{f}\left(3,2\right)\text{+w}\left(1,1\right)\text{f}\left(3,3\right)
+=,1\cdot3+0\cdot1+\left(-1\right)\cdot0
++2\cdot4+0\cdot2+\left(-2\right)\cdot0
++1\cdot0+0\cdot0+\left(-1\right)\cdot0
 =3+8+0=11
+\end{gathered}
 \]</span></p>
 
 <div class="figure" style="text-align: center"><span id="fig:convFinal"></span>
@@ -627,7 +645,7 @@ Figura 5.11: Imagem com diferentes tamanhos de filtro gaussiano. Adaptado de <sp
 <p>[2] R. C. Gonzalez e R. C. Woods, <em>Processamento digital de imagens</em>, 3º ed. São Paulo: Pearson Prentice Hall, 2010.</p>
 </div>
 <div id="ref-pedrini2008">
-<p>[3] H. Pedrini e W. Robson Schwartz, <em>Análise de imagens digitais: princípios, algoritmos e aplicações</em>, 3º ed. São Paulo: Thomson Learning Edicoes Ltda, 2007.</p>
+<p>[3] H. Pedrini e W. Robson Schwartz, <em>Analise de imagens digitais: principios, algoritmos e aplicações</em>, 3º ed. São Paulo: Thomson Learning Edicoes Ltda, 2007.</p>
 </div>
 <div id="ref-moeslund2012">
 <p>[4] T. B. Moeslund, <em>Introduction to video and image processing: Building real systems and applications</em>. Springer Science &amp; Business Media, 2012.</p>
