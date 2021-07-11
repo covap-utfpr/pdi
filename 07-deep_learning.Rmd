@@ -384,7 +384,7 @@ knitr::include_graphics(rep('imagens/07-deepLearning/custo_30.jpg'))
 knitr::include_graphics(rep('imagens/07-deepLearning/custo_100.jpg'))
 ```
 
-No fim do treinamento, as duas redes apresentaram erros na mesma ordem de grandeza, mas a capacidade de reconhecer números é bem diferente entre as duas. Esta diferença pode ser percebida ao comparar os gráficos de acurácia (Figuras \@ref(fig:acur30) e \@ref(fig:acur100)) considerando tanto os dados de treinamento quanto os de validação. O resultado do treinamento com todo o conjunto de dados mostra que a acurácia da rede para os dados de validação é bem próxima do resultado para os valores de treinamento, uma diferença de $1\text{%}$. Já para a situação que utilizou apenas 1000 dados de treinamento, as curvas de acurácia para os dados de validação e de treinamento estão mais afastadas, apresentando uma diferença próxima de $14\text{%}$.
+No fim do treinamento, as duas redes apresentaram erros na mesma ordem de grandeza, mas a capacidade de reconhecer números é bem diferente entre as duas. Esta diferença pode ser percebida ao comparar os gráficos de acurácia (Figuras \@ref(fig:acur30) e \@ref(fig:acur100)) considerando tanto os dados de treinamento quanto os de validação. O resultado do treinamento com todo o conjunto de dados mostra que a acurácia da rede para os dados de validação é bem próxima do resultado para os valores de treinamento, uma diferença de $1\%$. Já para a situação que utilizou apenas 1000 dados de treinamento, as curvas de acurácia para os dados de validação e de treinamento estão mais afastadas, apresentando uma diferença próxima de $14\%$.
 
 (ref:acur30) Curvas de acurácia para rede treinada com $30$ épocas e $1000$ imagens.
 
@@ -431,13 +431,13 @@ $$g(x,y)=w(x,y)\ast f(x,y)=\sum_{s=-a}^a\sum_{t=-b}^bg(s,t)f(x-s,y-t)
 Como podemos perceber observando as duas equações, essas operações são bem simples, sendo basicamente uma soma de produtos. Na Figura \@ref(fig:cnnconv), temos uma representação de um passo da convolução, onde podemos observar a seguinte operação:
 
 $$
-\text{w}\text{*f}\left(0,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,0+t\right)\,\text{=}\,\\
-\text{+w}\left(-1,-1\right)\text{f}\left(-1,-1\right)\text{+w}\left(-1,0\right)\text{f}\left(-1,0\right)\text{+w}\left(-1,1\right)\text{f}\left(-1,1\right)\\
-\text{+w}\left(0,-1\right)\text{f}\left(0,-1\right)\text{+w}\left(0,0\right)\text{f}\left(0,0\right)\text{+w}\left(0,1\right)\text{f}\left(0,1\right)\\
-\text{+w}\left(1,-1\right)\text{f}\left(1,-1\right)\text{+w}\left(0,1\right)\text{f}\left(0,-1\right)\text{+w}\left(1,1\right)\text{f}\left(-1,-1\right)\\
-=\,1\cdot0+0\cdot0+\left(-1\right)\cdot0\\
-+2\cdot0+0\cdot2+\left(-2\right)\cdot1\\
-+1\cdot0+0\cdot9+\left(-1\right)\cdot3\\
+\text{w}\text{*f}\left(0,0\right)\text{=}\sum_{s}^{}\sum_{t}^{}\text{w}\left(s,t\right)\text{f}\left(0+s,0+t\right)\,\text{=}\,
+\text{+w}\left(-1,-1\right)\text{f}\left(-1,-1\right)\text{+w}\left(-1,0\right)\text{f}\left(-1,0\right)\text{+w}\left(-1,1\right)\text{f}\left(-1,1\right)
+\text{+w}\left(0,-1\right)\text{f}\left(0,-1\right)\text{+w}\left(0,0\right)\text{f}\left(0,0\right)\text{+w}\left(0,1\right)\text{f}\left(0,1\right)
+\text{+w}\left(1,-1\right)\text{f}\left(1,-1\right)\text{+w}\left(0,1\right)\text{f}\left(0,-1\right)\text{+w}\left(1,1\right)\text{f}\left(-1,-1\right)
+=\,1\cdot0+0\cdot0+\left(-1\right)\cdot0
++2\cdot0+0\cdot2+\left(-2\right)\cdot1
++1\cdot0+0\cdot9+\left(-1\right)\cdot3
 =0\,-2-3\,=\,-5
 (\#eq:exemploConvolucao)
 $$
@@ -559,7 +559,7 @@ A rede LeNet foi uma das primeiras CNN's que demonstrou potencial de aplicação
 
 Na Figura \@ref(fig:lenet), consideramos como entrada uma imagem padrão do MNIST, de tamanho $28 \text{ x } 28$ pixels e com um canal em escala de cinza. No esquema geral da rede LeNet (Figura \@ref(fig:lenet2)), temos uma visão mais clara da combinação das camadas, em que após a camada de entrada existem duas camadas convolucionais, intercaladas com duas camadas de *pooling* e na ponta três camadas totalmente conectadas.
 
-Cada camada de convolução utiliza um filtro $5 \text{ x } 5$ e uma *função de ativação sigmóide*. A primeira camada de convolução tem seis canais ou mapas, enquanto a segunda tem 16. A operação de *pooling* envolve um filtro $2 \text{ x } 2$ que calcula a *média*, por isso é identificada como “AvgPool”, e utiliza $\text{stride}=2$ para que cada mapa da camada anterior tenha uma redução pela metade ao longo da largura e da altura, descartando $75 \text{%}$ das ativações. O tamanho das três camadas totalmente conectadas (*fully conected*) são respectivamente, 120, 84, e 10. A última camada, "FC(10)", corresponde ao número possível de classes, neste caso, 10 em razão dos dígitos de 0 à 9. A função de ativação na última camada é uma *função gaussiana*.
+Cada camada de convolução utiliza um filtro $5 \text{ x } 5$ e uma *função de ativação sigmóide*. A primeira camada de convolução tem seis canais ou mapas, enquanto a segunda tem 16. A operação de *pooling* envolve um filtro $2 \text{ x } 2$ que calcula a *média*, por isso é identificada como “AvgPool”, e utiliza $\text{stride}=2$ para que cada mapa da camada anterior tenha uma redução pela metade ao longo da largura e da altura, descartando $75\%$ das ativações. O tamanho das três camadas totalmente conectadas (*fully conected*) são respectivamente, 120, 84, e 10. A última camada, "FC(10)", corresponde ao número possível de classes, neste caso, 10 em razão dos dígitos de 0 à 9. A função de ativação na última camada é uma *função gaussiana*.
 
 (ref:lenet2) Esquema geral das camadas na rede LeNet - Esquema da rede LeNet com a sequência de camadas convolucionais ("Conv"), *pooling* ("AvgPool") e camadas totalmente conectadas ("FC") [@zhang2020dive, p.252].
 
@@ -606,25 +606,23 @@ O parâmetro C identifica o número de canais ou mapas da camada e o termo H e W
 Aumentar o número de camadas também exige que mais parâmetros sejam considerados, o que afeta tanto o tempo de treinamento quanto o seu desempenho, pois se não ocorrer uma otimização adequada dos parâmetros pode ser maior a probabilidade de ocorrer *overfitting* [@elgendy2020, p.230]. Para determinar aproximadamente a quantidade de parâmetros relacionados com cada camada considerou-se os pesos relacionados aos filtros de cada mapa, calculados como o produto entre as dimensões do filtro ($\text{K x K}$), a quantidade de canais do elemento de entrada e a quantidade de canais de saída da camada [@johnson2019]. Considerou-se também como parâmetros, os bias associados a cada canal de saída. Nas camadas totalmente conectadas,  o número de parâmetros é determinado como produto da quantidade de elementos de entrada  com a quantidade de elementos da saída da camada somado com o número de bias. A Equação \@ref(eq:calcConvInfos) exemplifica os cálculos para a primeira camada de convolução:
 
 <!-- $$ não funcionava, usei begin/end equation mesmo -->
-\begin{equation}
+$$
 \begin{split}
   \text{Número de Pesos} &= \text{C}_\text{saída} \text{ x } \text{C}_\text{saída} \text{ x } \text{K} \text{ x } \text{K}\\ 
   &= 6\text{ x }1 \text{ x } 5 \text{ x } 5\\
   &= 150\\\\
-
   \text{Número de Bias} &= 6\\\\
-
   \text{Número de parâmetros} &= \text{Número de Pesos} + \text{Número de parâmetros}\\
   &= 150 + 6\\
-  & = 156
+  &= 156
 \end{split}
 (\#eq:calcConvInfos)
-\end{equation}
+$$
 
 Considerando que o filtro na primeira camada é de tamanho $5\text{ x }5$, que a entrada só apresenta um canal e que são 6 canais na camada de convolução, a primeira camada de convolução considera aproximadamente 156 parâmetros. Na Tabela \@ref(tab:tablelenet), também está a quantidade de parâmetros relacionados com cada camada e o total aproximado de parâmetros para a rede LeNet é 61706. À medida que aumenta o número de canais na camada de convolução mais parâmetros são necessários. De maneira geral, a maior parte dos parâmetros se deve às camadas totalmente conectadas devido ao maior número de conexões [@johnson2019].
 
 #### AlexNet
-Atualmente existem várias arquiteturas de redes CNN's utilizadas para aplicações na visão computacional. A evolução destas redes pode ser compreendida a partir dos resultados da competição *ImageNet Large Scale Visual Recognition Challenge* (ILSVRC). O principal objetivo da competição era avaliar algoritmos para detecção de objetos e classificação de imagens. A primeira edição da competição, em 2010, envolvia 1,2 milhões de imagens para o treinamento, sendo 1000 categorias de objetos. Nos dois primeiros anos de competição as redes CNN's ainda não tinham sido as primeiras colocadas, porém a partir de 2012 os modelos CNN's começaram a liderar a competição [@imagenet2020]. O progresso das redes pode ser avaliado com base na taxa de erro dos modelos que em sete anos caiu de aproximadamente $26\text{%}$, no segundo ano da competição, para $2.3\text{%}$ na última edição da competição em 2017 [@johnson2019], como apresentado no gráfico da Figura \@ref(fig:imagenet). 
+Atualmente existem várias arquiteturas de redes CNN's utilizadas para aplicações na visão computacional. A evolução destas redes pode ser compreendida a partir dos resultados da competição *ImageNet Large Scale Visual Recognition Challenge* (ILSVRC). O principal objetivo da competição era avaliar algoritmos para detecção de objetos e classificação de imagens. A primeira edição da competição, em 2010, envolvia 1,2 milhões de imagens para o treinamento, sendo 1000 categorias de objetos. Nos dois primeiros anos de competição as redes CNN's ainda não tinham sido as primeiras colocadas, porém a partir de 2012 os modelos CNN's começaram a liderar a competição [@imagenet2020]. O progresso das redes pode ser avaliado com base na taxa de erro dos modelos que em sete anos caiu de aproximadamente $26\%$, no segundo ano da competição, para $2.3\%$ na última edição da competição em 2017 [@johnson2019], como apresentado no gráfico da Figura \@ref(fig:imagenet). 
 
 (ref:imagenet) Taxa de erro dos modelos de melhor desempenho na competição ImageNet - O desempenho dos modelos na competição ImageNet Large Scale Visual Recognition Challenge (ILSVRC) era avaliado principalmente pela taxa de erro. No gráfico são apresentados os modelos que venceram em cada edição da competição, que ocorreu de 2010 à 2017, e também redes que se tornaram populares como a VGG [@johnson2019].
 
@@ -632,7 +630,7 @@ Atualmente existem várias arquiteturas de redes CNN's utilizadas para aplicaç�
 knitr::include_graphics(rep('imagens/07-deepLearning/imagenet.png'))
 ```
 
-Para conhecer um pouco dos diferentes modelos de redes CNN’s e perceber algumas diferenças, e estruturas que tiveram bom desempenho e permaneceram em modelos mais atuais, destacaremos a seguir quatro arquiteturas que ficaram bastante conhecidas e tiveram destaque na competição. A rede AlexNet foi a primeira CNN que venceu a competição ImageNet, no ano de 2012 com uma taxa de erro de $16.4\text{%}$. A rede VGG não liderou a competição em 2014, porém é um dos modelos com bastante popularidade e que apresentou uma estrutura em blocos estabelecidos com base em regras. No ano de 2014, a CNN GoogLeNet que venceu a competição foi o ponto de partida para as redes *Inceptions*. A rede Residual (ResNet) em 2015 além de aproveitar as técnicas de maior desempenho das outras redes também implementou uma abordagem que possibilitou aumentar para mais de 100 camadas. 
+Para conhecer um pouco dos diferentes modelos de redes CNN’s e perceber algumas diferenças, e estruturas que tiveram bom desempenho e permaneceram em modelos mais atuais, destacaremos a seguir quatro arquiteturas que ficaram bastante conhecidas e tiveram destaque na competição. A rede AlexNet foi a primeira CNN que venceu a competição ImageNet, no ano de 2012 com uma taxa de erro de $16.4\%$. A rede VGG não liderou a competição em 2014, porém é um dos modelos com bastante popularidade e que apresentou uma estrutura em blocos estabelecidos com base em regras. No ano de 2014, a CNN GoogLeNet que venceu a competição foi o ponto de partida para as redes *Inceptions*. A rede Residual (ResNet) em 2015 além de aproveitar as técnicas de maior desempenho das outras redes também implementou uma abordagem que possibilitou aumentar para mais de 100 camadas. 
 
 A rede AlexNet foi desenvolvida por Alex Krizhevsky, Ilya Sutskever, e Geoffrey Hinton [@geron2019, p.450]. Esta rede é bem semelhante a LeNet-5, porém apresenta mais camadas. Por ser uma rede mais profunda, exigindo maior quantidade de memória, a rede original precisou ser distribuída entre dois GPU’s de 3 GB de forma física [@krizhevsky2012]. Desta forma, a rede foi desenhada como na Figura \@ref(fig:imagenet), com uma estrutura de fluxo de dados duplo para que cada GPU recebesse metade do modelo.
 
@@ -730,7 +728,7 @@ O principal papel destes dois blocos é reduzir de maneira considerável as dime
 knitr::include_graphics(rep('imagens/07-deepLearning/googlenet.png'))
 ```
 
-Outra técnica para tornar a rede mais eficiente foi incluir uma camada de *AvgPool* global antes da camada de classificação [@geron2019, p.455]. Nos modelos CNN’s anteriores era comum incluir um *flattering* para converter os dados em um vetor, perdendo a informação espacial, para ser compatível com as camadas totalmente conectadas que faziam a classificação. Estas últimas camadas acabam sendo as responsáveis pela maior parte dos parâmetros. No modelo VGG-16, por exemplo, as 3 camadas totalmente conectadas geram aproximadamente $123.6$ milhões de parâmetros, quase $90\text{%}$ dos parâmetros totais [@johnson2019]. 
+Outra técnica para tornar a rede mais eficiente foi incluir uma camada de *AvgPool* global antes da camada de classificação [@geron2019, p.455]. Nos modelos CNN’s anteriores era comum incluir um *flattering* para converter os dados em um vetor, perdendo a informação espacial, para ser compatível com as camadas totalmente conectadas que faziam a classificação. Estas últimas camadas acabam sendo as responsáveis pela maior parte dos parâmetros. No modelo VGG-16, por exemplo, as 3 camadas totalmente conectadas geram aproximadamente $123.6$ milhões de parâmetros, quase $90\%$ dos parâmetros totais [@johnson2019]. 
 
 Em vez de adotar o *flattering*,  o GoogLenet utiliza um filtro de média de mesma dimensão do elemento de entrada, retornando a média dos mapas para cada posição do vetor. Como o vetor de saída já tem um tamanho reduzido é necessário incluir apenas uma camada totalmente conectada com as $1000$ classes. Como a camada de média global não precisa de parâmetros, e considerando que retorna um vetor $1024$, são necessários aproximadamente $1$ milhão de parâmetros na camada totalmente conectada, $100$ vezes menos que na VGG [@johnson2019]. Na última camada, assim como no VGG, associa-se uma ativação *Softmax*, enquanto nas camadas de convolução é a *ReLu*.
 
@@ -762,7 +760,7 @@ knitr::include_graphics(rep('imagens/07-deepLearning/googlenet.png'))
 
 #### ResNet
 
-A Rede Neural Residual (*ResNet*) venceu a competição ImageNet em 2015 com uma taxa de erro de $3.6 \text{% }$. A rede desenvolvida por um grupo de pesquisa da Microsoft inclui várias técnicas de otimização e regularização dos modelos anteriores, principalmente da GoogLenet. Enquanto o ponto característico da rede GoogLenet são os módulos *inceptions*, na ResNet as unidades residuais permitiram treinar redes ainda mais profundas. Entre os principais modelos da ResNet são encontradas redes com 50, 101, 152 camadas de pesos [@elgendy2020, p.230], mais que o dobro do número da GoogLenet com 22 camadas.
+A Rede Neural Residual (*ResNet*) venceu a competição ImageNet em 2015 com uma taxa de erro de $3.6\%$. A rede desenvolvida por um grupo de pesquisa da Microsoft inclui várias técnicas de otimização e regularização dos modelos anteriores, principalmente da GoogLenet. Enquanto o ponto característico da rede GoogLenet são os módulos *inceptions*, na ResNet as unidades residuais permitiram treinar redes ainda mais profundas. Entre os principais modelos da ResNet são encontradas redes com 50, 101, 152 camadas de pesos [@elgendy2020, p.230], mais que o dobro do número da GoogLenet com 22 camadas.
 
 Da mesma forma que a GoogLenet, a rede *ResNet* pode ser divida em três partes, sendo que a primeira e a última parte seguem a arquitetura da GoogLenet, e as camadas intermediárias incluem as unidades residuais. As camadas de entrada que permitem uma redução considerável da dimensão da imagem incluem uma camada de convolução com 64 canais e filtros $7\text{ x }7$ de $\text{stride}=2$, seguida por uma camada $3\text{ x }3$ de *MaxPooling* com $\text{stride}=2$. A última parte da rede, a estrutura de classificação, apresenta as mesmas camadas da GoogLenet, a camada Global de *Pooling* média de dimensão 1024 e apenas uma camada totalmente conectada com 1000 unidades representando as classes. Lembrando que a substituição do processo de *flattering* pela média global permitiu reduzir a proporção de parâmetros nas últimas camadas. 
 

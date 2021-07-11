@@ -1,0 +1,2726 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.7.8)  11 JUL 2021 17:41
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**_main.tex
+(./_main.tex
+LaTeX2e <2021-06-01> patch level 1
+L3 programming layer <2021-06-18> (/home/gilson/.TinyTeX/texmf-dist/tex/latex/b
+ase/book.cls
+Document Class: book 2021/02/12 v1.4n Standard LaTeX document class
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/base/bk10.clo
+File: bk10.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count182
+\c@chapter=\count183
+\c@section=\count184
+\c@subsection=\count185
+\c@subsubsection=\count186
+\c@paragraph=\count187
+\c@subparagraph=\count188
+\c@figure=\count189
+\c@table=\count190
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2021/04/20 v2.17j AMS math features
+\@mathmargin=\skip49
+For additional information on amsmath, use the `?' option.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks16
+\ex@=\dimen139
+)) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen140
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count191
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count192
+\leftroot@=\count193
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count194
+\DOTSCASE@=\count195
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box50
+\strutbox@=\box51
+\big@size=\dimen141
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count196
+\c@MaxMatrixCols=\count197
+\dotsspace@=\muskip16
+\c@parentequation=\count198
+\dspbrk@lvl=\count199
+\tag@help=\toks17
+\row@=\count266
+\column@=\count267
+\maxfields@=\count268
+\andhelp@=\toks18
+\eqnshift@=\dimen142
+\alignsep@=\dimen143
+\tagshift@=\dimen144
+\tagwidth@=\dimen145
+\totwidth@=\dimen146
+\lineht@=\dimen147
+\@envbody=\toks19
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (/home/gilson/.TinyTeX/texmf-dist/tex/generic/iftex/ifxetex.sty
+Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
+(/home/gilson/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+)) (/home/gilson/.TinyTeX/texmf-dist/tex/generic/iftex/ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
+2.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks21
+\inpenc@posthook=\toks22
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
+(/home/gilson/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+) (/home/gilson/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+(/home/gilson/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks23
+) (/home/gilson/.TinyTeX/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+) (/home/gilson/.TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (/home/gilson/.TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+)
+\@linkdim=\dimen148
+\Hy@linkcounter=\count269
+\Hy@pagecounter=\count270
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref-langpatches.def
+File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel la
+nguages
+) (/home/gilson/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+) (/home/gilson/.TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count271
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4073.
+Package hyperref Info: Hyper figures OFF on input line 4192.
+Package hyperref Info: Link nesting OFF on input line 4197.
+Package hyperref Info: Hyper index ON on input line 4200.
+Package hyperref Info: Plain pages OFF on input line 4207.
+Package hyperref Info: Backreferencing OFF on input line 4212.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4445.
+\c@Hy@tempcnt=\count272
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4804.
+\XeTeXLinkMargin=\dimen149
+(/home/gilson/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+(/home/gilson/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count273
+\Field@Width=\dimen150
+\Fld@charsize=\dimen151
+Package hyperref Info: Hyper figures OFF on input line 6076.
+Package hyperref Info: Link nesting OFF on input line 6081.
+Package hyperref Info: Hyper index ON on input line 6084.
+Package hyperref Info: backreferencing OFF on input line 6091.
+Package hyperref Info: Link coloring OFF on input line 6096.
+Package hyperref Info: Link coloring with OCG OFF on input line 6101.
+Package hyperref Info: PDF/A mode OFF on input line 6106.
+LaTeX Info: Redefining \ref on input line 6146.
+LaTeX Info: Redefining \pageref on input line 6150.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count274
+\c@Item=\count275
+\c@Hfootnote=\count276
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2021-06-07 v7.00m Hyperref driver for pdfTeX
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
+e
+with kernel methods
+)
+\Fld@listcount=\count277
+\c@bookmark@seq@number=\count278
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+(/home/gilson/.TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip52
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2021/01/20 v3.7 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count279
+\FV@InFile=\read2
+\FV@TabBox=\box52
+\c@FancyVerbLine=\count280
+\FV@StepNumber=\count281
+\FV@OutFile=\write3
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip53
+\fb@frw=\dimen152
+\fb@frh=\dimen153
+\FrameRule=\dimen154
+\FrameSep=\dimen155
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2021-05-07 v4.16 Multi-page Table package (DPC)
+\LTleft=\skip54
+\LTright=\skip55
+\LTpre=\skip56
+\LTpost=\skip57
+\LTchunksize=\count282
+\LTcapwidth=\dimen156
+\LT@head=\box53
+\LT@firsthead=\box54
+\LT@foot=\box55
+\LT@lastfoot=\box56
+\LT@gbox=\box57
+\LT@cols=\count283
+\LT@rows=\count284
+\c@LT@tables=\count285
+\c@LT@chunks=\count286
+\LT@p@ftn=\toks24
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen157
+\lightrulewidth=\dimen158
+\cmidrulewidth=\dimen159
+\belowrulesep=\dimen160
+\belowbottomsep=\dimen161
+\aboverulesep=\dimen162
+\abovetopsep=\dimen163
+\cmidrulesep=\dimen164
+\cmidrulekern=\dimen165
+\defaultaddspace=\dimen166
+\@cmidla=\count287
+\@cmidlb=\count288
+\@aboverulesep=\dimen167
+\@belowrulesep=\dimen168
+\@thisruleclass=\count289
+\@lastruleclass=\count290
+\@thisrulewidth=\dimen169
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
+\col@sep=\dimen170
+\ar@mcellbox=\box58
+\extrarowheight=\dimen171
+\NC@list=\toks25
+\extratabsurround=\skip58
+\backup@length=\skip59
+\ar@cellbox=\box59
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count291
+\calc@Bcount=\count292
+\calc@Adimen=\dimen172
+\calc@Bdimen=\dimen173
+\calc@Askip=\skip60
+\calc@Bskip=\skip61
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count293
+\calc@Cskip=\skip62
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count294
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty
+Package: footnote 1997/01/28 1.13 Save footnotes around boxes
+\fn@notes=\box60
+\fn@width=\dimen174
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+)
+\Gin@req@height=\dimen175
+\Gin@req@width=\dimen176
+) (/home/gilson/.TinyTeX/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2021/06/28 3.61 The Babel package
+(/home/gilson/.TinyTeX/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2021/06/28 3.61 Babel common definitions
+\babel@savecnt=\count295
+\U@D=\dimen177
+\l@unhyphenated=\language3
+(/home/gilson/.TinyTeX/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read3
+)
+\bbl@dirlevel=\count296
+(/home/gilson/.TinyTeX/texmf-dist/tex/generic/babel-portuges/brazilian.ldf
+Language: portuges 2021/07/09 v1.2t Portuguese support from the babel system
+
+Package babel Warning: No hyphenation patterns were preloaded for
+(babel)                the language 'Portuguese' into the format.
+(babel)                Please, configure your TeX system to add them and
+(babel)                rebuild the format. Now I will use the patterns
+(babel)                preloaded for \language=0 instead on input line 53.
+
+Package babel Info: Hyphen rules for 'portuges' set to \l@english
+(babel)             (\language0). Reported on input line 54.
+Package babel Info: Hyphen rules for 'brazilian' set to \l@english
+(babel)             (\language0). Reported on input line 111.
+Package babel Info: Making " an active character on input line 143.
+) (/home/gilson/.TinyTeX/texmf-dist/tex/generic/babel-portuges/brazilian.ldf
+Language: portuges 2021/07/09 v1.2t Portuguese support from the babel system
+)) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2020/12/31 v3.16 programmable bibliographies (PK/MW)
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count297
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+)) (/home/gilson/.TinyTeX/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@tabx@nest=\count298
+\c@listtotal=\count299
+\c@listcount=\count300
+\c@liststart=\count301
+\c@liststop=\count302
+\c@citecount=\count303
+\c@citetotal=\count304
+\c@multicitecount=\count305
+\c@multicitetotal=\count306
+\c@instcount=\count307
+\c@maxnames=\count308
+\c@minnames=\count309
+\c@maxitems=\count310
+\c@minitems=\count311
+\c@citecounter=\count312
+\c@maxcitecounter=\count313
+\c@savedcitecounter=\count314
+\c@uniquelist=\count315
+\c@uniquename=\count316
+\c@refsection=\count317
+\c@refsegment=\count318
+\c@maxextratitle=\count319
+\c@maxextratitleyear=\count320
+\c@maxextraname=\count321
+\c@maxextradate=\count322
+\c@maxextraalpha=\count323
+\c@abbrvpenalty=\count324
+\c@highnamepenalty=\count325
+\c@lownamepenalty=\count326
+\c@maxparens=\count327
+\c@parenlevel=\count328
+\blx@tempcnta=\count329
+\blx@tempcntb=\count330
+\blx@tempcntc=\count331
+\blx@maxsection=\count332
+\blx@maxsegment@0=\count333
+\blx@notetype=\count334
+\blx@parenlevel@text=\count335
+\blx@parenlevel@foot=\count336
+\blx@sectionciteorder@0=\count337
+\blx@entrysetcounter=\count338
+\blx@biblioinstance=\count339
+\labelnumberwidth=\skip63
+\labelalphawidth=\skip64
+\biblabelsep=\skip65
+\bibitemsep=\skip66
+\bibnamesep=\skip67
+\bibinitsep=\skip68
+\bibparsep=\skip69
+\bibhang=\skip70
+\blx@bcfin=\read4
+\blx@bcfout=\write4
+\blx@langwohyphens=\language4
+\c@mincomprange=\count340
+\c@maxcomprange=\count341
+\c@mincompwidth=\count342
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/biblatex/blx-dm.def
+File: blx-dm.def 2020/12/31 v3.16 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count343
+\c@savedafterword=\count344
+\c@annotator=\count345
+\c@savedannotator=\count346
+\c@author=\count347
+\c@savedauthor=\count348
+\c@bookauthor=\count349
+\c@savedbookauthor=\count350
+\c@commentator=\count351
+\c@savedcommentator=\count352
+\c@editor=\count353
+\c@savededitor=\count354
+\c@editora=\count355
+\c@savededitora=\count356
+\c@editorb=\count357
+\c@savededitorb=\count358
+\c@editorc=\count359
+\c@savededitorc=\count360
+\c@foreword=\count361
+\c@savedforeword=\count362
+\c@holder=\count363
+\c@savedholder=\count364
+\c@introduction=\count365
+\c@savedintroduction=\count366
+\c@namea=\count367
+\c@savednamea=\count368
+\c@nameb=\count369
+\c@savednameb=\count370
+\c@namec=\count371
+\c@savednamec=\count372
+\c@translator=\count373
+\c@savedtranslator=\count374
+\c@shortauthor=\count375
+\c@savedshortauthor=\count376
+\c@shorteditor=\count377
+\c@savedshorteditor=\count378
+\c@labelname=\count379
+\c@savedlabelname=\count380
+\c@institution=\count381
+\c@savedinstitution=\count382
+\c@lista=\count383
+\c@savedlista=\count384
+\c@listb=\count385
+\c@savedlistb=\count386
+\c@listc=\count387
+\c@savedlistc=\count388
+\c@listd=\count389
+\c@savedlistd=\count390
+\c@liste=\count391
+\c@savedliste=\count392
+\c@listf=\count393
+\c@savedlistf=\count394
+\c@location=\count395
+\c@savedlocation=\count396
+\c@organization=\count397
+\c@savedorganization=\count398
+\c@origlocation=\count399
+\c@savedoriglocation=\count400
+\c@origpublisher=\count401
+\c@savedorigpublisher=\count402
+\c@publisher=\count403
+\c@savedpublisher=\count404
+\c@language=\count405
+\c@savedlanguage=\count406
+\c@origlanguage=\count407
+\c@savedoriglanguage=\count408
+\c@pageref=\count409
+\c@savedpageref=\count410
+\shorthandwidth=\skip71
+\shortjournalwidth=\skip72
+\shortserieswidth=\skip73
+\shorttitlewidth=\skip74
+\shortauthorwidth=\skip75
+\shorteditorwidth=\skip76
+\locallabelnumberwidth=\skip77
+\locallabelalphawidth=\skip78
+\localshorthandwidth=\skip79
+\localshortjournalwidth=\skip80
+\localshortserieswidth=\skip81
+\localshorttitlewidth=\skip82
+\localshortauthorwidth=\skip83
+\localshorteditorwidth=\skip84
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2020/12/31 v3.16 biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.def
+File: biblatex.def 2020/12/31 v3.16 biblatex compatibility (PK/MW)
+\c@textcitecount=\count411
+\c@textcitetotal=\count412
+\c@textcitemaxnames=\count413
+\c@biburlbigbreakpenalty=\count414
+\c@biburlbreakpenalty=\count415
+\c@biburlnumpenalty=\count416
+\c@biburlucpenalty=\count417
+\c@biburllcpenalty=\count418
+\biburlbigskip=\muskip18
+\biburlnumskip=\muskip19
+\biburlucskip=\muskip20
+\biburllcskip=\muskip21
+\c@smartand=\count419
+)
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+File: numeric.bbx 2020/12/31 v3.16 biblatex bibliography style (PK/MW)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2020/12/31 v3.16 biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count420
+\c@bbx:relatedtotal=\count421
+))
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+File: numeric.cbx 2020/12/31 v3.16 biblatex citation style (PK/MW)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
+))
+
+Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
+(biblatex)                Loading 'csquotes' recommended.
+
+\@quotelevel=\count422
+\@quotereset=\count423
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2021-05-07 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count424
+\l__pdf_internal_box=\box61
+) (./_main.aux
+
+LaTeX Warning: Label `eq:homografia' multiply defined.
+
+)
+\openout1 = `_main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 130.
+LaTeX Font Info:    ... okay on input line 130.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package hyperref Info: Link coloring OFF on input line 130.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/home/gilson/.TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count425
+)
+LaTeX Info: Redefining \ref on input line 130.
+LaTeX Info: Redefining \pageref on input line 130.
+LaTeX Info: Redefining \nameref on input line 130.
+(./_main.out) (./_main.out)
+\@outlinefile=\write5
+\openout5 = `_main.out'.
+
+Package biblatex Info: Trying to load language 'brazilian'...
+Package biblatex Info: ... file 'brazilian.lbx' found.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/biblatex/lbx/brazilian.lbx
+File: brazilian.lbx 2020/12/31 v3.16 biblatex localization (PK/MW)
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+Package biblatex Info: Document encoding is UTF8 ....
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2021-06-18 L3 programming layer (loader) 
+)
+Package biblatex Info: ... and expl3
+(biblatex)             2021-06-18 L3 programming layer (loader) 
+(biblatex)             is new enough (at least 2020/04/06),
+(biblatex)             setting 'casechanger=expl3'.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty (/home/
+gilson/.TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2021-06-18 L3 Experimental document command parser
+)
+Package: blx-case-expl3 2020/12/31 v3.16 expl3 case changing code for biblatex
+)
+\openout4 = `_main.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file '_main.bbl' found.
+(./_main.bbl)
+Package biblatex Info: Reference section=0 on input line 130.
+Package biblatex Info: Reference segment=0 on input line 130.
+(./_main.toc
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 6
+.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 6
+.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
+6.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
+6.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 6.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 6.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 6.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 6.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 6.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+
+{/home/gilson/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2])
+\tf@toc=\write6
+\openout6 = `_main.toc'.
+
+[3] [4
+
+]
+Cap\'{\i }tulo 1.
+<imagens/01-introducao/areasPDI.png, id=314, 263.98625pt x 378.41376pt>
+File: imagens/01-introducao/areasPDI.png Graphic file (type png)
+<use imagens/01-introducao/areasPDI.png>
+Package pdftex.def Info: imagens/01-introducao/areasPDI.png  used on input line
+ 148.
+(pdftex.def)             Requested size: 137.99466pt x 197.80984pt.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
+73.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [5] [6 <./imagens/01-introducao/areasPDI.png (PNG copy)>]
+Underfull \vbox (badness 3386) has occurred while \output is active []
+
+
+Overfull \hbox (238.5762pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 1.1.  RELAÇÃO ENTRE PROCESSAMENTO DIGITAL DE IMAGEM, VISÃO COMP
+UTACIONAL E COMPUTAÇÃO GRÁFICA \T1/lmr/m/n/10 7
+ []
+
+[7]
+<imagens/01-introducao/capitulos.png, id=343, 909.3975pt x 530.98375pt>
+File: imagens/01-introducao/capitulos.png Graphic file (type png)
+<use imagens/01-introducao/capitulos.png>
+Package pdftex.def Info: imagens/01-introducao/capitulos.png  used on input lin
+e 212.
+(pdftex.def)             Requested size: 206.99232pt x 120.85976pt.
+[8 <./imagens/01-introducao/capitulos.png (PNG copy)>]
+<imagens/02-formacao/componentes.png, id=354, 639.38875pt x 686.565pt>
+File: imagens/02-formacao/componentes.png Graphic file (type png)
+<use imagens/02-formacao/componentes.png>
+Package pdftex.def Info: imagens/02-formacao/componentes.png  used on input lin
+e 237.
+(pdftex.def)             Requested size: 224.24796pt x 240.79373pt.
+
+Overfull \hbox (188.30011pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 1.2.  ETAPAS DO PROCESSAMENTO DE IMAGENS, VISÃO COMPUTACIONAL E
+ APRENDIZADO DE MÁQUINA \T1/lmr/m/n/10 9
+ []
+
+[9 <./imagens/02-formacao/componentes.png>]
+<imagens/05-filtros/placaEletronicaMediana.png, id=371, 1037.8775pt x 294.09875
+pt>
+File: imagens/05-filtros/placaEletronicaMediana.png Graphic file (type png)
+<use imagens/05-filtros/placaEletronicaMediana.png>
+Package pdftex.def Info: imagens/05-filtros/placaEletronicaMediana.png  used on
+ input line 256.
+(pdftex.def)             Requested size: 293.24846pt x 83.09651pt.
+<imagens/01-introducao/cannyEOriginal.png, id=376, 946.53625pt x 454.69875pt>
+File: imagens/01-introducao/cannyEOriginal.png Graphic file (type png)
+<use imagens/01-introducao/cannyEOriginal.png>
+Package pdftex.def Info: imagens/01-introducao/cannyEOriginal.png  used on inpu
+t line 275.
+(pdftex.def)             Requested size: 206.99652pt x 99.43735pt.
+[10 <./imagens/05-filtros/placaEletronicaMediana.png>]
+<imagens/06-segmentacao/dog_hubble.jpg, id=390, 845.1575pt x 770.88pt>
+File: imagens/06-segmentacao/dog_hubble.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/dog_hubble.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/dog_hubble.jpg  used on input l
+ine 288.
+(pdftex.def)             Requested size: 120.7457pt x 110.13383pt.
+<imagens/08-modelagemBackground/indoorBGmodeling.png, id=394, 885.3075pt x 750.
+1626pt>
+File: imagens/08-modelagemBackground/indoorBGmodeling.png Graphic file (type pn
+g)
+<use imagens/08-modelagemBackground/indoorBGmodeling.png>
+Package pdftex.def Info: imagens/08-modelagemBackground/indoorBGmodeling.png  u
+sed on input line 301.
+(pdftex.def)             Requested size: 172.49242pt x 146.16092pt.
+
+Overfull \hbox (193.30011pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 1.2.  ETAPAS DO PROCESSAMENTO DE IMAGENS, VISÃO COMPUTACIONAL E
+ APRENDIZADO DE MÁQUINA \T1/lmr/m/n/10 11
+ []
+
+[11 <./imagens/01-introducao/cannyEOriginal.png (PNG copy)> <./imagens/06-segme
+ntacao/dog_hubble.jpg>]
+<imagens/07-deepLearning/differentscnn.png, id=403, 963.6pt x 549.05125pt>
+File: imagens/07-deepLearning/differentscnn.png Graphic file (type png)
+<use imagens/07-deepLearning/differentscnn.png>
+Package pdftex.def Info: imagens/07-deepLearning/differentscnn.png  used on inp
+ut line 320.
+(pdftex.def)             Requested size: 275.99626pt x 157.26036pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[12 <./imagens/08-modelagemBackground/indoorBGmodeling.png>] [13 <./imagens/07-
+deepLearning/differentscnn.png>]
+<imagens/01-introducao/espectro.png, id=428, 481.8pt x 174.8934pt>
+File: imagens/01-introducao/espectro.png Graphic file (type png)
+<use imagens/01-introducao/espectro.png>
+Package pdftex.def Info: imagens/01-introducao/espectro.png  used on input line
+ 346.
+(pdftex.def)             Requested size: 310.50497pt x 112.7133pt.
+[14 <./imagens/01-introducao/espectro.png>]
+<imagens/01-introducao/aplicacoes.png, id=445, 2058.94218pt x 476.53032pt>
+File: imagens/01-introducao/aplicacoes.png Graphic file (type png)
+<use imagens/01-introducao/aplicacoes.png>
+Package pdftex.def Info: imagens/01-introducao/aplicacoes.png  used on input li
+ne 382.
+(pdftex.def)             Requested size: 310.4931pt x 71.86183pt.
+[15] [16 <./imagens/01-introducao/aplicacoes.png>]
+Cap\'{\i }tulo 2.
+[17
+
+]
+<imagens/02-formacao/aquisicao_imagem.png, id=470, 858.20625pt x 632.3625pt>
+File: imagens/02-formacao/aquisicao_imagem.png Graphic file (type png)
+<use imagens/02-formacao/aquisicao_imagem.png>
+Package pdftex.def Info: imagens/02-formacao/aquisicao_imagem.png  used on inpu
+t line 409.
+(pdftex.def)             Requested size: 189.74881pt x 139.81491pt.
+<imagens/02-formacao/barreiraluz.png, id=473, 919.435pt x 451.6875pt>
+File: imagens/02-formacao/barreiraluz.png Graphic file (type png)
+<use imagens/02-formacao/barreiraluz.png>
+Package pdftex.def Info: imagens/02-formacao/barreiraluz.png  used on input lin
+e 422.
+(pdftex.def)             Requested size: 189.74805pt x 93.21683pt.
+<imagens/02-formacao/geometriapinhole.png, id=476, 1007.765pt x 674.52pt>
+File: imagens/02-formacao/geometriapinhole.png Graphic file (type png)
+<use imagens/02-formacao/geometriapinhole.png>
+Package pdftex.def Info: imagens/02-formacao/geometriapinhole.png  used on inpu
+t line 435.
+(pdftex.def)             Requested size: 189.73972pt x 126.99709pt.
+[18 <./imagens/02-formacao/aquisicao_imagem.png>] [19 <./imagens/02-formacao/ba
+rreiraluz.png> <./imagens/02-formacao/geometriapinhole.png>]
+<imagens/02-formacao/lente.png, id=502, 694.595pt x 371.3875pt>
+File: imagens/02-formacao/lente.png Graphic file (type png)
+<use imagens/02-formacao/lente.png>
+Package pdftex.def Info: imagens/02-formacao/lente.png  used on input line 460.
+
+(pdftex.def)             Requested size: 189.74767pt x 101.45467pt.
+[20 <./imagens/02-formacao/lente.png>]
+<imagens/02-formacao/proporcaoObjetoImagem.png, id=517, 459.7175pt x 381.425pt>
+
+File: imagens/02-formacao/proporcaoObjetoImagem.png Graphic file (type png)
+<use imagens/02-formacao/proporcaoObjetoImagem.png>
+Package pdftex.def Info: imagens/02-formacao/proporcaoObjetoImagem.png  used on
+ input line 488.
+(pdftex.def)             Requested size: 189.75505pt x 157.43869pt.
+<imagens/02-formacao/foco.png, id=520, 721.69624pt x 420.57124pt>
+File: imagens/02-formacao/foco.png Graphic file (type png)
+<use imagens/02-formacao/foco.png>
+Package pdftex.def Info: imagens/02-formacao/foco.png  used on input line 502.
+(pdftex.def)             Requested size: 189.75093pt x 110.57808pt.
+[21 <./imagens/02-formacao/proporcaoObjetoImagem.png (PNG copy)>]
+<imagens/02-formacao/profundidade.png, id=531, 744.7825pt x 292.09125pt>
+File: imagens/02-formacao/profundidade.png Graphic file (type png)
+<use imagens/02-formacao/profundidade.png>
+Package pdftex.def Info: imagens/02-formacao/profundidade.png  used on input li
+ne 515.
+(pdftex.def)             Requested size: 189.75224pt x 74.41765pt.
+<imagens/02-formacao/campovisao.png, id=537, 778.91pt x 608.2725pt>
+File: imagens/02-formacao/campovisao.png Graphic file (type png)
+<use imagens/02-formacao/campovisao.png>
+Package pdftex.def Info: imagens/02-formacao/campovisao.png  used on input line
+ 538.
+(pdftex.def)             Requested size: 189.74713pt x 148.1788pt.
+[22 <./imagens/02-formacao/foco.png> <./imagens/02-formacao/profundidade.png>]
+<imagens/02-formacao/diferentesprofundidades.png, id=549, 1055.945pt x 236.885p
+t>
+File: imagens/02-formacao/diferentesprofundidades.png Graphic file (type png)
+<use imagens/02-formacao/diferentesprofundidades.png>
+Package pdftex.def Info: imagens/02-formacao/diferentesprofundidades.png  used 
+on input line 557.
+(pdftex.def)             Requested size: 310.486pt x 69.65274pt.
+[23 <./imagens/02-formacao/campovisao.png> <./imagens/02-formacao/diferentespro
+fundidades.png>]
+<imagens/02-formacao/sensor.png, id=561, 784.9325pt x 403.5075pt>
+File: imagens/02-formacao/sensor.png Graphic file (type png)
+<use imagens/02-formacao/sensor.png>
+Package pdftex.def Info: imagens/02-formacao/sensor.png  used on input line 576
+.
+(pdftex.def)             Requested size: 189.75304pt x 97.54567pt.
+<imagens/02-formacao/exposicao.png, id=565, 729.72626pt x 613.29124pt>
+File: imagens/02-formacao/exposicao.png Graphic file (type png)
+<use imagens/02-formacao/exposicao.png>
+Package pdftex.def Info: imagens/02-formacao/exposicao.png  used on input line 
+589.
+(pdftex.def)             Requested size: 206.9943pt x 173.96631pt.
+File: imagens/02-formacao/componentes.png Graphic file (type png)
+<use imagens/02-formacao/componentes.png>
+Package pdftex.def Info: imagens/02-formacao/componentes.png  used on input lin
+e 603.
+(pdftex.def)             Requested size: 224.24796pt x 240.79373pt.
+<imagens/02-formacao/tres_sensores.png, id=571, 658.46pt x 353.32pt>
+File: imagens/02-formacao/tres_sensores.png Graphic file (type png)
+<use imagens/02-formacao/tres_sensores.png>
+Package pdftex.def Info: imagens/02-formacao/tres_sensores.png  used on input l
+ine 616.
+(pdftex.def)             Requested size: 206.99402pt x 111.06995pt.
+[24 <./imagens/02-formacao/sensor.png>] [25 <./imagens/02-formacao/exposicao.pn
+g>]
+<imagens/02-formacao/bayer.png, id=589, 1176.395pt x 381.425pt>
+File: imagens/02-formacao/bayer.png Graphic file (type png)
+<use imagens/02-formacao/bayer.png>
+Package pdftex.def Info: imagens/02-formacao/bayer.png  used on input line 629.
+
+(pdftex.def)             Requested size: 276.0041pt x 89.48938pt.
+<imagens/02-formacao/sensorarray.png, id=592, 1027.84pt x 657.45625pt>
+File: imagens/02-formacao/sensorarray.png Graphic file (type png)
+<use imagens/02-formacao/sensorarray.png>
+Package pdftex.def Info: imagens/02-formacao/sensorarray.png  used on input lin
+e 642.
+(pdftex.def)             Requested size: 206.99156pt x 132.40182pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[26 <./imagens/02-formacao/tres_sensores.png> <./imagens/02-formacao/bayer.png>
+]
+<imagens/02-formacao/amostragemquant.png, id=611, 982.67125pt x 748.7975pt>
+File: imagens/02-formacao/amostragemquant.png Graphic file (type png)
+<use imagens/02-formacao/amostragemquant.png>
+Package pdftex.def Info: imagens/02-formacao/amostragemquant.png  used on input
+ line 669.
+(pdftex.def)             Requested size: 241.49878pt x 184.02257pt.
+[27 <./imagens/02-formacao/sensorarray.png>]
+<imagens/02-formacao/quantizacao.png, id=631, 998.73125pt x 542.025pt>
+File: imagens/02-formacao/quantizacao.png Graphic file (type png)
+<use imagens/02-formacao/quantizacao.png>
+Package pdftex.def Info: imagens/02-formacao/quantizacao.png  used on input lin
+e 689.
+(pdftex.def)             Requested size: 206.99666pt x 112.33989pt.
+[28 <./imagens/02-formacao/amostragemquant.png>]
+<imagens/02-formacao/imagemdigital.png, id=649, 660.4675pt x 637.38126pt>
+File: imagens/02-formacao/imagemdigital.png Graphic file (type png)
+<use imagens/02-formacao/imagemdigital.png>
+Package pdftex.def Info: imagens/02-formacao/imagemdigital.png  used on input l
+ine 716.
+(pdftex.def)             Requested size: 241.49693pt x 233.05556pt.
+[29 <./imagens/02-formacao/quantizacao.png>]
+
+LaTeX Warning: Command \texttimes invalid in math mode on input line 729.
+
+
+LaTeX Warning: Command \texttimes invalid in math mode on input line 729.
+
+
+LaTeX Warning: Command \texttimes invalid in math mode on input line 729.
+
+
+LaTeX Warning: Command \texttimes invalid in math mode on input line 729.
+
+<imagens/02-formacao/tabelabits.png, id=665, 1162.3425pt x 392.46625pt>
+File: imagens/02-formacao/tabelabits.png Graphic file (type png)
+<use imagens/02-formacao/tabelabits.png>
+Package pdftex.def Info: imagens/02-formacao/tabelabits.png  used on input line
+ 739.
+(pdftex.def)             Requested size: 344.99864pt x 116.48917pt.
+
+Underfull \vbox (badness 5667) has occurred while \output is active []
+
+[30 <./imagens/02-formacao/imagemdigital.png>]
+<imagens/02-formacao/resolucaoespacial.png, id=679, 466.74374pt x 695.59875pt>
+File: imagens/02-formacao/resolucaoespacial.png Graphic file (type png)
+<use imagens/02-formacao/resolucaoespacial.png>
+Package pdftex.def Info: imagens/02-formacao/resolucaoespacial.png  used on inp
+ut line 757.
+(pdftex.def)             Requested size: 172.50018pt x 257.08093pt.
+<imagens/02-formacao/reducaoprofundidade.png, id=684, 1367.1075pt x 503.8825pt>
+
+File: imagens/02-formacao/reducaoprofundidade.png Graphic file (type png)
+<use imagens/02-formacao/reducaoprofundidade.png>
+Package pdftex.def Info: imagens/02-formacao/reducaoprofundidade.png  used on i
+nput line 772.
+(pdftex.def)             Requested size: 310.4855pt x 114.43738pt.
+[31 <./imagens/02-formacao/tabelabits.png>] [32 <./imagens/02-formacao/resoluca
+oespacial.png> <./imagens/02-formacao/reducaoprofundidade.png>]
+<imagens/02-formacao/vizinhanca4-8-d.png, id=704, 484.9317pt x 476.0184pt>
+File: imagens/02-formacao/vizinhanca4-8-d.png Graphic file (type png)
+<use imagens/02-formacao/vizinhanca4-8-d.png>
+Package pdftex.def Info: imagens/02-formacao/vizinhanca4-8-d.png  used on input
+ line 816.
+(pdftex.def)             Requested size: 137.99979pt x 135.46327pt.
+[33 <./imagens/02-formacao/vizinhanca4-8-d.png>]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 836.
+
+<imagens/02-formacao/caminho.png, id=720, 483.2454pt x 226.9278pt>
+File: imagens/02-formacao/caminho.png Graphic file (type png)
+<use imagens/02-formacao/caminho.png>
+Package pdftex.def Info: imagens/02-formacao/caminho.png  used on input line 84
+2.
+(pdftex.def)             Requested size: 137.99919pt x 64.8032pt.
+[34 <./imagens/02-formacao/caminho.png>]
+<imagens/02-formacao/componente_conexos.png, id=737, 317.5062pt x 350.9913pt>
+File: imagens/02-formacao/componente_conexos.png Graphic file (type png)
+<use imagens/02-formacao/componente_conexos.png>
+Package pdftex.def Info: imagens/02-formacao/componente_conexos.png  used on in
+put line 858.
+(pdftex.def)             Requested size: 68.99889pt x 76.27571pt.
+<imagens/02-formacao/borda_interior.png, id=741, 392.4261pt x 165.2574pt>
+File: imagens/02-formacao/borda_interior.png Graphic file (type png)
+<use imagens/02-formacao/borda_interior.png>
+Package pdftex.def Info: imagens/02-formacao/borda_interior.png  used on input 
+line 874.
+(pdftex.def)             Requested size: 137.99788pt x 58.11328pt.
+[35 <./imagens/02-formacao/componente_conexos.png> <./imagens/02-formacao/borda
+_interior.png>]
+<imagens/02-formacao/medida_distancia1.png, id=758, 580.569pt x 537.207pt>
+File: imagens/02-formacao/medida_distancia1.png Graphic file (type png)
+<use imagens/02-formacao/medida_distancia1.png>
+Package pdftex.def Info: imagens/02-formacao/medida_distancia1.png  used on inp
+ut line 915.
+(pdftex.def)             Requested size: 137.99287pt x 127.68636pt.
+<imagens/02-formacao/medida_distancia2.png, id=762, 471.9231pt x 536.0025pt>
+File: imagens/02-formacao/medida_distancia2.png Graphic file (type png)
+<use imagens/02-formacao/medida_distancia2.png>
+Package pdftex.def Info: imagens/02-formacao/medida_distancia2.png  used on inp
+ut line 934.
+(pdftex.def)             Requested size: 137.99194pt x 156.72897pt.
+[36 <./imagens/02-formacao/medida_distancia1.png>]
+<imagens/02-formacao/medida_distancia3.png, id=775, 412.9026pt x 482.2818pt>
+File: imagens/02-formacao/medida_distancia3.png Graphic file (type png)
+<use imagens/02-formacao/medida_distancia3.png>
+Package pdftex.def Info: imagens/02-formacao/medida_distancia3.png  used on inp
+ut line 949.
+(pdftex.def)             Requested size: 137.99718pt x 161.18457pt.
+[37 <./imagens/02-formacao/medida_distancia2.png> <./imagens/02-formacao/medida
+_distancia3.png>] [38]
+Cap\'{\i }tulo 3.
+[39
+
+]
+<imagens/03-transformacoes/coordenadaPolar.png, id=808, 1116.17pt x 399.4925pt>
+
+File: imagens/03-transformacoes/coordenadaPolar.png Graphic file (type png)
+<use imagens/03-transformacoes/coordenadaPolar.png>
+Package pdftex.def Info: imagens/03-transformacoes/coordenadaPolar.png  used on
+ input line 1006.
+(pdftex.def)             Requested size: 275.9932pt x 98.78174pt.
+[40 <./imagens/03-transformacoes/coordenadaPolar.png>]
+<imagens/03-transformacoes/tableMatriz.png, id=818, 590.205pt x 354.32375pt>
+File: imagens/03-transformacoes/tableMatriz.png Graphic file (type png)
+<use imagens/03-transformacoes/tableMatriz.png>
+Package pdftex.def Info: imagens/03-transformacoes/tableMatriz.png  used on inp
+ut line 1047.
+(pdftex.def)             Requested size: 137.99574pt x 82.84438pt.
+[41 <./imagens/03-transformacoes/tableMatriz.png>]
+<imagens/03-transformacoes/memoria_tela_imagem.png, id=827, 980.66376pt x 476.7
+8125pt>
+File: imagens/03-transformacoes/memoria_tela_imagem.png Graphic file (type png)
+
+<use imagens/03-transformacoes/memoria_tela_imagem.png>
+Package pdftex.def Info: imagens/03-transformacoes/memoria_tela_imagem.png  use
+d on input line 1080.
+(pdftex.def)             Requested size: 241.49922pt x 117.41261pt.
+[42 <./imagens/03-transformacoes/memoria_tela_imagem.png>]
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 1099.
+
+
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 1103.
+
+
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 1108.
+
+
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 1108.
+
+
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 1108.
+
+
+<imagens/03-transformacoes/translacao.png, id=838, 1309.89375pt x 625.33624pt>
+File: imagens/03-transformacoes/translacao.png Graphic file (type png)
+<use imagens/03-transformacoes/translacao.png>
+Package pdftex.def Info: imagens/03-transformacoes/translacao.png  used on inpu
+t line 1119.
+(pdftex.def)             Requested size: 241.48708pt x 115.28464pt.
+[43 <./imagens/03-transformacoes/translacao.png>]
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 1132.
+
+
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 1137.
+
+
+<imagens/03-transformacoes/escala.png, id=849, 1352.05125pt x 807.015pt>
+File: imagens/03-transformacoes/escala.png Graphic file (type png)
+<use imagens/03-transformacoes/escala.png>
+Package pdftex.def Info: imagens/03-transformacoes/escala.png  used on input li
+ne 1146.
+(pdftex.def)             Requested size: 275.99635pt x 164.73724pt.
+<imagens/03-transformacoes/escala3d.png, id=852, 959.585pt x 207.77625pt>
+File: imagens/03-transformacoes/escala3d.png Graphic file (type png)
+<use imagens/03-transformacoes/escala3d.png>
+Package pdftex.def Info: imagens/03-transformacoes/escala3d.png  used on input 
+line 1159.
+(pdftex.def)             Requested size: 276.003pt x 59.76215pt.
+
+Underfull \vbox (badness 1168) has occurred while \output is active []
+
+[44 <./imagens/03-transformacoes/escala.png>]
+<imagens/03-transformacoes/rotacao1.png, id=863, 769.87625pt x 597.23125pt>
+File: imagens/03-transformacoes/rotacao1.png Graphic file (type png)
+<use imagens/03-transformacoes/rotacao1.png>
+Package pdftex.def Info: imagens/03-transformacoes/rotacao1.png  used on input 
+line 1177.
+(pdftex.def)             Requested size: 155.24123pt x 120.42833pt.
+<imagens/03-transformacoes/matriz_rotacao.png, id=866, 343.2825pt x 153.57375pt
+>
+File: imagens/03-transformacoes/matriz_rotacao.png Graphic file (type png)
+<use imagens/03-transformacoes/matriz_rotacao.png>
+Package pdftex.def Info: imagens/03-transformacoes/matriz_rotacao.png  used on 
+input line 1211.
+(pdftex.def)             Requested size: 51.74681pt x 23.14989pt.
+[45 <./imagens/03-transformacoes/escala3d.png> <./imagens/03-transformacoes/rot
+acao1.png>]
+<imagens/03-transformacoes/rotacao2.png, id=876, 1197.47375pt x 602.25pt>
+File: imagens/03-transformacoes/rotacao2.png Graphic file (type png)
+<use imagens/03-transformacoes/rotacao2.png>
+Package pdftex.def Info: imagens/03-transformacoes/rotacao2.png  used on input 
+line 1224.
+(pdftex.def)             Requested size: 206.9847pt x 104.0996pt.
+[46 <./imagens/03-transformacoes/matriz_rotacao.png> <./imagens/03-transformaco
+es/rotacao2.png>]
+Cap\'{\i }tulo 4.
+<imagens/04-transformacaoRadiometricas/dominioEspecial.png, id=887, 681.54625pt
+ x 548.0475pt>
+File: imagens/04-transformacaoRadiometricas/dominioEspecial.png Graphic file (t
+ype png)
+<use imagens/04-transformacaoRadiometricas/dominioEspecial.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/dominioEspecial.
+png  used on input line 1247.
+(pdftex.def)             Requested size: 137.99156pt x 110.96228pt.
+[47
+
+ <./imagens/04-transformacaoRadiometricas/dominioEspecial.png>]
+<imagens/04-transformacaoRadiometricas/funcao_itensidade.png, id=898, 610.28pt 
+x 536.0025pt>
+File: imagens/04-transformacaoRadiometricas/funcao_itensidade.png Graphic file 
+(type png)
+<use imagens/04-transformacaoRadiometricas/funcao_itensidade.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/funcao_itensidad
+e.png  used on input line 1268.
+(pdftex.def)             Requested size: 137.99617pt x 121.20058pt.
+
+LaTeX Warning: Command \textendash invalid in math mode on input line 1278.
+
+
+LaTeX Warning: Command \textendash invalid in math mode on input line 1280.
+
+
+LaTeX Warning: Command \textendash invalid in math mode on input line 1280.
+
+[48]
+<imagens/04-transformacaoRadiometricas/monografia_digital.png, id=912, 760.8425
+pt x 422.57875pt>
+File: imagens/04-transformacaoRadiometricas/monografia_digital.png Graphic file
+ (type png)
+<use imagens/04-transformacaoRadiometricas/monografia_digital.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/monografia_digit
+al.png  used on input line 1289.
+(pdftex.def)             Requested size: 137.99059pt x 76.6412pt.
+[49 <./imagens/04-transformacaoRadiometricas/funcao_itensidade.png> <./imagens/
+04-transformacaoRadiometricas/monografia_digital.png>]
+<imagens/04-transformacaoRadiometricas/logaritimica.png, id=928, 688.5725pt x 3
+30.23375pt>
+File: imagens/04-transformacaoRadiometricas/logaritimica.png Graphic file (type
+ png)
+<use imagens/04-transformacaoRadiometricas/logaritimica.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/logaritimica.png
+  used on input line 1312.
+(pdftex.def)             Requested size: 137.99573pt x 66.18163pt.
+<imagens/04-transformacaoRadiometricas/plotagens_equacao.png, id=933, 578.16pt 
+x 503.8825pt>
+File: imagens/04-transformacaoRadiometricas/plotagens_equacao.png Graphic file 
+(type png)
+<use imagens/04-transformacaoRadiometricas/plotagens_equacao.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/plotagens_equaca
+o.png  used on input line 1333.
+(pdftex.def)             Requested size: 137.99371pt x 120.26535pt.
+<imagens/04-transformacaoRadiometricas/variacao_gradativa.png, id=941, 651.4337
+5pt x 632.3625pt>
+File: imagens/04-transformacaoRadiometricas/variacao_gradativa.png Graphic file
+ (type png)
+<use imagens/04-transformacaoRadiometricas/variacao_gradativa.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/variacao_gradati
+va.png  used on input line 1346.
+(pdftex.def)             Requested size: 137.99792pt x 133.95793pt.
+[50 <./imagens/04-transformacaoRadiometricas/logaritimica.png>] [51 <./imagens/
+04-transformacaoRadiometricas/plotagens_equacao.png> <./imagens/04-transformaca
+oRadiometricas/variacao_gradativa.png>]
+<imagens/04-transformacaoRadiometricas/potencial.png, id=961, 667.49374pt x 647
+.41875pt>
+File: imagens/04-transformacaoRadiometricas/potencial.png Graphic file (type pn
+g)
+<use imagens/04-transformacaoRadiometricas/potencial.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/potencial.png  u
+sed on input line 1359.
+(pdftex.def)             Requested size: 137.9982pt x 133.84789pt.
+[52 <./imagens/04-transformacaoRadiometricas/potencial.png>]
+<imagens/04-transformacaoRadiometricas/histograma5.png, id=975, 434.62375pt x 6
+94.595pt>
+File: imagens/04-transformacaoRadiometricas/histograma5.png Graphic file (type 
+png)
+<use imagens/04-transformacaoRadiometricas/histograma5.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/histograma5.png 
+ used on input line 1383.
+(pdftex.def)             Requested size: 138.00145pt x 220.54736pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[53 <./imagens/04-transformacaoRadiometricas/histograma5.png>]
+<imagens/04-transformacaoRadiometricas/histograma.png, id=994, 1021.8175pt x 33
+6.25626pt>
+File: imagens/04-transformacaoRadiometricas/histograma.png Graphic file (type p
+ng)
+<use imagens/04-transformacaoRadiometricas/histograma.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/histograma.png  
+used on input line 1409.
+(pdftex.def)             Requested size: 137.98618pt x 45.40802pt.
+[54 <./imagens/04-transformacaoRadiometricas/histograma.png>]
+<imagens/04-transformacaoRadiometricas/histograma2.png, id=1006, 914.41624pt x 
+571.13374pt>
+File: imagens/04-transformacaoRadiometricas/histograma2.png Graphic file (type 
+png)
+<use imagens/04-transformacaoRadiometricas/histograma2.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/histograma2.png 
+ used on input line 1427.
+(pdftex.def)             Requested size: 137.99368pt x 86.18924pt.
+<imagens/04-transformacaoRadiometricas/equalizaca2.png, id=1012, 661.72218pt x 
+97.86563pt>
+File: imagens/04-transformacaoRadiometricas/equalizaca2.png Graphic file (type 
+png)
+<use imagens/04-transformacaoRadiometricas/equalizaca2.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/equalizaca2.png 
+ used on input line 1447.
+(pdftex.def)             Requested size: 310.49452pt x 45.92068pt.
+
+LaTeX Warning: Command \textendash invalid in math mode on input line 1454.
+
+[55 <./imagens/04-transformacaoRadiometricas/histograma2.png> <./imagens/04-tra
+nsformacaoRadiometricas/equalizaca2.png>]
+
+LaTeX Warning: Command \textendash invalid in math mode on input line 1456.
+
+<imagens/04-transformacaoRadiometricas/tabla_pixels.png, id=1025, 500.87125pt x
+ 407.5225pt>
+File: imagens/04-transformacaoRadiometricas/tabla_pixels.png Graphic file (type
+ png)
+<use imagens/04-transformacaoRadiometricas/tabla_pixels.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/tabla_pixels.png
+  used on input line 1462.
+(pdftex.def)             Requested size: 137.99603pt x 112.27734pt.
+<imagens/04-transformacaoRadiometricas/histograma3.png, id=1030, 591.20876pt x 
+494.84875pt>
+File: imagens/04-transformacaoRadiometricas/histograma3.png Graphic file (type 
+png)
+<use imagens/04-transformacaoRadiometricas/histograma3.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/histograma3.png 
+ used on input line 1476.
+(pdftex.def)             Requested size: 137.99588pt x 115.50418pt.
+[56 <./imagens/04-transformacaoRadiometricas/tabla_pixels.png> <./imagens/04-tr
+ansformacaoRadiometricas/histograma3.png>]
+<imagens/04-transformacaoRadiometricas/tabela_histograma2.png, id=1043, 389.455
+pt x 497.86pt>
+File: imagens/04-transformacaoRadiometricas/tabela_histograma2.png Graphic file
+ (type png)
+<use imagens/04-transformacaoRadiometricas/tabela_histograma2.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/tabela_histogram
+a2.png  used on input line 1489.
+(pdftex.def)             Requested size: 137.99304pt x 176.40347pt.
+<imagens/04-transformacaoRadiometricas/tabela_histograma3.png, id=1047, 463.732
+5pt x 543.02875pt>
+File: imagens/04-transformacaoRadiometricas/tabela_histograma3.png Graphic file
+ (type png)
+<use imagens/04-transformacaoRadiometricas/tabela_histograma3.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/tabela_histogram
+a3.png  used on input line 1502.
+(pdftex.def)             Requested size: 137.99573pt x 161.5924pt.
+[57 <./imagens/04-transformacaoRadiometricas/tabela_histograma2.png> <./imagens
+/04-transformacaoRadiometricas/tabela_histograma3.png>]
+<imagens/04-transformacaoRadiometricas/tabela_histograma4.png, id=1061, 489.83p
+t x 387.4475pt>
+File: imagens/04-transformacaoRadiometricas/tabela_histograma4.png Graphic file
+ (type png)
+<use imagens/04-transformacaoRadiometricas/tabela_histograma4.png>
+Package pdftex.def Info: imagens/04-transformacaoRadiometricas/tabela_histogram
+a4.png  used on input line 1515.
+(pdftex.def)             Requested size: 137.99605pt x 109.1526pt.
+[58 <./imagens/04-transformacaoRadiometricas/tabela_histograma4.png>]
+Cap\'{\i }tulo 5.
+<imagens/05-filtros/onibusShapenNBlur.png, id=1069, 818.30719pt x 332.74312pt>
+File: imagens/05-filtros/onibusShapenNBlur.png Graphic file (type png)
+<use imagens/05-filtros/onibusShapenNBlur.png>
+Package pdftex.def Info: imagens/05-filtros/onibusShapenNBlur.png  used on inpu
+t line 1531.
+(pdftex.def)             Requested size: 189.74251pt x 77.1538pt.
+[59
+
+ <./imagens/05-filtros/onibusShapenNBlur.png>]
+<imagens/05-filtros/esquilo1.png, id=1081, 31.42174pt x 31.42174pt>
+File: imagens/05-filtros/esquilo1.png Graphic file (type png)
+<use imagens/05-filtros/esquilo1.png>
+Package pdftex.def Info: imagens/05-filtros/esquilo1.png  used on input line 15
+62.
+(pdftex.def)             Requested size: 31.42308pt x 31.42308pt.
+<imagens/05-filtros/esquilo2.png, id=1082, 31.42174pt x 31.42174pt>
+File: imagens/05-filtros/esquilo2.png Graphic file (type png)
+<use imagens/05-filtros/esquilo2.png>
+Package pdftex.def Info: imagens/05-filtros/esquilo2.png  used on input line 15
+67.
+(pdftex.def)             Requested size: 31.42308pt x 31.42308pt.
+<imagens/05-filtros/esquilo3.png, id=1083, 31.42174pt x 31.42174pt>
+File: imagens/05-filtros/esquilo3.png Graphic file (type png)
+<use imagens/05-filtros/esquilo3.png>
+Package pdftex.def Info: imagens/05-filtros/esquilo3.png  used on input line 15
+72.
+(pdftex.def)             Requested size: 31.42308pt x 31.42308pt.
+File: imagens/05-filtros/esquilo1.png Graphic file (type png)
+<use imagens/05-filtros/esquilo1.png>
+Package pdftex.def Info: imagens/05-filtros/esquilo1.png  used on input line 15
+77.
+(pdftex.def)             Requested size: 31.42308pt x 31.42308pt.
+<imagens/05-filtros/convolutionGif.png, id=1085, 642.4pt x 361.35pt>
+File: imagens/05-filtros/convolutionGif.png Graphic file (type png)
+<use imagens/05-filtros/convolutionGif.png>
+Package pdftex.def Info: imagens/05-filtros/convolutionGif.png  used on input l
+ine 1587.
+(pdftex.def)             Requested size: 189.7514pt x 106.73517pt.
+[60 <./imagens/05-filtros/esquilo1.png> <./imagens/05-filtros/esquilo2.png> <./
+imagens/05-filtros/esquilo3.png>]
+<imagens/05-filtros/correlationNConvolution1D.png, id=1098, 890.32625pt x 768.8
+725pt>
+File: imagens/05-filtros/correlationNConvolution1D.png Graphic file (type png)
+<use imagens/05-filtros/correlationNConvolution1D.png>
+Package pdftex.def Info: imagens/05-filtros/correlationNConvolution1D.png  used
+ on input line 1604.
+(pdftex.def)             Requested size: 189.74542pt x 163.86131pt.
+[61 <./imagens/05-filtros/convolutionGif.png>]
+<imagens/05-filtros/correlationNConvolution2D.png, id=1112, 563.10374pt x 626.3
+4pt>
+File: imagens/05-filtros/correlationNConvolution2D.png Graphic file (type png)
+<use imagens/05-filtros/correlationNConvolution2D.png>
+Package pdftex.def Info: imagens/05-filtros/correlationNConvolution2D.png  used
+ on input line 1619.
+(pdftex.def)             Requested size: 189.75146pt x 211.06046pt.
+[62 <./imagens/05-filtros/correlationNConvolution1D.png (PNG copy)>]
+<imagens/05-filtros/conv_1.png, id=1122, 512.66531pt x 292.84406pt>
+File: imagens/05-filtros/conv_1.png Graphic file (type png)
+<use imagens/05-filtros/conv_1.png>
+Package pdftex.def Info: imagens/05-filtros/conv_1.png  used on input line 1645
+.
+(pdftex.def)             Requested size: 189.75359pt x 108.39081pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[63 <./imagens/05-filtros/correlationNConvolution2D.png> <./imagens/05-filtros/
+conv_1.png>]
+<imagens/05-filtros/conv_2.png, id=1129, 512.66531pt x 292.84406pt>
+File: imagens/05-filtros/conv_2.png Graphic file (type png)
+<use imagens/05-filtros/conv_2.png>
+Package pdftex.def Info: imagens/05-filtros/conv_2.png  used on input line 1668
+.
+(pdftex.def)             Requested size: 189.75359pt x 108.39081pt.
+
+Overfull \hbox (925.76694pt too wide) detected at line 1685
+[][]
+ []
+
+<imagens/05-filtros/conv_3.png, id=1130, 512.66531pt x 292.84406pt>
+File: imagens/05-filtros/conv_3.png Graphic file (type png)
+<use imagens/05-filtros/conv_3.png>
+Package pdftex.def Info: imagens/05-filtros/conv_3.png  used on input line 1691
+.
+(pdftex.def)             Requested size: 189.75359pt x 108.39081pt.
+
+Overfull \hbox (920.76694pt too wide) detected at line 1708
+[][]
+ []
+
+<imagens/05-filtros/conv_4.png, id=1131, 512.66531pt x 292.84406pt>
+File: imagens/05-filtros/conv_4.png Graphic file (type png)
+<use imagens/05-filtros/conv_4.png>
+Package pdftex.def Info: imagens/05-filtros/conv_4.png  used on input line 1714
+.
+(pdftex.def)             Requested size: 189.75359pt x 108.39081pt.
+
+Overfull \hbox (980.21219pt too wide) detected at line 1731
+[][]
+ []
+
+[64 <./imagens/05-filtros/conv_2.png> <./imagens/05-filtros/conv_3.png>]
+<imagens/05-filtros/conv_5.png, id=1138, 512.66531pt x 292.84406pt>
+File: imagens/05-filtros/conv_5.png Graphic file (type png)
+<use imagens/05-filtros/conv_5.png>
+Package pdftex.def Info: imagens/05-filtros/conv_5.png  used on input line 1737
+.
+(pdftex.def)             Requested size: 189.75359pt x 108.39081pt.
+
+Overfull \hbox (907.43353pt too wide) detected at line 1754
+[][]
+ []
+
+<imagens/05-filtros/conv_6.png, id=1139, 512.66531pt x 292.84406pt>
+File: imagens/05-filtros/conv_6.png Graphic file (type png)
+<use imagens/05-filtros/conv_6.png>
+Package pdftex.def Info: imagens/05-filtros/conv_6.png  used on input line 1760
+.
+(pdftex.def)             Requested size: 189.75359pt x 108.39081pt.
+
+Overfull \hbox (902.43353pt too wide) detected at line 1777
+[][]
+ []
+
+[65 <./imagens/05-filtros/conv_4.png> <./imagens/05-filtros/conv_5.png> <./imag
+ens/05-filtros/conv_6.png>]
+<imagens/05-filtros/conv_7.png, id=1148, 512.66531pt x 303.38344pt>
+File: imagens/05-filtros/conv_7.png Graphic file (type png)
+<use imagens/05-filtros/conv_7.png>
+Package pdftex.def Info: imagens/05-filtros/conv_7.png  used on input line 1783
+.
+(pdftex.def)             Requested size: 189.75359pt x 112.29176pt.
+
+Overfull \hbox (959.6565pt too wide) detected at line 1800
+[][]
+ []
+
+<imagens/05-filtros/conv_8.png, id=1149, 512.66531pt x 303.38344pt>
+File: imagens/05-filtros/conv_8.png Graphic file (type png)
+<use imagens/05-filtros/conv_8.png>
+Package pdftex.def Info: imagens/05-filtros/conv_8.png  used on input line 1806
+.
+(pdftex.def)             Requested size: 189.75359pt x 112.29176pt.
+
+Overfull \hbox (900.7669pt too wide) detected at line 1823
+[][]
+ []
+
+<imagens/05-filtros/conv_9.png, id=1150, 512.66531pt x 303.38344pt>
+File: imagens/05-filtros/conv_9.png Graphic file (type png)
+<use imagens/05-filtros/conv_9.png>
+Package pdftex.def Info: imagens/05-filtros/conv_9.png  used on input line 1829
+.
+(pdftex.def)             Requested size: 189.75359pt x 112.29176pt.
+
+Overfull \hbox (901.73235pt too wide) detected at line 1846
+[][]
+ []
+
+<imagens/05-filtros/conv_final.png, id=1151, 768.62157pt x 338.01282pt>
+File: imagens/05-filtros/conv_final.png Graphic file (type png)
+<use imagens/05-filtros/conv_final.png>
+Package pdftex.def Info: imagens/05-filtros/conv_final.png  used on input line 
+1852.
+(pdftex.def)             Requested size: 189.75063pt x 83.44566pt.
+[66 <./imagens/05-filtros/conv_7.png> <./imagens/05-filtros/conv_8.png>]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 1878.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 1878.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1878--1878
+[][][]\T1/lmr/m/n/8 Adaptado de []$https : / / d2l . ai / chapter _ convolution
+al -[] neural -[] networks / padding -[] and -[]
+ []
+
+[67 <./imagens/05-filtros/conv_9.png> <./imagens/05-filtros/conv_final.png>]
+
+LaTeX Warning: Command \' invalid in math mode on input line 1880.
+
+
+Overfull \hbox (8.73088pt too wide) detected at line 1881
+\OML/lmm/m/it/10 sa\OT1/lmr/m/n/10 í\OML/lmm/m/it/10 da \OT1/lmr/m/n/10 = (\OML
+/lmm/m/it/10 f[] \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 w[] \OT1/lmr/m/n/10 + \O
+ML/lmm/m/it/10 p[] \OT1/lmr/m/n/10 + 1) \OMS/lmsy/m/n/10 ^^B \OT1/lmr/m/n/10 (\
+OML/lmm/m/it/10 f[] \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 w[] \OT1/lmr/m/n/10 +
+ \OML/lmm/m/it/10 p[] \OT1/lmr/m/n/10 + 1)[]
+ []
+
+File: imagens/05-filtros/onibusShapenNBlur.png Graphic file (type png)
+<use imagens/05-filtros/onibusShapenNBlur.png>
+Package pdftex.def Info: imagens/05-filtros/onibusShapenNBlur.png  used on inpu
+t line 1894.
+(pdftex.def)             Requested size: 189.74251pt x 77.1538pt.
+[68]
+<imagens/05-filtros/filtrosLetras.png, id=1195, 443.6575pt x 641.39626pt>
+File: imagens/05-filtros/filtrosLetras.png Graphic file (type png)
+<use imagens/05-filtros/filtrosLetras.png>
+Package pdftex.def Info: imagens/05-filtros/filtrosLetras.png  used on input li
+ne 1921.
+(pdftex.def)             Requested size: 189.74678pt x 274.31718pt.
+<imagens/05-filtros/filtrosMediaHubble.png, id=1200, 1029.8475pt x 330.23375pt>
+
+File: imagens/05-filtros/filtrosMediaHubble.png Graphic file (type png)
+<use imagens/05-filtros/filtrosMediaHubble.png>
+Package pdftex.def Info: imagens/05-filtros/filtrosMediaHubble.png  used on inp
+ut line 1934.
+(pdftex.def)             Requested size: 189.74881pt x 60.84537pt.
+[69 <./imagens/05-filtros/filtrosLetras.png>]
+File: imagens/05-filtros/placaEletronicaMediana.png Graphic file (type png)
+<use imagens/05-filtros/placaEletronicaMediana.png>
+Package pdftex.def Info: imagens/05-filtros/placaEletronicaMediana.png  used on
+ input line 1957.
+(pdftex.def)             Requested size: 189.73969pt x 53.76569pt.
+[70 <./imagens/05-filtros/filtrosMediaHubble.png>]
+<imagens/05-filtros/funcaoGaussiana.png, id=1234, 460.72125pt x 389.455pt>
+File: imagens/05-filtros/funcaoGaussiana.png Graphic file (type png)
+<use imagens/05-filtros/funcaoGaussiana.png>
+Package pdftex.def Info: imagens/05-filtros/funcaoGaussiana.png  used on input 
+line 1988.
+(pdftex.def)             Requested size: 189.74756pt x 160.39664pt.
+[71 <./imagens/05-filtros/funcaoGaussiana.png (PNG copy)>]
+<imagens/05-filtros/LettersGaussianFilter.png, id=1246, 304.13625pt x 432.61626
+pt>
+File: imagens/05-filtros/LettersGaussianFilter.png Graphic file (type png)
+<use imagens/05-filtros/LettersGaussianFilter.png>
+Package pdftex.def Info: imagens/05-filtros/LettersGaussianFilter.png  used on 
+input line 2029.
+(pdftex.def)             Requested size: 189.75519pt x 269.91582pt.
+[72] [73 <./imagens/05-filtros/LettersGaussianFilter.png>] [74]
+Cap\'{\i }tulo 6.
+[75
+
+]
+<imagens/06-segmentacao/imagemDerivadas.png, id=1284, 1031.855pt x 926.46124pt>
+
+File: imagens/06-segmentacao/imagemDerivadas.png Graphic file (type png)
+<use imagens/06-segmentacao/imagemDerivadas.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemDerivadas.png  used on in
+put line 2062.
+(pdftex.def)             Requested size: 189.74081pt x 170.36067pt.
+[76 <./imagens/06-segmentacao/imagemDerivadas.png>]
+<imagens/06-segmentacao/mascarasLaplacianas.png, id=1307, 665.48625pt x 305.14p
+t>
+File: imagens/06-segmentacao/mascarasLaplacianas.png Graphic file (type png)
+<use imagens/06-segmentacao/mascarasLaplacianas.png>
+Package pdftex.def Info: imagens/06-segmentacao/mascarasLaplacianas.png  used o
+n input line 2095.
+(pdftex.def)             Requested size: 189.74678pt x 87.00304pt.
+[77 <./imagens/06-segmentacao/mascarasLaplacianas.png>]
+
+LaTeX Warning: Command \' invalid in math mode on input line 2108.
+
+<imagens/06-segmentacao/imagemDeteccaoLinhas.png, id=1325, 657.45625pt x 650.43
+pt>
+File: imagens/06-segmentacao/imagemDeteccaoLinhas.png Graphic file (type png)
+<use imagens/06-segmentacao/imagemDeteccaoLinhas.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemDeteccaoLinhas.png  used 
+on input line 2123.
+(pdftex.def)             Requested size: 189.74452pt x 187.7167pt.
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 2132.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 2132.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 213
+2.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 213
+2.
+
+[78]
+<imagens/06-segmentacao/mascarasDeteccaoLinhas.png, id=1343, 1320.935pt x 346.2
+9375pt>
+File: imagens/06-segmentacao/mascarasDeteccaoLinhas.png Graphic file (type png)
+
+<use imagens/06-segmentacao/mascarasDeteccaoLinhas.png>
+Package pdftex.def Info: imagens/06-segmentacao/mascarasDeteccaoLinhas.png  use
+d on input line 2138.
+(pdftex.def)             Requested size: 189.74687pt x 49.74367pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[79 <./imagens/06-segmentacao/imagemDeteccaoLinhas.png> <./imagens/06-segmentac
+ao/mascarasDeteccaoLinhas.png>]
+<imagens/06-segmentacao/modelosBordas.png, id=1359, 1014.79124pt x 226.8475pt>
+File: imagens/06-segmentacao/modelosBordas.png Graphic file (type png)
+<use imagens/06-segmentacao/modelosBordas.png>
+Package pdftex.def Info: imagens/06-segmentacao/modelosBordas.png  used on inpu
+t line 2160.
+(pdftex.def)             Requested size: 189.74641pt x 42.4161pt.
+<imagens/06-segmentacao/derivadasImagensRuidosas.png, id=1366, 587.19376pt x 87
+5.27pt>
+File: imagens/06-segmentacao/derivadasImagensRuidosas.png Graphic file (type pn
+g)
+<use imagens/06-segmentacao/derivadasImagensRuidosas.png>
+Package pdftex.def Info: imagens/06-segmentacao/derivadasImagensRuidosas.png  u
+sed on input line 2175.
+(pdftex.def)             Requested size: 189.75156pt x 282.84335pt.
+[80 <./imagens/06-segmentacao/modelosBordas.png>] [81 <./imagens/06-segmentacao
+/derivadasImagensRuidosas.png>]
+<imagens/06-segmentacao/vetorGradiente.png, id=1388, 450.68375pt x 281.05pt>
+File: imagens/06-segmentacao/vetorGradiente.png Graphic file (type png)
+<use imagens/06-segmentacao/vetorGradiente.png>
+Package pdftex.def Info: imagens/06-segmentacao/vetorGradiente.png  used on inp
+ut line 2208.
+(pdftex.def)             Requested size: 189.7535pt x 118.3318pt.
+[82 <./imagens/06-segmentacao/vetorGradiente.png>]
+<imagens/06-segmentacao/operadorRoberts.png, id=1406, 397.485pt x 88.33pt>
+File: imagens/06-segmentacao/operadorRoberts.png Graphic file (type png)
+<use imagens/06-segmentacao/operadorRoberts.png>
+Package pdftex.def Info: imagens/06-segmentacao/operadorRoberts.png  used on in
+put line 2244.
+(pdftex.def)             Requested size: 189.7535pt x 42.16743pt.
+<imagens/06-segmentacao/operadorPrewitt.png, id=1410, 449.68pt x 118.4425pt>
+File: imagens/06-segmentacao/operadorPrewitt.png Graphic file (type png)
+<use imagens/06-segmentacao/operadorPrewitt.png>
+Package pdftex.def Info: imagens/06-segmentacao/operadorPrewitt.png  used on in
+put line 2267.
+(pdftex.def)             Requested size: 189.74945pt x 49.97864pt.
+[83 <./imagens/06-segmentacao/operadorRoberts.png>]
+<imagens/06-segmentacao/operadorSobel.png, id=1422, 457.71pt x 119.44624pt>
+File: imagens/06-segmentacao/operadorSobel.png Graphic file (type png)
+<use imagens/06-segmentacao/operadorSobel.png>
+Package pdftex.def Info: imagens/06-segmentacao/operadorSobel.png  used on inpu
+t line 2290.
+(pdftex.def)             Requested size: 189.75055pt x 49.51822pt.
+[84 <./imagens/06-segmentacao/operadorPrewitt.png> <./imagens/06-segmentacao/op
+eradorSobel.png>]
+<imagens/06-segmentacao/laplacianoGaussiana.png, id=1453, 654.445pt x 521.95pt>
+
+File: imagens/06-segmentacao/laplacianoGaussiana.png Graphic file (type png)
+<use imagens/06-segmentacao/laplacianoGaussiana.png>
+Package pdftex.def Info: imagens/06-segmentacao/laplacianoGaussiana.png  used o
+n input line 2327.
+(pdftex.def)             Requested size: 189.74425pt x 151.32976pt.
+[85] [86 <./imagens/06-segmentacao/laplacianoGaussiana.png>] [87]
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 240
+7.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 240
+7.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 240
+7.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 240
+7.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 240
+7.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 240
+7.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 240
+7.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 240
+7.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 240
+7.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 240
+7.
+
+<imagens/06-segmentacao/edge_orientation.png, id=1501, 631.35875pt x 560.0925pt
+>
+File: imagens/06-segmentacao/edge_orientation.png Graphic file (type png)
+<use imagens/06-segmentacao/edge_orientation.png>
+Package pdftex.def Info: imagens/06-segmentacao/edge_orientation.png  used on i
+nput line 2414.
+(pdftex.def)             Requested size: 241.49875pt x 214.23895pt.
+[88] [89 <./imagens/06-segmentacao/edge_orientation.png>]
+<imagens/06-segmentacao/original.jpg, id=1519, 545.03625pt x 545.03625pt>
+File: imagens/06-segmentacao/original.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/original.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/original.jpg  used on input lin
+e 2478.
+(pdftex.def)             Requested size: 172.49403pt x 172.49403pt.
+<imagens/06-segmentacao/gaussian.jpg, id=1520, 1091.07625pt x 1091.07625pt>
+File: imagens/06-segmentacao/gaussian.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/gaussian.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/gaussian.jpg  used on input lin
+e 2497.
+(pdftex.def)             Requested size: 172.4947pt x 172.4947pt.
+<imagens/06-segmentacao/derivadas.jpg, id=1521, 1106.1325pt x 1116.17pt>
+File: imagens/06-segmentacao/derivadas.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/derivadas.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/derivadas.jpg  used on input li
+ne 2516.
+(pdftex.def)             Requested size: 258.74281pt x 261.09076pt.
+<imagens/06-segmentacao/supressao.jpg, id=1524, 1091.07625pt x 1091.07625pt>
+File: imagens/06-segmentacao/supressao.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/supressao.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/supressao.jpg  used on input li
+ne 2535.
+(pdftex.def)             Requested size: 172.4947pt x 172.4947pt.
+<imagens/06-segmentacao/threshold.jpg, id=1525, 1091.07625pt x 1091.07625pt>
+File: imagens/06-segmentacao/threshold.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/threshold.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/threshold.jpg  used on input li
+ne 2554.
+(pdftex.def)             Requested size: 172.4947pt x 172.4947pt.
+[90 <./imagens/06-segmentacao/original.jpg>] [91 <./imagens/06-segmentacao/gaus
+sian.jpg> <./imagens/06-segmentacao/derivadas.jpg>]
+<imagens/06-segmentacao/canny.jpg, id=1546, 1091.07625pt x 1091.07625pt>
+File: imagens/06-segmentacao/canny.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/canny.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/canny.jpg  used on input line 2
+573.
+(pdftex.def)             Requested size: 172.4947pt x 172.4947pt.
+[92 <./imagens/06-segmentacao/supressao.jpg> <./imagens/06-segmentacao/threshol
+d.jpg>]
+<imagens/06-segmentacao/planoxy.png, id=1559, 686.565pt x 340.27126pt>
+File: imagens/06-segmentacao/planoxy.png Graphic file (type png)
+<use imagens/06-segmentacao/planoxy.png>
+Package pdftex.def Info: imagens/06-segmentacao/planoxy.png  used on input line
+ 2596.
+(pdftex.def)             Requested size: 224.24144pt x 111.1372pt.
+[93 <./imagens/06-segmentacao/canny.jpg>]
+<imagens/06-segmentacao/planoxyrhotheta.png, id=1573, 821.43106pt x 317.24823pt
+>
+File: imagens/06-segmentacao/planoxyrhotheta.png Graphic file (type png)
+<use imagens/06-segmentacao/planoxyrhotheta.png>
+Package pdftex.def Info: imagens/06-segmentacao/planoxyrhotheta.png  used on in
+put line 2614.
+(pdftex.def)             Requested size: 310.5051pt x 119.92143pt.
+[94 <./imagens/06-segmentacao/planoxy.png> <./imagens/06-segmentacao/planoxyrho
+theta.png>]
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 263
+8.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 263
+8.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 263
+8.
+
+
+LaTeX Warning: Command \textordmasculine invalid in math mode on input line 263
+8.
+
+<imagens/06-segmentacao/hough_um_ponto.jpg, id=1588, 739.76375pt x 379.4175pt>
+File: imagens/06-segmentacao/hough_um_ponto.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/hough_um_ponto.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/hough_um_ponto.jpg  used on inp
+ut line 2645.
+(pdftex.def)             Requested size: 258.75186pt x 132.71126pt.
+<imagens/06-segmentacao/hough_dois_ponto_esquerda.png, id=1593, 739.76375pt x 3
+79.4175pt>
+File: imagens/06-segmentacao/hough_dois_ponto_esquerda.png Graphic file (type p
+ng)
+<use imagens/06-segmentacao/hough_dois_ponto_esquerda.png>
+Package pdftex.def Info: imagens/06-segmentacao/hough_dois_ponto_esquerda.png  
+used on input line 2658.
+(pdftex.def)             Requested size: 258.75186pt x 132.71126pt.
+[95 <./imagens/06-segmentacao/hough_um_ponto.jpg>]
+<imagens/06-segmentacao/hough_dois_ponto_direita.png, id=1602, 739.76375pt x 37
+9.4175pt>
+File: imagens/06-segmentacao/hough_dois_ponto_direita.png Graphic file (type pn
+g)
+<use imagens/06-segmentacao/hough_dois_ponto_direita.png>
+Package pdftex.def Info: imagens/06-segmentacao/hough_dois_ponto_direita.png  u
+sed on input line 2671.
+(pdftex.def)             Requested size: 258.75186pt x 132.71126pt.
+<imagens/06-segmentacao/hough_tres_ponto.png, id=1605, 739.76375pt x 379.4175pt
+>
+File: imagens/06-segmentacao/hough_tres_ponto.png Graphic file (type png)
+<use imagens/06-segmentacao/hough_tres_ponto.png>
+Package pdftex.def Info: imagens/06-segmentacao/hough_tres_ponto.png  used on i
+nput line 2684.
+(pdftex.def)             Requested size: 258.75186pt x 132.71126pt.
+[96 <./imagens/06-segmentacao/hough_dois_ponto_esquerda.png> <./imagens/06-segm
+entacao/hough_dois_ponto_direita.png>]
+<imagens/06-segmentacao/hough_line_exemplo.jpg, id=1618, 1061.9675pt x 366.3687
+4pt>
+File: imagens/06-segmentacao/hough_line_exemplo.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/hough_line_exemplo.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/hough_line_exemplo.jpg  used on
+ input line 2697.
+(pdftex.def)             Requested size: 327.74814pt x 113.07pt.
+[97 <./imagens/06-segmentacao/hough_tres_ponto.png> <./imagens/06-segmentacao/h
+ough_line_exemplo.jpg>]
+<imagens/06-segmentacao/houghCircle.png, id=1634, 485.815pt x 585.18625pt>
+File: imagens/06-segmentacao/houghCircle.png Graphic file (type png)
+<use imagens/06-segmentacao/houghCircle.png>
+Package pdftex.def Info: imagens/06-segmentacao/houghCircle.png  used on input 
+line 2729.
+(pdftex.def)             Requested size: 206.99866pt x 249.3393pt.
+<imagens/06-segmentacao/moedas.jpg, id=1640, 1392.20125pt x 833.1125pt>
+File: imagens/06-segmentacao/moedas.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/moedas.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/moedas.jpg  used on input line 
+2742.
+(pdftex.def)             Requested size: 189.74474pt x 113.54587pt.
+<imagens/06-segmentacao/hough_circle_raios.jpg, id=1641, 1145.27875pt x 1109.14
+375pt>
+File: imagens/06-segmentacao/hough_circle_raios.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/hough_circle_raios.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/hough_circle_raios.jpg  used on
+ input line 2753.
+(pdftex.def)             Requested size: 345.00179pt x 334.11655pt.
+<imagens/06-segmentacao/hough_circle_resultado.jpg, id=1642, 1145.27875pt x 690
+.58pt>
+File: imagens/06-segmentacao/hough_circle_resultado.jpg Graphic file (type jpg)
+
+<use imagens/06-segmentacao/hough_circle_resultado.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/hough_circle_resultado.jpg  use
+d on input line 2764.
+(pdftex.def)             Requested size: 189.74924pt x 114.41496pt.
+[98 <./imagens/06-segmentacao/houghCircle.png>] [99 <./imagens/06-segmentacao/m
+oedas.jpg> <./imagens/06-segmentacao/hough_circle_raios.jpg>] [100 <./imagens/0
+6-segmentacao/hough_circle_resultado.jpg>] [101]
+<imagens/06-segmentacao/imagemQuinas.png, id=1698, 854.19125pt x 338.26375pt>
+File: imagens/06-segmentacao/imagemQuinas.png Graphic file (type png)
+<use imagens/06-segmentacao/imagemQuinas.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemQuinas.png  used on input
+ line 2867.
+(pdftex.def)             Requested size: 189.7474pt x 75.14085pt.
+[102]
+<imagens/06-segmentacao/gaussian_blob.jpg, id=1707, 812.03375pt x 345.29pt>
+File: imagens/06-segmentacao/gaussian_blob.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/gaussian_blob.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/gaussian_blob.jpg  used on inpu
+t line 2883.
+(pdftex.def)             Requested size: 258.74095pt x 110.02086pt.
+<imagens/06-segmentacao/nasa_hubble_deep.jpg, id=1709, 1126.2075pt x 1027.84pt>
+
+File: imagens/06-segmentacao/nasa_hubble_deep.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/nasa_hubble_deep.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/nasa_hubble_deep.jpg  used on i
+nput line 2901.
+(pdftex.def)             Requested size: 189.73428pt x 173.16212pt.
+[103 <./imagens/06-segmentacao/imagemQuinas.png> <./imagens/06-segmentacao/gaus
+sian_blob.jpg>]
+<imagens/06-segmentacao/log_sigmas.jpg, id=1723, 1423.3175pt x 443.6575pt>
+File: imagens/06-segmentacao/log_sigmas.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/log_sigmas.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/log_sigmas.jpg  used on input l
+ine 2914.
+(pdftex.def)             Requested size: 344.9912pt x 107.53603pt.
+<imagens/06-segmentacao/log_hubble.jpg, id=1726, 845.1575pt x 770.88pt>
+File: imagens/06-segmentacao/log_hubble.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/log_hubble.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/log_hubble.jpg  used on input l
+ine 2927.
+(pdftex.def)             Requested size: 189.75246pt x 173.07587pt.
+<imagens/06-segmentacao/log_hubble_baixo_threshold.jpg, id=1727, 845.1575pt x 7
+70.88pt>
+File: imagens/06-segmentacao/log_hubble_baixo_threshold.jpg Graphic file (type 
+jpg)
+<use imagens/06-segmentacao/log_hubble_baixo_threshold.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/log_hubble_baixo_threshold.jpg 
+ used on input line 2938.
+(pdftex.def)             Requested size: 189.75246pt x 173.07587pt.
+[104 <./imagens/06-segmentacao/nasa_hubble_deep.jpg> <./imagens/06-segmentacao/
+log_sigmas.jpg>] [105 <./imagens/06-segmentacao/log_hubble.jpg> <./imagens/06-s
+egmentacao/log_hubble_baixo_threshold.jpg>]
+File: imagens/06-segmentacao/dog_hubble.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/dog_hubble.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/dog_hubble.jpg  used on input l
+ine 2954.
+(pdftex.def)             Requested size: 189.75246pt x 173.07587pt.
+[106]
+<imagens/06-segmentacao/imageIntegral.png, id=1755, 704.6325pt x 311.1625pt>
+File: imagens/06-segmentacao/imageIntegral.png Graphic file (type png)
+<use imagens/06-segmentacao/imageIntegral.png>
+Package pdftex.def Info: imagens/06-segmentacao/imageIntegral.png  used on inpu
+t line 2983.
+(pdftex.def)             Requested size: 189.74799pt x 83.79184pt.
+[107 <./imagens/06-segmentacao/imageIntegral.png>]
+<imagens/06-segmentacao/discretizadogaussiano.png, id=1771, 916.42375pt x 165.6
+1874pt>
+File: imagens/06-segmentacao/discretizadogaussiano.png Graphic file (type png)
+<use imagens/06-segmentacao/discretizadogaussiano.png>
+Package pdftex.def Info: imagens/06-segmentacao/discretizadogaussiano.png  used
+ on input line 3013.
+(pdftex.def)             Requested size: 293.2476pt x 52.99655pt.
+<imagens/06-segmentacao/doh_hubble.jpg, id=1776, 845.1575pt x 770.88pt>
+File: imagens/06-segmentacao/doh_hubble.jpg Graphic file (type jpg)
+<use imagens/06-segmentacao/doh_hubble.jpg>
+Package pdftex.def Info: imagens/06-segmentacao/doh_hubble.jpg  used on input l
+ine 3033.
+(pdftex.def)             Requested size: 189.75246pt x 173.07587pt.
+[108 <./imagens/06-segmentacao/discretizadogaussiano.png>] [109 <./imagens/06-s
+egmentacao/doh_hubble.jpg>]
+<imagens/06-segmentacao/histograma4didatica.png, id=1800, 715.67375pt x 318.188
+75pt>
+File: imagens/06-segmentacao/histograma4didatica.png Graphic file (type png)
+<use imagens/06-segmentacao/histograma4didatica.png>
+Package pdftex.def Info: imagens/06-segmentacao/histograma4didatica.png  used o
+n input line 3077.
+(pdftex.def)             Requested size: 189.75092pt x 84.3633pt.
+<imagens/06-segmentacao/imagemRuido.png, id=1811, 1351.0475pt x 675.52374pt>
+File: imagens/06-segmentacao/imagemRuido.png Graphic file (type png)
+<use imagens/06-segmentacao/imagemRuido.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemRuido.png  used on input 
+line 3102.
+(pdftex.def)             Requested size: 189.74321pt x 94.8716pt.
+[110 <./imagens/06-segmentacao/histograma4didatica.png>]
+<imagens/06-segmentacao/imagemRefletancia.png, id=1825, 1348.03625pt x 677.5312
+5pt>
+File: imagens/06-segmentacao/imagemRefletancia.png Graphic file (type png)
+<use imagens/06-segmentacao/imagemRefletancia.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemRefletancia.png  used on 
+input line 3121.
+(pdftex.def)             Requested size: 189.73169pt x 95.36029pt.
+
+Underfull \vbox (badness 2181) has occurred while \output is active []
+
+[111 <./imagens/06-segmentacao/imagemRuido.png> <./imagens/06-segmentacao/image
+mRefletancia.png>]
+<imagens/06-segmentacao/imagemLimiarGlobalSimples.png, id=1844, 1355.0625pt x 5
+00.87125pt>
+File: imagens/06-segmentacao/imagemLimiarGlobalSimples.png Graphic file (type p
+ng)
+<use imagens/06-segmentacao/imagemLimiarGlobalSimples.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemLimiarGlobalSimples.png  
+used on input line 3157.
+(pdftex.def)             Requested size: 189.74881pt x 70.13678pt.
+[112 <./imagens/06-segmentacao/imagemLimiarGlobalSimples.png>] [113] [114]
+<imagens/06-segmentacao/imagemOtsu.png, id=1900, 731.73375pt x 629.35126pt>
+File: imagens/06-segmentacao/imagemOtsu.png Graphic file (type png)
+<use imagens/06-segmentacao/imagemOtsu.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemOtsu.png  used on input l
+ine 3238.
+(pdftex.def)             Requested size: 189.74384pt x 163.19533pt.
+<imagens/06-segmentacao/imagemSuavizacaoLimiarizacao.png, id=1910, 988.69376pt 
+x 497.86pt>
+File: imagens/06-segmentacao/imagemSuavizacaoLimiarizacao.png Graphic file (typ
+e png)
+<use imagens/06-segmentacao/imagemSuavizacaoLimiarizacao.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemSuavizacaoLimiarizacao.pn
+g  used on input line 3258.
+(pdftex.def)             Requested size: 189.73955pt x 95.54396pt.
+[115 <./imagens/06-segmentacao/imagemOtsu.png>]
+<imagens/06-segmentacao/ImagemSuavizacaoLimiarizacaoProblem.png, id=1928, 988.6
+9376pt x 496.85625pt>
+File: imagens/06-segmentacao/ImagemSuavizacaoLimiarizacaoProblem.png Graphic fi
+le (type png)
+<use imagens/06-segmentacao/ImagemSuavizacaoLimiarizacaoProblem.png>
+Package pdftex.def Info: imagens/06-segmentacao/ImagemSuavizacaoLimiarizacaoPro
+blem.png  used on input line 3271.
+(pdftex.def)             Requested size: 189.73955pt x 95.35133pt.
+
+Underfull \vbox (badness 1931) has occurred while \output is active []
+
+[116 <./imagens/06-segmentacao/imagemSuavizacaoLimiarizacao.png> <./imagens/06-
+segmentacao/ImagemSuavizacaoLimiarizacaoProblem.png>] [117]
+<imagens/06-segmentacao/imagemLimiarizGradiente.png, id=1960, 991.705pt x 496.8
+5625pt>
+File: imagens/06-segmentacao/imagemLimiarizGradiente.png Graphic file (type png
+)
+<use imagens/06-segmentacao/imagemLimiarizGradiente.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemLimiarizGradiente.png  us
+ed on input line 3311.
+(pdftex.def)             Requested size: 189.7424pt x 95.06325pt.
+<imagens/06-segmentacao/imagemLimiarizLaplace.png, id=1969, 825.0825pt x 592.21
+25pt>
+File: imagens/06-segmentacao/imagemLimiarizLaplace.png Graphic file (type png)
+<use imagens/06-segmentacao/imagemLimiarizLaplace.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemLimiarizLaplace.png  used
+ on input line 3325.
+(pdftex.def)             Requested size: 189.7398pt x 136.18793pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[118 <./imagens/06-segmentacao/imagemLimiarizGradiente.png>] [119 <./imagens/06
+-segmentacao/imagemLimiarizLaplace.png>]
+<imagens/06-segmentacao/imagemLimiarizacaoMult.png, id=1999, 1350.04375pt x 394
+.47375pt>
+File: imagens/06-segmentacao/imagemLimiarizacaoMult.png Graphic file (type png)
+
+<use imagens/06-segmentacao/imagemLimiarizacaoMult.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemLimiarizacaoMult.png  use
+d on input line 3365.
+(pdftex.def)             Requested size: 189.74643pt x 55.44263pt.
+<imagens/06-segmentacao/imagemLimiarizacaoVariavel.png, id=2009, 1349.04pt x 67
+4.52pt>
+File: imagens/06-segmentacao/imagemLimiarizacaoVariavel.png Graphic file (type 
+png)
+<use imagens/06-segmentacao/imagemLimiarizacaoVariavel.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemLimiarizacaoVariavel.png 
+ used on input line 3388.
+(pdftex.def)             Requested size: 189.74945pt x 94.87473pt.
+[120 <./imagens/06-segmentacao/imagemLimiarizacaoMult.png>]
+<imagens/06-segmentacao/imagemHistoVari.png, id=2021, 662.475pt x 529.98pt>
+File: imagens/06-segmentacao/imagemHistoVari.png Graphic file (type png)
+<use imagens/06-segmentacao/imagemHistoVari.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemHistoVari.png  used on in
+put line 3399.
+(pdftex.def)             Requested size: 189.74742pt x 151.79793pt.
+[121 <./imagens/06-segmentacao/imagemLimiarizacaoVariavel.png> <./imagens/06-se
+gmentacao/imagemHistoVari.png>]
+
+LaTeX Warning: Command \' invalid in math mode on input line 3426.
+
+<imagens/06-segmentacao/imagemLimiarizVariavel.png, id=2048, 501.875pt x 532.99
+126pt>
+File: imagens/06-segmentacao/imagemLimiarizVariavel.png Graphic file (type png)
+
+<use imagens/06-segmentacao/imagemLimiarizVariavel.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemLimiarizVariavel.png  use
+d on input line 3436.
+(pdftex.def)             Requested size: 189.74957pt x 201.51405pt.
+[122] [123 <./imagens/06-segmentacao/imagemLimiarizVariavel.png>]
+<imagens/06-segmentacao/imagemMediaMovel1.png, id=2076, 1352.05125pt x 376.4062
+5pt>
+File: imagens/06-segmentacao/imagemMediaMovel1.png Graphic file (type png)
+<use imagens/06-segmentacao/imagemMediaMovel1.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemMediaMovel1.png  used on 
+input line 3464.
+(pdftex.def)             Requested size: 189.73976pt x 52.82286pt.
+<imagens/06-segmentacao/imagemMediaMovel2.png, id=2083, 1348.03625pt x 371.3875
+pt>
+File: imagens/06-segmentacao/imagemMediaMovel2.png Graphic file (type png)
+<use imagens/06-segmentacao/imagemMediaMovel2.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemMediaMovel2.png  used on 
+input line 3477.
+(pdftex.def)             Requested size: 189.73169pt x 52.27156pt.
+[124 <./imagens/06-segmentacao/imagemMediaMovel1.png> <./imagens/06-segmentacao
+/imagemMediaMovel2.png>]
+<imagens/06-segmentacao/imagemLimiarizMultiv.png, id=2096, 389.455pt x 343.2825
+pt>
+File: imagens/06-segmentacao/imagemLimiarizMultiv.png Graphic file (type png)
+<use imagens/06-segmentacao/imagemLimiarizMultiv.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemLimiarizMultiv.png  used 
+on input line 3497.
+(pdftex.def)             Requested size: 189.74712pt x 167.25131pt.
+
+LaTeX Warning: Command \' invalid in math mode on input line 3509.
+
+<imagens/06-segmentacao/imagemLimiarizMultiv2.png, id=2101, 1020.81375pt x 370.
+38374pt>
+File: imagens/06-segmentacao/imagemLimiarizMultiv2.png Graphic file (type png)
+<use imagens/06-segmentacao/imagemLimiarizMultiv2.png>
+Package pdftex.def Info: imagens/06-segmentacao/imagemLimiarizMultiv2.png  used
+ on input line 3517.
+(pdftex.def)             Requested size: 189.751pt x 68.8477pt.
+[125 <./imagens/06-segmentacao/imagemLimiarizMultiv.png>] [126 <./imagens/06-se
+gmentacao/imagemLimiarizMultiv2.png>]
+Cap\'{\i }tulo 7.
+<imagens/07-deepLearning/deep-blue.jpg, id=2118, 1071.00125pt x 1606.0pt>
+File: imagens/07-deepLearning/deep-blue.jpg Graphic file (type jpg)
+<use imagens/07-deepLearning/deep-blue.jpg>
+Package pdftex.def Info: imagens/07-deepLearning/deep-blue.jpg  used on input l
+ine 3544.
+(pdftex.def)             Requested size: 189.74861pt x 284.534pt.
+[127
+
+] [128 <./imagens/07-deepLearning/deep-blue.jpg>]
+<imagens/07-deepLearning/cajal-cortex.png, id=2135, 779.91376pt x 259.97125pt>
+File: imagens/07-deepLearning/cajal-cortex.png Graphic file (type png)
+<use imagens/07-deepLearning/cajal-cortex.png>
+Package pdftex.def Info: imagens/07-deepLearning/cajal-cortex.png  used on inpu
+t line 3559.
+(pdftex.def)             Requested size: 310.49622pt x 103.49873pt.
+<imagens/07-deepLearning/colored-neural-network.png, id=2141, 1709.38625pt x 20
+55.68pt>
+File: imagens/07-deepLearning/colored-neural-network.png Graphic file (type png
+)
+<use imagens/07-deepLearning/colored-neural-network.png>
+Package pdftex.def Info: imagens/07-deepLearning/colored-neural-network.png  us
+ed on input line 3574.
+(pdftex.def)             Requested size: 172.48753pt x 207.4307pt.
+
+Overfull \hbox (25.4537pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  CARACTERIZAÇÃO DE IA, MACHINE LEARNING E DEEP LEARNING \T
+1/lmr/m/n/10 129
+ []
+
+[129 <./imagens/07-deepLearning/cajal-cortex.png>] [130 <./imagens/07-deepLearn
+ing/colored-neural-network.png>]
+Overfull \hbox (25.4537pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  CARACTERIZAÇÃO DE IA, MACHINE LEARNING E DEEP LEARNING \T
+1/lmr/m/n/10 131
+ []
+
+[131]
+<imagens/07-deepLearning/neuron.png, id=2176, 760.8425pt x 325.215pt>
+File: imagens/07-deepLearning/neuron.png Graphic file (type png)
+<use imagens/07-deepLearning/neuron.png>
+Package pdftex.def Info: imagens/07-deepLearning/neuron.png  used on input line
+ 3611.
+(pdftex.def)             Requested size: 206.9975pt x 88.47914pt.
+<imagens/07-deepLearning/artificial-neuron.png, id=2179, 970.62625pt x 641.3962
+6pt>
+File: imagens/07-deepLearning/artificial-neuron.png Graphic file (type png)
+<use imagens/07-deepLearning/artificial-neuron.png>
+Package pdftex.def Info: imagens/07-deepLearning/artificial-neuron.png  used on
+ input line 3624.
+(pdftex.def)             Requested size: 241.50075pt x 159.58528pt.
+[132 <./imagens/07-deepLearning/neuron.png> <./imagens/07-deepLearning/artifici
+al-neuron.png>]
+<imagens/07-deepLearning/limiar-function.png, id=2193, 709.65125pt x 379.4175pt
+>
+File: imagens/07-deepLearning/limiar-function.png Graphic file (type png)
+<use imagens/07-deepLearning/limiar-function.png>
+Package pdftex.def Info: imagens/07-deepLearning/limiar-function.png  used on i
+nput line 3644.
+(pdftex.def)             Requested size: 172.49628pt x 92.22572pt.
+<imagens/07-deepLearning/one-layer-perceptron.png, id=2200, 603.25375pt x 634.3
+7pt>
+File: imagens/07-deepLearning/one-layer-perceptron.png Graphic file (type png)
+<use imagens/07-deepLearning/one-layer-perceptron.png>
+Package pdftex.def Info: imagens/07-deepLearning/one-layer-perceptron.png  used
+ on input line 3659.
+(pdftex.def)             Requested size: 172.4998pt x 181.39746pt.
+
+Overfull \hbox (25.4537pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  CARACTERIZAÇÃO DE IA, MACHINE LEARNING E DEEP LEARNING \T
+1/lmr/m/n/10 133
+ []
+
+[133 <./imagens/07-deepLearning/limiar-function.png>]
+<imagens/07-deepLearning/sigmoid-function.png, id=2218, 738.76pt x 402.50375pt>
+
+File: imagens/07-deepLearning/sigmoid-function.png Graphic file (type png)
+<use imagens/07-deepLearning/sigmoid-function.png>
+Package pdftex.def Info: imagens/07-deepLearning/sigmoid-function.png  used on 
+input line 3681.
+(pdftex.def)             Requested size: 172.49263pt x 93.98036pt.
+[134 <./imagens/07-deepLearning/one-layer-perceptron.png>]
+Overfull \hbox (25.4537pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  CARACTERIZAÇÃO DE IA, MACHINE LEARNING E DEEP LEARNING \T
+1/lmr/m/n/10 135
+ []
+
+[135 <./imagens/07-deepLearning/sigmoid-function.png>]
+<imagens/07-deepLearning/mlp-network.png, id=2240, 1064.97874pt x 518.93875pt>
+File: imagens/07-deepLearning/mlp-network.png Graphic file (type png)
+<use imagens/07-deepLearning/mlp-network.png>
+Package pdftex.def Info: imagens/07-deepLearning/mlp-network.png  used on input
+ line 3706.
+(pdftex.def)             Requested size: 310.49345pt x 151.29605pt.
+<imagens/07-deepLearning/recurrent-network.png, id=2246, 645.41125pt x 536.0025
+pt>
+File: imagens/07-deepLearning/recurrent-network.png Graphic file (type png)
+<use imagens/07-deepLearning/recurrent-network.png>
+Package pdftex.def Info: imagens/07-deepLearning/recurrent-network.png  used on
+ input line 3721.
+(pdftex.def)             Requested size: 310.4931pt x 257.85896pt.
+<imagens/07-deepLearning/mnist-zero.png, id=2249, 357.7365pt x 359.1819pt>
+File: imagens/07-deepLearning/mnist-zero.png Graphic file (type png)
+<use imagens/07-deepLearning/mnist-zero.png>
+Package pdftex.def Info: imagens/07-deepLearning/mnist-zero.png  used on input 
+line 3737.
+(pdftex.def)             Requested size: 137.99371pt x 138.55127pt.
+[136 <./imagens/07-deepLearning/mlp-network.png>]
+Overfull \hbox (25.4537pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  CARACTERIZAÇÃO DE IA, MACHINE LEARNING E DEEP LEARNING \T
+1/lmr/m/n/10 137
+ []
+
+[137 <./imagens/07-deepLearning/recurrent-network.png> <./imagens/07-deepLearni
+ng/mnist-zero.png>]
+<imagens/07-deepLearning/mlp-two-layers.png, id=2269, 796.9775pt x 568.1225pt>
+File: imagens/07-deepLearning/mlp-two-layers.png Graphic file (type png)
+<use imagens/07-deepLearning/mlp-two-layers.png>
+Package pdftex.def Info: imagens/07-deepLearning/mlp-two-layers.png  used on in
+put line 3752.
+(pdftex.def)             Requested size: 207.00252pt x 147.56099pt.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
+764.
+(/home/gilson/.TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 3765.
+[138 <./imagens/07-deepLearning/mlp-two-layers.png>]
+Overfull \hbox (25.4537pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  CARACTERIZAÇÃO DE IA, MACHINE LEARNING E DEEP LEARNING \T
+1/lmr/m/n/10 139
+ []
+
+[139] [140]
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 3859.
+
+
+
+Overfull \hbox (25.4537pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  CARACTERIZAÇÃO DE IA, MACHINE LEARNING E DEEP LEARNING \T
+1/lmr/m/n/10 141
+ []
+
+[141] [142]
+Overfull \hbox (25.4537pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  CARACTERIZAÇÃO DE IA, MACHINE LEARNING E DEEP LEARNING \T
+1/lmr/m/n/10 143
+ []
+
+[143] [144]
+<imagens/07-deepLearning/custo_30.jpg, id=2342, 433.62pt x 289.08pt>
+File: imagens/07-deepLearning/custo_30.jpg Graphic file (type jpg)
+<use imagens/07-deepLearning/custo_30.jpg>
+Package pdftex.def Info: imagens/07-deepLearning/custo_30.jpg  used on input li
+ne 4021.
+(pdftex.def)             Requested size: 241.50224pt x 161.00148pt.
+<imagens/07-deepLearning/custo_100.jpg, id=2343, 433.62pt x 289.08pt>
+File: imagens/07-deepLearning/custo_100.jpg Graphic file (type jpg)
+<use imagens/07-deepLearning/custo_100.jpg>
+Package pdftex.def Info: imagens/07-deepLearning/custo_100.jpg  used on input l
+ine 4032.
+(pdftex.def)             Requested size: 241.50224pt x 161.00148pt.
+
+Overfull \hbox (25.4537pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  CARACTERIZAÇÃO DE IA, MACHINE LEARNING E DEEP LEARNING \T
+1/lmr/m/n/10 145
+ []
+
+[145] [146 <./imagens/07-deepLearning/custo_30.jpg> <./imagens/07-deepLearning/
+custo_100.jpg>]
+<imagens/07-deepLearning/acuracia_30.jpg, id=2361, 433.62pt x 289.08pt>
+File: imagens/07-deepLearning/acuracia_30.jpg Graphic file (type jpg)
+<use imagens/07-deepLearning/acuracia_30.jpg>
+Package pdftex.def Info: imagens/07-deepLearning/acuracia_30.jpg  used on input
+ line 4045.
+(pdftex.def)             Requested size: 241.50224pt x 161.00148pt.
+<imagens/07-deepLearning/acuracia_100.jpg, id=2362, 433.62pt x 289.08pt>
+File: imagens/07-deepLearning/acuracia_100.jpg Graphic file (type jpg)
+<use imagens/07-deepLearning/acuracia_100.jpg>
+Package pdftex.def Info: imagens/07-deepLearning/acuracia_100.jpg  used on inpu
+t line 4056.
+(pdftex.def)             Requested size: 241.50224pt x 161.00148pt.
+
+Overfull \hbox (25.4537pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 7.1.  CARACTERIZAÇÃO DE IA, MACHINE LEARNING E DEEP LEARNING \T
+1/lmr/m/n/10 147
+ []
+
+[147 <./imagens/07-deepLearning/acuracia_30.jpg> <./imagens/07-deepLearning/acu
+racia_100.jpg>] [148]
+Overfull \hbox (892.43542pt too wide) detected at line 4110
+[][] [] [] [] [] [] [] [] []  [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [
+] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] \OT1/lmr/m/n/10 =
+  1 \OMS/lmsy/m/n/10 ^^A \OT1/lmr/m/n/10 0 + 0 \OMS/lmsy/m/n/10 ^^A \OT1/lmr/m/
+n/10 0 + [] \OMS/lmsy/m/n/10 ^^A \OT1/lmr/m/n/10 0 + 2 \OMS/lmsy/m/n/10 ^^A \OT
+1/lmr/m/n/10 0 + 0 \OMS/lmsy/m/n/10 ^^A \OT1/lmr/m/n/10 2 + [] \OMS/lmsy/m/n/10
+ ^^A \OT1/lmr/m/n/10 1 + 1 \OMS/lmsy/m/n/10 ^^A \OT1/lmr/m/n/10 0 + 0 \OMS/lmsy
+/m/n/10 ^^A \OT1/lmr/m/n/10 9 + [] \OMS/lmsy/m/n/10 ^^A \OT1/lmr/m/n/10 3 = 0  
+\OMS/lmsy/m/n/10 ^^@ \OT1/lmr/m/n/10 2 \OMS/lmsy/m/n/10 ^^@ \OT1/lmr/m/n/10 3  
+=  \OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 5[]
+ []
+
+<imagens/07-deepLearning/cnn_conv.png, id=2384, 768.62157pt x 348.55219pt>
+File: imagens/07-deepLearning/cnn_conv.png Graphic file (type png)
+<use imagens/07-deepLearning/cnn_conv.png>
+Package pdftex.def Info: imagens/07-deepLearning/cnn_conv.png  used on input li
+ne 4116.
+(pdftex.def)             Requested size: 293.25204pt x 132.98305pt.
+[149]
+<imagens/07-deepLearning/cnn_conv_3d.png, id=2394, 927.465pt x 438.8897pt>
+File: imagens/07-deepLearning/cnn_conv_3d.png Graphic file (type png)
+<use imagens/07-deepLearning/cnn_conv_3d.png>
+Package pdftex.def Info: imagens/07-deepLearning/cnn_conv_3d.png  used on input
+ line 4129.
+(pdftex.def)             Requested size: 293.25687pt x 138.77335pt.
+<imagens/07-deepLearning/cnn_conv_block.png, id=2396, 1257.94969pt x 957.5775pt
+>
+File: imagens/07-deepLearning/cnn_conv_block.png Graphic file (type png)
+<use imagens/07-deepLearning/cnn_conv_block.png>
+Package pdftex.def Info: imagens/07-deepLearning/cnn_conv_block.png  used on in
+put line 4142.
+(pdftex.def)             Requested size: 293.23807pt x 223.21892pt.
+[150 <./imagens/07-deepLearning/cnn_conv.png> <./imagens/07-deepLearning/cnn_co
+nv_3d.png>] [151 <./imagens/07-deepLearning/cnn_conv_block.png>]
+<imagens/07-deepLearning/cnn_stride.png, id=2425, 563.10374pt x 572.89032pt>
+File: imagens/07-deepLearning/cnn_stride.png Graphic file (type png)
+<use imagens/07-deepLearning/cnn_stride.png>
+Package pdftex.def Info: imagens/07-deepLearning/cnn_stride.png  used on input 
+line 4176.
+(pdftex.def)             Requested size: 241.49406pt x 245.69115pt.
+[152] [153 <./imagens/07-deepLearning/cnn_stride.png>]
+<imagens/07-deepLearning/cnn_pooling_max.png, id=2453, 776.14969pt x 463.7325pt
+>
+File: imagens/07-deepLearning/cnn_pooling_max.png Graphic file (type png)
+<use imagens/07-deepLearning/cnn_pooling_max.png>
+Package pdftex.def Info: imagens/07-deepLearning/cnn_pooling_max.png  used on i
+nput line 4196.
+(pdftex.def)             Requested size: 241.49214pt x 144.28629pt.
+<imagens/07-deepLearning/cnn_pooling_max_3d.png, id=2456, 995.97093pt x 654.946
+87pt>
+File: imagens/07-deepLearning/cnn_pooling_max_3d.png Graphic file (type png)
+<use imagens/07-deepLearning/cnn_pooling_max_3d.png>
+Package pdftex.def Info: imagens/07-deepLearning/cnn_pooling_max_3d.png  used o
+n input line 4209.
+(pdftex.def)             Requested size: 241.49986pt x 158.80943pt.
+[154 <./imagens/07-deepLearning/cnn_pooling_max.png> <./imagens/07-deepLearning
+/cnn_pooling_max_3d.png>]
+<imagens/07-deepLearning/cnn_typical.png, id=2472, 765.6103pt x 205.5178pt>
+File: imagens/07-deepLearning/cnn_typical.png Graphic file (type png)
+<use imagens/07-deepLearning/cnn_typical.png>
+Package pdftex.def Info: imagens/07-deepLearning/cnn_typical.png  used on input
+ line 4227.
+(pdftex.def)             Requested size: 310.50272pt x 83.35028pt.
+<imagens/07-deepLearning/cnn_fc.png, id=2475, 551.05875pt x 415.5525pt>
+File: imagens/07-deepLearning/cnn_fc.png Graphic file (type png)
+<use imagens/07-deepLearning/cnn_fc.png>
+Package pdftex.def Info: imagens/07-deepLearning/cnn_fc.png  used on input line
+ 4240.
+(pdftex.def)             Requested size: 276.00797pt x 208.13716pt.
+[155 <./imagens/07-deepLearning/cnn_typical.png (PNG copy)>] [156 <./imagens/07
+-deepLearning/cnn_fc.png (PNG copy)>]
+<imagens/07-deepLearning/lenet.png, id=2501, 1091.07625pt x 300.12125pt>
+File: imagens/07-deepLearning/lenet.png Graphic file (type png)
+<use imagens/07-deepLearning/lenet.png>
+Package pdftex.def Info: imagens/07-deepLearning/lenet.png  used on input line 
+4282.
+(pdftex.def)             Requested size: 344.98941pt x 94.89589pt.
+[157 <./imagens/07-deepLearning/lenet.png>]
+<imagens/07-deepLearning/lenet2.png, id=2521, 228.855pt x 455.7025pt>
+File: imagens/07-deepLearning/lenet2.png Graphic file (type png)
+<use imagens/07-deepLearning/lenet2.png>
+Package pdftex.def Info: imagens/07-deepLearning/lenet2.png  used on input line
+ 4299.
+(pdftex.def)             Requested size: 103.50061pt x 206.09332pt.
+[158 <./imagens/07-deepLearning/lenet2.png>]
+Overfull \hbox (65.91602pt too wide) in alignment at lines 4310--4315
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (65.91602pt too wide) in alignment at lines 4315--4319
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (65.91602pt too wide) in alignment at lines 4319--4331
+ [] [] [] [] [] [] 
+ []
+
+[159]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[160]
+<imagens/07-deepLearning/imagenet.png, id=2555, 963.72044pt x 505.52866pt>
+File: imagens/07-deepLearning/imagenet.png Graphic file (type png)
+<use imagens/07-deepLearning/imagenet.png>
+Package pdftex.def Info: imagens/07-deepLearning/imagenet.png  used on input li
+ne 4376.
+(pdftex.def)             Requested size: 344.99802pt x 180.97195pt.
+[161]
+<imagens/07-deepLearning/alexnet.png, id=2569, 1316.92pt x 409.53pt>
+File: imagens/07-deepLearning/alexnet.png Graphic file (type png)
+<use imagens/07-deepLearning/alexnet.png>
+Package pdftex.def Info: imagens/07-deepLearning/alexnet.png  used on input lin
+e 4391.
+(pdftex.def)             Requested size: 344.98332pt x 107.28139pt.
+[162 <./imagens/07-deepLearning/imagenet.png>]
+<imagens/07-deepLearning/lenetalexnet.png, id=2581, 274.8669pt x 422.0568pt>
+File: imagens/07-deepLearning/lenetalexnet.png Graphic file (type png)
+<use imagens/07-deepLearning/lenetalexnet.png>
+Package pdftex.def Info: imagens/07-deepLearning/lenetalexnet.png  used on inpu
+t line 4408.
+(pdftex.def)             Requested size: 137.9993pt x 211.89728pt.
+
+Overfull \hbox (65.91602pt too wide) in alignment at lines 4419--4424
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (65.91602pt too wide) in alignment at lines 4424--4428
+ [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (65.91602pt too wide) in alignment at lines 4428--4444
+ [] [] [] [] [] [] 
+ []
+
+[163 <./imagens/07-deepLearning/alexnet.png>] [164 <./imagens/07-deepLearning/l
+enetalexnet.png>] [165]
+Overfull \hbox (50.972pt too wide) detected at line 4469
+[]
+ []
+
+<imagens/07-deepLearning/alexnetvgg.png, id=2615, 262.90346pt x 408.29704pt>
+File: imagens/07-deepLearning/alexnetvgg.png Graphic file (type png)
+<use imagens/07-deepLearning/alexnetvgg.png>
+Package pdftex.def Info: imagens/07-deepLearning/alexnetvgg.png  used on input 
+line 4477.
+(pdftex.def)             Requested size: 241.50905pt x 375.07089pt.
+[166] [167 <./imagens/07-deepLearning/alexnetvgg.png>]
+<imagens/07-deepLearning/neuralevolution.png, id=2632, 804.00375pt x 567.11874p
+t>
+File: imagens/07-deepLearning/neuralevolution.png Graphic file (type png)
+<use imagens/07-deepLearning/neuralevolution.png>
+Package pdftex.def Info: imagens/07-deepLearning/neuralevolution.png  used on i
+nput line 4495.
+(pdftex.def)             Requested size: 241.49742pt x 170.34462pt.
+[168 <./imagens/07-deepLearning/neuralevolution.png>]
+<imagens/07-deepLearning/googlenet.png, id=2646, 340.27126pt x 602.25pt>
+File: imagens/07-deepLearning/googlenet.png Graphic file (type png)
+<use imagens/07-deepLearning/googlenet.png>
+Package pdftex.def Info: imagens/07-deepLearning/googlenet.png  used on input l
+ine 4510.
+(pdftex.def)             Requested size: 172.49762pt x 305.30551pt.
+<imagens/07-deepLearning/inceptionmodule.png, id=2654, 1323.94624pt x 452.69125
+pt>
+File: imagens/07-deepLearning/inceptionmodule.png Graphic file (type png)
+<use imagens/07-deepLearning/inceptionmodule.png>
+Package pdftex.def Info: imagens/07-deepLearning/inceptionmodule.png  used on i
+nput line 4527.
+(pdftex.def)             Requested size: 344.98558pt x 117.95943pt.
+[169] [170 <./imagens/07-deepLearning/googlenet.png>] [171 <./imagens/07-deepLe
+arning/inceptionmodule.png>]
+File: imagens/07-deepLearning/googlenet.png Graphic file (type png)
+<use imagens/07-deepLearning/googlenet.png>
+Package pdftex.def Info: imagens/07-deepLearning/googlenet.png  used on input l
+ine 4550.
+(pdftex.def)             Requested size: 172.49762pt x 305.30551pt.
+<imagens/07-deepLearning/resnet.png, id=2685, 808.01875pt x 472.76625pt>
+File: imagens/07-deepLearning/resnet.png Graphic file (type png)
+<use imagens/07-deepLearning/resnet.png>
+Package pdftex.def Info: imagens/07-deepLearning/resnet.png  used on input line
+ 4568.
+(pdftex.def)             Requested size: 345.00008pt x 201.85718pt.
+[172] [173] [174 <./imagens/07-deepLearning/resnet.png>]
+<imagens/07-deepLearning/residual.png, id=2718, 569.2467pt x 338.4645pt>
+File: imagens/07-deepLearning/residual.png Graphic file (type png)
+<use imagens/07-deepLearning/residual.png>
+Package pdftex.def Info: imagens/07-deepLearning/residual.png  used on input li
+ne 4587.
+(pdftex.def)             Requested size: 345.00768pt x 205.13574pt.
+<imagens/07-deepLearning/residualblock.png, id=2722, 832.10875pt x 500.87125pt>
+
+File: imagens/07-deepLearning/residualblock.png Graphic file (type png)
+<use imagens/07-deepLearning/residualblock.png>
+Package pdftex.def Info: imagens/07-deepLearning/residualblock.png  used on inp
+ut line 4600.
+(pdftex.def)             Requested size: 310.49098pt x 186.89384pt.
+[175 <./imagens/07-deepLearning/residual.png>]
+<imagens/07-deepLearning/resnetdefault.png, id=2737, 580.1675pt x 1903.11pt>
+File: imagens/07-deepLearning/resnetdefault.png Graphic file (type png)
+<use imagens/07-deepLearning/resnetdefault.png>
+Package pdftex.def Info: imagens/07-deepLearning/resnetdefault.png  used on inp
+ut line 4615.
+(pdftex.def)             Requested size: 103.49611pt x 339.49591pt.
+[176 <./imagens/07-deepLearning/residualblock.png>] [177 <./imagens/07-deepLear
+ning/resnetdefault.png>]
+File: imagens/07-deepLearning/differentscnn.png Graphic file (type png)
+<use imagens/07-deepLearning/differentscnn.png>
+Package pdftex.def Info: imagens/07-deepLearning/differentscnn.png  used on inp
+ut line 4633.
+(pdftex.def)             Requested size: 344.99901pt x 196.57756pt.
+[178]
+<imagens/07-deepLearning/vgg16.png, id=2764, 270.58571pt x 503.04472pt>
+File: imagens/07-deepLearning/vgg16.png Graphic file (type png)
+<use imagens/07-deepLearning/vgg16.png>
+Package pdftex.def Info: imagens/07-deepLearning/vgg16.png  used on input line 
+4660.
+(pdftex.def)             Requested size: 172.50125pt x 320.69637pt.
+[179 <./imagens/07-deepLearning/vgg16.png>] [180] [181]
+<imagens/07-deepLearning/frameworks.png, id=2806, 939.22548pt x 409.15063pt>
+File: imagens/07-deepLearning/frameworks.png Graphic file (type png)
+<use imagens/07-deepLearning/frameworks.png>
+Package pdftex.def Info: imagens/07-deepLearning/frameworks.png  used on input 
+line 4719.
+(pdftex.def)             Requested size: 344.99998pt x 150.2908pt.
+[182] [183 <./imagens/07-deepLearning/frameworks.png>] [184]
+<imagens/07-deepLearning/keras.png, id=2845, 993.7125pt x 383.4325pt>
+File: imagens/07-deepLearning/keras.png Graphic file (type png)
+<use imagens/07-deepLearning/keras.png>
+Package pdftex.def Info: imagens/07-deepLearning/keras.png  used on input line 
+4748.
+(pdftex.def)             Requested size: 310.50406pt x 119.81065pt.
+
+Underfull \vbox (badness 2556) has occurred while \output is active []
+
+[185 <./imagens/07-deepLearning/keras.png>] [186]
+<imagens/07-deepLearning/siamesa-bromley.png, id=2891, 341.275pt x 341.275pt>
+File: imagens/07-deepLearning/siamesa-bromley.png Graphic file (type png)
+<use imagens/07-deepLearning/siamesa-bromley.png>
+Package pdftex.def Info: imagens/07-deepLearning/siamesa-bromley.png  used on i
+nput line 4783.
+(pdftex.def)             Requested size: 137.9969pt x 137.9969pt.
+<imagens/07-deepLearning/siamesa-chopra.png, id=2895, 606.265pt x 491.8375pt>
+File: imagens/07-deepLearning/siamesa-chopra.png Graphic file (type png)
+<use imagens/07-deepLearning/siamesa-chopra.png>
+Package pdftex.def Info: imagens/07-deepLearning/siamesa-chopra.png  used on in
+put line 4796.
+(pdftex.def)             Requested size: 172.50053pt x 139.94249pt.
+[187] [188 <./imagens/07-deepLearning/siamesa-bromley.png (PNG copy)> <./imagen
+s/07-deepLearning/siamesa-chopra.png (PNG copy)>] [189]
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 4832.
+
+
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 4832.
+
+
+[190]
+<imagens/07-deepLearning/erro-triplet.png, id=2939, 416.55624pt x 101.37875pt>
+File: imagens/07-deepLearning/erro-triplet.png Graphic file (type png)
+<use imagens/07-deepLearning/erro-triplet.png>
+Package pdftex.def Info: imagens/07-deepLearning/erro-triplet.png  used on inpu
+t line 4847.
+(pdftex.def)             Requested size: 137.9979pt x 33.58502pt.
+[191 <./imagens/07-deepLearning/erro-triplet.png (PNG copy)>] [192
+
+]
+Cap\'{\i }tulo 8.
+[193]
+Overfull \hbox (41.10518pt too wide) detected at line 4880
+[][] \OT1/lmr/m/n/10 = \OML/lmm/m/it/10 media\OT1/lmr/m/n/10 5(\OML/lmm/m/it/10
+ P[]\OT1/lmr/m/n/10 ) + \OML/lmm/m/it/10 media\OT1/lmr/m/n/10 5(\OML/lmm/m/it/1
+0 P[]\OT1/lmr/m/n/10 ) + \OML/lmm/m/it/10 media\OT1/lmr/m/n/10 5(\OML/lmm/m/it/
+10 P[]\OT1/lmr/m/n/10 ) + \OML/lmm/m/it/10 media\OT1/lmr/m/n/10 5(\OML/lmm/m/it
+/10 P[]\OT1/lmr/m/n/10 ) + \OML/lmm/m/it/10 media\OT1/lmr/m/n/10 5(\OML/lmm/m/i
+t/10 P[]\OT1/lmr/m/n/10 )[]
+ []
+
+<imagens/08-modelagemBackground/onibusMedianaTemporal.png, id=2975, 724.7075pt 
+x 594.22pt>
+File: imagens/08-modelagemBackground/onibusMedianaTemporal.png Graphic file (ty
+pe png)
+<use imagens/08-modelagemBackground/onibusMedianaTemporal.png>
+Package pdftex.def Info: imagens/08-modelagemBackground/onibusMedianaTemporal.p
+ng  used on input line 4895.
+(pdftex.def)             Requested size: 189.74648pt x 155.5816pt.
+[194]
+File: imagens/08-modelagemBackground/indoorBGmodeling.png Graphic file (type pn
+g)
+<use imagens/08-modelagemBackground/indoorBGmodeling.png>
+Package pdftex.def Info: imagens/08-modelagemBackground/indoorBGmodeling.png  u
+sed on input line 4911.
+(pdftex.def)             Requested size: 189.74301pt x 160.77817pt.
+<imagens/08-modelagemBackground/outdoorBGmodeling.png, id=2994, 1003.75pt x 888
+.31876pt>
+File: imagens/08-modelagemBackground/outdoorBGmodeling.png Graphic file (type p
+ng)
+<use imagens/08-modelagemBackground/outdoorBGmodeling.png>
+Package pdftex.def Info: imagens/08-modelagemBackground/outdoorBGmodeling.png  
+used on input line 4926.
+(pdftex.def)             Requested size: 189.74957pt x 167.92838pt.
+
+Overfull \hbox (215.73286pt too wide) has occurred while \output is active
+\T1/lmr/m/sl/10 8.4.  EXEMPLOS COMPARATIVOS DA MÉDIA TEMPORAL, MÉDIA ESPAÇO-TEM
+PORAL E MEDIANA TEMPORAL \T1/lmr/m/n/10 195
+ []
+
+[195 <./imagens/08-modelagemBackground/onibusMedianaTemporal.png>] [196 <./imag
+ens/08-modelagemBackground/outdoorBGmodeling.png>]
+Cap\'{\i }tulo 9.
+<imagens/09-espaco_3D/linhas_paralelas.png, id=3010, 264.99pt x 340.27126pt>
+File: imagens/09-espaco_3D/linhas_paralelas.png Graphic file (type png)
+<use imagens/09-espaco_3D/linhas_paralelas.png>
+Package pdftex.def Info: imagens/09-espaco_3D/linhas_paralelas.png  used on inp
+ut line 4947.
+(pdftex.def)             Requested size: 189.7535pt x 243.66074pt.
+[197
+
+] [198 <./imagens/09-espaco_3D/linhas_paralelas.png (PNG copy)>]
+<imagens/09-espaco_3D/espaco_projetivo.png, id=3030, 606.265pt x 340.27126pt>
+File: imagens/09-espaco_3D/espaco_projetivo.png Graphic file (type png)
+<use imagens/09-espaco_3D/espaco_projetivo.png>
+Package pdftex.def Info: imagens/09-espaco_3D/espaco_projetivo.png  used on inp
+ut line 4977.
+(pdftex.def)             Requested size: 189.75337pt x 106.50064pt.
+
+Overfull \hbox (13.85391pt too wide) detected at line 4996
+[][] \OT1/lmr/m/n/10 = [] [][][]
+ []
+
+<imagens/09-espaco_3D/geometria_homografia.png, id=3034, 606.265pt x 340.27126p
+t>
+File: imagens/09-espaco_3D/geometria_homografia.png Graphic file (type png)
+<use imagens/09-espaco_3D/geometria_homografia.png>
+Package pdftex.def Info: imagens/09-espaco_3D/geometria_homografia.png  used on
+ input line 5002.
+(pdftex.def)             Requested size: 189.75337pt x 106.50064pt.
+[199 <./imagens/09-espaco_3D/espaco_projetivo.png (PNG copy)>] [200 <./imagens/
+09-espaco_3D/geometria_homografia.png (PNG copy)>] [201]
+<imagens/09-espaco_3D/coordenadas.png, id=3070, 383.18156pt x 414.79968pt>
+File: imagens/09-espaco_3D/coordenadas.png Graphic file (type png)
+<use imagens/09-espaco_3D/coordenadas.png>
+Package pdftex.def Info: imagens/09-espaco_3D/coordenadas.png  used on input li
+ne 5112.
+(pdftex.def)             Requested size: 189.75438pt x 205.41193pt.
+[202 <./imagens/09-espaco_3D/coordenadas.png>]
+<imagens/09-espaco_3D/transformacoes.png, id=3082, 606.265pt x 491.8375pt>
+File: imagens/09-espaco_3D/transformacoes.png Graphic file (type png)
+<use imagens/09-espaco_3D/transformacoes.png>
+Package pdftex.def Info: imagens/09-espaco_3D/transformacoes.png  used on input
+ line 5133.
+(pdftex.def)             Requested size: 189.75337pt x 153.93898pt.
+
+Underfull \vbox (badness 3907) has occurred while \output is active []
+
+[203 <./imagens/09-espaco_3D/transformacoes.png (PNG copy)>] [204]
+<imagens/09-espaco_3D/distorcaoradial.png, id=3103, 567.11874pt x 264.99pt>
+File: imagens/09-espaco_3D/distorcaoradial.png Graphic file (type png)
+<use imagens/09-espaco_3D/distorcaoradial.png>
+Package pdftex.def Info: imagens/09-espaco_3D/distorcaoradial.png  used on inpu
+t line 5263.
+(pdftex.def)             Requested size: 189.74582pt x 88.65999pt.
+[205]
+
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 5285.
+
+[206 <./imagens/09-espaco_3D/distorcaoradial.png (PNG copy)>]
+<imagens/09-espaco_3D/chess.jpg, id=3136, 642.4pt x 481.8pt>
+File: imagens/09-espaco_3D/chess.jpg Graphic file (type jpg)
+<use imagens/09-espaco_3D/chess.jpg>
+Package pdftex.def Info: imagens/09-espaco_3D/chess.jpg  used on input line 533
+1.
+(pdftex.def)             Requested size: 189.7514pt x 142.31355pt.
+[207] [208 <./imagens/09-espaco_3D/chess.jpg>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[209] [210]
+Underfull \hbox (badness 1057) in paragraph at lines 5450--5450
+[]\T1/lmr/m/n/10 Eduardo Azevedo, Aura Conci e Cristina Vas-con-ce-los. \T1/lmr
+/m/it/10 Com-putação
+ []
+
+[211
+
+] [212] [213]
+Underfull \hbox (badness 1490) in paragraph at lines 5450--5450
+[]\T1/lmr/m/n/10 Harshall Lamba. \T1/lmr/m/it/10 One Shot Learn-ing with Siames
+e Net-works us-ing
+ []
+
+[214]
+Underfull \hbox (badness 2293) in paragraph at lines 5450--5450
+\T1/lmr/m/it/10 cionismo\T1/lmr/m/n/10 . Last ac-cessed 14 April 2021. Flo-ri-a
+-nop-o-lis, 2018. \T1/lmr/m/sc/10 url\T1/lmr/m/n/10 :
+ []
+
+[215] (./_main.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package rerunfilecheck Info: File `_main.out' has not changed.
+(rerunfilecheck)             Checksum: 0C5CA1817AE92A1EBBBDBC8D28BE3F39;10557.
+Package logreq Info: Writing requests to '_main.run.xml'.
+\openout1 = `_main.run.xml'.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 22114 strings out of 480477
+ 425745 string characters out of 5898848
+ 1103902 words of memory out of 5000000
+ 38585 multiletter control sequences out of 15000+600000
+ 481337 words of font info for 75 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 60i,20n,66p,1301b,2026s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{segmentauxe7uxe3o} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{ux5cux23ux5cux23ux5cux2520Componente-Conexa} has be
+en referenced but does not exist, replaced by a fixed one
+
+{/home/gilson/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/home/gilson/.T
+inyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/home/gilson/.TinyTeX/texmf
+-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/home/gilson/.TinyTeX/texmf-dist/fonts/
+enc/dvips/lm/lm-rm.enc}{/home/gilson/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-
+mathex.enc}{/home/gilson/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</ho
+me/gilson/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></home/gilson/.T
+inyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></home/gilson/.TinyTeX/texmf
+-dist/fonts/type1/public/lm/lmbxi10.pfb></home/gilson/.TinyTeX/texmf-dist/fonts
+/type1/public/lm/lmcsc10.pfb></home/gilson/.TinyTeX/texmf-dist/fonts/type1/publ
+ic/lm/lmex10.pfb></home/gilson/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10
+.pfb></home/gilson/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></home/g
+ilson/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></home/gilson/.TinyTe
+X/texmf-dist/fonts/type1/public/lm/lmr10.pfb></home/gilson/.TinyTeX/texmf-dist/
+fonts/type1/public/lm/lmr5.pfb></home/gilson/.TinyTeX/texmf-dist/fonts/type1/pu
+blic/lm/lmr6.pfb></home/gilson/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.p
+fb></home/gilson/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></home/gils
+on/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></home/gilson/.TinyTeX/
+texmf-dist/fonts/type1/public/lm/lmro10.pfb></home/gilson/.TinyTeX/texmf-dist/f
+onts/type1/public/lm/lmsy10.pfb></home/gilson/.TinyTeX/texmf-dist/fonts/type1/p
+ublic/lm/lmsy5.pfb></home/gilson/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy
+7.pfb></home/gilson/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></home
+/gilson/.TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></home/gilson/.Tin
+yTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></home/gilson/.TinyTeX/texmf-
+dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on _main.pdf (215 pages, 33033947 bytes).
+PDF statistics:
+ 3499 PDF objects out of 3580 (max. 8388607)
+ 2804 compressed objects within 29 object streams
+ 758 named destinations out of 1000 (max. 500000)
+ 1399 words of extra memory for PDF output out of 10000 (max. 10000000)
+

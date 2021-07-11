@@ -679,7 +679,7 @@ L_{xy}(X, \sigma) & L_{yy}(X, \sigma)
 \end{bmatrix}
 (\#eq:hessianaImagem)$$
 
-onde $L_{xx}(X, \sigma)$ é a convolução da imagem no ponto $X$ com a derivada de segunda ordem gaussiana $\frac{\partial^2g(\sigma)}{\partial x^²}$ e assim por diante [@bay2006surf]. Aqui, entra em cena mais um elemento para melhorar a velocidade do algoritmo, Bay, Herbert et al. utilizam *box filters* para aproximar o filtro gaussiano. Como podemos ver, na Figura \@ref(fig:discretizadogaussiano), os dois primeiros filtros são os derivativos gaussianos discretizados e os dois últimos são os aproximados a partir de *box filters*.
+onde $L_{xx}(X, \sigma)$ é a convolução da imagem no ponto $X$ com a derivada de segunda ordem gaussiana $\frac{\partial^2g(\sigma)}{\partial x^2}$ e assim por diante [@bay2006surf]. Aqui, entra em cena mais um elemento para melhorar a velocidade do algoritmo, Bay, Herbert et al. utilizam *box filters* para aproximar o filtro gaussiano. Como podemos ver, na Figura \@ref(fig:discretizadogaussiano), os dois primeiros filtros são os derivativos gaussianos discretizados e os dois últimos são os aproximados a partir de *box filters*.
 
 (ref:discretizadogaussiano) Filtro gaussiano discretizado e aproximado nas direções $y$ e $xy$ [@bay2006surf].
 

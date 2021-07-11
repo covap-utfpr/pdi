@@ -456,7 +456,9 @@ As distorções podem ser calculadas com base nos valores estimados das posiçõ
 
 Considera-se que os parâmetros intrínsecos são os mesmos em todas as imagens padrão, e que somente os parâmetros extrínsecos se alteram quando a imagem é reposicionada [@opencvcalibration]. Todas as etapas anteriores são resolvidas por uma única função no OpenCV:
 
+
 ```python
 ret, cameraMatrix, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, imagem.shape[::-1], None, None)
 ```
+
 em que se tem como saída da função a matriz de calibração (cameraMatriz) e os coeficientes de distorções (dist), que valem para todas as imagens, e o vetor de rotação R (rvecs) e de translação T (tvecs) que são calculados por padrão. 
