@@ -730,7 +730,7 @@ Em vez de adotar o *flattering*,  o GoogLenet utiliza um filtro de média de mes
 
 Já foi comentado sobre a primeira parte e a última da rede GoogLenet, a seção intermediária que estudaremos inclui os módulos *Inceptions* que se tornaram elementos característicos das redes mais modernas intituladas *Inceptions*. Cada módulo se assemelha aos blocos do VGG, em que estão presentes algumas camadas convolucionais em sequência e na ponta uma camada *pooling*. No caso do VGG, viu-se que para reduzir o número de hiperparâmetros se fixou o tamanho dos filtros em $3\text{ x }3$, e o parâmetro variável ficou sendo o número de camadas convolucionais. A ideia dos *Inceptions* (Figura \@ref(fig:inceptionmodule)) é não se preocupar nem com tamanho dos filtros e nem com o número de camadas no módulo, pois cada módulo consiste em uma combinação de filtros de diferentes tamanhos arranjados de uma forma fixa [@elgendy2020, p.217].
 
-(ref:inceptionmodule) Módulo Incepetion da rede GoogLenet - A parte intermediária da rede GoogLenet é formada por uma sequência de módulos Inceptions separados por camadas *pooling.* Cada módulo apresenta quatro caminhos para o mesmo dado de entrada, e na saída, os resultados são concatenados [@zhang2020dive, p.274].
+(ref:inceptionmodule) Módulo Incepetion da rede GoogLenet - A parte intermediária da rede GoogLenet é formada por uma sequência de módulos Inceptions separados por camadas *pooling* (Figura \@ref(fig:googlenet)). Cada módulo apresenta quatro caminhos para o mesmo dado de entrada, e na saída, os resultados são concatenados [@zhang2020dive, p.274].
 
 ```{r inceptionmodule, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:inceptionmodule)', fig.align='center', out.width='100%'}
 knitr::include_graphics(rep('imagens/07-deepLearning/inceptionmodule.png'))
@@ -748,10 +748,10 @@ O diagrama anterior da GoogLenet é uma das representações mais simplificadas 
 
 Existe uma peculiaridade ao treinar as redes mais profundas, pois, na retropropagação dos erros, as taxas reduzem a valores muito próximo de zeros, dificultando a convergência do algoritmo. A técnica adotada pelo GoogLenet para garantir a convergência foi incluir o cálculo do gradiente dos erros destas classificações intermediárias na retropropagação do erro [@geron2019, p.456].
 
-(ref:googlenet2)  Arquitetura da rede GoogLenet com classificadores intermediários - A rede GoogLenet com dois classificadores, um no terceiro módulo *inception* e o outro no sexto módulo. Estes classificadores intermediários reduzem o efeito de desaparecimento dos gradiente do erro [@szegedy2015].
+(ref:googlenet2)  Arquitetura da rede GoogLenet com classificadores intermediários - A rede GoogLenet com dois classificadores, um no terceiro módulo *inception* e o outro no sexto módulo. Estes classificadores intermediários reduzem o efeito de desaparecimento dos gradiente do erro [@img:googlenet].
 
 ```{r googlenet2, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:googlenet2)', fig.align='center', out.width='50%'}
-knitr::include_graphics(rep('imagens/07-deepLearning/googlenet.png'))
+knitr::include_graphics(rep('imagens/07-deepLearning/googlenet2.jpg'))
 ```
 
 #### ResNet
@@ -760,7 +760,7 @@ A Rede Neural Residual (*ResNet*) venceu a competição ImageNet em 2015 com uma
 
 Da mesma forma que a GoogLenet, a rede *ResNet* pode ser divida em três partes, sendo que a primeira e a última parte seguem a arquitetura da GoogLenet, e as camadas intermediárias incluem as unidades residuais. As camadas de entrada que permitem uma redução considerável da dimensão da imagem incluem uma camada de convolução com 64 canais e filtros $7\text{ x }7$ de $\text{stride}=2$, seguida por uma camada $3\text{ x }3$ de *MaxPooling* com $\text{stride}=2$. A última parte da rede, a estrutura de classificação, apresenta as mesmas camadas da GoogLenet, a camada Global de *Pooling* média de dimensão 1024 e apenas uma camada totalmente conectada com 1000 unidades representando as classes. Lembrando que a substituição do processo de *flattering* pela média global permitiu reduzir a proporção de parâmetros nas últimas camadas. 
 
-(ref:resnet)  Arquitetura da rede *ResNet* - A estrutura geral da rede ResNet também pode ser dividida em três partes: Parte A - Semelhante a GoogLenet, contém uma camada convolucional e *pooling* para reduzir as dimensões da imagem; Parte B - Módulos com unidades residuais; Parte C - Camada de *pooling* global e uma Full Conect para classificação [@geron2019, p.458].
+(ref:resnet)  Arquitetura da rede *ResNet* - A estrutura geral da rede ResNet também pode ser dividida em três partes. Semelhante a GoogLenet, contém uma camada convolucional e *pooling* para reduzir as dimensões da imagem. Uma parte com os módulos de unidades residuais, e no final uma camada de *pooling* global e uma Full Conect para classificação [@geron2019, p.458].
 
 ```{r resnet, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:resnet)', fig.align='center', out.width='100%'}
 knitr::include_graphics(rep('imagens/07-deepLearning/resnet.png'))
@@ -782,7 +782,7 @@ knitr::include_graphics(rep('imagens/07-deepLearning/residual.png'))
 
 A conexão residual parte da entrada de uma unidade residual em direção a saída da mesma, somando a informação de entrada com a resposta antes da camada de ativação *ReLu* (Figura \@ref(fig:residualblock)). Cada unidade residual tem duas camadas de convolução $3\text{ x }3$, com $\text{stride}=1$ e configuração de *padding* para manter as dimensões. Entre as duas camadas existe uma camada de normalização antecedendo uma ativação *ReLu.*
 
-(ref:residualblock) Unidade residual da rede *ResNet* - Na parte intermediária da rede *ResNet* existe uma sequência de módulos com unidades residuais. Cada unidade residual tem duas camadas de convolução intercaladas por um *pooling*, e as normalizações são aplicadas na saída das convoluções [@geron2019, p.457].
+(ref:residualblock) Unidade residual da rede *ResNet* - Na parte intermediária da rede *ResNet* existe uma sequência de módulos com unidades residuais. Cada unidade residual tem duas camadas de convolução intercaladas por uma ativação ReLu e uma normalização que também é aplicada na saída das convoluções [@geron2019, p.457].
 
 ```{r residualblock, echo=FALSE, fig.asp=.7, fig.width= 4, fig.cap='(ref:residualblock)', fig.align='center', out.width='90%'}
 knitr::include_graphics(rep('imagens/07-deepLearning/residualblock.png'))

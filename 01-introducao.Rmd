@@ -95,7 +95,7 @@ knitr::include_graphics(rep('imagens/05-filtros/placaEletronicaMediana.png'))
 
 - Análise 
 
-À parte de Análise atribuímos todos os processos que fazem uso da informação visual para compor um sistema de aplicação na área de Visão Computacional. Atualmente é mais comum ver estes processos englobados dentro de modelos de aprendizado de máquina mais genéricos como em redes neurais, capazes por exemplo, de classificar, identificar e rastrear objetos em diferentes situações. No Capítulo [Deep Learning em Visão Computacional](#deepLearning), assim como na Figura \@ref(fig:exemploMLP) é possível se ter uma pequena noção de como as redes neurais, em particular as redes multicamadas de perceptrons (MLP), enxergam as imagens e como desagregam suas informações para disponibilizar resultados satisfatórios no campo da VC. 
+À parte de Análise atribuímos todos os processos que fazem uso da informação visual para compor um sistema de aplicação na área de Visão Computacional. Atualmente é mais comum ver estes processos englobados dentro de modelos de aprendizado de máquina mais genéricos como em redes neurais, capazes por exemplo, de classificar, identificar e rastrear objetos em diferentes situações. No Capítulo [Deep Learning em Visão Computacional](#deepLearning), assim como na Figura \@ref(fig:exemploMLP) é possível se ter uma pequena noção de como as redes neurais, como as redes multicamadas de perceptrons (MLP), enxergam as imagens e como desagregam suas informações para disponibilizar resultados satisfatórios no campo da VC. 
 
 (ref:exemploMLP) Aplicação das Redes Neurais na Visão Computacional - Utilização das redes multicamadas de perceptrons para classificar dígitos de números em imagens [@img:exemploMLP]
 
