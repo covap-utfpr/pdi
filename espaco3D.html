@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 9 Espaço 3D | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
   <meta name="description" content="Capítulo 9 Espaço 3D | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 9 Espaço 3D | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,8 @@
   
 <link rel="prev" href="separacaoFundo.html"/>
 <link rel="next" href="refêrencias.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -286,7 +286,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">9.1</span> Geometria projetiva</h2>
 <p>Em alguns trabalhos realizados na visão computacional, a geometria euclidiana se torna insuficiente, pois as capturas de imagens com câmeras geram certos problemas, como linhas paralelas que se cruzam (como na Figura <a href="espaco3D.html#fig:linhasparalelas">9.1</a>) e ângulos que não são preservados, fatos esses que ocorrem por estarmos projetando o mundo 3D em uma plano 2D <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">65</a>, p. 321]</span>. Nesses casos usamos outro tipo de geometria conhecida como geometria projetiva.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:linhasparalelas"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:linhasparalelas"></span>
 <img src="imagens/09-espaco_3D/linhas_paralelas.png" alt="Linhas paralelas se cruzam - Como podemos ver nessa imagem de um trilho de trem, duas linhas que no mundo real são paralelas se cruzam no horizonte por causa da perspectiva [66]." width="55%" />
 <p class="caption">
 Figura 9.1: Linhas paralelas se cruzam - Como podemos ver nessa imagem de um trilho de trem, duas linhas que no mundo real são paralelas se cruzam no horizonte por causa da perspectiva <span class="citation">[<a href="#ref-img:linhas_paralelas" role="doc-biblioref">66</a>]</span>.
@@ -306,7 +306,7 @@ x_c = \frac{wx}{w} \text{ e } y_c =\frac{wy}{w} \tag{9.2}
 \]</span>
 Assim, quando <span class="math inline">\(w = 1\)</span> nossas coordenadas são as mesmas do sistema cartesiano, como pode ser visto na Figura <a href="espaco3D.html#fig:espacoprojetivo">9.2</a>, onde <span class="math inline">\(w\)</span> é representado por <span class="math inline">\(Z\)</span>. Os pontos que estão no formato <span class="math inline">\(X_H = (x, y, 0)^T\)</span> são conhecidos como pontos ideais, e são os pontos onde as linhas se cruzam no infinito <span class="citation">[<a href="#ref-szeliski2010computer" role="doc-biblioref">67</a>, p. 36]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:espacoprojetivo"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:espacoprojetivo"></span>
 <img src="imagens/09-espaco_3D/espaco_projetivo.png" alt="Plano euclidiano e espaço projetivo - Nesta representação podemos ver um ponto do espaço euclidiano sendo projetado no espaço projetivo. [65, p. 605]." width="55%" />
 <p class="caption">
 Figura 9.2: Plano euclidiano e espaço projetivo - Nesta representação podemos ver um ponto do espaço euclidiano sendo projetado no espaço projetivo. <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">65</a>, p. 605]</span>.
@@ -325,7 +325,7 @@ Onde <span class="math inline">\(x_0\)</span> e <span class="math inline">\(x_1\
 \begin{bmatrix}x_0 &amp; y_0 &amp; 1_0\end{bmatrix}^T = \begin{bmatrix}h_{11} &amp; h_{12} &amp; h_{13} &amp; h_{21} &amp; h_{22} &amp; h_{23} &amp; h_{31} &amp; h_{32} &amp; h_{33}\end{bmatrix} \begin{bmatrix}x_1 &amp; y_1 &amp; 1_1\end{bmatrix}^T \tag{9.4}
 \]</span></p>
 
-<div class="figure" style="text-align: center"><span id="fig:geometriahomografia"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:geometriahomografia"></span>
 <img src="imagens/09-espaco_3D/geometria_homografia.png" alt="Geometria de uma homografia - Temos nessa figura a representação de uma homografia que relaciona pontos entre dois planos de imagem de um mesmo plano no mundo. [67, p. 60]." width="55%" />
 <p class="caption">
 Figura 9.3: Geometria de uma homografia - Temos nessa figura a representação de uma homografia que relaciona pontos entre dois planos de imagem de um mesmo plano no mundo. <span class="citation">[<a href="#ref-szeliski2010computer" role="doc-biblioref">67</a>, p. 60]</span>.
@@ -410,7 +410,7 @@ h_{33}
 <h2><span class="header-section-number">9.3</span> Transformações de câmera</h2>
 <p>A formação de imagem a partir de uma câmera digital pode ser compreendida por uma sequência de transformações entre sistemas de coordenadas, que fazem a correspondência entres os pontos “P” do espaço tridimensional para os pontos “p” no plano da imagem. Para estudar estas transformações será utilizado como referência os quatros sistemas de coordenadas na Figura <a href="espaco3D.html#fig:coordenadas">9.4</a>, apresentados por Carvalho et al. (2005) <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 22]</span>:</p>
 
-<div class="figure" style="text-align: center"><span id="fig:coordenadas"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:coordenadas"></span>
 <img src="imagens/09-espaco_3D/coordenadas.png" alt="Sistemas de coordenadas. Relação entre os sistemas de coordenadas que determina a transformação da posição do objeto de interesse no SCM para a projeção na imagem (SCI). Outros sistemas intermediários são o Sistema de coordenadas da câmera (SCC) e o Sistema de coordenadas em pixel (SCP). [69, p. 22]." width="55%" />
 <p class="caption">
 Figura 9.4: Sistemas de coordenadas. Relação entre os sistemas de coordenadas que determina a transformação da posição do objeto de interesse no SCM para a projeção na imagem (SCI). Outros sistemas intermediários são o Sistema de coordenadas da câmera (SCC) e o Sistema de coordenadas em pixel (SCP). <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 22]</span>.
@@ -422,7 +422,7 @@ Figura 9.4: Sistemas de coordenadas. Relação entre os sistemas de coordenadas 
 <p>Sistema de coordenadas em pixel (SCP): também é um sistema bidimensional, com origem no canto superior (ou inferior) esquerdo da imagem e com posições representadas por (u, v). Identifica os pontos da imagem com relação a grade de pixels.</p>
 <p>As etapas de transformações entre estes sistemas estão resumidas no esquema da Figura <a href="espaco3D.html#fig:transformacoes">9.5</a>, em que ocorrem sucessivas mudanças de coordenadas dos pontos de interesse, inicialmente referenciados no sistema SCM como (X,Y, Z), passando por todos os sistemas até o nível de pixel (u, v). Entre as transformações realizadas, estão a translação, rotação, escala e projeções que podem ser descritas como combinações de operações matriciais na sua forma homogênea <span class="citation">[<a href="#ref-davies2012" role="doc-biblioref">70</a>, p. 481]</span>, seguindo as abordagens descritas no tópico <a href="espaco3D.html#homogenea">coordenadas homogêneas</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:transformacoes"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:transformacoes"></span>
 <img src="imagens/09-espaco_3D/transformacoes.png" alt="Mudanças de coordenadas. Etapas de transformação do referencial do objeto de interesse (SCM) para o sistema de coordenadas de pixel (SCP) no plano de projeção. São apresentados quatro sistemas de coordenadas - SCM, SCC, SCI, SCP - cada um com a identificação da origem e dos pontos, por exemplo, no SCM a origem é indicada por “O” e o ponto (X, Y, Z)." width="55%" />
 <p class="caption">
 Figura 9.5: Mudanças de coordenadas. Etapas de transformação do referencial do objeto de interesse (SCM) para o sistema de coordenadas de pixel (SCP) no plano de projeção. São apresentados quatro sistemas de coordenadas - SCM, SCC, SCI, SCP - cada um com a identificação da origem e dos pontos, por exemplo, no SCM a origem é indicada por “O” e o ponto (X, Y, Z).
@@ -535,7 +535,7 @@ f_x &amp; c &amp; u_c\\
 <h2><span class="header-section-number">9.4</span> Distorção das lentes</h2>
 <p>Os parâmetros intrínsecos foram modelados com base em uma aproximação do comportamento das câmeras do tipo pinhole, entretanto, as lentes das câmeras reais podem apresentar distorções. Geralmente as distorções mais proeminentes nas imagens são do tipo geométrica, em que os pontos no plano da imagem são deslocados de onde deveriam ser projetados <span class="citation">[<a href="#ref-corke2017" role="doc-biblioref">65</a>, p. 331]</span>. A maior parte dos modelos empíricos de distorção consideram as distorções geométricas radiais e tangenciais <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">72</a>]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:distorcaoradial"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:distorcaoradial"></span>
 <img src="imagens/09-espaco_3D/distorcaoradial.png" alt="Distorção radial. Este tipo de distorção faz com que as linhas retas pareçam curvadas, e o efeito é maior nas bordas. (a) Imagem com distorção radial. (b) Imagem sem distorção. [71, p. 3]" width="55%" />
 <p class="caption">
 Figura 9.6: Distorção radial. Este tipo de distorção faz com que as linhas retas pareçam curvadas, e o efeito é maior nas bordas. (a) Imagem com distorção radial. (b) Imagem sem distorção. <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">71</a>, p. 3]</span>
@@ -590,7 +590,7 @@ Geralmente, apenas 3 coeficientes (<span class="math inline">\(k_1, k_2, k_3\)</
 Na calibração devem ser utilizadas imagens de amostra de um padrão, como de um tabuleiro de xadrez (Figura <a href="espaco3D.html#fig:chess">9.7</a>), em que seja possível identificar automaticamente na imagem pontos cujas coordenadas sejam conhecidas <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 29]</span>. No caso do tabuleiro de xadrez, os pontos de referência são as interseções dos quadrados que possibilitam identificar tanto as coordenadas na imagem (p) quanto no real (P) <span class="citation">[<a href="#ref-santos2012" role="doc-biblioref">71</a>, p. 12]</span>.</p>
 <p>Para exemplificar as etapas de calibração utilizaremos como guia o material e o código disponibilizados na documentação do OpenCv <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">72</a>]</span>. As etapas de calibração que descreveremos seguem o método Zhang, que usa um padrão bidimensional, mas que é posicionado em diferentes posições do espaço <span class="citation">[<a href="#ref-carvalho2005" role="doc-biblioref">69</a>, p. 39]</span>. Na prática, as imagens são obtidas a partir de uma câmera estática e o tabuleiro é colocado em diferentes posições e orientações, sendo necessário pelo menos 10 imagens <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">72</a>]</span>. Em cada imagem são utilizados os mesmos pontos de referência, por exemplo, pela Figura <a href="espaco3D.html#fig:chess">9.7</a> se identifica 9x6 pontos de interseção no tabuleiro, assim, a entrada do algoritmo segue a forma tamanho_tabuleiro = (9,6) .</p>
 
-<div class="figure" style="text-align: center"><span id="fig:chess"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chess"></span>
 <img src="imagens/09-espaco_3D/chess.jpg" alt="Tabuleiro de Xadrez. Uma das imagens utilizadas como padrão para realizar a calibração da câmera. Os pontos de contato entre os quadrados de mesma cor são utilizados como posições de referência para o algoritmo de calibração. [72]" width="55%" />
 <p class="caption">
 Figura 9.7: Tabuleiro de Xadrez. Uma das imagens utilizadas como padrão para realizar a calibração da câmera. Os pontos de contato entre os quadrados de mesma cor são utilizados como posições de referência para o algoritmo de calibração. <span class="citation">[<a href="#ref-opencvcalibration" role="doc-biblioref">72</a>]</span>
@@ -724,7 +724,6 @@ As distorções podem ser calculadas com base nos valores estimados das posiçõ
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -764,6 +763,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 },

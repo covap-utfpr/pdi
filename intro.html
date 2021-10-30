@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 1 Introdução | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
   <meta name="description" content="Capítulo 1 Introdução | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 1 Introdução | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,8 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="formacaoImagem.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -286,7 +286,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.1</span> Relação entre Processamento Digital de Imagem, Visão Computacional e Computação Gráfica</h2>
 <p>A visão desempenha um papel importante na vida das pessoas, pois com ela é possível uma percepção incrivelmente rica do mundo ao seu redor. Para tentar reproduzir as capacidades visuais humanas por sistemas autônomos manipulados por computadores foram desenvolvidas pelo menos três grandes áreas <span class="citation">[<a href="#ref-velho2009" role="doc-biblioref">1</a>, p. 2]</span>: <em>Processamento Digital de Imagens</em> (PDI), <em>Visão Computacional</em> (VC) e a <em>Computação Gráfica</em>(CG), apresentados na Figura <a href="intro.html#fig:areasPDI">1.1</a>. Essas áreas, apesar de serem correlacionadas, têm objetivos e métodos diferentes o que justifica a importância de distingui-las.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:areasPDI"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:areasPDI"></span>
 <img src="imagens/01-introducao/areasPDI.png" alt="Processos Computacionais com Imagens - O processamento de imagem, a visão computacional e a computação gráfica são áreas que operam com imagens digitais. Estas áreas têm propósitos diferentes, mas podem ser relacionadas, pois a saída do processamento de uma pode ser a entrada de outra. [1, p. 2]." width="40%" />
 <p class="caption">
 Figura 1.1: Processos Computacionais com Imagens - O processamento de imagem, a visão computacional e a computação gráfica são áreas que operam com imagens digitais. Estas áreas têm propósitos diferentes, mas podem ser relacionadas, pois a saída do processamento de uma pode ser a entrada de outra. <span class="citation">[<a href="#ref-velho2009" role="doc-biblioref">1</a>, p. 2]</span>.
@@ -340,7 +340,7 @@ na Figura <a href="intro.html#fig:areasPDI">1.1</a>. Muitas vezes as áreas de V
 <p>Um dos objetivos deste material é servir de referência para o estudo inicial da Visão Computacional, assim, para compreender as relações entre os três temas discutidos no final do tópico anterior - Processamento de Imagens, Visão Computacional e Aprendizado de Máquina - indicamos um guia para o presente material de estudo, em que se descreve como os capítulos foram organizados dentro destes três temas mais amplos.</p>
 <p>Com base na abordagem adotada no diagrama da Figura <a href="intro.html#fig:capitulos">1.2</a>, as principais etapas para o tratamento de problemas envolvem: aquisição da imagem; pré-processamento; e análise da informação visual. Dentro de cada um destes níveis é possível subdividir vários outros subtópicos dependendo da aplicação de interesse, e neste material apresentamos algumas de usos mais gerais, que estão organizadas em capítulos.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:capitulos"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:capitulos"></span>
 <img src="imagens/01-introducao/capitulos.png" alt="Etapas para o desenvolvimento de aplicações na Visão Computacional - Diagrama com a distribuição dos capítulos com base nas principais etapas dentro do processamento de imagem e do aprendizado de máquina orientados à visão computacional." width="60%" />
 <p class="caption">
 Figura 1.2: Etapas para o desenvolvimento de aplicações na Visão Computacional - Diagrama com a distribuição dos capítulos com base nas principais etapas dentro do processamento de imagem e do aprendizado de máquina orientados à visão computacional.
@@ -354,7 +354,7 @@ Figura 1.2: Etapas para o desenvolvimento de aplicações na Visão Computaciona
 </ul>
 <p>Captura a imagem por meio de um dispositivo ou sensor e a converte em uma imagem digitalizada <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. Podemos citar como exemplo as câmeras fotográficas, tomógrafos médicos, satélites e scanners. Na figura <a href="intro.html#fig:componentes2">1.3</a>, temos um exemplo de imagem colorida separadas em suas três componentes, e mais detalhes sobre a aquisição e formação deste tipo de imagem e de outras são abordados no Capítulo <a href="formacaoImagem.html#formacaoImagem">Formação de Imagem</a>. Como será discutido no Capítulo <a href="espaco3D.html#espaco3D">Espaço 3D</a>, algumas aplicações da Visão computacional dependem de parâmetros determinados pelo equipamento e das condições durante a aquisição das imagens.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:componentes2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:componentes2"></span>
 <img src="imagens/02-formacao/componentes.png" alt="Imagem colorida - Imagem separada em seus três componentes, em que Red é a vermelha, Green é a verde e Blue é a azul [4, p. 28]." width="65%" />
 <p class="caption">
 Figura 1.3: Imagem colorida - Imagem separada em seus três componentes, em que <em>Red</em> é a vermelha, <em>Green</em> é a verde e <em>Blue</em> é a azul <span class="citation">[<a href="#ref-moeslund2012" role="doc-biblioref">4</a>, p. 28]</span>.
@@ -365,7 +365,7 @@ Figura 1.3: Imagem colorida - Imagem separada em seus três componentes, em que 
 </ul>
 <p>Essa etapa busca realizar mudanças e ajustes na imagem visando melhorar seu uso nas etapas futuras <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 3]</span>. Como exemplo temos casos onde não precisamos das cores de uma imagem, podendo então realizar a conversão para <em>grayscale</em> (tons de cinza), ou precisamos gerar imagens coloridas. Além disso, podemos realizar cortes ou realces, isolando somente a parte de maior interesse na imagem utilizando algumas das técnicas apresentadas no Capítulo <a href="transformacoesGeometricas.html#transformacoesGeometricas">Transformações Geométricas</a> e no Capítulo <a href="transformacoesRadiometricas.html#transformacoesRadiometricas">Transformações Radiométricas</a>. Na Figura <a href="intro.html#fig:placaEletronicaMediana2">1.4</a> se destaca uma das abordagens recorrentes no tratamento de imagem, a atenuação de ruídos e a suavização, utilizando principalmente alguns dos filtros do Capítulo <a href="filtros.html#filtros">Filtros Digitais</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:placaEletronicaMediana2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:placaEletronicaMediana2"></span>
 <img src="imagens/05-filtros/placaEletronicaMediana.png" alt="Remoção de ruído sal e pimenta por meio do filtro de Mediana - No Capítulo Filtros Digitais serão apresentados alguns filtros como este que tratam as imagens, por exemplo, revomendo ruídos, aumentando o realce ou suavizando[2, p. 103]." width="85%" />
 <p class="caption">
 Figura 1.4: Remoção de ruído sal e pimenta por meio do filtro de Mediana - No Capítulo <a href="filtros.html#filtros">Filtros Digitais</a> serão apresentados alguns filtros como este que tratam as imagens, por exemplo, revomendo ruídos, aumentando o realce ou suavizando<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 103]</span>.
@@ -376,7 +376,7 @@ Figura 1.4: Remoção de ruído sal e pimenta por meio do filtro de Mediana - No
 </ul>
 <p>À parte de Análise atribuímos todos os processos que fazem uso da informação visual para compor um sistema de aplicação na área de Visão Computacional. Atualmente é mais comum ver estes processos englobados dentro de modelos de aprendizado de máquina mais genéricos como em redes neurais, capazes por exemplo, de classificar, identificar e rastrear objetos em diferentes situações. No Capítulo <a href="deepLearning.html#deepLearning">Deep Learning em Visão Computacional</a>, assim como na Figura <a href="intro.html#fig:exemploMLP">1.5</a> é possível se ter uma pequena noção de como as redes neurais, como as redes multicamadas de perceptrons (MLP), enxergam as imagens e como desagregam suas informações para disponibilizar resultados satisfatórios no campo da VC.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:exemploMLP"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:exemploMLP"></span>
 <img src="imagens/01-introducao/exemploMLP.jpg" alt="Aplicação das Redes Neurais na Visão Computacional - Utilização das redes multicamadas de perceptrons para classificar dígitos de números em imagens [5]" width="80%" />
 <p class="caption">
 Figura 1.5: Aplicação das Redes Neurais na Visão Computacional - Utilização das redes multicamadas de perceptrons para classificar dígitos de números em imagens <span class="citation">[<a href="#ref-img:exemploMLP" role="doc-biblioref">5</a>]</span>
@@ -392,7 +392,7 @@ Figura 1.5: Aplicação das Redes Neurais na Visão Computacional - Utilização
 <p>Este variado campo de aplicações pode ser justificado pela capacidade dos aparelhos de processamento de imagens trabalharem com imagens de diversas fontes. Diferentemente dos seres humanos, que são limitados à banda visual do espectro eletromagnético (EM), o processamento computacional cobre todo o EM, variando de ondas gama a ondas de rádio <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 1]</span>. No processamento digital ainda é possível trabalhar com imagens geradas por fontes que os humanos não estão acostumados a associar com imagens. Essas fontes incluem acústica, ultrassom, microscopia eletrônica e imagens geradas por computador <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 13]</span>.</p>
 <p>Uma das formas mais fáceis de desenvolver uma compreensão básica da extensão das aplicações de PDI é categorizar as imagens de acordo com sua fonte. Na Figura <a href="intro.html#fig:espectro">1.6</a> ttemos uma representação do EM e iremos a seguir explorar cada uma dessas faixas, apresentando algumas das áreas onde podem ser utilizados:</p>
 
-<div class="figure" style="text-align: center"><span id="fig:espectro"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:espectro"></span>
 <img src="imagens/01-introducao/espectro.png" alt="Espectro eletromagnético - As imagens podem ser geradas a partir de diferentes fontes eletromagnéticas, incluindo raios gama, raio x, ultravioleta, visível, infravermelho, microondas e rádio [6]." width="90%" />
 <p class="caption">
 Figura 1.6: Espectro eletromagnético - As imagens podem ser geradas a partir de diferentes fontes eletromagnéticas, incluindo raios gama, raio x, ultravioleta, visível, infravermelho, microondas e rádio <span class="citation">[<a href="#ref-img:espectro" role="doc-biblioref">6</a>]</span>.
@@ -412,7 +412,7 @@ Figura 1.6: Espectro eletromagnético - As imagens podem ser geradas a partir de
 </ul>
 <p>Como podemos observar, existem inúmeras maneiras de se conseguir imagens além da clássica imagem no espectro visível, isso nos dá a possibilidade de utilizar o PDI em inúmeras áreas e problemas. Na Figura <a href="intro.html#fig:aplicacoes">1.7</a> temos uma nebulosa observada a partir de diferentes bandas do EM, sendo possível observar detalhes que passariam despercebidos se usássemos somente alguma delas.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:aplicacoes"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:aplicacoes"></span>
 <img src="imagens/01-introducao/aplicacoes.png" alt="Nebulosa CRAB em diferentes frequências - Ao observar um mesmo objeto a partir de várias bandas do EM é possível avaliar diferentes aspectos [7]." width="90%" />
 <p class="caption">
 Figura 1.7: Nebulosa CRAB em diferentes frequências - Ao observar um mesmo objeto a partir de várias bandas do EM é possível avaliar diferentes aspectos <span class="citation">[<a href="#ref-img:nebulosa" role="doc-biblioref">7</a>]</span>.
@@ -455,7 +455,6 @@ Figura 1.7: Nebulosa CRAB em diferentes frequências - Ao observar um mesmo obje
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -495,6 +494,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 },

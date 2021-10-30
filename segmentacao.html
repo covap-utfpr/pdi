@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
   <meta name="description" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 6 Segmentação | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,8 @@
   
 <link rel="prev" href="filtros.html"/>
 <link rel="next" href="deepLearning.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -294,7 +294,7 @@ Os métodos de detecção de bordas se baseiam no comportamento das derivadas, q
 <p>Para avaliar o comportamento das derivadas na transição de intensidades apresentamos na Figura <a href="segmentacao.html#fig:imagemDerivadas">6.1</a> um perfil de intensidade horizontal (linha de digitalização) de uma imagem, juntamente com os resultados das duas últimas equações, <a href="segmentacao.html#eq:der1ordem">(6.1)</a> e <a href="segmentacao.html#eq:der2ordem">(6.2)</a>, para alguns pontos. A imagem contém vários objetos sólidos, uma linha e um ponto interno de ruído, e a linha de digitalização está próxima ao centro, incluindo o ponto isolado. A Figura <a href="segmentacao.html#fig:imagemDerivadas">6.1</a>(c) mostra uma simplificação do perfil e como as derivadas de primeira e segunda ordem se comportam quando encontram um ponto isolado, uma linha e as bordas dos objetos.</p>
 <p>Com base nos resultados das Equações <a href="segmentacao.html#eq:der1ordem">(6.1)</a> e <a href="segmentacao.html#eq:der2ordem">(6.2)</a>, na Figura <a href="segmentacao.html#fig:imagemDerivadas">6.1</a>, observa-se que atendem as propriedades das derivadas. No início e ao longo da rampa de intensidade, a derivada de primeira ordem é diferente de zero, enquanto a segunda derivada é diferente de zero apenas no início e no final da rampa. Estes comportamentos indicam que as derivadas de primeira ordem produzem bordas grossas, e as de segunda ordem produzem bordas mais finas <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 458]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemDerivadas"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemDerivadas"></span>
 <img src="imagens/06-segmentacao/imagemDerivadas.png" alt="(a) Imagem. (b) Perfil de intensidade horizontal no centro da imagem. (c) Perfil simplificado e resultados das derivadas. [2, p. 457]." width="55%" />
 <p class="caption">
 Figura 6.1: (a) Imagem. (b) Perfil de intensidade horizontal no centro da imagem. (c) Perfil simplificado e resultados das derivadas. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 457]</span>.
@@ -316,7 +316,7 @@ Figura 6.1: (a) Imagem. (b) Perfil de intensidade horizontal no centro da imagem
 \tag{6.6}\]</span></p>
 <p>Essa equação pode ser implementada utilizando a máscara de filtragem identificada na Figura <a href="segmentacao.html#fig:mascarasLaplacianas">6.2</a>(a). Para incluir as direções diagonais na definição do laplaciano digital, acrescenta-se mais dois termos a esta equação, <a href="segmentacao.html#eq:opLaplacianoDisc">(6.6)</a>, um para cada direção diagonal. A Figura <a href="segmentacao.html#fig:mascarasLaplacianas">6.2</a>(b) mostra a máscara de filtragem desta atualização que inclui as diagonais.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:mascarasLaplacianas"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mascarasLaplacianas"></span>
 <img src="imagens/06-segmentacao/mascarasLaplacianas.png" alt="(a) Máscara referente a equação laplaciana discreta. (b) Máscara que inclui as diagonais. [2, p. 106]" width="55%" />
 <p class="caption">
 Figura 6.2: (a) Máscara referente a equação laplaciana discreta. (b) Máscara que inclui as diagonais. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 106]</span>
@@ -337,7 +337,7 @@ em que <span class="math inline">\(g\)</span> é a imagem de saída, <span class
 <h3><span class="header-section-number">6.1.2</span> Detecção de linhas</h3>
 <p>Semelhante à detecção de pontos isolados, as derivadas de segunda ordem geram respostas mais fortes na detecção de linhas, e produzem linhas mais finas do que as derivadas de primeira ordem <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 460]</span>. Ao utilizar a máscara laplaciana da Figura <a href="segmentacao.html#fig:mascarasLaplacianas">6.2</a> sobre a imagem de um componente em um circuito eletrônico (parte de uma conexão <em>wire-bond</em>), representado na Figura <a href="segmentacao.html#fig:imagemDeteccaoLinhas">6.3</a>(a), obtém-se como resultado a Figura <a href="segmentacao.html#fig:imagemDeteccaoLinhas">6.3</a>(b). Na seção ampliada da Figura <a href="segmentacao.html#fig:imagemDeteccaoLinhas">6.3</a>(b), as linhas mais claras identificam os pontos positivos, o cinza escuro são os valores negativos, e o cinza médio representa zero. O efeito de linha dupla é evidente na região ampliada ao se utilizar a segunda derivada.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemDeteccaoLinhas"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemDeteccaoLinhas"></span>
 <img src="imagens/06-segmentacao/imagemDeteccaoLinhas.png" alt="(a) Imagem do circuito. (b) Resultado do filtro laplaciano. (c) Valor absoluto do filtro laplaciano. (d) Valores positivos do filtro laplaciano. [2, p. 460]" width="55%" />
 <p class="caption">
 Figura 6.3: (a) Imagem do circuito. (b) Resultado do filtro laplaciano. (c) Valor absoluto do filtro laplaciano. (d) Valores positivos do filtro laplaciano. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 460]</span>
@@ -346,7 +346,7 @@ Figura 6.3: (a) Imagem do circuito. (b) Resultado do filtro laplaciano. (c) Valo
 <p>Para destacar as linhas após a aplicação do filtro e remover os valores negativos pode ser utilizado o módulo dos valores calculados ou utilizar apenas os valores positivos do laplaciano <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 460]</span>, os resultados destas metodologias estão identificados na Figura <a href="segmentacao.html#fig:imagemDeteccaoLinhas">6.3</a>(c) e (d), respectivamente. Nota-se que as linhas geradas pela abordagem do módulo são mais grossas, pois a espessura é o dobro se comparada com a outra metodologia. Nas duas situações, as linhas mais largas que o tamanho do filtro laplaciano são separadas por um “vale” de zeros. A detecção de linhas é ideal quando a espessura é menor que o detector, ao contrário se recomenda tratar o elemento como uma região e utilizar outros métodos <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 460]</span>.</p>
 <p>O filtro laplaciano, na Figura <a href="segmentacao.html#fig:mascarasLaplacianas">6.2</a>, é isotrópico, assim, a sua resposta independe da direção <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 460]</span>. No caso das linhas, pode ser interessante a detecção em apenas uma determinada direção, utilizando, por exemplo, uma das máscaras apresentadas na Figura <a href="segmentacao.html#fig:mascarasDeteccaoLinhas">6.4</a>. Para a primeira máscara da Figura <a href="segmentacao.html#fig:mascarasDeteccaoLinhas">6.4</a>, os sinais mais fortes ocorrem em linhas horizontais da imagem que passam pela linha do meio da máscara. O segundo filtro detecta melhor as linhas com <span class="math inline">\(45°\)</span> de inclinação. O terceiro filtro para linhas verticais. O quarto filtro para linhas com <span class="math inline">\(-45º\)</span> de inclinação. Vale destacar que estamos utilizando a convenção de que os eixos da imagem têm sua origem no canto superior esquerdo, com o eixo <span class="math inline">\(x\)</span> positivo apontando para baixo e o eixo <span class="math inline">\(y\)</span> positivo se estendendo à direita. Os ângulos das linhas são medidos em relação ao eixo <span class="math inline">\(x\)</span> positivo.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:mascarasDeteccaoLinhas"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mascarasDeteccaoLinhas"></span>
 <img src="imagens/06-segmentacao/mascarasDeteccaoLinhas.png" alt="Máscaras para detecção de linhas em uma determinada direção [2, p. 461]." width="55%" />
 <p class="caption">
 Figura 6.4: Máscaras para detecção de linhas em uma determinada direção <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 461]</span>.
@@ -362,7 +362,7 @@ Figura 6.4: Máscaras para detecção de linhas em uma determinada direção <sp
 <p>Na Figura <a href="segmentacao.html#fig:modelosBordas">6.5</a>, estão os principais modelos de borda, que são classificados de acordo com os perfis de intensidade. A primeira borda, borda em degrau, (a), apresenta uma transição entre dois níveis de intensidade e são consideradas ideais com uma distância de 1 pixel. Na prática, as bordas nas imagens digitais não apresentam uma transição tão bem definida, assim, modelos mais apropriados consideram um perfil de rampa como da Figura <a href="segmentacao.html#fig:modelosBordas">6.5</a>(b) <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 462]</span>. Quanto mais indefinida é a transição da borda, menor é a inclinação da rampa. Em vez de uma borda com 1 pixel de espessura, todos os pontos na rampa fazem parte da borda.
 Além disso, na Figura <a href="segmentacao.html#fig:modelosBordas">6.5</a>, mostra os modelos de bordas com seus respectivos perfis de intensidade.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:modelosBordas"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:modelosBordas"></span>
 <img src="imagens/06-segmentacao/modelosBordas.png" alt="(a) Borda degrau. (b) Borda rampa. (c) Borda telhado. [2, p. 462]" width="55%" />
 <p class="caption">
 Figura 6.5: (a) Borda degrau. (b) Borda rampa. (c) Borda telhado. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 462]</span>
@@ -371,7 +371,7 @@ Figura 6.5: (a) Borda degrau. (b) Borda rampa. (c) Borda telhado. <span class="c
 <p>No terceiro modelo de borda, Figura <a href="segmentacao.html#fig:modelosBordas">6.5</a>(c), em forma de telhado ou <em>roof edge</em>, a base (largura) de uma borda é definida pela espessura e a nitidez da linha. Quando a base é igual 1 <em>pixel</em> de espessura, uma borda em forma de telhado é definida como uma linha <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 462]</span>.</p>
 <p>As imagens da Figura <a href="segmentacao.html#fig:derivadasImagensRuidosas">6.6</a> não apresentam ruídos, entretanto os modelos de detecção devem considerar que as bordas estejam desfocadas e com ruídos. Na primeira coluna da Figura <a href="segmentacao.html#fig:modelosBordas">6.5</a> estão quatro bordas de perfil rampa com diferentes níveis de ruídos, e abaixo de cada imagem, está o perfil horizontal de intensidade que passa pelo centro da imagem. A primeira imagem no canto esquerdo não apresenta ruído, e as outras três imagens da primeira coluna foram alteradas com ruído gaussiano aditivo com média zero e desvio padrão de <span class="math inline">\(0.1\)</span>, <span class="math inline">\(1.0\)</span> e <span class="math inline">\(10.0\)</span> níveis de intensidade, respectivamente.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:derivadasImagensRuidosas"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:derivadasImagensRuidosas"></span>
 <img src="imagens/06-segmentacao/derivadasImagensRuidosas.png" alt="Primeira coluna: imagens e perfis de intensidade de uma borda em declive corrompida pelo ruído gaussiano aleatório de desvio padrão \(0.0\), \(0.1\), \(1.0\) e \(10.0\) níveis de intensidade, respectivamente. Segunda coluna: imagens da primeira derivada. Terceira coluna: imagens da segunda derivada. [2, p. 465]" width="55%" />
 <p class="caption">
 Figura 6.6: Primeira coluna: imagens e perfis de intensidade de uma borda em declive corrompida pelo ruído gaussiano aleatório de desvio padrão <span class="math inline">\(0.0\)</span>, <span class="math inline">\(0.1\)</span>, <span class="math inline">\(1.0\)</span> e <span class="math inline">\(10.0\)</span> níveis de intensidade, respectivamente. Segunda coluna: imagens da primeira derivada. Terceira coluna: imagens da segunda derivada. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 465]</span>
@@ -395,7 +395,7 @@ G_x
 \end{bmatrix}
 \tag{6.8}\]</span></p>
 
-<div class="figure" style="text-align: center"><span id="fig:vetorGradiente"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:vetorGradiente"></span>
 <img src="imagens/06-segmentacao/vetorGradiente.png" alt="Vetor gradiente \(\nabla f\) em uma borda. [3, p. 155]" width="55%" />
 <p class="caption">
 Figura 6.7: Vetor gradiente <span class="math inline">\(\nabla f\)</span> em uma borda. <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 155]</span>
@@ -421,7 +421,7 @@ tg^{-1}
 \tag{6.12}\]</span>
 é o mesmo que aplicar os filtros de tamanho 2x2 da Figura <a href="segmentacao.html#fig:operadorRoberts">6.8</a> e somar os resultados absolutos.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:operadorRoberts"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:operadorRoberts"></span>
 <img src="imagens/06-segmentacao/operadorRoberts.png" alt="Operador de Roberts [3, p. 157]." width="55%" />
 <p class="caption">
 Figura 6.8: Operador de Roberts <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 157]</span>.
@@ -438,7 +438,7 @@ M(x,y) &amp;\simeq
 \end{split}
 \tag{6.13}\]</span></p>
 
-<div class="figure" style="text-align: center"><span id="fig:operadorPrewitt"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:operadorPrewitt"></span>
 <img src="imagens/06-segmentacao/operadorPrewitt.png" alt="Operador de Prewitt [3, p. 158]." width="55%" />
 <p class="caption">
 Figura 6.9: Operador de Prewitt <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 158]</span>.
@@ -455,7 +455,7 @@ M(x,y) &amp;\simeq
 \end{split}
 \tag{6.14}\]</span></p>
 
-<div class="figure" style="text-align: center"><span id="fig:operadorSobel"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:operadorSobel"></span>
 <img src="imagens/06-segmentacao/operadorSobel.png" alt="Operador de Sobel [3, p. 158]." width="55%" />
 <p class="caption">
 Figura 6.10: Operador de Sobel <span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 158]</span>.
@@ -482,7 +482,7 @@ com desvio padrão <span class="math inline">\(\sigma\)</span>. Em razão da lin
 \tag{6.17}\]</span></p>
 <p>As máscaras podem ser geradas pela amostragem da Equação <a href="segmentacao.html#eq:laplGauss">(6.17)</a> com ajustes nos coeficientes para que a soma seja zero. Um exemplo de máscara 5x5 que atende ao Laplaciano da Gaussiana está na Figura <a href="segmentacao.html#fig:laplacianoGaussiana">6.11</a>(d). O comportamento dessa máscara é próximo do efeito da função LoG na Figura <a href="segmentacao.html#fig:laplacianoGaussiana">6.11</a>(a), em que o termo positivo e central é rodeado por uma região negativa cujo os valores aumentam ao se distanciar da origem, e uma região externa com zeros <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 472]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:laplacianoGaussiana"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:laplacianoGaussiana"></span>
 <img src="imagens/06-segmentacao/laplacianoGaussiana.png" alt="(a) Gráfico 3-D do negativo de LoG. (b) Imagem do negativo de LoG. (c) Seção transversal de (a). (d) Aproximação de máscara 5x5 para LoG. [2, p. 471]" width="55%" />
 <p class="caption">
 Figura 6.11: (a) Gráfico 3-D do negativo de LoG. (b) Imagem do negativo de LoG. (c) Seção transversal de (a). (d) Aproximação de máscara 5x5 para LoG. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 471]</span>
@@ -537,7 +537,7 @@ Figura 6.11: (a) Gráfico 3-D do negativo de LoG. (b) Imagem do negativo de LoG.
 <p>A etapa de não máximos tem como base a discretização das direções da normal da borda (vetor gradiente), ou seja, em uma região 3x3, temos 4 direções possíveis, como pode ser visto na Figura <a href="segmentacao.html#fig:edgeorientation">6.12</a>(c); por exemplo, uma borda de <span class="math inline">\(45º\)</span>, se ela estiver entre <span class="math inline">\(+157.5º\)</span> e <span class="math inline">\(+112.5º\)</span> ou <span class="math inline">\(-67.5º\)</span> e <span class="math inline">\(-22.5º\)</span>.
 Na Figura <a href="segmentacao.html#fig:edgeorientation">6.12</a>(a), temos um exemplo de duas orientações que podem existir em uma borda horizontal. Na Figura <a href="segmentacao.html#fig:edgeorientation">6.12</a>(b), podemos ver a normal de uma borda horizontal e o intervalo de valores onde a direção do vetor gradiente pode existir.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:edgeorientation"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:edgeorientation"></span>
 <img src="imagens/06-segmentacao/edge_orientation.png" alt="Discretização das direções. (a) Borda horizontal. (b) Intervalo dos possíveis valor do ângulo normal da borda para uma borda horizontal. (c) Intervalo de valores do ângulo da normal para os diferentes tipos de borda. [2, p. 475]" width="70%" />
 <p class="caption">
 Figura 6.12: Discretização das direções. (a) Borda horizontal. (b) Intervalo dos possíveis valor do ângulo normal da borda para uma borda horizontal. (c) Intervalo de valores do ângulo da normal para os diferentes tipos de borda. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 475]</span>
@@ -572,7 +572,7 @@ Figura 6.12: Discretização das direções. (a) Borda horizontal. (b) Intervalo
 <li>Imagem original</li>
 </ol>
 
-<div class="figure" style="text-align: center"><span id="fig:original"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:original"></span>
 <img src="imagens/06-segmentacao/original.jpg" alt="Imagem original." width="50%" />
 <p class="caption">
 Figura 6.13: Imagem original.
@@ -582,7 +582,7 @@ Figura 6.13: Imagem original.
 <li>Aplicação do filtro gaussiano para suavizar a imagem.</li>
 </ol>
 
-<div class="figure" style="text-align: center"><span id="fig:gaussian"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gaussian"></span>
 <img src="imagens/06-segmentacao/gaussian.jpg" alt="Imagem filtrada com filtro gaussiano." width="50%" />
 <p class="caption">
 Figura 6.14: Imagem filtrada com filtro gaussiano.
@@ -592,7 +592,7 @@ Figura 6.14: Imagem filtrada com filtro gaussiano.
 <li>Cálculo da magnitude do gradiente e dos ângulos.</li>
 </ol>
 
-<div class="figure" style="text-align: center"><span id="fig:derivadas"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:derivadas"></span>
 <img src="imagens/06-segmentacao/derivadas.jpg" alt="(a) Sobel na direção vertical. (b) Sobel na direção horizontal. (c) Gradiente. (d) Ângulos. [9, p. 98]" width="75%" />
 <p class="caption">
 Figura 6.15: (a) Sobel na direção vertical. (b) Sobel na direção horizontal. (c) Gradiente. (d) Ângulos. <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">9</a>, p. 98]</span>
@@ -602,7 +602,7 @@ Figura 6.15: (a) Sobel na direção vertical. (b) Sobel na direção horizontal.
 <li>Aplicação da supressão não máximos para afinar as bordas.</li>
 </ol>
 
-<div class="figure" style="text-align: center"><span id="fig:supressao"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:supressao"></span>
 <img src="imagens/06-segmentacao/supressao.jpg" alt="Resultado da supressão não máxima." width="50%" />
 <p class="caption">
 Figura 6.16: Resultado da supressão não máxima.
@@ -612,7 +612,7 @@ Figura 6.16: Resultado da supressão não máxima.
 <li>Usar limiarização por histerese.</li>
 </ol>
 
-<div class="figure" style="text-align: center"><span id="fig:threshold"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:threshold"></span>
 <img src="imagens/06-segmentacao/threshold.jpg" alt="Resultado da histerese." width="50%" />
 <p class="caption">
 Figura 6.17: Resultado da histerese.
@@ -622,7 +622,7 @@ Figura 6.17: Resultado da histerese.
 <li>Resultado final, após a análise de conectividade para detectar e conectar as bordas.</li>
 </ol>
 
-<div class="figure" style="text-align: center"><span id="fig:canny"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:canny"></span>
 <img src="imagens/06-segmentacao/canny.jpg" alt="Resultado final da detecção de bordas de Canny." width="50%" />
 <p class="caption">
 Figura 6.18: Resultado final da detecção de bordas de Canny.
@@ -638,7 +638,7 @@ Figura 6.18: Resultado final da detecção de bordas de Canny.
 <p>Para começar a entender essa transformada, imaginemos que temos um ponto <span class="math inline">\((x_i, y_i)\)</span> no plano <span class="math inline">\(xy\)</span> e a equação da reta <span class="math inline">\(y_i=ax_i+b\)</span>. É fato que pelo ponto <span class="math inline">\((x_i, y_i)\)</span>, passam infinitas retas. Podemos escrever a equação anterior em relação a <span class="math inline">\(b\)</span>, ou seja, <span class="math inline">\(b=-x_ia+y_i\)</span>, o que nos leva ao plano <span class="math inline">\(ab\)</span> (espaço de parâmetros) onde essa nova equação gerará uma única reta.</p>
 <p>Imaginemos um outro ponto <span class="math inline">\((x_j, y_j)\)</span> no plano <span class="math inline">\(xy\)</span>, podemos também levá-lo ao plano <span class="math inline">\(ab\)</span> através da equação <span class="math inline">\(b=-x_ja+y_j\)</span>. Como podemos ver na Figura <a href="segmentacao.html#fig:planoxy">6.19</a>(b), as duas retas geradas no plano <span class="math inline">\(ab\)</span> se cruzam nas coordenadas <span class="math inline">\((a&#39;, b&#39;)\)</span>. O ponto de cruzamento representa a reta que cruza os dois pontos no plano <span class="math inline">\(xy\)</span>, como podemos ver na mesma representação <a href="segmentacao.html#fig:planoxy">6.19</a>(a). Na realidade, todos os pontos pertencentes a reta definida por esses dois pontos em <span class="math inline">\(xy\)</span>, tem sua reta respectiva em <span class="math inline">\(ab\)</span> e todas elas se cruzam no ponto <span class="math inline">\((a&#39;, b&#39;)\)</span>, isso nos dá uma maneira de realizar a detecção de bordas, pois podemos imaginar essa reta no plano <span class="math inline">\(xy\)</span> como nossa borda, assim, para achá-la, basta localizar o ponto no espaço de parâmetros onde um grande número de retas se cruzam.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:planoxy"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:planoxy"></span>
 <img src="imagens/06-segmentacao/planoxy.png" alt="Planos \(xy\) e \(ab\) [2, p. 483]." width="65%" />
 <p class="caption">
 Figura 6.19: Planos <span class="math inline">\(xy\)</span> e <span class="math inline">\(ab\)</span> <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 483]</span>.
@@ -649,7 +649,7 @@ Figura 6.19: Planos <span class="math inline">\(xy\)</span> e <span class="math 
 \tag{6.28}\]</span></p>
 <p>A Figura <a href="segmentacao.html#fig:planoxyrhotheta">6.20</a> mostra a aplicação de coordenadas polares nesse contexto por exemplos gráficos. Na Figura <a href="segmentacao.html#fig:planoxyrhotheta">6.20</a>(a), <span class="math inline">\(\rho\)</span> é a distância da origem até a reta. Na Figura <a href="segmentacao.html#fig:planoxyrhotheta">6.20</a>(b), mostra-se que cada uma das curvas senoidais representa as infinitas retas que passam por cada um dos dois pontos, <span class="math inline">\((x_i,y_i)\)</span> e <span class="math inline">\((x_j,y_j)\)</span> e a interseção das curvas, <span class="math inline">\((\rho&#39;,\theta&#39;)\)</span>, é a reta que passa por esses dois pontos.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:planoxyrhotheta"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:planoxyrhotheta"></span>
 <img src="imagens/06-segmentacao/planoxyrhotheta.png" alt="Exemplo de conversão de uma reta no plano cartesiano para o plano polar. (a) Pode ser dois pontos arbitrários de uma imagemImagem de ônibus com filtro de aguçamento e de suavização. [9, p. 98]" width="90%" />
 <p class="caption">
 Figura 6.20: Exemplo de conversão de uma reta no plano cartesiano para o plano polar. (a) Pode ser dois pontos arbitrários de uma imagemImagem de ônibus com filtro de aguçamento e de suavização. <span class="citation">[<a href="#ref-burger2009" role="doc-biblioref">9</a>, p. 98]</span>
@@ -668,7 +668,7 @@ Figura 6.20: Exemplo de conversão de uma reta no plano cartesiano para o plano 
 <span class="math display">\[\rho=50\cdot\cos(-45º)+50\cdot \text{sen}(-45º)=0\]</span></li>
 </ul>
 
-<div class="figure" style="text-align: center"><span id="fig:houghumponto"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:houghumponto"></span>
 <img src="imagens/06-segmentacao/hough_um_ponto.jpg" alt="Transformada de Hough para um ponto." width="75%" />
 <p class="caption">
 Figura 6.21: Transformada de Hough para um ponto.
@@ -676,7 +676,7 @@ Figura 6.21: Transformada de Hough para um ponto.
 </div>
 <p>Na Figura <a href="segmentacao.html#fig:houghdoispontosesquerda">6.22</a>(a), temos dois pontos, <span class="math inline">\(a\)</span> e <span class="math inline">\(b\)</span>, onde foi realizada a transformada de Hough que tem a Figura <a href="segmentacao.html#fig:houghdoispontosesquerda">6.22</a>(b) como espaço de saída. A reta <span class="math inline">\(c\)</span> que passa por esses dois pontos, representada em pontilhado na Figura <a href="segmentacao.html#fig:houghdoispontosesquerda">6.22</a>(a) e, na Figura <a href="segmentacao.html#fig:houghdoispontosesquerda">6.22</a>(b), temos o ponto no plano que representa essa reta, ou seja, uma reta a uma distância <span class="math inline">\(\rho\approx70,71\)</span> da origem com o ângulo de <span class="math inline">\(45^{\circ}\)</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:houghdoispontosesquerda"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:houghdoispontosesquerda"></span>
 <img src="imagens/06-segmentacao/hough_dois_ponto_esquerda.png" alt="Transformada de Hough para um ponto em 45º." width="75%" />
 <p class="caption">
 Figura 6.22: Transformada de Hough para um ponto em 45º.
@@ -684,7 +684,7 @@ Figura 6.22: Transformada de Hough para um ponto em 45º.
 </div>
 <p>Na Figura <a href="segmentacao.html#fig:houghdoispontosdireita">6.23</a>(a) temos mais um exemplo, desta vez com um ponto localizado a sua direita, diferentemente da anterior, esses dois pontos formam uma reta de <span class="math inline">\(-45^{\circ}\)</span>, fato que pode ser visto na Figura <a href="segmentacao.html#fig:houghdoispontosdireita">6.23</a>(b) onde o ponto de encontro das duas curvas acontece em <span class="math inline">\(\theta=-45^{\circ}\)</span> com um valor de <span class="math inline">\(\rho=0\)</span> já que a reta cruza a origem, ou seja, não possui distância em relação a ela.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:houghdoispontosdireita"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:houghdoispontosdireita"></span>
 <img src="imagens/06-segmentacao/hough_dois_ponto_direita.png" alt="Transformada de Hough para um ponto em -45º." width="75%" />
 <p class="caption">
 Figura 6.23: Transformada de Hough para um ponto em -45º.
@@ -692,7 +692,7 @@ Figura 6.23: Transformada de Hough para um ponto em -45º.
 </div>
 <p>Nosso último exemplo contém uma imagem com três pontos, onde temos três tipos de retas possíveis. Observando a figura <a href="segmentacao.html#fig:houghtrespontos">6.24</a>(a), podemos ver os pontos <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span> e <span class="math inline">\(c\)</span> e as retas <span class="math inline">\(d\)</span>, <span class="math inline">\(e\)</span> e <span class="math inline">\(f\)</span> que passam por eles e, na Figura <a href="segmentacao.html#fig:houghtrespontos">6.24</a>(b), temos a transformada de Hough para essa imagem, algo interessante de se notar é o fato de a reta que passa pelos pontos <span class="math inline">\(b\)</span> e <span class="math inline">\(c\)</span> pode ser detectada duas vezes, isso se deve a uma característica da transformada de Hough chamada relação de adjacência reflexiva, ou seja, isso acontece como resultado pela maneira como <span class="math inline">\(\rho\)</span> e <span class="math inline">\(\theta\)</span> mudam de sinal quando chegamos as extremidades de <span class="math inline">\(\pm90^{\circ}\)</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:houghtrespontos"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:houghtrespontos"></span>
 <img src="imagens/06-segmentacao/hough_tres_ponto.png" alt="Transformada de Hough para três pontos." width="75%" />
 <p class="caption">
 Figura 6.24: Transformada de Hough para três pontos.
@@ -700,7 +700,7 @@ Figura 6.24: Transformada de Hough para três pontos.
 </div>
 <p>Na Figura <a href="segmentacao.html#fig:houghlineexemplo">6.25</a>, temos nosso último exemplo na detecção de linhas, mas, desta vez, realizado em uma imagem real. Primeiramente, foi realizada a detecção de bordas pelo método de Canny, como pode ser visto na Figura <a href="segmentacao.html#fig:houghlineexemplo">6.25</a>(a). Logo após, foi realizada a transformação de Hough, com resultado em Figura <a href="segmentacao.html#fig:houghlineexemplo">6.25</a>(b) e, por fim, temos a imagem original com as linhas detectadas na Figura <a href="segmentacao.html#fig:houghlineexemplo">6.25</a>(c). Atenção ao fato de que nem todos os picos da transformada podem ser utilizadas como linhas, pois teríamos um número enorme delas, então utilizamos um <em>threshold</em> para somente as linhas que tiverem um número de votos (acumulação na matriz) superior a um valor limítrofe serem utilizadas.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:houghlineexemplo"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:houghlineexemplo"></span>
 <img src="imagens/06-segmentacao/hough_line_exemplo.jpg" alt="Resultado da transformada de Hough usada na detecção de linhas em uma imagem." width="95%" />
 <p class="caption">
 Figura 6.25: Resultado da transformada de Hough usada na detecção de linhas em uma imagem.
@@ -721,7 +721,7 @@ Figura 6.25: Resultado da transformada de Hough usada na detecção de linhas em
 </ul>
 <p>A diferença é que, neste caso, o nosso espaço de parâmetro terá três dimensões, porque, como desenhamos um círculo para cada pixel do círculo da imagem, a variação do diâmetro desse círculo deve levar a uma variação dos círculos descritos no espaço de parâmetros, então, também devemos variar os valores de <span class="math inline">\(r\)</span> além dos valores de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>. Uma representação disso é vista na Figura <a href="segmentacao.html#fig:houghCircle">6.26</a>(a), a qual temos três pixels que definem um círculo, na Figura <a href="segmentacao.html#fig:houghCircle">6.26</a>(b), a qual temos os círculos no espaço de parâmetros, e, na Figura <a href="segmentacao.html#fig:houghCircle">6.26</a>(c), podemos ver uma representação de um espaço de parâmetros com diferentes raios.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:houghCircle"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:houghCircle"></span>
 <img src="imagens/06-segmentacao/houghCircle.png" alt="Transformada de Hough para círculos [19, p. 255]." width="60%" />
 <p class="caption">
 Figura 6.26: Transformada de Hough para círculos <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 255]</span>.
@@ -729,21 +729,21 @@ Figura 6.26: Transformada de Hough para círculos <span class="citation">[<a hre
 </div>
 <p>A Figura <a href="segmentacao.html#fig:moedas">6.27</a> contém uma imagem com algumas moedas. Na figura <a href="segmentacao.html#fig:houghcircleraios">6.28</a>(a), temos as bordas da imagem detectada com o método de Canny. Logo após, na Figura <a href="segmentacao.html#fig:houghcircleraios">6.28</a>(b) - (f), temos a representação do espaço de Hough para diferentes valores de raio. E, na figura <a href="segmentacao.html#fig:houghcircleresultado">6.29</a>, temos o resultado da detecção de círculo após encontrados os picos do espaço de parâmetros.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:moedas"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:moedas"></span>
 <img src="imagens/06-segmentacao/moedas.jpg" alt="Imagem original de moedas." width="55%" />
 <p class="caption">
 Figura 6.27: Imagem original de moedas.
 </p>
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:houghcircleraios"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:houghcircleraios"></span>
 <img src="imagens/06-segmentacao/hough_circle_raios.jpg" alt="Canny e espaço de parâmetros." width="100%" />
 <p class="caption">
 Figura 6.28: Canny e espaço de parâmetros.
 </p>
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:houghcircleresultado"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:houghcircleresultado"></span>
 <img src="imagens/06-segmentacao/hough_circle_resultado.jpg" alt="Resultado final da transformada de Hough para círculos." width="55%" />
 <p class="caption">
 Figura 6.29: Resultado final da transformada de Hough para círculos.
@@ -828,7 +828,7 @@ A Figura <a href="segmentacao.html#fig:imagemQuinas">6.30</a>(a) é a imagem ori
 Observe que a imagem identificou as quinas do tabuleiro de xadrez e do cubo mágico, porém não detectou outras quinas como as das árvores. Além disso, foi encontrado quinas que não são próprias dos objetos, e sim da iluminação.
 Variando tanto o sensibilizador da função, <span class="math inline">\(k\)</span>, como o limiar é provável que consigamos encontrar mais quinas, com o custo de também poder classificar ruídos que foram identificados como bordas também como quinas. Entretanto, já vimos que o filtro gaussiano pode ser que nos ajude nesse problema.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemQuinas"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemQuinas"></span>
 <img src="imagens/06-segmentacao/imagemQuinas.png" alt="Exemplo de detecção de Quinas pelo método de Harris." width="55%" />
 <p class="caption">
 Figura 6.30: Exemplo de detecção de Quinas pelo método de Harris.
@@ -840,7 +840,7 @@ Figura 6.30: Exemplo de detecção de Quinas pelo método de Harris.
 <h2><span class="header-section-number">6.5</span> Detecção de <em>Blobs</em></h2>
 <p><em>Blobs</em>, traduzido para português como bolhas, são regiões da imagem em que os pixels têm valores, aproximadamente, iguais. Uma boa representação - um tanto quanto artificial - disso é a função gaussiana, como pode ser vista sua representação 3-D, na Figura <a href="segmentacao.html#fig:gaussianblob">6.31</a>(a), e sua representação 2-D, na Figura <a href="segmentacao.html#fig:gaussianblob">6.31</a>(b), temos, em ambas, um conjunto de pixels com valores bem próximos, o que caracteriza um <em>blob.</em></p>
 
-<div class="figure" style="text-align: center"><span id="fig:gaussianblob"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gaussianblob"></span>
 <img src="imagens/06-segmentacao/gaussian_blob.jpg" alt="Função gaussiana em 3-D e 2-D." width="75%" />
 <p class="caption">
 Figura 6.31: Função gaussiana em 3-D e 2-D.
@@ -851,7 +851,7 @@ Figura 6.31: Função gaussiana em 3-D e 2-D.
 <h3><span class="header-section-number">6.5.1</span> LoG</h3>
 <p>Esse método utiliza o <a href="segmentacao.html#método-de-marr-hildreth">Laplaciano da Gaussiana</a>, que já foi apresentado anteriormente, mas que, resumidamente, é o cálculo de derivadas de segunda ordem em uma imagem convolucionada com um filtro gaussiano. Isso gerará fortes respostas positivas em <em>blobs</em> escuros e negativas em <em>blobs</em> claros de tamanho <span class="math inline">\(\sqrt{2\sigma}\)</span>. Como existe uma relação entre as respostas e o tamanho do <span class="math inline">\(\sigma\)</span>, é necessário realizar a operação com vários valores de <span class="math inline">\(\sigma\)</span>, pois, assim, detecta-se <em>blobs</em> de diferentes tamanhos.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:nasahubbledeep"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:nasahubbledeep"></span>
 <img src="imagens/06-segmentacao/nasa_hubble_deep.jpg" alt="Imagem de Campo Ultraprofundo do Hubble [20]." width="55%" />
 <p class="caption">
 Figura 6.32: Imagem de Campo Ultraprofundo do Hubble <span class="citation">[<a href="#ref-img:hubbledeep" role="doc-biblioref">20</a>]</span>.
@@ -859,7 +859,7 @@ Figura 6.32: Imagem de Campo Ultraprofundo do Hubble <span class="citation">[<a 
 </div>
 <p>Como podemos ver na Figura <a href="segmentacao.html#fig:gaussianblob">6.31</a> com diferentes valores de <span class="math inline">\(\sigma\)</span>, consegue-se detectar objetos de tamanhos variados, por exemplo, na Figura <a href="segmentacao.html#fig:logsigmas">6.33</a>(a), detectam-se as estrelas da Figura <a href="segmentacao.html#fig:nasahubbledeep">6.32</a> que apresentam uma menor resposta ao filtro laplaciano.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:logsigmas"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:logsigmas"></span>
 <img src="imagens/06-segmentacao/log_sigmas.jpg" alt="Laplaciano do Gaussiano com diferentes valores de sigma." width="100%" />
 <p class="caption">
 Figura 6.33: Laplaciano do Gaussiano com diferentes valores de sigma.
@@ -867,14 +867,14 @@ Figura 6.33: Laplaciano do Gaussiano com diferentes valores de sigma.
 </div>
 <p>Na Figura <a href="segmentacao.html#fig:loghubble">6.34</a>, tem-se o resultado da detecção dos <em>blobs</em> utilizando LoG. Note que nem todas as estrelas foram detectadas, isso se deve ao fato do uso de um valor de <em>threshold</em>, o qual queremos as detecções acima de um determinado limiar. Na Figura <a href="segmentacao.html#fig:loghubblebaixo">6.35</a>, pode-se ver o resultado com um valor de limiar menor, onde muito mais objetos foram localizados.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:loghubble"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:loghubble"></span>
 <img src="imagens/06-segmentacao/log_hubble.jpg" alt="Resultado da detecção de blobs com LoG." width="55%" />
 <p class="caption">
 Figura 6.34: Resultado da detecção de <em>blobs</em> com LoG.
 </p>
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:loghubblebaixo"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:loghubblebaixo"></span>
 <img src="imagens/06-segmentacao/log_hubble_baixo_threshold.jpg" alt="Resultado da detecção de blobs com LoG com um threshold menor." width="55%" />
 <p class="caption">
 Figura 6.35: Resultado da detecção de <em>blobs</em> com LoG com um <em>threshold</em> menor.
@@ -885,7 +885,7 @@ Figura 6.35: Resultado da detecção de <em>blobs</em> com LoG com um <em>thresh
 <h3><span class="header-section-number">6.5.2</span> DoG</h3>
 <p>O método de DoG é, basicamente, o mesmo do anterior, mas possui uma certa vantagem, que é o fato de ele ser mais eficiente. Como também já foi mencionado no tópico na seção anterior, <a href="segmentacao.html#método-de-marr-hildreth">Marr-Hildreth</a>, é possível aproximar o Laplaciano da Gaussiana através da Diferença de Gaussianas (DoG), ou seja, primeiramente, realiza-se a filtragem gaussiana com dois <span class="math inline">\(\sigma\)</span> diferentes e se faz a subtração entre os dois. Realizamos esse processo para diferentes pares de valores, dessa forma, obtém-se o mesmo espaço de escala construído com o processo do LoG. Na Figura <a href="segmentacao.html#fig:doghubble">6.36</a>, tem-se um exemplo de detecção por DoG.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:doghubble"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:doghubble"></span>
 <img src="imagens/06-segmentacao/dog_hubble.jpg" alt="Resultado da detecção de blobs com DoG." width="55%" />
 <p class="caption">
 Figura 6.36: Resultado da detecção de <em>blobs</em> com DoG.
@@ -906,7 +906,7 @@ Figura 6.36: Resultado da detecção de <em>blobs</em> com DoG.
 <p>A matriz Hessiana tem muita utilidade, pois ela possibilita descrever a curvatura em um ponto da função multivariável, o que, no nosso caso, pode ajudar a detectar os <em>blobs</em>, já que eles são aglomerados de pixels e devem estar separados do restante da imagem, ou seja, um aglomerado claro em um fundo escuro e vice-versa. Isso irá fazer com que sua função tenha uma mudança de sinal que pode ser detectada através das informações da matriz. Além disso, como dito por Herbert Bay et al.<span class="citation">[<a href="#ref-bay2006surf" role="doc-biblioref">21</a>]</span>, os detectores baseados na Hessiana são mais estáveis e repetíveis (tem a mesma resposta para a mesma imagem com diferentes ângulos, iluminações etc.).</p>
 <p>Um dos principais algoritmos que fazem uso dessa matriz se chama <em>Speeded Up Robust Features</em> (SURF)<span class="citation">[<a href="#ref-bay2006surf" role="doc-biblioref">21</a>]</span>. Esse método faz uso de várias técnicas que o tornam muito rápido, como seu próprio nome sugere. Uma dessas técnicas é o cálculo da integral da imagem, realizado a partir da soma de todos os pixels de uma área retangular a partir do <span class="math inline">\(x\)</span> atual, sendo que este varia a medida que se anda pela imagem.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imageIntegral"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imageIntegral"></span>
 <img src="imagens/06-segmentacao/imageIntegral.png" alt="Integral de uma imagem [22]." width="55%" />
 <p class="caption">
 Figura 6.37: Integral de uma imagem <span class="citation">[<a href="#ref-Cen2016StudyOV" role="doc-biblioref">22</a>]</span>.
@@ -927,7 +927,7 @@ L_{xy}(X, \sigma) &amp; L_{yy}(X, \sigma)
 \tag{6.51}\]</span></p>
 <p>onde <span class="math inline">\(L_{xx}(X, \sigma)\)</span> é a convolução da imagem no ponto <span class="math inline">\(X\)</span> com a derivada de segunda ordem gaussiana <span class="math inline">\(\frac{\partial^2g(\sigma)}{\partial x^2}\)</span> e assim por diante <span class="citation">[<a href="#ref-bay2006surf" role="doc-biblioref">21</a>]</span>. Aqui, entra em cena mais um elemento para melhorar a velocidade do algoritmo, Bay, Herbert et al. utilizam <em>box filters</em> para aproximar o filtro gaussiano. Como podemos ver, na Figura <a href="segmentacao.html#fig:discretizadogaussiano">6.38</a>, os dois primeiros filtros são os derivativos gaussianos discretizados e os dois últimos são os aproximados a partir de <em>box filters</em>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:discretizadogaussiano"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:discretizadogaussiano"></span>
 <img src="imagens/06-segmentacao/discretizadogaussiano.png" alt="Filtro gaussiano discretizado e aproximado nas direções \(y\) e \(xy\) [21]." width="85%" />
 <p class="caption">
 Figura 6.38: Filtro gaussiano discretizado e aproximado nas direções <span class="math inline">\(y\)</span> e <span class="math inline">\(xy\)</span> <span class="citation">[<a href="#ref-bay2006surf" role="doc-biblioref">21</a>]</span>.
@@ -939,7 +939,7 @@ Figura 6.38: Filtro gaussiano discretizado e aproximado nas direções <span cla
 \tag{6.52}\]</span></p>
 <p>O valor <span class="math inline">\(0.9\)</span> é um peso introduzido pelos autores Bay, Hebert et al. para corrigir as respostas quando utilizamos várias escalas de sigma e obter uma invariância escalar. Na Figura <a href="segmentacao.html#fig:dohhubble">6.39</a>, tem-se o resultado de uma detecção de <em>blobs</em> realizada pela Determinante do Hessiano.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:dohhubble"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dohhubble"></span>
 <img src="imagens/06-segmentacao/doh_hubble.jpg" alt="Resultado da detecção de blobs com DoH." width="55%" />
 <p class="caption">
 Figura 6.39: Resultado da detecção de <em>blobs</em> com DoH.
@@ -968,7 +968,7 @@ Figura 6.39: Resultado da detecção de <em>blobs</em> com DoH.
 \tag{6.53}\]</span></p>
 <p>Note que se cria uma binarização, uma imagem preta e branca, que pode ser vista como uma máscara a ser aplicada na imagem do histograma, multiplicando a imagem pela máscara. E, analogamente ao caso anterior, após definido os limiares de uma imagem com mais modos, por exemplo, numa imagem com três modos, as regiões poderiam ser identificadas pelas cores branca, cinza e preta.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:histograma4didatica"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histograma4didatica"></span>
 <img src="imagens/06-segmentacao/histograma4didatica.png" alt="Histogramas de intensidade que podem ser divididos por um limiar único, (a), e limiares duplos, (b). [2, p. 486]" width="55%" />
 <p class="caption">
 Figura 6.40: Histogramas de intensidade que podem ser divididos por um limiar único, (a), e limiares duplos, (b). <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 486]</span>
@@ -982,7 +982,7 @@ Figura 6.40: Histogramas de intensidade que podem ser divididos por um limiar ú
 <p>O ruído de uma imagem é capaz de fazer com que fique difícil achar um limiar ideal para segmentar a imagem sem processamentos adicionais, pois o(s) vale(s) da imagem podem desaparecer <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 487]</span>.</p>
 <p>Observe que, conforme os exemplos da Figura <a href="segmentacao.html#fig:imagemRuido">6.41</a> e seus respectivos histogramas, o aumento no desvio padrão nos níveis de intensidade do ruído gaussiano faz com que o vale que separava os dois modos desapareça, o que torna difícil a segmentação do fundo e do objeto.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemRuido"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemRuido"></span>
 <img src="imagens/06-segmentacao/imagemRuido.png" alt="(a) Imagem de 8 bits livre de ruído, produção típica de uma Computação Gráfica. (b) Imagem com ruído gaussiano aditivo com \(\mu = 0\) e \(\sigma\) de 10 níveis de intensidade. (c) Imagem com ruído gaussiano aditivo com \(\mu = 0\) e \(\sigma\) de 50 níveis de intensidade. (d) a (f) Histogramas correspondentes [2, p. 487]." width="55%" />
 <p class="caption">
 Figura 6.41: (a) Imagem de 8 bits livre de ruído, produção típica de uma Computação Gráfica. (b) Imagem com ruído gaussiano aditivo com <span class="math inline">\(\mu = 0\)</span> e <span class="math inline">\(\sigma\)</span> de 10 níveis de intensidade. (c) Imagem com ruído gaussiano aditivo com <span class="math inline">\(\mu = 0\)</span> e <span class="math inline">\(\sigma\)</span> de 50 níveis de intensidade. (d) a (f) Histogramas correspondentes <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 487]</span>.
@@ -993,7 +993,7 @@ Figura 6.41: (a) Imagem de 8 bits livre de ruído, produção típica de uma Com
 </ul>
 <p>O problema da iluminação é quando não é possível ter uma incidência uniforme de luz, causando um sombreamento. O mesmo efeito acontece quando o problema não é na iluminação, mas nas características da superfície do objeto; pois a iluminação e refletância produzem problemas equivalentes. Note que, pela Figura <a href="segmentacao.html#fig:imagemRefletancia">6.42</a>, o histograma deixou de ser bimodal. Logo não é simples de segmentar imagens com problemas de iluminação e refletância.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemRefletancia"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemRefletancia"></span>
 <img src="imagens/06-segmentacao/imagemRefletancia.png" alt="(a) é a imagem ruidosa. (b) é a rampa de intensidade no intervalo \([0.2, 0.6]\). (c) é o produto de (a) e (b). (d) a (f) são os histogramas correspondentes [2, p. 488]." width="55%" />
 <p class="caption">
 Figura 6.42: (a) é a imagem ruidosa. (b) é a rampa de intensidade no intervalo <span class="math inline">\([0.2, 0.6]\)</span>. (c) é o produto de (a) e (b). (d) a (f) são os histogramas correspondentes <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 488]</span>.
@@ -1013,7 +1013,7 @@ Figura 6.42: (a) é a imagem ruidosa. (b) é a rampa de intensidade no intervalo
 </ol>
 <p>A Figura <a href="segmentacao.html#fig:imagemLimiarGlobalSimples">6.43</a> mostra um exemplo da aplicação de Limiarização Global Simples. A Figura <a href="segmentacao.html#fig:imagemLimiarGlobalSimples">6.43</a>(a) é a imagem de uma digital com ruído. A Figura <a href="segmentacao.html#fig:imagemLimiarGlobalSimples">6.43</a>(b) mostra que seu histograma possui um vale bem nítido e, pela aplicação do algoritmo, que usa <span class="math inline">\(\Delta T = 0\)</span> e inicia <span class="math inline">\(T\)</span> como a média de intensidade da imagem, após três iterações, encontra-se o limiar <span class="math inline">\(T = 125.4\)</span>. A Figura <a href="segmentacao.html#fig:imagemLimiarGlobalSimples">6.43</a>(c) mostra a digital segmentada pelo limiar encontrado, <span class="math inline">\(T = 125\)</span>; como esperado, pelo nítido vale, foi satisfatório o resultado.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemLimiarGlobalSimples"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemLimiarGlobalSimples"></span>
 <img src="imagens/06-segmentacao/imagemLimiarGlobalSimples.png" alt="(a) Impressão digital ruidosa. (b) Histograma. (c) Segmentação resultante usando um limiar global. [2, p. 489]" width="55%" />
 <p class="caption">
 Figura 6.43: (a) Impressão digital ruidosa. (b) Histograma. (c) Segmentação resultante usando um limiar global. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 489]</span>
@@ -1064,7 +1064,7 @@ m_{1}(k) &amp; = \sum_{i=0}^{k}{iP(i/C_{1})}\\
 </ol>
 <p>A Figura <a href="segmentacao.html#fig:imagemOtsu">6.44</a>(a) mostra uma imagem de microscópio ótico de células polimerosomas e a Figura <a href="segmentacao.html#fig:imagemOtsu">6.44</a>(b), seu histograma. O objetivo deste exemplo é segmentar as moléculas do fundo. A Figura <a href="segmentacao.html#fig:imagemOtsu">6.44</a>(c) é o resultado pela limiarização global simples. Como o histograma não tem vales distintos e a diferença de intensidade entre o fundo e os objetos é pequena, o algoritmo não conseguiu alcançar a segmentação desejada. A Figura <a href="segmentacao.html#fig:imagemOtsu">6.44</a>(d) mostra o resultado obtido pelo método de Otsu. Esse resultado, obviamente, é superior ao da Figura <a href="segmentacao.html#fig:imagemOtsu">6.44</a>(c). O valor do limiar calculado pelo algoritmo simples foi o de <span class="math inline">\(169\)</span>, enquanto o limiar calculado pelo método de Otsu era o de <span class="math inline">\(181\)</span>, que está mais próximo das áreas mais claras da imagem que define as células. A medida de separabilidade <span class="math inline">\(\eta\)</span> foi <span class="math inline">\(0.467\)</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemOtsu"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemOtsu"></span>
 <img src="imagens/06-segmentacao/imagemOtsu.png" alt="(a) Imagem original. (b) Histograma (os picos elevados foram cortados para realçar os detalhes nos valores mais baixos). (c) Resultado da segmentação pela limiarização global simples. (d) Resultado da segmentação pelo método de Otsu. [2, p. 492]" width="55%" />
 <p class="caption">
 Figura 6.44: (a) Imagem original. (b) Histograma (os picos elevados foram cortados para realçar os detalhes nos valores mais baixos). (c) Resultado da segmentação pela limiarização global simples. (d) Resultado da segmentação pelo método de Otsu. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 492]</span>
@@ -1077,7 +1077,7 @@ Figura 6.44: (a) Imagem original. (b) Histograma (os picos elevados foram cortad
 <p>Atente-se ao tipo de média e ao tamanho do <em>kernel</em>, aconselha-se o filtro gaussiano, pois ele minimiza o borramento de fronteira, e suaviza o ruído ainda que de maneira mais branda do que um filtro de média.</p>
 <p>A Figura <a href="segmentacao.html#fig:imagemSuavizacaoLimiarizacao">6.45</a>(a) mostra uma imagem ruidosa, a Figura <a href="segmentacao.html#fig:imagemSuavizacaoLimiarizacao">6.45</a>(b) mostra seu histograma, a Figura <a href="segmentacao.html#fig:imagemSuavizacaoLimiarizacao">6.45</a>(c) mostra o resultado do método de Otsu. Já a Figura <a href="segmentacao.html#fig:imagemSuavizacaoLimiarizacao">6.45</a>(d) mostra a imagem da Figura <a href="segmentacao.html#fig:imagemSuavizacaoLimiarizacao">6.45</a>(a) suavizada usando uma máscara de média de tamanho 5x5 e a Figura <a href="segmentacao.html#fig:imagemSuavizacaoLimiarizacao">6.45</a>(e) é seu histograma e a Figura <a href="segmentacao.html#fig:imagemSuavizacaoLimiarizacao">6.45</a>(f) é resultado da limiarização pelo método de Otsu.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemSuavizacaoLimiarizacao"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemSuavizacaoLimiarizacao"></span>
 <img src="imagens/06-segmentacao/imagemSuavizacaoLimiarizacao.png" alt="Exemplo de suavização antes da aplicação do método de Otsu [2, p. 493]." width="55%" />
 <p class="caption">
 Figura 6.45: Exemplo de suavização antes da aplicação do método de Otsu <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 493]</span>.
@@ -1085,7 +1085,7 @@ Figura 6.45: Exemplo de suavização antes da aplicação do método de Otsu <sp
 </div>
 <p>Apesar do filtro de média poder nos ajudar, nem sempre será capaz disso. A Figura <a href="segmentacao.html#fig:ImagemSuavizacaoLimiarizacaoProblem">6.46</a>(a) mostra uma imagem ruidosa e a Figura <a href="segmentacao.html#fig:ImagemSuavizacaoLimiarizacaoProblem">6.46</a>(b) mostra o seu histograma, observe que o pontinho branco parece nem estar presente no histograma. E após aplicado o método de Otsu, a Figura <a href="segmentacao.html#fig:ImagemSuavizacaoLimiarizacaoProblem">6.46</a>(c), observe que não foi obtida a segmentação desejada. Então, tentou-se um filtro de média 5x5, que reduz o ruído, Figura <a href="segmentacao.html#fig:ImagemSuavizacaoLimiarizacaoProblem">6.46</a>(d). O resultado no histograma foi a redução do espalhamento do histograma, Figura <a href="segmentacao.html#fig:ImagemSuavizacaoLimiarizacaoProblem">6.46</a>(e), mas a distribuição ainda é unimodal, resultando em falha na segmentação, o que é visto na Figura <a href="segmentacao.html#fig:ImagemSuavizacaoLimiarizacaoProblem">6.46</a>(f).</p>
 
-<div class="figure" style="text-align: center"><span id="fig:ImagemSuavizacaoLimiarizacaoProblem"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ImagemSuavizacaoLimiarizacaoProblem"></span>
 <img src="imagens/06-segmentacao/ImagemSuavizacaoLimiarizacaoProblem.png" alt="Exemplo de insucesso na segmentação por Otsu, mesmo com prévia suavização [2, p. 493]." width="55%" />
 <p class="caption">
 Figura 6.46: Exemplo de insucesso na segmentação por Otsu, mesmo com prévia suavização <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 493]</span>.
@@ -1108,7 +1108,7 @@ Figura 6.46: Exemplo de insucesso na segmentação por Otsu, mesmo com prévia s
 </ol>
 <p>A Figura <a href="segmentacao.html#fig:imagemLimiarizGradiente">6.47</a>(a) e (b) mostram as mesmas imagens da Figura <a href="segmentacao.html#fig:ImagemSuavizacaoLimiarizacaoProblem">6.46</a> e seu histograma. Vimos que essa imagem não adianta ser suavizada. Entretanto, usamos a estratégia de máscara de borda que obteve um ótimo resultado. A Figura <a href="segmentacao.html#fig:imagemLimiarizGradiente">6.47</a>(c) mostra o gradiente já limiarizado, A Figura <a href="segmentacao.html#fig:imagemLimiarizGradiente">6.47</a>(d) e (e) mostra a máscara multiplicada a imagem original, que tem um histograma mais relevante à segmentação. E a Figura <a href="segmentacao.html#fig:imagemLimiarizGradiente">6.47</a>(f) mostra o resultado da segmentação pelo novo histograma, <a href="segmentacao.html#fig:imagemLimiarizGradiente">6.47</a>(e), através do Método de Otsu. O limiar foi de <span class="math inline">\(134\)</span>, que fica aproximadamente a meio caminho entre os picos no histograma.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemLimiarizGradiente"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemLimiarizGradiente"></span>
 <img src="imagens/06-segmentacao/imagemLimiarizGradiente.png" alt="Exemplo de limiarização por meio da máscara de borda do gradiente [2, p. 495]." width="55%" />
 <p class="caption">
 Figura 6.47: Exemplo de limiarização por meio da máscara de borda do gradiente <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 495]</span>.
@@ -1117,7 +1117,7 @@ Figura 6.47: Exemplo de limiarização por meio da máscara de borda do gradient
 <p>Já a Figura <a href="segmentacao.html#fig:imagemLimiarizLaplace">6.48</a>(a) e (b) mostra uma imagem de 8 bits de células de levedura e seu histograma. A tentativa em detectar em segmentar os pontos claros pelo método de Otsu sem prévia etapa não foi sucedida, embora o método seja capaz de isolar algumas das regiões das células muitas da regiões segmentadas à direita não estão separadas. O limiar calculado foi de <span class="math inline">\(42\)</span> e a medida de separabilidade foi de <span class="math inline">\(0.636\)</span>.<br />
 A Figura <a href="segmentacao.html#fig:imagemLimiarizLaplace">6.48</a> (d) mostra a imagem <span class="math inline">\(g_T(x,y)\)</span> obtida pelo cálculo do valor absoluto da imagem laplaciana e a limiarização com <span class="math inline">\(T\)</span> definido a <span class="math inline">\(115\)</span> em uma escala de intensidade no intervalo <span class="math inline">\([0, 255]\)</span>. Este valor de <span class="math inline">\(T\)</span> corresponde aproximadamente ao percentil <span class="math inline">\(99.5\)</span> dos valores da imagem laplaciana absoluta; assim, a limiarização a este nível deve resultar em um conjunto de <em>pixels</em> reduzido, como mostra esta Figura. A Figura <a href="segmentacao.html#fig:imagemLimiarizLaplace">6.48</a> (e) é o histograma dos <em>pixels</em> diferentes a zero no produto de (a) e (d). Finalmente a Figura <a href="segmentacao.html#fig:imagemLimiarizLaplace">6.48</a> (f) mostra o resultado da segmentação global da imagem original utilizando o método de Otsu baseado no histograma da Figura <a href="segmentacao.html#fig:imagemLimiarizLaplace">6.48</a> (e). Este resultado está de acordo com as localizações dos pontos claros na imagem. O limiar calculado pelo método de Otsu foi <span class="math inline">\(115\)</span> e a medida de separabilidade foi de <span class="math inline">\(0.762\)</span>, sendo que ambos são superiores aos valores obtidos utilizando o histograma original <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 495]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemLimiarizLaplace"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemLimiarizLaplace"></span>
 <img src="imagens/06-segmentacao/imagemLimiarizLaplace.png" alt="Exemplo de limiarização por meio da máscara de borda laplaciana [2, p. 496]." width="55%" />
 <p class="caption">
 Figura 6.48: Exemplo de limiarização por meio da máscara de borda laplaciana <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 496]</span>.
@@ -1147,7 +1147,7 @@ As classes <span class="math inline">\(K\)</span> são separadas por <span class
 \tag{6.66}\]</span></p>
 <p>A Figura <a href="segmentacao.html#fig:imagemLimiarizacaoMult">6.49</a>(a) mostra a imagem de um <em>iceberg</em>. É notório que será possível dividí-la com dois limiares<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> a partir das predominâncias de três grupos de intensidade. Olhando no histograma, <a href="segmentacao.html#fig:imagemLimiarizacaoMult">6.49</a>(b), pelos vales bem destacados também é observado isso. Encontra-se pelo método de Otsu dois limiares, <span class="math inline">\(80\)</span> e <span class="math inline">\(177\)</span>, com uma excelente medida de separabilidade de <span class="math inline">\(0.954\)</span>. Limiarizando a Figura <a href="segmentacao.html#fig:imagemLimiarizacaoMult">6.49</a>(a) o resultado que se obtém é uma segmentação muito boa, Figura <a href="segmentacao.html#fig:imagemLimiarizacaoMult">6.49</a>(c) <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 498]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemLimiarizacaoMult"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemLimiarizacaoMult"></span>
 <img src="imagens/06-segmentacao/imagemLimiarizacaoMult.png" alt="(a) Imagem de um iceberg. (b) Histograma. (c) Imagem segmentada em três regiões usando os limiares duplos de Otsu. [2, p. 496]" width="55%" />
 <p class="caption">
 Figura 6.49: (a) Imagem de um <em>iceberg</em>. (b) Histograma. (c) Imagem segmentada em três regiões usando os limiares duplos de Otsu. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 496]</span>
@@ -1162,14 +1162,14 @@ Figura 6.49: (a) Imagem de um <em>iceberg</em>. (b) Histograma. (c) Imagem segme
 <p>O particionamento da imagem consiste em fracionar a imagem em retângulos suficientemente pequenos de maneira que eles tenham iluminação e refletância uniformes e aplicar o método de Otsu em cada um deles. O sucesso do método é análogo ao da máscara de bordas, ele produz, para cada fração, histogramas simétricos com vales profundos <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 498]</span>.</p>
 <p>A Figura <a href="segmentacao.html#fig:imagemLimiarizacaoVariavel">6.50</a>(a) e (b) mostra uma imagem e seu histograma. Pelo seu histograma é plausível que não resultaria em uma boa segmentação, seja pelo método de Otsu, Figura <a href="segmentacao.html#fig:imagemLimiarizacaoVariavel">6.50</a>(c) ou pelo método iterativo, Figura <a href="segmentacao.html#fig:imagemLimiarizacaoVariavel">6.50</a>(d). Após fracionada a imagem, Figura <a href="segmentacao.html#fig:imagemLimiarizacaoVariavel">6.50</a>(e), a segmentação por Otsu teve sucesso, Figura <a href="segmentacao.html#fig:imagemLimiarizacaoVariavel">6.50</a>(f). <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 498]</span></p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemLimiarizacaoVariavel"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemLimiarizacaoVariavel"></span>
 <img src="imagens/06-segmentacao/imagemLimiarizacaoVariavel.png" alt="Exemplo da técnica de particionamento da imagem [2, p. 498]." width="55%" />
 <p class="caption">
 Figura 6.50: Exemplo da técnica de particionamento da imagem <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 498]</span>.
 </p>
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemHistoVari"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemHistoVari"></span>
 <img src="imagens/06-segmentacao/imagemHistoVari.png" alt="Representa o histograma das subimagens da Figura 6.50(e) [2, p. 498]." width="55%" />
 <p class="caption">
 Figura 6.51: Representa o histograma das subimagens da Figura <a href="segmentacao.html#fig:imagemLimiarizacaoVariavel">6.50</a>(e) <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 498]</span>.
@@ -1196,7 +1196,7 @@ na qual <span class="math inline">\(m_G\)</span> é a média global da imagem.</
 \tag{6.69}\]</span></p>
 <p>A Figura <a href="segmentacao.html#fig:imagemLimiarizVariavel">6.52</a>(a) é a imagem de células de levedura da Figura anterior <a href="segmentacao.html#fig:imagemLimiarizLaplace">6.48</a>(a). A Figura <a href="segmentacao.html#fig:imagemLimiarizVariavel">6.52</a>(b) é um exemplo da segmentação da Figura <a href="segmentacao.html#fig:imagemLimiarizVariavel">6.52</a>(a) com dois limiares. Entretanto, note que as células do canto superior direito foram segmentadas de forma unida. A Figura <a href="segmentacao.html#fig:imagemLimiarizVariavel">6.52</a>(c) é a imagem dos desvios padrão locais da vizinhança de tamanho 3x3 de cada píxel. E foi escolhida a média global ao invés da local, pois geralmente produz melhores resultados quando o fundo é quase constante e todas as intensidades de objeto estão acima ou abaixo da intensidade do fundo. Os pesos <span class="math inline">\(a=30\)</span> e <span class="math inline">\(b=1.5\)</span> foram assumidos. E, por fim, foi limiarizada pelo predicado exemplificado na Equação <a href="segmentacao.html#eq:limLocalGlobal">(6.68)</a> e não pela intensidade de um ponto, Figura <a href="segmentacao.html#fig:imagemLimiarizVariavel">6.52</a>(d).</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemLimiarizVariavel"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemLimiarizVariavel"></span>
 <img src="imagens/06-segmentacao/imagemLimiarizVariavel.png" alt="Exemplo de limiarização variável baseada nas propriedades locais [2, p. 500]." width="55%" />
 <p class="caption">
 Figura 6.52: Exemplo de limiarização variável baseada nas propriedades locais <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 500]</span>.
@@ -1216,7 +1216,7 @@ m(k+1)
 <p>na qual <span class="math inline">\(n\)</span> é o tamanho do intervalo ou número de pixels utilizados no cálculo da média e <span class="math inline">\(m(1)=\frac{z_1}{n}\)</span>. Este valor inicial não é rigorosamente correto porque a média de um único ponto é o valor do ponto em si. No entanto, o usamos para que cálculos especiais não sejam necessários quando é executada pela primeira vez. Já que a média móvel é calculada para cada ponto da imagem, a segmentação é baseada no limiar <span class="math inline">\(T_{xy}=bm_{xy}\)</span>, em que <span class="math inline">\(b\)</span> é constante e <span class="math inline">\(m_{xy}\)</span> é a média móvel no ponto <span class="math inline">\((x,y)\)</span> na imagem de entrada <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 500]</span>. A diferença desse método ao explicado anteriormente, <a href="segmentacao.html#limiarização-variável-baseada-nas-propriedades-locais-da-imagem">limiarização variável baseada nas propriedades locais da imagem</a>^(limiarização-variável-baseada-nas-propriedades-locais-da-imagem), é que, neste, usa-se um <em>kernel</em> 1D que avalia linha por linha da imagem pegando amostras de uma certa quantidade de pixels, na qual, conforme mencionado anteriormente neste tópico, a quantidade de pixels tem que ser cinco vezes mais larga que a largura do objeto que se deseja segmentar.</p>
 <p>Na Figura <a href="segmentacao.html#fig:imagemMediaMovel1">6.53</a>(a) mostra uma imagem de texto escrito à mão sombreada por um padrão de intensidade. Esta forma de sombreamento de intensidade é típica de imagens obtidas com um <em>flash</em> fotográfico. A Figura <a href="segmentacao.html#fig:imagemMediaMovel1">6.53</a>(b) é o resultado da segmentação pela limiarização global de Otsu. A Figura <a href="segmentacao.html#fig:imagemMediaMovel1">6.53</a>(b) mostra uma segmentação bem sucedida com limiarização local usando médias móveis, usando <span class="math inline">\(n=20\)</span>, já que a largura média do traço era de <span class="math inline">\(4\)</span> pixels, e <span class="math inline">\(b=0.5\)</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemMediaMovel1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemMediaMovel1"></span>
 <img src="imagens/06-segmentacao/imagemMediaMovel1.png" alt="Exemplo de aplicação da limiarização por médias móveis em um documento corrompido por um sombreamento típico de flash fotográfico. (a) Imagem original. (b) Aplicado método de Otsu. (c) Aplicado método de médias móveis. [2, p. 501]." width="55%" />
 <p class="caption">
 Figura 6.53: Exemplo de aplicação da limiarização por médias móveis em um documento corrompido por um sombreamento típico de flash fotográfico. (a) Imagem original. (b) Aplicado método de Otsu. (c) Aplicado método de médias móveis. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 501]</span>.
@@ -1224,7 +1224,7 @@ Figura 6.53: Exemplo de aplicação da limiarização por médias móveis em um 
 </div>
 <p>Já na Figura <a href="segmentacao.html#fig:imagemMediaMovel2">6.54</a>(a) mostra uma imagem de texto escrito à mão corrompida por um sombreamento senoidal. Esta forma de sombreamento de intensidade é típica de quando o fornecimento de energia em um digitalizador de documentos não é apropriado. A Figura <a href="segmentacao.html#fig:imagemMediaMovel2">6.54</a>(a) é a imagem original, a Figura <a href="segmentacao.html#fig:imagemMediaMovel2">6.54</a>(b) é o resultado da limiarização por Otsu e a Figura <a href="segmentacao.html#fig:imagemMediaMovel2">6.54</a>(c) é o resultado pela média móvel. Os parâmetros utilizados foram o mesmo do anterior, sendo <span class="math inline">\(n=20\)</span> e <span class="math inline">\(b=0.5\)</span>, o que mostra relativa robustez do método.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemMediaMovel2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemMediaMovel2"></span>
 <img src="imagens/06-segmentacao/imagemMediaMovel2.png" alt="Exemplo de aplicação da limiarização por médias móveis em um documento corrompido por um sombreamento típico de problemas em scanner em que o fornecimento de energia não é o apropriado. (a) Imagem original. (b) Imagem original aplicado o método de Otsu. (c) Imagem original aplicado método de médias móveis. [2, p. 502]." width="55%" />
 <p class="caption">
 Figura 6.54: Exemplo de aplicação da limiarização por médias móveis em um documento corrompido por um sombreamento típico de problemas em <em>scanner</em> em que o fornecimento de energia não é o apropriado. (a) Imagem original. (b) Imagem original aplicado o método de Otsu. (c) Imagem original aplicado método de médias móveis. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 502]</span>.
@@ -1239,7 +1239,7 @@ Um exemplo notável é a imagem em cores, na qual os componentes são vermelho (
 valores e pode ser representado como um vetor 3-D, <span class="math inline">\(z = (z_1+z_2+z_3)^T\)</span>, cujos componentes são as cores RGB em um ponto. Estes pontos 3-D são frequentemente chamados de voxels para denotar elementos volumétricos em oposição aos elementos de imagem <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 501]</span>.</p>
 <p>Numa limiarização focada na intensidade de cinza, de apenas uma variável, avaliamos apenas a intensidade, um gráfico de duas variáveis (histograma convencional). A sua limiarização é simples. Já no R, G, B, gráfico tridimensional, avaliamos a distância dos pixels da imagem a um píxel de referência, e o limiar é representado pelo contorno de uma figura geométrica simétrica, como a esfera abaixo, na qual contém os pixels segmentados e tem como seu centro o pixel de referência. Conforme demonstrado na Figura <a href="segmentacao.html#fig:imagemLimiarizMultiv">6.55</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemLimiarizMultiv"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemLimiarizMultiv"></span>
 <img src="imagens/06-segmentacao/imagemLimiarizMultiv.png" alt="Segmentação multivariada no RGB. Gráfico 3-D [2, p. 295]." width="55%" />
 <p class="caption">
 Figura 6.55: Segmentação multivariada no RGB. Gráfico 3-D <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 295]</span>.
@@ -1253,7 +1253,7 @@ Figura 6.55: Segmentação multivariada no RGB. Gráfico 3-D <span class="citati
 \end{cases}
 \tag{6.71}\]</span></p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagemLimiarizMultiv2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagemLimiarizMultiv2"></span>
 <img src="imagens/06-segmentacao/imagemLimiarizMultiv2.png" alt="Exemplo de segmentação multivariada no RGB [2, p. 295]." width="55%" />
 <p class="caption">
 Figura 6.56: Exemplo de segmentação multivariada no RGB <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 295]</span>.
@@ -1313,7 +1313,6 @@ Figura 6.56: Exemplo de segmentação multivariada no RGB <span class="citation"
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1353,6 +1352,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 },

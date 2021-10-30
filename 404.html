@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 3 Transformacões geométricas | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
-  <meta name="description" content="Capítulo 3 Transformacões geométricas | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <title>Page not found | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
+  <meta name="description" content="Page not found | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 3 Transformacões geométricas | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta property="og:title" content="Page not found | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 3 Transformacões geométricas | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
+  <meta name="twitter:title" content="Page not found | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="formacaoImagem.html"/>
-<link rel="next" href="transformacoesRadiometricas.html"/>
+
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -280,200 +280,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="transformacoesGeometricas" class="section level1">
-<h1><span class="header-section-number">Capítulo 3</span> Transformacões geométricas</h1>
-<p>Nessa seção abordaremos conceitos importantes que detalham processos de transformações geométricas na imagem digitalizada, definiremos a seção proposta, sistema de coordenadas objetos (2D e 3D), representação vetorial e matricial de Imagens digitalizadas, matrizes em computação gráfica, transformações em pontos e objetos; transformações (translação, escala e rotação).</p>
-<div id="definição" class="section level2">
-<h2><span class="header-section-number">3.1</span> Definição</h2>
-<p>As transformações geométricas são operações que podem ser utilizadas sobre uma imagem, visando alterar características como: posição , orientação, forma ou tamanho da imagem apresentada.
-As operações (transformações geométricas) não alteram a topologia (pixels) da imagem operada, apenas possibilitam a projeção da imagem no espaço determinado.</p>
-</div>
-<div id="sistema-de-coordenadas-objetos-2d-e-3d" class="section level2">
-<h2><span class="header-section-number">3.2</span> Sistema de coordenadas objetos (2D e 3D)</h2>
-<p>Sistemas de coordenadas nos objetos (2D e 3D) podem ser usadas para modelar objetos(imagens), servindo de referência em termos de dimensões(tamanhos), rotacionamento e posições dos objetos nas operações geométricas, dentro do ambiente de aplicação.</p>
-<p>No sistema de coordenadas polares (ao dentro da imagem, Figura <a href="transformacoesGeometricas.html#fig:cdpolar">3.1</a>), as coordenadas são descritas por raio e ângulo: (r, <span class="math inline">\(\phi\)</span>).
-No sistema de coordenadas esférico (à esquerda), as coordenadas são descritas por raio e dois ângulos.
-Nos sistemas de coordenadas cilíndricos (à direita), as coordenadas são descritas por raio, ângulo e um comprimento. Os dois sistemas de extremidades são 3D.
-Esse tema é abordado com mais profundidade na matéria de Computação Gráfica (CG), transformações geométricas no plano e no espaço <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 36]</span>.</p>
-
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cdpolar"></span>
-<img src="imagens/03-transformacoes/coordenadaPolar.png" alt="Coordenadas Polares [13, p. 36]." width="80%" />
-<p class="caption">
-Figura 3.1: Coordenadas Polares <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 36]</span>.
-</p>
-</div>
-</div>
-<div id="representação-vetorial-e-matricial-de-imagens-digitalizadas" class="section level2">
-<h2><span class="header-section-number">3.3</span> Representação Vetorial e Matricial de Imagens digitalizadas</h2>
-<p>Um vetor é basicamente um segmento de reta orientada (sentido e direção). Para representar um vetor em dimensão 2D, usaremos <span class="math inline">\(V\)</span>, como seta que sai da origem do sistema de coordenadas, para o ponto (x, y), tendo assim a direção um sentido e um comprimento específico. <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 14]</span>.</p>
-<p>A fórmula abaixo é aplicada para calcular comprimento do vetor 2D:</p>
-<p><span class="math display" id="eq:circulCompre">\[
-|V| = {\sqrt{x^2 + y^2}}
-\tag{3.1}
-\]</span></p>
-<p>Exemplo 1: Calcule o comprimento de <span class="math inline">\(V\)</span> com <span class="math inline">\(x=2\)</span> e <span class="math inline">\(y=3\)</span>.</p>
-<p>Resolução:
-<span class="math display">\[|V| = {\sqrt{22+ 32}} = 3.60\]</span></p>
-<p>Se pensamos em <span class="math inline">\(V\)</span> no espaço 3D, definindo a origem ao ponto <span class="math inline">\(P(x, y, z)\)</span> seu comprimento seria:
-<span class="math display">\[|V| = {\sqrt{x^2+y^2+z^2}}\]</span>
-Exemplo 2: Calcule o comprimento de <span class="math inline">\(V\)</span> com <span class="math inline">\(x=2\)</span> , <span class="math inline">\(y=3\)</span> e <span class="math inline">\(z=1\)</span>.</p>
-<p>Resolução:
-<span class="math display" id="eq:circulCompre3D">\[
-|V| = {\sqrt{2^2+3^2+1^2} = 3.74}
-\tag{3.2}
-\]</span></p>
-<p>Uma matriz é um arranjo (vetor) de elementos em duas direções (linha e coluna). Para declará-la é necessário definir a quantidade de elementos existentes em cada direção.
-Representaremos matriz com a letra M, as direções (linha e coluna) pelas letras L e C.
-Suponhamos que L = 4 e C = 4 então M[4][4] formando matriz quadrática como mostra a Figura <a href="transformacoesGeometricas.html#fig:repreMatricial">3.2</a>, nela pode-se observar a matriz identidade de tamanho 4 x 4.
-(ref:repreMatricial) Representação matricial <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 14]</span>.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:repreMatricial"></span>
-<img src="imagens/03-transformacoes/tableMatriz.png" alt="(ref:repreMatricial)" width="40%" />
-<p class="caption">
-Figura 3.2: (ref:repreMatricial)
-</p>
-</div>
-</div>
-<div id="matrizes-em-computação-gráfica" class="section level2">
-<h2><span class="header-section-number">3.4</span> Matrizes em Computação gráfica</h2>
-<p>As transformações geométricas (translação, escala e rotação) podem ser representadas na forma de equações possibilitando suas manipulações.
-O problema é que manipulações de objetos gráficos normalmente envolvem muitas operações aritméticas simples.</p>
-<p>As matrizes são muito usadas nessas manipulações porque são mais fáceis de usar e entender do que as equações algébricas, o que explica por que programadores e engenheiros as usam extensivamente.</p>
-<p>As matrizes são parecidas com modelo organizacional da memória dos computadores. Suas representações se relacionam diretamente com estas estruturas de armazenamento, facilmente o trabalho dos e permitindo maior velocidade para aplicações críticas como jogos e aplicações em realidade virtual. É devido a esse fato que os computadores com “facilidades vetoriais” têm sido muito usados junto a aplicações de computação gráfica.</p>
-<p>Devido ao padrão de coordenadas usualmente adotado para representação de pontos no plano <span class="math inline">\((x,y)\)</span> e no espaço tridimensional <span class="math inline">\((x,y,z)\)</span>, pode ser conveniente manipular esses pontos em matrizes quadradas de 2x2 ou 3x3 elementos. Através de matrizes e de sua multiplicação, podemos representar todas as transformações lineares 2D e 3D. Várias transformações podem ser combinadas resultando em uma única matriz denominada de matriz de transformação.</p>
-<p>Na imagem digitalizada, são aplicados elementos básicos como pontos, linhas, curvas e as superfícies tridimensionais ou mesmo os sólidos que mostram os elementos que formam as imagens sintaticamente no computador.
-Em computação gráfica os elementos pontos, linhas, curvas e as superfícies tridimensionais ou mesmo os sólidos são denominados primitivas vetoriais da imagem. As primitivas vetoriais são associadas a um conjunto de atributos que define sua aparência e a um conjunto de dados que define a sua geometria (pontos de controle).
-Para esclarecer melhor, vamos considerar alguns exemplos, dois elementos facilmente caracterizados como vetoriais, pela noção de vetores já discutida são os pontos e linhas retas.</p>
-<p>A cada elemento de um conjunto de pontos associa-se uma posição, que pode ser representada por suas coordenadas (geometria), e uma cor, que será como esses pontos aparecerão na tela (tributos). No caso de um conjunto de linhas retas, cada uma pode ser definida pelas coordenadas de seus pontos extremos (geometria) e sua cor, espessura, ou ainda se aparecerá pontilhada ou tracejada (atributos).</p>
-<p>A descrição matricial é típica das imagens digitalizadas capturadas por scanners ou utilizadas nos vídeos. É a forma de descrição principal na análise e no processamento de imagens. Em computação gráfica sintética, surgem nos processos de finalização (ray tracing, z-buffers).</p>
-<p>Na representação matricial, a imagem é descrita por um conjunto de células em um arranjo especial bidimensional, uma matriz. Cada célula representa os pixels (ou pontos) da imagem matricial. Os objetos são formados usando adequadamente esses pixels. A figura 3.3 mostra a representação matricial da imagem digitalizada e sua tela. Essa é a representação usualmente empregada para formar a imagem nas memórias e telas dos computadores e na maioria dos dispositivos de saída gráficos (impressoras e vídeos) <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 14]</span>.</p>
-
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:desMatricial"></span>
-<img src="imagens/03-transformacoes/memoria_tela_imagem.png" alt="Descrição de imagens matriciais por conjunto de pixels [13, p. 15]." width="70%" />
-<p class="caption">
-Figura 3.3: Descrição de imagens matriciais por conjunto de pixels <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 15]</span>.
-</p>
-</div>
-</div>
-<div id="transformações-em-pontos-e-objetos" class="section level2">
-<h2><span class="header-section-number">3.5</span> Transformações em Pontos e Objetos</h2>
-<p>A habilidade de representar uma objeto em várias posições no espaço para compreender sua forma. A possibilidade de submetê-lo a diversas transformações é importante em diversas aplicações da computação gráfica [Rogers, 1990]. As operações geométricas de rotação e translação de objetos são chamadas operações de corpos rígidos<span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 38]</span>.</p>
-</div>
-<div id="transformação-de-translação" class="section level2">
-<h2><span class="header-section-number">3.6</span> Transformação de Translação</h2>
-<p>A transformação geométrica translação tem como objetivo movimentar a objeto(imagem) no espaço (ambiente projetado), usando a matriz dedos (pontos) do objeto, aplica-se operações da nova coordenada p(x, y) sobre os pontos da matriz possibilitando transladar ao novo espaço da coordenada definida.
-Para transladar (mover) um objeto do ponto atual para o novo ponto, p(x) e p(y) pode ser movido por Txunidades em relação ao x, e por Ty, unidades em relação eixo . Logo nova posição do ponto p(x,y) passa a ser p’(x) e p’(y) , que podem ser escrito como:</p>
-<p><span class="math display" id="eq:formTranslacao1">\[
-x’ = x + Tx
-\tag{3.3}
-\]</span>
-<span class="math display" id="eq:formTranslacao2">\[
-y’ = y + Ty
-\tag{3.4}
-\]</span>
-No caso do ponto for representado por vetor, p = (x, y), a translação desse mesmo ponto para o novo pode ser obtida pela adição de vetor de deslocamento à posição atual do ponto <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 38]</span>:
-<span class="math display" id="eq:formTranslacao3">\[
-p’ = p+ T = [x’y’] = [xy] + [Tx Ty]
-\tag{3.5}
-\]</span>.</p>
-<p>A figura 3.4, translação de um triângulo de três unidades na horizontal e-4 na vertical.<br />
-Repare que se teria o mesmo efeito transladado a origem do sistema de coordenadas para o ponto p(-3, 4)na primeira figura <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 39]</span>.</p>
-
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:translacao"></span>
-<img src="imagens/03-transformacoes/translacao.png" alt="Tranformação de translação [13, p. 39]." width="70%" />
-<p class="caption">
-Figura 3.4: Tranformação de translação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 39]</span>.
-</p>
-</div>
-</div>
-<div id="transformação-de-escala" class="section level2">
-<h2><span class="header-section-number">3.7</span> Transformação de Escala</h2>
-<p>A transformação geométrica escala tem como objetivo mudar as dimensões (tamanho) do objeto(imagem) no espaço (ambiente projetado)<span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 40]</span>. Para fazer com que uma imagem definida por conjunto de pontos mude de tamanho, teremos de multiplicar os valores de suas coordenadas por um fator de escala. Transformar um objeto por alguma operação nada mais é do que fazer essa operação com todos os seus pontos. Nesse caso um dos vetores de suas coordenadas são multiplicados por fatores de escala. Estes fatores de escala em 2D podem, por exemplo ser <span class="math inline">\(Ss\)</span> e <span class="math inline">\(Sy\)</span>:</p>
-<p><span class="math display" id="eq:formEscala1">\[
-x’ = x * Sx
-\tag{3.6}
-\]</span></p>
-<p><span class="math display" id="eq:formEscala2">\[
-y’ = y * Sy
-\tag{3.7}
-\]</span>
-Essa operação pode ser representada na forma matricial:</p>
-
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:escala"></span>
-<img src="imagens/03-transformacoes/escala.png" alt="Tranformação de escala [13, p. 40]." width="80%" />
-<p class="caption">
-Figura 3.5: Tranformação de escala <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 40]</span>.
-</p>
-</div>
-<p>A mudança de escala de um ponto de um objeto no espaço tridimensional pode ser obtida pela multiplicação de três fatores de escala ao ponto. A operação de mudança de escala pode ser descrita pela multiplicação de coordenadas do ponto por uma matriz diagonal cujos valores dos elementos não-nulos sejam os fatores de escala <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 41]</span>. Assim, no caso 3D tem-se:</p>
-
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:escala3d"></span>
-<img src="imagens/03-transformacoes/escala3d.png" alt="Escala espaço tridimencional [13, p. 41]." width="80%" />
-<p class="caption">
-Figura 3.6: Escala espaço tridimencional <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 41]</span>.
-</p>
-</div>
-</div>
-<div id="transformação-de-rotação" class="section level2">
-<h2><span class="header-section-number">3.8</span> Transformação de Rotação</h2>
-<p>A transformação geométrica da rotação tem como objetivo rotacionar objeto(imagem) no espaço (ambiente projetado), é equivalente a girar ao redor da origem do sistema de coordenadas como na Figura <a href="transformacoesGeometricas.html#fig:rotacao">3.7</a>.</p>
-<p>Na Figura <a href="transformacoesGeometricas.html#fig:rotacao">3.7</a> rotação de um ponto P em torno da origem, passando para a posição P’. Repare que se chegaria a esse mesmo ponto através de uma rotação de - no sistema de eixos XY <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 41]</span>.</p>
-
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rotacao"></span>
-<img src="imagens/03-transformacoes/rotacao1.png" alt="Transformação de Rotação [13, p. 42]." width="45%" />
-<p class="caption">
-Figura 3.7: Transformação de Rotação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>.
-</p>
-</div>
-<p>Se um ponto de coordenada (x,y), distante <span class="math inline">\(r=(x2 + y2)^\frac12\)</span> da origem do sistema de coordenadas, for rotacionado de um ângulo <span class="math inline">\(\phi\)</span> em torno da origem, suas coordenadas, que antes eram definidas como: <span class="math inline">\(x = r * \cos(\phi), y =r * \sin(\phi)\)</span>, passam a ser descritas como (x’, y’) dadas por <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>:</p>
-<p><span class="math display" id="eq:formRotacao1">\[
-x&#39; = r * \cos(\theta + \phi) = r * \cos\phi * cos\theta - r * \sin\phi * \sin\theta
-\tag{3.8}
-\]</span>
-<span class="math display" id="eq:formRotacao2">\[
-x&#39; = r * \sin(\theta + \phi) = r * \sin\phi * cos\theta + r * \cos\phi * \sin\theta
-\tag{3.9}
-\]</span></p>
-<p>isso equivale às expressões:
-<span class="math display" id="eq:formRotacao3">\[
-x&#39; = x\cos(\phi) - y\sin(\phi)
-\tag{3.10}
-\]</span>
-<span class="math display" id="eq:formRotacao4">\[
-y&#39; = y\cos(\phi) + y\sin(\phi)
-\tag{3.11}
-\]</span></p>
-<p>Essas expressões podem ser descritas pela multiplicação do vetor de coordenadas do ponto (x,y) pela matriz:</p>
-
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rotacao2"></span>
-<img src="imagens/03-transformacoes/matriz_rotacao.png" alt="Matriz de rotação [13, p. 42]." width="15%" />
-<p class="caption">
-Figura 3.8: Matriz de rotação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>.
-</p>
-</div>
-<p>Para alterar a orientação de um objeto(imagem) em torno de um certo ponto realizando uma combinação da rotação com a translação, é necessário, antes de aplicar a rotação de um ângulo no plano das coordenadas em torno de um ponto, realizar uma translação para localizar esse ponto na origem do sistema, aplicando a rotação desejada e, então, uma translação inversa para localizar o dado ponto na origem <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 42]</span>. A multiplicação de coordenadas por uma matriz de rotação pode resultar em uma translação.</p>
-
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rotacao3"></span>
-<img src="imagens/03-transformacoes/rotacao2.png" alt="Proceso de aplicação rotação [13, p. 43]." width="60%" />
-<p class="caption">
-Figura 3.9: Proceso de aplicação rotação <span class="citation">[<a href="#ref-azevedo2018" role="doc-biblioref">13</a>, p. 43]</span>.
-</p>
-</div>
-
-</div>
-</div>
-<h3>Refêrencias</h3>
-<div id="refs" class="references">
-<div id="ref-azevedo2018">
-<p>[13] E. Azevedo, A. Conci, e C. Vasconcelos, <em>Computação grafica: Teoria e pratica: geração de imagens</em>, vol. 1. Elsevier Brasil, 2018.</p>
-</div>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="formacaoImagem.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="transformacoesRadiometricas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -504,7 +323,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/covap-utfpr/pdi/edit/master/03-transformacoes_geometricas.Rmd",
+"link": "https://github.com/covap-utfpr/pdi/edit/master/%s",
 "text": "Editar "
 },
 "history": {

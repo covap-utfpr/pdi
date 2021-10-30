@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 4 Transformações radiométricas | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
   <meta name="description" content="Capítulo 4 Transformações radiométricas | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 4 Transformações radiométricas | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,8 @@
   
 <link rel="prev" href="transformacoesGeometricas.html"/>
 <link rel="next" href="filtros.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -289,7 +289,7 @@ g(x,y) = T[f(x, y)]
 \]</span></p>
 <p>O componente <span class="math inline">\(f(x, y)\)</span> é a imagem de entrada, <span class="math inline">\(g(x, y)\)</span> é a imagem de saída, e <span class="math inline">\(T\)</span> é um operador em <span class="math inline">\(f\)</span> definido em uma vizinhança do ponto <span class="math inline">\((x, y)\)</span>. Este procedimento pode ser aplicado como na Figura <a href="transformacoesRadiometricas.html#fig:dominioEspacial">4.1</a>, em que um ponto <span class="math inline">\((x, y)\)</span> está destacado com sua vizinhança. Geralmente a vizinhança é retangular e bem menor que a imagem, e no caso da Figura é um quadrado de tamanho 3 x 3.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:dominioEspacial"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dominioEspacial"></span>
 <img src="imagens/04-transformacaoRadiometricas/dominioEspecial.png" alt="Processamento no domínio espacial [2, p. 69]." width="40%" />
 <p class="caption">
 Figura 4.1: Processamento no domínio espacial <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 69]</span>.
@@ -302,7 +302,7 @@ A vizinhança e uma operação predefinida <span class="math inline">\(T\)</span
 <p>Como as transformações de intensidade operam individualmente nos <em>pixels</em> de uma imagem, são chamadas de técnicas de processamento ponto-a-ponto <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 69]</span>. Este processo é utilizado, por exemplo, para fins de manipulação de contraste e limiarização de imagem. Já a filtragem espacial, também muito aplicada para realce de imagens, é uma técnica de processamento por vizinhança <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 69]</span>. Nesta seção serão apresentados alguns exemplos de realce de imagem, que tem o foco em melhorar o aspecto da imagem, tornando-a mais viável para o seu objetivo. O realce pode ser utilizado para minimizar na imagem efeitos de ruídos, perda de contraste, borramento e distorções.</p>
 <p>Na Figura <a href="transformacoesRadiometricas.html#fig:funcaointensidade">4.2</a> são mostradas as três funções radiométricas <span class="math inline">\(T\)</span> mais básicas aplicadas na transformação de intensidade, frequentemente utilizadas para o realce de imagens. Para cada uma das três funções - linear (transformações de negativo), logarítmica (transformações de log e log inverso) e de potência (transformações de n-ésima potência e n-ésima raiz).</p>
 
-<div class="figure" style="text-align: center"><span id="fig:funcaointensidade"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:funcaointensidade"></span>
 <img src="imagens/04-transformacaoRadiometricas/funcao_itensidade.png" alt="Funções de transformação de intensidade [2, p. 71]." width="40%" />
 <p class="caption">
 Figura 4.2: Funções de transformação de intensidade <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 71]</span>.
@@ -315,7 +315,7 @@ Figura 4.2: Funções de transformação de intensidade <span class="citation">[
 \tag{4.3}\]</span></p>
 <p>Esse tipo de processamento pode ser utilizado para realçar detalhes brancos ou cinza em regiões escuras de uma imagem <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 70]</span>. Na Figura <a href="transformacoesRadiometricas.html#fig:mamografiadigital">4.3</a> é exemplificado uma aplicação da transformação de negativo. A imagem original é uma mamografia digital, <a href="transformacoesRadiometricas.html#fig:mamografiadigital">4.3</a>(a), mostrando uma pequena lesão. Após a transformação se torna mais fácil analisar o tecido mamário no negativo da imagem <a href="transformacoesRadiometricas.html#fig:mamografiadigital">4.3</a>(b).</p>
 
-<div class="figure" style="text-align: center"><span id="fig:mamografiadigital"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mamografiadigital"></span>
 <img src="imagens/04-transformacaoRadiometricas/monografia_digital.png" alt="Transformação Linear (Negativos de Imagens). (a) Mamografia digital original. (b) Negativo da imagem. [2, p. 71]." width="40%" />
 <p class="caption">
 Figura 4.3: Transformação Linear (Negativos de Imagens). (a) Mamografia digital original. (b) Negativo da imagem. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 71]</span>.
@@ -330,7 +330,7 @@ Figura 4.3: Transformação Linear (Negativos de Imagens). (a) Mamografia digita
 <p>em que <span class="math inline">\(c\)</span> é uma constante e considera-se que <span class="math inline">\(r \geq 0\)</span>. Nas aplicações Log, um dos objetivos é a expansão dos valores de <em>pixels</em> mais escuros em uma imagem, ao mesmo tempo em que se comprime os valores de níveis mais altos <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>]</span>. A expansão é quando se mapeia uma faixa estreita de baixos valores de intensidade em uma faixa mais ampla de níveis de saída, como na função Log da Figura <a href="transformacoesRadiometricas.html#fig:logaritimica">4.4</a>. Na compressão, ocorre o oposto com os valores mais altos de níveis de intensidade. Na transformação logarítmica inversa, comprime-se os <em>pixels</em> mais escuros e se expande os mais claros <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 71]</span>.</p>
 <p>Uma maneira de avaliar o efeito da transformação logarítmica é utilizar sobre o espectro de Fourier. Na Figura <a href="transformacoesRadiometricas.html#fig:logaritimica">4.4</a>(a) mostra um espectro de Fourier com valores variando de 0 a 1,5 × 106, com baixo nível de detalhamento. Ao aplicar a transformação Log (com <span class="math inline">\(c = 1\)</span> neste caso) aos valores do espectro, a faixa de valores do resultado passa a ser de 0 a 6,2, o que melhora o detalhamento na exibição da imagem <a href="transformacoesRadiometricas.html#fig:logaritimica">4.4</a>(b).</p>
 
-<div class="figure" style="text-align: center"><span id="fig:logaritimica"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:logaritimica"></span>
 <img src="imagens/04-transformacaoRadiometricas/logaritimica.png" alt="Transformação Logarítmica. (a) Espectro de Fourier. (b) Resultado da aplicação da transformação logarítmica.[2, p. 72]." width="40%" />
 <p class="caption">
 Figura 4.4: Transformação Logarítmica. (a) Espectro de Fourier. (b) Resultado da aplicação da transformação logarítmica.<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 72]</span>.
@@ -344,7 +344,7 @@ Figura 4.4: Transformação Logarítmica. (a) Espectro de Fourier. (b) Resultado
 \tag{4.5}\]</span></p>
 <p>sendo <span class="math inline">\(c\)</span> e <span class="math inline">\(\gamma\)</span> constantes positivas. Ao plotar a transformação de potência para diferentes valores <span class="math inline">\(\gamma\)</span>, e <span class="math inline">\(c=1\)</span>, na Figura <a href="transformacoesRadiometricas.html#fig:plotagensequacao">4.5</a>, se observa um comportamento semelhante ao de expansão/compressão da transformação Logarítmica. Curvas de transformação de potência com valores de <span class="math inline">\(\gamma\)</span> menores que 1 tem um efeito parecido com a função logarítmica, enquanto que para valores de <span class="math inline">\(\gamma\)</span> maiores que 1 se parecem mais com a logarítmica inversa.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:plotagensequacao"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:plotagensequacao"></span>
 <img src="imagens/04-transformacaoRadiometricas/plotagens_equacao.png" alt="Plotagens da equação \(s = cr^\gamma\) para vários valores de \(\gamma\) [2, p. 72]." width="40%" />
 <p class="caption">
 Figura 4.5: Plotagens da equação <span class="math inline">\(s = cr^\gamma\)</span> para vários valores de <span class="math inline">\(\gamma\)</span> <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 72]</span>.
@@ -352,7 +352,7 @@ Figura 4.5: Plotagens da equação <span class="math inline">\(s = cr^\gamma\)</
 </div>
 <p>Uma das aplicações da transformação de potência é a correção gama em dispositivos que funcionam de acordo com uma lei de potência, como em computadores <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 72]</span>. Por exemplo, dispositivos de tubo de raios catódicos apresentam relação com a função potência de expoentes variando em aproximadamente 1,8 a 2,5. Para valores de gama próximos de 2,5 a imagem de saída no monitor tende a ser mais escura (Figura <a href="transformacoesRadiometricas.html#fig:variacaogradativa">4.6</a>(b)) que a imagem original (Figura <a href="transformacoesRadiometricas.html#fig:variacaogradativa">4.6</a>(a)). A imagem corrigida (Figura <a href="transformacoesRadiometricas.html#fig:variacaogradativa">4.6</a>(c)) pela correção gama, neste caso com gama menor que 1, gera uma saída (Figura <a href="transformacoesRadiometricas.html#fig:variacaogradativa">4.6</a>(d) mais parecida com a imagem original (Figura <a href="transformacoesRadiometricas.html#fig:variacaogradativa">4.6</a>(a)).</p>
 
-<div class="figure" style="text-align: center"><span id="fig:variacaogradativa"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:variacaogradativa"></span>
 <img src="imagens/04-transformacaoRadiometricas/variacao_gradativa.png" alt="Correcão Gama. (a) Imagem com variação gradativa de intensidade (gradiente). (b) Imagem vista em um monitor simulado com gama igual a 2,5. (c) Imagem com correção gama. (d) Imagem corrigida vista no mesmo monitor. [2, p. 72]." width="40%" />
 <p class="caption">
 Figura 4.6: Correcão Gama. (a) Imagem com variação gradativa de intensidade (gradiente). (b) Imagem vista em um monitor simulado com gama igual a 2,5. (c) Imagem com correção gama. (d) Imagem corrigida vista no mesmo monitor. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 72]</span>.
@@ -360,7 +360,7 @@ Figura 4.6: Correcão Gama. (a) Imagem com variação gradativa de intensidade (
 </div>
 <p>Outra utilidade da transformação de potência pode ser vista na Figura <a href="transformacoesRadiometricas.html#fig:potencial">4.7</a>, em que a imagem original está desbotada, indicando que se deve aplicar uma compressão dos níveis mais baixos e expandir valores mais altos <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 72]</span>. Assim, a transformação foi realizada com gama maior que 1. Os resultados do processamento com <span class="math inline">\(\gamma = 3, \gamma = 4,\)</span> e <span class="math inline">\(\gamma = 5\)</span> podem ser vistos nas imagens <a href="transformacoesRadiometricas.html#fig:potencial">4.7</a>(b), <a href="transformacoesRadiometricas.html#fig:potencial">4.7</a>(c) e <a href="transformacoesRadiometricas.html#fig:potencial">4.7</a>(d), respectivamente.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:potencial"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:potencial"></span>
 <img src="imagens/04-transformacaoRadiometricas/potencial.png" alt="Transformações de potência. (a) Imagem aérea. (b) a (d) Resultados da aplicação da transformação de potência com \(c = 1 \text{ e } \gamma = 3, 4 \text{ e } 5\), respectivamente. [2, p. 74]." width="40%" />
 <p class="caption">
 Figura 4.7: Transformações de potência. (a) Imagem aérea. (b) a (d) Resultados da aplicação da transformação de potência com <span class="math inline">\(c = 1 \text{ e } \gamma = 3, 4 \text{ e } 5\)</span>, respectivamente. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 74]</span>.
@@ -376,7 +376,7 @@ Figura 4.7: Transformações de potência. (a) Imagem aérea. (b) a (d) Resultad
 Na Figura <a href="transformacoesRadiometricas.html#fig:histograma5">4.8</a>, estão identificados quatro histogramas referentes a cada uma das imagens dos grãos de pólen do lado esquerdo. O eixo horizontal de cada histograma corresponde a valores de intensidade, <span class="math inline">\(r_k\)</span>, e o eixo vertical são os valores de <span class="math inline">\(p(r_k)\)</span>. Cada imagem destaca uma característica em relação à intensidade da imagem: escura, clara, baixo contraste e alto contraste.</p>
 <p>Na imagem do topo, a mais escura, as barras do histograma estão concentradas no lado inferior esquerdo (escuro) da escala de intensidades, enquanto que na imagem mais clara tendem à região oposta <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 79]</span>. Uma imagem com baixo contraste, aparência desbotada e sem brilho, tem um histograma estreito normalmente localizado no meio da escala de intensidades. Os componentes do histograma na imagem de alto contraste estão distribuídos quase uniformemente em uma ampla faixa da escala de intensidades, com poucas linhas verticais sendo muito mais altas do que as outras. As imagens de alto contraste tendem a apresentar uma boa correspondência em relação aos detalhes de nível de cinza <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 78]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:histograma5"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histograma5"></span>
 <img src="imagens/04-transformacaoRadiometricas/histograma5.png" alt="Histogramas de uma imagem com grãos de pólen. De cima para baixo: escura, clara, baixo contraste e alto contraste. [2, p. 79]." width="40%" />
 <p class="caption">
 Figura 4.8: Histogramas de uma imagem com grãos de pólen. De cima para baixo: escura, clara, baixo contraste e alto contraste. <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 79]</span>.
@@ -393,7 +393,7 @@ Figura 4.8: Histogramas de uma imagem com grãos de pólen. De cima para baixo: 
 <p><span class="math display" id="eq:eqEqualizHistS">\[p_s(s) = \frac{1}{L-1} \text{ para } 0 \leq s \leq L - 1
 \tag{4.8}\]</span></p>
 
-<div class="figure" style="text-align: center"><span id="fig:histograma"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histograma"></span>
 <img src="imagens/04-transformacaoRadiometricas/histograma.png" alt="Equalização de histograma na forma contínua. (a) Uma PDF arbitrária. (b) Resultado da aplicação da transformação para equalização [2, p. 81]." width="40%" />
 <p class="caption">
 Figura 4.9: Equalização de histograma na forma contínua. (a) Uma PDF arbitrária. (b) Resultado da aplicação da transformação para equalização <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 81]</span>.
@@ -404,7 +404,7 @@ Figura 4.9: Equalização de histograma na forma contínua. (a) Uma PDF arbitrá
 \tag{4.9}\]</span></p>
 <p>Esta expressão deve ser aplicada para cada <em>pixel</em> da imagem de entrada com intensidade <span class="math inline">\(r_k\)</span>, obtendo-se um <em>pixel</em> correspondente com nível <span class="math inline">\(s_k\)</span> na imagem de saída, estes resultados são arredondados para o nível de cinza mais próximo, que é um valor inteiro. Diferente do equivalente contínuo, não pode ser provado (em geral) que a equalização de um histograma discreto resulta em um histograma uniforme <span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 81]</span>. No entanto, como identificado na Figura <a href="transformacoesRadiometricas.html#fig:histograma2">4.10</a>, a equalização discreta tende a espalhar o histograma da imagem de entrada, aumentando o intervalo da escala de intensidade.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:histograma2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histograma2"></span>
 <img src="imagens/04-transformacaoRadiometricas/histograma2.png" alt="Equalização de histograma[3, p. 113]." width="40%" />
 <p class="caption">
 Figura 4.10: Equalização de histograma<span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 113]</span>.
@@ -417,7 +417,7 @@ Figura 4.10: Equalização de histograma<span class="citation">[<a href="#ref-pe
 <p>Sejam, <span class="math inline">\(p_r(r)\)</span> e <span class="math inline">\(p_z(z)\)</span>, as funções densidade de probabilidade (PDF) original e especificada, respectivamente. Pela Equação <a href="transformacoesRadiometricas.html#eq:eqEqualizHistDiscret">(4.9)</a>, o histograma da imagem original pode ser equalizado, representado pela transformação <span class="math inline">\(T\)</span>.</p>
 <p>Na Figura <a href="transformacoesRadiometricas.html#fig:equalizaca2">4.11</a>(a), <span class="math inline">\(T_2(z)\)</span> é a função de transformação que realiza a equalização do histograma especificado. O método para obter os níveis de cinza <span class="math inline">\(z\)</span> da imagem processada envolve o cálculo da função de transformação inversa <span class="math inline">\(z = T_2^{-1}(s)\)</span>, como identificado na Figura <a href="transformacoesRadiometricas.html#fig:equalizaca2">4.11</a>(b). O termo <span class="math inline">\(s\)</span> corresponde às intensidades da imagem equalizada para os dois caminhos de transformação e <span class="math inline">\(p_s(s)\)</span> a sua PDF.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:equalizaca2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:equalizaca2"></span>
 <img src="imagens/04-transformacaoRadiometricas/equalizaca2.png" alt="Etapas de especificação de histograma. (a) equalização do histograma especificado pela função \(T_2(z)\). (b) cálculo da função de transformação inversa \(T_2^{-1}(s)\)[3, p. 116]." width="90%" />
 <p class="caption">
 Figura 4.11: Etapas de especificação de histograma. (a) equalização do histograma especificado pela função <span class="math inline">\(T_2(z)\)</span>. (b) cálculo da função de transformação inversa <span class="math inline">\(T_2^{-1}(s)\)</span><span class="citation">[<a href="#ref-pedrini2008" role="doc-biblioref">3</a>, p. 116]</span>.
@@ -426,7 +426,7 @@ Figura 4.11: Etapas de especificação de histograma. (a) equalização do histo
 <p>Assim, a especificação de histograma envolve a aplicação de duas transformações, <span class="math inline">\(T_1(r)\)</span> seguida de <span class="math inline">\(T_2^{-1}(s)\)</span>. Na forma discreta não é necessário calcular a função inversa <span class="math inline">\(T_2^{-1}(s)\)</span>, é possível determinar os valores de <span class="math inline">\(z\)</span> de forma mais direta por mapeamento em tabela<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>]</span>. Após o cálculo das duas transformações, <span class="math inline">\(T_1(r)\)</span> e <span class="math inline">\(T_2(z)\)</span>, os valores são arredondados para os valores inteiros mais próximos no intervalo <span class="math inline">\([0, L – 1]\)</span>. Com os valores organizados em uma tabela, se faz o mapeamento de cada valor <span class="math inline">\(s_k\)</span>, procurando a melhor correspondência nos valores obtidos em <span class="math inline">\(T_2(z_q)\)</span>, determinando a solução mais próxima <span class="math inline">\(z_q\)</span>.</p>
 <p>Estas etapas ficam mais compreensíveis ao se aplicar a um exemplo. Suponha que uma imagem de 3 bits <span class="math inline">\((L = 8)\)</span> de dimensões 64 × 64 pixels <span class="math inline">\((MN = 4096)\)</span> tenha a distribuição de intensidade da Figura <a href="transformacoesRadiometricas.html#fig:tabelapixels">4.12</a>, na qual os níveis de cinza são números inteiros no intervalo <span class="math inline">\([0, L – 1] = [0, 7]\)</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:tabelapixels"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tabelapixels"></span>
 <img src="imagens/04-transformacaoRadiometricas/tabla_pixels.png" alt="Distribuição de intensidades para uma imagem digital de 3 bits, 64 × 64 pixels[2, p. 83]." width="40%" />
 <p class="caption">
 Figura 4.12: Distribuição de intensidades para uma imagem digital de 3 bits, 64 × 64 pixels<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 83]</span>.
@@ -435,7 +435,7 @@ Figura 4.12: Distribuição de intensidades para uma imagem digital de 3 bits, 6
 <p>O histograma da imagem hipotética é apresentado na Figura <a href="transformacoesRadiometricas.html#fig:histograma3">4.13</a>(a). Os valores ajustados do histograma equalizado <span class="math inline">\(s\)</span>, obtidos pela função <span class="math inline">\(s =T_1(r)\)</span>, Equação <a href="transformacoesRadiometricas.html#eq:eqEqualizHistDiscret">(4.9)</a>, são:
 <span class="math inline">\(s_0 = 1, s_1 = 3, s_2 = 5, s_3 = 6, s_4 = 6, s_5 = 7, s_6 = 7, s_7 = 7\)</span></p>
 
-<div class="figure" style="text-align: center"><span id="fig:histograma3"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histograma3"></span>
 <img src="imagens/04-transformacaoRadiometricas/histograma3.png" alt="Exemplo de especificação de histograma. (a) Histograma de uma imagem de 3 bits. (b) Histograma especificado desejado. (c) Função de transformação obtida a partir do histograma especificado desejado. (d) Resultado da especificação do histograma.[2, p. 88]." width="40%" />
 <p class="caption">
 Figura 4.13: Exemplo de especificação de histograma. (a) Histograma de uma imagem de 3 bits. (b) Histograma especificado desejado. (c) Função de transformação obtida a partir do histograma especificado desejado. (d) Resultado da especificação do histograma.<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 88]</span>.
@@ -443,7 +443,7 @@ Figura 4.13: Exemplo de especificação de histograma. (a) Histograma de uma ima
 </div>
 <p>No próximo passo, todos os valores de <span class="math inline">\(T_2(z_q)\)</span> são calculados da mesma forma que <span class="math inline">\(T_1(r)\)</span>, Equação <a href="transformacoesRadiometricas.html#eq:eqEqualizHistDiscret">(4.9)</a> de equalização, em que os valores de <span class="math inline">\(p_z(z_q)\)</span> estão na Figura <a href="transformacoesRadiometricas.html#fig:tabelahistograma2">4.14</a>. Os resultados desta segunda etapa estão na Figura <a href="transformacoesRadiometricas.html#fig:tabelahistograma3">4.15</a> e a função de transformação é esboçada na Figura <a href="transformacoesRadiometricas.html#fig:histograma3">4.13</a>(c).</p>
 
-<div class="figure" style="text-align: center"><span id="fig:tabelahistograma2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tabelahistograma2"></span>
 <img src="imagens/04-transformacaoRadiometricas/tabela_histograma2.png" alt="Histograma especificado[2, p. 88]." width="40%" />
 <p class="caption">
 Figura 4.14: Histograma especificado<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 88]</span>.
@@ -451,7 +451,7 @@ Figura 4.14: Histograma especificado<span class="citation">[<a href="#ref-gonzal
 </div>
 <p>No terceiro passo, sendo <span class="math inline">\(G(z_q) = T_2(z_q)\)</span>, verifica-se o menor valor de <span class="math inline">\(z_q\)</span> na Figura <a href="transformacoesRadiometricas.html#fig:tabelahistograma3">4.15</a> de modo que <span class="math inline">\(G(z_q)\)</span> seja o mais próximo possível de <span class="math inline">\(s_k\)</span> . Isso é feito para todos os valores de <span class="math inline">\(s_k\)</span> para criar os mapeamentos necessários de <span class="math inline">\(s\)</span> em <span class="math inline">\(z\)</span>, Figura <a href="transformacoesRadiometricas.html#fig:tabelahistograma4">4.16</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:tabelahistograma3"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tabelahistograma3"></span>
 <img src="imagens/04-transformacaoRadiometricas/tabela_histograma3.png" alt="Valores da função de transformação \(G(z_q) = T_2(z_q)\) arredondados[2, p. 88]." width="40%" />
 <p class="caption">
 Figura 4.15: Valores da função de transformação <span class="math inline">\(G(z_q) = T_2(z_q)\)</span> arredondados<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 88]</span>.
@@ -459,7 +459,7 @@ Figura 4.15: Valores da função de transformação <span class="math inline">\(
 </div>
 <p>Na última etapa, o mapeamento na Figura <a href="transformacoesRadiometricas.html#fig:tabelahistograma4">4.16</a> juntamente com a distribuição dos pixels na Figura <a href="transformacoesRadiometricas.html#fig:tabelapixels">4.12</a> é utilizado para mapear cada pixel na imagem do histograma equalizado <span class="math inline">\(p_s(s)\)</span> em um pixel correspondente na imagem do histograma especificado recém-criado <span class="math inline">\(p_z(z)\)</span>. O histograma resultante da especificação, calculado com base na equação <a href="transformacoesRadiometricas.html#eq:histogEquacao">(4.6)</a> é esboçado na Figura <a href="transformacoesRadiometricas.html#fig:histograma3">4.13</a>(d).</p>
 
-<div class="figure" style="text-align: center"><span id="fig:tabelahistograma4"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tabelahistograma4"></span>
 <img src="imagens/04-transformacaoRadiometricas/tabela_histograma4.png" alt="Mapeamentos dos valores de \(s_k\) nos valores correspondentes de \(z_q\).[2, p. 89]." width="40%" />
 <p class="caption">
 Figura 4.16: Mapeamentos dos valores de <span class="math inline">\(s_k\)</span> nos valores correspondentes de <span class="math inline">\(z_q\)</span>.<span class="citation">[<a href="#ref-gonzalez2010" role="doc-biblioref">2</a>, p. 89]</span>.
@@ -487,7 +487,6 @@ Figura 4.16: Mapeamentos dos valores de <span class="math inline">\(s_k\)</span>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -527,6 +526,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 },

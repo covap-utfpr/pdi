@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 7 Deep Learning em visão computacional | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
   <meta name="description" content="Capítulo 7 Deep Learning em visão computacional | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 7 Deep Learning em visão computacional | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,8 @@
   
 <link rel="prev" href="segmentacao.html"/>
 <link rel="next" href="separacaoFundo.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -288,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Esses três termos costumam causar certa confusão, principalmente em pessoas que estão começando a estudar essa área. De maneira geral, o termo Inteligência Artificial (IA) denomina uma área que possui muitas vertentes e tópicos de estudos, onde a maioria tem o foco em conseguir fazer os computadores realizarem tarefas complexas, que anteriormente eram realizadas exclusivamente por humanos.</p>
 <p>No começo dos estudos sobre IA foram tentados e resolvidos muitos problemas que eram considerados difíceis para seres humanos, mas relativamente fáceis para os computadores <span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 1]</span>. Esses eram problemas que podiam ser descritos formalmente, por meio de regras matemáticas, como exemplo, temos o jogo de xadrez, onde, em 1997, o campeão Garry Kasparov perdeu para o IBM Deep Blue (Figura <a href="deepLearning.html#fig:deepBlue">7.1</a>).</p>
 
-<div class="figure" style="text-align: center"><span id="fig:deepBlue"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:deepBlue"></span>
 <img src="imagens/07-deepLearning/deep-blue.jpg" alt="IBM Deep Blue [24]." width="55%" />
 <p class="caption">
 Figura 7.1: IBM Deep Blue <span class="citation">[<a href="#ref-img:deepblue" role="doc-biblioref">24</a>]</span>.
@@ -297,7 +297,7 @@ Figura 7.1: IBM Deep Blue <span class="citation">[<a href="#ref-img:deepblue" ro
 <p>Com o tempo começamos a perceber que a dificuldade não residia nesses problemas, mas naqueles que são realizados facilmente, até instintivamente e intuitivamente pelos humanos, como reconhecer rostos familiares, entender linguagens, etc. A questão é que os seres humanos, no dia a dia, recebem e processam quantidades enormes de informações, então tentar fazer os computadores realizarem essas atividades somente com regras descritas por nós não era algo viável, por isso os pesquisadores começaram a desenvolver técnicas onde o próprio computador, através de algoritmos, aprendesse a abstrair essas regras e informações sozinho de bases de dados brutos, a isso chamamos de <em>Machine Learning</em> (Aprendizado de Máquina).</p>
 <p>Dentro da área de <em>Machine Learning</em>, temos um conjunto de técnicas e áreas de pesquisa, sendo que uma delas utiliza um modelo baseado em cérebros biológicos, contendo neurônios e conexões conhecidas como Redes Neurais. Na Figura <a href="deepLearning.html#fig:cajalCortex">7.2</a>, temos uma representação dos neurônios do córtex cerebral humano, onde podemos ver as conexões formadas por eles, que se assemelham com o modelo de redes neurais da Figura <a href="deepLearning.html#fig:coloredNeuralNetwork">7.3</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:cajalCortex"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cajalCortex"></span>
 <img src="imagens/07-deepLearning/cajal-cortex.png" alt="Representação da conexão de neurônios no córtex cerebral [25, p. 363]." width="90%" />
 <p class="caption">
 Figura 7.2: Representação da conexão de neurônios no córtex cerebral <span class="citation">[<a href="#ref-cajal" role="doc-biblioref">25</a>, p. 363]</span>.
@@ -306,7 +306,7 @@ Figura 7.2: Representação da conexão de neurônios no córtex cerebral <span 
 <p>Atualmente, como ouvimos muito se falar sobre IA’s, temos a tendência de pensar que essa é uma técnica moderna, mas a ideia de fazer os computadores imitarem o esquema de funcionamento do cérebro remonta a 1943, quando Warren McCulloch e Walter Pitts sugeriram a ideia em seu artigo “<em>A logical calculus of the ideas immanent in nervous activity</em>” <span class="citation">[<a href="#ref-mcculloch1943" role="doc-biblioref">26</a>]</span>.</p>
 <p>Como pode ser visto na Figura <a href="deepLearning.html#fig:coloredNeuralNetwork">7.3</a>, as redes neurais são formadas por camadas, sendo que os dados entram pela camada <em>Input</em>, são processados nas camadas <em>Hidden</em> e temos os dados de saída na camada <em>Output</em>. Cada uma dessas camadas é formada por um número de neurônios (representados pelos círculos) e suas conexões são representadas pelas setas. Por enquanto, não será aprofundado tanto no funcionamento das redes neurais, isso será abordado na Seção <a href="deepLearning.html#redes-neurais-artificiais">Redes Neurais Artificiais</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:coloredNeuralNetwork"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:coloredNeuralNetwork"></span>
 <img src="imagens/07-deepLearning/colored-neural-network.png" alt="Rede neural artificial [27]." width="50%" />
 <p class="caption">
 Figura 7.3: Rede neural artificial <span class="citation">[<a href="#ref-img:coloredNeuralNetwork" role="doc-biblioref">27</a>]</span>.
@@ -328,7 +328,7 @@ Figura 7.3: Rede neural artificial <span class="citation">[<a href="#ref-img:col
 <p>Mesmo que o termo Rede Neural só tenha começado a ganhar destaque nos últimos anos, os primeiros estudos teóricos começaram por volta de 1940 <span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 12]</span>. Um dos primeiros trabalhos publicados foi “<em>A Logical Calculus of the Ideas Immamente in Nervous Activity</em>” de 1943, em que os autores, Warren McCulloch e Walter Pitts, apresentaram um modelo artificial de um neurônio a partir da <em>teoria de redes lógicas de nós</em> <span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 14]</span>.</p>
 <p>A Figura <a href="deepLearning.html#fig:neuron">7.4</a> apresenta uma simplificação de um neurônio biológico, dividido em três partes principais: o corpo da célula, os dendritos e o axônio. Um neurônio recebe informações, ou impulsos nervosos, a partir dos dendritos. Estas informações são processadas no corpo celular e novos impulsos são transmitidos através do axônio para outros neurônios. A comunicação entre os neurônios, a sinapse, controla a transmissão dos impulsos, determinando o fluxo de informações com base na intensidade do sinal recebido <span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 36]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:neuron"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:neuron"></span>
 <img src="imagens/07-deepLearning/neuron.png" alt="Representação de um neurônio biológico [30]." width="60%" />
 <p class="caption">
 Figura 7.4: Representação de um neurônio biológico <span class="citation">[<a href="#ref-img:neuronCS" role="doc-biblioref">30</a>]</span>.
@@ -336,7 +336,7 @@ Figura 7.4: Representação de um neurônio biológico <span class="citation">[<
 </div>
 <p>Por analogia ao parágrafo anterior, McCulloch e Pitts descreveram matematicamente um neurônio artificial como um modelo com vários terminais de entrada <span class="math inline">\(x_m\)</span>, representando os dendritos, e apenas um ponto de saída <span class="math inline">\(y_k\)</span>, como axônio (Figura <a href="deepLearning.html#fig:artificialNeuron">7.5</a>). Para simular o comportamento das sinapses, cada entrada <span class="math inline">\(x_m\)</span> é associada com um peso <span class="math inline">\(w_{km}\)</span>, sendo que o somatório representa a intensidade de sinais recebidos (<span class="math inline">\(v_k\)</span>).</p>
 
-<div class="figure" style="text-align: center"><span id="fig:artificialNeuron"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:artificialNeuron"></span>
 <img src="imagens/07-deepLearning/artificial-neuron.png" alt="Representação matemática de um neurônio artificial [29, p. 36]." width="70%" />
 <p class="caption">
 Figura 7.5: Representação matemática de um neurônio artificial <span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 36]</span>.
@@ -350,7 +350,7 @@ Figura 7.5: Representação matemática de um neurônio artificial <span class="
 \end{cases}
 \tag{7.1}\]</span></p>
 
-<div class="figure" style="text-align: center"><span id="fig:limiarFunc"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:limiarFunc"></span>
 <img src="imagens/07-deepLearning/limiar-function.png" alt="Função de ativação de limiar [29, p. 36]" width="50%" />
 <p class="caption">
 Figura 7.6: Função de ativação de limiar <span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 36]</span>
@@ -359,7 +359,7 @@ Figura 7.6: Função de ativação de limiar <span class="citation">[<a href="#r
 <p>O modelo proposto por McCulloch e Walter Pitts poderia realizar classificações em duas categorias, entretanto, os pesos precisavam ser ajustados manualmente pois não tinham a capacidade de aprender <span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 14]</span>. Uma das primeiras discussões sobre regras de aprendizagem nas correções dos pesos sinápticos foi publicada em 1949 no livro de Donald Hebb “<em>The Organization of Behavior</em>” <span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 64]</span>. No postulado de Hebb, apresenta-se que a conexão entre os neurônios é fortalecida cada vez que esta é utilizada, assim, os caminhos neurais no cérebro são continuamente modificados e formam agrupamentos.</p>
 <p>A primeira rede neural com capacidade de aprender os pesos das categorias foi o <em>Perceptron</em> apresentado por Frank Rosenblatt em 1958 <span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 65]</span>. O <em>Perceptron</em> tinha arquitetura semelhante à Figura <a href="deepLearning.html#fig:perceptron">7.7</a>, uma rede de camada única além da de entrada e de aprendizado supervisionado. Inicialmente, foram lançadas grandes expectativas sobre as possíveis aplicações do <em>Perceptron</em>, porém, as limitações logo começaram a ser destacadas, muitas descritas no livro de Marvin Minsky e Seymour Papert publicado em 1969. Uma das limitações é que o <em>Perceptron</em> de camada única realiza apenas a classificação de padrões linearmente separáveis em duas categorias, não podendo, por exemplo, representar o operador de lógica <em>XOR</em>, que não é linearmente separável <span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 14]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:perceptron"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:perceptron"></span>
 <img src="imagens/07-deepLearning/one-layer-perceptron.png" alt="Arquitetura Perceptron [29, p. 47]." width="50%" />
 <p class="caption">
 Figura 7.7: Arquitetura <em>Perceptron</em> <span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 47]</span>.
@@ -372,7 +372,7 @@ Figura 7.7: Arquitetura <em>Perceptron</em> <span class="citation">[<a href="#re
 <p>Como as funções de ativação são responsáveis pelo intermédio das respostas entre as camadas, deveriam ser considerados formatos não lineares que não alterassem de forma radical a resposta da rede. Os perfis que mais se aproximavam destes comportamentos são os das funções sigmóides: a <em>tangente hiperbólica</em> e a <em>função logística</em> <span class="citation">[<a href="#ref-rateke1999" role="doc-biblioref">31</a>]</span>.</p>
 <p>A função sigmóide tem seu formato em S, em que nas extremidades da função tem um comportamento constante, o que fica evidente no gráfico da <em>função logística</em> (Figura <a href="deepLearning.html#fig:sigmoid">7.8</a>). O parâmetro <span class="math inline">\(a\)</span> da equação logística, Equação <a href="deepLearning.html#eq:sigmoid">(7.2)</a>, permite parametrizar o comportamento da função, alterando a inclinação. Quanto maior o valor de <span class="math inline">\(a\)</span>, mais a função sigmóide se aproxima da função de limiar, Figura <a href="deepLearning.html#fig:limiarFunc">7.6</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:sigmoid"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sigmoid"></span>
 <img src="imagens/07-deepLearning/sigmoid-function.png" alt="Função sigmóide [29, p. 39]" width="50%" />
 <p class="caption">
 Figura 7.8: Função sigmóide <span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 39]</span>
@@ -387,7 +387,7 @@ Figura 7.8: Função sigmóide <span class="citation">[<a href="#ref-haykin1999"
 <p>O neurônio matemático proposto inicialmente foi estendido para uma estrutura de conexões de elementos de processamento, os nós da rede. Os elementos foram organizados em camadas, e foram propostas diferentes configurações de conexões. Os formatos mais populares são definidos como uma arquitetura de rede neural, reconhecida pelo número de camadas da rede, número de nós em cada camada e tipo de conexão entre os nós.</p>
 <p>A arquitetura da rede <em>MLP</em> é composta por uma camada de entrada que recebe o sinal, uma camada de saída que retorna o resultado, e entre elas um número arbitrário de camadas ocultas (Figura <a href="deepLearning.html#fig:mlpnet">7.9</a>). Geralmente, a escolha do número de nós na camada de entrada e saída é direta. Por exemplo, em uma aplicação com imagens, o número de neurônios na camada de entrada pode corresponder ao número de pixels da imagem e o da camada de saída poderia ser apenas um único neurônio indicando a probabilidade de ser de fato o que se procura, a chance de um resultado positivo. Já o arranjo das camadas intermediárias não é tão simples, muitas vezes é definido empiricamente com base nas características dos dados de entrada e na complexidade do problema <span class="citation">[<a href="#ref-braga1998fundamentos" role="doc-biblioref">32</a>]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:mlpnet"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mlpnet"></span>
 <img src="imagens/07-deepLearning/mlp-network.png" alt="Arquitetura da rede MLP [29, p. 186]." width="90%" />
 <p class="caption">
 Figura 7.9: Arquitetura da rede <em>MLP</em> <span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 186]</span>.
@@ -396,7 +396,7 @@ Figura 7.9: Arquitetura da rede <em>MLP</em> <span class="citation">[<a href="#r
 <p>Uma classificação comum das arquiteturas é com base no padrão de conexões, sendo identificadas duas classes principais: <em>redes diretas</em> (<em>feedforward</em>) e <em>redes recorrentes</em> (<em>feedback</em>) <span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 46]</span>. O modelo <em>MLP</em> tem arquitetura do tipo <em>feedforward</em>, em que a propagação da informação ocorre em uma única direção e os nós de uma mesma camada não são conectados entre si. A saída de uma camada é usada como entrada na próxima, sem <em>loopings</em>, ou seja, não são enviadas de volta <span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 47]</span>.</p>
 <p>Já nas tipologias recorrentes ocorre o <em>feedback</em>, um processo de realimentação, em que as saídas de nós são reinseridas como entradas em nós anteriores (Figura <a href="deepLearning.html#fig:recnet">7.10</a>). O comportamento dos ciclos é dinâmico controlado por atrasos unitários <span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 49]</span>. A ideia do modelo é estimular sinais em efeito cascata com dependência temporal.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:recnet"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:recnet"></span>
 <img src="imagens/07-deepLearning/recurrent-network.png" alt="Arquitetura rede recorrente [29, p. 49]." width="90%" />
 <p class="caption">
 Figura 7.10: Arquitetura rede recorrente <span class="citation">[<a href="#ref-haykin1999" role="doc-biblioref">29</a>, p. 49]</span>.
@@ -407,7 +407,7 @@ Figura 7.10: Arquitetura rede recorrente <span class="citation">[<a href="#ref-h
 <h4><span class="header-section-number">7.1.2.2</span> Backpropagation</h4>
 <p>Para explicar o algoritmo <em>backpropagation</em> no treinamento de redes neurais, utilizaremos um exemplo de aplicação de rede MLP para o reconhecimento de números. O código da rede é uma implementação do livro online “<em>Neural Networks and Deep Learning</em>” escrito por Michael Nielsen. Os dados de treinamento foram retirados do MNIST dataset, que contém mais de 60000 imagens escaneadas de números escritos juntamente com os rótulos de classificação. As informações foram coletadas pelo Instituto Nacional de Padrões e Tecnologia dos Estados Unidos (NIST), sendo que as imagens são em escala de cinza e de tamanho <span class="math inline">\(28\text{ x }28\)</span> pixels como na Figura <a href="deepLearning.html#fig:mnistZero">7.11</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:mnistZero"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mnistZero"></span>
 <img src="imagens/07-deepLearning/mnist-zero.png" alt="Um exemplo de número zero selecionado do MNIST dataset [33]." width="40%" />
 <p class="caption">
 Figura 7.11: Um exemplo de número zero selecionado do MNIST dataset <span class="citation">[<a href="#ref-nielsen2015" role="doc-biblioref">33</a>]</span>.
@@ -416,7 +416,7 @@ Figura 7.11: Um exemplo de número zero selecionado do MNIST dataset <span class
 <p>O conjunto de dados originais do MNIST é dividido em duas partes, uma que contém 60000 imagens para treinamento e a outra com 10000 imagens para a fase de testes, em que se avalia a acurácia da rede treinada para reconhecer os dígitos. No exemplo do autor Michael Nielsen, os dados de treinamento original também foram reorganizados em dois grupos, o primeiro com 50000 imagens que foram utilizados no treinamento e a outra parte, 10000 imagens, que foi reservada para a validação em que se definiu os hiperparâmetros da rede.</p>
 <p>Considerando imagens de <span class="math inline">\(28 \text{ x } 28\)</span> pixels, os dados de entrada foram definidos como um vetor <span class="math inline">\(x\)</span> de dimensão <span class="math inline">\(784\)</span>, em que cada posição corresponde a um valor de pixel da imagem. Para o vetor <span class="math inline">\(y\)</span> de saída da rede se estabeleceu a dimensão <span class="math inline">\(10\)</span>, em que cada posição faz referência a um dígito de <span class="math inline">\(0\)</span> a <span class="math inline">\(9\)</span>. Assim, se uma entrada corresponde ao número <span class="math inline">\(3\)</span> então a saída esperada será o vetor transposto na forma <span class="math inline">\(y(x)=(0,0,0,1,0,0,0,0,0,0)^T\)</span>. Com base no formato dos dados de entrada e saída da rede, o exemplo foi construído com uma rede MLP de três camadas como na Figura <a href="deepLearning.html#fig:mlpTwo">7.12</a>, com a primeira camada tendo <span class="math inline">\(784\)</span> nós e a última camada com <span class="math inline">\(10\)</span> nós. Na camada do meio, a camada oculta, utilizaremos <span class="math inline">\(30\)</span> nós, mas vale destacar que o autor Michael Nielsen definiu o número de nós após alguns testes otimizando a escolha dos parâmetros da rede.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:mlpTwo"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mlpTwo"></span>
 <img src="imagens/07-deepLearning/mlp-two-layers.png" alt="Rede MLP com uma camada oculta [34]." width="60%" />
 <p class="caption">
 Figura 7.12: Rede MLP com uma camada oculta <span class="citation">[<a href="#ref-hertz2018" role="doc-biblioref">34</a>]</span>.
@@ -553,14 +553,14 @@ O método “<em>accuracy()</em>”, <a href="deepLearning.html#pythonMLP1Camada
 <div class="sourceCode" id="pythonMLP1Camada.13"><pre class="sourceCode py"><code class="sourceCode python"><span id="pythonMLP1Camada.13-1"><a href="deepLearning.html#pythonMLP1Camada.13-1"></a><span class="cf">return</span> evaluation_cost, evaluation_accuracy,training_cost, training_accuracy</span></code></pre></div>
 <p>Os resultados salvos podem ser plotados em gráficos para avaliar visualmente o desempenho da rede. Um gráfico muito comum para acompanhar o treinamento da rede é o de custo de treinamento, principalmente, porque o aprendizado é guiado pela minimização desta curva. Na Figura <a href="deepLearning.html#fig:cust30">7.13</a>, apresenta-se a curva de custo para uma configuração que utiliza o conjunto total de treinamento (50000 imagens) e com 30 épocas. Entretanto, não é indicado ter apenas este gráfico como base para estabelecer os hiperparâmetros da rede, como a taxa de aprendizagem e o número de épocas de treinamento. Por exemplo, a Figura <a href="deepLearning.html#fig:cust100">7.14</a> também se refere a uma função de custo, mas para uma outra configuração de treinamento, que utiliza apenas 1000 imagens para treinamento e 100 épocas.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:cust30"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cust30"></span>
 <img src="imagens/07-deepLearning/custo_30.jpg" alt="Curva de custo no treinamento com 30 épocas e 50000 imagens." width="70%" />
 <p class="caption">
 Figura 7.13: Curva de custo no treinamento com 30 épocas e 50000 imagens.
 </p>
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:cust100"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cust100"></span>
 <img src="imagens/07-deepLearning/custo_100.jpg" alt="Curva de custo no treinamento com 100 épocas e 1000 imagens." width="70%" />
 <p class="caption">
 Figura 7.14: Curva de custo no treinamento com 100 épocas e 1000 imagens.
@@ -568,14 +568,14 @@ Figura 7.14: Curva de custo no treinamento com 100 épocas e 1000 imagens.
 </div>
 <p>No fim do treinamento, as duas redes apresentaram erros na mesma ordem de grandeza, mas a capacidade de reconhecer números é bem diferente entre as duas. Esta diferença pode ser percebida ao comparar os gráficos de acurácia (Figuras <a href="deepLearning.html#fig:acur30">7.15</a> e <a href="deepLearning.html#fig:acur100">7.16</a>) considerando tanto os dados de treinamento quanto os de validação. O resultado do treinamento com todo o conjunto de dados mostra que a acurácia da rede para os dados de validação é bem próxima do resultado para os valores de treinamento, uma diferença de <span class="math inline">\(1\%\)</span>. Já para a situação que utilizou apenas 1000 dados de treinamento, as curvas de acurácia para os dados de validação e de treinamento estão mais afastadas, apresentando uma diferença próxima de <span class="math inline">\(14\%\)</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:acur30"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:acur30"></span>
 <img src="imagens/07-deepLearning/acuracia_30.jpg" alt="Curvas de acurácia para rede treinada com \(30\) épocas e \(1000\) imagens." width="70%" />
 <p class="caption">
 Figura 7.15: Curvas de acurácia para rede treinada com <span class="math inline">\(30\)</span> épocas e <span class="math inline">\(1000\)</span> imagens.
 </p>
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:acur100"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:acur100"></span>
 <img src="imagens/07-deepLearning/acuracia_100.jpg" alt="Curvas de acurácia para rede treinada com \(100\) épocas e \(1000\) imagens." width="70%" />
 <p class="caption">
 Figura 7.16: Curvas de acurácia para rede treinada com <span class="math inline">\(100\)</span> épocas e <span class="math inline">\(1000\)</span> imagens.
@@ -617,7 +617,7 @@ Figura 7.16: Curvas de acurácia para rede treinada com <span class="math inline
 \tag{7.17}
 \]</span></p>
 
-<div class="figure" style="text-align: center"><span id="fig:cnnconv"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cnnconv"></span>
 <img src="imagens/07-deepLearning/cnn_conv.png" alt="Convolução de uma imagem de tamanho 5x5 com um kernel de tamanho 3x3 e seu respectivo resultado." width="85%" />
 <p class="caption">
 Figura 7.17: Convolução de uma imagem de tamanho 5x5 com um kernel de tamanho 3x3 e seu respectivo resultado.
@@ -625,7 +625,7 @@ Figura 7.17: Convolução de uma imagem de tamanho 5x5 com um kernel de tamanho 
 </div>
 <p>O exemplo anterior, Figura <a href="deepLearning.html#fig:cnnconv">7.17</a>, foi bem simples, mas sabemos que em várias aplicações não teremos a imagem de entrada representada por apenas uma matriz (configurando uma imagem em tons de cinza) mas em grande parte das vezes estaremos utilizando imagens que contém três dimensões, ou seja, teremos uma imagem no modelo RGB, onde estarão presentes três matrizes, cada uma representando um canal de cor. Na Figura <a href="deepLearning.html#fig:cnnconv3d">7.18</a>, há um exemplo de convolução em imagens RGB, podemos ver que agora nosso kernel é também formado por três matrizes. Uma coisa importante a se notar é que o número de camadas do filtro têm que ser igual ao número de canais da imagem para que a operação de convolução possa ser feita.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:cnnconv3d"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cnnconv3d"></span>
 <img src="imagens/07-deepLearning/cnn_conv_3d.png" alt="Convolução de uma imagem de tamanho 5x5x3 com um kernel de tamanho 3x3x3 e seu respectivo resultado." width="85%" />
 <p class="caption">
 Figura 7.18: Convolução de uma imagem de tamanho 5x5x3 com um kernel de tamanho 3x3x3 e seu respectivo resultado.
@@ -633,7 +633,7 @@ Figura 7.18: Convolução de uma imagem de tamanho 5x5x3 com um kernel de tamanh
 </div>
 <p>Na Figura <a href="deepLearning.html#fig:cnnconvblock">7.19</a>, temos uma representação de uma camada de convolução com mais de um filtro. Para cada um dos filtros temos uma saída e, consequentemente, temos no resultado final um conjunto de dados onde o número de camadas de profundidade (também conhecidas como <em>feature map</em>, ilustrada pelas três matrizes em azul) corresponderão ao número de filtros aplicados a entrada. Essa saída então pode ser enviada para frente na rede, passando por mais convoluções e tendo mais características extraídas.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:cnnconvblock"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cnnconvblock"></span>
 <img src="imagens/07-deepLearning/cnn_conv_block.png" alt="Convolução com múltiplos kernels." width="85%" />
 <p class="caption">
 Figura 7.19: Convolução com múltiplos kernels.
@@ -654,7 +654,7 @@ Figura 7.19: Convolução com múltiplos kernels.
 \tag{7.18}\]</span></p>
 <p>Onde <span class="math inline">\(m\)</span> e <span class="math inline">\(n\)</span> são as dimensões da imagem, <span class="math inline">\(p\)</span> é o <em>padding</em>, <span class="math inline">\(k_m\)</span> e <span class="math inline">\(k_n\)</span> são as dimensões do kernel e <span class="math inline">\(s\)</span> é o stride. Na Figura <a href="deepLearning.html#fig:cnnstride">7.20</a> temos um exemplo com os passos (Figuras <a href="deepLearning.html#fig:cnnstride">7.20</a>(a-d)) de uma convolução com <span class="math inline">\(\text{stride} = 2\)</span> utilizando um kernel de tamanho <span class="math inline">\(3 \text{ x } 3\)</span> sobre uma imagem de tamanho <span class="math inline">\(5 \text{ x } 5\)</span> e <span class="math inline">\(\text{padding} = 0\)</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:cnnstride"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cnnstride"></span>
 <img src="imagens/07-deepLearning/cnn_stride.png" alt="Representação de uma convolução com \(\text{stride} = 2\). Adaptado de [37]." width="70%" />
 <p class="caption">
 Figura 7.20: Representação de uma convolução com <span class="math inline">\(\text{stride} = 2\)</span>. Adaptado de <span class="citation">[<a href="#ref-dumoulin2016" role="doc-biblioref">37</a>]</span>.
@@ -668,7 +668,7 @@ Figura 7.20: Representação de uma convolução com <span class="math inline">\
 <p>Como nas camadas de convolução cada unidade da saída é conectada a uma região de entrada, então, também devemos levar em consideração o tamanho, stride e padding. Mas, diferentemente da convolução, o “kernel”, ou, em outras palavras, a região que nos conectará com a entrada, não terá pesos mas apenas realiza uma operação, sendo as mais comuns o <em>máximo</em> ou a <em>média</em> <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 442]</span>.</p>
 <p>Na Figura <a href="deepLearning.html#fig:cnnpooling">7.21</a>, temos um exemplo de <em>max pooling</em>, onde podemos ver seu funcionamento em passos (Figuras <a href="deepLearning.html#fig:cnnpooling">7.21</a>(a-d)). Este exemplo utiliza uma região de <span class="math inline">\(2 \text{ x } 2\)</span>, o que é muito comum <span class="citation">[<a href="#ref-adrian2017" role="doc-biblioref">36</a>, p. 187]</span>, com <span class="math inline">\(\text{stride}=1\)</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:cnnpooling"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cnnpooling"></span>
 <img src="imagens/07-deepLearning/cnn_pooling_max.png" alt="Exemplo de aplicação do max pooling." width="70%" />
 <p class="caption">
 Figura 7.21: Exemplo de aplicação do <em>max pooling</em>.
@@ -676,7 +676,7 @@ Figura 7.21: Exemplo de aplicação do <em>max pooling</em>.
 </div>
 <p>Na Figura <a href="deepLearning.html#fig:cnnpooling3d">7.22</a>, temos outro exemplo de <em>max pooling</em>, mas desta vez realizado com uma entrada de maiores dimensões, podemos ver que a operação é realizada em cada uma das camadas do objeto de entrada, e que sua saída contém o mesmo número de camadas da entrada, sendo que é isso que tipicamente ocorre nesse tipo de operação <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 443]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:cnnpooling3d"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cnnpooling3d"></span>
 <img src="imagens/07-deepLearning/cnn_pooling_max_3d.png" alt="Exemplo da aplicação de max pooling em uma imagem com mais dimensões, uma RGB por exemplo." width="70%" />
 <p class="caption">
 Figura 7.22: Exemplo da aplicação de <em>max pooling</em> em uma imagem com mais dimensões, uma RGB por exemplo.
@@ -688,7 +688,7 @@ Figura 7.22: Exemplo da aplicação de <em>max pooling</em> em uma imagem com ma
 <h4><span class="header-section-number">7.2.1.3</span> Camadas totalmente conectadas</h4>
 <p>As <em>CNN’s</em> geralmente tem várias camadas de convolução seguidas por camadas de <em>ReLU</em> que por sua vez são seguidas por camadas de pooling, e esse processo vai diminuindo as dimensões <span class="math inline">\(m \text{ x }n\)</span> e aumentando a profundidade, ou seja, a quantidade de camadas de características (conhecida como <em>feature maps</em>) <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">38</a>, p. 119]</span> <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 446]</span>. Na Figura <a href="deepLearning.html#fig:cnntypical">7.23</a>, temos uma representação desse processo através da topologia da rede. Ao final dessa rede temos uma quantidade grande de camadas com as características extraídas da imagem de entrada, e precisamos utilizar essas informações. Nessa mesma Figura, podemos ver que no final temos camadas totalmente conectadas (<em>fully connected</em>) que é uma rede neural regular, uma <em>MLP</em> <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">38</a>, p. 119]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:cnntypical"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cnntypical"></span>
 <img src="imagens/07-deepLearning/cnn_typical.png" alt="Típica arquitetura de uma rede neural convolucional [35, p. 447]." width="90%" />
 <p class="caption">
 Figura 7.23: Típica arquitetura de uma rede neural convolucional <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 447]</span>.
@@ -696,7 +696,7 @@ Figura 7.23: Típica arquitetura de uma rede neural convolucional <span class="c
 </div>
 <p>Na Figura <a href="deepLearning.html#fig:cnnfc">7.24</a>, temos a representação da utilização dessas informações abstraídas da imagem, onde recebemos o resultado das camadas de convolução, um bloco de dados de <span class="math inline">\(5 \text{ x } 5 \text{ x } 40\)</span> da última camada de pooling, que é então planificado (<em>flattened</em>) em um vetor contínuo de uma dimensão e dado como entrada a uma rede MLP que, ao final, tem uma camada <em>Softmax</em> que faz a classificação da imagem de entrada.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:cnnfc"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cnnfc"></span>
 <img src="imagens/07-deepLearning/cnn_fc.png" alt="Camada totalmente conectada [38, p. 120]." width="80%" />
 <p class="caption">
 Figura 7.24: Camada totalmente conectada <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">38</a>, p. 120]</span>.
@@ -725,7 +725,7 @@ Figura 7.24: Camada totalmente conectada <span class="citation">[<a href="#ref-e
 <p>Após estudar os principais blocos de construção de uma rede convolucional (CNN) - camada de convolução (<em>convolutional layer</em>), camada de redução (<em>pooling layer</em>) e camadas totalmente conectadas (<em>fully connected layer</em>) - torna-se mais fácil comparar as arquiteturas CNN’s e perceber que mesmo com as diferenças elas apresentam um padrão na combinação das camadas. Normalmente, as arquiteturas CNN’s possuem uma sequência intercalada de camada de convolução, seguida por uma camada pooling, que se repete até a ponta da rede onde se encontram algumas <a href="deepLearning.html#camadas-totalmente-conectadas">camadas totalmente conectadas</a> com estrutura semelhante às redes MLP. Esta estrutura básica pode ser vista na Figura <a href="deepLearning.html#fig:lenet">7.25</a>.</p>
 <p>À medida que são realizadas as operações ao longo da rede se percebe que os mapas ficam cada vez menores e que as camadas ficam mais profundas, ou seja, aumentam a quantidade de mapas em uma mesma camada. Como a camada de saída geralmente se apresenta como um vetor de probabilidades para as classes de predição, existe uma transição da representação dos dados em mapas para vetor, a partir do processo de <em>flatten</em>, que ocorre antes da primeira camada totalmente conectada.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:lenet"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:lenet"></span>
 <img src="imagens/07-deepLearning/lenet.png" alt="Rede Convolucional LeNet - A entrada é uma imagem de um número escrito à mão e a saída um vetor com a probabilidade para cada um dos dez dígitos de 0 à 9 [39, p. 250]." width="100%" />
 <p class="caption">
 Figura 7.25: Rede Convolucional LeNet - A entrada é uma imagem de um número escrito à mão e a saída um vetor com a probabilidade para cada um dos dez dígitos de 0 à 9 <span class="citation">[<a href="#ref-zhang2020dive" role="doc-biblioref">39</a>, p. 250]</span>.
@@ -735,7 +735,7 @@ Figura 7.25: Rede Convolucional LeNet - A entrada é uma imagem de um número es
 <p>Na Figura <a href="deepLearning.html#fig:lenet">7.25</a>, consideramos como entrada uma imagem padrão do MNIST, de tamanho <span class="math inline">\(28 \text{ x } 28\)</span> pixels e com um canal em escala de cinza. No esquema geral da rede LeNet (Figura <a href="deepLearning.html#fig:lenet2">7.26</a>), temos uma visão mais clara da combinação das camadas, em que após a camada de entrada existem duas camadas convolucionais, intercaladas com duas camadas de <em>pooling</em> e na ponta três camadas totalmente conectadas.</p>
 <p>Cada camada de convolução utiliza um filtro <span class="math inline">\(5 \text{ x } 5\)</span> e uma <em>função de ativação sigmóide</em>. A primeira camada de convolução tem seis canais ou mapas, enquanto a segunda tem 16. A operação de <em>pooling</em> envolve um filtro <span class="math inline">\(2 \text{ x } 2\)</span> que calcula a <em>média</em>, por isso é identificada como “AvgPool”, e utiliza <span class="math inline">\(\text{stride}=2\)</span> para que cada mapa da camada anterior tenha uma redução pela metade ao longo da largura e da altura, descartando <span class="math inline">\(75\%\)</span> das ativações. O tamanho das três camadas totalmente conectadas (<em>fully conected</em>) são respectivamente, 120, 84, e 10. A última camada, “FC(10)”, corresponde ao número possível de classes, neste caso, 10 em razão dos dígitos de 0 à 9. A função de ativação na última camada é uma <em>função gaussiana</em>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:lenet2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:lenet2"></span>
 <img src="imagens/07-deepLearning/lenet2.png" alt="Esquema geral das camadas na rede LeNet - Esquema da rede LeNet com a sequência de camadas convolucionais (“Conv”), pooling (“AvgPool”) e camadas totalmente conectadas (“FC”) [39, p. 252]." width="30%" />
 <p class="caption">
 Figura 7.26: Esquema geral das camadas na rede LeNet - Esquema da rede LeNet com a sequência de camadas convolucionais (“Conv”), <em>pooling</em> (“AvgPool”) e camadas totalmente conectadas (“FC”) <span class="citation">[<a href="#ref-zhang2020dive" role="doc-biblioref">39</a>, p. 252]</span>.
@@ -871,7 +871,7 @@ Figura 7.26: Esquema geral das camadas na rede LeNet - Esquema da rede LeNet com
 <h4><span class="header-section-number">7.2.3.2</span> AlexNet</h4>
 <p>Atualmente existem várias arquiteturas de redes CNN’s utilizadas para aplicações na visão computacional. A evolução destas redes pode ser compreendida a partir dos resultados da competição <em>ImageNet Large Scale Visual Recognition Challenge</em> (ILSVRC). O principal objetivo da competição era avaliar algoritmos para detecção de objetos e classificação de imagens. A primeira edição da competição, em 2010, envolvia 1,2 milhões de imagens para o treinamento, sendo 1000 categorias de objetos. Nos dois primeiros anos de competição as redes CNN’s ainda não tinham sido as primeiras colocadas, porém a partir de 2012 os modelos CNN’s começaram a liderar a competição <span class="citation">[<a href="#ref-imagenet2020" role="doc-biblioref">41</a>]</span>. O progresso das redes pode ser avaliado com base na taxa de erro dos modelos que em sete anos caiu de aproximadamente <span class="math inline">\(26\%\)</span>, no segundo ano da competição, para <span class="math inline">\(2.3\%\)</span> na última edição da competição em 2017 <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">40</a>]</span>, como apresentado no gráfico da Figura <a href="deepLearning.html#fig:imagenet">7.27</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:imagenet"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagenet"></span>
 <img src="imagens/07-deepLearning/imagenet.png" alt="Taxa de erro dos modelos de melhor desempenho na competição ImageNet - O desempenho dos modelos na competição ImageNet Large Scale Visual Recognition Challenge (ILSVRC) era avaliado principalmente pela taxa de erro. No gráfico são apresentados os modelos que venceram em cada edição da competição, que ocorreu de 2010 à 2017, e também redes que se tornaram populares como a VGG [40]." width="100%" />
 <p class="caption">
 Figura 7.27: Taxa de erro dos modelos de melhor desempenho na competição ImageNet - O desempenho dos modelos na competição ImageNet Large Scale Visual Recognition Challenge (ILSVRC) era avaliado principalmente pela taxa de erro. No gráfico são apresentados os modelos que venceram em cada edição da competição, que ocorreu de 2010 à 2017, e também redes que se tornaram populares como a VGG <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">40</a>]</span>.
@@ -880,7 +880,7 @@ Figura 7.27: Taxa de erro dos modelos de melhor desempenho na competição Image
 <p>Para conhecer um pouco dos diferentes modelos de redes CNN’s e perceber algumas diferenças, e estruturas que tiveram bom desempenho e permaneceram em modelos mais atuais, destacaremos a seguir quatro arquiteturas que ficaram bastante conhecidas e tiveram destaque na competição. A rede AlexNet foi a primeira CNN que venceu a competição ImageNet, no ano de 2012 com uma taxa de erro de <span class="math inline">\(16.4\%\)</span>. A rede VGG não liderou a competição em 2014, porém é um dos modelos com bastante popularidade e que apresentou uma estrutura em blocos estabelecidos com base em regras. No ano de 2014, a CNN GoogLeNet que venceu a competição foi o ponto de partida para as redes <em>Inceptions</em>. A rede Residual (ResNet) em 2015 além de aproveitar as técnicas de maior desempenho das outras redes também implementou uma abordagem que possibilitou aumentar para mais de 100 camadas.</p>
 <p>A rede AlexNet foi desenvolvida por Alex Krizhevsky, Ilya Sutskever, e Geoffrey Hinton <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 450]</span>. Esta rede é bem semelhante a LeNet-5, porém apresenta mais camadas. Por ser uma rede mais profunda, exigindo maior quantidade de memória, a rede original precisou ser distribuída entre dois GPU’s de 3 GB de forma física <span class="citation">[<a href="#ref-krizhevsky2012" role="doc-biblioref">42</a>]</span>. Desta forma, a rede foi desenhada como na Figura <a href="deepLearning.html#fig:imagenet">7.27</a>, com uma estrutura de fluxo de dados duplo para que cada GPU recebesse metade do modelo.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:alexnet"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:alexnet"></span>
 <img src="imagens/07-deepLearning/alexnet.png" alt="Arquitetura da rede AlexNet - representada como a combinação de duas redes idênticas, pois originalmente o treinamento ocorreria com a distribuição dos dados entre duas GPU’s [42]." width="100%" />
 <p class="caption">
 Figura 7.28: Arquitetura da rede AlexNet - representada como a combinação de duas redes idênticas, pois originalmente o treinamento ocorreria com a distribuição dos dados entre duas GPU’s <span class="citation">[<a href="#ref-krizhevsky2012" role="doc-biblioref">42</a>]</span>.
@@ -890,7 +890,7 @@ Figura 7.28: Arquitetura da rede AlexNet - representada como a combinação de d
 <p>Com a descoberta de que as funções de ativação <em>ReLU’s</em> nas camadas de convolução e que o <em>maxpooling</em> melhoram o desempenho das redes, a maioria dos modelos foram construídos utilizando estes artifícios <span class="citation">[<a href="#ref-zhang2020dive" role="doc-biblioref">39</a>, p. 250]</span>. Os filtros <em>maxpooling</em> de tamanho <span class="math inline">\(3\text{ x }3\)</span> e <span class="math inline">\(\text{stride} = 2\)</span> reduzem a dimensão dos canais com base no maior valor do campo de recepção. Com exceção da primeira camada, todas as demais camadas de convolução têm <em>padding</em> para que a dimensão dos canais não seja alterada após as convoluções.</p>
 <p>As três últimas camadas são totalmente conectadas e apresentam respectivamente os tamanhos, 4096, 4096 e 1000. A camada de saída tem dimensão 1000 devido ao número de classes possíveis da competição ImageNet e a função de ativação é a <em>Softmax.</em></p>
 
-<div class="figure" style="text-align: center"><span id="fig:lenetalexnet"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:lenetalexnet"></span>
 <img src="imagens/07-deepLearning/lenetalexnet.png" alt="Comparação das redes AlexNet e LeNet. (a) é a Rede LeNet e (b), a Rede AlexNet. Estes esquemas gerais das camadas apresentam que a principal diferença das redes é que a AlexNet é mais profunda, com três camadas de convolução a mais do que a LeNet [39, p. 261]." width="40%" />
 <p class="caption">
 Figura 7.29: Comparação das redes AlexNet e LeNet. (a) é a Rede LeNet e (b), a Rede AlexNet. Estes esquemas gerais das camadas apresentam que a principal diferença das redes é que a AlexNet é mais profunda, com três camadas de convolução a mais do que a LeNet <span class="citation">[<a href="#ref-zhang2020dive" role="doc-biblioref">39</a>, p. 261]</span>.
@@ -1045,7 +1045,7 @@ Figura 7.29: Comparação das redes AlexNet e LeNet. (a) é a Rede LeNet e (b), 
 \]</span></p>
 <p>No caso de duas camadas de convolução com filtros <span class="math inline">\(3\text{ x }3\)</span> e separadas por um <em>pooling</em>, com redução pela metade da dimensão dos canais (<span class="math inline">\(\text{2H x 2W} \rightarrow \text{H x W}\)</span>) e dobrando o número de canais (<span class="math inline">\(\text{C} \rightarrow \text{2C}\)</span>), a quantidade de pesos aumenta de <span class="math inline">\(9\text{C}^2\)</span> para <span class="math inline">\(36\text{C}^2\)</span>, porém o número de operações se mantêm em <span class="math inline">\(36\text{HWC}^2\)</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:alexnetvgg"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:alexnetvgg"></span>
 <img src="imagens/07-deepLearning/alexnetvgg.png" alt="Comparação das redes VGG e AlexNet - Comparação das redes VGG e AlexNet com base na estrutura geral das camadas. Enquanto a parte final das redes é semelhante em relação às camadas totalmente conectadas, a VGG se diferencia por ser mais profunda e apresentar um padrão das camadas convolucionais organizadas em blocos [40]" width="70%" />
 <p class="caption">
 Figura 7.30: Comparação das redes VGG e AlexNet - Comparação das redes VGG e AlexNet com base na estrutura geral das camadas. Enquanto a parte final das redes é semelhante em relação às camadas totalmente conectadas, a VGG se diferencia por ser mais profunda e apresentar um padrão das camadas convolucionais organizadas em blocos <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">40</a>]</span>
@@ -1057,7 +1057,7 @@ Figura 7.30: Comparação das redes VGG e AlexNet - Comparação das redes VGG e
 <p>Ao acompanhar a evolução das CNN’s podemos perceber que a principal estratégia para aumentar o desempenho na classificação das imagens foi aumentar o número de camadas que guardam os pesos das redes. As redes AlexNet e VGG-16 foram desenvolvidas com 8 e 16 camadas, respectivamente. À medida que as redes se tornavam mais profundas surgiu o dilema de como tornar os algoritmos mais eficientes, visto que mais camadas significava maior quantidade de parâmetros e operações, exigindo maiores recursos computacionais. Comparando as redes na Figura <a href="deepLearning.html#fig:neuralevolution">7.31</a> é possível verificar a acurácia das redes, a quantidade de parâmetros e o número de operações. Verifica-se que para a rede VGG-16 alcançar resultados melhores que a rede AlexNet foi necessário mais do que duplicar a quantidade de parâmetros, de aproximadamente 65 milhões na AlexNet para um pouco mais que 130 milhões na VGG-16.</p>
 <p>Na competição da ImageNet de 2014, um grupo de pesquisa da Google liderado por Christian Szegedy propôs a arquitetura GoogLeNet que deveria ao mesmo tempo garantir boa performance e ser mais eficiente que os modelos existentes <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 452]</span>. O modelo não só ganhou a competição como atendeu os seus requisitos, pois mesmo sendo uma rede com 22 camadas, mais que a VGG-16, precisou de 12 vezes menos parâmetros, 13 milhões em vez de 138 milhões <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">38</a>, p. 217]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:neuralevolution"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:neuralevolution"></span>
 <img src="imagens/07-deepLearning/neuralevolution.png" alt="Gráfico da evolução das redes neurais CNN’s - O desempenho das redes é avaliado pela acurácia versus o número de operações necessárias para uma única etapa forward. O raio dos círculos é proporcional ao número de parâmetros, sendo que a legenda no canto inferior direito indica uma referência de \(5\text{ x }10^6\) à \(155\text{ x }10^6\) [43]." width="70%" />
 <p class="caption">
 Figura 7.31: Gráfico da evolução das redes neurais CNN’s - O desempenho das redes é avaliado pela acurácia versus o número de operações necessárias para uma única etapa <em>forward.</em> O raio dos círculos é proporcional ao número de parâmetros, sendo que a legenda no canto inferior direito indica uma referência de <span class="math inline">\(5\text{ x }10^6\)</span> à <span class="math inline">\(155\text{ x }10^6\)</span> <span class="citation">[<a href="#ref-canziani2016" role="doc-biblioref">43</a>]</span>.
@@ -1066,7 +1066,7 @@ Figura 7.31: Gráfico da evolução das redes neurais CNN’s - O desempenho das
 <p>Para compreender a rede GoogLenet podemos dividi-la em três partes (Figura <a href="deepLearning.html#fig:googlenet">7.32</a>), na primeira parte, as camadas da entrada são semelhantes às redes AlexNet e VGG, na segunda parte, são os blocos inceptions característicos desta rede, e a última parte se refere a estrutura de classificação. A primeira parte contém dois blocos com uma sequência de camadas convolucionais intercaladas com <em>pooling</em> <span class="math inline">\(3\text{ x }3\)</span>. No primeiro bloco, tem apenas uma camada de convolução <span class="math inline">\(7\text{ x }7\)</span>, com <span class="math inline">\(\text{stride} = 2\)</span> e <span class="math inline">\(\text{padding}= 3\)</span>, e uma camada <em>pooling</em> com <span class="math inline">\(\text{stride} = 2\)</span>. Ao final destas duas camadas, o elemento tem 64 canais e teve uma redução por 4 em sua dimensão (H e W). No segundo bloco, são duas camadas de convolução, a primeira com filtro <span class="math inline">\(1\text{ x }1\)</span> e 64 canais e a segunda <span class="math inline">\(3\text{ x }3\)</span> com 192 canais, sendo que apenas o <em>pooling</em> <span class="math inline">\(3\text{ x }3\)</span> na ponta do bloco altera as dimensões dos canais pela metade.</p>
 <p>O principal papel destes dois blocos é reduzir de maneira considerável as dimensões da imagem, visto que a maior parte da memória exigida se deve às primeiras camadas <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">40</a>]</span>. Considerando que nesta etapa ocorre uma redução em 8 vezes das dimensões da imagem, uma entrada <span class="math inline">\(224\text{ x }224\)</span> ao se reduzir para <span class="math inline">\(28\text{ x }28\)</span> utilizará aproximadamente <span class="math inline">\(7.5 \text{ MB}\)</span> de memória enquanto a mesma redução no VGG-16 precisa de <span class="math inline">\(42.9 \text{ MB}\)</span>, quase <span class="math inline">\(6\)</span> vezes mais que a GoogLenet <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">40</a>]</span>. Também ao passar para as próximas camadas uma imagem de menor dimensão também se reduz o número de operações e a quantidade de parâmetros para treinar a rede.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:googlenet"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:googlenet"></span>
 <img src="imagens/07-deepLearning/googlenet.png" alt="A estrutura geral da rede GoogLenet pode ser dividida em três partes: Parte A - Semelhante a AlexNet e LeNet, contém uma sequência de camadas convolucionais e pooling para reduzir as dimensões da imagem; Parte B - Módulos Inceptions separados por camadas pooling; Parte C - Camada de pooling global e uma Full Conect para classificação [38, p. 224]." width="50%" />
 <p class="caption">
 Figura 7.32: A estrutura geral da rede GoogLenet pode ser dividida em três partes: Parte A - Semelhante a AlexNet e LeNet, contém uma sequência de camadas convolucionais e pooling para reduzir as dimensões da imagem; Parte B - Módulos Inceptions separados por camadas <em>pooling</em>; Parte C - Camada de pooling global e uma Full Conect para classificação <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">38</a>, p. 224]</span>.
@@ -1076,7 +1076,7 @@ Figura 7.32: A estrutura geral da rede GoogLenet pode ser dividida em três part
 <p>Em vez de adotar o <em>flattering</em>, o GoogLenet utiliza um filtro de média de mesma dimensão do elemento de entrada, retornando a média dos mapas para cada posição do vetor. Como o vetor de saída já tem um tamanho reduzido é necessário incluir apenas uma camada totalmente conectada com as <span class="math inline">\(1000\)</span> classes. Como a camada de média global não precisa de parâmetros, e considerando que retorna um vetor <span class="math inline">\(1024\)</span>, são necessários aproximadamente <span class="math inline">\(1\)</span> milhão de parâmetros na camada totalmente conectada, <span class="math inline">\(100\)</span> vezes menos que na VGG <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">40</a>]</span>. Na última camada, assim como no VGG, associa-se uma ativação <em>Softmax</em>, enquanto nas camadas de convolução é a <em>ReLu</em>.</p>
 <p>Já foi comentado sobre a primeira parte e a última da rede GoogLenet, a seção intermediária que estudaremos inclui os módulos <em>Inceptions</em> que se tornaram elementos característicos das redes mais modernas intituladas <em>Inceptions</em>. Cada módulo se assemelha aos blocos do VGG, em que estão presentes algumas camadas convolucionais em sequência e na ponta uma camada <em>pooling</em>. No caso do VGG, viu-se que para reduzir o número de hiperparâmetros se fixou o tamanho dos filtros em <span class="math inline">\(3\text{ x }3\)</span>, e o parâmetro variável ficou sendo o número de camadas convolucionais. A ideia dos <em>Inceptions</em> (Figura <a href="deepLearning.html#fig:inceptionmodule">7.33</a>) é não se preocupar nem com tamanho dos filtros e nem com o número de camadas no módulo, pois cada módulo consiste em uma combinação de filtros de diferentes tamanhos arranjados de uma forma fixa <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">38</a>, p. 217]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:inceptionmodule"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:inceptionmodule"></span>
 <img src="imagens/07-deepLearning/inceptionmodule.png" alt="Módulo Incepetion da rede GoogLenet - A parte intermediária da rede GoogLenet é formada por uma sequência de módulos Inceptions separados por camadas pooling (Figura 7.32). Cada módulo apresenta quatro caminhos para o mesmo dado de entrada, e na saída, os resultados são concatenados [39, p. 274]." width="100%" />
 <p class="caption">
 Figura 7.33: Módulo Incepetion da rede GoogLenet - A parte intermediária da rede GoogLenet é formada por uma sequência de módulos Inceptions separados por camadas <em>pooling</em> (Figura <a href="deepLearning.html#fig:googlenet">7.32</a>). Cada módulo apresenta quatro caminhos para o mesmo dado de entrada, e na saída, os resultados são concatenados <span class="citation">[<a href="#ref-zhang2020dive" role="doc-biblioref">39</a>, p. 274]</span>.
@@ -1089,7 +1089,7 @@ Figura 7.33: Módulo Incepetion da rede GoogLenet - A parte intermediária da re
 <p>O diagrama anterior da GoogLenet é uma das representações mais simplificadas do modelo, pois como é visto na Figura <a href="deepLearning.html#fig:googlenet2">7.34</a>, a arquitetura original inclui dois classificadores que correm paralelamente com os outros blocos descritos anteriormente, um que se inicia depois do terceiro módulo <em>inception</em> e o outro depois do sexto módulo <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 456]</span>. Cada classificador funciona parecido com a parte final da rede, em que ocorre a classificação <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">40</a>]</span>. Os classificadores são formados por uma camada <em>AvgPooling</em>, seguida por uma de convolução, duas camadas totalmente conectadas e na saída uma função de ativação <em>Softmax.</em></p>
 <p>Existe uma peculiaridade ao treinar as redes mais profundas, pois, na retropropagação dos erros, as taxas reduzem a valores muito próximo de zeros, dificultando a convergência do algoritmo. A técnica adotada pelo GoogLenet para garantir a convergência foi incluir o cálculo do gradiente dos erros destas classificações intermediárias na retropropagação do erro <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 456]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:googlenet2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:googlenet2"></span>
 <img src="imagens/07-deepLearning/googlenet2.jpg" alt="Arquitetura da rede GoogLenet com classificadores intermediários - A rede GoogLenet com dois classificadores, um no terceiro módulo inception e o outro no sexto módulo. Estes classificadores intermediários reduzem o efeito de desaparecimento dos gradiente do erro [44]." width="50%" />
 <p class="caption">
 Figura 7.34: Arquitetura da rede GoogLenet com classificadores intermediários - A rede GoogLenet com dois classificadores, um no terceiro módulo <em>inception</em> e o outro no sexto módulo. Estes classificadores intermediários reduzem o efeito de desaparecimento dos gradiente do erro <span class="citation">[<a href="#ref-img:googlenet" role="doc-biblioref">44</a>]</span>.
@@ -1101,7 +1101,7 @@ Figura 7.34: Arquitetura da rede GoogLenet com classificadores intermediários -
 <p>A Rede Neural Residual (<em>ResNet</em>) venceu a competição ImageNet em 2015 com uma taxa de erro de <span class="math inline">\(3.6\%\)</span>. A rede desenvolvida por um grupo de pesquisa da Microsoft inclui várias técnicas de otimização e regularização dos modelos anteriores, principalmente da GoogLenet. Enquanto o ponto característico da rede GoogLenet são os módulos <em>inceptions</em>, na ResNet as unidades residuais permitiram treinar redes ainda mais profundas. Entre os principais modelos da ResNet são encontradas redes com 50, 101, 152 camadas de pesos <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">38</a>, p. 230]</span>, mais que o dobro do número da GoogLenet com 22 camadas.</p>
 <p>Da mesma forma que a GoogLenet, a rede <em>ResNet</em> pode ser divida em três partes, sendo que a primeira e a última parte seguem a arquitetura da GoogLenet, e as camadas intermediárias incluem as unidades residuais. As camadas de entrada que permitem uma redução considerável da dimensão da imagem incluem uma camada de convolução com 64 canais e filtros <span class="math inline">\(7\text{ x }7\)</span> de <span class="math inline">\(\text{stride}=2\)</span>, seguida por uma camada <span class="math inline">\(3\text{ x }3\)</span> de <em>MaxPooling</em> com <span class="math inline">\(\text{stride}=2\)</span>. A última parte da rede, a estrutura de classificação, apresenta as mesmas camadas da GoogLenet, a camada Global de <em>Pooling</em> média de dimensão 1024 e apenas uma camada totalmente conectada com 1000 unidades representando as classes. Lembrando que a substituição do processo de <em>flattering</em> pela média global permitiu reduzir a proporção de parâmetros nas últimas camadas.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:resnet"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:resnet"></span>
 <img src="imagens/07-deepLearning/resnet.png" alt="Arquitetura da rede ResNet - A estrutura geral da rede ResNet também pode ser dividida em três partes. Semelhante a GoogLenet, contém uma camada convolucional e pooling para reduzir as dimensões da imagem. Uma parte com os módulos de unidades residuais, e no final uma camada de pooling global e uma Full Conect para classificação [35, p. 458]." width="100%" />
 <p class="caption">
 Figura 7.35: Arquitetura da rede <em>ResNet</em> - A estrutura geral da rede ResNet também pode ser dividida em três partes. Semelhante a GoogLenet, contém uma camada convolucional e <em>pooling</em> para reduzir as dimensões da imagem. Uma parte com os módulos de unidades residuais, e no final uma camada de <em>pooling</em> global e uma Full Conect para classificação <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 458]</span>.
@@ -1112,7 +1112,7 @@ Figura 7.35: Arquitetura da rede <em>ResNet</em> - A estrutura geral da rede Res
 <p>Mesmo conseguindo convergir redes mais profundas, identificou-se nos modelos que ocorria uma <em>degradação da acurácia</em> ao se acrescentar mais camadas <span class="citation">[<a href="#ref-he2016" role="doc-biblioref">45</a>]</span>. Antigamente se tinha a intuição de que ao se partir de um modelo com número reduzido de camadas para uma rede mais profunda, o erro não deveria aumentar, pois no mínimo a rede mais profunda teria uma parte das suas camadas copiadas da outra rede e a outra parte funcionaria como funções de identidade. Com mais camadas, a otimização de um modelo se torna mais complexa mesmo para problemas facilmente mapeados em redes menores <span class="citation">[<a href="#ref-he2016" role="doc-biblioref">45</a>]</span>. A ideia na ResNet para lidar com esta complexidade foi forçar que as camadas realizassem o mapeamento da saída incluindo como referência a própria entrada, ou seja, um <em>mapeamento residual</em> <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 457]</span>.</p>
 <p>No mapeamento comum das camadas na Figura <a href="deepLearning.html#fig:residual">7.36</a> se imagina que a partir de uma entrada <span class="math inline">\(x\)</span> se busca com o treinamento estabelecer uma resposta esperada <span class="math inline">\(h(x)\)</span>. No caso do <em>mapeamento residual</em> se inclui um desvio do dado de entrada (<span class="math inline">\(x\)</span>) na saída para forçar um modelo <span class="math inline">\(h(x) - x\)</span>. Com isso se espera que seja mais fácil otimizar um modelo com referência, o <em>mapeamento residual</em>, e que este consiga rapidamente se ajustar a funções identidade, garantindo que as camadas no mínimo estabeleçam a performance das camadas anteriores <span class="citation">[<a href="#ref-zhang2020dive" role="doc-biblioref">39</a>, p. 288]</span>. Os desvios, conexões residuais, também <em>minimizam os efeitos de desaparecimento dos pesos</em>, pois permitem um fluxo alternativo dos gradientes, contribuindo para a retropropagação do erro <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">38</a>, p. 231]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:residual"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:residual"></span>
 <img src="imagens/07-deepLearning/residual.png" alt="Mapeamento convencional e o residual da rede ResNet - a - Mapeamento tradicional da entrada e saída das camadas; b - Mapeamento em uma unidade residual da rede ResNet. No mapeamento comum, para uma entrada \(x\) se busca estabelecer uma resposta esperada \(h(x)\). No modelo residual se inclui um desvio da entrada (\(x\)) na saída para forçar uma resposta \(h(x) - x\) [35, p. 457]" width="100%" />
 <p class="caption">
 Figura 7.36: Mapeamento convencional e o residual da rede <em>ResNet</em> - a - Mapeamento tradicional da entrada e saída das camadas; b - Mapeamento em uma unidade residual da rede ResNet. No mapeamento comum, para uma entrada <span class="math inline">\(x\)</span> se busca estabelecer uma resposta esperada <span class="math inline">\(h(x)\)</span>. No modelo residual se inclui um desvio da entrada (<span class="math inline">\(x\)</span>) na saída para forçar uma resposta <span class="math inline">\(h(x) - x\)</span> <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 457]</span>
@@ -1120,7 +1120,7 @@ Figura 7.36: Mapeamento convencional e o residual da rede <em>ResNet</em> - a - 
 </div>
 <p>A conexão residual parte da entrada de uma unidade residual em direção a saída da mesma, somando a informação de entrada com a resposta antes da camada de ativação <em>ReLu</em> (Figura <a href="deepLearning.html#fig:residualblock">7.37</a>). Cada unidade residual tem duas camadas de convolução <span class="math inline">\(3\text{ x }3\)</span>, com <span class="math inline">\(\text{stride}=1\)</span> e configuração de <em>padding</em> para manter as dimensões. Entre as duas camadas existe uma camada de normalização antecedendo uma ativação <em>ReLu.</em></p>
 
-<div class="figure" style="text-align: center"><span id="fig:residualblock"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:residualblock"></span>
 <img src="imagens/07-deepLearning/residualblock.png" alt="Unidade residual da rede ResNet - Na parte intermediária da rede ResNet existe uma sequência de módulos com unidades residuais. Cada unidade residual tem duas camadas de convolução intercaladas por uma ativação ReLu e uma normalização que também é aplicada na saída das convoluções [35, p. 457]." width="90%" />
 <p class="caption">
 Figura 7.37: Unidade residual da rede <em>ResNet</em> - Na parte intermediária da rede <em>ResNet</em> existe uma sequência de módulos com unidades residuais. Cada unidade residual tem duas camadas de convolução intercaladas por uma ativação ReLu e uma normalização que também é aplicada na saída das convoluções <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 457]</span>.
@@ -1129,7 +1129,7 @@ Figura 7.37: Unidade residual da rede <em>ResNet</em> - Na parte intermediária 
 <p>Após uma sequência de unidades residuais de mesma configuração, entre os módulos, é dobrado o número de canais e ao mesmo tempo se reduz pela metade a largura e altura dos canais. Entre as unidades residuais não são utilizadas camadas <em>pooling</em>, assim, para reduzir as dimensões dos canais é utilizado <span class="math inline">\(\text{stride}=2\)</span> na convolução que encerra um módulo. Desta forma, na última unidade residual dos módulos, a entrada tem dimensão diferente da saída. Para poder somar os valores é necessário corrigir as dimensões da entrada com uma convolução <span class="math inline">\(1\text{ x }1\)</span> de <span class="math inline">\(\text{stride}=2\)</span> e de mesmo número de canais da saída da unidade <span class="citation">[<a href="#ref-zhang2020dive" role="doc-biblioref">39</a>, p. 289]</span>.</p>
 <p>A estrutura dos módulos com as unidades residuais lembram os blocos da rede VGG, em que cada bloco apresenta uma sequência de camadas de convolução com as mesmas dimensões, e sempre filtro <span class="math inline">\(3\text{ x }3\)</span>. De um bloco para o outro no VGG, o número de canais também dobra e a altura e a largura são reduzidas pela metade, neste caso pelo efeito do <em>MaxPooling.</em> O ResNet apresenta 4 módulos, em que o número de unidades residuais varia de modelo a modelo como indicado na Figura <a href="deepLearning.html#fig:resnetdefault">7.38</a>. O <em>ResNet</em>-34, por exemplo, com 34 camadas de pesos contém respectivamente nos quatro módulos, três unidades residuais com saída de 64 canais, quatro unidades com 128 canais, seis unidades com 256 canais e três unidades com 512 canais <span class="citation">[<a href="#ref-he2016" role="doc-biblioref">45</a>]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:resnetdefault"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:resnetdefault"></span>
 <img src="imagens/07-deepLearning/resnetdefault.png" alt="Arquitetura padrão da ResNet - Existem várias versões da ResNet, sendo que a parte inicial e a final das redes são semelhantes, e o que geralmente muda é quantidade de unidades residuais em cada um dos quatro módulos, na parte intermediária da rede [35, p. 457]." width="30%" />
 <p class="caption">
 Figura 7.38: Arquitetura padrão da <em>ResNet</em> - Existem várias versões da <em>ResNet</em>, sendo que a parte inicial e a final das redes são semelhantes, e o que geralmente muda é quantidade de unidades residuais em cada um dos quatro módulos, na parte intermediária da rede <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 457]</span>.
@@ -1142,7 +1142,7 @@ Figura 7.38: Arquitetura padrão da <em>ResNet</em> - Existem várias versões d
 <p>Treinar uma rede neural do zero é uma tarefa complicada, pois necessita de uma enorme quantidade de dados e poder computacional <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">38</a>, p. 242]</span>. Em muitos casos podemos não ter uma quantidade suficiente de algum dos dois, mas isso não impede que criemos nossos modelos. Para isso contamos com uma técnica conhecida como aprendizagem por transferência, que consiste basicamente em utilizar-se modelos já treinados na resolução de nossos problemas. Nesse caso assumimos que muitos dos fatores que explicam o contexto <span class="math inline">\(P_1\)</span> (situação na qual o modelo foi treinado) também podem explicar nossa novo contexto <span class="math inline">\(P_2\)</span> <span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 536]</span>.</p>
 <p>Conseguimos utilizar essa técnica pois mesmo modelos treinados em escopos diferentes acabam aprendendo a detectar características parecidas nas camadas mais iniciais, com maior especificação nas camadas mais profundas. Podemos ver isso na Figura <a href="deepLearning.html#fig:differentscnn">7.39</a>, onde temos a representação de quatro redes diferentes sendo a primeira voltada a trabalhar com imagem de pessoas, a segunda com carros, a terceira com elefantes e a última com cadeiras. Mesmo esses sendo objetos completamente diferentes, as redes aprendem, nas camadas iniciais a detectar bordas e quinas, que são características compartilhadas por todos os itens.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:differentscnn"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:differentscnn"></span>
 <img src="imagens/07-deepLearning/differentscnn.png" alt="Diferentes CNN’s e seus mapas de características em diferentes camadas - Na primeira coluna temos as características aprendidas por uma rede especializada no trabalho com rostos humanos, na segunda coluna com carros, na terceira com elefantes e na quarta com cadeiras [38, p. 253]." width="100%" />
 <p class="caption">
 Figura 7.39: Diferentes CNN’s e seus mapas de características em diferentes camadas - Na primeira coluna temos as características aprendidas por uma rede especializada no trabalho com rostos humanos, na segunda coluna com carros, na terceira com elefantes e na quarta com cadeiras <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">38</a>, p. 253]</span>.
@@ -1157,7 +1157,7 @@ Figura 7.39: Diferentes CNN’s e seus mapas de características em diferentes c
 <p>O método de usar uma <em>rede pré-treinada como classificador</em> é melhor quando nosso problema tem um domínio muito parecido com a rede já treinada que iremos utilizar, sendo que temos apenas que a encaixar em nosso uso, não sendo necessário treinamento adicional.</p>
 <p>O método usar uma <em>rede pré-treinada como um extrator de características</em> é útil quando estamos resolvendo um problema que tem várias características comuns com uma rede pré treinada mas não de maneira que possamos utilizar como na aproximação anterior. O que fazemos então é “congelar” as camadas da rede que extraem características (ou seja, as camadas de convolução) e substituir a rede totalmente conectada do final, colocando em seu lugar outra rede que classifique conforme nossa necessidade e realizamos seu treinamento.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:vgg16"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:vgg16"></span>
 <img src="imagens/07-deepLearning/vgg16.png" alt="Rede VGG-16 - Temos, de cima para baixo, as camadas “congeladas”, as camadas que serão removidas e a camada que será adicionada e treinada [38, p. 257]." width="50%" />
 <p class="caption">
 Figura 7.40: Rede VGG-16 - Temos, de cima para baixo, as camadas “congeladas”, as camadas que serão removidas e a camada que será adicionada e treinada <span class="citation">[<a href="#ref-elgendy2020" role="doc-biblioref">38</a>, p. 257]</span>.
@@ -1222,7 +1222,7 @@ Figura 7.40: Rede VGG-16 - Temos, de cima para baixo, as camadas “congeladas�
 <p>A utilização da GPU para o treinamento das redes se tornou ainda mais comum após a adaptação para propósitos mais gerais. Um dos principais modelos de GPU, da NVIDIA, suporta uma programação <em>CUDA</em> para o desenvolvimento de códigos arbitrários semelhantes à linguagem C <span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 440]</span>. Assim, a GPU pode executar diferentes rotinas que não estejam só associadas a subrotinas de renderização.</p>
 <p>Para garantir códigos de GPU de alta performance, foram construídos ao longo dos anos diferentes bibliotecas que lidam com computação numérica, principalmente envolvendo convoluções e outras operações com tensores <span class="citation">[<a href="#ref-goodfellow2016" role="doc-biblioref">23</a>, p. 441]</span>. Assim, no desenvolvimento das redes não é necessário saber a programação a nível de <em>CUDA</em>, que é mais complexa e envolve computação paralela e distribuída. Geralmente estas bibliotecas, ou frameworks, têm suporte tanto em GPU quanto CPU. As primeiras gerações de muitos frameworks foram desenvolvidas por meio de parcerias entre Universidades e grandes empresas com interesse em <em>Deep Learning</em>. Algumas das bibliotecas mais comuns, destacadas na Figura <a href="deepLearning.html#fig:frameworks">7.41</a>, são o <em>PyTorch</em> e <em>Caffe2</em> mantidos pelo Facebook, o <em>TensorFlow</em> pela Google, o <em>MXNet</em> pela Amazon e o <em>CNTK</em> pela Microsoft <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">40</a>]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:frameworks"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:frameworks"></span>
 <img src="imagens/07-deepLearning/frameworks.png" alt="Principais frameworks para Deep Learning - Para facilitar a manipulação de tensores e a utilização de GPU’s foram desenvolvidos diferentes frameworks. A maior parte das primeiras gerações dos frameworks surgiram como parcerias entre universidades e grandes empresa [40]." width="100%" />
 <p class="caption">
 Figura 7.41: Principais frameworks para <em>Deep Learning</em> - Para facilitar a manipulação de tensores e a utilização de GPU’s foram desenvolvidos diferentes frameworks. A maior parte das primeiras gerações dos frameworks surgiram como parcerias entre universidades e grandes empresa <span class="citation">[<a href="#ref-johnson2019" role="doc-biblioref">40</a>]</span>.
@@ -1238,7 +1238,7 @@ Figura 7.41: Principais frameworks para <em>Deep Learning</em> - Para facilitar 
 <p>Grande parte do trabalho com as redes neurais pode ser implementado direto com o API de alto nível, incluindo o desenho da arquitetura, as funções, algoritmo de treinamento, otimizadores e módulos de regularização. Para implementações que necessitam de maiores customizações é necessário recorrer aos frameworks de mais baixo nível, como o <em>TensorFlow.</em> O <em>TensorFlow</em>, criado por um grupo de pesquisa da Google e liberado como software livre em 2015, tem a sua própria implementação de <em>keras</em>, o <em>tf.keras</em> <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 368]</span>.</p>
 <p>O API <em>tf.keras</em> tem como backend apenas o <em>TensorFlow</em> (Figura <a href="deepLearning.html#fig:keras">7.42</a>), porém apresenta maiores facilidades para integrar com customizações do backend. A inclusão de novos códigos pode ser feita a partir da linguagem <em>Python</em> e automaticamente o API converte para funções do tipo <em>TensorFlow</em> que possuem base no <em>C++</em> <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 398]</span>. Muitas vezes essas adaptações ocorrem quando se precisa de um controle maior, ou customizar funções, camadas, módulos de regularização, processos de inicialização, ou medidas de avaliação <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 398]</span>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:keras"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:keras"></span>
 <img src="imagens/07-deepLearning/keras.png" alt="Implementações do API Keras - a - Implementação geral do API keras-team que é compatível com diferentes backends, como TensorFlow, Theano, CNTK e MxNet. b - O API tf.keras tem como backend apenas o TensorFlow e comporta aplicações específicas deste framework [35, p. 292]" width="90%" />
 <p class="caption">
 Figura 7.42: Implementações do API Keras - a - Implementação geral do API keras-team que é compatível com diferentes backends, como <em>TensorFlow</em>, <em>Theano</em>, <em>CNTK</em> e <em>MxNet.</em> b - O API <em>tf.keras</em> tem como backend apenas o <em>TensorFlow</em> e comporta aplicações específicas deste framework <span class="citation">[<a href="#ref-geron2019" role="doc-biblioref">35</a>, p. 292]</span>
@@ -1260,7 +1260,7 @@ Figura 7.42: Implementações do API Keras - a - Implementação geral do API ke
 <h3><span class="header-section-number">7.3.1</span> Arquitetura</h3>
 <p>Como dito no tópico anterior de <a href="deepLearning.html#redes-neurais-siamesas">Redes Neurais Siamesas</a>, o objetivo de se utilizar uma rede com arquitetura siamesa era comparar diferentes entradas e ter como resultado um valor que representasse sua semelhança ou diferença. O nome “siamesa” por si só já nos dá uma boa ideia de como será sua arquitetura, que consiste basicamente na utilização de duas redes idênticas, como na Figura <a href="deepLearning.html#fig:siamesa-bromley">7.43</a>, onde temos a rede proposta por Bromley et al. (1993) em seu artigo sobre verificação de assinaturas <span class="citation">[<a href="#ref-bromley1993" role="doc-biblioref">60</a>]</span>. Nessa arquitetura temos uma camada de entrada de <span class="math inline">\(200 \text{ x } 8\)</span> unidades e como saída um bloco de dados de <span class="math inline">\(16 \text{ x } 19\)</span> unidades, o método utilizado para realizar a comparação entre os vetores de saída das duas redes foi calcular o cosseno do ângulo entre eles.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:siamesa-bromley"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:siamesa-bromley"></span>
 <img src="imagens/07-deepLearning/siamesa-bromley.png" alt="Arquitetura utilizada por Bromley et al. (1993) com duas redes recebendo os dados sobre assinaturas após seu pré-processamento. A rede contém uma camada de entrada com \(200 \text{ x } 8\) unidades e uma saída de \(16 \text{ x } 19\) unidades. [60]." width="40%" />
 <p class="caption">
 Figura 7.43: Arquitetura utilizada por Bromley et al. (1993) com duas redes recebendo os dados sobre assinaturas após seu pré-processamento. A rede contém uma camada de entrada com <span class="math inline">\(200 \text{ x } 8\)</span> unidades e uma saída de <span class="math inline">\(16 \text{ x } 19\)</span> unidades. <span class="citation">[<a href="#ref-bromley1993" role="doc-biblioref">60</a>]</span>.
@@ -1268,7 +1268,7 @@ Figura 7.43: Arquitetura utilizada por Bromley et al. (1993) com duas redes rec
 </div>
 <p>Na Figura <a href="deepLearning.html#fig:siamesa-chopra">7.44</a> temos um exemplo de outra arquitetura, nesse caso a apresentada por Chopra et al. (2005). Um aspecto importante que devemos notar é que tanto essa rede quanto a anterior tem os mesmo pesos em ambas as suas redes internas. Nesse caso se optou por utilizar a distância euclidiana entre os dois vetores de características resultantes das duas subredes.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:siamesa-chopra"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:siamesa-chopra"></span>
 <img src="imagens/07-deepLearning/siamesa-chopra.png" alt="Arquitetura utilizada por Chopra et al. [50]. Essa arquitetura de rede siamesa tem os parâmetros da rede compartilhados entre as duas. \(X_1\) e \(X_2\) são as duas entradas da rede e \(E_w\) é a saída da diferença euclidiana entre as saídas das duas redes (\(||G_w(X_1)-G_w(X_2)||\))." width="50%" />
 <p class="caption">
 Figura 7.44: Arquitetura utilizada por Chopra et al. <span class="citation">[<a href="#ref-chopra2005" role="doc-biblioref">50</a>]</span>. Essa arquitetura de rede siamesa tem os parâmetros da rede compartilhados entre as duas. <span class="math inline">\(X_1\)</span> e <span class="math inline">\(X_2\)</span> são as duas entradas da rede e <span class="math inline">\(E_w\)</span> é a saída da diferença euclidiana entre as saídas das duas redes (<span class="math inline">\(||G_w(X_1)-G_w(X_2)||\)</span>).
@@ -1301,7 +1301,7 @@ C = \sum_{i}\left[||f(x_i^a) - f(x_i^p)||_2^2 - ||f(x_i^a) - f(x_i^n)||_2^2 + \a
 \]</span></p>
 <p>Considerando que as funções <span class="math inline">\(f(x) \in R\)</span> podem ser interpretadas como a aplicação de cada sub-rede, o algoritmo de treinamento deve buscar ordenar as entradas com base na similaridade relativa. Assim, a distância entre a âncora e o padrão positivo deve ser menor do que em relação ao caso negativo, como demonstrado na Figura <a href="deepLearning.html#fig:erro-triplet">7.45</a>. <span class="citation">[<a href="#ref-schroff2015" role="doc-biblioref">63</a>]</span>. Da mesma forma que no método contrastivo é aplicada uma margem (<span class="math inline">\(\alpha\)</span>) de ajuste.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:erro-triplet"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:erro-triplet"></span>
 <img src="imagens/07-deepLearning/erro-triplet.png" alt="Comportamento da função erro Triplet. A função Triplet reduz a distância entre os exemplos similares, ou seja, entre a âncora e o padrão positivo, e aumenta a distância entre o padrão diferente (caso negativo) e a âncora [63]." width="40%" />
 <p class="caption">
 Figura 7.45: Comportamento da função erro <em>Triplet</em>. A função <em>Triplet</em> reduz a distância entre os exemplos similares, ou seja, entre a âncora e o padrão positivo, e aumenta a distância entre o padrão diferente (caso negativo) e a âncora <span class="citation">[<a href="#ref-schroff2015" role="doc-biblioref">63</a>]</span>.
@@ -1449,7 +1449,6 @@ Figura 7.45: Comportamento da função erro <em>Triplet</em>. A função <em>Tri
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1489,6 +1488,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 },

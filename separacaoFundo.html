@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 8 Separação Plano de Fundo | Material introdutório de Processamento Digital de Imagens e Visão Computacional</title>
   <meta name="description" content="Capítulo 8 Separação Plano de Fundo | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 8 Separação Plano de Fundo | Material introdutório de Processamento Digital de Imagens e Visão Computacional" />
   <meta property="og:type" content="book" />
@@ -32,7 +32,8 @@
   
 <link rel="prev" href="deepLearning.html"/>
 <link rel="next" href="espaco3D.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -40,7 +41,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -308,7 +308,7 @@ MP_{x,y} = mediana(P_{1_{x,y}}, P_{2_{x,y}}, P_{3_{x,y}}, P_{4_{x,y}}, P_{5_{x,y
 \]</span>
 Apesar de ser capaz de produzir melhores resultados, nada é perfeito. Observe as Figuras <a href="separacaoFundo.html#fig:onibusMedianaTemporal">8.1</a> (A) e (B), o ônibus que antes estava em movimento vai desaparecendo do <em>foreground</em> à medida que novos frames são capturados e ele se mantém parado, pois, progressivamente, o objeto ônibus vai pertencendo ao <em>background.</em> Porém, ao se mover novamente, ele é identificado como um alvo, mas a região em que ele estava parado ainda detecta um fantasma, por causa da diferença naquela região ainda ser praticamente equivalente, pois no novo <em>frame</em> não há mais ônibus ali, mas, no <em>background</em>, há. Conforme observa-se nas Figuras <a href="separacaoFundo.html#fig:onibusMedianaTemporal">8.1</a> (C) e (D). Note que à medida que novos <em>frames</em> são captados esse fantasma vai sumindo.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:onibusMedianaTemporal"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:onibusMedianaTemporal"></span>
 <img src="imagens/08-modelagemBackground/onibusMedianaTemporal.png" alt="Detecção de movimento através da modelagem de background a partir da Mediana Temporal [64, p. 671]." width="55%" />
 <p class="caption">
 Figura 8.1: Detecção de movimento através da modelagem de <em>background</em> a partir da Mediana Temporal <span class="citation">[<a href="#ref-davies2017" role="doc-biblioref">64</a>, p. 671]</span>.
@@ -319,7 +319,7 @@ Figura 8.1: Detecção de movimento através da modelagem de <em>background</em>
 <h2><span class="header-section-number">8.4</span> Exemplos comparativos da Média Temporal, Média Espaço-Temporal e Mediana Temporal</h2>
 <p>Os exemplos a seguir são complementares a teoria dos tópicos anteriores de modelagem de plano de fundo, a fim de mostrar os resultados dos métodos estudados aplicados em um ambiente controlado e <em>outdoor</em>. Desde os <em>frames</em> capturados, o <em>background</em> modelado e o <em>foreground</em> produzido pela limiarização da diferença entre o primeiro <em>frame</em>, Figura <a href="separacaoFundo.html#fig:indoorBGmodeling">8.2</a> (A), e os respectivos planos de fundo modelados.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:indoorBGmodeling"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:indoorBGmodeling"></span>
 <img src="imagens/08-modelagemBackground/indoorBGmodeling.png" alt="As imagens A, B, …, E são os frames capturados por uma câmera em um ambiente interno. As imagens F, G e H são os backgrounds estimados. E as imagens I, J e K são os foregrounds produzidos, as detecções de movimento estimadas. Adaptado de [19, p. 435] e [19, p. 436]." width="55%" />
 <p class="caption">
 Figura 8.2: As imagens A, B, …, E são os <em>frames</em> capturados por uma câmera em um ambiente interno. As imagens F, G e H são os <em>backgrounds</em> estimados. E as imagens I, J e K são os <em>foregrounds</em> produzidos, as detecções de movimento estimadas. Adaptado de <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 435]</span> e <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 436]</span>.
@@ -328,7 +328,7 @@ Figura 8.2: As imagens A, B, …, E são os <em>frames</em> capturados por uma c
 <p>Note que apareceram pés fantasmas resultado da interação da luz com o movimento dos pés e sua sombra, mas ao ser aplicado a suavização esse problema é diminuído. Além disso, parte da camiseta da pessoa não foi detectada, isso pode tentar ser corrigido por ajustes no limiar de limiarização <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 436]</span>.</p>
 <p>A Figura <a href="separacaoFundo.html#fig:outdoorBGmodeling">8.3</a> é análoga a anterior, só que em um ambiente externo.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:outdoorBGmodeling"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:outdoorBGmodeling"></span>
 <img src="imagens/08-modelagemBackground/outdoorBGmodeling.png" alt="As imagens A, B, …, E são os frames capturados por uma câmera em um ambiente externo. As imagens F, G e H são os backgrounds estimados. E as imagens I, J e K são os foregrounds produzidos, as detecções de movimento estimadas [19, p. 437]." width="55%" />
 <p class="caption">
 Figura 8.3: As imagens A, B, …, E são os <em>frames</em> capturados por uma câmera em um ambiente externo. As imagens F, G e H são os <em>backgrounds</em> estimados. E as imagens I, J e K são os <em>foregrounds</em> produzidos, as detecções de movimento estimadas <span class="citation">[<a href="#ref-nixon2019feature" role="doc-biblioref">19</a>, p. 437]</span>.
@@ -357,7 +357,6 @@ Figura 8.3: As imagens A, B, …, E são os <em>frames</em> capturados por uma c
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -397,6 +396,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 },
